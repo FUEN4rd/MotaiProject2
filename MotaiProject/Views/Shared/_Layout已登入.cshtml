@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title 墨臺</title>
+
+    <style>
+        * {
+            /* font-family: DFKai-sb; */
+            font-family: serif, sans-serif, cursive, fantasy, monospace;
+        }
+
+        .red {
+            z-index: -1;
+            width: 100%;
+            height: auto;
+            background: #A22E37;
+            background: url("../../Content/background_RedCloud.png")repeat-y;
+        }
+
+        .productInfo {
+            padding: 10px 20px;
+            text-align: center;
+            line-height: 1.5em;
+            color: #FCD492;
+            height: 90px;
+        }
+
+        .form-control2 {
+            display: block;
+            width: 220px;
+            height: calc(2.25rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            /* color: #A22E37; */
+            background-color: #F2EDD8;
+            background-clip: padding-box;
+            border: 1px solid #A22E37;
+            border-radius: 0.25rem;
+            /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
+        }
+
+            .form-control2:focus {
+                /* color: #495057; */
+                background-color: #F2EDD8;
+                border-color: #313737;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem #A7674C;
+            }
+    </style>
+</head>
+<body>
+    <div class="red">
+        <nav style="background-color:#F2EDD8" class="navbar navbar-expand-lg fixed-top">
+
+            <!-- <div style="display: flex;align-items: center;"> -->
+            <div class="navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <svg class="lnr lnr-menu" style="fill: #A22E37; width: 32px; height:32px">
+                        <use xlink:href="#lnr-menu"></use>
+                    </svg>
+                </button>
+            </div>
+            <li class="nav nav-item active">
+                <a class="nav-link" href="#">
+                    <img style="height: auto;width: 60px" href="#" src="../../Content/imgshare/墨臺Logo.png"
+                         alt=>
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+
+            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto"></ul>
+                <form class="navbar-nav mr-auto" style="align-items: center;">
+                    <li class="nav-item">
+                        @Html.ActionLink("首頁", "首頁", "CustomerLogin", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>首頁</b></a>*@
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("最新消息", "News", "Home", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>關於我們</b></a>*@
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("產品", "Product", "Home", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
+                    </li>
+                    @*<li class="nav-item">
+                            <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
+                        </li>*@
+                    <li class="form-inline">
+                        <input style="color: #A22E37;position: absolute;" type="search" placeholder="搜尋"
+                               class="form-control2 mr-sm-2" aria-label="Search">
+                        <button style="position: relative;margin-left: 172px; height: 35px;" class="btn btn-light"
+                                type="submit">
+                            <svg class="lnr lnr-magnifier"
+                                 style="fill: #A22E37;width: 20px;height: 20px;">
+                                <use xlink:href="#lnr-magnifier"></use>
+                            </svg>
+                        </button>
+                    </li>
+                </form>
+                <br>
+
+
+                <div class="nav " style="justify-content: center;">
+                    <li class="nav-item">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#Login" data-whatever="">
+                            <svg href="#" fill="#A22E37" class="lnr lnr-user" height="32px" width="50px"
+                                 viewBox="0 0 32 32">
+                                <use xlink:href="#lnr-user"></use>
+                            </svg>
+                        </button>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg fill=" #A22E37" class="lnr lnr-star" height="32px" width="50px"
+                                 viewBox="0 0 32 32">
+                                <use xlink:href="#lnr-star"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg fill=" #A22E37" class="lnr lnr-cart" height="32px" width="50px"
+                                 viewBox="0 0 32 32">
+                                <use xlink:href="#lnr-cart"></use>
+                            </svg>
+                        </a>
+                    </li>
+
+                </div>
+
+
+
+        </nav>
+        <div class="body-content">
+            <br>
+            <br>
+            <br>
+            <br>
+            @RenderBody()
+
+            <footer style="background-color: #313737;color: #F2EDD8">
+                <div class="container-fluid">
+                    <div class="row" style="padding-left: 100px;width: 95%;">
+                        <div class=" d-none d-lg-block col-md-6 col-xl-2">
+                            <br>
+                            <h5 style="color: #FCD492;">分店資訊</h5>
+                            <h6> 鶯歌光點</h6>
+                            <!-- <h6> 營業時間：10:00-19:00 </h6> -->
+                            <h6> 電話：02-2677-3306</h6>
+                            <h6> 新北市鶯歌區陶瓷街18號(E區-12)</h6>
+                            <br>
+                        </div>
+                        <div class="d-none d-lg-block col-md-6 col-xl-2">
+                            <br>
+                            <h5 style="color: #313737;">隱藏</h5>
+                            <h6>礁溪店(麒麟飯店) </h6>
+                            <!-- <h6>營業時間：13:00-21:50 </h6> -->
+                            <h6>電話：0988273032</h6>
+                            <h6>宜蘭縣礁溪鄉礁溪路五段116號</h6>
+                        </div>
+                        <div class="d-none d-lg-block col-md-6 col-xl-2">
+                            <br>
+                            <h5 style="color: #313737;">隱藏</h5>
+                            <h6>台南家樂福新仁店</h6>
+                            <!-- <h6>營業時間：10:00-22:00</h6> -->
+                            <h6>電話：06-2679092</h6>
+                            <h6>台南市仁德區大同路三段755號</h6>
+                            <br>
+                        </div>
+                        <div class="d-none d-lg-block col-md-6 col-xl-2">
+                            <br>
+                            <h5 style="color: #313737;">隱藏</h5>
+                            <h6>鳳山店 </h6>
+                            <!-- <h6>營業時間：預約制 </h6> -->
+                            <h6>電話：077197029</h6>
+                            <h6>高雄市鳳山區三民路52號</h6>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-2">
+                            <br>
+                            <h5 style="color: #FCD492;">意見回饋</h5>
+                            <!-- <br class="d-none d-lg-block"> -->
+                            <span>歡迎寄信告訴我們任何意見</span>
+                            <span>
+                                <input type=" email" name="mail" value="電子郵件" />
+                                <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
+                            </span>
+                            <h5 style="color: #313737;">隱藏</h5>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-2">
+                            <br>
+                            <h5 style="color: #FCD492;">訂閱社群媒體</h5>
+                            <!-- <br class="d-none d-lg-block"> -->
+                            <div>公布最新活動，將會通知您</div>
+                            <a href="">
+                                <svg xmlns=" http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fab"
+                                     data-icon="facebook-square" class="svg-inline--fa fa-facebook-square fa-w-14" role="img"
+                                     viewBox="0 0 448 512" height="32px" width="32px">
+                                    <path fill="#F2EDD8"
+                                          d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                                </svg>
+                            </a>
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fab"
+                                     data-icon="instagram" class="svg-inline--fa fa-instagram fa-w-14" role="img"
+                                     viewBox="0 0 448 512" height="32px" width="40px">
+                                    <path fill="#F2EDD8"
+                                          d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                                </svg>
+                            </a>
+                            <div style="color: #313737;">隱藏</div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    @*會員登出彈出視窗*@
+    @using (Html.BeginForm("首頁", "CustomerLogin", FormMethod.Post,null))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">登出視窗</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    是否要登出?
+                </div>
+                <div class="modal-footer">                    
+                    <button type="submit" class="btn btn-primary">確認</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+    
+</body>
+</html>

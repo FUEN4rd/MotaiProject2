@@ -1,0 +1,13 @@
+﻿@using MotaiProject.Models
+@{    
+    Layout = "~/Views/Shared/_Layout已登入.cshtml";
+    string welcome = "403 未經授權";
+    tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+    if (cust != null)
+    {
+        welcome = cust.cName;
+    }
+}
+
+<h2>@welcome 歡迎光臨</h2>
+

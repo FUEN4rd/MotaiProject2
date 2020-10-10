@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MotaiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tCustomer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cTelePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cCellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cGUI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tFavorites" Relationship="Self.FK_tFavorite_tCustomer" FromRole="tCustomer" ToRole="tFavorite" />
+    <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tCustomer" FromRole="tCustomer" ToRole="tOrder" />
+    <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tCustomer" FromRole="tCustomer" ToRole="tStatus" />
+  </EntityType>
+  <EntityType Name="tEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="eName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ePosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="eBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tEmployee" FromRole="tEmployee" ToRole="tOrder" />
+  </EntityType>
+  <EntityType Name="tFavorite">
+    <Key>
+      <PropertyRef Name="FavoriteId" />
+    </Key>
+    <Property Name="FavoriteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fCustomerId" Type="Int32" Nullable="false" />
+    <Property Name="fProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tCustomer" Relationship="Self.FK_tFavorite_tCustomer" FromRole="tFavorite" ToRole="tCustomer" />
+  </EntityType>
+  <EntityType Name="tOrder">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="oCustomerId" Type="Int32" Nullable="false" />
+    <Property Name="oAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="oDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="oDeliverDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="oEmployeeId" Type="Int32" />
+    <NavigationProperty Name="tCustomer" Relationship="Self.FK_tOrder_tCustomer" FromRole="tOrder" ToRole="tCustomer" />
+    <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrder_tEmployee" FromRole="tOrder" ToRole="tEmployee" />
+    <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrder" ToRole="tOrderDetail" />
+    <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrder" FromRole="tOrder" ToRole="tOrderPay" />
+  </EntityType>
+  <EntityType Name="tOrderDetail">
+    <Key>
+      <PropertyRef Name="oDetailId" />
+    </Key>
+    <Property Name="oDetailId" Type="Int32" Nullable="false" />
+    <Property Name="oOrderId" Type="Int32" Nullable="false" />
+    <Property Name="oProductId" Type="Int32" Nullable="false" />
+    <Property Name="oProductQty" Type="Int32" Nullable="false" />
+    <Property Name="oWarehouseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
+  </EntityType>
+  <EntityType Name="tOrderPay">
+    <Key>
+      <PropertyRef Name="oPayId" />
+    </Key>
+    <Property Name="oPayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="oOrderId" Type="Int32" Nullable="false" />
+    <Property Name="oPayType" Type="Int32" Nullable="false" />
+    <Property Name="oPayment" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderPay_tOrder" FromRole="tOrderPay" ToRole="tOrder" />
+    <NavigationProperty Name="tOrderPayType" Relationship="Self.FK_tOrderPay_tOrderPayType" FromRole="tOrderPay" ToRole="tOrderPayType" />
+  </EntityType>
+  <EntityType Name="tOrderPayType">
+    <Key>
+      <PropertyRef Name="oPayTypeId" />
+    </Key>
+    <Property Name="oPayTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="oPayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrderPayType" FromRole="tOrderPayType" ToRole="tOrderPay" />
+    <NavigationProperty Name="tOrderPayType1" Relationship="Self.FK_tOrderPayType_tOrderPayType" FromRole="tOrderPayType" ToRole="tOrderPayType1" />
+    <NavigationProperty Name="tOrderPayType2" Relationship="Self.FK_tOrderPayType_tOrderPayType" FromRole="tOrderPayType1" ToRole="tOrderPayType" />
+  </EntityType>
+  <EntityType Name="tProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pCategory" Type="Int32" Nullable="false" />
+    <Property Name="pMaterial" Type="Int32" Nullable="false" />
+    <Property Name="pSize" Type="Int32" Nullable="false" />
+    <Property Name="pLxWxH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pWeight" Type="Double" Nullable="false" />
+    <Property Name="pImage" Type="Int32" />
+    <Property Name="pPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="pQty" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tProductCategory" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProduct" ToRole="tProductCategory" />
+    <NavigationProperty Name="tProductImage" Relationship="Self.FK_tProduct_tProductImage" FromRole="tProduct" ToRole="tProductImage" />
+    <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
+    <NavigationProperty Name="tProductSize" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProduct" ToRole="tProductSize" />
+    <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
+    <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
+    <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
+  </EntityType>
+  <EntityType Name="tProductCategory">
+    <Key>
+      <PropertyRef Name="pCategoryId" />
+    </Key>
+    <Property Name="pCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tProducts" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProductCategory" ToRole="tProduct" />
+    <NavigationProperty Name="tProductCategory1" Relationship="Self.FK_tProductCategory_tProductCategory" FromRole="tProductCategory" ToRole="tProductCategory1" />
+    <NavigationProperty Name="tProductCategory2" Relationship="Self.FK_tProductCategory_tProductCategory" FromRole="tProductCategory1" ToRole="tProductCategory" />
+  </EntityType>
+  <EntityType Name="tProductImage">
+    <Key>
+      <PropertyRef Name="pImageId" />
+    </Key>
+    <Property Name="pImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="pImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tProducts" Relationship="Self.FK_tProduct_tProductImage" FromRole="tProductImage" ToRole="tProduct" />
+  </EntityType>
+  <EntityType Name="tProductMaterial">
+    <Key>
+      <PropertyRef Name="pMaterialId" />
+    </Key>
+    <Property Name="pMaterialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Material" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tProducts" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProductMaterial" ToRole="tProduct" />
+  </EntityType>
+  <EntityType Name="tProductSize">
+    <Key>
+      <PropertyRef Name="pSizeId" />
+    </Key>
+    <Property Name="pSizeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tProducts" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProductSize" ToRole="tProduct" />
+  </EntityType>
+  <EntityType Name="tPromotion">
+    <Key>
+      <PropertyRef Name="PromotionId" />
+    </Key>
+    <Property Name="PromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tPromotion1" Relationship="Self.FK_tPromotion_tPromotion" FromRole="tPromotion" ToRole="tPromotion1" />
+    <NavigationProperty Name="tPromotion2" Relationship="Self.FK_tPromotion_tPromotion" FromRole="tPromotion1" ToRole="tPromotion" />
+    <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotion" ToRole="tPromotionDetail" />
+  </EntityType>
+  <EntityType Name="tPromotionDetail">
+    <Key>
+      <PropertyRef Name="pDetailId" />
+    </Key>
+    <Property Name="pDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pPromotionId" Type="Int32" Nullable="false" />
+    <Property Name="pPromotionProductId" Type="Int32" Nullable="false" />
+    <Property Name="pPromotionImageId" Type="Int32" />
+    <Property Name="pPromotionStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pPromotionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tPromotion" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotionDetail" ToRole="tPromotion" />
+    <NavigationProperty Name="tPromotionImage" Relationship="Self.FK_tPromotionDetail_tPromotionImage" FromRole="tPromotionDetail" ToRole="tPromotionImage" />
+  </EntityType>
+  <EntityType Name="tPromotionImage">
+    <Key>
+      <PropertyRef Name="PromotionImageId" />
+    </Key>
+    <Property Name="PromotionImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tPromotionImage" FromRole="tPromotionImage" ToRole="tPromotionDetail" />
+  </EntityType>
+  <EntityType Name="tStatu">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sCustomerId" Type="Int32" Nullable="false" />
+    <Property Name="sProductId" Type="Int32" Nullable="false" />
+    <Property Name="sProductQty" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tCustomer" Relationship="Self.FK_tStatus_tCustomer" FromRole="tStatus" ToRole="tCustomer" />
+    <NavigationProperty Name="tProduct" Relationship="Self.FK_tStatus_tProduct" FromRole="tStatus" ToRole="tProduct" />
+  </EntityType>
+  <EntityType Name="tTransfer">
+    <Key>
+      <PropertyRef Name="TransferId" />
+    </Key>
+    <Property Name="TransferId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tProductId" Type="Int32" Nullable="false" />
+    <Property Name="tProductQty" Type="Int32" Nullable="false" />
+    <Property Name="tWNIdOut" Type="Int32" Nullable="false" />
+    <Property Name="tWNIdIn" Type="Int32" Nullable="false" />
+    <Property Name="tDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tProduct" Relationship="Self.FK_tTransfer_tProduct" FromRole="tTransfer" ToRole="tProduct" />
+    <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tTransfer" ToRole="tWarehouseName" />
+    <NavigationProperty Name="tWarehouseName1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tTransfer" ToRole="tWarehouseName" />
+  </EntityType>
+  <EntityType Name="tWarehouse">
+    <Key>
+      <PropertyRef Name="WarehouseId" />
+    </Key>
+    <Property Name="WarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WarehouseNameId" Type="Int32" Nullable="false" />
+    <Property Name="wProductId" Type="Int32" Nullable="false" />
+    <Property Name="wQuantity" Type="Int32" />
+    <Property Name="wSerialValue" Type="Int32" Nullable="false" />
+    <Property Name="wStockDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="wShipmentDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tProduct" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tWarehouse" ToRole="tProduct" />
+    <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouse" ToRole="tWarehouseName" />
+  </EntityType>
+  <EntityType Name="tWarehouseName">
+    <Key>
+      <PropertyRef Name="WarehouseNameId" />
+    </Key>
+    <Property Name="WarehouseNameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WarehouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tWarehouseName" ToRole="tTransfer" />
+    <NavigationProperty Name="tTransfers1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tWarehouseName" ToRole="tTransfer" />
+    <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouseName" ToRole="tWarehouse" />
+  </EntityType>
+  <Association Name="FK_tFavorite_tCustomer">
+    <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
+    <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="tFavorite">
+        <PropertyRef Name="fCustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrder_tCustomer">
+    <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="tOrder">
+        <PropertyRef Name="oCustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tStatus_tCustomer">
+    <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
+    <End Role="tStatus" Type="Self.tStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="tStatus">
+        <PropertyRef Name="sCustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrder_tEmployee">
+    <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tEmployee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="tOrder">
+        <PropertyRef Name="oEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrderDetail_tOrder">
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+    <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tOrder">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="tOrderDetail">
+        <PropertyRef Name="oOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrderPay_tOrder">
+    <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+    <End Role="tOrderPay" Type="Self.tOrderPay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tOrder">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="tOrderPay">
+        <PropertyRef Name="oOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrderPay_tOrderPayType">
+    <End Role="tOrderPayType" Type="Self.tOrderPayType" Multiplicity="1" />
+    <End Role="tOrderPay" Type="Self.tOrderPay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tOrderPayType">
+        <PropertyRef Name="oPayTypeId" />
+      </Principal>
+      <Dependent Role="tOrderPay">
+        <PropertyRef Name="oPayType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrderPayType_tOrderPayType">
+    <End Role="tOrderPayType" Type="Self.tOrderPayType" Multiplicity="1" />
+    <End Role="tOrderPayType1" Type="Self.tOrderPayType" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tOrderPayType">
+        <PropertyRef Name="oPayTypeId" />
+      </Principal>
+      <Dependent Role="tOrderPayType1">
+        <PropertyRef Name="oPayTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tProductCategory">
+    <End Role="tProductCategory" Type="Self.tProductCategory" Multiplicity="1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProductCategory">
+        <PropertyRef Name="pCategoryId" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="pCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tProductImage">
+    <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="0..1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProductImage">
+        <PropertyRef Name="pImageId" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="pImage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tProductMaterial">
+    <End Role="tProductMaterial" Type="Self.tProductMaterial" Multiplicity="1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProductMaterial">
+        <PropertyRef Name="pMaterialId" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="pMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProduct_tProductSize">
+    <End Role="tProductSize" Type="Self.tProductSize" Multiplicity="1" />
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProductSize">
+        <PropertyRef Name="pSizeId" />
+      </Principal>
+      <Dependent Role="tProduct">
+        <PropertyRef Name="pSize" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tStatus_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tStatus" Type="Self.tStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tStatus">
+        <PropertyRef Name="sProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tTransfer_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tTransfer" Type="Self.tTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tTransfer">
+        <PropertyRef Name="tProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tWarehouse_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tWarehouse">
+        <PropertyRef Name="wProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tProductCategory_tProductCategory">
+    <End Role="tProductCategory" Type="Self.tProductCategory" Multiplicity="1" />
+    <End Role="tProductCategory1" Type="Self.tProductCategory" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tProductCategory">
+        <PropertyRef Name="pCategoryId" />
+      </Principal>
+      <Dependent Role="tProductCategory1">
+        <PropertyRef Name="pCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tPromotion_tPromotion">
+    <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
+    <End Role="tPromotion1" Type="Self.tPromotion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tPromotion">
+        <PropertyRef Name="PromotionId" />
+      </Principal>
+      <Dependent Role="tPromotion1">
+        <PropertyRef Name="PromotionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tPromotionDetail_tPromotion">
+    <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
+    <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tPromotion">
+        <PropertyRef Name="PromotionId" />
+      </Principal>
+      <Dependent Role="tPromotionDetail">
+        <PropertyRef Name="pPromotionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tPromotionDetail_tPromotionImage">
+    <End Role="tPromotionImage" Type="Self.tPromotionImage" Multiplicity="0..1" />
+    <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tPromotionImage">
+        <PropertyRef Name="PromotionImageId" />
+      </Principal>
+      <Dependent Role="tPromotionDetail">
+        <PropertyRef Name="pPromotionImageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tTransfer_tWarehouseIn">
+    <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+    <End Role="tTransfer" Type="Self.tTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tWarehouseName">
+        <PropertyRef Name="WarehouseNameId" />
+      </Principal>
+      <Dependent Role="tTransfer">
+        <PropertyRef Name="tWNIdIn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tTransfer_tWarehouseOut">
+    <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+    <End Role="tTransfer" Type="Self.tTransfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tWarehouseName">
+        <PropertyRef Name="WarehouseNameId" />
+      </Principal>
+      <Dependent Role="tTransfer">
+        <PropertyRef Name="tWNIdOut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tWarehouse_tWarehouseName">
+    <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+    <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tWarehouseName">
+        <PropertyRef Name="WarehouseNameId" />
+      </Principal>
+      <Dependent Role="tWarehouse">
+        <PropertyRef Name="WarehouseNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MotaiDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tCustomers" EntityType="Self.tCustomer" />
+    <EntitySet Name="tEmployees" EntityType="Self.tEmployee" />
+    <EntitySet Name="tFavorites" EntityType="Self.tFavorite" />
+    <EntitySet Name="tOrders" EntityType="Self.tOrder" />
+    <EntitySet Name="tOrderDetails" EntityType="Self.tOrderDetail" />
+    <EntitySet Name="tOrderPays" EntityType="Self.tOrderPay" />
+    <EntitySet Name="tOrderPayTypes" EntityType="Self.tOrderPayType" />
+    <EntitySet Name="tProducts" EntityType="Self.tProduct" />
+    <EntitySet Name="tProductCategories" EntityType="Self.tProductCategory" />
+    <EntitySet Name="tProductImages" EntityType="Self.tProductImage" />
+    <EntitySet Name="tProductMaterials" EntityType="Self.tProductMaterial" />
+    <EntitySet Name="tProductSizes" EntityType="Self.tProductSize" />
+    <EntitySet Name="tPromotions" EntityType="Self.tPromotion" />
+    <EntitySet Name="tPromotionDetails" EntityType="Self.tPromotionDetail" />
+    <EntitySet Name="tPromotionImages" EntityType="Self.tPromotionImage" />
+    <EntitySet Name="tStatus" EntityType="Self.tStatu" />
+    <EntitySet Name="tTransfers" EntityType="Self.tTransfer" />
+    <EntitySet Name="tWarehouses" EntityType="Self.tWarehouse" />
+    <EntitySet Name="tWarehouseNames" EntityType="Self.tWarehouseName" />
+    <AssociationSet Name="FK_tFavorite_tCustomer" Association="Self.FK_tFavorite_tCustomer">
+      <End Role="tCustomer" EntitySet="tCustomers" />
+      <End Role="tFavorite" EntitySet="tFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrder_tCustomer" Association="Self.FK_tOrder_tCustomer">
+      <End Role="tCustomer" EntitySet="tCustomers" />
+      <End Role="tOrder" EntitySet="tOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tStatus_tCustomer" Association="Self.FK_tStatus_tCustomer">
+      <End Role="tCustomer" EntitySet="tCustomers" />
+      <End Role="tStatus" EntitySet="tStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrder_tEmployee" Association="Self.FK_tOrder_tEmployee">
+      <End Role="tEmployee" EntitySet="tEmployees" />
+      <End Role="tOrder" EntitySet="tOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
+      <End Role="tOrder" EntitySet="tOrders" />
+      <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrderPay_tOrder" Association="Self.FK_tOrderPay_tOrder">
+      <End Role="tOrder" EntitySet="tOrders" />
+      <End Role="tOrderPay" EntitySet="tOrderPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrderPay_tOrderPayType" Association="Self.FK_tOrderPay_tOrderPayType">
+      <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
+      <End Role="tOrderPay" EntitySet="tOrderPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrderPayType_tOrderPayType" Association="Self.FK_tOrderPayType_tOrderPayType">
+      <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
+      <End Role="tOrderPayType1" EntitySet="tOrderPayTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tProductCategory" Association="Self.FK_tProduct_tProductCategory">
+      <End Role="tProductCategory" EntitySet="tProductCategories" />
+      <End Role="tProduct" EntitySet="tProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tProductImage" Association="Self.FK_tProduct_tProductImage">
+      <End Role="tProductImage" EntitySet="tProductImages" />
+      <End Role="tProduct" EntitySet="tProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tProductMaterial" Association="Self.FK_tProduct_tProductMaterial">
+      <End Role="tProductMaterial" EntitySet="tProductMaterials" />
+      <End Role="tProduct" EntitySet="tProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProduct_tProductSize" Association="Self.FK_tProduct_tProductSize">
+      <End Role="tProductSize" EntitySet="tProductSizes" />
+      <End Role="tProduct" EntitySet="tProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tStatus_tProduct" Association="Self.FK_tStatus_tProduct">
+      <End Role="tProduct" EntitySet="tProducts" />
+      <End Role="tStatus" EntitySet="tStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tTransfer_tProduct" Association="Self.FK_tTransfer_tProduct">
+      <End Role="tProduct" EntitySet="tProducts" />
+      <End Role="tTransfer" EntitySet="tTransfers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
+      <End Role="tProduct" EntitySet="tProducts" />
+      <End Role="tWarehouse" EntitySet="tWarehouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tProductCategory_tProductCategory" Association="Self.FK_tProductCategory_tProductCategory">
+      <End Role="tProductCategory" EntitySet="tProductCategories" />
+      <End Role="tProductCategory1" EntitySet="tProductCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tPromotion_tPromotion" Association="Self.FK_tPromotion_tPromotion">
+      <End Role="tPromotion" EntitySet="tPromotions" />
+      <End Role="tPromotion1" EntitySet="tPromotions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tPromotionDetail_tPromotion" Association="Self.FK_tPromotionDetail_tPromotion">
+      <End Role="tPromotion" EntitySet="tPromotions" />
+      <End Role="tPromotionDetail" EntitySet="tPromotionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tPromotionDetail_tPromotionImage" Association="Self.FK_tPromotionDetail_tPromotionImage">
+      <End Role="tPromotionImage" EntitySet="tPromotionImages" />
+      <End Role="tPromotionDetail" EntitySet="tPromotionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tTransfer_tWarehouseIn" Association="Self.FK_tTransfer_tWarehouseIn">
+      <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+      <End Role="tTransfer" EntitySet="tTransfers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tTransfer_tWarehouseOut" Association="Self.FK_tTransfer_tWarehouseOut">
+      <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+      <End Role="tTransfer" EntitySet="tTransfers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tWarehouse_tWarehouseName" Association="Self.FK_tWarehouse_tWarehouseName">
+      <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+      <End Role="tWarehouse" EntitySet="tWarehouses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
