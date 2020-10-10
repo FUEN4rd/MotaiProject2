@@ -25,7 +25,5 @@ namespace MotaiProject
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderPay> tOrderPays { get; set; }
-        public virtual tOrderPayType tOrderPayType1 { get; set; }
-        public virtual tOrderPayType tOrderPayType2 { get; set; }
     }
 }

@@ -23,8 +23,6 @@ namespace MotaiProject
         public int PromotionId { get; set; }
         public string PromotionName { get; set; }
     
-        public virtual tPromotion tPromotion1 { get; set; }
-        public virtual tPromotion tPromotion2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tPromotionDetail> tPromotionDetails { get; set; }
     }

@@ -63,21 +63,35 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 新增產品()
         {
+            var query = (new MotaiDataEntities()).tProductCategories.OrderBy(c => c.pCategoryId);           
+            List<tProductCategory> categories = new List<tProductCategory>();
+            foreach(tProductCategory category in query)
+            {
+                categories.Add(category);
+            }                           
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach(var c in categories)
+            {
+                items.Add(new SelectListItem() { Text = c.Category });
+            }
+            ViewBag.CategooryItems = items;
             return View();
         }
         [HttpPost]
         public ActionResult 新增產品(ProductViewModel n新增產品)
         {
-            tProduct prod = new tProduct();
-            prod = n新增產品.Product;
-            if(prod.tProductCategory.Category == n新增產品.pCategory)
-            {
-                prod.pCategory = prod.tProductCategory.pCategoryId;
-            }
-            
-            MotaiDataEntities db = new MotaiDataEntities();
-            db.tProducts.Add(prod);
-            db.SaveChanges();
+
+            //tProduct prod = new tProduct();
+            //prod = n新增產品.Product;
+            //prod.tProductCategory.Category
+
+
+            //    prod.pCategory = prod.tProductCategory.pCategoryId;
+
+
+            //MotaiDataEntities db = new MotaiDataEntities();
+            //db.tProducts.Add(prod);
+            //db.SaveChanges();
             return RedirectToAction("員工看產品頁面");
         }
         public ActionResult 修改產品(int id)//修改產品,藉由id到資料庫把產品抓出來

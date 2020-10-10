@@ -19,5 +19,6 @@ namespace MotaiProject
         public int fProductId { get; set; }
     
         public virtual tCustomer tCustomer { get; set; }
+        public virtual tProduct tProduct { get; set; }
     }
 }

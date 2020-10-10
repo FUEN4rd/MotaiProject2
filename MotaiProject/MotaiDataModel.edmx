@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tCustomer">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -195,6 +195,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tFavorite_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tFavorite">
+              <PropertyRef Name="FavoriteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tOrder_tCustomer">
           <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
@@ -255,18 +267,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tOrderPayType_tOrderPayType">
-          <End Role="tOrderPayType" Type="Self.tOrderPayType" Multiplicity="1" />
-          <End Role="tOrderPayType1" Type="Self.tOrderPayType" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tOrderPayType">
-              <PropertyRef Name="oPayTypeId" />
-            </Principal>
-            <Dependent Role="tOrderPayType1">
-              <PropertyRef Name="oPayTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tProduct_tProductCategory">
           <End Role="tProductCategory" Type="Self.tProductCategory" Multiplicity="1" />
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
@@ -315,27 +315,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tProductCategory_tProductCategory">
-          <End Role="tProductCategory" Type="Self.tProductCategory" Multiplicity="1" />
-          <End Role="tProductCategory1" Type="Self.tProductCategory" Multiplicity="0..1" />
+        <Association Name="FK_tPromotionDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tProductCategory">
-              <PropertyRef Name="pCategoryId" />
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
             </Principal>
-            <Dependent Role="tProductCategory1">
-              <PropertyRef Name="pCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotion_tPromotion">
-          <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
-          <End Role="tPromotion1" Type="Self.tPromotion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tPromotion">
-              <PropertyRef Name="PromotionId" />
-            </Principal>
-            <Dependent Role="tPromotion1">
-              <PropertyRef Name="PromotionId" />
+            <Dependent Role="tPromotionDetail">
+              <PropertyRef Name="pPromotionProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -471,6 +459,10 @@
             <End Role="tCustomer" EntitySet="tCustomer" />
             <End Role="tFavorite" EntitySet="tFavorite" />
           </AssociationSet>
+          <AssociationSet Name="FK_tFavorite_tProduct" Association="Self.FK_tFavorite_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tFavorite" EntitySet="tFavorite" />
+          </AssociationSet>
           <AssociationSet Name="FK_tOrder_tCustomer" Association="Self.FK_tOrder_tCustomer">
             <End Role="tCustomer" EntitySet="tCustomer" />
             <End Role="tOrder" EntitySet="tOrder" />
@@ -491,10 +483,6 @@
             <End Role="tOrderPayType" EntitySet="tOrderPayType" />
             <End Role="tOrderPay" EntitySet="tOrderPay" />
           </AssociationSet>
-          <AssociationSet Name="FK_tOrderPayType_tOrderPayType" Association="Self.FK_tOrderPayType_tOrderPayType">
-            <End Role="tOrderPayType" EntitySet="tOrderPayType" />
-            <End Role="tOrderPayType1" EntitySet="tOrderPayType" />
-          </AssociationSet>
           <AssociationSet Name="FK_tProduct_tProductCategory" Association="Self.FK_tProduct_tProductCategory">
             <End Role="tProductCategory" EntitySet="tProductCategory" />
             <End Role="tProduct" EntitySet="tProduct" />
@@ -511,13 +499,9 @@
             <End Role="tProductSize" EntitySet="tProductSize" />
             <End Role="tProduct" EntitySet="tProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_tProductCategory_tProductCategory" Association="Self.FK_tProductCategory_tProductCategory">
-            <End Role="tProductCategory" EntitySet="tProductCategory" />
-            <End Role="tProductCategory1" EntitySet="tProductCategory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tPromotion_tPromotion" Association="Self.FK_tPromotion_tPromotion">
-            <End Role="tPromotion" EntitySet="tPromotion" />
-            <End Role="tPromotion1" EntitySet="tPromotion" />
+          <AssociationSet Name="FK_tPromotionDetail_tProduct" Association="Self.FK_tPromotionDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tPromotionDetail" EntitySet="tPromotionDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_tPromotionDetail_tPromotion" Association="Self.FK_tPromotionDetail_tPromotion">
             <End Role="tPromotion" EntitySet="tPromotion" />
@@ -556,8 +540,7 @@
             <End Role="tWarehouse" EntitySet="tWarehouse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MotaiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -597,6 +580,7 @@
           <Property Name="fCustomerId" Type="Int32" Nullable="false" />
           <Property Name="fProductId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tCustomer" Relationship="Self.FK_tFavorite_tCustomer" FromRole="tFavorite" ToRole="tCustomer" />
+          <NavigationProperty Name="tProduct" Relationship="MotaiDataModel.FK_tFavorite_tProduct" FromRole="tFavorite" ToRole="tProduct" />
         </EntityType>
         <EntityType Name="tOrder">
           <Key>
@@ -642,8 +626,6 @@
           <Property Name="oPayTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="oPayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrderPayType" FromRole="tOrderPayType" ToRole="tOrderPay" />
-          <NavigationProperty Name="tOrderPayType1" Relationship="Self.FK_tOrderPayType_tOrderPayType" FromRole="tOrderPayType" ToRole="tOrderPayType1" />
-          <NavigationProperty Name="tOrderPayType2" Relationship="Self.FK_tOrderPayType_tOrderPayType" FromRole="tOrderPayType1" ToRole="tOrderPayType" />
         </EntityType>
         <EntityType Name="tProduct">
           <Key>
@@ -664,9 +646,11 @@
           <NavigationProperty Name="tProductImage" Relationship="Self.FK_tProduct_tProductImage" FromRole="tProduct" ToRole="tProductImage" />
           <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
           <NavigationProperty Name="tProductSize" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProduct" ToRole="tProductSize" />
+          <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tProduct" FromRole="tProduct" ToRole="tPromotionDetail" />
           <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
           <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
+          <NavigationProperty Name="tFavorite" Relationship="MotaiDataModel.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
         </EntityType>
         <EntityType Name="tProductCategory">
           <Key>
@@ -675,8 +659,6 @@
           <Property Name="pCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tProducts" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProductCategory" ToRole="tProduct" />
-          <NavigationProperty Name="tProductCategory1" Relationship="Self.FK_tProductCategory_tProductCategory" FromRole="tProductCategory" ToRole="tProductCategory1" />
-          <NavigationProperty Name="tProductCategory2" Relationship="Self.FK_tProductCategory_tProductCategory" FromRole="tProductCategory1" ToRole="tProductCategory" />
         </EntityType>
         <EntityType Name="tProductImage">
           <Key>
@@ -709,8 +691,6 @@
           </Key>
           <Property Name="PromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tPromotion1" Relationship="Self.FK_tPromotion_tPromotion" FromRole="tPromotion" ToRole="tPromotion1" />
-          <NavigationProperty Name="tPromotion2" Relationship="Self.FK_tPromotion_tPromotion" FromRole="tPromotion1" ToRole="tPromotion" />
           <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotion" ToRole="tPromotionDetail" />
         </EntityType>
         <EntityType Name="tPromotionDetail">
@@ -723,6 +703,7 @@
           <Property Name="pPromotionImageId" Type="Int32" />
           <Property Name="pPromotionStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pPromotionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_tPromotionDetail_tProduct" FromRole="tPromotionDetail" ToRole="tProduct" />
           <NavigationProperty Name="tPromotion" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotionDetail" ToRole="tPromotion" />
           <NavigationProperty Name="tPromotionImage" Relationship="Self.FK_tPromotionDetail_tPromotionImage" FromRole="tPromotionDetail" ToRole="tPromotionImage" />
         </EntityType>
@@ -867,18 +848,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tOrderPayType_tOrderPayType">
-          <End Role="tOrderPayType" Type="Self.tOrderPayType" Multiplicity="1" />
-          <End Role="tOrderPayType1" Type="Self.tOrderPayType" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tOrderPayType">
-              <PropertyRef Name="oPayTypeId" />
-            </Principal>
-            <Dependent Role="tOrderPayType1">
-              <PropertyRef Name="oPayTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tProduct_tProductCategory">
           <End Role="tProductCategory" Type="Self.tProductCategory" Multiplicity="1" />
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
@@ -927,6 +896,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tPromotionDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tPromotionDetail">
+              <PropertyRef Name="pPromotionProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tStatus_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
           <End Role="tStatus" Type="Self.tStatu" Multiplicity="*" />
@@ -960,30 +941,6 @@
             </Principal>
             <Dependent Role="tWarehouse">
               <PropertyRef Name="wProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tProductCategory_tProductCategory">
-          <End Role="tProductCategory" Type="Self.tProductCategory" Multiplicity="1" />
-          <End Role="tProductCategory1" Type="Self.tProductCategory" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tProductCategory">
-              <PropertyRef Name="pCategoryId" />
-            </Principal>
-            <Dependent Role="tProductCategory1">
-              <PropertyRef Name="pCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotion_tPromotion">
-          <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
-          <End Role="tPromotion1" Type="Self.tPromotion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tPromotion">
-              <PropertyRef Name="PromotionId" />
-            </Principal>
-            <Dependent Role="tPromotion1">
-              <PropertyRef Name="PromotionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1095,10 +1052,6 @@
             <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
             <End Role="tOrderPay" EntitySet="tOrderPays" />
           </AssociationSet>
-          <AssociationSet Name="FK_tOrderPayType_tOrderPayType" Association="Self.FK_tOrderPayType_tOrderPayType">
-            <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
-            <End Role="tOrderPayType1" EntitySet="tOrderPayTypes" />
-          </AssociationSet>
           <AssociationSet Name="FK_tProduct_tProductCategory" Association="Self.FK_tProduct_tProductCategory">
             <End Role="tProductCategory" EntitySet="tProductCategories" />
             <End Role="tProduct" EntitySet="tProducts" />
@@ -1115,6 +1068,10 @@
             <End Role="tProductSize" EntitySet="tProductSizes" />
             <End Role="tProduct" EntitySet="tProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_tPromotionDetail_tProduct" Association="Self.FK_tPromotionDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tPromotionDetail" EntitySet="tPromotionDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_tStatus_tProduct" Association="Self.FK_tStatus_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tStatus" EntitySet="tStatus" />
@@ -1126,14 +1083,6 @@
           <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tWarehouse" EntitySet="tWarehouses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tProductCategory_tProductCategory" Association="Self.FK_tProductCategory_tProductCategory">
-            <End Role="tProductCategory" EntitySet="tProductCategories" />
-            <End Role="tProductCategory1" EntitySet="tProductCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tPromotion_tPromotion" Association="Self.FK_tPromotion_tPromotion">
-            <End Role="tPromotion" EntitySet="tPromotions" />
-            <End Role="tPromotion1" EntitySet="tPromotions" />
           </AssociationSet>
           <AssociationSet Name="FK_tPromotionDetail_tPromotion" Association="Self.FK_tPromotionDetail_tPromotion">
             <End Role="tPromotion" EntitySet="tPromotions" />
@@ -1155,7 +1104,23 @@
             <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
             <End Role="tWarehouse" EntitySet="tWarehouses" />
           </AssociationSet>
+          <AssociationSet Name="FK_tFavorite_tProduct" Association="MotaiDataModel.FK_tFavorite_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tFavorite" EntitySet="tFavorites" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_tFavorite_tProduct">
+          <End Type="MotaiDataModel.tProduct" Role="tProduct" Multiplicity="1" />
+          <End Type="MotaiDataModel.tFavorite" Role="tFavorite" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tFavorite">
+              <PropertyRef Name="FavoriteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

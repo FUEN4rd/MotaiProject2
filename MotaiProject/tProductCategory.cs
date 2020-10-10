@@ -25,7 +25,5 @@ namespace MotaiProject
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tProduct> tProducts { get; set; }
-        public virtual tProductCategory tProductCategory1 { get; set; }
-        public virtual tProductCategory tProductCategory2 { get; set; }
     }
 }

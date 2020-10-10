@@ -21,6 +21,7 @@ namespace MotaiProject
         public string pPromotionStartDate { get; set; }
         public string pPromotionTime { get; set; }
     
+        public virtual tProduct tProduct { get; set; }
         public virtual tPromotion tPromotion { get; set; }
         public virtual tPromotionImage tPromotionImage { get; set; }
     }
