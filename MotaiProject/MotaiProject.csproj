@@ -109,11 +109,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\background_RedCloud.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\UBear card.png" />
+    <Content Include="Content\三尊佛.jpg" />
+    <Content Include="Content\墨臺Logo.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
