@@ -52,6 +52,7 @@
     <Property Name="oProductId" Type="int" Nullable="false" />
     <Property Name="oProductQty" Type="int" Nullable="false" />
     <Property Name="oWarehouseId" Type="int" Nullable="false" />
+    <Property Name="oNote" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tOrderPay">
     <Key>

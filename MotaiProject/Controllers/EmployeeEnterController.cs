@@ -73,31 +73,31 @@ namespace MotaiProject.Controllers
                     Text = c.Value,
                     Value = c.Key.ToString()
                 });
-            }
-            newprod.pCategory = Cateitems;
+            }            
+            newprod.Categories = Cateitems;
 
-            List<tProductMaterial> materials = new ClassMethod().GetMaterialAll();
+            var materials = new ClassMethod().GetMaterialAll();
             List<SelectListItem> Mateitems = new List<SelectListItem>();
-            foreach(var m in materials)
+            foreach (var m in materials)
             {
                 Mateitems.Add(new SelectListItem()
                 {
-                    Text = m.Material,
-                    Value = m.pMaterialId.ToString()
+                    Text = m.Value,
+                    Value = m.Key.ToString()
                 });
             }
-            newprod.pMaterial = Mateitems;
+            newprod.Materials = Mateitems;
 
-            List<tProductSize> sizes = new ClassMethod().GetSizeAll();
+            var sizes = new ClassMethod().GetSizeAll();
             List<SelectListItem> Sizeitems = new List<SelectListItem>();
             foreach(var s in sizes)
             {
                 Sizeitems.Add(new SelectListItem() {
-                    Text = s.Size,
-                    Value = s.pSizeId.ToString()
+                    Text = s.Value,
+                    Value = s.Key.ToString()
                 });
             }
-            newprod.pSize = Sizeitems;
+            newprod.Sizes = Sizeitems;            
             return View(newprod);
         }
         [HttpPost]
@@ -107,9 +107,13 @@ namespace MotaiProject.Controllers
             tProduct prod = new tProduct();
             prod.pNumber = n新增產品.pNumber;
             prod.pName = n新增產品.pName;
-            //prod.pCategory = db.tProductCategories.Where(c => c.Category == n新增產品.pCategory);
-
-
+            prod.pCategory = n新增產品.pCategory;
+            prod.pMaterial = n新增產品.pMaterial;
+            prod.pSize = n新增產品.pSize;
+            prod.pLxWxH = n新增產品.pLxWxH;
+            prod.pImage = n新增產品.pImage;
+            prod.pPrice = n新增產品.pPrice;
+            prod.pQty = n新增產品.pQty;
 
             db.tProducts.Add(prod);
             db.SaveChanges();

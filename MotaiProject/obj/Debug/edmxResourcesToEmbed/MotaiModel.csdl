@@ -65,6 +65,7 @@
     <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
     <NavigationProperty Name="tProduct" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
     <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tOrderDetail" ToRole="tWarehouseName" />
+    <Property Name="oNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tOrderPay">
     <Key>

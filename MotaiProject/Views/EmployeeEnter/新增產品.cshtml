@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Cateitems",Model.pCategory,"",new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.pCategory, Model.Categories, "請選擇分類", new { @class = "form-control", id = "pCategory" })
                 @Html.ValidationMessageFor(model => model.pCategory, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pMaterial, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Mateitems", Model.pMaterial, "", new { @class = "form-control" })
+                @Html.DropDownList("pMaterial", Model.Materials, "請選擇材質", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.pMaterial, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pSize, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Sizeitems", Model.pSize, "", new { @class = "form-control" })
+                @Html.DropDownList("pSize", Model.Sizes, "請選擇尺寸", new { @class = "form-control",@id = "pSize" })
                 @Html.ValidationMessageFor(model => model.pSize, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -119,3 +119,10 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#pCategory").change(function () {
+            
+        })
+    })
+</script>

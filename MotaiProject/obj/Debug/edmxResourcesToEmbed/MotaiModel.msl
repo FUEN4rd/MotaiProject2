@@ -51,6 +51,7 @@
     <EntitySetMapping Name="tOrderDetails">
       <EntityTypeMapping TypeName="MotaiDataModel.tOrderDetail">
         <MappingFragment StoreEntitySet="tOrderDetail">
+          <ScalarProperty Name="oNote" ColumnName="oNote" />
           <ScalarProperty Name="oDetailId" ColumnName="oDetailId" />
           <ScalarProperty Name="oOrderId" ColumnName="oOrderId" />
           <ScalarProperty Name="oProductId" ColumnName="oProductId" />

@@ -26,16 +26,17 @@ namespace MotaiProject.ViewModels
         [DisplayName("產品編號")]
         public string pNumber { get { return this.Product.pNumber; } set { Product.pNumber = value; } }
         public string pName { get { return this.Product.pName; } set { Product.pName = value; } }
-        public IEnumerable<SelectListItem> pCategory { get; set; }
-        public IEnumerable<SelectListItem> pMaterial { get; set; }
-        public IEnumerable<SelectListItem> pSize{get ;set;}
+        public int pCategory { get { return this.Product.pCategory; } set { Product.pCategory = value; } }
+        public int pMaterial { get; set; }
+        public int pSize{get;set;}
         public string pLxWxH { get { return this.Product.pLxWxH; } set { Product.pLxWxH = value; } }
         public double pWeight { get { return this.Product.pWeight; } set { Product.pWeight = value; } }
         public Nullable<int> pImage { get { return this.Product.pImage; } set { Product.pImage = value; } }
         public decimal pPrice { get { return this.Product.pPrice; } set { Product.pPrice = value; } }
-        public int pQty
-        {
-            get;set;
-        }
+        public int pQty{get;set;}
+
+        public IEnumerable<SelectListItem> Categories { get; set; }
+        public IEnumerable<SelectListItem> Materials { get; set; }
+        public IEnumerable<SelectListItem> Sizes { get; set; }
     }
 }
