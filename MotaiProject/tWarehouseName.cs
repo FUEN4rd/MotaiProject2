@@ -17,6 +17,7 @@ namespace MotaiProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tWarehouseName()
         {
+            this.tOrderDetails = new HashSet<tOrderDetail>();
             this.tTransfers = new HashSet<tTransfer>();
             this.tTransfers1 = new HashSet<tTransfer>();
             this.tWarehouses = new HashSet<tWarehouse>();
@@ -25,6 +26,8 @@ namespace MotaiProject
         public int WarehouseNameId { get; set; }
         public string WarehouseName { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tTransfer> tTransfers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

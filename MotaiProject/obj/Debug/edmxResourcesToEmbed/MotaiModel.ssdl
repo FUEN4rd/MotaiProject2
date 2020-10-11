@@ -120,6 +120,8 @@
     </Key>
     <Property Name="PromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PromotionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pPromotionStartDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pPromotionTime" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="tPromotionDetail">
     <Key>
@@ -129,8 +131,6 @@
     <Property Name="pPromotionId" Type="int" Nullable="false" />
     <Property Name="pPromotionProductId" Type="int" Nullable="false" />
     <Property Name="pPromotionImageId" Type="int" />
-    <Property Name="pPromotionStartDate" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="pPromotionTime" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="tPromotionImage">
     <Key>

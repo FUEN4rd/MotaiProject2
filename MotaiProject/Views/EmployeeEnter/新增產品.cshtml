@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DropDwon",(IEnumerable<SelectListItem>)ViewBag.CategooryItems)
+                @Html.DropDownList("Cateitems",Model.pCategory,"",new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.pCategory, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pMaterial, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.pMaterial, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Mateitems", Model.pMaterial, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.pMaterial, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.pSize, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.pSize, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Sizeitems", Model.pSize, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.pSize, "", new { @class = "text-danger" })
             </div>
         </div>

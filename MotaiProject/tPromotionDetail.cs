@@ -18,8 +18,6 @@ namespace MotaiProject
         public int pPromotionId { get; set; }
         public int pPromotionProductId { get; set; }
         public Nullable<int> pPromotionImageId { get; set; }
-        public string pPromotionStartDate { get; set; }
-        public string pPromotionTime { get; set; }
     
         public virtual tProduct tProduct { get; set; }
         public virtual tPromotion tPromotion { get; set; }

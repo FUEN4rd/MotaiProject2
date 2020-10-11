@@ -36,7 +36,7 @@
     <Property Name="fCustomerId" Type="Int32" Nullable="false" />
     <Property Name="fProductId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tCustomer" Relationship="Self.FK_tFavorite_tCustomer" FromRole="tFavorite" ToRole="tCustomer" />
-    <NavigationProperty Name="tProduct" Relationship="MotaiDataModel.FK_tFavorite_tProduct" FromRole="tFavorite" ToRole="tProduct" />
+    <NavigationProperty Name="tProduct" Relationship="Self.FK_tFavorite_tProduct" FromRole="tFavorite" ToRole="tProduct" />
   </EntityType>
   <EntityType Name="tOrder">
     <Key>
@@ -63,8 +63,8 @@
     <Property Name="oProductQty" Type="Int32" Nullable="false" />
     <Property Name="oWarehouseId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
-    <NavigationProperty Name="tProduct" Relationship="MotaiDataModel.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
-    <NavigationProperty Name="tWarehouseName" Relationship="MotaiDataModel.FK_tOrderDetail_tWarehouseName" FromRole="tOrderDetail" ToRole="tWarehouseName" />
+    <NavigationProperty Name="tProduct" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
+    <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tOrderDetail" ToRole="tWarehouseName" />
   </EntityType>
   <EntityType Name="tOrderPay">
     <Key>
@@ -100,6 +100,8 @@
     <Property Name="pImage" Type="Int32" />
     <Property Name="pPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
     <Property Name="pQty" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tFavorite" Relationship="Self.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
+    <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tProduct" ToRole="tOrderDetail" />
     <NavigationProperty Name="tProductCategory" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProduct" ToRole="tProductCategory" />
     <NavigationProperty Name="tProductImage" Relationship="Self.FK_tProduct_tProductImage" FromRole="tProduct" ToRole="tProductImage" />
     <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
@@ -108,8 +110,6 @@
     <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
     <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
     <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
-    <NavigationProperty Name="tFavorite" Relationship="MotaiDataModel.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
-    <NavigationProperty Name="tOrderDetails" Relationship="MotaiDataModel.FK_tOrderDetail_tProduct" FromRole="tProduct" ToRole="tOrderDetail" />
   </EntityType>
   <EntityType Name="tProductCategory">
     <Key>
@@ -150,6 +150,8 @@
     </Key>
     <Property Name="PromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pPromotionStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pPromotionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotion" ToRole="tPromotionDetail" />
   </EntityType>
   <EntityType Name="tPromotionDetail">
@@ -160,8 +162,6 @@
     <Property Name="pPromotionId" Type="Int32" Nullable="false" />
     <Property Name="pPromotionProductId" Type="Int32" Nullable="false" />
     <Property Name="pPromotionImageId" Type="Int32" />
-    <Property Name="pPromotionStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="pPromotionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="tProduct" Relationship="Self.FK_tPromotionDetail_tProduct" FromRole="tPromotionDetail" ToRole="tProduct" />
     <NavigationProperty Name="tPromotion" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotionDetail" ToRole="tPromotion" />
     <NavigationProperty Name="tPromotionImage" Relationship="Self.FK_tPromotionDetail_tPromotionImage" FromRole="tPromotionDetail" ToRole="tPromotionImage" />
@@ -219,10 +219,10 @@
     </Key>
     <Property Name="WarehouseNameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="WarehouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrderDetail" />
     <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tWarehouseName" ToRole="tTransfer" />
     <NavigationProperty Name="tTransfers1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tWarehouseName" ToRole="tTransfer" />
     <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouseName" ToRole="tWarehouse" />
-    <NavigationProperty Name="tOrderDetails" Relationship="MotaiDataModel.FK_tOrderDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrderDetail" />
   </EntityType>
   <Association Name="FK_tFavorite_tCustomer">
     <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
@@ -272,6 +272,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tFavorite_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tFavorite">
+        <PropertyRef Name="FavoriteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tOrderDetail_tOrder">
     <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
     <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
@@ -293,6 +305,30 @@
       </Principal>
       <Dependent Role="tOrderPay">
         <PropertyRef Name="oOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrderDetail_tProduct">
+    <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+    <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tProduct">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="tOrderDetail">
+        <PropertyRef Name="oProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOrderDetail_tWarehouseName">
+    <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+    <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tWarehouseName">
+        <PropertyRef Name="WarehouseNameId" />
+      </Principal>
+      <Dependent Role="tOrderDetail">
+        <PropertyRef Name="oWarehouseId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -500,6 +536,10 @@
       <End Role="tEmployee" EntitySet="tEmployees" />
       <End Role="tOrder" EntitySet="tOrders" />
     </AssociationSet>
+    <AssociationSet Name="FK_tFavorite_tProduct" Association="Self.FK_tFavorite_tProduct">
+      <End Role="tProduct" EntitySet="tProducts" />
+      <End Role="tFavorite" EntitySet="tFavorites" />
+    </AssociationSet>
     <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
       <End Role="tOrder" EntitySet="tOrders" />
       <End Role="tOrderDetail" EntitySet="tOrderDetails" />
@@ -507,6 +547,14 @@
     <AssociationSet Name="FK_tOrderPay_tOrder" Association="Self.FK_tOrderPay_tOrder">
       <End Role="tOrder" EntitySet="tOrders" />
       <End Role="tOrderPay" EntitySet="tOrderPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrderDetail_tProduct" Association="Self.FK_tOrderDetail_tProduct">
+      <End Role="tProduct" EntitySet="tProducts" />
+      <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOrderDetail_tWarehouseName" Association="Self.FK_tOrderDetail_tWarehouseName">
+      <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+      <End Role="tOrderDetail" EntitySet="tOrderDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_tOrderPay_tOrderPayType" Association="Self.FK_tOrderPay_tOrderPayType">
       <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
@@ -564,53 +612,5 @@
       <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
       <End Role="tWarehouse" EntitySet="tWarehouses" />
     </AssociationSet>
-    <AssociationSet Name="FK_tFavorite_tProduct" Association="MotaiDataModel.FK_tFavorite_tProduct">
-      <End Role="tProduct" EntitySet="tProducts" />
-      <End Role="tFavorite" EntitySet="tFavorites" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tOrderDetail_tProduct" Association="MotaiDataModel.FK_tOrderDetail_tProduct">
-      <End Role="tProduct" EntitySet="tProducts" />
-      <End Role="tOrderDetail" EntitySet="tOrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tOrderDetail_tWarehouseName" Association="MotaiDataModel.FK_tOrderDetail_tWarehouseName">
-      <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
-      <End Role="tOrderDetail" EntitySet="tOrderDetails" />
-    </AssociationSet>
   </EntityContainer>
-  <Association Name="FK_tFavorite_tProduct">
-    <End Type="MotaiDataModel.tProduct" Role="tProduct" Multiplicity="1" />
-    <End Type="MotaiDataModel.tFavorite" Role="tFavorite" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="tProduct">
-        <PropertyRef Name="ProductId" />
-      </Principal>
-      <Dependent Role="tFavorite">
-        <PropertyRef Name="FavoriteId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tOrderDetail_tProduct">
-    <End Type="MotaiDataModel.tProduct" Role="tProduct" Multiplicity="1" />
-    <End Type="MotaiDataModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tProduct">
-        <PropertyRef Name="ProductId" />
-      </Principal>
-      <Dependent Role="tOrderDetail">
-        <PropertyRef Name="oProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tOrderDetail_tWarehouseName">
-    <End Type="MotaiDataModel.tWarehouseName" Role="tWarehouseName" Multiplicity="1" />
-    <End Type="MotaiDataModel.tOrderDetail" Role="tOrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tWarehouseName">
-        <PropertyRef Name="WarehouseNameId" />
-      </Principal>
-      <Dependent Role="tOrderDetail">
-        <PropertyRef Name="oWarehouseId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

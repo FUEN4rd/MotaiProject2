@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MotaiDataModelStoreContainer" CdmEntityContainer="MotaiDataEntities">
+    <EntitySetMapping Name="tCustomers">
+      <EntityTypeMapping TypeName="MotaiDataModel.tCustomer">
+        <MappingFragment StoreEntitySet="tCustomer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="cAccount" ColumnName="cAccount" />
+          <ScalarProperty Name="cPassword" ColumnName="cPassword" />
+          <ScalarProperty Name="cName" ColumnName="cName" />
+          <ScalarProperty Name="cTelePhone" ColumnName="cTelePhone" />
+          <ScalarProperty Name="cCellPhone" ColumnName="cCellPhone" />
+          <ScalarProperty Name="cAddress" ColumnName="cAddress" />
+          <ScalarProperty Name="cGUI" ColumnName="cGUI" />
+          <ScalarProperty Name="cEmail" ColumnName="cEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tEmployees">
+      <EntityTypeMapping TypeName="MotaiDataModel.tEmployee">
+        <MappingFragment StoreEntitySet="tEmployee">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="eName" ColumnName="eName" />
+          <ScalarProperty Name="ePosition" ColumnName="ePosition" />
+          <ScalarProperty Name="eBranch" ColumnName="eBranch" />
+          <ScalarProperty Name="ePassword" ColumnName="ePassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tFavorites">
+      <EntityTypeMapping TypeName="MotaiDataModel.tFavorite">
+        <MappingFragment StoreEntitySet="tFavorite">
+          <ScalarProperty Name="FavoriteId" ColumnName="FavoriteId" />
+          <ScalarProperty Name="fCustomerId" ColumnName="fCustomerId" />
+          <ScalarProperty Name="fProductId" ColumnName="fProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOrders">
+      <EntityTypeMapping TypeName="MotaiDataModel.tOrder">
+        <MappingFragment StoreEntitySet="tOrder">
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="oCustomerId" ColumnName="oCustomerId" />
+          <ScalarProperty Name="oAddress" ColumnName="oAddress" />
+          <ScalarProperty Name="oDate" ColumnName="oDate" />
+          <ScalarProperty Name="oDeliverDate" ColumnName="oDeliverDate" />
+          <ScalarProperty Name="oEmployeeId" ColumnName="oEmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOrderDetails">
+      <EntityTypeMapping TypeName="MotaiDataModel.tOrderDetail">
+        <MappingFragment StoreEntitySet="tOrderDetail">
+          <ScalarProperty Name="oDetailId" ColumnName="oDetailId" />
+          <ScalarProperty Name="oOrderId" ColumnName="oOrderId" />
+          <ScalarProperty Name="oProductId" ColumnName="oProductId" />
+          <ScalarProperty Name="oProductQty" ColumnName="oProductQty" />
+          <ScalarProperty Name="oWarehouseId" ColumnName="oWarehouseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOrderPays">
+      <EntityTypeMapping TypeName="MotaiDataModel.tOrderPay">
+        <MappingFragment StoreEntitySet="tOrderPay">
+          <ScalarProperty Name="oPayId" ColumnName="oPayId" />
+          <ScalarProperty Name="oOrderId" ColumnName="oOrderId" />
+          <ScalarProperty Name="oPayType" ColumnName="oPayType" />
+          <ScalarProperty Name="oPayment" ColumnName="oPayment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOrderPayTypes">
+      <EntityTypeMapping TypeName="MotaiDataModel.tOrderPayType">
+        <MappingFragment StoreEntitySet="tOrderPayType">
+          <ScalarProperty Name="oPayTypeId" ColumnName="oPayTypeId" />
+          <ScalarProperty Name="oPayType" ColumnName="oPayType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProducts">
+      <EntityTypeMapping TypeName="MotaiDataModel.tProduct">
+        <MappingFragment StoreEntitySet="tProduct">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="pNumber" ColumnName="pNumber" />
+          <ScalarProperty Name="pName" ColumnName="pName" />
+          <ScalarProperty Name="pCategory" ColumnName="pCategory" />
+          <ScalarProperty Name="pMaterial" ColumnName="pMaterial" />
+          <ScalarProperty Name="pSize" ColumnName="pSize" />
+          <ScalarProperty Name="pLxWxH" ColumnName="pLxWxH" />
+          <ScalarProperty Name="pWeight" ColumnName="pWeight" />
+          <ScalarProperty Name="pImage" ColumnName="pImage" />
+          <ScalarProperty Name="pPrice" ColumnName="pPrice" />
+          <ScalarProperty Name="pQty" ColumnName="pQty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductCategories">
+      <EntityTypeMapping TypeName="MotaiDataModel.tProductCategory">
+        <MappingFragment StoreEntitySet="tProductCategory">
+          <ScalarProperty Name="pCategoryId" ColumnName="pCategoryId" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductImages">
+      <EntityTypeMapping TypeName="MotaiDataModel.tProductImage">
+        <MappingFragment StoreEntitySet="tProductImage">
+          <ScalarProperty Name="pImageId" ColumnName="pImageId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="pImage" ColumnName="pImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductMaterials">
+      <EntityTypeMapping TypeName="MotaiDataModel.tProductMaterial">
+        <MappingFragment StoreEntitySet="tProductMaterial">
+          <ScalarProperty Name="pMaterialId" ColumnName="pMaterialId" />
+          <ScalarProperty Name="Material" ColumnName="Material" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tProductSizes">
+      <EntityTypeMapping TypeName="MotaiDataModel.tProductSize">
+        <MappingFragment StoreEntitySet="tProductSize">
+          <ScalarProperty Name="pSizeId" ColumnName="pSizeId" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tPromotions">
+      <EntityTypeMapping TypeName="MotaiDataModel.tPromotion">
+        <MappingFragment StoreEntitySet="tPromotion">
+          <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
+          <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
+          <ScalarProperty Name="pPromotionStartDate" ColumnName="pPromotionStartDate" />
+          <ScalarProperty Name="pPromotionTime" ColumnName="pPromotionTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tPromotionDetails">
+      <EntityTypeMapping TypeName="MotaiDataModel.tPromotionDetail">
+        <MappingFragment StoreEntitySet="tPromotionDetail">
+          <ScalarProperty Name="pDetailId" ColumnName="pDetailId" />
+          <ScalarProperty Name="pPromotionId" ColumnName="pPromotionId" />
+          <ScalarProperty Name="pPromotionProductId" ColumnName="pPromotionProductId" />
+          <ScalarProperty Name="pPromotionImageId" ColumnName="pPromotionImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tPromotionImages">
+      <EntityTypeMapping TypeName="MotaiDataModel.tPromotionImage">
+        <MappingFragment StoreEntitySet="tPromotionImage">
+          <ScalarProperty Name="PromotionImageId" ColumnName="PromotionImageId" />
+          <ScalarProperty Name="pImage" ColumnName="pImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tStatus">
+      <EntityTypeMapping TypeName="MotaiDataModel.tStatu">
+        <MappingFragment StoreEntitySet="tStatus">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="sCustomerId" ColumnName="sCustomerId" />
+          <ScalarProperty Name="sProductId" ColumnName="sProductId" />
+          <ScalarProperty Name="sProductQty" ColumnName="sProductQty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tTransfers">
+      <EntityTypeMapping TypeName="MotaiDataModel.tTransfer">
+        <MappingFragment StoreEntitySet="tTransfer">
+          <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+          <ScalarProperty Name="tProductId" ColumnName="tProductId" />
+          <ScalarProperty Name="tProductQty" ColumnName="tProductQty" />
+          <ScalarProperty Name="tWNIdOut" ColumnName="tWNIdOut" />
+          <ScalarProperty Name="tWNIdIn" ColumnName="tWNIdIn" />
+          <ScalarProperty Name="tDate" ColumnName="tDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tWarehouses">
+      <EntityTypeMapping TypeName="MotaiDataModel.tWarehouse">
+        <MappingFragment StoreEntitySet="tWarehouse">
+          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+          <ScalarProperty Name="WarehouseNameId" ColumnName="WarehouseNameId" />
+          <ScalarProperty Name="wProductId" ColumnName="wProductId" />
+          <ScalarProperty Name="wQuantity" ColumnName="wQuantity" />
+          <ScalarProperty Name="wSerialValue" ColumnName="wSerialValue" />
+          <ScalarProperty Name="wStockDate" ColumnName="wStockDate" />
+          <ScalarProperty Name="wShipmentDate" ColumnName="wShipmentDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tWarehouseNames">
+      <EntityTypeMapping TypeName="MotaiDataModel.tWarehouseName">
+        <MappingFragment StoreEntitySet="tWarehouseName">
+          <ScalarProperty Name="WarehouseNameId" ColumnName="WarehouseNameId" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

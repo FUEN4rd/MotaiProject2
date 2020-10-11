@@ -19,7 +19,10 @@ namespace MotaiProject
         public int oProductId { get; set; }
         public int oProductQty { get; set; }
         public int oWarehouseId { get; set; }
+        public string oNote { get; set; }
     
         public virtual tOrder tOrder { get; set; }
+        public virtual tProduct tProduct { get; set; }
+        public virtual tWarehouseName tWarehouseName { get; set; }
     }
 }

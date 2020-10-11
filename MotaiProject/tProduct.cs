@@ -17,6 +17,7 @@ namespace MotaiProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tProduct()
         {
+            this.tOrderDetails = new HashSet<tOrderDetail>();
             this.tPromotionDetails = new HashSet<tPromotionDetail>();
             this.tStatus = new HashSet<tStatu>();
             this.tTransfers = new HashSet<tTransfer>();
@@ -35,6 +36,9 @@ namespace MotaiProject
         public decimal pPrice { get; set; }
         public int pQty { get; set; }
     
+        public virtual tFavorite tFavorite { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         public virtual tProductCategory tProductCategory { get; set; }
         public virtual tProductImage tProductImage { get; set; }
         public virtual tProductMaterial tProductMaterial { get; set; }
@@ -47,6 +51,5 @@ namespace MotaiProject
         public virtual ICollection<tTransfer> tTransfers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tWarehouse> tWarehouses { get; set; }
-        public virtual tFavorite tFavorite { get; set; }
     }
 }
