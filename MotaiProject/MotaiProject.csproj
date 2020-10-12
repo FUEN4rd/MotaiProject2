@@ -231,6 +231,21 @@
     <Content Include="MotaiModel.edmx.diagram">
       <DependentUpon>MotaiModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\bootstrap4.2.min.js.map" />
+    <Content Include="Scripts\bootstrap\bootstrap-grid.css" />
+    <Content Include="Scripts\bootstrap\bootstrap-grid.min.css" />
+    <Content Include="Scripts\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Scripts\bootstrap\bootstrap-reboot.min.css" />
+    <Content Include="Scripts\bootstrap\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap\bootstrap.css" />
+    <Content Include="Scripts\bootstrap\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap\bootstrap-grid.css.map" />
+    <Content Include="Scripts\bootstrap\bootstrap-grid.min.css.map" />
+    <Content Include="Scripts\bootstrap\bootstrap-reboot.css.map" />
+    <Content Include="Scripts\bootstrap\bootstrap-reboot.min.css.map" />
+    <Content Include="Scripts\bootstrap\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="MotaiModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -244,6 +259,11 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap4.2.min.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
