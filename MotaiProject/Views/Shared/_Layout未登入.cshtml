@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">*@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -229,7 +229,7 @@
         </div>
     </div>
     @*會員登入彈出視窗*@
-    @using (Html.BeginForm("會員登入", "CustomerLogin", FormMethod.Post,null))
+    @using (Html.BeginForm("會員登入", "CustomerLogin", FormMethod.Post, null))
     {
         @Html.AntiForgeryToken()
 
@@ -283,7 +283,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-   
+
     <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
     <script>
         $('#Login').on('show.bs.modal', function (event) {
@@ -293,6 +293,9 @@
             modal.find('.modal-title').text('會員登入 '/* + recipient*/)
             //modal.find('.modal-body input').val(recipient)
         })
+
     </script>
+
+    <link href="~/Scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
 </body>
 </html>
