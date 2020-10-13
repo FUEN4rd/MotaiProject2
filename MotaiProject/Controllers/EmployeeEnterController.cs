@@ -110,8 +110,7 @@ namespace MotaiProject.Controllers
             prod.pCategory = n新增產品.pCategory;
             prod.pMaterial = n新增產品.pMaterial;
             prod.pSize = n新增產品.pSize;
-            prod.pLxWxH = n新增產品.pLxWxH;
-            prod.pImage = n新增產品.pImage;
+            prod.pLxWxH = n新增產品.pLxWxH;            
             prod.pPrice = n新增產品.pPrice;
             prod.pQty = n新增產品.pQty;
 

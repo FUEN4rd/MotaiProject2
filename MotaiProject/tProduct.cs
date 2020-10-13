@@ -18,6 +18,7 @@ namespace MotaiProject
         public tProduct()
         {
             this.tOrderDetails = new HashSet<tOrderDetail>();
+            this.tProductImages = new HashSet<tProductImage>();
             this.tPromotionDetails = new HashSet<tPromotionDetail>();
             this.tStatus = new HashSet<tStatu>();
             this.tTransfers = new HashSet<tTransfer>();
@@ -32,7 +33,6 @@ namespace MotaiProject
         public int pSize { get; set; }
         public string pLxWxH { get; set; }
         public double pWeight { get; set; }
-        public Nullable<int> pImage { get; set; }
         public decimal pPrice { get; set; }
         public int pQty { get; set; }
     
@@ -40,9 +40,10 @@ namespace MotaiProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         public virtual tProductCategory tProductCategory { get; set; }
-        public virtual tProductImage tProductImage { get; set; }
         public virtual tProductMaterial tProductMaterial { get; set; }
         public virtual tProductSize tProductSize { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tProductImage> tProductImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tPromotionDetail> tPromotionDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -224,12 +224,15 @@
     <Content Include="lib\twitter-bootstrap\scss\utilities\_text.scss" />
     <Content Include="lib\twitter-bootstrap\scss\utilities\_visibility.scss" />
     <Content Include="lib\twitter-bootstrap\scss\vendor\_rfs.scss" />
-    <EntityDeploy Include="MotaiModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MotaiModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="MotaiModel.edmx.diagram">
+    <Content Include="MotaiModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MotaiModel.edmx</DependentUpon>
+      <LastGenOutput>MotaiModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MotaiModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MotaiModel.edmx</DependentUpon>
+      <LastGenOutput>MotaiModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap4.2.min.js.map" />
     <Content Include="Scripts\bootstrap\bootstrap-grid.css" />
@@ -246,17 +249,14 @@
     <Content Include="Scripts\bootstrap\bootstrap-reboot.min.css.map" />
     <Content Include="Scripts\bootstrap\bootstrap.css.map" />
     <Content Include="Scripts\bootstrap\bootstrap.min.css.map" />
+    <EntityDeploy Include="MotaiModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MotaiModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MotaiModel.edmx.diagram">
+      <DependentUpon>MotaiModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="MotaiModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MotaiModel.edmx</DependentUpon>
-      <LastGenOutput>MotaiModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="MotaiModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MotaiModel.edmx</DependentUpon>
-      <LastGenOutput>MotaiModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap4.2.min.js" />

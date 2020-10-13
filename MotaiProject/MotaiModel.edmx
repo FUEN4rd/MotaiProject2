@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tCustomer">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -24,6 +24,7 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="eName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ePosition" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="eBranch" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -87,7 +88,6 @@
           <Property Name="pSize" Type="int" Nullable="false" />
           <Property Name="pLxWxH" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pWeight" Type="float" Nullable="false" />
-          <Property Name="pImage" Type="int" />
           <Property Name="pPrice" Type="money" Nullable="false" />
           <Property Name="pQty" Type="int" Nullable="false" />
         </EntityType>
@@ -304,18 +304,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tProduct_tProductImage">
-          <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="0..1" />
-          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tProductImage">
-              <PropertyRef Name="pImageId" />
-            </Principal>
-            <Dependent Role="tProduct">
-              <PropertyRef Name="pImage" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tProduct_tProductMaterial">
           <End Role="tProductMaterial" Type="Self.tProductMaterial" Multiplicity="1" />
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
@@ -337,6 +325,18 @@
             </Principal>
             <Dependent Role="tProduct">
               <PropertyRef Name="pSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductImage_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tProductImage">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -520,10 +520,6 @@
             <End Role="tProductCategory" EntitySet="tProductCategory" />
             <End Role="tProduct" EntitySet="tProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_tProduct_tProductImage" Association="Self.FK_tProduct_tProductImage">
-            <End Role="tProductImage" EntitySet="tProductImage" />
-            <End Role="tProduct" EntitySet="tProduct" />
-          </AssociationSet>
           <AssociationSet Name="FK_tProduct_tProductMaterial" Association="Self.FK_tProduct_tProductMaterial">
             <End Role="tProductMaterial" EntitySet="tProductMaterial" />
             <End Role="tProduct" EntitySet="tProduct" />
@@ -531,6 +527,10 @@
           <AssociationSet Name="FK_tProduct_tProductSize" Association="Self.FK_tProduct_tProductSize">
             <End Role="tProductSize" EntitySet="tProductSize" />
             <End Role="tProduct" EntitySet="tProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductImage_tProduct" Association="Self.FK_tProductImage_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tProductImage" EntitySet="tProductImage" />
           </AssociationSet>
           <AssociationSet Name="FK_tPromotionDetail_tProduct" Association="Self.FK_tPromotionDetail_tProduct">
             <End Role="tProduct" EntitySet="tProduct" />
@@ -573,7 +573,8 @@
             <End Role="tWarehouse" EntitySet="tWarehouse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MotaiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -599,6 +600,7 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="eName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ePosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="eBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -639,10 +641,10 @@
           <Property Name="oProductId" Type="Int32" Nullable="false" />
           <Property Name="oProductQty" Type="Int32" Nullable="false" />
           <Property Name="oWarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="oNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tOrderDetail" ToRole="tWarehouseName" />
-          <Property Name="oNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tOrderPay">
           <Key>
@@ -675,15 +677,14 @@
           <Property Name="pSize" Type="Int32" Nullable="false" />
           <Property Name="pLxWxH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pWeight" Type="Double" Nullable="false" />
-          <Property Name="pImage" Type="Int32" />
           <Property Name="pPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="pQty" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tFavorite" Relationship="Self.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tProduct" ToRole="tOrderDetail" />
           <NavigationProperty Name="tProductCategory" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProduct" ToRole="tProductCategory" />
-          <NavigationProperty Name="tProductImage" Relationship="Self.FK_tProduct_tProductImage" FromRole="tProduct" ToRole="tProductImage" />
           <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
           <NavigationProperty Name="tProductSize" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProduct" ToRole="tProductSize" />
+          <NavigationProperty Name="tProductImages" Relationship="Self.FK_tProductImage_tProduct" FromRole="tProduct" ToRole="tProductImage" />
           <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tProduct" FromRole="tProduct" ToRole="tPromotionDetail" />
           <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
@@ -704,7 +705,7 @@
           <Property Name="pImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="pImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tProducts" Relationship="Self.FK_tProduct_tProductImage" FromRole="tProductImage" ToRole="tProduct" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_tProductImage_tProduct" FromRole="tProductImage" ToRole="tProduct" />
         </EntityType>
         <EntityType Name="tProductMaterial">
           <Key>
@@ -934,18 +935,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tProduct_tProductImage">
-          <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="0..1" />
-          <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tProductImage">
-              <PropertyRef Name="pImageId" />
-            </Principal>
-            <Dependent Role="tProduct">
-              <PropertyRef Name="pImage" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tProduct_tProductMaterial">
           <End Role="tProductMaterial" Type="Self.tProductMaterial" Multiplicity="1" />
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="*" />
@@ -967,6 +956,18 @@
             </Principal>
             <Dependent Role="tProduct">
               <PropertyRef Name="pSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tProductImage_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tProductImage" Type="Self.tProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tProductImage">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1142,10 +1143,6 @@
             <End Role="tProductCategory" EntitySet="tProductCategories" />
             <End Role="tProduct" EntitySet="tProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_tProduct_tProductImage" Association="Self.FK_tProduct_tProductImage">
-            <End Role="tProductImage" EntitySet="tProductImages" />
-            <End Role="tProduct" EntitySet="tProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK_tProduct_tProductMaterial" Association="Self.FK_tProduct_tProductMaterial">
             <End Role="tProductMaterial" EntitySet="tProductMaterials" />
             <End Role="tProduct" EntitySet="tProducts" />
@@ -1153,6 +1150,10 @@
           <AssociationSet Name="FK_tProduct_tProductSize" Association="Self.FK_tProduct_tProductSize">
             <End Role="tProductSize" EntitySet="tProductSizes" />
             <End Role="tProduct" EntitySet="tProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tProductImage_tProduct" Association="Self.FK_tProductImage_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tProductImage" EntitySet="tProductImages" />
           </AssociationSet>
           <AssociationSet Name="FK_tPromotionDetail_tProduct" Association="Self.FK_tPromotionDetail_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
@@ -1216,6 +1217,7 @@
             <EntityTypeMapping TypeName="MotaiDataModel.tEmployee">
               <MappingFragment StoreEntitySet="tEmployee">
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="eAccount" ColumnName="eAccount" />
                 <ScalarProperty Name="eName" ColumnName="eName" />
                 <ScalarProperty Name="ePosition" ColumnName="ePosition" />
                 <ScalarProperty Name="eBranch" ColumnName="eBranch" />
@@ -1247,12 +1249,12 @@
           <EntitySetMapping Name="tOrderDetails">
             <EntityTypeMapping TypeName="MotaiDataModel.tOrderDetail">
               <MappingFragment StoreEntitySet="tOrderDetail">
-                <ScalarProperty Name="oNote" ColumnName="oNote" />
                 <ScalarProperty Name="oDetailId" ColumnName="oDetailId" />
                 <ScalarProperty Name="oOrderId" ColumnName="oOrderId" />
                 <ScalarProperty Name="oProductId" ColumnName="oProductId" />
                 <ScalarProperty Name="oProductQty" ColumnName="oProductQty" />
                 <ScalarProperty Name="oWarehouseId" ColumnName="oWarehouseId" />
+                <ScalarProperty Name="oNote" ColumnName="oNote" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1285,7 +1287,6 @@
                 <ScalarProperty Name="pSize" ColumnName="pSize" />
                 <ScalarProperty Name="pLxWxH" ColumnName="pLxWxH" />
                 <ScalarProperty Name="pWeight" ColumnName="pWeight" />
-                <ScalarProperty Name="pImage" ColumnName="pImage" />
                 <ScalarProperty Name="pPrice" ColumnName="pPrice" />
                 <ScalarProperty Name="pQty" ColumnName="pQty" />
               </MappingFragment>

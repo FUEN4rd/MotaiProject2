@@ -30,8 +30,7 @@ namespace MotaiProject.ViewModels
         public int pMaterial { get; set; }
         public int pSize{get;set;}
         public string pLxWxH { get { return this.Product.pLxWxH; } set { Product.pLxWxH = value; } }
-        public double pWeight { get { return this.Product.pWeight; } set { Product.pWeight = value; } }
-        public Nullable<int> pImage { get { return this.Product.pImage; } set { Product.pImage = value; } }
+        public double pWeight { get { return this.Product.pWeight; } set { Product.pWeight = value; } }        
         public decimal pPrice { get { return this.Product.pPrice; } set { Product.pPrice = value; } }
         public int pQty{get;set;}
 

@@ -21,6 +21,7 @@ namespace MotaiProject
         }
     
         public int EmployeeId { get; set; }
+        public string eAccount { get; set; }
         public string eName { get; set; }
         public string ePosition { get; set; }
         public string eBranch { get; set; }

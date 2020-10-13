@@ -14,17 +14,10 @@ namespace MotaiProject
     
     public partial class tProductImage
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tProductImage()
-        {
-            this.tProducts = new HashSet<tProduct>();
-        }
-    
         public int pImageId { get; set; }
         public int ProductId { get; set; }
         public string pImage { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tProduct> tProducts { get; set; }
+        public virtual tProduct tProduct { get; set; }
     }
 }

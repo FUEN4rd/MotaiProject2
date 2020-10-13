@@ -40,8 +40,7 @@ namespace MotaiProject.ViewModels
             set { Product.tProductSize.Size = value; }
         }
         public string pLxWxH { get { return this.Product.pLxWxH; } set { Product.pLxWxH = value; } }
-        public double pWeight { get { return this.Product.pWeight; } set { Product.pWeight = value; } }
-        public string pImage { get { return this.Product.tProductImage.pImage; } set { Product.tProductImage.pImage = value; } }
+        public double pWeight { get { return this.Product.pWeight; } set { Product.pWeight = value; } }       
         public decimal pPrice { get { return this.Product.pPrice; } set { Product.pPrice = value; } }
         public int pQty
         {
