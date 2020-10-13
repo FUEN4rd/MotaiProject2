@@ -384,6 +384,7 @@
     <Content Include="Views\EmployeeEnter\員工看產品頁面.cshtml" />
     <Content Include="Views\EmployeeEnter\新增產品.cshtml" />
     <Content Include="Views\EmployeeEnter\修改產品.cshtml" />
+    <Content Include="Views\CustomerMember\產品細節.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
