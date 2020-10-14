@@ -25,13 +25,16 @@ namespace MotaiProject
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tBranch> tBranches { get; set; }
         public virtual DbSet<tCustomer> tCustomers { get; set; }
         public virtual DbSet<tEmployee> tEmployees { get; set; }
         public virtual DbSet<tFavorite> tFavorites { get; set; }
+        public virtual DbSet<tLogbook> tLogbooks { get; set; }
         public virtual DbSet<tOrder> tOrders { get; set; }
         public virtual DbSet<tOrderDetail> tOrderDetails { get; set; }
         public virtual DbSet<tOrderPay> tOrderPays { get; set; }
         public virtual DbSet<tOrderPayType> tOrderPayTypes { get; set; }
+        public virtual DbSet<tPosition> tPositions { get; set; }
         public virtual DbSet<tProduct> tProducts { get; set; }
         public virtual DbSet<tProductCategory> tProductCategories { get; set; }
         public virtual DbSet<tProductImage> tProductImages { get; set; }

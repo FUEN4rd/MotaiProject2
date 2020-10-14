@@ -302,6 +302,9 @@
       <DependentUpon>MotaiModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tBranch.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tCustomer.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
@@ -309,6 +312,9 @@
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tFavorite.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tLogbook.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tOrder.cs">
@@ -321,6 +327,9 @@
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tOrderPayType.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tPosition.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tProduct.cs">
@@ -359,12 +368,14 @@
     <Compile Include="tWarehouseName.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddToCartViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\CustProdViewModel.cs" />
     <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\StatusCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -32,5 +32,42 @@ namespace MotaiProject.Controllers
             return View(productlist);
         }
 
+        public ActionResult 購物車清單(int Customerid)
+        {
+            var StateList = from item in (new MotaiDataEntities()).tProducts
+                            select item;
+            List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
+            foreach(var items in StateList)
+            {
+                StatusCartViewModel cart = new StatusCartViewModel();
+                cart.Product = items;
+                cartList.Add(cart);
+            }
+            return View(cartList);
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(int Customerid,AddToCartViewModel n購物車新增)
+        {
+            MotaiDataEntities db = new MotaiDataEntities();
+            var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == n購物車新增.sProductId);
+            if (product == null)
+            {
+                return RedirectToAction("List");
+            }
+            tStatu cart = new tStatu();
+
+            cart.sCustomerId = n購物車新增.sCustomerId;
+            cart.sProductId = n購物車新增.sProductId;
+            cart.sProductQty = n購物車新增.sProductQty;
+            db.tStatus.Add(cart);
+            db.SaveChanges();
+
+
+
+            return RedirectToAction("List");
+
+
+        }
     }
 }

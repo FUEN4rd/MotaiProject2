@@ -78,15 +78,7 @@
                 @Html.EditorFor(model => model.pWeight, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.pWeight, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.pImage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.pImage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.pImage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        </div>       
 
         <div class="form-group">
             @Html.LabelFor(model => model.pPrice, htmlAttributes: new { @class = "control-label col-md-2" })
