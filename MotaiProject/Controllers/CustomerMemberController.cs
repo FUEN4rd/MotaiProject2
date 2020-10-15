@@ -18,7 +18,7 @@ namespace MotaiProject.Controllers
             return View();
         }
 
-        public ActionResult 客戶看產品頁面()
+        public ActionResult 客戶看產品頁面(int CustomerId)
         {
             var q = from p in (new MotaiDataEntities()).tProducts//先撈資料,產品的工廠
                     select p;
@@ -32,17 +32,18 @@ namespace MotaiProject.Controllers
             return View(productlist);
         }
 
-        public ActionResult 購物車清單(int Customerid)
+        public ActionResult 購物車清單(int CustomerId)
         {
-            var StateList = from item in (new MotaiDataEntities()).tProducts
-                            select item;
-            List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == CustomerId).ToList();
+            List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();           
             foreach(var items in StateList)
             {
+                tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
                 StatusCartViewModel cart = new StatusCartViewModel();
-                cart.Product = items;
+                cart.Product = cartProd;
                 cartList.Add(cart);
-            }
+            }            
             return View(cartList);
         }
 
@@ -53,7 +54,7 @@ namespace MotaiProject.Controllers
             var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == n購物車新增.sProductId);
             if (product == null)
             {
-                return RedirectToAction("List");
+                return RedirectToAction("購物車清單");
             }
             tStatu cart = new tStatu();
 
@@ -63,9 +64,7 @@ namespace MotaiProject.Controllers
             db.tStatus.Add(cart);
             db.SaveChanges();
 
-
-
-            return RedirectToAction("List");
+            return RedirectToAction("購物車清單");
 
 
         }
