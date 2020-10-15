@@ -365,7 +365,6 @@
     <Compile Include="ViewModels\AddToCartViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModels\CustProdViewModel.cs" />
     <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />

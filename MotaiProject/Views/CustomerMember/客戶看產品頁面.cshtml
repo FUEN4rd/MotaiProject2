@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.CustProdViewModel>
+﻿@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>
 
 @{
     ViewBag.Title = "客戶看產品頁面";
@@ -10,6 +10,9 @@
 
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.pNumber)
         </th>
@@ -32,9 +35,6 @@
             @Html.DisplayNameFor(model => model.pWeight)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pImage)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.pPrice)
         </th>
         <th>
@@ -45,6 +45,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.pNumber)
         </td>
@@ -67,17 +70,13 @@
             @Html.DisplayFor(modelItem => item.pWeight)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pImage)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.pPrice)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pQty)
         </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        <td>           
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
         </td>
     </tr>
 }

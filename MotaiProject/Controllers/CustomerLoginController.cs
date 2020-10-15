@@ -26,7 +26,9 @@ namespace MotaiProject.Controllers
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;
-                return RedirectToAction("已登入首頁","CustomerMember", new { d資料確認.CustomerId});
+                CustomerViewModel cust = new CustomerViewModel();
+                cust.Customer = d資料確認;
+                return RedirectToAction("已登入首頁","CustomerMember", new {cust.CustomerId});
             }
             return RedirectToAction("首頁");
         }

@@ -86,7 +86,7 @@
                 <ul class="navbar-nav mr-auto"></ul>
                 <form class="navbar-nav mr-auto" style="align-items: center;">
                     <li class="nav-item">
-                        @Html.ActionLink("首頁", "首頁", "CustomerLogin", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @Html.ActionLink("首頁", "首頁", "CustomerLogin",null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>首頁</b></a>*@
                     </li>
                     <li class="nav-item">
@@ -94,7 +94,7 @@
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>關於我們</b></a>*@
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("產品", "Product", "Home", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @Html.ActionLink("產品", "客戶看產品頁面", "CustomerMember",null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
                     </li>
                     @*<li class="nav-item">

@@ -18,14 +18,14 @@ namespace MotaiProject.Controllers
             return View();
         }
 
-        public ActionResult 客戶看產品頁面(int CustomerId)
+        public ActionResult 客戶看產品頁面()
         {
             var q = from p in (new MotaiDataEntities()).tProducts//先撈資料,產品的工廠
                     select p;
-            List<CustProdViewModel> productlist = new List<CustProdViewModel>();
+            List<ProductViewModel> productlist = new List<ProductViewModel>();
             foreach (tProduct item in q)
             {
-                CustProdViewModel prod = new CustProdViewModel();
+                ProductViewModel prod = new ProductViewModel();
                 prod.Product = item;
                 productlist.Add(prod);
             }

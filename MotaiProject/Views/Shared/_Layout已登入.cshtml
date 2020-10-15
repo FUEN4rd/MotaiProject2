@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">*@
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">*@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +55,6 @@
                 outline: 0;
                 box-shadow: 0 0 0 0.2rem #A7674C;
             }
-            
     </style>
 </head>
 <body>
@@ -67,7 +66,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
-                    <svg  style="fill: #A22E37; width: 32px; height:32px">
+                    <svg style="fill: #A22E37; width: 32px; height:32px">
                         <symbol id="lnr-menu" viewBox="0 0 1024 1024"><title>menu</title><path class="path1" d="M896 307.2h-768c-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path2" d="M896 563.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path3" d="M896 819.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path></symbol>
                         <use xlink:href="#lnr-menu"></use>
                     </svg>
@@ -86,7 +85,7 @@
                 <ul class="navbar-nav mr-auto"></ul>
                 <form class="navbar-nav mr-auto" style="align-items: center;">
                     <li class="nav-item">
-                        @Html.ActionLink("首頁", "首頁", "CustomerLogin", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @Html.ActionLink("首頁", "首頁", "CustomerLogin",null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>首頁</b></a>*@
                     </li>
                     <li class="nav-item">
@@ -94,12 +93,14 @@
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>關於我們</b></a>*@
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("產品", "Product", "Home", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @{ 
+                        @Html.ActionLink("產品", "客戶看產品頁面", "CustomerMember",null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        }
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
                     </li>
                     @*<li class="nav-item">
-                <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
-            </li>*@
+                            <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
+                        </li>*@
                     <li class="form-inline">
                         <input style="color: #A22E37;position: absolute;" type="search" placeholder="搜尋"
                                class="form-control2 mr-sm-2" aria-label="Search">
@@ -148,7 +149,7 @@
 
 
 
-</nav>
+        </nav>
         <div class="body-content">
             <br>
             <br>
@@ -266,7 +267,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-   
+
     <link href="~/Scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
 </body>
 </html>
