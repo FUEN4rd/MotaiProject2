@@ -317,6 +317,9 @@
     <Compile Include="tFavorite.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tLogbook.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tOrder.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
@@ -362,12 +365,14 @@
     <Compile Include="tWarehouseName.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddToCartViewModel.cs" />
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\CustProdViewModel.cs" />
     <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\StatusCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
