@@ -317,9 +317,6 @@
     <Compile Include="tFavorite.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="tLogbook.cs">
-      <DependentUpon>MotaiModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="tOrder.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
