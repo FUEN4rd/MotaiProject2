@@ -302,7 +302,13 @@
       <DependentUpon>MotaiModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tBranch.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tCustomer.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tDiary.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tEmployee.cs">
@@ -323,6 +329,9 @@
     <Compile Include="tOrderPayType.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tPosition.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tProduct.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
@@ -339,12 +348,6 @@
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tPromotion.cs">
-      <DependentUpon>MotaiModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tPromotionDetail.cs">
-      <DependentUpon>MotaiModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tPromotionImage.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tStatu.cs">

@@ -12,27 +12,20 @@ namespace MotaiProject
     using System;
     using System.Collections.Generic;
     
-    public partial class tEmployee
+    public partial class tBranch
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tEmployee()
+        public tBranch()
         {
-            this.tDiaries = new HashSet<tDiary>();
-            this.tOrders = new HashSet<tOrder>();
+            this.tEmployees = new HashSet<tEmployee>();
         }
     
-        public int EmployeeId { get; set; }
-        public string eAccount { get; set; }
-        public string eName { get; set; }
-        public int ePosition { get; set; }
-        public int eBranch { get; set; }
-        public string ePassword { get; set; }
+        public int BranchId { get; set; }
+        public string bBranch { get; set; }
     
-        public virtual tBranch tBranch { get; set; }
+        public virtual tBranch tBranch1 { get; set; }
+        public virtual tBranch tBranch2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tDiary> tDiaries { get; set; }
-        public virtual tPosition tPosition { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tOrder> tOrders { get; set; }
+        public virtual ICollection<tEmployee> tEmployees { get; set; }
     }
 }

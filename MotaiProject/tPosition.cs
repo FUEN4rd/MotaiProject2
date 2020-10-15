@@ -12,18 +12,18 @@ namespace MotaiProject
     using System;
     using System.Collections.Generic;
     
-    public partial class tPromotionImage
+    public partial class tPosition
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tPromotionImage()
+        public tPosition()
         {
-            this.tPromotionDetails = new HashSet<tPromotionDetail>();
+            this.tEmployees = new HashSet<tEmployee>();
         }
     
-        public int PromotionImageId { get; set; }
-        public string pImage { get; set; }
+        public int PositionId { get; set; }
+        public string pPosition { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tPromotionDetail> tPromotionDetails { get; set; }
+        public virtual ICollection<tEmployee> tEmployees { get; set; }
     }
 }

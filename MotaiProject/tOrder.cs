@@ -27,9 +27,13 @@ namespace MotaiProject
         public string oDate { get; set; }
         public string oDeliverDate { get; set; }
         public Nullable<int> oEmployeeId { get; set; }
+        public string oCheck { get; set; }
+        public string oCheckDate { get; set; }
+        public Nullable<int> oPromotionId { get; set; }
     
         public virtual tCustomer tCustomer { get; set; }
         public virtual tEmployee tEmployee { get; set; }
+        public virtual tPromotion tPromotion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

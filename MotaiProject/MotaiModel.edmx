@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tBranch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bBranch" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tCustomer">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -19,6 +26,16 @@
           <Property Name="cGUI" Type="nvarchar" MaxLength="50" />
           <Property Name="cEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tDiary">
+          <Key>
+            <PropertyRef Name="DiaryId" />
+          </Key>
+          <Property Name="DiaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dEmployeeId" Type="int" Nullable="false" />
+          <Property Name="dDate" Type="date" Nullable="false" />
+          <Property Name="dWeather" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dDiaryNote" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="tEmployee">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -26,8 +43,8 @@
           <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="eAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="eName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ePosition" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="eBranch" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ePosition" Type="int" Nullable="false" />
+          <Property Name="eBranch" Type="int" Nullable="false" />
           <Property Name="ePassword" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tFavorite">
@@ -48,6 +65,9 @@
           <Property Name="oDate" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="oDeliverDate" Type="nvarchar" MaxLength="50" />
           <Property Name="oEmployeeId" Type="int" />
+          <Property Name="oCheck" Type="nvarchar" MaxLength="50" />
+          <Property Name="oCheckDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="oPromotionId" Type="int" />
         </EntityType>
         <EntityType Name="tOrderDetail">
           <Key>
@@ -75,6 +95,13 @@
           </Key>
           <Property Name="oPayTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="oPayType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tPosition">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pPosition" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tProduct">
           <Key>
@@ -128,22 +155,10 @@
           <Property Name="PromotionName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pPromotionStartDate" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pPromotionTime" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tPromotionDetail">
-          <Key>
-            <PropertyRef Name="pDetailId" />
-          </Key>
-          <Property Name="pDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pPromotionId" Type="int" Nullable="false" />
-          <Property Name="pPromotionProductId" Type="int" Nullable="false" />
-          <Property Name="pPromotionImageId" Type="int" />
-        </EntityType>
-        <EntityType Name="tPromotionImage">
-          <Key>
-            <PropertyRef Name="PromotionImageId" />
-          </Key>
-          <Property Name="PromotionImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pImage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pPromotionWeb" Type="nvarchar(max)" />
+          <Property Name="pADimage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pDiscountCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pDiscount" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="tStatus">
           <Key>
@@ -184,6 +199,54 @@
           <Property Name="WarehouseNameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WarehouseName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tBranch_tBranch">
+          <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
+          <End Role="tBranch1" Type="Self.tBranch" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tBranch1">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDiary_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tDiary" Type="Self.tDiary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="tDiary">
+              <PropertyRef Name="dEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tBranch">
+          <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="eBranch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tPosition">
+          <End Role="tPosition" Type="Self.tPosition" Multiplicity="1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPosition">
+              <PropertyRef Name="PositionId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="ePosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tFavorite_tCustomer">
           <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
           <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="*" />
@@ -229,6 +292,18 @@
             </Principal>
             <Dependent Role="tOrder">
               <PropertyRef Name="oEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tPromotion">
+          <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tPromotion">
+              <PropertyRef Name="PromotionId" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -337,42 +412,6 @@
             </Principal>
             <Dependent Role="tProductImage">
               <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotionDetail_tProduct">
-          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
-          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tProduct">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="tPromotionDetail">
-              <PropertyRef Name="pPromotionProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotionDetail_tPromotion">
-          <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
-          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tPromotion">
-              <PropertyRef Name="PromotionId" />
-            </Principal>
-            <Dependent Role="tPromotionDetail">
-              <PropertyRef Name="pPromotionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotionDetail_tPromotionImage">
-          <End Role="tPromotionImage" Type="Self.tPromotionImage" Multiplicity="0..1" />
-          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tPromotionImage">
-              <PropertyRef Name="PromotionImageId" />
-            </Principal>
-            <Dependent Role="tPromotionDetail">
-              <PropertyRef Name="pPromotionImageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -461,25 +500,42 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MotaiDataModelStoreContainer">
+          <EntitySet Name="tBranch" EntityType="Self.tBranch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCustomer" EntityType="Self.tCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDiary" EntityType="Self.tDiary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tEmployee" EntityType="Self.tEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tFavorite" EntityType="Self.tFavorite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrderPay" EntityType="Self.tOrderPay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrderPayType" EntityType="Self.tOrderPayType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPosition" EntityType="Self.tPosition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProduct" EntityType="Self.tProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProductCategory" EntityType="Self.tProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProductImage" EntityType="Self.tProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProductMaterial" EntityType="Self.tProductMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProductSize" EntityType="Self.tProductSize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tPromotion" EntityType="Self.tPromotion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tPromotionDetail" EntityType="Self.tPromotionDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tPromotionImage" EntityType="Self.tPromotionImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tStatus" EntityType="Self.tStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tTransfer" EntityType="Self.tTransfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tWarehouse" EntityType="Self.tWarehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tWarehouseName" EntityType="Self.tWarehouseName" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tBranch_tBranch" Association="Self.FK_tBranch_tBranch">
+            <End Role="tBranch" EntitySet="tBranch" />
+            <End Role="tBranch1" EntitySet="tBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDiary_tEmployee" Association="Self.FK_tDiary_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tDiary" EntitySet="tDiary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tBranch" Association="Self.FK_tEmployee_tBranch">
+            <End Role="tBranch" EntitySet="tBranch" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tPosition" Association="Self.FK_tEmployee_tPosition">
+            <End Role="tPosition" EntitySet="tPosition" />
+            <End Role="tEmployee" EntitySet="tEmployee" />
+          </AssociationSet>
           <AssociationSet Name="FK_tFavorite_tCustomer" Association="Self.FK_tFavorite_tCustomer">
             <End Role="tCustomer" EntitySet="tCustomer" />
             <End Role="tFavorite" EntitySet="tFavorite" />
@@ -494,6 +550,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_tOrder_tEmployee" Association="Self.FK_tOrder_tEmployee">
             <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tOrder" EntitySet="tOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tPromotion" Association="Self.FK_tOrder_tPromotion">
+            <End Role="tPromotion" EntitySet="tPromotion" />
             <End Role="tOrder" EntitySet="tOrder" />
           </AssociationSet>
           <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
@@ -532,18 +592,6 @@
             <End Role="tProduct" EntitySet="tProduct" />
             <End Role="tProductImage" EntitySet="tProductImage" />
           </AssociationSet>
-          <AssociationSet Name="FK_tPromotionDetail_tProduct" Association="Self.FK_tPromotionDetail_tProduct">
-            <End Role="tProduct" EntitySet="tProduct" />
-            <End Role="tPromotionDetail" EntitySet="tPromotionDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tPromotionDetail_tPromotion" Association="Self.FK_tPromotionDetail_tPromotion">
-            <End Role="tPromotion" EntitySet="tPromotion" />
-            <End Role="tPromotionDetail" EntitySet="tPromotionDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tPromotionDetail_tPromotionImage" Association="Self.FK_tPromotionDetail_tPromotionImage">
-            <End Role="tPromotionImage" EntitySet="tPromotionImage" />
-            <End Role="tPromotionDetail" EntitySet="tPromotionDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_tStatus_tCustomer" Association="Self.FK_tStatus_tCustomer">
             <End Role="tCustomer" EntitySet="tCustomer" />
             <End Role="tStatus" EntitySet="tStatus" />
@@ -578,6 +626,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MotaiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tBranch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tBranch1" Relationship="Self.FK_tBranch_tBranch" FromRole="tBranch" ToRole="tBranch1" />
+          <NavigationProperty Name="tBranch2" Relationship="Self.FK_tBranch_tBranch" FromRole="tBranch1" ToRole="tBranch" />
+          <NavigationProperty Name="tEmployees" Relationship="Self.FK_tEmployee_tBranch" FromRole="tBranch" ToRole="tEmployee" />
+        </EntityType>
         <EntityType Name="tCustomer">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -595,6 +653,17 @@
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tCustomer" FromRole="tCustomer" ToRole="tOrder" />
           <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tCustomer" FromRole="tCustomer" ToRole="tStatus" />
         </EntityType>
+        <EntityType Name="tDiary">
+          <Key>
+            <PropertyRef Name="DiaryId" />
+          </Key>
+          <Property Name="DiaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="dDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dWeather" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dDiaryNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tDiary_tEmployee" FromRole="tDiary" ToRole="tEmployee" />
+        </EntityType>
         <EntityType Name="tEmployee">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -602,9 +671,12 @@
           <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="eAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="eName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ePosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="eBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ePosition" Type="Int32" Nullable="false" />
+          <Property Name="eBranch" Type="Int32" Nullable="false" />
           <Property Name="ePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tBranch" Relationship="Self.FK_tEmployee_tBranch" FromRole="tEmployee" ToRole="tBranch" />
+          <NavigationProperty Name="tDiaries" Relationship="Self.FK_tDiary_tEmployee" FromRole="tEmployee" ToRole="tDiary" />
+          <NavigationProperty Name="tPosition" Relationship="Self.FK_tEmployee_tPosition" FromRole="tEmployee" ToRole="tPosition" />
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tEmployee" FromRole="tEmployee" ToRole="tOrder" />
         </EntityType>
         <EntityType Name="tFavorite">
@@ -627,8 +699,12 @@
           <Property Name="oDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="oDeliverDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="oEmployeeId" Type="Int32" />
+          <Property Name="oCheck" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oCheckDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oPromotionId" Type="Int32" />
           <NavigationProperty Name="tCustomer" Relationship="Self.FK_tOrder_tCustomer" FromRole="tOrder" ToRole="tCustomer" />
           <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrder_tEmployee" FromRole="tOrder" ToRole="tEmployee" />
+          <NavigationProperty Name="tPromotion" Relationship="Self.FK_tOrder_tPromotion" FromRole="tOrder" ToRole="tPromotion" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrder" ToRole="tOrderDetail" />
           <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrder" FromRole="tOrder" ToRole="tOrderPay" />
         </EntityType>
@@ -665,6 +741,14 @@
           <Property Name="oPayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrderPayType" FromRole="tOrderPayType" ToRole="tOrderPay" />
         </EntityType>
+        <EntityType Name="tPosition">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tEmployees" Relationship="Self.FK_tEmployee_tPosition" FromRole="tPosition" ToRole="tEmployee" />
+        </EntityType>
         <EntityType Name="tProduct">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -685,7 +769,6 @@
           <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
           <NavigationProperty Name="tProductSize" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProduct" ToRole="tProductSize" />
           <NavigationProperty Name="tProductImages" Relationship="Self.FK_tProductImage_tProduct" FromRole="tProduct" ToRole="tProductImage" />
-          <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tProduct" FromRole="tProduct" ToRole="tPromotionDetail" />
           <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
           <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
@@ -731,27 +814,11 @@
           <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pPromotionStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pPromotionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotion" ToRole="tPromotionDetail" />
-        </EntityType>
-        <EntityType Name="tPromotionDetail">
-          <Key>
-            <PropertyRef Name="pDetailId" />
-          </Key>
-          <Property Name="pDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pPromotionId" Type="Int32" Nullable="false" />
-          <Property Name="pPromotionProductId" Type="Int32" Nullable="false" />
-          <Property Name="pPromotionImageId" Type="Int32" />
-          <NavigationProperty Name="tProduct" Relationship="Self.FK_tPromotionDetail_tProduct" FromRole="tPromotionDetail" ToRole="tProduct" />
-          <NavigationProperty Name="tPromotion" Relationship="Self.FK_tPromotionDetail_tPromotion" FromRole="tPromotionDetail" ToRole="tPromotion" />
-          <NavigationProperty Name="tPromotionImage" Relationship="Self.FK_tPromotionDetail_tPromotionImage" FromRole="tPromotionDetail" ToRole="tPromotionImage" />
-        </EntityType>
-        <EntityType Name="tPromotionImage">
-          <Key>
-            <PropertyRef Name="PromotionImageId" />
-          </Key>
-          <Property Name="PromotionImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tPromotionDetails" Relationship="Self.FK_tPromotionDetail_tPromotionImage" FromRole="tPromotionImage" ToRole="tPromotionDetail" />
+          <Property Name="pPromotionWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pADimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pDiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pDiscount" Type="Double" Nullable="false" />
+          <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrder_tPromotion" FromRole="tPromotion" ToRole="tOrder" />
         </EntityType>
         <EntityType Name="tStatu">
           <Key>
@@ -803,6 +870,30 @@
           <NavigationProperty Name="tTransfers1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tWarehouseName" ToRole="tTransfer" />
           <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouseName" ToRole="tWarehouse" />
         </EntityType>
+        <Association Name="FK_tBranch_tBranch">
+          <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
+          <End Role="tBranch1" Type="Self.tBranch" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tBranch1">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tBranch">
+          <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="eBranch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tFavorite_tCustomer">
           <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
           <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="*" />
@@ -839,6 +930,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tDiary_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tDiary" Type="Self.tDiary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="tDiary">
+              <PropertyRef Name="dEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tEmployee_tPosition">
+          <End Role="tPosition" Type="Self.tPosition" Multiplicity="1" />
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPosition">
+              <PropertyRef Name="PositionId" />
+            </Principal>
+            <Dependent Role="tEmployee">
+              <PropertyRef Name="ePosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tOrder_tEmployee">
           <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="0..1" />
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
@@ -860,6 +975,18 @@
             </Principal>
             <Dependent Role="tFavorite">
               <PropertyRef Name="FavoriteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tPromotion">
+          <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tPromotion">
+              <PropertyRef Name="PromotionId" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -971,18 +1098,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tPromotionDetail_tProduct">
-          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
-          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tProduct">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="tPromotionDetail">
-              <PropertyRef Name="pPromotionProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tStatus_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
           <End Role="tStatus" Type="Self.tStatu" Multiplicity="*" />
@@ -1016,30 +1131,6 @@
             </Principal>
             <Dependent Role="tWarehouse">
               <PropertyRef Name="wProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotionDetail_tPromotion">
-          <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="1" />
-          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tPromotion">
-              <PropertyRef Name="PromotionId" />
-            </Principal>
-            <Dependent Role="tPromotionDetail">
-              <PropertyRef Name="pPromotionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tPromotionDetail_tPromotionImage">
-          <End Role="tPromotionImage" Type="Self.tPromotionImage" Multiplicity="0..1" />
-          <End Role="tPromotionDetail" Type="Self.tPromotionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tPromotionImage">
-              <PropertyRef Name="PromotionImageId" />
-            </Principal>
-            <Dependent Role="tPromotionDetail">
-              <PropertyRef Name="pPromotionImageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1080,25 +1171,34 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MotaiDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tBranches" EntityType="Self.tBranch" />
           <EntitySet Name="tCustomers" EntityType="Self.tCustomer" />
+          <EntitySet Name="tDiaries" EntityType="Self.tDiary" />
           <EntitySet Name="tEmployees" EntityType="Self.tEmployee" />
           <EntitySet Name="tFavorites" EntityType="Self.tFavorite" />
           <EntitySet Name="tOrders" EntityType="Self.tOrder" />
           <EntitySet Name="tOrderDetails" EntityType="Self.tOrderDetail" />
           <EntitySet Name="tOrderPays" EntityType="Self.tOrderPay" />
           <EntitySet Name="tOrderPayTypes" EntityType="Self.tOrderPayType" />
+          <EntitySet Name="tPositions" EntityType="Self.tPosition" />
           <EntitySet Name="tProducts" EntityType="Self.tProduct" />
           <EntitySet Name="tProductCategories" EntityType="Self.tProductCategory" />
           <EntitySet Name="tProductImages" EntityType="Self.tProductImage" />
           <EntitySet Name="tProductMaterials" EntityType="Self.tProductMaterial" />
           <EntitySet Name="tProductSizes" EntityType="Self.tProductSize" />
           <EntitySet Name="tPromotions" EntityType="Self.tPromotion" />
-          <EntitySet Name="tPromotionDetails" EntityType="Self.tPromotionDetail" />
-          <EntitySet Name="tPromotionImages" EntityType="Self.tPromotionImage" />
           <EntitySet Name="tStatus" EntityType="Self.tStatu" />
           <EntitySet Name="tTransfers" EntityType="Self.tTransfer" />
           <EntitySet Name="tWarehouses" EntityType="Self.tWarehouse" />
           <EntitySet Name="tWarehouseNames" EntityType="Self.tWarehouseName" />
+          <AssociationSet Name="FK_tBranch_tBranch" Association="Self.FK_tBranch_tBranch">
+            <End Role="tBranch" EntitySet="tBranches" />
+            <End Role="tBranch1" EntitySet="tBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tBranch" Association="Self.FK_tEmployee_tBranch">
+            <End Role="tBranch" EntitySet="tBranches" />
+            <End Role="tEmployee" EntitySet="tEmployees" />
+          </AssociationSet>
           <AssociationSet Name="FK_tFavorite_tCustomer" Association="Self.FK_tFavorite_tCustomer">
             <End Role="tCustomer" EntitySet="tCustomers" />
             <End Role="tFavorite" EntitySet="tFavorites" />
@@ -1111,6 +1211,14 @@
             <End Role="tCustomer" EntitySet="tCustomers" />
             <End Role="tStatus" EntitySet="tStatus" />
           </AssociationSet>
+          <AssociationSet Name="FK_tDiary_tEmployee" Association="Self.FK_tDiary_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tDiary" EntitySet="tDiaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tEmployee_tPosition" Association="Self.FK_tEmployee_tPosition">
+            <End Role="tPosition" EntitySet="tPositions" />
+            <End Role="tEmployee" EntitySet="tEmployees" />
+          </AssociationSet>
           <AssociationSet Name="FK_tOrder_tEmployee" Association="Self.FK_tOrder_tEmployee">
             <End Role="tEmployee" EntitySet="tEmployees" />
             <End Role="tOrder" EntitySet="tOrders" />
@@ -1118,6 +1226,10 @@
           <AssociationSet Name="FK_tFavorite_tProduct" Association="Self.FK_tFavorite_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tFavorite" EntitySet="tFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tPromotion" Association="Self.FK_tOrder_tPromotion">
+            <End Role="tPromotion" EntitySet="tPromotions" />
+            <End Role="tOrder" EntitySet="tOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
             <End Role="tOrder" EntitySet="tOrders" />
@@ -1155,10 +1267,6 @@
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tProductImage" EntitySet="tProductImages" />
           </AssociationSet>
-          <AssociationSet Name="FK_tPromotionDetail_tProduct" Association="Self.FK_tPromotionDetail_tProduct">
-            <End Role="tProduct" EntitySet="tProducts" />
-            <End Role="tPromotionDetail" EntitySet="tPromotionDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_tStatus_tProduct" Association="Self.FK_tStatus_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tStatus" EntitySet="tStatus" />
@@ -1170,14 +1278,6 @@
           <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tWarehouse" EntitySet="tWarehouses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tPromotionDetail_tPromotion" Association="Self.FK_tPromotionDetail_tPromotion">
-            <End Role="tPromotion" EntitySet="tPromotions" />
-            <End Role="tPromotionDetail" EntitySet="tPromotionDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tPromotionDetail_tPromotionImage" Association="Self.FK_tPromotionDetail_tPromotionImage">
-            <End Role="tPromotionImage" EntitySet="tPromotionImages" />
-            <End Role="tPromotionDetail" EntitySet="tPromotionDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tTransfer_tWarehouseIn" Association="Self.FK_tTransfer_tWarehouseIn">
             <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
@@ -1198,6 +1298,14 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MotaiDataModelStoreContainer" CdmEntityContainer="MotaiDataEntities">
+          <EntitySetMapping Name="tBranches">
+            <EntityTypeMapping TypeName="MotaiDataModel.tBranch">
+              <MappingFragment StoreEntitySet="tBranch">
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="bBranch" ColumnName="bBranch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tCustomers">
             <EntityTypeMapping TypeName="MotaiDataModel.tCustomer">
               <MappingFragment StoreEntitySet="tCustomer">
@@ -1210,6 +1318,17 @@
                 <ScalarProperty Name="cAddress" ColumnName="cAddress" />
                 <ScalarProperty Name="cGUI" ColumnName="cGUI" />
                 <ScalarProperty Name="cEmail" ColumnName="cEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDiaries">
+            <EntityTypeMapping TypeName="MotaiDataModel.tDiary">
+              <MappingFragment StoreEntitySet="tDiary">
+                <ScalarProperty Name="DiaryId" ColumnName="DiaryId" />
+                <ScalarProperty Name="dEmployeeId" ColumnName="dEmployeeId" />
+                <ScalarProperty Name="dDate" ColumnName="dDate" />
+                <ScalarProperty Name="dWeather" ColumnName="dWeather" />
+                <ScalarProperty Name="dDiaryNote" ColumnName="dDiaryNote" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1243,6 +1362,9 @@
                 <ScalarProperty Name="oDate" ColumnName="oDate" />
                 <ScalarProperty Name="oDeliverDate" ColumnName="oDeliverDate" />
                 <ScalarProperty Name="oEmployeeId" ColumnName="oEmployeeId" />
+                <ScalarProperty Name="oCheck" ColumnName="oCheck" />
+                <ScalarProperty Name="oCheckDate" ColumnName="oCheckDate" />
+                <ScalarProperty Name="oPromotionId" ColumnName="oPromotionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1273,6 +1395,14 @@
               <MappingFragment StoreEntitySet="tOrderPayType">
                 <ScalarProperty Name="oPayTypeId" ColumnName="oPayTypeId" />
                 <ScalarProperty Name="oPayType" ColumnName="oPayType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPositions">
+            <EntityTypeMapping TypeName="MotaiDataModel.tPosition">
+              <MappingFragment StoreEntitySet="tPosition">
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="pPosition" ColumnName="pPosition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1332,24 +1462,10 @@
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
                 <ScalarProperty Name="pPromotionStartDate" ColumnName="pPromotionStartDate" />
                 <ScalarProperty Name="pPromotionTime" ColumnName="pPromotionTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tPromotionDetails">
-            <EntityTypeMapping TypeName="MotaiDataModel.tPromotionDetail">
-              <MappingFragment StoreEntitySet="tPromotionDetail">
-                <ScalarProperty Name="pDetailId" ColumnName="pDetailId" />
-                <ScalarProperty Name="pPromotionId" ColumnName="pPromotionId" />
-                <ScalarProperty Name="pPromotionProductId" ColumnName="pPromotionProductId" />
-                <ScalarProperty Name="pPromotionImageId" ColumnName="pPromotionImageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tPromotionImages">
-            <EntityTypeMapping TypeName="MotaiDataModel.tPromotionImage">
-              <MappingFragment StoreEntitySet="tPromotionImage">
-                <ScalarProperty Name="PromotionImageId" ColumnName="PromotionImageId" />
-                <ScalarProperty Name="pImage" ColumnName="pImage" />
+                <ScalarProperty Name="pPromotionWeb" ColumnName="pPromotionWeb" />
+                <ScalarProperty Name="pADimage" ColumnName="pADimage" />
+                <ScalarProperty Name="pDiscountCode" ColumnName="pDiscountCode" />
+                <ScalarProperty Name="pDiscount" ColumnName="pDiscount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

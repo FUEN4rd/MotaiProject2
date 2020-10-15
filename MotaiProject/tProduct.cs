@@ -19,7 +19,6 @@ namespace MotaiProject
         {
             this.tOrderDetails = new HashSet<tOrderDetail>();
             this.tProductImages = new HashSet<tProductImage>();
-            this.tPromotionDetails = new HashSet<tPromotionDetail>();
             this.tStatus = new HashSet<tStatu>();
             this.tTransfers = new HashSet<tTransfer>();
             this.tWarehouses = new HashSet<tWarehouse>();
@@ -44,8 +43,6 @@ namespace MotaiProject
         public virtual tProductSize tProductSize { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tProductImage> tProductImages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tPromotionDetail> tPromotionDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tStatu> tStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

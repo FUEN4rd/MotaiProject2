@@ -14,18 +14,15 @@ namespace MotaiProject
     
     public partial class tPromotion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tPromotion()
-        {
-            this.tPromotionDetails = new HashSet<tPromotionDetail>();
-        }
-    
         public int PromotionId { get; set; }
         public string PromotionName { get; set; }
         public string pPromotionStartDate { get; set; }
         public string pPromotionTime { get; set; }
+        public string pPromotionWeb { get; set; }
+        public string pADimage { get; set; }
+        public string pDiscountCode { get; set; }
+        public double pDiscount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tPromotionDetail> tPromotionDetails { get; set; }
+        public virtual tOrder tOrder { get; set; }
     }
 }

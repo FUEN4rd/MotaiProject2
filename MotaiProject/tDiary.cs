@@ -12,15 +12,14 @@ namespace MotaiProject
     using System;
     using System.Collections.Generic;
     
-    public partial class tPromotionDetail
+    public partial class tDiary
     {
-        public int pDetailId { get; set; }
-        public int pPromotionId { get; set; }
-        public int pPromotionProductId { get; set; }
-        public Nullable<int> pPromotionImageId { get; set; }
+        public int DiaryId { get; set; }
+        public int dEmployeeId { get; set; }
+        public System.DateTime dDate { get; set; }
+        public string dWeather { get; set; }
+        public string dDiaryNote { get; set; }
     
-        public virtual tProduct tProduct { get; set; }
-        public virtual tPromotion tPromotion { get; set; }
-        public virtual tPromotionImage tPromotionImage { get; set; }
+        public virtual tEmployee tEmployee { get; set; }
     }
 }
