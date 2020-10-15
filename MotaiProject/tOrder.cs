@@ -28,8 +28,7 @@ namespace MotaiProject
         public string oDeliverDate { get; set; }
         public Nullable<int> oEmployeeId { get; set; }
         public string oCheck { get; set; }
-        public string oCheckDate { get; set; }
-        public string oCheckDate { get; set; }
+        public string oCheckDate { get; set; }        
         public Nullable<int> oPromotionId { get; set; }
     
         public virtual tCustomer tCustomer { get; set; }

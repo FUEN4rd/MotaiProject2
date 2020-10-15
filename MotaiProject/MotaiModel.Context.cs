@@ -30,7 +30,7 @@ namespace MotaiProject
         public virtual DbSet<tDiary> tDiaries { get; set; }
         public virtual DbSet<tEmployee> tEmployees { get; set; }
         public virtual DbSet<tFavorite> tFavorites { get; set; }
-        public virtual DbSet<tLogbook> tLogbooks { get; set; }
+        
         public virtual DbSet<tOrder> tOrders { get; set; }
         public virtual DbSet<tOrderDetail> tOrderDetails { get; set; }
         public virtual DbSet<tOrderPay> tOrderPays { get; set; }
