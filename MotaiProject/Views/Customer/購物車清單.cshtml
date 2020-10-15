@@ -1,23 +1,14 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>
+﻿@model IEnumerable<MotaiProject.ViewModels.StatusCartViewModel>
 
 @{
-    ViewBag.Title = "員工看產品頁面";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "購物車清單";
+    Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
 
-<h2>員工看產品頁面</h2>
+<h2>購物車清單</h2>
 
-<p>
-    @Html.ActionLink("新增", "新增產品")
-</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pNumber)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.pName)
         </th>
@@ -37,25 +28,16 @@
             @Html.DisplayNameFor(model => model.pWeight)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pImage)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.pPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pQty)
+            @Html.DisplayNameFor(model => model.sProductQty)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pNumber)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.pName)
         </td>
@@ -75,16 +57,13 @@
             @Html.DisplayFor(modelItem => item.pWeight)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pImage)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.pPrice)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pQty)
+            @Html.DisplayFor(modelItem => item.sProductQty)
         </td>
         <td>
-            @Html.ActionLink("修改產品", "修改產品", new { id=item.ProductId }) |
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>

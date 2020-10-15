@@ -10,7 +10,7 @@ namespace MotaiProject.ViewModels
     public class EmployeeLoginViewModel
     {
         [DisplayName("員工帳號")]
-        public int EmployeeId { get; set; }
+        public string eAccount { get; set; }
         [DisplayName("員工密碼")]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
         public string ePassword { get; set; }

@@ -277,10 +277,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CustomerLoginController.cs" />
-    <Compile Include="Controllers\CustomerMemberController.cs" />
-    <Compile Include="Controllers\EmployeeEnterController.cs" />
-    <Compile Include="Controllers\EmployeeLoginController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -374,21 +372,20 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout未登入.cshtml" />
-    <Content Include="Views\EmployeeLogin\員工登入.cshtml" />
+    <Content Include="Views\Shared\_Layout登入.cshtml" />
+    <Content Include="Views\Employee\員工登入.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\CustomerLogin\首頁.cshtml" />
-    <Content Include="Views\CustomerLogin\會員註冊.cshtml" />
-    <Content Include="Views\CustomerMember\已登入首頁.cshtml" />
-    <Content Include="Views\Shared\_Layout已登入.cshtml" />
-    <Content Include="Views\EmployeeEnter\新增員工.cshtml" />
+    <Content Include="Views\Customer\首頁.cshtml" />
+    <Content Include="Views\Customer\會員註冊.cshtml" />
+    <Content Include="Views\Customer\已登入首頁.cshtml" />
+    <Content Include="Views\Employee\新增員工.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\EmployeeEnter\員工首頁.cshtml" />
-    <Content Include="Views\CustomerMember\客戶看產品頁面.cshtml" />
-    <Content Include="Views\EmployeeEnter\員工看產品頁面.cshtml" />
-    <Content Include="Views\EmployeeEnter\新增產品.cshtml" />
-    <Content Include="Views\EmployeeEnter\修改產品.cshtml" />
-    <Content Include="Views\CustomerMember\產品細節.cshtml" />
+    <Content Include="Views\Employee\員工首頁.cshtml" />
+    <Content Include="Views\Customer\產品頁面.cshtml" />
+    <Content Include="Views\Employee\員工看產品頁面.cshtml" />
+    <Content Include="Views\Employee\新增產品.cshtml" />
+    <Content Include="Views\Employee\修改產品.cshtml" />
+    <Content Include="Views\Customer\購物車清單.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

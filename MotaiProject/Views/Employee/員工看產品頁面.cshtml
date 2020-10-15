@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>
 
 @{
-    ViewBag.Title = "客戶看產品頁面";
-    Layout = "~/Views/Shared/_Layout已登入.cshtml";
+    ViewBag.Title = "員工看產品頁面";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>客戶看產品頁面</h2>
+<h2>員工看產品頁面</h2>
 
-
+<p>
+    @Html.ActionLink("新增", "新增產品")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -75,8 +77,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.pQty)
         </td>
-        <td>           
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+        <td>
+            @Html.ActionLink("修改產品", "修改產品", new { id=item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

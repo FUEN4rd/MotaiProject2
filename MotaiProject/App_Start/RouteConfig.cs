@@ -16,7 +16,7 @@ namespace MotaiProject
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "CustomerLogin", action = "首頁", id = UrlParameter.Optional }
+                defaults: new { controller = "Customer", action = "首頁", id = UrlParameter.Optional }
             );
         }
     }

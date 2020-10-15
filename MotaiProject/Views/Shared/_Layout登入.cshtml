@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using MotaiProject.Models
+@{ 
+    tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+}
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">*@
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">*@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +59,7 @@
                 outline: 0;
                 box-shadow: 0 0 0 0.2rem #A7674C;
             }
+      
     </style>
 </head>
 <body>
@@ -85,7 +90,7 @@
                 <ul class="navbar-nav mr-auto"></ul>
                 <form class="navbar-nav mr-auto" style="align-items: center;">
                     <li class="nav-item">
-                        @Html.ActionLink("首頁", "首頁", "CustomerLogin",null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                        @Html.ActionLink("首頁", "首頁", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>首頁</b></a>*@
                     </li>
                     <li class="nav-item">
@@ -93,9 +98,7 @@
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>關於我們</b></a>*@
                     </li>
                     <li class="nav-item">
-                        @{ 
-                        @Html.ActionLink("產品", "客戶看產品頁面", "CustomerMember",null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        }
+                        @Html.ActionLink("產品", "產品頁面", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
                     </li>
                     @*<li class="nav-item">
@@ -118,7 +121,7 @@
 
                 <div class="nav " style="justify-content: center;">
                     <li class="nav-item">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#Login" data-whatever="">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#Login">
                             <svg href="#" fill="#A22E37" height="32px" width="50px"
                                  viewBox="0 0 32 32">
                                 <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
@@ -128,7 +131,7 @@
 
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a href="#">                        
                             <svg fill=" #A22E37" height="32px" width="50px"
                                  viewBox="0 0 32 32">
                                 <symbol id="lnr-star" viewBox="0 0 1024 1024"><title>star</title><path class="path1" d="M793.598 972.8c-4.205 0-8.422-1.034-12.258-3.126l-269.341-146.912-269.341 146.912c-8.598 4.691-19.118 4.061-27.098-1.613-7.981-5.677-12.022-15.41-10.413-25.069l49.034-294.206-195.483-195.485c-6.781-6.781-9.203-16.782-6.277-25.914s10.712-15.862 20.17-17.438l294.341-49.058 122.17-244.339c4.336-8.674 13.2-14.152 22.898-14.152s18.562 5.478 22.898 14.152l122.17 244.339 294.341 49.058c9.459 1.576 17.243 8.307 20.17 17.438s0.504 19.133-6.277 25.914l-195.483 195.485 49.034 294.206c1.61 9.659-2.434 19.392-10.413 25.069-4.419 3.144-9.621 4.739-14.84 4.739zM512 768c4.219 0 8.437 1.042 12.259 3.126l235.445 128.426-42.557-255.344c-1.36-8.155 1.302-16.464 7.15-22.309l169.626-169.626-258.131-43.022c-8.080-1.346-15.027-6.477-18.69-13.803l-105.102-210.205-105.102 210.205c-3.664 7.326-10.61 12.458-18.69 13.803l-258.131 43.022 169.624 169.626c5.846 5.845 8.509 14.155 7.15 22.309l-42.557 255.344 235.446-128.426c3.821-2.085 8.040-3.126 12.259-3.126z"></path></symbol>
@@ -137,12 +140,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
-                            <svg fill=" #A22E37" height="32px" width="50px"
-                                 viewBox="0 0 32 32">
-                                <symbol id="lnr-cart" viewBox="0 0 1024 1024"><title>cart</title><path class="path1" d="M409.6 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM409.6 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path2" d="M768 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM768 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path3" d="M898.021 228.688c-12.859-15.181-32.258-23.888-53.221-23.888h-626.846l-5.085-30.506c-6.72-40.315-43.998-71.894-84.869-71.894h-51.2c-14.138 0-25.6 11.462-25.6 25.6s11.462 25.6 25.6 25.6h51.2c15.722 0 31.781 13.603 34.366 29.112l85.566 513.395c6.718 40.314 43.997 71.893 84.867 71.893h512c14.139 0 25.6-11.461 25.6-25.6s-11.461-25.6-25.6-25.6h-512c-15.722 0-31.781-13.603-34.366-29.11l-12.63-75.784 510.206-44.366c39.69-3.451 75.907-36.938 82.458-76.234l34.366-206.194c3.448-20.677-1.952-41.243-14.813-56.424zM862.331 276.694l-34.366 206.194c-2.699 16.186-20.043 32.221-36.39 33.645l-514.214 44.714-50.874-305.246h618.314c5.968 0 10.995 2.054 14.155 5.782 3.157 3.73 4.357 9.024 3.376 14.912z"></path></symbol>
-                                <use xlink:href="#lnr-cart"></use>
-                            </svg>
+                        <a href="@Url.Action("購物車清單","Customer")">                       
+                        <svg fill=" #A22E37" height="32px" width="50px"
+                             viewBox="0 0 32 32">
+                            <symbol id="lnr-cart" viewBox="0 0 1024 1024"><title>cart</title><path class="path1" d="M409.6 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM409.6 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path2" d="M768 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM768 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path3" d="M898.021 228.688c-12.859-15.181-32.258-23.888-53.221-23.888h-626.846l-5.085-30.506c-6.72-40.315-43.998-71.894-84.869-71.894h-51.2c-14.138 0-25.6 11.462-25.6 25.6s11.462 25.6 25.6 25.6h51.2c15.722 0 31.781 13.603 34.366 29.112l85.566 513.395c6.718 40.314 43.997 71.893 84.867 71.893h512c14.139 0 25.6-11.461 25.6-25.6s-11.461-25.6-25.6-25.6h-512c-15.722 0-31.781-13.603-34.366-29.11l-12.63-75.784 510.206-44.366c39.69-3.451 75.907-36.938 82.458-76.234l34.366-206.194c3.448-20.677-1.952-41.243-14.813-56.424zM862.331 276.694l-34.366 206.194c-2.699 16.186-20.043 32.221-36.39 33.645l-514.214 44.714-50.874-305.246h618.314c5.968 0 10.995 2.054 14.155 5.782 3.157 3.73 4.357 9.024 3.376 14.912z"></path></symbol>
+                            <use xlink:href="#lnr-cart"></use>
+                        </svg>
                         </a>
                     </li>
                 </div>
@@ -233,31 +236,83 @@
             </footer>
         </div>
     </div>
-    @*會員登出彈出視窗*@
-    @using (Html.BeginForm("首頁", "CustomerLogin", FormMethod.Post, null))
-    {
-        @Html.AntiForgeryToken()
+    <div>
+        @{  
+            if (cust == null) {
+            @Html.BeginForm("會員登入", "Customer", FormMethod.Post, null)
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">登出視窗</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        是否要登出?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">確認</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">會員登入</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group form-inline">
+                                        <label for="loginAccount" class="col-form-label">帳號:</label>
+                                        <div class="col-md-10">
+                                            @Html.Editor("cAccount")
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-inline">
+                                        <label for="loginPassword" class="col-form-label">密碼:</label>
+                                        <div class="col-md-10">
+                                            @Html.Editor("cPassword")
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-inline">
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("忘記密碼", "忘記密碼", "Customer", null, null)
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">登入</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    }
+                }
+            }
+            else {
+            @Html.BeginForm("首頁", "Customer", FormMethod.Post, null)
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">登出視窗</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                是否要登出?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">確認</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+        }
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -266,7 +321,7 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>    
 
     <link href="~/Scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
 </body>
