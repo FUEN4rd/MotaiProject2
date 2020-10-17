@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -33,27 +34,13 @@ namespace MotaiProject.ViewModels
             }
             set => sta = value;
         }
-
+        [DisplayName("產品名稱")]
         public string pName { get { return this.Product.pName; } set { Product.pName = value; } }
-        public string pCategory
-        {
-            get { return this.Product.tProductCategory.Category; }
-            set { Product.tProductCategory.Category = value; }
-        }
-        public string pMaterial
-        {
-            get { return this.Product.tProductMaterial.Material; }
-            set { Product.tProductMaterial.Material = value; }
-        }
-        public string pSize
-        {
-            get { return this.Product.tProductSize.Size; }
-            set { Product.tProductSize.Size = value; }
-        }
-        public string pLxWxH { get { return this.Product.pLxWxH; } set { Product.pLxWxH = value; } }
-        public double pWeight { get { return this.Product.pWeight; } set { Product.pWeight = value; } }
+        [DisplayName("產品單價")]
         public decimal pPrice { get { return this.Product.pPrice; } set { Product.pPrice = value; } }
-
-        public int sProductQty { get { return this.Status.sProductQty; }set { Status.sProductQty = value; } }
+        [DisplayName("購買數量")]
+        public int sProductQty { get; set; }
+        [DisplayName("小計")]
+        public decimal pTotal{get{ return pPrice * sProductQty;}}
     }
 }

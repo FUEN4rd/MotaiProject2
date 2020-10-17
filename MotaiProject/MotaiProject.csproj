@@ -365,6 +365,7 @@
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
+    <Compile Include="ViewModels\FavoriteViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\StatusCartViewModel.cs" />
   </ItemGroup>

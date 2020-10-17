@@ -4,6 +4,93 @@
     ViewBag.Title = "購物車清單";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
+<style>
+    .wrapper {
+        position: relative;
+        width: 80%;
+        height: 300px;
+        overflow: hidden;
+        margin: 100px auto;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+    }
+
+    li {
+        margin: 20px;
+        padding: 0;
+        list-style: none;
+    }
+
+    ul.slides {
+        width: 2200px;
+        left: 0px;
+        transition: all 1s;
+    }
+
+        ul.slides li {
+            width: 200px;
+            height: 300px;
+            overflow: hidden;
+            float: left;
+        }
+
+            ul.slides li img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+    .dot {
+        bottom: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+        .dot li {
+            border: 1px solid #fff;
+            /* border-radius: 50%; */
+            margin: 0 5px;
+            width: 24px;
+            height: 10px;
+        }
+
+    /* .dot li:hover{
+            background: #fff;
+        } */
+    .slide_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        color: #fff;
+        position: absolute;
+        font-size: 24px;
+    }
+
+    #prevSlide {
+        left: 0;
+    }
+
+    #nextSlide {
+        right: 0;
+    }
+
+    .slide_btn i {
+        color: rgba(255, 255, 255, .6);
+        transition: .5s;
+    }
+
+    .slide_btn:hover i {
+        color: rgba(255, 255, 255, 1);
+    }
+</style>
 
 <h2>購物車清單</h2>
 
@@ -11,22 +98,7 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.pName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pCategory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pMaterial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pSize)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pLxWxH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pWeight)
-        </th>
+        </th>        
         <th>
             @Html.DisplayNameFor(model => model.pPrice)
         </th>
@@ -36,38 +108,75 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.pName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pMaterial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pLxWxH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sProductQty)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pName)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.pPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sProductQty)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<script>
+        $(function () {
+
+            let slideNum = 0;
+            let slideCount = $(".slides li").length;
+            let lastIndex = slideCount - 1;
+            
+            function setPlay() {
+                show();
+                slideNum++
+                if (slideNum > lastIndex) {
+                    slideNum = 0;
+                }
+            }
+
+            function stopPlay() {
+                clearInterval(play);
+            }
+
+            function show() {
+                let move = 0 - 200 * slideNum;
+                $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+                $("ul.slides").css("left", move);
+            }           
+
+            $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
+            $(".dot li").mouseenter(function () {
+                slideNum = $(this).index();
+                show();
+            });
+
+            $("#prevSlide").click(function () {
+                slideNum--;
+                if (slideNum < 0) {
+                    slideNum = lastIndex;
+                }
+                show();
+            })
+
+            $("#nextSlide").click(function () {
+                slideNum++;
+                if (slideNum > lastIndex) {
+                    slideNum = 0;
+                }
+                show();
+            })
+
+        });
+</script>
+

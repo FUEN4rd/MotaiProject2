@@ -124,6 +124,42 @@ namespace MotaiProject.Controllers
 
             return RedirectToAction("購物車清單");
 
+        }
+
+        public ActionResult 新增收藏(int cid, int pid)
+        {
+
+            MotaiDataEntities db = new MotaiDataEntities();
+            tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cid)
+            && c.fProductId == pid).FirstOrDefault();
+            if (x == null)
+            {
+                Response.Write("這筆紀錄已新增過");
+            }
+            else
+            {
+                x.fCustomerId = cid;
+                x.fProductId = pid;
+                db.tFavorites.Add(x);
+                db.SaveChanges();
+            }
+            return View();
+
+        }
+
+        public ActionResult 刪除收藏(int cid, int pid)
+        {
+
+            MotaiDataEntities db = new MotaiDataEntities();
+            tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cid)
+            && c.fProductId == pid).FirstOrDefault();
+            if (x != null)
+            {
+                db.tFavorites.Remove(x);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("List");
 
         }
     }
