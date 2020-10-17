@@ -15,6 +15,12 @@ namespace MotaiProject.Controllers
         {            
             return View();
         }
+        [HttpPost]
+        public ActionResult 登出()
+        {
+            Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = null;
+            return RedirectToAction("首頁");
+        }
 
 
         //GET: 會員登入
@@ -126,6 +132,30 @@ namespace MotaiProject.Controllers
 
         }
 
+        public ActionResult 收藏清單()
+        {
+            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+            if (cust != null)
+            {
+
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                List<tFavorite> FavorList = dbContext.tFavorites.Where(c => c.fCustomerId == cust.CustomerId).ToList();
+                List<FavoriteViewModel> favorList = new List<FavoriteViewModel>();
+                foreach (var items in FavorList)
+                {
+                    tProduct favorProd = dbContext.tProducts.Where(p => p.ProductId == items.fProductId).FirstOrDefault();
+                    FavoriteViewModel favor = new FavoriteViewModel();
+                    favor.Product = favorProd;
+                    favorList.Add(favor);
+                }
+                return View(favorList);
+            }
+            else
+            {
+                return RedirectToAction("首頁");
+            }
+        }
+
         public ActionResult 新增收藏(int pid)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
@@ -147,7 +177,6 @@ namespace MotaiProject.Controllers
                 }
             }
             return View();
-
         }
 
         public ActionResult 刪除收藏(int cid, int pid)
