@@ -9,6 +9,7 @@ namespace MotaiProject.ViewModels
 {
     public class ProductViewModel
     {
+        MotaiDataEntities dbContext = new MotaiDataEntities();
         private tProduct prod;
         public tProduct Product
         {
@@ -51,8 +52,29 @@ namespace MotaiProject.ViewModels
         [DisplayName("產品數量")]
         public int pQty { get; set; }
 
+        public HttpPostedFileBase[] pImage { get; set; }
+
         public IEnumerable<SelectListItem> Categories { get; set; }
         public IEnumerable<SelectListItem> Materials { get; set; }
         public IEnumerable<SelectListItem> Sizes { get; set; }
+
+        //private List<string> image;
+
+        //public List<string> pImgae
+        //{
+        //    get
+        //    {
+        //        if (image == null)
+        //        {
+        //            image = new List<string>();
+        //        }
+        //        foreach(var items in this.dbContext.tProductImages.Where(i => i.ProductId == Product.ProductId))
+        //        {
+        //            image.Add(items.pImage);
+        //        }
+        //        return image;
+        //    }
+        //    set => image = value;           
+        //}
     }
 }

@@ -2,6 +2,7 @@
 using MotaiProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -132,8 +133,25 @@ namespace MotaiProject.Controllers
             prod.pLxWxH = n新增產品.pLxWxH;
             prod.pPrice = n新增產品.pPrice;
             prod.pQty = n新增產品.pQty;
-
             db.tProducts.Add(prod);
+
+            tProductImage image = new tProductImage();
+            int ProductId = db.tProducts.OrderByDescending(o=>o.ProductId).First().ProductId;
+            if(n新增產品.pImage.Count()> 0)
+            {
+                foreach(var uploagFile in n新增產品.pImage)
+                {
+                    if(uploagFile.ContentLength > 0)
+                    {
+                        FileInfo file = new FileInfo(uploagFile.FileName);
+                        string photoName = Guid.NewGuid().ToString() + file.Extension;
+                        uploagFile.SaveAs(Server.MapPath("../Content/" + photoName));
+                        image.ProductId = ProductId;
+                        image.pImage = "../Content/" + photoName;
+                        db.tProductImages.Add(image);
+                    }
+                }
+            }            
             db.SaveChanges();
             return RedirectToAction("員工看產品頁面");
         }
