@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MotaiProject.ViewModels
 {
@@ -44,7 +45,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("規格")]
         public string psSize { get { return this.Product.tProductSize.Size; } set { Product.tProductSize.Size = value; } }
         [DisplayName("產品大中小")]
-        public int pSize { get{ return this.Product.pSize; } set { Product.pSize = value; } }
+        public int pSize { get { return this.Product.pSize; } set { Product.pSize = value; } }
 
         [DisplayName("產品尺寸")]
         public string pLxWxH { get { return this.Product.pLxWxH; } set { Product.pLxWxH = value; } }
@@ -60,6 +61,9 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("產品數量")]
         public int pQty { get; set; }
+
+        //[DisplayName("產品圖片")]
+        //public Image psImage{ get; set; }
 
         public HttpPostedFileBase[] pImage { get; set; }
 

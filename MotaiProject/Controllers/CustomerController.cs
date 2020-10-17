@@ -127,17 +127,14 @@ namespace MotaiProject.Controllers
             cart.sProductQty = n購物車新增.sProductQty;
             db.tStatus.Add(cart);
             db.SaveChanges();
-
             return RedirectToAction("購物車清單");
-
         }
 
         public ActionResult 收藏清單()
-        {
-            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            if (cust != null)
+        {            
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
-
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tFavorite> FavorList = dbContext.tFavorites.Where(c => c.fCustomerId == cust.CustomerId).ToList();
                 List<FavoriteViewModel> favorList = new List<FavoriteViewModel>();
@@ -156,14 +153,14 @@ namespace MotaiProject.Controllers
             }
         }
 
-        public ActionResult 新增收藏(int pid)
+        public ActionResult 新增收藏(int ProductId)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities db = new MotaiDataEntities();
                 tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
-                && c.fProductId == pid).FirstOrDefault();
+                && c.fProductId == ProductId).FirstOrDefault();
                 if (x == null)
                 {
                     Response.Write("這筆紀錄已新增過");
@@ -171,7 +168,7 @@ namespace MotaiProject.Controllers
                 else
                 {
                     x.fCustomerId = cust.CustomerId;
-                    x.fProductId = pid;
+                    x.fProductId = ProductId;
                     db.tFavorites.Add(x);
                     db.SaveChanges();
                 }
@@ -179,20 +176,18 @@ namespace MotaiProject.Controllers
             return View();
         }
 
-        public ActionResult 刪除收藏(int cid, int pid)
+        public ActionResult 刪除收藏(int ProductId)
         {
-
+            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
             MotaiDataEntities db = new MotaiDataEntities();
-            tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cid)
-            && c.fProductId == pid).FirstOrDefault();
+            tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
+            && c.fProductId == ProductId).FirstOrDefault();
             if (x != null)
             {
                 db.tFavorites.Remove(x);
                 db.SaveChanges();
             }
-
             return RedirectToAction("List");
-
         }
     }
 }
