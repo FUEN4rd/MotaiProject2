@@ -87,11 +87,10 @@ namespace MotaiProject.Controllers
         }
 
         public ActionResult 購物車清單()
-        {
-            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            if (cust != null)
+        {            
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
-
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
                 List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
@@ -109,21 +108,36 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }
+        //待修
+        public ActionResult AddToCart(int ProductId)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                StatusCartViewModel cart = new StatusCartViewModel();
+                cart.Product = product;
+                cart.sProductQty = 1;
+                return View(cart);
+            }
+            return RedirectToAction("首頁");
+        }
 
         [HttpPost]
-        public ActionResult AddToCart(AddToCartViewModel n購物車新增)
+        public ActionResult AddToCart(StatusCartViewModel n購物車新增)
         {
-
+            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
             MotaiDataEntities db = new MotaiDataEntities();
-            var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == n購物車新增.sProductId);
+            var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == n購物車新增.Product.ProductId);
             if (product == null)
             {
                 return RedirectToAction("購物車清單");
             }
             tStatu cart = new tStatu();
 
-            cart.sCustomerId = n購物車新增.sCustomerId;
-            cart.sProductId = n購物車新增.sProductId;
+            cart.sCustomerId = cust.CustomerId;
+            cart.sProductId = n購物車新增.Product.ProductId;
             cart.sProductQty = n購物車新增.sProductQty;
             db.tStatus.Add(cart);
             db.SaveChanges();
@@ -161,7 +175,7 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities db = new MotaiDataEntities();
                 tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
                 && c.fProductId == ProductId).FirstOrDefault();
-                if (x == null)
+                if (x != null)
                 {
                     Response.Write("這筆紀錄已新增過");
                 }
