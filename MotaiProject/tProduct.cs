@@ -32,6 +32,7 @@ namespace MotaiProject
         public int pSize { get; set; }
         public string pLxWxH { get; set; }
         public double pWeight { get; set; }
+        public string pIntroduction { get; set; }
         public decimal pPrice { get; set; }
         public int pQty { get; set; }
     

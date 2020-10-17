@@ -19,7 +19,7 @@ namespace MotaiProject
         public int tProductQty { get; set; }
         public int tWNIdOut { get; set; }
         public int tWNIdIn { get; set; }
-        public string tDate { get; set; }
+        public System.DateTime tDate { get; set; }
     
         public virtual tProduct tProduct { get; set; }
         public virtual tWarehouseName tWarehouseName { get; set; }

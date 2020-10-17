@@ -19,8 +19,8 @@ namespace MotaiProject
         public int wProductId { get; set; }
         public Nullable<int> wQuantity { get; set; }
         public int wSerialValue { get; set; }
-        public string wStockDate { get; set; }
-        public string wShipmentDate { get; set; }
+        public System.DateTime wStockDate { get; set; }
+        public Nullable<System.DateTime> wShipmentDate { get; set; }
     
         public virtual tProduct tProduct { get; set; }
         public virtual tWarehouseName tWarehouseName { get; set; }

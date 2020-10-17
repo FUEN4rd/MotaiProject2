@@ -126,22 +126,25 @@ namespace MotaiProject.Controllers
 
         }
 
-        public ActionResult 新增收藏(int cid, int pid)
+        public ActionResult 新增收藏(int pid)
         {
-
-            MotaiDataEntities db = new MotaiDataEntities();
-            tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cid)
-            && c.fProductId == pid).FirstOrDefault();
-            if (x == null)
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
-                Response.Write("這筆紀錄已新增過");
-            }
-            else
-            {
-                x.fCustomerId = cid;
-                x.fProductId = pid;
-                db.tFavorites.Add(x);
-                db.SaveChanges();
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
+                && c.fProductId == pid).FirstOrDefault();
+                if (x == null)
+                {
+                    Response.Write("這筆紀錄已新增過");
+                }
+                else
+                {
+                    x.fCustomerId = cust.CustomerId;
+                    x.fProductId = pid;
+                    db.tFavorites.Add(x);
+                    db.SaveChanges();
+                }
             }
             return View();
 

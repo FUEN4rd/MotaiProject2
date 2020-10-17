@@ -16,8 +16,8 @@ namespace MotaiProject
     {
         public int PromotionId { get; set; }
         public string PromotionName { get; set; }
-        public string pPromotionStartDate { get; set; }
-        public string pPromotionTime { get; set; }
+        public System.DateTime pPromotionStartDate { get; set; }
+        public System.DateTime pPromotionDeadline { get; set; }
         public string pPromotionWeb { get; set; }
         public string pADimage { get; set; }
         public string pDiscountCode { get; set; }

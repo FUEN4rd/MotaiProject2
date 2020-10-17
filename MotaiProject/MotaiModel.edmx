@@ -62,11 +62,11 @@
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="oCustomerId" Type="int" Nullable="false" />
           <Property Name="oAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="oDate" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="oDeliverDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="oDate" Type="date" Nullable="false" />
+          <Property Name="oDeliverDate" Type="date" />
           <Property Name="oEmployeeId" Type="int" />
           <Property Name="oCheck" Type="nvarchar" MaxLength="50" />
-          <Property Name="oCheckDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="oCheckDate" Type="date" />
           <Property Name="oPromotionId" Type="int" />
         </EntityType>
         <EntityType Name="tOrderDetail">
@@ -115,6 +115,7 @@
           <Property Name="pSize" Type="int" Nullable="false" />
           <Property Name="pLxWxH" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pWeight" Type="float" Nullable="false" />
+          <Property Name="pIntroduction" Type="nvarchar(max)" />
           <Property Name="pPrice" Type="money" Nullable="false" />
           <Property Name="pQty" Type="int" Nullable="false" />
         </EntityType>
@@ -153,8 +154,8 @@
           </Key>
           <Property Name="PromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PromotionName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="pPromotionStartDate" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="pPromotionTime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pPromotionStartDate" Type="date" Nullable="false" />
+          <Property Name="pPromotionDeadline" Type="date" Nullable="false" />
           <Property Name="pPromotionWeb" Type="nvarchar(max)" />
           <Property Name="pADimage" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pDiscountCode" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -178,7 +179,7 @@
           <Property Name="tProductQty" Type="int" Nullable="false" />
           <Property Name="tWNIdOut" Type="int" Nullable="false" />
           <Property Name="tWNIdIn" Type="int" Nullable="false" />
-          <Property Name="tDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="tWarehouse">
           <Key>
@@ -189,8 +190,8 @@
           <Property Name="wProductId" Type="int" Nullable="false" />
           <Property Name="wQuantity" Type="int" />
           <Property Name="wSerialValue" Type="int" Nullable="false" />
-          <Property Name="wStockDate" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="wShipmentDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="wStockDate" Type="date" Nullable="false" />
+          <Property Name="wShipmentDate" Type="date" />
         </EntityType>
         <EntityType Name="tWarehouseName">
           <Key>
@@ -696,11 +697,11 @@
           <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="oCustomerId" Type="Int32" Nullable="false" />
           <Property Name="oAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="oDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="oDeliverDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="oDeliverDate" Type="DateTime" Precision="0" />
           <Property Name="oEmployeeId" Type="Int32" />
           <Property Name="oCheck" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="oCheckDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oCheckDate" Type="DateTime" Precision="0" />
           <Property Name="oPromotionId" Type="Int32" />
           <NavigationProperty Name="tCustomer" Relationship="Self.FK_tOrder_tCustomer" FromRole="tOrder" ToRole="tCustomer" />
           <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrder_tEmployee" FromRole="tOrder" ToRole="tEmployee" />
@@ -761,6 +762,7 @@
           <Property Name="pSize" Type="Int32" Nullable="false" />
           <Property Name="pLxWxH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pWeight" Type="Double" Nullable="false" />
+          <Property Name="pIntroduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="pPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="pQty" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tFavorite" Relationship="Self.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
@@ -812,8 +814,8 @@
           </Key>
           <Property Name="PromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="pPromotionStartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="pPromotionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pPromotionStartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pPromotionDeadline" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pPromotionWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="pADimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pDiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -840,7 +842,7 @@
           <Property Name="tProductQty" Type="Int32" Nullable="false" />
           <Property Name="tWNIdOut" Type="Int32" Nullable="false" />
           <Property Name="tWNIdIn" Type="Int32" Nullable="false" />
-          <Property Name="tDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tTransfer_tProduct" FromRole="tTransfer" ToRole="tProduct" />
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tTransfer" ToRole="tWarehouseName" />
           <NavigationProperty Name="tWarehouseName1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tTransfer" ToRole="tWarehouseName" />
@@ -854,8 +856,8 @@
           <Property Name="wProductId" Type="Int32" Nullable="false" />
           <Property Name="wQuantity" Type="Int32" />
           <Property Name="wSerialValue" Type="Int32" Nullable="false" />
-          <Property Name="wStockDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="wShipmentDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="wStockDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="wShipmentDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tWarehouse" ToRole="tProduct" />
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouse" ToRole="tWarehouseName" />
         </EntityType>
@@ -1417,6 +1419,7 @@
                 <ScalarProperty Name="pSize" ColumnName="pSize" />
                 <ScalarProperty Name="pLxWxH" ColumnName="pLxWxH" />
                 <ScalarProperty Name="pWeight" ColumnName="pWeight" />
+                <ScalarProperty Name="pIntroduction" ColumnName="pIntroduction" />
                 <ScalarProperty Name="pPrice" ColumnName="pPrice" />
                 <ScalarProperty Name="pQty" ColumnName="pQty" />
               </MappingFragment>
@@ -1461,7 +1464,7 @@
                 <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
                 <ScalarProperty Name="pPromotionStartDate" ColumnName="pPromotionStartDate" />
-                <ScalarProperty Name="pPromotionTime" ColumnName="pPromotionTime" />
+                <ScalarProperty Name="pPromotionDeadline" ColumnName="pPromotionDeadline" />
                 <ScalarProperty Name="pPromotionWeb" ColumnName="pPromotionWeb" />
                 <ScalarProperty Name="pADimage" ColumnName="pADimage" />
                 <ScalarProperty Name="pDiscountCode" ColumnName="pDiscountCode" />

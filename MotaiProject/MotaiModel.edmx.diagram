@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9a6e05db145f413680c7572d70ec43e9" Name="Diagram1">
+      <Diagram DiagramId="ca2fac37ea0e4880994d22d403c41ca9" Name="Diagram1">
         <EntityTypeShape EntityType="MotaiDataModel.tBranch" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tCustomer" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tDiary" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="MotaiDataModel.tOrderPay" Width="1.5" PointX="8.25" PointY="21.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tOrderPayType" Width="1.5" PointX="6" PointY="25.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tPosition" Width="1.5" PointX="1.5" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tProduct" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tProduct" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tProductCategory" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tProductImage" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tProductMaterial" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
