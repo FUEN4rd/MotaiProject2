@@ -6,10 +6,34 @@
 
 }
 
-<h2>產品頁面</h2>
+<style>
+    .Y_productInfo {
+        padding: 10px 20px;
+        text-align: center;
+        line-height: 1.5em;
+        color: #FCD492;
+        height: 90px;
+    }
+</style>
+<div class="container">
+    <div class="row ">
+        @foreach (var item in Model)
+        {
+            <div class=" col-12 col-md-6 col-xl-3 ">
+                <a href="@Url.Action("產品細節", new { fid = item.ProductId })">
 
+                    <img src="https://img.ruten.com.tw/s1/f/40/09/21949993928713_387.jpg" class="img-fluid ">
 
-<table class="table">
+                    <div class="Y_productInfo">
+                        <h4><b>@Html.DisplayFor(modelItem => item.pName)</b></h4>
+                        <h5><b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b></h5>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+<table class="table" style="display:none">
     <tr>
         <th style="display:none">
             @Html.DisplayNameFor(model => model.ProductId)
@@ -42,49 +66,49 @@
             @Html.DisplayNameFor(model => model.pQty)
         </th>
         <th>
-            
+
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td style="display:none">
-            @Html.DisplayFor(modelItem => item.ProductId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.psCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.psMaterial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.psSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pLxWxH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pQty)
-        </td>
-        <td>
-            
-        </td>
-        <td>           
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.psCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.psMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.psSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pLxWxH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pQty)
+            </td>
+            <td></td>
+            <td>
+                @Html.ActionLink(" ", "產品細節", new { fid = item.ProductId })
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
 
 </table>
