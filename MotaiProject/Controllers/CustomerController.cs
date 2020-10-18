@@ -89,8 +89,12 @@ namespace MotaiProject.Controllers
         {
             tProduct product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == fid);
             if (product == null)
+            {
                 return RedirectToAction("List");
-            return View(product);
+            }
+            ProductViewModel prod = new ProductViewModel();
+            prod.Product = product;
+            return View(prod);
         }
 
         public ActionResult 購物車清單()
