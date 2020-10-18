@@ -11,19 +11,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title 墨臺</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
 
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <link href="~/Scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <style>
         * {
             /* font-family: DFKai-sb; */
             font-family: serif, sans-serif, cursive, fantasy, monospace;
         }
-        /*.Y_bc{
-            min-height:100%;
-        }*/
+
         .red {
             z-index: -1;
             width: 100%;
-            min-height: 600px;
+            min-height: 40rem;
             background: #A22E37;
             background: url("../../Content/background_RedCloud.png")repeat-y;
         }
@@ -62,186 +69,185 @@
     </style>
 </head>
 <body>
-    <div class="Y_bc">
-        <nav style="background-color:#F2EDD8" class="navbar navbar-expand-lg fixed-top">
+    <nav style="background-color:#F2EDD8" class="navbar navbar-expand-lg fixed-top">
 
-            <!-- <div style="display: flex;align-items: center;"> -->
-            <div class="navbar-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <svg style="fill: #A22E37; width: 32px; height:32px">
-                        <symbol id="lnr-menu" viewBox="0 0 1024 1024"><title>menu</title><path class="path1" d="M896 307.2h-768c-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path2" d="M896 563.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path3" d="M896 819.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path></symbol>
-                        <use xlink:href="#lnr-menu"></use>
-                    </svg>
-                </button>
-            </div>
-            <li class="nav nav-item active">
-                <a class="nav-link" href="#">
-                    <img style="height: auto;width: 60px" href="#" src="../../Content/墨臺Logo.png"
-                         alt=>
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-
-
-            <div class=" collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto"></ul>
-                <form class="navbar-nav mr-auto" style="align-items: center;">
-                    <li class="nav-item">
-                        @Html.ActionLink("首頁", "首頁", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>首頁</b></a>*@
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("最新消息", "News", "Home", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>關於我們</b></a>*@
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("產品", "產品頁面", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
-                    </li>
-                    @*<li class="nav-item">
-                            <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
-                        </li>*@
-                    <li class="form-inline">
-                        <input style="color: #A22E37;position: absolute;" type="search" placeholder="搜尋"
-                               class="form-control2 mr-sm-2" aria-label="Search">
-                        <button style="position: relative;margin-left: 172px; height: 35px;" class="btn btn-light"
-                                type="submit">
-                            <svg style="fill: #A22E37;width: 20px;height: 20px;">
-                                <symbol id="lnr-magnifier" viewBox="0 0 1024 1024"><title>magnifier</title><path class="path1" d="M966.070 981.101l-304.302-331.965c68.573-71.754 106.232-165.549 106.232-265.136 0-102.57-39.942-199-112.47-271.53s-168.96-112.47-271.53-112.47-199 39.942-271.53 112.47-112.47 168.96-112.47 271.53 39.942 199.002 112.47 271.53 168.96 112.47 271.53 112.47c88.362 0 172.152-29.667 240.043-84.248l304.285 331.947c5.050 5.507 11.954 8.301 18.878 8.301 6.179 0 12.378-2.226 17.293-6.728 10.421-9.555 11.126-25.749 1.571-36.171zM51.2 384c0-183.506 149.294-332.8 332.8-332.8s332.8 149.294 332.8 332.8-149.294 332.8-332.8 332.8-332.8-149.294-332.8-332.8z"></path></symbol>
-                                <use xlink:href="#lnr-magnifier"></use>
-                            </svg>
-                        </button>
-                    </li>
-                </form>
-                <br>
+        <!-- <div style="display: flex;align-items: center;"> -->
+        <div class="navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <svg style="fill: #A22E37; width: 32px; height:32px">
+                    <symbol id="lnr-menu" viewBox="0 0 1024 1024"><title>menu</title><path class="path1" d="M896 307.2h-768c-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path2" d="M896 563.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path3" d="M896 819.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path></symbol>
+                    <use xlink:href="#lnr-menu"></use>
+                </svg>
+            </button>
+        </div>
+        <li class="nav nav-item active">
+            <a class="nav-link" href="#">
+                <img style="height: auto;width: 60px" href="#" src="../../Content/墨臺Logo.png"
+                     alt=>
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
 
 
-                <div class="nav " style="justify-content: center;">
-                    <li class="nav-item">
-                        @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
-                                <svg href="#" fill="#A22E37" height="32px" width="50px"
-                                     viewBox="0 0 32 32">
-                                    <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
-                                    <use xlink:href="#lnr-user"></use>
-                                </svg>
-                            </button>*@
-                        <a href="#" data-toggle="modal" data-target="#Login">
+        <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <form class="navbar-nav mr-auto" style="align-items: center;">
+                <li class="nav-item">
+                    @Html.ActionLink("首頁", "首頁", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                    @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>首頁</b></a>*@
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("最新消息", "News", "Home", htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                    @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>關於我們</b></a>*@
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("產品", "產品頁面", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                    @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
+                </li>
+                @*<li class="nav-item">
+                        <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
+                    </li>*@
+                <li class="form-inline">
+                    <input style="color: #A22E37;position: absolute;" type="search" placeholder="搜尋"
+                           class="form-control2 mr-sm-2" aria-label="Search">
+                    <button style="position: relative;margin-left: 172px; height: 35px;" class="btn btn-light"
+                            type="submit">
+                        <svg style="fill: #A22E37;width: 20px;height: 20px;">
+                            <symbol id="lnr-magnifier" viewBox="0 0 1024 1024"><title>magnifier</title><path class="path1" d="M966.070 981.101l-304.302-331.965c68.573-71.754 106.232-165.549 106.232-265.136 0-102.57-39.942-199-112.47-271.53s-168.96-112.47-271.53-112.47-199 39.942-271.53 112.47-112.47 168.96-112.47 271.53 39.942 199.002 112.47 271.53 168.96 112.47 271.53 112.47c88.362 0 172.152-29.667 240.043-84.248l304.285 331.947c5.050 5.507 11.954 8.301 18.878 8.301 6.179 0 12.378-2.226 17.293-6.728 10.421-9.555 11.126-25.749 1.571-36.171zM51.2 384c0-183.506 149.294-332.8 332.8-332.8s332.8 149.294 332.8 332.8-149.294 332.8-332.8 332.8-332.8-149.294-332.8-332.8z"></path></symbol>
+                            <use xlink:href="#lnr-magnifier"></use>
+                        </svg>
+                    </button>
+                </li>
+            </form>
+            <br>
+
+
+            <div class="nav " style="justify-content: center;">
+                <li class="nav-item">
+                    @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
                             <svg href="#" fill="#A22E37" height="32px" width="50px"
                                  viewBox="0 0 32 32">
                                 <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
                                 <use xlink:href="#lnr-user"></use>
                             </svg>
+                        </button>*@
+                    <a href="#" data-toggle="modal" data-target="#Login">
+                        <svg href="#" fill="#A22E37" height="32px" width="50px"
+                             viewBox="0 0 32 32">
+                            <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
+                            <use xlink:href="#lnr-user"></use>
+                        </svg>
 
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">
-                            <svg fill=" #A22E37" height="32px" width="50px"
-                                 viewBox="0 0 32 32">
-                                <symbol id="lnr-star" viewBox="0 0 1024 1024">
-                                    <title>star</title>
-                                    <path class="path1"
-                                          d="M793.598 972.8c-4.205 0-8.422-1.034-12.258-3.126l-269.341-146.912-269.341 146.912c-8.598 4.691-19.118 4.061-27.098-1.613-7.981-5.677-12.022-15.41-10.413-25.069l49.034-294.206-195.483-195.485c-6.781-6.781-9.203-16.782-6.277-25.914s10.712-15.862 20.17-17.438l294.341-49.058 122.17-244.339c4.336-8.674 13.2-14.152 22.898-14.152s18.562 5.478 22.898 14.152l122.17 244.339 294.341 49.058c9.459 1.576 17.243 8.307 20.17 17.438s0.504 19.133-6.277 25.914l-195.483 195.485 49.034 294.206c1.61 9.659-2.434 19.392-10.413 25.069-4.419 3.144-9.621 4.739-14.84 4.739zM512 768c4.219 0 8.437 1.042 12.259 3.126l235.445 128.426-42.557-255.344c-1.36-8.155 1.302-16.464 7.15-22.309l169.626-169.626-258.131-43.022c-8.080-1.346-15.027-6.477-18.69-13.803l-105.102-210.205-105.102 210.205c-3.664 7.326-10.61 12.458-18.69 13.803l-258.131 43.022 169.624 169.626c5.846 5.845 8.509 14.155 7.15 22.309l-42.557 255.344 235.446-128.426c3.821-2.085 8.040-3.126 12.259-3.126z">
-                                    </path>
-                                </symbol>
-                                <use xlink:href="#lnr-star"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("購物車清單","Customer")">
-                            <svg fill=" #A22E37" height="32px" width="50px"
-                                 viewBox="0 0 32 32">
-                                <symbol id="lnr-cart" viewBox="0 0 1024 1024"><title>cart</title><path class="path1" d="M409.6 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM409.6 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path2" d="M768 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM768 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path3" d="M898.021 228.688c-12.859-15.181-32.258-23.888-53.221-23.888h-626.846l-5.085-30.506c-6.72-40.315-43.998-71.894-84.869-71.894h-51.2c-14.138 0-25.6 11.462-25.6 25.6s11.462 25.6 25.6 25.6h51.2c15.722 0 31.781 13.603 34.366 29.112l85.566 513.395c6.718 40.314 43.997 71.893 84.867 71.893h512c14.139 0 25.6-11.461 25.6-25.6s-11.461-25.6-25.6-25.6h-512c-15.722 0-31.781-13.603-34.366-29.11l-12.63-75.784 510.206-44.366c39.69-3.451 75.907-36.938 82.458-76.234l34.366-206.194c3.448-20.677-1.952-41.243-14.813-56.424zM862.331 276.694l-34.366 206.194c-2.699 16.186-20.043 32.221-36.39 33.645l-514.214 44.714-50.874-305.246h618.314c5.968 0 10.995 2.054 14.155 5.782 3.157 3.73 4.357 9.024 3.376 14.912z"></path></symbol>
-                                <use xlink:href="#lnr-cart"></use>
-                            </svg>
-                        </a>
-                    </li>
-                </div>
-        </nav>
-        <div class="red">
-            <div class="body-content">
-                <div style="padding-top:130px">
-                    @RenderBody()
-                </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <svg fill=" #A22E37" height="32px" width="50px"
+                             viewBox="0 0 32 32">
+                            <symbol id="lnr-star" viewBox="0 0 1024 1024">
+                                <title>star</title>
+                                <path class="path1"
+                                      d="M793.598 972.8c-4.205 0-8.422-1.034-12.258-3.126l-269.341-146.912-269.341 146.912c-8.598 4.691-19.118 4.061-27.098-1.613-7.981-5.677-12.022-15.41-10.413-25.069l49.034-294.206-195.483-195.485c-6.781-6.781-9.203-16.782-6.277-25.914s10.712-15.862 20.17-17.438l294.341-49.058 122.17-244.339c4.336-8.674 13.2-14.152 22.898-14.152s18.562 5.478 22.898 14.152l122.17 244.339 294.341 49.058c9.459 1.576 17.243 8.307 20.17 17.438s0.504 19.133-6.277 25.914l-195.483 195.485 49.034 294.206c1.61 9.659-2.434 19.392-10.413 25.069-4.419 3.144-9.621 4.739-14.84 4.739zM512 768c4.219 0 8.437 1.042 12.259 3.126l235.445 128.426-42.557-255.344c-1.36-8.155 1.302-16.464 7.15-22.309l169.626-169.626-258.131-43.022c-8.080-1.346-15.027-6.477-18.69-13.803l-105.102-210.205-105.102 210.205c-3.664 7.326-10.61 12.458-18.69 13.803l-258.131 43.022 169.624 169.626c5.846 5.845 8.509 14.155 7.15 22.309l-42.557 255.344 235.446-128.426c3.821-2.085 8.040-3.126 12.259-3.126z">
+                                </path>
+                            </symbol>
+                            <use xlink:href="#lnr-star"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("購物車清單","Customer")">
+                        <svg fill=" #A22E37" height="32px" width="50px"
+                             viewBox="0 0 32 32">
+                            <symbol id="lnr-cart" viewBox="0 0 1024 1024"><title>cart</title><path class="path1" d="M409.6 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM409.6 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path2" d="M768 1024c-56.464 0-102.4-45.936-102.4-102.4s45.936-102.4 102.4-102.4 102.4 45.936 102.4 102.4-45.936 102.4-102.4 102.4zM768 870.4c-28.232 0-51.2 22.968-51.2 51.2s22.968 51.2 51.2 51.2 51.2-22.968 51.2-51.2-22.968-51.2-51.2-51.2z"></path><path class="path3" d="M898.021 228.688c-12.859-15.181-32.258-23.888-53.221-23.888h-626.846l-5.085-30.506c-6.72-40.315-43.998-71.894-84.869-71.894h-51.2c-14.138 0-25.6 11.462-25.6 25.6s11.462 25.6 25.6 25.6h51.2c15.722 0 31.781 13.603 34.366 29.112l85.566 513.395c6.718 40.314 43.997 71.893 84.867 71.893h512c14.139 0 25.6-11.461 25.6-25.6s-11.461-25.6-25.6-25.6h-512c-15.722 0-31.781-13.603-34.366-29.11l-12.63-75.784 510.206-44.366c39.69-3.451 75.907-36.938 82.458-76.234l34.366-206.194c3.448-20.677-1.952-41.243-14.813-56.424zM862.331 276.694l-34.366 206.194c-2.699 16.186-20.043 32.221-36.39 33.645l-514.214 44.714-50.874-305.246h618.314c5.968 0 10.995 2.054 14.155 5.782 3.157 3.73 4.357 9.024 3.376 14.912z"></path></symbol>
+                            <use xlink:href="#lnr-cart"></use>
+                        </svg>
+                    </a>
+                </li>
+            </div>
+    </nav>
+    <div class="red">
+        <div class="body-content">
+            <div style="padding-top:130px">
+                @RenderBody()
             </div>
         </div>
+    </div>
 
-        <footer style="background-color: #313737;color: #F2EDD8">
-            <div class="container-fluid">
-                <div class="row" style="padding-left: 100px;width: 95%;">
-                    <div class=" d-none d-lg-block col-md-6 col-xl-2">
-                        <br>
-                        <h5 style="color: #FCD492;">分店資訊</h5>
-                        <h6> 鶯歌光點</h6>
-                        <!-- <h6> 營業時間：10:00-19:00 </h6> -->
-                        <h6> 電話：02-2677-3306</h6>
-                        <h6> 新北市鶯歌區陶瓷街18號(E區-12)</h6>
-                        <br>
-                    </div>
-                    <div class="d-none d-lg-block col-md-6 col-xl-2">
-                        <br>
-                        <h5 style="color: #313737;">隱藏</h5>
-                        <h6>礁溪店(麒麟飯店) </h6>
-                        <!-- <h6>營業時間：13:00-21:50 </h6> -->
-                        <h6>電話：0988273032</h6>
-                        <h6>宜蘭縣礁溪鄉礁溪路五段116號</h6>
-                    </div>
-                    <div class="d-none d-lg-block col-md-6 col-xl-2">
-                        <br>
-                        <h5 style="color: #313737;">隱藏</h5>
-                        <h6>台南家樂福新仁店</h6>
-                        <!-- <h6>營業時間：10:00-22:00</h6> -->
-                        <h6>電話：06-2679092</h6>
-                        <h6>台南市仁德區大同路三段755號</h6>
-                        <br>
-                    </div>
-                    <div class="d-none d-lg-block col-md-6 col-xl-2">
-                        <br>
-                        <h5 style="color: #313737;">隱藏</h5>
-                        <h6>鳳山店 </h6>
-                        <!-- <h6>營業時間：預約制 </h6> -->
-                        <h6>電話：077197029</h6>
-                        <h6>高雄市鳳山區三民路52號</h6>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-2">
-                        <br>
-                        <h5 style="color: #FCD492;">意見回饋</h5>
-                        <!-- <br class="d-none d-lg-block"> -->
-                        <span>歡迎寄信告訴我們任何意見</span>
-                        <span>
-                            <input type=" email" name="mail" value="電子郵件" />
-                            <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
-                        </span>
-                        <h5 style="color: #313737;">隱藏</h5>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-2">
-                        <br>
-                        <h5 style="color: #FCD492;">訂閱社群媒體</h5>
-                        <!-- <br class="d-none d-lg-block"> -->
-                        <div>公布最新活動，將會通知您</div>
-                        <a href="">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fab"
-                                 data-icon="facebook-square" role="img"
-                                 viewBox="0 0 448 512" height="32px" width="32px">
-                                <path fill="#F2EDD8"
-                                      d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
-                            </svg>
-                        </a>
-                        <a href="">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fab"
-                                 data-icon="instagram" role="img"
-                                 viewBox="0 0 448 512" height="32px" width="40px">
-                                <path fill="#F2EDD8"
-                                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-                            </svg>
-                        </a>
-                        <div style="color: #313737;">隱藏</div>
-                    </div>
+    <footer style="background-color: #313737;color: #F2EDD8">
+        <div class="container-fluid">
+            <div class="row" style="padding-left: 100px;width: 95%;">
+                <div class=" d-none d-lg-block col-md-6 col-xl-2">
+                    <br>
+                    <h5 style="color: #FCD492;">分店資訊</h5>
+                    <h6> 鶯歌光點</h6>
+                    <!-- <h6> 營業時間：10:00-19:00 </h6> -->
+                    <h6> 電話：02-2677-3306</h6>
+                    <h6> 新北市鶯歌區陶瓷街18號(E區-12)</h6>
+                    <br>
                 </div>
-        </footer>
+                <div class="d-none d-lg-block col-md-6 col-xl-2">
+                    <br>
+                    <h5 style="color: #313737;">隱藏</h5>
+                    <h6>礁溪店(麒麟飯店) </h6>
+                    <!-- <h6>營業時間：13:00-21:50 </h6> -->
+                    <h6>電話：0988273032</h6>
+                    <h6>宜蘭縣礁溪鄉礁溪路五段116號</h6>
+                </div>
+                <div class="d-none d-lg-block col-md-6 col-xl-2">
+                    <br>
+                    <h5 style="color: #313737;">隱藏</h5>
+                    <h6>台南家樂福新仁店</h6>
+                    <!-- <h6>營業時間：10:00-22:00</h6> -->
+                    <h6>電話：06-2679092</h6>
+                    <h6>台南市仁德區大同路三段755號</h6>
+                    <br>
+                </div>
+                <div class="d-none d-lg-block col-md-6 col-xl-2">
+                    <br>
+                    <h5 style="color: #313737;">隱藏</h5>
+                    <h6>鳳山店 </h6>
+                    <!-- <h6>營業時間：預約制 </h6> -->
+                    <h6>電話：077197029</h6>
+                    <h6>高雄市鳳山區三民路52號</h6>
+                </div>
+                <div class="col-12 col-md-6 col-xl-2">
+                    <br>
+                    <h5 style="color: #FCD492;">意見回饋</h5>
+                    <!-- <br class="d-none d-lg-block"> -->
+                    <span>歡迎寄信告訴我們任何意見</span>
+                    <span>
+                        <input type=" email" name="mail" value="電子郵件" />
+                        <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
+                    </span>
+                    <h5 style="color: #313737;">隱藏</h5>
+                </div>
+                <div class="col-12 col-md-6 col-xl-2">
+                    <br>
+                    <h5 style="color: #FCD492;">訂閱社群媒體</h5>
+                    <!-- <br class="d-none d-lg-block"> -->
+                    <div>公布最新活動，將會通知您</div>
+                    <a href="">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="facebook-square" role="img"
+                             viewBox="0 0 448 512" height="32px" width="32px">
+                            <path fill="#F2EDD8"
+                                  d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                        </svg>
+                    </a>
+                    <a href="">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="instagram" role="img"
+                             viewBox="0 0 448 512" height="32px" width="40px">
+                            <path fill="#F2EDD8"
+                                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                        </svg>
+                    </a>
+                    <div style="color: #313737;">隱藏</div>
+                </div>
+            </div>
+    </footer>
     </div>
     </div>
     <div>
@@ -323,16 +329,6 @@
             }
         }
     </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-            crossorigin="anonymous"></script>
-
-    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-
-    <link href="~/Scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
+ 
 </body>
 </html>
