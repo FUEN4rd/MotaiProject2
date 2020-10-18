@@ -495,7 +495,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Customer\產品細節.cshtml" />
-    <Content Include="Views\Customer\最新消息.cshtml" />
     <Content Include="Views\Customer\消息.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

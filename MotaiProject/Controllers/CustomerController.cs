@@ -125,10 +125,6 @@ namespace MotaiProject.Controllers
             return View(prod);
         }
 
-        public ActionResult 最新消息()
-        {
-            return View();
-        }
 
         public ActionResult 購物車清單()
         {            
@@ -187,7 +183,17 @@ namespace MotaiProject.Controllers
             db.SaveChanges();
             return RedirectToAction("購物車清單");
         }
-
+        public ActionResult 購物車內刪除(int fid)
+        {
+            MotaiDataEntities db = new MotaiDataEntities();
+            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == fid);
+            if (product != null)
+            {
+                db.tProducts.Remove(product);
+                db.SaveChanges();
+            }
+            return RedirectToAction("購物車清單");
+        }
         public ActionResult 收藏清單()
         {            
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)

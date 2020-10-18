@@ -106,8 +106,11 @@
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.sProductQty)
                 </th>
-                <th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.pTotal)
+                </th>
+                <th scope="col">
+                    刪除
                 </th>
             </tr>
         </thead>
@@ -115,24 +118,26 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.pName)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.pPrice)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.sProductQty)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.pTotal)
-                </td>
-                <td scope="row">
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.pName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sProductQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pTotal)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                        @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.ProductId },
+    new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
+                    </td>
+                </tr>
             }
 
         </tbody>
@@ -142,52 +147,52 @@
 
 
 @*<script>
-        $(function () {
+            $(function () {
 
-            let slideNum = 0;
-            let slideCount = $(".slides li").length;
-            let lastIndex = slideCount - 1;
-            
-            function setPlay() {
-                show();
-                slideNum++
-                if (slideNum > lastIndex) {
-                    slideNum = 0;
+                let slideNum = 0;
+                let slideCount = $(".slides li").length;
+                let lastIndex = slideCount - 1;
+
+                function setPlay() {
+                    show();
+                    slideNum++
+                    if (slideNum > lastIndex) {
+                        slideNum = 0;
+                    }
                 }
-            }
 
-            function stopPlay() {
-                clearInterval(play);
-            }
+                function stopPlay() {
+                    clearInterval(play);
+                }
 
-            function show() {
-                let move = 0 - 200 * slideNum;
-                $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
-                $("ul.slides").css("left", move);
-            }           
+                function show() {
+                    let move = 0 - 200 * slideNum;
+                    $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+                    $("ul.slides").css("left", move);
+                }
 
-            $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
-            $(".dot li").mouseenter(function () {
-                slideNum = $(this).index();
-                show();
+                $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
+                $(".dot li").mouseenter(function () {
+                    slideNum = $(this).index();
+                    show();
+                });
+
+                $("#prevSlide").click(function () {
+                    slideNum--;
+                    if (slideNum < 0) {
+                        slideNum = lastIndex;
+                    }
+                    show();
+                })
+
+                $("#nextSlide").click(function () {
+                    slideNum++;
+                    if (slideNum > lastIndex) {
+                        slideNum = 0;
+                    }
+                    show();
+                })
+
             });
-
-            $("#prevSlide").click(function () {
-                slideNum--;
-                if (slideNum < 0) {
-                    slideNum = lastIndex;
-                }
-                show();
-            })
-
-            $("#nextSlide").click(function () {
-                slideNum++;
-                if (slideNum > lastIndex) {
-                    slideNum = 0;
-                }
-                show();
-            })
-
-        });
-</script>*@
+    </script>*@
 

@@ -40,22 +40,16 @@
                 </h3>
             </div>
             <div class=" col-12 col-md-6 col-xl-12">
-                <br>
-                <br>
-                <br>
             </div>
         </div>
     </div>
+
     <!-- 影片 -->
     <div class="container">
-        <div class="row">
-            <div style="margin: auto;" id="player"></div>
+        <div class="row" style="display:flex;justify-content:center;margin:70px 0">
+            <iframe width="900" height="506" src="https://www.youtube.com/embed/O6xupBejB0c?mute=1&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <br>
-        <br>
-        <br>
     </div>
-
     <div class="container">
         <div class="row col-12">
             <h4 style=" color:#FCD492">關於墨臺</h4>
@@ -65,7 +59,6 @@
             </h5>
         </div>
     </div>
-
 
     <div class="container">
         <div class="row">
@@ -96,7 +89,7 @@
             </div>
         </div>
     </div>
-    <hr>    
+    <hr>
     <br>
 
     <div class="container">
@@ -181,20 +174,5 @@
         </div>
         <br />
     </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: 'O6xupBejB0c',
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-        function onPlayerReady(event) {
-            event.target.playVideo();
-        }</script>
+
 </content>
