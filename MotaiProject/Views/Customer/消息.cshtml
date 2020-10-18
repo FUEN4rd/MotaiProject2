@@ -1,0 +1,74 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<MotaiProject.ViewModels.PromotionViewModel>
+
+
+@{
+    ViewBag.Title = "消息";
+    Layout = "~/Views/Shared/_Layout登入.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="container">
+    <h2>消息</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionWeb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pADimage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pDiscountCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pDiscount)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PromotionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PromotionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPromotionStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPromotionDeadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPromotionWeb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pADimage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pDiscountCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pDiscount)
+                </td>               
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("消息", new { Page }))
+
+</div>

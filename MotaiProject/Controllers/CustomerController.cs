@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+
 
 namespace MotaiProject.Controllers
 {
@@ -20,6 +22,30 @@ namespace MotaiProject.Controllers
         {
             Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = null;
             return RedirectToAction("首頁");
+        }
+        int pageSize = 10;
+        public ActionResult 消息(int page = 1)
+        {
+            MotaiDataEntities db = new MotaiDataEntities();
+
+            int cpage = page < 1 ? 1 : page;
+            //資料庫讀取 tPromotions 為資料庫名稱
+            var promotion = db.tPromotions.OrderBy(c => c.PromotionId).ToList();
+            //開新List 取值
+            List<PromotionViewModel> reslsit = new List<PromotionViewModel>();
+            foreach(var items in promotion)
+            {
+                //實體化 class
+                PromotionViewModel res = new PromotionViewModel();
+                //Prom 讀取入get set
+                res.Prom = items;
+                //
+                reslsit.Add(res);
+            }
+            var result = reslsit.ToPagedList(cpage, pageSize);
+
+
+            return View(result);
         }
 
 
