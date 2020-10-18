@@ -85,17 +85,19 @@ namespace MotaiProject.Controllers
             }
             return View(productlist);
         }
-        public ActionResult 產品細節(int fid)
+        public ActionResult 產品細節(int ProductId)
         {
-            tProduct product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == fid);
+            tProduct product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             if (product == null)
             {
                 return RedirectToAction("List");
             }
+            ViewBag.Qty = product.pQty;
             ProductViewModel prod = new ProductViewModel();
             prod.Product = product;
             return View(prod);
         }
+
         public ActionResult 最新消息()
         {
             return View();

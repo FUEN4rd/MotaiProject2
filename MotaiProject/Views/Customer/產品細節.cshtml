@@ -1,5 +1,5 @@
-﻿@model MotaiProject.tProduct
-@*@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>*@
+﻿@*@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>*@
+@model MotaiProject.ViewModels.ProductViewModel
 @{
     ViewBag.Title = "產品細節";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
@@ -139,7 +139,7 @@
             <h7>@Html.DisplayNameFor(model => model.pNumber)</h7>
             <h7>@Html.DisplayFor(model => model.pNumber)</h7>
             <div style="display: flex;align-items: center;">
-                <h5>@Html.DisplayFor(model => model.pName)</h5>
+                <h5>@Html.DisplayFor(model=>model.pName)</h5>
 
                 <button type="button" class="btn Y_btn" data-toggle="tooltip" data-placement="top" title="收藏"
                         id="star1" style="display: none;">
@@ -211,12 +211,12 @@
             <hr>
             <div style="display: flex;">
                 <div class="Pintroduce_border">
-                    <h5>@Html.DisplayNameFor(model => model.pCategory)</h5>
-                    <h6>@Html.DisplayFor(model => model.pCategory)</h6>
+                    <h5>@Html.DisplayNameFor(model => model.psCategory)</h5>
+                    <h6>@Html.DisplayFor(model => model.psCategory)</h6>
                 </div>
                 <div class="Pintroduce_border">
-                    <h5>@Html.DisplayNameFor(model => model.pMaterial)</h5>
-                    <h6>@Html.DisplayFor(model => model.pMaterial)</h6>
+                    <h5>@Html.DisplayNameFor(model => model.psMaterial)</h5>
+                    <h6>@Html.DisplayFor(model => model.psMaterial)</h6>
                 </div>
             </div>
             <div style="display: flex;">
@@ -240,10 +240,7 @@
 </div>
 
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -256,10 +253,8 @@
 <script>
 
     let R = 1;
-    let ALL = 10;//商品上限
-    //let ALL = $("#Qty").val();//商品上限
-    //console.log("all" + ALL);
-    console.log($("#Qty".val()));
+    /*let ALL = 10;*///商品上限
+    let ALL = @ViewBag.Qty;//商品上限    
 
 
     function Count(id) {
