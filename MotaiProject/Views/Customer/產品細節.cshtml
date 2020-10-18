@@ -132,11 +132,11 @@
                 </div>
             </div>
 
-        <div class=" col-12 col-md-6 col-xl-6 Y_white">
-            <h7>@Html.DisplayNameFor(model => model.pNumber)</h7>
-            <h7>@Html.DisplayFor(model => model.pNumber)</h7>
-            <div style="display: flex;align-items: center;">
-                <h5>@Html.DisplayFor(model=>model.pName)</h5>
+            <div class=" col-12 col-md-6 col-xl-6 Y_white">
+                <h7>@Html.DisplayNameFor(model => model.pNumber)</h7>
+                <h7>@Html.DisplayFor(model => model.pNumber)</h7>
+                <div style="display: flex;align-items: center;">
+                    <h5>@Html.DisplayFor(model => model.pName)</h5>
 
                     <button type="button" class="btn Y_btn" data-toggle="tooltip" data-placement="top" title="收藏"
                             id="star1" style="display: none;">
@@ -194,27 +194,27 @@
                 <h5>NTD.@Html.DisplayFor(model => model.pPrice)</h5>
 
 
-            <hr>
-            <div style="display: flex">
-                <div class="form-inline PlusMinus" style="margin-right: 30px">
-                    <button id="minus" class="Y_btn" onclick="Count(this.id)">-</button>
-                    <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">
-                    <button id="plus" class="Y_btn" onclick="Count(this.id)">+</button>
+                <hr>
+                <div style="display: flex">
+                    <div class="form-inline PlusMinus" style="margin-right: 30px">
+                        <button id="minus" class="Y_btn" onclick="Count(this.id)">-</button>
+                        <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">
+                        <button id="plus" class="Y_btn" onclick="Count(this.id)">+</button>
+                    </div>
+                    <button type="button" class="btn btn-dark">@Html.ActionLink("加入購物車", "購物車新增", "Customer", null, new { ProductId = Model.ProductId })</button>
                 </div>
-                <button type="button" class="btn btn-dark">@Html.ActionLink("加入購物車", "購物車新增","Customer",null, new { ProductId = Model.ProductId })</button>
-            </div>
-            <h7 id="Qty">@Html.DisplayFor(model => model.pQty)</h7>
-            <h7>件庫存</h7>
-            <hr>
-            <div style="display: flex;">
-                <div class="Pintroduce_border">
-                    <h5>@Html.DisplayNameFor(model => model.psCategory)</h5>
-                    <h6>@Html.DisplayFor(model => model.psCategory)</h6>
-                </div>
-                <div class="Pintroduce_border">
-                    <h5>@Html.DisplayNameFor(model => model.psMaterial)</h5>
-                    <h6>@Html.DisplayFor(model => model.psMaterial)</h6>
-                </div>
+                <h7 id="Qty">@Html.DisplayFor(model => model.pQty)</h7>
+                <h7>件庫存</h7>
+                <hr>
+                <div style="display: flex;">
+                    <div class="Pintroduce_border">
+                        <h5>@Html.DisplayNameFor(model => model.psCategory)</h5>
+                        <h6>@Html.DisplayFor(model => model.psCategory)</h6>
+                    </div>
+                    <div class="Pintroduce_border">
+                        <h5>@Html.DisplayNameFor(model => model.psMaterial)</h5>
+                        <h6>@Html.DisplayFor(model => model.psMaterial)</h6>
+                    </div>
 
                 </div>
             </div>
@@ -222,16 +222,8 @@
     </div>
 </content>
 
+</content>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
 <script>
     let R = 1;
     let ALL = @ViewBag.Qty;
@@ -251,4 +243,14 @@
                 $("#buyQty").val(R);
             }
         }
+</script>
+<script>
+    $("#star1").click(function () {
+        $(this).css("display", "none");
+        $("#star2").css("display", "block");
+    })
+    $("#star2").click(function () {
+        $(this).css("display", "none");
+        $("#star1").css("display", "block");
+    })
 </script>
