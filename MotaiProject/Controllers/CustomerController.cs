@@ -92,6 +92,10 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("List");
             return View(product);
         }
+        public ActionResult 最新消息()
+        {
+            return View();
+        }
 
         public ActionResult 購物車清單()
         {            
