@@ -34,6 +34,7 @@ namespace MotaiProject.ViewModels
             }
             set => sta = value;
         }
+        public int StatusId { get { return this.Status.StatusId; } set { Status.StatusId = value; } }
         [DisplayName("產品名稱")]
         public string pName { get { return this.Product.pName; } set { Product.pName = value; } }
         [DisplayName("產品單價")]

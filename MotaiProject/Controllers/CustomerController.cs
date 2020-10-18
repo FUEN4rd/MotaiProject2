@@ -149,7 +149,7 @@ namespace MotaiProject.Controllers
             }
         }
         //待修
-        public ActionResult 購物車新增(int ProductId, int buyQty)
+        public ActionResult 購物車新增(int ProductId)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
@@ -157,8 +157,7 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities db = new MotaiDataEntities();
                 var product = db.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
                 StatusCartViewModel cart = new StatusCartViewModel();
-                cart.Product = product;
-                cart.sProductQty = buyQty;
+                cart.Product = product;                
                 return View(cart);
             }
             return RedirectToAction("首頁");
