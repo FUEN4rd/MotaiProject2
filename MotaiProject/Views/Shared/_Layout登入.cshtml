@@ -101,8 +101,8 @@
                         @*<a style="color:#A22E37" class="navbar-brand" href="#"><b>最新消息</b></a>*@
                     </li>
                     @*<li class="nav-item">
-                        <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
-                    </li>*@
+                            <a style="color:#A22E37" class="navbar-brand" href="#"><b>產品</b></a>
+                        </li>*@
                     <li class="form-inline">
                         <input style="color: #A22E37;position: absolute;" type="search" placeholder="搜尋"
                                class="form-control2 mr-sm-2" aria-label="Search">
@@ -121,12 +121,12 @@
                 <div class="nav " style="justify-content: center;">
                     <li class="nav-item">
                         @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
-                            <svg href="#" fill="#A22E37" height="32px" width="50px"
-                                 viewBox="0 0 32 32">
-                                <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
-                                <use xlink:href="#lnr-user"></use>
-                            </svg>
-                        </button>*@
+                                <svg href="#" fill="#A22E37" height="32px" width="50px"
+                                     viewBox="0 0 32 32">
+                                    <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
+                                    <use xlink:href="#lnr-user"></use>
+                                </svg>
+                            </button>*@
                         <a href="#" data-toggle="modal" data-target="#Login">
                             <svg href="#" fill="#A22E37" height="32px" width="50px"
                                  viewBox="0 0 32 32">
@@ -241,8 +241,8 @@
                         <div style="color: #313737;">隱藏</div>
                     </div>
                 </div>
-            </footer>
-        </div>
+        </footer>
+    </div>
     </div>
     <div>
         @{
@@ -252,80 +252,77 @@
                 {
                     @Html.AntiForgeryToken()
 
-                        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">會員登入</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="form-group form-inline">
-                                                <label for="loginAccount" class="col-form-label">帳號:</label>
-                                                <div class="col-md-10">
-                                                    @Html.Editor("cAccount")
-                                                </div>
+                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">會員登入</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group form-inline">
+                                            <label for="loginAccount" class="col-form-label">帳號:</label>
+                                            <div class="col-md-10">
+                                                @Html.Editor("cAccount")
                                             </div>
-                                            <div class="form-group form-inline">
-                                                <label for="loginPassword" class="col-form-label">密碼:</label>
-                                                <div class="col-md-10">
-                                                    @Html.Editor("cPassword")
-                                                </div>
+                                        </div>
+                                        <div class="form-group form-inline">
+                                            <label for="loginPassword" class="col-form-label">密碼:</label>
+                                            <div class="col-md-10">
+                                                @Html.Editor("cPassword")
                                             </div>
-                                            <div class="form-group form-inline">
-                                                <div class="col-md-10">
-                                                    @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
-                                                </div>
-                                                <div class="col-md-10">
-                                                    @Html.ActionLink("忘記密碼", "忘記密碼", "Customer", null, null)
-                                                </div>
+                                        </div>
+                                        <div class="form-group form-inline">
+                                            <div class="col-md-10">
+                                                @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">登入</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    </div>
+                                            <div class="col-md-10">
+                                                @Html.ActionLink("忘記密碼", "忘記密碼", "Customer", null, null)
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">登入</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                 </div>
                             </div>
                         </div>
-                    }
+                    </div>
                 }
             }
             else
             {
                 using (Html.BeginForm("登出", "Customer", FormMethod.Post, null))
                 {
-                    @Html.BeginForm("登出", "Customer", FormMethod.Post, null)
-                    {
-                        @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
-                        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">登出視窗</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        是否要登出?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">確認</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    </div>
+                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">登出視窗</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    是否要登出?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">確認</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                 </div>
                             </div>
                         </div>
-                    }
+                    </div>
                 }
             }
-        </div>
+        }
+    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
             integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
