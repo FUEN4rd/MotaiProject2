@@ -17,11 +17,13 @@
             /* font-family: DFKai-sb; */
             font-family: serif, sans-serif, cursive, fantasy, monospace;
         }
-
+        /*.Y_bc{
+            min-height:100%;
+        }*/
         .red {
             z-index: -1;
             width: 100%;
-            height: auto;
+            min-height: 600px;
             background: #A22E37;
             background: url("../../Content/background_RedCloud.png")repeat-y;
         }
@@ -60,7 +62,7 @@
     </style>
 </head>
 <body>
-    <div class="red">
+    <div class="Y_bc">
         <nav style="background-color:#F2EDD8" class="navbar navbar-expand-lg fixed-top">
 
             <!-- <div style="display: flex;align-items: center;"> -->
@@ -118,14 +120,21 @@
 
                 <div class="nav " style="justify-content: center;">
                     <li class="nav-item">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#Login">
+                        @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
+                                <svg href="#" fill="#A22E37" height="32px" width="50px"
+                                     viewBox="0 0 32 32">
+                                    <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
+                                    <use xlink:href="#lnr-user"></use>
+                                </svg>
+                            </button>*@
+                        <a href="#" data-toggle="modal" data-target="#Login">
                             <svg href="#" fill="#A22E37" height="32px" width="50px"
                                  viewBox="0 0 32 32">
                                 <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
                                 <use xlink:href="#lnr-user"></use>
                             </svg>
-                        </button>
 
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
@@ -151,92 +160,89 @@
                         </a>
                     </li>
                 </div>
-
-
-
         </nav>
-        <div class="body-content">
-            <br>
-            <br>
-            <br>
-            <br>
-            @RenderBody()
+        <div class="red">
+            <div class="body-content">
+                <div style="padding-top:130px">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
 
-            <footer style="background-color: #313737;color: #F2EDD8">
-                <div class="container-fluid">
-                    <div class="row" style="padding-left: 100px;width: 95%;">
-                        <div class=" d-none d-lg-block col-md-6 col-xl-2">
-                            <br>
-                            <h5 style="color: #FCD492;">分店資訊</h5>
-                            <h6> 鶯歌光點</h6>
-                            <!-- <h6> 營業時間：10:00-19:00 </h6> -->
-                            <h6> 電話：02-2677-3306</h6>
-                            <h6> 新北市鶯歌區陶瓷街18號(E區-12)</h6>
-                            <br>
-                        </div>
-                        <div class="d-none d-lg-block col-md-6 col-xl-2">
-                            <br>
-                            <h5 style="color: #313737;">隱藏</h5>
-                            <h6>礁溪店(麒麟飯店) </h6>
-                            <!-- <h6>營業時間：13:00-21:50 </h6> -->
-                            <h6>電話：0988273032</h6>
-                            <h6>宜蘭縣礁溪鄉礁溪路五段116號</h6>
-                        </div>
-                        <div class="d-none d-lg-block col-md-6 col-xl-2">
-                            <br>
-                            <h5 style="color: #313737;">隱藏</h5>
-                            <h6>台南家樂福新仁店</h6>
-                            <!-- <h6>營業時間：10:00-22:00</h6> -->
-                            <h6>電話：06-2679092</h6>
-                            <h6>台南市仁德區大同路三段755號</h6>
-                            <br>
-                        </div>
-                        <div class="d-none d-lg-block col-md-6 col-xl-2">
-                            <br>
-                            <h5 style="color: #313737;">隱藏</h5>
-                            <h6>鳳山店 </h6>
-                            <!-- <h6>營業時間：預約制 </h6> -->
-                            <h6>電話：077197029</h6>
-                            <h6>高雄市鳳山區三民路52號</h6>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-2">
-                            <br>
-                            <h5 style="color: #FCD492;">意見回饋</h5>
-                            <!-- <br class="d-none d-lg-block"> -->
-                            <span>歡迎寄信告訴我們任何意見</span>
-                            <span>
-                                <input type=" email" name="mail" value="電子郵件" />
-                                <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
-                            </span>
-                            <h5 style="color: #313737;">隱藏</h5>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-2">
-                            <br>
-                            <h5 style="color: #FCD492;">訂閱社群媒體</h5>
-                            <!-- <br class="d-none d-lg-block"> -->
-                            <div>公布最新活動，將會通知您</div>
-                            <a href="">
-                                <svg aria-hidden="true" focusable="false" data-prefix="fab"
-                                     data-icon="facebook-square" role="img"
-                                     viewBox="0 0 448 512" height="32px" width="32px">
-                                    <path fill="#F2EDD8"
-                                          d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
-                                </svg>
-                            </a>
-                            <a href="">
-                                <svg aria-hidden="true" focusable="false" data-prefix="fab"
-                                     data-icon="instagram" role="img"
-                                     viewBox="0 0 448 512" height="32px" width="40px">
-                                    <path fill="#F2EDD8"
-                                          d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-                                </svg>
-                            </a>
-                            <div style="color: #313737;">隱藏</div>
-                        </div>
+        <footer style="background-color: #313737;color: #F2EDD8">
+            <div class="container-fluid">
+                <div class="row" style="padding-left: 100px;width: 95%;">
+                    <div class=" d-none d-lg-block col-md-6 col-xl-2">
+                        <br>
+                        <h5 style="color: #FCD492;">分店資訊</h5>
+                        <h6> 鶯歌光點</h6>
+                        <!-- <h6> 營業時間：10:00-19:00 </h6> -->
+                        <h6> 電話：02-2677-3306</h6>
+                        <h6> 新北市鶯歌區陶瓷街18號(E區-12)</h6>
+                        <br>
+                    </div>
+                    <div class="d-none d-lg-block col-md-6 col-xl-2">
+                        <br>
+                        <h5 style="color: #313737;">隱藏</h5>
+                        <h6>礁溪店(麒麟飯店) </h6>
+                        <!-- <h6>營業時間：13:00-21:50 </h6> -->
+                        <h6>電話：0988273032</h6>
+                        <h6>宜蘭縣礁溪鄉礁溪路五段116號</h6>
+                    </div>
+                    <div class="d-none d-lg-block col-md-6 col-xl-2">
+                        <br>
+                        <h5 style="color: #313737;">隱藏</h5>
+                        <h6>台南家樂福新仁店</h6>
+                        <!-- <h6>營業時間：10:00-22:00</h6> -->
+                        <h6>電話：06-2679092</h6>
+                        <h6>台南市仁德區大同路三段755號</h6>
+                        <br>
+                    </div>
+                    <div class="d-none d-lg-block col-md-6 col-xl-2">
+                        <br>
+                        <h5 style="color: #313737;">隱藏</h5>
+                        <h6>鳳山店 </h6>
+                        <!-- <h6>營業時間：預約制 </h6> -->
+                        <h6>電話：077197029</h6>
+                        <h6>高雄市鳳山區三民路52號</h6>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-2">
+                        <br>
+                        <h5 style="color: #FCD492;">意見回饋</h5>
+                        <!-- <br class="d-none d-lg-block"> -->
+                        <span>歡迎寄信告訴我們任何意見</span>
+                        <span>
+                            <input type=" email" name="mail" value="電子郵件" />
+                            <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
+                        </span>
+                        <h5 style="color: #313737;">隱藏</h5>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-2">
+                        <br>
+                        <h5 style="color: #FCD492;">訂閱社群媒體</h5>
+                        <!-- <br class="d-none d-lg-block"> -->
+                        <div>公布最新活動，將會通知您</div>
+                        <a href="">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fab"
+                                 data-icon="facebook-square" role="img"
+                                 viewBox="0 0 448 512" height="32px" width="32px">
+                                <path fill="#F2EDD8"
+                                      d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                            </svg>
+                        </a>
+                        <a href="">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fab"
+                                 data-icon="instagram" role="img"
+                                 viewBox="0 0 448 512" height="32px" width="40px">
+                                <path fill="#F2EDD8"
+                                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                            </svg>
+                        </a>
+                        <div style="color: #313737;">隱藏</div>
                     </div>
                 </div>
-            </footer>
-        </div>
+        </footer>
+    </div>
     </div>
     <div>
         @{
@@ -317,7 +323,7 @@
             }
         }
     </div>
-
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
             integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
             crossorigin="anonymous"></script>
