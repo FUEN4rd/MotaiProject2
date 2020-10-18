@@ -5,31 +5,34 @@
     ViewBag.Title = "產品頁面";
 
 }
-
-<style>
-    .Y_productInfo {
-        padding: 10px 20px;
-        text-align: center;
-        line-height: 1.5em;
-        color: #FCD492;
-        height: 90px;
-    }
-</style>
-<div class="container">
-    <div class="row ">
-        @foreach (var item in Model)
-        {
-            <div class=" col-12 col-md-6 col-xl-3 ">
-                <a href="@Url.Action("產品細節", new { ProductId = item.ProductId })">
-
-                    <img src="https://img.ruten.com.tw/s1/f/40/09/21949993928713_387.jpg" class="img-fluid ">
-
-                    <div class="Y_productInfo">
-                        <h4><b>@Html.DisplayFor(modelItem => item.pName)</b></h4>
-                        <h5><b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b></h5>
-                    </div>
-                </a>
-            </div>
+<content>
+    <style>
+        .Y_productInfo {
+            padding: 10px 20px;
+            text-align: center;
+            line-height: 1.5em;
+            color: #FCD492;
+            height: 90px;
         }
+    </style>
+    <div class="container">
+        <div class="row ">
+            @foreach (var item in Model)
+            {
+                <div class=" col-12 col-md-6 col-xl-3 ">
+                    <a href="@Url.Action("產品細節", new { ProductId = item.ProductId })">
+                        <img src="https://img.ruten.com.tw/s1/f/40/09/21949993928713_387.jpg" class="img-fluid ">
+                        <div class="Y_productInfo">
+                            <h4>
+                                <b>@Html.DisplayFor(modelItem => item.pName)</b>
+                            </h4>
+                            <h5>
+                                <b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>
+                            </h5>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
     </div>
-</div>
+</content>
