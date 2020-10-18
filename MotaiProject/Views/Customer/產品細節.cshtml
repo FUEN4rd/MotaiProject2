@@ -214,10 +214,26 @@
                         <h5>@Html.DisplayNameFor(model => model.psMaterial)</h5>
                         <h6>@Html.DisplayFor(model => model.psMaterial)</h6>
                     </div>
-
+                </div>
+                <div style="display: flex;">
+                    <div class="Pintroduce_border">
+                        <h5>@Html.DisplayNameFor(model => model.pLxWxH)</h5>
+                        <h6>@Html.DisplayFor(model => model.pLxWxH)</h6>
+                    </div>
+                    <div class="Pintroduce_border">
+                        <h5>@Html.DisplayNameFor(model => model.pWeight)</h5>
+                        <h6>@Html.DisplayFor(model => model.pWeight)</h6>
+                    </div>
+                </div>
+                <div class="Pintroduce_border">
+                    <h5>@Html.DisplayNameFor(model => model.pIntroduction)</h5>
+                    <h6>@Html.DisplayFor(model => model.pIntroduction)</h6>
                 </div>
             </div>
         </div>
+    </div>
+    <div style="display:none">
+        <h6>@Html.DisplayFor(model => model.ProductId)</h6>
     </div>
 </content>
 
