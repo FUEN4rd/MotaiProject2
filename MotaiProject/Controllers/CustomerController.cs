@@ -85,17 +85,20 @@ namespace MotaiProject.Controllers
             }
             return View(productlist);
         }
-        public ActionResult 產品細節(int fid)
+        public ActionResult 產品細節(int ProductId)
         {
-            tProduct product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == fid);
+            tProduct product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             if (product == null)
             {
                 return RedirectToAction("List");
             }
+            ViewBag.Qty = product.pQty;
             ProductViewModel prod = new ProductViewModel();
             prod.Product = product;
+            prod.pQty = product.pQty;
             return View(prod);
         }
+
         public ActionResult 最新消息()
         {
             return View();
@@ -124,23 +127,23 @@ namespace MotaiProject.Controllers
             }
         }
         //待修
-        public ActionResult AddToCart(int ProductId)
+        public ActionResult 購物車新增(int ProductId, int buyQty)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities db = new MotaiDataEntities();
-                var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                var product = db.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
                 StatusCartViewModel cart = new StatusCartViewModel();
                 cart.Product = product;
-                cart.sProductQty = 1;
+                cart.sProductQty = buyQty;
                 return View(cart);
             }
             return RedirectToAction("首頁");
         }
 
         [HttpPost]
-        public ActionResult AddToCart(StatusCartViewModel n購物車新增)
+        public ActionResult 購物車新增(StatusCartViewModel n購物車新增)
         {
             tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
             MotaiDataEntities db = new MotaiDataEntities();

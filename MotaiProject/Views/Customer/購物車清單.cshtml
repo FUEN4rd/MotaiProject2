@@ -92,44 +92,56 @@
     }
 </style>
 
-<h2>購物車清單</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.pName)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.pPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sProductQty)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.pName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.pPrice)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.sProductQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pTotal)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.pName)
-            </td>            
-            <td>
-                @Html.DisplayFor(modelItem => item.pPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sProductQty)
-            </td>
-            <td>                
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.pName)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.pPrice)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.sProductQty)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.pTotal)
+                </td>
+                <td scope="row">
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+            }
 
-</table>
+        </tbody>
 
-<script>
+    </table>
+</div>
+
+
+@*<script>
         $(function () {
 
             let slideNum = 0;
@@ -177,5 +189,5 @@
             })
 
         });
-</script>
+</script>*@
 
