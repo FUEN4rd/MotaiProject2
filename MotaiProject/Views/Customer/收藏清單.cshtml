@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Favorited)
+            @Html.DisplayNameFor(model => model.FavoriteId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.fCustomerId)
@@ -33,7 +33,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Favorited)
+            @Html.DisplayFor(modelItem => item.FavoriteId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.fCustomerId)
