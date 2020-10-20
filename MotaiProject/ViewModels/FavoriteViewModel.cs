@@ -40,7 +40,7 @@ namespace MotaiProject.ViewModels
         }
 
         [DisplayName("收藏")]
-        public int Favorited { get { return this.Favor.FavoriteId; } set { Favor.FavoriteId = value; } }
+        public int FavoriteId { get { return this.Favor.FavoriteId; } set { Favor.FavoriteId = value; } }
         [DisplayName("客戶ID")]
         public int fCustomerId { get { return this.Favor.fCustomerId; } set { Favor.fCustomerId = value; } }
         [DisplayName("產品ID")]

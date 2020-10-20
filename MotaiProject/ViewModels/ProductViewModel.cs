@@ -62,8 +62,22 @@ namespace MotaiProject.ViewModels
         [DisplayName("產品數量")]
         public int pQty { get; set; }
 
+        private tProductImage prodImage;
+        public tProductImage ProdImage
+        {
+            get
+            {
+                if (prodImage == null)
+                {
+                    prodImage = new tProductImage();
+                }
+                return prodImage;
+            }
+            set => prodImage = value;
+        }
+
         [DisplayName("產品圖片")]
-        public string[] psImage { get; set; }
+        public List<string> psImage { get; set; }
 
         public HttpPostedFileBase[] pImage { get; set; }
 
