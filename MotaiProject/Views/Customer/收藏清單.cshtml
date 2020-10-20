@@ -5,54 +5,58 @@
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
 
-<h2>收藏清單</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FavoriteId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fCustomerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fProductId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pPrice)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FavoriteId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fCustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fProductId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pPrice)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FavoriteId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fCustomerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FavoriteId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fCustomerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fProductId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
 
-</table>
+    </table>
+</div>

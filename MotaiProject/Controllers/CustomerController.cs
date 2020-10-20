@@ -233,11 +233,11 @@ namespace MotaiProject.Controllers
                 }
                 return View(favorList);
             }
-            return View("收藏清單");
-            //else
-            //{
-            //    return RedirectToAction("首頁");
-            //}
+            //return View("收藏清單");
+            else
+            {
+                return RedirectToAction("首頁");
+            }
         }
 
         public ActionResult 新增收藏(int ProductId)
