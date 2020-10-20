@@ -100,14 +100,19 @@ namespace MotaiProject.Controllers
 
         public ActionResult 產品頁面()
         {
-            var q = from p in (new MotaiDataEntities()).tProducts//先撈資料,產品的工廠
-                    select p;
+            MotaiDataEntities db = new MotaiDataEntities();
+            List<tProduct> prod = db.tProducts.ToList();
             List<ProductViewModel> productlist = new List<ProductViewModel>();
-            foreach (tProduct item in q)
+            foreach (tProduct item in prod)
             {
-                ProductViewModel prod = new ProductViewModel();
-                prod.Product = item;
-                productlist.Add(prod);
+                List<tProductImage> image = db.tProductImages.Where(i => i.ProductId.Equals(item.ProductId)).ToList();
+                ProductViewModel Prod = new ProductViewModel();
+                Prod.Product = item;
+                foreach(var imageitem in image)
+                {
+                    Prod.psImage.Add(imageitem.pImage);
+                }
+                productlist.Add(Prod);
             }
             return View(productlist);
         }
@@ -158,7 +163,7 @@ namespace MotaiProject.Controllers
                 var product = db.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
                 StatusCartViewModel cart = new StatusCartViewModel();
                 cart.Product = product;                
-                return View(cart);
+                return Json(cart);
             }
             return RedirectToAction("首頁");
         }
