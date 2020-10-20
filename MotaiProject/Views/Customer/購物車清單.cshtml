@@ -13,7 +13,7 @@
         margin: 100px auto;
     }
 
-    ul {
+    /*ul {
         margin: 0;
         padding: 0;
         position: absolute;
@@ -23,7 +23,7 @@
         margin: 20px;
         padding: 0;
         list-style: none;
-    }
+    }*/
 
     ul.slides {
         width: 2200px;
@@ -133,15 +133,15 @@
                     </td>
                     <td>
                         @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                         @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
     new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
                     </td>
                 </tr>
             }
         </tbody>
-        <button type="button" class="btn btn-dark" onclick="">確定結帳</button>
     </table>
+    <button type="button" class="btn btn-dark" onclick="">確定結帳</button>
 </div>
 
 
