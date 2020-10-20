@@ -76,8 +76,24 @@ namespace MotaiProject.ViewModels
             set => prodImage = value;
         }
 
+        private List<string> image;
         [DisplayName("產品圖片")]
-        public List<string> psImage { get; set; }
+        public List<string> psImage
+        {
+            get
+            {
+                if (image == null)
+                {
+                    image = new List<string>();
+                }
+                foreach (var item in this.dbContext.tProductImages.Where(i => i.ProductId == Product.ProductId))
+                {
+                    image.Add(item.pImage);
+                }
+                return image;
+            }
+            set => image = value;
+        }
 
         public HttpPostedFileBase[] pImage { get; set; }
 

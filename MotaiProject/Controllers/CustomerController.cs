@@ -118,13 +118,19 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 產品細節(int ProductId)
         {
-            tProduct product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+            MotaiDataEntities db = new MotaiDataEntities();
+            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             if (product == null)
             {
                 return RedirectToAction("List");
             }
             ViewBag.Qty = product.pQty;
             ProductViewModel prod = new ProductViewModel();
+            List<tProductImage> image = db.tProductImages.Where(i => i.ProductId.Equals(ProductId)).ToList();
+            foreach(var item in image)
+            {
+                prod.psImage.Add(Server.MapPath("../Content/" + item.pImage));
+            }           
             prod.Product = product;
             prod.pQty = product.pQty;        
             return View(prod);

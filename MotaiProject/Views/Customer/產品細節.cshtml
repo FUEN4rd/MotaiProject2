@@ -96,31 +96,42 @@
         <div class="row presize">
             <div class=" col-12 col-md-6 col-xl-6 ">
                 @{
+                    int count = 0;
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li class="dataexample active" data-target="#carouselExampleIndicators" data-slide-to="0">
+                            
+                            @foreach (var item in Model.psImage)
+                            {
+                                <li class="dataexample active" data-target="#carouselExampleIndicators" data-slide-to="@count">
+                                </li>
+                                count++;
+                            }
+                            @*<li class="dataexample active" data-target="#carouselExampleIndicators" data-slide-to="0">
                             </li>
                             <li class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="1">
                             </li>
                             <li class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="2">
-                            </li>
+                            </li>*@
                         </ol>
                         <div class="carousel-inner">
-                            foreach()
+                            @foreach (var item in Model.psImage)
                             {
-                            @*<div class="carousel-item active">
-                                    <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
-                                         class="d-block w-100" alt="...">
+                                <div class="carousel-item active">
+                                    <img src="@Url.Action(item)" class="d-block w-100" alt="..." />
                                 </div>
-                                <div class="carousel-item">
-                                    <img src="https://cdn.pixabay.com/photo/2020/03/30/10/18/electric-scooter-4983759_1280.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://cdn.pixabay.com/photo/2020/04/12/08/50/child-5033381_1280.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>*@
                             }
+                                @*<div class="carousel-item active">
+                                        <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
+                                             class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://cdn.pixabay.com/photo/2020/03/30/10/18/electric-scooter-4983759_1280.jpg"
+                                             class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://cdn.pixabay.com/photo/2020/04/12/08/50/child-5033381_1280.jpg"
+                                             class="d-block w-100" alt="...">
+                                    </div>*@                            
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
