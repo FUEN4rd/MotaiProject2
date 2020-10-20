@@ -1,0 +1,96 @@
+﻿@model MotaiProject.ViewModels.CustomerViewModel
+
+@{
+    ViewBag.Title = "會員中心";
+    Layout = "~/Views/Shared/_Layout登入.cshtml";
+}
+<style>
+    *{
+        color:#ffffff;
+    }
+</style>
+
+<h2>會員中心</h2>
+
+
+
+<div class="container">
+    <div style="display:none">
+        @Html.DisplayFor(model => model.CustomerId)
+    </div>
+    <div class="row">
+        <h4>
+            @Html.DisplayNameFor(model => model.cAccount)
+        </h4>
+
+        <h4>
+            @Html.DisplayFor(model => model.cAccount)
+        </h4>
+    </div>
+    <div class="row" >
+        <div>
+            @Html.DisplayNameFor(model => model.cPassword)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cPassword)
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            @Html.DisplayNameFor(model => model.cName)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cName)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cTelePhone)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cTelePhone)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cCellPhone)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cCellPhone)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cAddress)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cAddress)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cGUI)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cGUI)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cEmail)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cEmail)
+        </div>
+
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>
+</div>
+

@@ -65,6 +65,17 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("首頁");
         }
+        public ActionResult 會員中心()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                CustomerViewModel customer = new CustomerViewModel();
+                customer.Customer = cust;
+                return View(customer);
+            }
+            return RedirectToAction("首頁");
+        }
 
         public ActionResult 會員註冊()
         {
@@ -124,6 +135,7 @@ namespace MotaiProject.Controllers
             prod.pQty = product.pQty;
             return View(prod);
         }
+
 
 
         public ActionResult 購物車清單()
