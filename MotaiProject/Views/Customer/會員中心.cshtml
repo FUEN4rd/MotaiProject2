@@ -6,94 +6,114 @@
 }
 <style>
     * {
-        color: #ffffff;
+        color: #F2EDD8;
+        text-decoration: none;
+        font-weight:500;
     }
-    .modal-title{
+
+    .modal-title {
         color: black;
     }
-    .modal-body{
+
+    .modal-body {
         color: black;
+    }
+
+    .Y_row {
+        font-size: 20px;
+    }
+    .Y_yellow {
+        color: #FCD492;
     }
 </style>
 
-<h2>會員中心</h2>
+
 
 
 <div class="container">
-    <div style="display:none">
-        @Html.DisplayFor(model => model.CustomerId)
-    </div>
-    <div class="row">
-        <h4>
-            @Html.DisplayNameFor(model => model.cAccount)
-        </h4>
-
-        <h4>
-            @Html.DisplayFor(model => model.cAccount)
-        </h4>
-    </div>
-    <div class="row">
+    <h2 class="Y_yellow">會員中心</h2>
+    <hr />
+    <div class="row Y_row">
         <div>
-            @Html.DisplayNameFor(model => model.cPassword)
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.cPassword)
-        </div>
-    </div>
-    <div class="row">
-        <div>
-            @Html.DisplayNameFor(model => model.cName)
+            @Html.DisplayNameFor(model => model.cName)：
         </div>
 
         <div>
             @Html.DisplayFor(model => model.cName)
         </div>
+    </div>
 
+    <div class="row Y_row">
         <div>
-            @Html.DisplayNameFor(model => model.cTelePhone)
+            @Html.DisplayNameFor(model => model.cTelePhone)：
         </div>
 
         <div>
             @Html.DisplayFor(model => model.cTelePhone)
         </div>
-
+    </div>
+    <div class="row Y_row">
         <div>
-            @Html.DisplayNameFor(model => model.cCellPhone)
+            @Html.DisplayNameFor(model => model.cCellPhone)：
         </div>
 
         <div>
             @Html.DisplayFor(model => model.cCellPhone)
         </div>
-
+    </div>
+    <div class="row Y_row">
         <div>
-            @Html.DisplayNameFor(model => model.cAddress)
+            @Html.DisplayNameFor(model => model.cAddress)：
         </div>
 
         <div>
             @Html.DisplayFor(model => model.cAddress)
         </div>
-
+    </div>
+    <div class="row Y_row">
         <div>
-            @Html.DisplayNameFor(model => model.cGUI)
+            @Html.DisplayNameFor(model => model.cGUI)：
         </div>
 
         <div>
             @Html.DisplayFor(model => model.cGUI)
         </div>
-
+    </div>
+    <div class="row Y_row">
         <div>
-            @Html.DisplayNameFor(model => model.cEmail)
+            @Html.DisplayNameFor(model => model.cEmail)：
         </div>
 
         <div>
             @Html.DisplayFor(model => model.cEmail)
         </div>
+    </div>
 
+    <div class="row Y_row">
+        <div>
+            @Html.DisplayNameFor(model => model.cAccount)：
+        </div>
 
-        <p>
-            @Html.ActionLink("修改個人資料", "修改會員資料", new { CustomerId =Model.CustomerId}) |
-            <button type="button" class="btn" data-toggle="modal" data-target="#Login">登出</button>
+        <div>
+            @Html.DisplayFor(model => model.cAccount)
+        </div>
+    </div>
+
+    <div class="row Y_row">
+        <div >
+            @Html.DisplayNameFor(model => model.cPassword)：
+        </div>
+
+        <div type="password">
+            @Html.DisplayFor(model => model.cPassword)
+        </div>
+    </div>
+    <div class="row Y_row">
+        <div>
+            <div style="color:aqua">
+                @Html.ActionLink("修改個人資料", "修改會員資料", new { CustomerId = Model.CustomerId, style = "color: #ff0000;" })
+            </div>  |
+            <button type="button" class="btn Y_row" data-toggle="modal" data-target="#Login">登出</button>
             @using (Html.BeginForm("登出", "Customer", FormMethod.Post, null))
             {
                 @Html.AntiForgeryToken()
@@ -118,9 +138,12 @@
                     </div>
                 </div>
             }
-        </p>
+        </div>
     </div>
 </div>
 
 
 
+<div style="display:none">
+    @Html.DisplayFor(model => model.CustomerId)
+</div>
