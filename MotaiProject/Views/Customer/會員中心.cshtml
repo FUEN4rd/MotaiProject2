@@ -92,7 +92,7 @@
 
 
         <p>
-            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+            @Html.ActionLink("修改個人資料", "修改會員資料", new { CustomerId =Model.CustomerId}) |
             <button type="button" class="btn" data-toggle="modal" data-target="#Login">登出</button>
             @using (Html.BeginForm("登出", "Customer", FormMethod.Post, null))
             {

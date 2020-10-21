@@ -498,6 +498,7 @@
     <Content Include="Views\Customer\消息.cshtml" />
     <Content Include="Views\Customer\收藏清單.cshtml" />
     <Content Include="Views\Customer\會員中心.cshtml" />
+    <Content Include="Views\Customer\修改會員資料.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

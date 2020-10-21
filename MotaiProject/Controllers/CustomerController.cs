@@ -101,7 +101,36 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
-
+        public ActionResult 修改會員資料(int CustomerId)
+        {
+            MotaiDataEntities db = new MotaiDataEntities();
+            tCustomer cust = db.tCustomers.FirstOrDefault(c => c.CustomerId == CustomerId);
+            if (cust == null)
+            {
+                return RedirectToAction("會員中心");
+            }
+            CustomerViewModel customer = new CustomerViewModel();
+            customer.Customer = cust;
+            return View(customer);
+        }
+        [HttpPost]
+        public ActionResult 修改會員資料(CustomerViewModel c)
+        {
+            MotaiDataEntities db = new MotaiDataEntities();
+            tCustomer cust = db.tCustomers.Find(c.CustomerId);
+            if (cust != null)
+            {
+                cust.cName = c.cName;
+                cust.cPassword = c.cPassword;
+                cust.cTelePhone = c.cTelePhone;
+                cust.cGUI = c.cGUI;
+                cust.cEmail = c.cEmail;
+                cust.cAddress = c.cAddress;
+                cust.cAccount = c.cAccount;
+                db.SaveChanges();
+            }
+            return RedirectToAction("會員中心");
+        }
         //public ActionResult 已登入首頁()
         //{
         //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] == null)
