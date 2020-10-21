@@ -261,13 +261,6 @@
     <Content Include="Scripts\bootstrap\bootstrap-reboot.min.css.map" />
     <Content Include="Scripts\bootstrap\bootstrap.css.map" />
     <Content Include="Scripts\bootstrap\bootstrap.min.css.map" />
-    <EntityDeploy Include="MotaiModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MotaiModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="MotaiModel.edmx.diagram">
-      <DependentUpon>MotaiModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap4.2.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap\bootstrap.bundle.min.js" />
@@ -286,6 +279,13 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <EntityDeploy Include="MotaiModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MotaiModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MotaiModel.edmx.diagram">
+      <DependentUpon>MotaiModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
