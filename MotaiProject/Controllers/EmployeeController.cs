@@ -20,14 +20,18 @@ namespace MotaiProject.Controllers
         public ActionResult 員工登入(EmployeeLoginViewModel e登入資料)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            tEmployee d資料確認 = dbContext.tEmployees.FirstOrDefault
-                (e => e.eAccount == e登入資料.eAccount && e.ePassword.Equals(e登入資料.ePassword));
+            tEmployee d資料確認 = dbContext.tEmployees.Where(e => e.eAccount == e登入資料.eAccount && e.ePassword.Equals(e登入資料.ePassword)).FirstOrDefault();
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = d資料確認;
                 return RedirectToAction("員工首頁");
             }
-            return View();
+            else
+            {
+                Response.Write("帳號密碼錯誤!");
+                return View();
+            }
+            
         }
 
         public ActionResult 員工首頁()
@@ -134,15 +138,16 @@ namespace MotaiProject.Controllers
             prod.pPrice = n新增產品.pPrice;
             prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
-
-            tProductImage image = new tProductImage();
+            
             int ProductId = db.tProducts.OrderByDescending(o=>o.ProductId).First().ProductId;
+            ProductId = ProductId + 1;
             if(n新增產品.pImage.Count()> 0)
             {
                 foreach(var uploagFile in n新增產品.pImage)
                 {
                     if(uploagFile.ContentLength > 0)
                     {
+                        tProductImage image = new tProductImage();
                         FileInfo file = new FileInfo(uploagFile.FileName);
                         string photoName = Guid.NewGuid().ToString() + file.Extension;
                         uploagFile.SaveAs(Server.MapPath("../Content/" + photoName));

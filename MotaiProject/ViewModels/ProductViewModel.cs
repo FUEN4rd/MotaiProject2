@@ -95,7 +95,31 @@ namespace MotaiProject.ViewModels
             set => image = value;
         }
 
-        public HttpPostedFileBase[] pImage { get; set; }
+        public List<HttpPostedFileBase> pImage { get; set; }
+
+        public string epsImage
+        {
+            get
+            {
+                if (image == null)
+                {
+                    image = new List<string>();
+                }
+                foreach (var item in this.dbContext.tProductImages.Where(i => i.ProductId == Product.ProductId))
+                {
+                    image.Add(item.pImage);
+                }
+                if(image.FirstOrDefault() == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return image[0];
+                }                
+            }
+            set => image[0]=value;
+        }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
         public IEnumerable<SelectListItem> Materials { get; set; }
