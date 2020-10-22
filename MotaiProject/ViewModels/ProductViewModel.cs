@@ -76,23 +76,23 @@ namespace MotaiProject.ViewModels
             set => prodImage = value;
         }
 
-        private List<string> image;
+        private List<string> images;
         [DisplayName("產品圖片")]
         public List<string> psImage
         {
             get
             {
-                if (image == null)
+                if(images == null)
                 {
-                    image = new List<string>();
+                    images = new List<string>();
                 }
                 foreach (var item in this.dbContext.tProductImages.Where(i => i.ProductId == Product.ProductId))
                 {
-                    image.Add(item.pImage);
+                    images.Add(item.pImage);
                 }
-                return image;
+                return images;
             }
-            set => image = value;
+            set => images = value;
         }
 
         public List<HttpPostedFileBase> pImage { get; set; }
@@ -100,48 +100,40 @@ namespace MotaiProject.ViewModels
         public string epsImage
         {
             get
-            {
-                if (image == null)
-                {
-                    image = new List<string>();
-                }
-                foreach (var item in this.dbContext.tProductImages.Where(i => i.ProductId == Product.ProductId))
-                {
-                    image.Add(item.pImage);
-                }
-                if(image.FirstOrDefault() == null)
+            {                
+                if(psImage.FirstOrDefault() == null)
                 {
                     return "";
                 }
                 else
                 {
-                    return image[0];
+                    return psImage[0];
                 }                
             }
-            set => image[0]=value;
+            set => psImage[0]=value;
         }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
         public IEnumerable<SelectListItem> Materials { get; set; }
         public IEnumerable<SelectListItem> Sizes { get; set; }
 
-        //private List<string> image;
+        //private List<string> images;
 
         //public List<string> pImgae
         //{
         //    get
         //    {
-        //        if (image == null)
+        //        if (images == null)
         //        {
-        //            image = new List<string>();
+        //            images = new List<string>();
         //        }
         //        foreach(var items in this.dbContext.tProductImages.Where(i => i.ProductId == Product.ProductId))
         //        {
-        //            image.Add(items.pImage);
+        //            images.Add(items.pImage);
         //        }
-        //        return image;
+        //        return images;
         //    }
-        //    set => image = value;           
+        //    set => images = value;           
         //}
     }
 }

@@ -20,8 +20,8 @@
             @foreach (var item in Model)
             {
                 <div class=" col-12 col-md-6 col-xl-3 ">
-                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId })">
-                        <img src="https://img.ruten.com.tw/s1/f/40/09/21949993928713_387.jpg" class="img-fluid ">
+                    <a href="@Url.Action("產品細節","Customer", new { id = item.ProductId })">
+                        <img src="@Url.Action(item.epsImage)" class="img-fluid " alt="..." />
                         <div class="Y_productInfo">
                             <h4>
                                 <b>@Html.DisplayFor(modelItem => item.pName)</b>
