@@ -185,13 +185,13 @@ namespace MotaiProject.Controllers
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
-                List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
+                List<StatusCustomerViewModel> cartList = new List<StatusCustomerViewModel>();
                 foreach (var items in StateList)
                 {
                     tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
-                    StatusCartViewModel cart = new StatusCartViewModel();
-                    cart.Product = cartProd;
-                    cartList.Add(cart);
+                    StatusCustomerViewModel cartC = new StatusCustomerViewModel();                    
+                    cartC.Status.Product = cartProd;
+                    cartList.Add(cartC);
                 }
                 return View(cartList);
             }
@@ -200,6 +200,12 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }
+
+       
+
+
+
+
         //待修
         public ActionResult 購物車新增(int ProductId)
         {

@@ -43,5 +43,6 @@ namespace MotaiProject.ViewModels
         public int sProductQty { get; set; }
         [DisplayName("小計")]
         public decimal pTotal{get{ return pPrice * sProductQty;}}
+
     }
 }

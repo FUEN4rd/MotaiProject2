@@ -1,6 +1,9 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.StatusCartViewModel>
+﻿@model IEnumerable<MotaiProject.ViewModels.StatusCustomerViewModel>
+
 
 @{
+    /**/
+
     ViewBag.Title = "購物車清單";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
@@ -94,20 +97,29 @@
 
 
 <div class="container">
+
+
+    @Html.RadioButton("rb", "rbvalue", true)
+
+
+
     <table class="table table-light">
         <thead>
             <tr>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.pName)
+                    @Html.DisplayNameFor(model => model.Status.pName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.pPrice)
+                    @Html.DisplayNameFor(model => model.Status.pPrice)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.sProductQty)
+                    @Html.DisplayNameFor(model => model.Status.sProductQty)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.pTotal)
+                    @Html.DisplayNameFor(model => model.Status.pTotal)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Customer.cAddress)
                 </th>
                 <th scope="col">
                     刪除
@@ -120,21 +132,24 @@
             {
                 <tr>
                     <td scope="row">
-                        @Html.DisplayFor(modelItem => item.pName)
+                        @Html.DisplayFor(modelItem => item.Status.pName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.pPrice)
+                        @Html.DisplayFor(modelItem => item.Status.pPrice)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.sProductQty)
+                        @Html.DisplayFor(modelItem => item.Status.sProductQty)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.pTotal)
+                        @Html.DisplayFor(modelItem => item.Status.pTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.cAddress)
                     </td>
                     <td>
                         @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                        @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
+                        @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.Status.StatusId },
     new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
                     </td>
                 </tr>

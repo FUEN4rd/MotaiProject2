@@ -466,6 +466,7 @@
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\StatusCartViewModel.cs" />
     <Compile Include="ViewModels\PromotionViewModel.cs" />
+    <Compile Include="ViewModels\StatusCustomerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
