@@ -94,6 +94,7 @@
         .Y_black {
             color: #313737;
         }
+
     </style>
 </head>
 <body>
@@ -286,7 +287,7 @@
                                             <label for="loginAccount" class="col-form-label">帳號:</label>
                                             <div class="col-md-10">
                                                 @*<input id="userPassword" type="password" required>*@
-                                                @Html.Editor("cAccount", new { PasswordPropertyTextAttribute = new { @style = "color:red" } })
+                                                @Html.Editor("cAccount")
                                                 @*@Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control" } })*@
 
                                                 @*@Html.ValidationMessageFor("cAccount", "必填", new { @class = "text-danger" })*@
