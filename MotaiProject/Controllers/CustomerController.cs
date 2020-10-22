@@ -142,13 +142,13 @@ namespace MotaiProject.Controllers
         {
             MotaiDataEntities db = new MotaiDataEntities();
             List<tProduct> prod = db.tProducts.ToList();
-            List<ProductViewModel> productlist = new List<ProductViewModel>();
+            List<ProductViewModel> productlist = new List<ProductViewModel>();            
             foreach (tProduct item in prod)
             {
-                List<tProductImage> image = db.tProductImages.Where(i => i.ProductId.Equals(item.ProductId)).ToList();
+                List<tProductImage> images = db.tProductImages.Where(i => i.ProductId.Equals(item.ProductId)).ToList();
                 ProductViewModel Prod = new ProductViewModel();
                 Prod.Product = item;
-                foreach(var imageitem in image)
+                foreach(var imageitem in images)
                 {
                     Prod.psImage.Add(imageitem.pImage);
                 }
@@ -156,27 +156,20 @@ namespace MotaiProject.Controllers
             }
             return View(productlist);
         }
-        public ActionResult 產品細節(int ProductId)
+        public ActionResult 產品細節(int id)
         {
             MotaiDataEntities db = new MotaiDataEntities();
-            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == id);
             if (product == null)
             {
                 return RedirectToAction("List");
             }
             ViewBag.Qty = product.pQty;
             ProductViewModel prod = new ProductViewModel();
-            List<tProductImage> image = db.tProductImages.Where(i => i.ProductId.Equals(ProductId)).ToList();
-            foreach(var item in image)
-            {
-                prod.psImage.Add(Server.MapPath("../Content/" + item.pImage));
-            }           
             prod.Product = product;
             prod.pQty = product.pQty;        
             return View(prod);
         }
-
-
 
         public ActionResult 購物車清單()
         {            

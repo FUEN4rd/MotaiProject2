@@ -13,11 +13,11 @@
             clear: both;
         }
 
-        /*
+        
         .flexdirection {
             display: flex;
             flex-flow: column;
-        } */
+        } 
 
         .Y_btn {
             width: auto;
@@ -95,16 +95,15 @@
     <div class="container">
         <div class="row presize">
             <div class=" col-12 col-md-6 col-xl-6 ">
-                @{
-                    int count = 0;
+                @{        
+                    int nub = 0;
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            
-                            @foreach (var item in Model.psImage)
+                        <ol class="carousel-indicators">                           
+                            @foreach (var item in Model.psImage)                            
                             {
-                                <li class="dataexample active" data-target="#carouselExampleIndicators" data-slide-to="@count">
-                                </li>
-                                count++;
+                                <li id="imageli" class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="@nub">
+                                </li>  
+                                nub++;
                             }
                             @*<li class="dataexample active" data-target="#carouselExampleIndicators" data-slide-to="0">
                             </li>
@@ -116,7 +115,7 @@
                         <div class="carousel-inner">
                             @foreach (var item in Model.psImage)
                             {
-                                <div class="carousel-item active">
+                                <div class="carousel-item" id="imagepic">
                                     <img src="@Url.Action(item)" class="d-block w-100" alt="..." />
                                 </div>
                             }
@@ -170,9 +169,8 @@
                 <div style="display: flex">
                     <div class="form-inline PlusMinus" style="margin-right: 30px">
                         <button id="minus" class="Y_btn" onclick="Count(this.id)">-</button>
-                        @*<input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">*@
-                        @Html.EditorFor(model => model.pQty, new { htmlAttributes = new { @class = "form - control3" } })
-                        <button id="plus" class="Y_btn" onclick="">+</button>
+                        <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">                       
+                        <button id="plus" class="Y_btn" onclick="Count(this.id)">+</button>
                     </div>
                     <button type="button" class="btn btn-dark" onclick="ajax">加入購物車</button>
                 </div>
@@ -237,5 +235,9 @@
     $("#star2").click(function () {
         $(this).css("display", "none");
         $("#star1").css("display", "block");
+    })
+    $(document).ready(function () {
+        $("#imageli").addClass("active");
+        $("#imagepic").addClass("active");
     })
 </script>
