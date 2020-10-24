@@ -23,6 +23,8 @@ namespace MotaiProject.ViewModels
         }
         [DisplayName("員工編號")]
         public int EmployeeId { get { return this.Employee.EmployeeId; } set { Employee.EmployeeId = value; } }
+        [DisplayName("員工帳號")]
+        public string eAccount { get { return this.Employee.eAccount; } set { Employee.eAccount = value; } }
         [DisplayName("員工姓名")]
         public string eName { get { return this.Employee.eName; } set { Employee.eName = value; } }
         [DisplayName("員工職位")]

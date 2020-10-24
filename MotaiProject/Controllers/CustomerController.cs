@@ -246,49 +246,75 @@ namespace MotaiProject.Controllers
                     favorList.Add(favor);
                 }
                 return View(favorList);
-            }
-            //return View("收藏清單");
+            }            
             else
             {
                 return RedirectToAction("首頁");
             }
         }
 
-        public ActionResult 新增收藏(int ProductId)
+        //public ActionResult 新增收藏(int ProductId)
+        //{
+        //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+        //    {
+        //        tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+        //        MotaiDataEntities dbContext = new MotaiDataEntities();
+        //        tFavorite x = dbContext.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
+        //        && c.fProductId == ProductId).FirstOrDefault();
+        //        if (x != null)
+        //        {
+        //            Response.Write("這筆紀錄已新增過");
+        //        }
+        //        else
+        //        {
+        //            x.fCustomerId = cust.CustomerId;
+        //            x.fProductId = ProductId;
+        //            dbContext.tFavorites.Add(x);
+        //            dbContext.SaveChanges();
+        //        }
+        //    }
+        //    return View();
+        //}
+
+        public JsonResult AddFavorite(int ProductId)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                MotaiDataEntities db = new MotaiDataEntities();
-                tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
-                && c.fProductId == ProductId).FirstOrDefault();
-                if (x != null)
-                {
-                    Response.Write("這筆紀錄已新增過");
-                }
-                else
-                {
-                    x.fCustomerId = cust.CustomerId;
-                    x.fProductId = ProductId;
-                    db.tFavorites.Add(x);
-                    db.SaveChanges();
-                }
+                MotaiDataEntities dbContext = new MotaiDataEntities();                
+                tFavorite favor = new tFavorite();
+                //if (dbContext.tFavorites.Count().Equals(0))
+                //{
+                //    favor.FavoriteId = 1;
+                //}
+                favor.fCustomerId = cust.CustomerId;
+                favor.fProductId = ProductId;
+                dbContext.tFavorites.Add(favor);
+                dbContext.SaveChanges();
+                return Json(new { result = true, msg = "加入成功" });
             }
-            return View();
+            else
+            {
+                return Json(new { result = false, msg = "請先登入" });
+            }
         }
 
-        public ActionResult 刪除收藏(int ProductId)
+        public JsonResult CancelFavorite(int ProductId)
         {
-            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            MotaiDataEntities db = new MotaiDataEntities();
-            tFavorite x = db.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
-            && c.fProductId == ProductId).FirstOrDefault();
-            if (x != null)
-            {
-                db.tFavorites.Remove(x);
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null) {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                tFavorite favor = new tFavorite();
+                favor.fCustomerId = cust.CustomerId;
+                favor.fProductId = ProductId;
+                db.tFavorites.Remove(favor);
                 db.SaveChanges();
+                return Json(new { result = true, msg = "刪除成功" });
             }
-            return RedirectToAction("List");
+            else
+            {
+                return Json(new { result = false, msg = "請先登入" });
+            }
         }
     }
 }
