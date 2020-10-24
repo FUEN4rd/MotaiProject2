@@ -304,9 +304,7 @@ namespace MotaiProject.Controllers
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null) {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities db = new MotaiDataEntities();
-                tFavorite favor = new tFavorite();
-                favor.fCustomerId = cust.CustomerId;
-                favor.fProductId = ProductId;
+                tFavorite favor = db.tFavorites.Where(f => f.fProductId.Equals(ProductId)&&f.fCustomerId.Equals(cust.CustomerId)).FirstOrDefault();
                 db.tFavorites.Remove(favor);
                 db.SaveChanges();
                 return Json(new { result = true, msg = "刪除成功" });

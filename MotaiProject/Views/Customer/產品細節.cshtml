@@ -251,6 +251,8 @@
     
 </script>
 <script>
+
+
     function cancelFavor() {        
         fetch('/Customer/CancelFavorite', {
             method: 'POST',
@@ -270,8 +272,7 @@
             }
         });
     }
-    function addFavor() {
-        
+    function addFavor() {       
         fetch('/Customer/AddFavorite', {
             method: 'POST',
             headers: {

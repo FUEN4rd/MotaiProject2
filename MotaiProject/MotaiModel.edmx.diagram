@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf50fb25554046f4b873149e998ef115" Name="Diagram1">
+      <Diagram DiagramId="1588e33187374d6daa34e6ab89bc3e6c" Name="Diagram1">
         <EntityTypeShape EntityType="MotaiDataModel.tBranch" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tCustomer" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tDiary" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />

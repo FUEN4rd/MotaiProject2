@@ -262,13 +262,13 @@
         </Association>
         <Association Name="FK_tFavorite_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
-          <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="0..1" />
+          <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tProduct">
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="tFavorite">
-              <PropertyRef Name="FavoriteId" />
+              <PropertyRef Name="fProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -765,7 +765,7 @@
           <Property Name="pIntroduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="pPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="pQty" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tFavorite" Relationship="Self.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
+          <NavigationProperty Name="tFavorites" Relationship="Self.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tProduct" ToRole="tOrderDetail" />
           <NavigationProperty Name="tProductCategory" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProduct" ToRole="tProductCategory" />
           <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
@@ -970,13 +970,13 @@
         </Association>
         <Association Name="FK_tFavorite_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
-          <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="0..1" />
+          <End Role="tFavorite" Type="Self.tFavorite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tProduct">
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="tFavorite">
-              <PropertyRef Name="FavoriteId" />
+              <PropertyRef Name="fProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
