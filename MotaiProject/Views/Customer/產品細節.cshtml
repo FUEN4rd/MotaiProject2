@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "產品細節";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
+    int id = Model.ProductId;
 }
 <content>
     <style>
@@ -142,9 +143,10 @@
                         </a>
                     </div>
                 }
-            </div>
+            </div>            
             <div style="display:none">
                 <h6>@Html.DisplayFor(model => model.ProductId)</h6>
+                    @Html.HiddenFor(model => model.ProductId, new { id = "ProductId"})
             </div>
             <div class=" col-12 col-md-6 col-xl-6 Y_white">
                 <h7>@Html.DisplayNameFor(model => model.pNumber)</h7>
@@ -172,7 +174,7 @@
                         <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">                       
                         <button id="plus" class="Y_btn" onclick="Count(this.id)">+</button>
                     </div>
-                    <button type="button" class="btn btn-dark" onclick="ajax">加入購物車</button>
+                    <button type="button" class="btn btn-dark" onclick="addTocart()">加入購物車</button>
                 </div>
                 <h7 id="Qty">@Html.DisplayFor(model => model.pQty)</h7>
                 <h7>件庫存</h7>
@@ -226,6 +228,27 @@
             }
         }
     }
+</script>
+<script>
+    function addTocart() {        
+        const qty = document.querySelector("#buyQty").value;        
+        fetch('/Customer/AddToCart', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `ProductId=${@id}&buyQty=${qty}`
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            if (data.result) {
+                alert(data.msg);
+            } else {
+                alert(data.msg);
+            }
+        });
+    }
+    
 </script>
 <script>
     $("#star1").click(function () {

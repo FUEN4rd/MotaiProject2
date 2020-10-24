@@ -14,7 +14,7 @@ namespace MotaiProject.Controllers
     {
         // GET: Customer
         public ActionResult 首頁()
-        {            
+        {
             return View();
         }
         [HttpPost]
@@ -33,7 +33,7 @@ namespace MotaiProject.Controllers
             var promotion = db.tPromotions.OrderBy(c => c.PromotionId).ToList();
             //開新List 取值
             List<PromotionViewModel> reslsit = new List<PromotionViewModel>();
-            foreach(var items in promotion)
+            foreach (var items in promotion)
             {
                 //實體化 class
                 PromotionViewModel res = new PromotionViewModel();
@@ -131,24 +131,18 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("會員中心");
         }
-        //public ActionResult 已登入首頁()
-        //{
-        //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] == null)
-        //        return RedirectToAction("首頁");
-        //    return View();
-        //}
 
         public ActionResult 產品頁面()
         {
             MotaiDataEntities db = new MotaiDataEntities();
             List<tProduct> prod = db.tProducts.ToList();
-            List<ProductViewModel> productlist = new List<ProductViewModel>();            
+            List<ProductViewModel> productlist = new List<ProductViewModel>();
             foreach (tProduct item in prod)
             {
                 List<tProductImage> images = db.tProductImages.Where(i => i.ProductId.Equals(item.ProductId)).ToList();
                 ProductViewModel Prod = new ProductViewModel();
                 Prod.Product = item;
-                foreach(var imageitem in images)
+                foreach (var imageitem in images)
                 {
                     Prod.psImage.Add(imageitem.pImage);
                 }
@@ -167,12 +161,12 @@ namespace MotaiProject.Controllers
             ViewBag.Qty = product.pQty;
             ProductViewModel prod = new ProductViewModel();
             prod.Product = product;
-            prod.pQty = product.pQty;        
+            prod.pQty = product.pQty;
             return View(prod);
         }
 
         public ActionResult 購物車清單()
-        {            
+        {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
@@ -182,8 +176,11 @@ namespace MotaiProject.Controllers
                 foreach (var items in StateList)
                 {
                     tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
-                    StatusCustomerViewModel cartC = new StatusCustomerViewModel();                    
-                    cartC.Status.Product = cartProd;
+                    StatusCustomerViewModel cartC = new StatusCustomerViewModel();
+                    StatusCartViewModel s = new StatusCartViewModel();
+                    s.Product = cartProd;
+                    s.sProductQty = items.sProductQty;
+                    cartC.Status = s;
                     cartList.Add(cartC);
                 }
                 return View(cartList);
@@ -192,47 +189,36 @@ namespace MotaiProject.Controllers
             {
                 return RedirectToAction("首頁");
             }
-        }
-
-       
-
-
-
-
-        //待修
-        public ActionResult 購物車新增(int ProductId)
+        }        
+        
+        public JsonResult AddToCart(int ProductId, int buyQty)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities db = new MotaiDataEntities();
-                var product = db.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
-                StatusCartViewModel cart = new StatusCartViewModel();
-                cart.Product = product;                
-                return Json(cart);
+                var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                if (product != null && product.pQty > buyQty)
+                {
+                    tStatu cart = new tStatu();
+                    cart.sCustomerId = cust.CustomerId;
+                    cart.sProductId = ProductId;
+                    cart.sProductQty = buyQty;
+                    db.tStatus.Add(cart);
+                    db.SaveChanges();
+                    return Json(new { result = true, msg = "加入成功" });
+                }
+                else
+                {
+                    return Json(new { result = false, msg = "庫存不足" });
+                }
             }
-            return RedirectToAction("首頁");
-        }
-
-        [HttpPost]
-        public ActionResult 購物車新增(StatusCartViewModel n購物車新增)
-        {
-            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            MotaiDataEntities db = new MotaiDataEntities();
-            var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == n購物車新增.Product.ProductId);
-            if (product == null)
+            else
             {
-                return RedirectToAction("購物車清單");
+                return Json(new { result = false, msg = "請先登入" });
             }
-            tStatu cart = new tStatu();
-
-            cart.sCustomerId = cust.CustomerId;
-            cart.sProductId = n購物車新增.Product.ProductId;
-            cart.sProductQty = n購物車新增.sProductQty;
-            db.tStatus.Add(cart);
-            db.SaveChanges();
-            return RedirectToAction("購物車清單");
         }
+
         public ActionResult 購物車內刪除(int fid)
         {
             MotaiDataEntities db = new MotaiDataEntities();
