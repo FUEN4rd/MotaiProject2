@@ -40,6 +40,50 @@
     .Y_email a {
         pointer-events: none;
     }
+
+    .Y_member_border {
+        border-radius: 10px;
+        border-color: #FCD492;
+        border-width: 2px;
+        border-style: solid;
+        padding: 30px;
+        display: flex;
+        width: 550px;
+    }
+
+    .Y_member_row {
+        width: 350px;
+    }
+
+    .btn-Y_yellow {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+        .btn-Y_yellow:hover {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .btn-Y_yellow:focus, .btn-Y_yellow.focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+        .btn-Y_yellow.disabled, .btn-Y_yellow:disabled {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-Y_yellow:not(:disabled):not(.disabled):active, .btn-Y_yellow:not(:disabled):not(.disabled).active,
+        .show > .btn-Y_yellow.dropdown-toggle {
+            color: #fff;
+            background-color: #0062cc;
+            border-color: #005cbf;
+        }
+            .btn-Y_yellow:not(:disabled):not(.disabled):active:focus, .btn-Y_yellow:not(:disabled):not(.disabled).active:focus,
+            .show > .btn-Y_yellow.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+            }
+
 </style>
 
 
@@ -49,9 +93,8 @@
     <div class="row Y_row" style="align-items :center; justify-content:space-between">
         <h2 class="Y_yellow">會員中心</h2>
         <div>
-            @Html.ActionLink("修改個人資料", "修改會員資料", new { CustomerId = Model.CustomerId, style = "color: #ff0000;" })
 
-            <button type="button" class="btn Y_row Y_yellow" data-toggle="modal" data-target="#Login">登出</button>
+            <button type="button" class="btn btn-primary Y_row Y_yellow" data-toggle="modal" data-target="#Login">登出</button>
             @using (Html.BeginForm("登出", "Customer", FormMethod.Post, null))
             {
                 @Html.AntiForgeryToken()
@@ -80,115 +123,126 @@
     </div>
 
     <hr />
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cName)：
-        </div>
+    <div style="display:flex;justify-content:space-between">
+        <div class="Y_member_border">
+            <div style="display:flex;justify-content:space-between">
+                <div class="Y_member_row">
+                    <div class="row Y_row">
+                        <div>
+                            @Html.DisplayNameFor(model => model.cName)：
+                        </div>
 
-        <div>
-            @Html.DisplayFor(model => model.cName)
-        </div>
-    </div>
+                        <div>
+                            @Html.DisplayFor(model => model.cName)
+                        </div>
+                    </div>
 
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cTelePhone)：
-        </div>
+                    <div class="row Y_row">
+                        <div>
+                            @Html.DisplayNameFor(model => model.cTelePhone)：
+                        </div>
 
-        <div>
-            @Html.DisplayFor(model => model.cTelePhone)
-        </div>
-    </div>
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cCellPhone)：
-        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.cTelePhone)
+                        </div>
+                    </div>
+                    <div class="row Y_row">
+                        <div>
+                            @Html.DisplayNameFor(model => model.cCellPhone)：
+                        </div>
 
-        <div>
-            @Html.DisplayFor(model => model.cCellPhone)
-        </div>
-    </div>
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cAddress)：
-        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.cCellPhone)
+                        </div>
+                    </div>
+                    <div class="row Y_row">
+                        <div>
+                            @Html.DisplayNameFor(model => model.cAddress)：
+                        </div>
 
-        <div>
-            @Html.DisplayFor(model => model.cAddress)
-        </div>
-    </div>
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cGUI)：
-        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.cAddress)
+                        </div>
+                    </div>
+                    <div class="row Y_row">
+                        <div>
+                            @Html.DisplayNameFor(model => model.cEmail)：
+                        </div>
 
-        <div>
-            @Html.DisplayFor(model => model.cGUI)
-        </div>
-    </div>
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cEmail)：
-        </div>
+                        <div class="Y_email">
+                            @Html.DisplayFor(model => model.cEmail)
+                        </div>
+                    </div>
+                    <div class="row Y_row">
+                        <div>
+                            @Html.DisplayNameFor(model => model.cGUI)：
+                        </div>
 
-        <div class="Y_email">
-            @Html.DisplayFor(model => model.cEmail)
-        </div>
-    </div>
-
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cAccount)：
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.cAccount)
-        </div>
-    </div>
-
-    <div class="row Y_row">
-        <div>
-            @Html.DisplayNameFor(model => model.cPassword)：
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.cPassword)
-        </div>
-    </div>
-    <div class="row Y_row">
-
-    </div>
-    <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            修改密碼
-        </button>
-    </p>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body card-deck">
-            <div>
-                舊密碼
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
+                        <div>
+                            @Html.DisplayFor(model => model.cGUI)
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    @Html.ActionLink("修改個人資料", "修改會員資料", new {  @class="btn-Y_yellow",CustomerId = Model.CustomerId, style = "color: #ff0000;" })
                 </div>
             </div>
-            <div>
-                新密碼
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
-                    @Html.ValidationMessageFor(model => model.cPassword, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            <div style="display:flex;justify-content:space-between">
+                <div class="Y_member_border">
+                    <div style="display:flex;justify-content:space-between">
+                        <div class="Y_member_row">
+                            <div class="row Y_row">
+                                <div>
+                                    @Html.DisplayNameFor(model => model.cAccount)：
+                                </div>
+
+                                <div>
+                                    @Html.DisplayFor(model => model.cAccount)
+                                </div>
+                            </div>
+                            <div class="row Y_row">
+                                <div>
+                                    @Html.DisplayNameFor(model => model.cPassword)：
+                                </div>
+                                <div>
+                                    <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        修改密碼
+                                    </button>
+                                </div>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body card-deck">
+                                        <div>
+                                            舊密碼
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
+                                            </div>
+                                        </div>
+                                        <div>
+                                            新密碼
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
+                                                @Html.ValidationMessageFor(model => model.cPassword, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div>
+                                            確認密碼
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
-            <div>
-                確認密碼
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
-                </div>
-            </div>
-            
         </div>
     </div>
 
-</div>
 
 
 
@@ -199,13 +253,13 @@
 <script>
     var pa = document.querySelectorAll(".form-control");
     pa.forEach(p => p.value = "")
-    const clearbox = (item)=>{
+    const clearbox = (item) => {
         item.value = "";
         item.type = "Password";
     }
     pa.forEach(clearbox);
 
 
-    //pa.Value = "";
-    //pa.type = "Password";
+                    //pa.Value = "";
+                    //pa.type = "Password";
 </script>

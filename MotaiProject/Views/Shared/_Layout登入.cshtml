@@ -1,7 +1,7 @@
 ﻿@using MotaiProject.Models
 @{
     tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-    
+
 }
 <!DOCTYPE html>
 
@@ -29,18 +29,47 @@
             font-weight: bold;
             /*text-decoration-line: none;
             text-decoration-style: solid;*/
-            text-decoration:none;
-            
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
         }
-        .Y_bc{
+       
+        /* 滾輪 */
+        .outer-container,
+        .bc_content {
+            width: 100vw;
+            height: 100vh;
+        }
 
+        .outer-container {
+            position: relative;
+            overflow: hidden;
         }
-        .red {
+
+        .inner-container {
+            position: absolute;
+            left: 0;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            min-height: 100vh;
+        }
+            /* for Chrome */
+            .inner-container::-webkit-scrollbar {
+                display: none;
+            }
+
+        .element::-webkit-scrollbar {
+            display: none
+        }
+
+        .Y_bc_red {
             z-index: -1;
-            width: 100%;
-            min-height: 40rem;
+            /*width:100%;*/
+            height: auto;
+            /*min-height: 40rem;*/
             /*background: #A22E37;*/
-            background-image:url(../../Content/background_RedCloud.png)
+            background-image: url(../../Content/background_RedCloud.png);
+            background-repeat: repeat;
         }
 
         .productInfo {
@@ -74,191 +103,202 @@
                 outline: 0;
                 box-shadow: 0 0 0 0.2rem #A7674C;
             }
-        .midding{
-            justify-content:center !important
+
+        .midding {
+            justify-content: center !important
         }
-        .Y_nav-item_ch{
-            width:80px;
+
+        .Y_nav-item_ch {
+            width: 80px;
         }
+
         .Y_nav-item_icon {
             width: 60px;
         }
+
         .Y_yellow {
-            color: #FCD492;            
+            color: #FCD492;
         }
+
         .Y_red {
             color: #A22E37;
         }
+
         .Y_white {
-            color:#F2EDD8;
+            color: #F2EDD8;
         }
+
         .Y_black {
             color: #313737;
         }
 
+
     </style>
 </head>
 <body>
+    <div class="outer-container">
+        <div class="inner-container">
+            <div class="bc_content">
+                <nav style="background-color:#F2EDD8" class="navbar navbar-expand-lg fixed-top">
 
-    <div class="Y_bc">
-        <nav style="background-color:#F2EDD8" class="navbar navbar-expand-lg fixed-top">
-
-            <!-- <div style="display: flex;align-items: center;"> -->
-            <div class="navbar-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <svg style="fill: #A22E37; width: 32px; height:32px">
-                        <symbol id="lnr-menu" viewBox="0 0 1024 1024"><title>menu</title><path class="path1" d="M896 307.2h-768c-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path2" d="M896 563.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path3" d="M896 819.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path></symbol>
-                        <use xlink:href="#lnr-menu"></use>
-                    </svg>
-                </button>
-            </div>
-            <div class="nav nav-item active">
-                <a class="nav-link" href="#">
-                    <img style="height: auto;width: 60px" href="#" src="../../Content/墨臺Logo.png" alt="">
-                    <span class="sr-only">(current)</span>
-                </a>
-            </div>
-
-
-            <div class="collapse navbar-collapse midding" id="navbarSupportedContent">
-                <div class="navbar-nav mr-auto col-1"></div>
-                <form class="navbar-nav mr-auto" style="display:flex; align-items: center; justify-content:center">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item Y_nav-item_ch">
-                            @Html.ActionLink("首頁", "首頁", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        </li>
-                        <li class="nav-item Y_nav-item_ch">
-                            @Html.ActionLink("消息", "消息", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        </li>
-                        <li class="nav-item Y_nav-item_ch">
-                            @Html.ActionLink("產品", "產品頁面", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
-                        </li>
-
-                        <div class="form-inline">
-                            <input style="color: #A22E37;position: absolute; " type="search" placeholder="搜尋"
-                                   class="form-control2 mr-sm-2" aria-label="Search">
-                            <button style="position: relative;margin-left: 172px; height: 35px;" class="btn btn-light"
-                                    type="submit">
-                                <svg style="fill: #A22E37;width: 20px;height: 20px;">
-                                    <symbol id="lnr-magnifier" viewBox="0 0 1024 1024"><title>magnifier</title><path class="path1" d="M966.070 981.101l-304.302-331.965c68.573-71.754 106.232-165.549 106.232-265.136 0-102.57-39.942-199-112.47-271.53s-168.96-112.47-271.53-112.47-199 39.942-271.53 112.47-112.47 168.96-112.47 271.53 39.942 199.002 112.47 271.53 168.96 112.47 271.53 112.47c88.362 0 172.152-29.667 240.043-84.248l304.285 331.947c5.050 5.507 11.954 8.301 18.878 8.301 6.179 0 12.378-2.226 17.293-6.728 10.421-9.555 11.126-25.749 1.571-36.171zM51.2 384c0-183.506 149.294-332.8 332.8-332.8s332.8 149.294 332.8 332.8-149.294 332.8-332.8 332.8-332.8-149.294-332.8-332.8z"></path></symbol>
-                                    <use xlink:href="#lnr-magnifier"></use>
-                                </svg>
-                            </button>
-                        </div>
-                    </ul>
-                </form>
-                <br>
-            </div>
-
-            <div class="nav " style="justify-content: center;">
-                <li class="nav-item Y_nav-item_icon">
-                    @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
-                            <svg href="#" fill="#A22E37" height="32px" width="50px"
-                                 viewBox="0 0 32 32">
-                                <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
-                                <use xlink:href="#lnr-user"></use>
+                    <!-- <div style="display: flex;align-items: center;"> -->
+                    <div class="navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <svg style="fill: #A22E37; width: 32px; height:32px">
+                                <symbol id="lnr-menu" viewBox="0 0 1024 1024"><title>menu</title><path class="path1" d="M896 307.2h-768c-14.138 0-25.6-11.462-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.462 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path2" d="M896 563.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path><path class="path3" d="M896 819.2h-768c-14.138 0-25.6-11.461-25.6-25.6s11.462-25.6 25.6-25.6h768c14.139 0 25.6 11.461 25.6 25.6s-11.461 25.6-25.6 25.6z"></path></symbol>
+                                <use xlink:href="#lnr-menu"></use>
                             </svg>
-                        </button>*@
-                    <a href="@Url.Action("會員中心", "Customer")" data-toggle="modal" data-target="#Login" id="login_origin">
-                        <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" viewBox="0 0 448 512"><path fill="#A22E37" d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" /></svg>
-                    </a>
-                </li>
-                <li class="nav-item Y_nav-item_icon">
-                    <a href="@Url.Action("收藏清單","Customer")" data-toggle="modal" data-target="#Star" id="star_origin">
-                        <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#A22E37" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" /></svg>
-                    </a>
-                </li>
-                <li class="nav-item .Y_nav-item_icon">
-                    <a href="@Url.Action("購物車清單","Customer")" data-toggle="modal" data-target="#Shop" id="shop_origin">
-                        <svg height="30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cart-plus" class="svg-inline--fa fa-cart-plus fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#A22E37" d="M504.717 320H211.572l6.545 32h268.418c15.401 0 26.816 14.301 23.403 29.319l-5.517 24.276C523.112 414.668 536 433.828 536 456c0 31.202-25.519 56.444-56.824 55.994-29.823-.429-54.35-24.631-55.155-54.447-.44-16.287 6.085-31.049 16.803-41.548H231.176C241.553 426.165 248 440.326 248 456c0 31.813-26.528 57.431-58.67 55.938-28.54-1.325-51.751-24.385-53.251-52.917-1.158-22.034 10.436-41.455 28.051-51.586L93.883 64H24C10.745 64 0 53.255 0 40V24C0 10.745 10.745 0 24 0h102.529c11.401 0 21.228 8.021 23.513 19.19L159.208 64H551.99c15.401 0 26.816 14.301 23.403 29.319l-47.273 208C525.637 312.246 515.923 320 504.717 320zM408 168h-48v-40c0-8.837-7.163-16-16-16h-16c-8.837 0-16 7.163-16 16v40h-48c-8.837 0-16 7.163-16 16v16c0 8.837 7.163 16 16 16h48v40c0 8.837 7.163 16 16 16h16c8.837 0 16-7.163 16-16v-40h48c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16z" /></svg>
-                    </a>
-                </li>
-            </div>
-        </nav>
-        <div class="red">
-            <div class="body-content">
-                <div style="padding-top:130px">
-                    @RenderBody()
+                        </button>
+                    </div>
+                    <div class="nav nav-item active">
+                        <a class="nav-link" href="#">
+                            <img style="height: auto;width: 60px" href="#" src="../../Content/墨臺Logo.png" alt="">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </div>
+
+
+                    <div class="collapse navbar-collapse midding" id="navbarSupportedContent">
+                        <div class="navbar-nav mr-auto col-1"></div>
+                        <form class="navbar-nav mr-auto" style="display:flex; align-items: center; justify-content:center">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item Y_nav-item_ch">
+                                    @Html.ActionLink("首頁", "首頁", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                                </li>
+                                <li class="nav-item Y_nav-item_ch">
+                                    @Html.ActionLink("消息", "消息", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                                </li>
+                                <li class="nav-item Y_nav-item_ch">
+                                    @Html.ActionLink("產品", "產品頁面", "Customer", null, htmlAttributes: new { style = "color:#A22E37", @class = "navbar-brand" })
+                                </li>
+
+                                <div class="form-inline">
+                                    <input style="color: #A22E37;position: absolute; " type="search" placeholder="搜尋"
+                                           class="form-control2 mr-sm-2" aria-label="Search">
+                                    <button style="position: relative;margin-left: 172px; height: 35px;" class="btn btn-light"
+                                            type="submit">
+                                        <svg style="fill: #A22E37;width: 20px;height: 20px;">
+                                            <symbol id="lnr-magnifier" viewBox="0 0 1024 1024"><title>magnifier</title><path class="path1" d="M966.070 981.101l-304.302-331.965c68.573-71.754 106.232-165.549 106.232-265.136 0-102.57-39.942-199-112.47-271.53s-168.96-112.47-271.53-112.47-199 39.942-271.53 112.47-112.47 168.96-112.47 271.53 39.942 199.002 112.47 271.53 168.96 112.47 271.53 112.47c88.362 0 172.152-29.667 240.043-84.248l304.285 331.947c5.050 5.507 11.954 8.301 18.878 8.301 6.179 0 12.378-2.226 17.293-6.728 10.421-9.555 11.126-25.749 1.571-36.171zM51.2 384c0-183.506 149.294-332.8 332.8-332.8s332.8 149.294 332.8 332.8-149.294 332.8-332.8 332.8-332.8-149.294-332.8-332.8z"></path></symbol>
+                                            <use xlink:href="#lnr-magnifier"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </ul>
+                        </form>
+                        <br>
+                    </div>
+
+                    <div class="nav " style="justify-content: center;">
+                        <li class="nav-item Y_nav-item_icon">
+                            @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
+                                    <svg href="#" fill="#A22E37" height="32px" width="50px"
+                                         viewBox="0 0 32 32">
+                                        <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
+                                        <use xlink:href="#lnr-user"></use>
+                                    </svg>
+                                </button>*@
+                            <a href="@Url.Action("會員中心", "Customer")" data-toggle="modal" data-target="#Login" id="login_origin">
+                                <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" viewBox="0 0 448 512"><path fill="#A22E37" d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" /></svg>
+                            </a>
+                        </li>
+                        <li class="nav-item Y_nav-item_icon">
+                            <a href="@Url.Action("收藏清單","Customer")" data-toggle="modal" data-target="#Star" id="star_origin">
+                                <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#A22E37" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" /></svg>
+                            </a>
+                        </li>
+                        <li class="nav-item .Y_nav-item_icon">
+                            <a href="@Url.Action("購物車清單","Customer")" data-toggle="modal" data-target="#Shop" id="shop_origin">
+                                <svg height="30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cart-plus" class="svg-inline--fa fa-cart-plus fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#A22E37" d="M504.717 320H211.572l6.545 32h268.418c15.401 0 26.816 14.301 23.403 29.319l-5.517 24.276C523.112 414.668 536 433.828 536 456c0 31.202-25.519 56.444-56.824 55.994-29.823-.429-54.35-24.631-55.155-54.447-.44-16.287 6.085-31.049 16.803-41.548H231.176C241.553 426.165 248 440.326 248 456c0 31.813-26.528 57.431-58.67 55.938-28.54-1.325-51.751-24.385-53.251-52.917-1.158-22.034 10.436-41.455 28.051-51.586L93.883 64H24C10.745 64 0 53.255 0 40V24C0 10.745 10.745 0 24 0h102.529c11.401 0 21.228 8.021 23.513 19.19L159.208 64H551.99c15.401 0 26.816 14.301 23.403 29.319l-47.273 208C525.637 312.246 515.923 320 504.717 320zM408 168h-48v-40c0-8.837-7.163-16-16-16h-16c-8.837 0-16 7.163-16 16v40h-48c-8.837 0-16 7.163-16 16v16c0 8.837 7.163 16 16 16h48v40c0 8.837 7.163 16 16 16h16c8.837 0 16-7.163 16-16v-40h48c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16z" /></svg>
+                            </a>
+                        </li>
+                    </div>
+                </nav>
+                <div class="Y_bc_red">
+                    <div class="body-content">
+                        <div style="padding-top:130px">
+                            @RenderBody()
+                        </div>
+                    </div>
                 </div>
+                <footer style="background-color: #313737;color: #F2EDD8">
+                    <div class="container-fluid">
+                        <div class="row" style="padding-left: 100px;width: 95%;">
+                            <div class=" d-none d-lg-block col-lg-6 col-xl-2">
+                                <br>
+                                <h4 style="color: #FCD492;">分店資訊</h4>
+                                <h5> 鶯歌光點</h5>
+                                <h5> 電話：02-2677-3306</h5>
+                                <h5> 新北市鶯歌區陶瓷街18號(E區-12)</h5>
+                                <br>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-6 col-xl-2">
+                                <br>
+                                <h4 style="color: #313737;">隱藏</h4>
+                                <h5>礁溪店(麒麟飯店) </h5>
+                                <h5>電話：0988273032</h5>
+                                <h5>宜蘭縣礁溪鄉礁溪路五段116號</h5>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-6 col-xl-2">
+                                <br>
+                                <h4 style="color: #313737;">隱藏</h4>
+                                <h5>台南家樂福新仁店</h5>
+                                <h5>電話：06-2679092</h5>
+                                <h5>台南市仁德區大同路三段755號</h5>
+                                <br>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-6 col-xl-2">
+                                <br>
+                                <h4 style="color: #313737;">隱藏</h4>
+                                <h5>鳳山店 </h5>
+                                <h5>電話：077197029</h5>
+                                <h5>高雄市鳳山區三民路52號</h5>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-2">
+                                <br>
+                                <h4 style="color: #FCD492;">意見回饋</h4>
+                                <!-- <br class="d-none d-lg-block"> -->
+                                <h4 class="h5">歡迎告訴意見,我們會盡速回覆您</h4>
+                                @*<span>
+                                        <input type="email" name="mail" value="電子郵件" />
+                                        <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
+                                    </span>*@
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    與我們聯絡
+                                </button>
+                                <h4 style="color: #313737;">隱藏</h4>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-2">
+                                <br>
+                                <h4 style="color: #FCD492;">訂閱社群媒體</h4>
+                                <!-- <br class="d-none d-lg-block"> -->
+                                <h5>公布最新活動，將會通知您</h5>
+                                <a href="https://www.facebook.com/%E5%A2%A8%E8%87%BA-100734885157358/?view_public_for=100734885157358" target="_blank">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fab"
+                                         data-icon="facebook-square" role="img"
+                                         viewBox="0 0 448 512" height="32px" width="32px">
+                                        <path fill="#F2EDD8"
+                                              d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                                    </svg>
+                                </a>
+                                <a href="" target="_blank">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fab"
+                                         data-icon="instagram" role="img"
+                                         viewBox="0 0 448 512" height="32px" width="40px">
+                                        <path fill="#F2EDD8"
+                                              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                                    </svg>
+                                </a>
+                                <div style="color: #313737;">隱藏</div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-
-        <footer style="background-color: #313737;color: #F2EDD8">
-            <div class="container-fluid">
-                <div class="row" style="padding-left: 100px;width: 95%;">
-                    <div class=" d-none d-lg-block col-lg-6 col-xl-2">
-                        <br>
-                        <h4 style="color: #FCD492;">分店資訊</h4>
-                        <h5> 鶯歌光點</h5>
-                        <h5> 電話：02-2677-3306</h5>
-                        <h5> 新北市鶯歌區陶瓷街18號(E區-12)</h5>
-                        <br>
-                    </div>
-                    <div class="d-none d-lg-block col-lg-6 col-xl-2">
-                        <br>
-                        <h4 style="color: #313737;">隱藏</h4>
-                        <h5>礁溪店(麒麟飯店) </h5>
-                        <h5>電話：0988273032</h5>
-                        <h5>宜蘭縣礁溪鄉礁溪路五段116號</h5>
-                    </div>
-                    <div class="d-none d-lg-block col-lg-6 col-xl-2">
-                        <br>
-                        <h4 style="color: #313737;">隱藏</h4>
-                        <h5>台南家樂福新仁店</h5>
-                        <h5>電話：06-2679092</h5>
-                        <h5>台南市仁德區大同路三段755號</h5>
-                        <br>
-                    </div>
-                    <div class="d-none d-lg-block col-lg-6 col-xl-2">
-                        <br>
-                        <h4 style="color: #313737;">隱藏</h4>
-                        <h5>鳳山店 </h5>
-                        <h5>電話：077197029</h5>
-                        <h5>高雄市鳳山區三民路52號</h5>
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-2">
-                        <br>
-                        <h4 style="color: #FCD492;">意見回饋</h4>
-                        <!-- <br class="d-none d-lg-block"> -->
-                        <h4 class="h5">歡迎告訴意見,我們會盡速回覆您</h4>
-                        @*<span>
-                                <input type="email" name="mail" value="電子郵件" />
-                                <input style="color: #F2EDD8" class="btn btn-outline-secondary" type="submit" value="送出" />
-                            </span>*@
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            與我們聯絡
-                        </button>
-                        <h4 style="color: #313737;">隱藏</h4>
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-2">
-                        <br>
-                        <h4 style="color: #FCD492;">訂閱社群媒體</h4>
-                        <!-- <br class="d-none d-lg-block"> -->
-                        <h5>公布最新活動，將會通知您</h5>
-                        <a href="https://www.facebook.com/%E5%A2%A8%E8%87%BA-100734885157358/?view_public_for=100734885157358" target="_blank">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fab"
-                                 data-icon="facebook-square" role="img"
-                                 viewBox="0 0 448 512" height="32px" width="32px">
-                                <path fill="#F2EDD8"
-                                      d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
-                            </svg>
-                        </a>
-                        <a href="" target="_blank">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fab"
-                                 data-icon="instagram" role="img"
-                                 viewBox="0 0 448 512" height="32px" width="40px">
-                                <path fill="#F2EDD8"
-                                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-                            </svg>
-                        </a>
-                        <div style="color: #313737;">隱藏</div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
+
     <div>
         @{
             if (cust == null)
@@ -422,44 +462,45 @@
             </div>
         </div>
     </div>
+
     @*<!--facebook messenger chatbot-->
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: 'your-app-id',
-                autoLogAppEvents: true,
-                xfbml: true,
-                version: 'v8.0'
-            });
-        };
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                xfbml: true,
-                version: 'v8.0'
-            });
-        };
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: 'your-app-id',
+                    autoLogAppEvents: true,
+                    xfbml: true,
+                    version: 'v8.0'
+                });
+            };
+        </script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    xfbml: true,
+                    version: 'v8.0'
+                });
+            };
 
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
 
-    <!-- Your Chat Plugin code -->
-    <div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="100734885157358">
-    </div>
-    <!--openngrok.exe and type ngrok http 50720 -host-header="localhost:50720"-->
-    <!--than key-->
-    <!--facebook messenger chatbot end-->*@
+        <!-- Your Chat Plugin code -->
+        <div class="fb-customerchat"
+             attribution=setup_tool
+             page_id="100734885157358">
+        </div>
+        <!--openngrok.exe and type ngrok http 50720 -host-header="localhost:50720"-->
+        <!--than key-->
+        <!--facebook messenger chatbot end-->*@
 </body>
 
 </html>
