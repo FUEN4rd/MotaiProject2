@@ -5,58 +5,109 @@
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
 
-
-<div class="container">
-    <table class="table table-light">
-        <thead>
-            <tr>
-                <th style="display:none">
-                    @Html.DisplayNameFor(model => model.FavoriteId)
-                </th>
-                <th style="display:none">
-                    @Html.DisplayNameFor(model => model.fCustomerId)
-                </th>
-                <th style="display:none">
-                    @Html.DisplayNameFor(model => model.fProductId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.pName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.pPrice)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        
-        <tbody>
-            @foreach (var item in Model)
+<content>
+    <script type="text/javascript">
+        function collect(id2, name, price) {
+            let r = Math.floor(Math.random() * (1000 - 10)) + 10; //亂數id
+            id = id2 + r;
+            var card1 = document.createElement("div");
+            card1.className = "card col-xl-4 col-md-6";//class
+            card1.style.padding = "20px";
+            card1.style.margin = "0px";
+            card1.id = "card" + id;
+            document.getElementById(`productrow`).appendChild(card1);
+            let img1 = document.createElement("img");
+            img1.src = "https://bootstrap.hexschool.com/docs/4.2/assets/img/bootstrap-themes.png";//產品圖片
+            img1.className = "card-img-top";
+            img1.style.width = "300px";
+            img1.style.height = "200px";
+            document.getElementById(`${card1.id}`).appendChild(img1);
+            let cardbody1 = document.createElement("div");
+            cardbody1.className = "card-body"
+            cardbody1.id = "cardbody" + id;
+            document.getElementById(`${card1.id}`).appendChild(cardbody1);
+            let titel1 = document.createElement("h5");
+            titel1.className = "card-title"
+            titel1.innerHTML = name;//商品名
+            document.getElementById(`${cardbody1.id}`).appendChild(titel1);
+            let cardtext1 = document.createElement("p");
+            cardtext1.className = "card-text"
+            cardtext1.innerHTML = price;//商品價格
+            document.getElementById(`${cardbody1.id}`).appendChild(cardtext1);
+            img1.setAttribute("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer" )/${id2}'`);//插入action link
+           
+        }
+    </script>
+    <div class="container">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
             {
-                <tr>
-                    <td style="display:none">
-                        @Html.DisplayFor(modelItem => item.FavoriteId)
-                    </td>
-                    <td style="display:none">
-                        @Html.DisplayFor(modelItem => item.fCustomerId)
-                    </td>
-                    <td style="display:none">
-                        @Html.DisplayFor(modelItem => item.fProductId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pPrice)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
+                <div onload="collect(@item.fProductId,@item.pName,@item.pPrice)"></div>
             }
-        </tbody>
+        }
+
+        <div id="productrow" class="container row">
+            <div></div>
+        </div>
+        <script>
+            window.onload = collect(2, 123, 123456);
+            window.onload = collect(2, 123, 123456);
+        </script>
+        @*<table class="table table-light">
+            <thead>
+                <tr>
+                    <th style="display:none">
+                        @Html.DisplayNameFor(model => model.FavoriteId)
+                    </th>
+                    <th style="display:none">
+                        @Html.DisplayNameFor(model => model.fCustomerId)
+                    </th>
+                    <th style="display:none">
+                        @Html.DisplayNameFor(model => model.fProductId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.pName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.pPrice)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="display:none">
+                            @Html.DisplayFor(modelItem => item.FavoriteId)
+                        </td>
+                        <td style="display:none">
+                            @Html.DisplayFor(modelItem => item.fCustomerId)
+                        </td>
+                        <td style="display:none">
+                            @Html.DisplayFor(modelItem => item.fProductId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.pName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.pPrice)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
 
-    </table>
-</div>
+        </table>*@
+
+    </div>
+
+</content>
+
