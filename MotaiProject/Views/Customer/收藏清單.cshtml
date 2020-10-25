@@ -10,13 +10,13 @@
     <table class="table table-light">
         <thead>
             <tr>
-                <th>
+                <th style="display:none">
                     @Html.DisplayNameFor(model => model.FavoriteId)
                 </th>
-                <th>
+                <th style="display:none">
                     @Html.DisplayNameFor(model => model.fCustomerId)
                 </th>
-                <th>
+                <th style="display:none">
                     @Html.DisplayNameFor(model => model.fProductId)
                 </th>
                 <th>
@@ -33,13 +33,13 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="display:none">
                         @Html.DisplayFor(modelItem => item.FavoriteId)
                     </td>
-                    <td>
+                    <td style="display:none">
                         @Html.DisplayFor(modelItem => item.fCustomerId)
                     </td>
-                    <td>
+                    <td style="display:none">
                         @Html.DisplayFor(modelItem => item.fProductId)
                     </td>
                     <td>

@@ -169,16 +169,17 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
-                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;                
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
                 List<StatusCustomerViewModel> cartList = new List<StatusCustomerViewModel>();
                 foreach (var items in StateList)
-                {
-                    tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
+                {                 
+                    tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();                   
                     StatusCustomerViewModel cartC = new StatusCustomerViewModel();
                     StatusCartViewModel s = new StatusCartViewModel();
                     s.Product = cartProd;
+                    s.Status = items;
                     s.sProductQty = items.sProductQty;
                     cartC.Status = s;
                     cartList.Add(cartC);
@@ -222,10 +223,10 @@ namespace MotaiProject.Controllers
         public ActionResult 購物車內刪除(int fid)
         {
             MotaiDataEntities db = new MotaiDataEntities();
-            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == fid);
-            if (product != null)
+            tStatu statu = db.tStatus.Where(s => s.StatusId.Equals(fid)).FirstOrDefault();
+            if ( statu != null)
             {
-                db.tProducts.Remove(product);
+                db.tStatus.Remove(statu);
                 db.SaveChanges();
             }
             return RedirectToAction("購物車清單");
@@ -242,6 +243,8 @@ namespace MotaiProject.Controllers
                 {
                     tProduct favorProd = dbContext.tProducts.Where(p => p.ProductId == items.fProductId).FirstOrDefault();
                     FavoriteViewModel favor = new FavoriteViewModel();
+                    favor.fProductId = items.fProductId;
+                    favor.fCustomerId = cust.CustomerId;
                     favor.Product = favorProd;
                     favorList.Add(favor);
                 }
@@ -252,29 +255,6 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }
-
-        //public ActionResult 新增收藏(int ProductId)
-        //{
-        //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
-        //    {
-        //        tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-        //        MotaiDataEntities dbContext = new MotaiDataEntities();
-        //        tFavorite x = dbContext.tFavorites.Where(c => c.fCustomerId.Equals(cust.CustomerId)
-        //        && c.fProductId == ProductId).FirstOrDefault();
-        //        if (x != null)
-        //        {
-        //            Response.Write("這筆紀錄已新增過");
-        //        }
-        //        else
-        //        {
-        //            x.fCustomerId = cust.CustomerId;
-        //            x.fProductId = ProductId;
-        //            dbContext.tFavorites.Add(x);
-        //            dbContext.SaveChanges();
-        //        }
-        //    }
-        //    return View();
-        //}
 
         public JsonResult AddFavorite(int ProductId)
         {
@@ -313,6 +293,27 @@ namespace MotaiProject.Controllers
             {
                 return Json(new { result = false, msg = "請先登入" });
             }
+        }
+
+        public bool CheckFavor(int ProductId)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                if(db.tFavorites.Where(f => f.fProductId.Equals(ProductId) && f.fCustomerId.Equals(cust.CustomerId)).FirstOrDefault() == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }            
         }
     }
 }
