@@ -60,30 +60,34 @@
         background-color: #007bff;
         border-color: #007bff;
     }
+
         .btn-Y_yellow:hover {
             color: #fff;
             background-color: #0069d9;
             border-color: #0062cc;
         }
+
         .btn-Y_yellow:focus, .btn-Y_yellow.focus {
             box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
         }
+
         .btn-Y_yellow.disabled, .btn-Y_yellow:disabled {
             color: #fff;
             background-color: #007bff;
             border-color: #007bff;
         }
+
         .btn-Y_yellow:not(:disabled):not(.disabled):active, .btn-Y_yellow:not(:disabled):not(.disabled).active,
         .show > .btn-Y_yellow.dropdown-toggle {
             color: #fff;
             background-color: #0062cc;
             border-color: #005cbf;
         }
+
             .btn-Y_yellow:not(:disabled):not(.disabled):active:focus, .btn-Y_yellow:not(:disabled):not(.disabled).active:focus,
             .show > .btn-Y_yellow.dropdown-toggle:focus {
                 box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
             }
-
 </style>
 
 
@@ -184,7 +188,7 @@
                     </div>
                 </div>
                 <div>
-                    @Html.ActionLink("修改個人資料", "修改會員資料", new {  @class="btn-Y_yellow",CustomerId = Model.CustomerId, style = "color: #ff0000;" })
+                    @Html.ActionLink("修改個人資料", "修改會員資料", new { @class = "btn-Y_yellow", CustomerId = Model.CustomerId, style = "color: #ff0000;" })
                 </div>
             </div>
         </div>
@@ -212,37 +216,44 @@
                                     </button>
                                 </div>
                                 <div class="collapse" id="collapseExample">
-                                    <div class="card card-body card-deck">
+                                    <div class="card card-body card-deck" style="background-color:black">
                                         <div>
                                             舊密碼
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
+                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "oldpass" } })
                                             </div>
                                         </div>
-                                        <div>
-                                            新密碼
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
-                                                @Html.ValidationMessageFor(model => model.cPassword, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
+                                        @using (Html.BeginForm("修改會員資料", "Customer",FormMethod.Post))//要改
+                                        {
+                                            <form method="post">
+                                                <div>
+                                                    新密碼
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "newpass" } })                                                       
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        <button type="submit" class="btn btn-danger" id="pwch"></button>
+                                        }
                                         <div>
                                             確認密碼
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", } })
+                                                @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "checkpass" } })
                                             </div>
                                         </div>
+                                        <button class="btn btn-danger" id="changepassword" onclick="cha()">修改密碼</button>
+                                        <p id="warning"></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 
 
 
@@ -252,14 +263,37 @@
 
 <script>
     var pa = document.querySelectorAll(".form-control");
-    pa.forEach(p => p.value = "")
+    var oldpass = pa[0].value;
+    //var checkpass = pa[2].value;
+    //console.log(oldpass + "+" + checkpass);
     const clearbox = (item) => {
-        item.value = "";
+        //item.value = "";
         item.type = "Password";
     }
     pa.forEach(clearbox);
+    
+    //console.log(oldpass2 + "+" + checkpass2);
+    
+
+    function cha() {
+        let oldpass2 = pa[0].value;
+        let newpass = pa[1].value;
+        let checkpass2 = pa[2].value;
+        if ((oldpass === oldpass2) && (newpass === checkpass2)) {
+            console.log("0")
+            document.querySelector("#pwch").click();
+        }
+        else if (oldpass != oldpass2) {
+            document.querySelector("#warning").innerHTML = "舊密碼錯誤";
+        }
+        else if (newpass != checkpass2) {
+            document.querySelector("#warning").innerHTML = "密碼確認錯誤";
+        }
+        else {
+            document.querySelector("#warning").innerHTML = "密碼格式錯誤";
+        }
+        console.log(oldpass2, newpass, checkpass2);
+    }
 
 
-                    //pa.Value = "";
-                    //pa.type = "Password";
 </script>
