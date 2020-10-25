@@ -169,16 +169,17 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
-                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;                
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
                 List<StatusCustomerViewModel> cartList = new List<StatusCustomerViewModel>();
                 foreach (var items in StateList)
-                {
-                    tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
+                {                 
+                    tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();                   
                     StatusCustomerViewModel cartC = new StatusCustomerViewModel();
                     StatusCartViewModel s = new StatusCartViewModel();
                     s.Product = cartProd;
+                    s.Status = items;
                     s.sProductQty = items.sProductQty;
                     cartC.Status = s;
                     cartList.Add(cartC);
@@ -222,10 +223,10 @@ namespace MotaiProject.Controllers
         public ActionResult 購物車內刪除(int fid)
         {
             MotaiDataEntities db = new MotaiDataEntities();
-            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == fid);
-            if (product != null)
+            tStatu statu = db.tStatus.Where(s => s.StatusId.Equals(fid)).FirstOrDefault();
+            if ( statu != null)
             {
-                db.tProducts.Remove(product);
+                db.tStatus.Remove(statu);
                 db.SaveChanges();
             }
             return RedirectToAction("購物車清單");
