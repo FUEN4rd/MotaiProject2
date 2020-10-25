@@ -11,7 +11,7 @@
             let r = Math.floor(Math.random() * (1000 - 10)) + 10; //亂數id
             id = id2 + r;
             var card1 = document.createElement("div");
-            card1.className = "card col-xl-4 col-md-6 ";//class
+            card1.className = "card col-xl-4 col-md-6";//class
             card1.style.height = "400px";
             card1.style.padding = "10px";
             card1.style.margin = "10px";
@@ -29,35 +29,50 @@
             cardbody1.id = "cardbody" + id;
             document.getElementById(`${card1.id}`).appendChild(cardbody1);
             let titel1 = document.createElement("h5");
-            titel1.className = "card-title"
+            titel1.className = "card-title d-flex"
+            titel1.style.width = "70%";
             titel1.innerHTML = name;//商品名
             document.getElementById(`${cardbody1.id}`).appendChild(titel1);
-            //要插入收藏的link 調整title的寬
+            let img2 = document.createElement("img");
+            img2.src = "https://bootstrap.hexschool.com/docs/4.2/assets/img/bootstrap-themes.png";//產品圖片
+            img2.className = "card-img-top d-flex";
+            img2.style.width = "50px";
+            img2.style.height = "50px";
+            img2.style.marginLeft = "70%";
+            img2.style.marginTop = "-20px";
+            //img2.setAttribute("onclick", "");
+            document.getElementById(`${cardbody1.id}`).appendChild(img2);
             let cardtext1 = document.createElement("p");
             cardtext1.className = "card-text d-block"
-            cardtext1.style.height = "60px";
+            cardtext1.style.height = "40px";
+            cardtext1.style.marginTop="-30px"
             cardtext1.innerHTML = price;//商品價格
             document.getElementById(`${cardbody1.id}`).appendChild(cardtext1);
             img1.setAttribute("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer" )/${id2}'`);//插入url           
         }
     </script>
     <div class="container">
-        @if (Model != null)
-        {
-            foreach (var item in Model)
-            {
-                <div onload="collect(@item.fProductId,@item.pName,@item.pPrice)"></div>
-            }
-        }
+
 
         <div class="container row">
             <div id="productrow" class="card-group"></div>
         </div>
         <div class="container-fluid" style="height:200px"></div>
-        <script>
-            window.onload = collect(2, 123, 123456);
+        @*<script>
+            window.onload = collect(2, "七彩玉花瓶", 123456);
             window.onload = collect(3, 564321, 123456);
-        </script>
+        </script>*@
+        
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <script>
+                    window.onload = collect(@item.fProductId, "@item.pName", @item.pPrice);
+                </script>
+            }
+        }
+        
         @*<table class="table table-light">
             <thead>
                 <tr>
