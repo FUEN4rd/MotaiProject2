@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.StatusCustomerViewModel>
 @*@model MotaiProject.ViewModels.StatusCustomerViewModel*@
+@using MotaiProject.Models
 
 @{
     /**/
 
     ViewBag.Title = "購物車清單";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
+    tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
 }
 <style>
     .wrapper {
@@ -145,7 +147,46 @@
             }
         </tbody>
     </table>
-    <button type="button" class="btn btn-dark" onclick="">確定結帳</button>
+    <div>
+        <div style="display:inline-grid">
+            <p>@Html.RadioButton("address", cust.cAddress, true, false)自家住宅</p>
+            <p>@Html.RadioButton("address", cust.cAddress, false, true)門市 </p>
+        </div>
+        <div>
+            <ul>
+                <li>
+                    1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
+                    <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
+                </li>
+                <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
+                <li> 3.不同帳號的交易紀錄無法移轉。</li>
+            </ul>
+        </div>
+
+        <div>
+            訂單資訊
+            <hr />
+            <div id="info"></div>
+            <script>
+                document.
+                document.querySelector("#info").innerHTML = "小計: "+@ViewBag.pro;
+            </script>
+            運費
+            <br />
+            折扣
+            <br />
+            <button type="button" class="btn btn-dark" onclick="">確定結帳</button>
+        </div>
+
+
+    </div>
+    <div>
+
+    </div>
+
+
+
+
 </div>
 
 

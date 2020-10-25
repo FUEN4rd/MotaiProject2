@@ -122,10 +122,10 @@ namespace MotaiProject.Controllers
             {
                 cust.cName = c.cName;
                 cust.cPassword = c.cPassword;
-                cust.cTelePhone = c.cTelePhone;
+                //cust.cTelePhone = c.cTelePhone;
                 cust.cGUI = c.cGUI;
                 cust.cEmail = c.cEmail;
-                cust.cAddress = c.cAddress;
+                //cust.cAddress = c.cAddress;
                 cust.cAccount = c.cAccount;
                 db.SaveChanges();
             }
@@ -169,10 +169,12 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
+
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;                
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
                 List<StatusCustomerViewModel> cartList = new List<StatusCustomerViewModel>();
+                
                 foreach (var items in StateList)
                 {                 
                     tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();                   
@@ -184,6 +186,8 @@ namespace MotaiProject.Controllers
                     cartC.Status = s;
                     cartList.Add(cartC);
                 }
+
+                
                 return View(cartList);
             }
             else
