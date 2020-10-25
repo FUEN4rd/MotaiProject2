@@ -46,6 +46,7 @@
             @Html.DropDownListFor(model => model.pCategory, Model.Categories, "請選擇分類", new { @class = "form-control", id = "pCategory" })
             @Html.ValidationMessageFor(model => model.pCategory, "", new { @class = "text-danger" })
         </div>
+
     </div>
 
     <div class="form-group">
@@ -125,7 +126,7 @@
 
 
     const onReaderLoaded = function (event) {
-        let tpl = `<img class="myimg" src="${event.target.result}" alt="" width="150px">`;
+        let tpl = `<img class="myimg" src="${event.target.result}" alt="" width="450px">`;
         container.innerHTML += tpl;
     }
 

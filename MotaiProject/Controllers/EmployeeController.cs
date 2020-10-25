@@ -34,6 +34,12 @@ namespace MotaiProject.Controllers
             
         }
 
+        public ActionResult 員工登出()
+        {
+            Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = null;
+            return RedirectToAction("員工首頁");
+        }
+
         public ActionResult 員工首頁()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
