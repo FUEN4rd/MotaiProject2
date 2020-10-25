@@ -14,11 +14,11 @@
             clear: both;
         }
 
-        
+
         .flexdirection {
             display: flex;
             flex-flow: column;
-        } 
+        }
 
         .Y_btn {
             width: auto;
@@ -96,22 +96,22 @@
     <div class="container">
         <div class="row presize">
             <div class=" col-12 col-md-6 col-xl-6 ">
-                @{        
+                @{
                     int nub = 0;
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">                           
-                            @foreach (var item in Model.psImage)                            
+                        <ol class="carousel-indicators">
+                            @foreach (var item in Model.psImage)
                             {
                                 <li id="imageli" class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="@nub">
-                                </li>  
+                                </li>
                                 nub++;
                             }
                             @*<li class="dataexample active" data-target="#carouselExampleIndicators" data-slide-to="0">
-                            </li>
-                            <li class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="1">
-                            </li>
-                            <li class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="2">
-                            </li>*@
+                                </li>
+                                <li class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="1">
+                                </li>
+                                <li class="dataexample" data-target="#carouselExampleIndicators" data-slide-to="2">
+                                </li>*@
                         </ol>
                         <div class="carousel-inner">
                             @foreach (var item in Model.psImage)
@@ -120,18 +120,18 @@
                                     <img src="@Url.Action(item)" class="d-block w-100" alt="..." />
                                 </div>
                             }
-                                @*<div class="carousel-item active">
-                                        <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
-                                             class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://cdn.pixabay.com/photo/2020/03/30/10/18/electric-scooter-4983759_1280.jpg"
-                                             class="d-block w-100" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://cdn.pixabay.com/photo/2020/04/12/08/50/child-5033381_1280.jpg"
-                                             class="d-block w-100" alt="...">
-                                    </div>*@                            
+                            @*<div class="carousel-item active">
+                                    <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
+                                         class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://cdn.pixabay.com/photo/2020/03/30/10/18/electric-scooter-4983759_1280.jpg"
+                                         class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://cdn.pixabay.com/photo/2020/04/12/08/50/child-5033381_1280.jpg"
+                                         class="d-block w-100" alt="...">
+                                </div>*@
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -143,10 +143,10 @@
                         </a>
                     </div>
                 }
-            </div>            
+            </div>
             <div style="display:none">
                 <h6>@Html.DisplayFor(model => model.ProductId)</h6>
-                    @Html.HiddenFor(model => model.ProductId, new { id = "ProductId"})
+                @Html.HiddenFor(model => model.ProductId, new { id = "ProductId" })
             </div>
             <div class=" col-12 col-md-6 col-xl-6 Y_white">
                 <h7>@Html.DisplayNameFor(model => model.pNumber)</h7>
@@ -155,12 +155,12 @@
                     <h5>@Html.DisplayFor(model => model.pName)</h5>
 
                     <button type="button" class="btn Y_btn" data-toggle="tooltip" data-placement="top" title="收藏"
-                            id="star1" style="display: none;" onclick="cancelFavor()">
-                        <svg height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" /></svg>
+                            id="starlight" style="display: none;" onclick="cancelFavor()">
+                        <svg id="starlight" height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" /></svg>
                     </button>
                     <button type="button" class="btn Y_btn" data-toggle="tooltip" data-placement="top" title="收藏"
-                            id="star2" onclick="addFavor()">
-                        <svg height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" /></svg>
+                            id="star" onclick="addFavor()">
+                        <svg id="star" height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" /></svg>
                     </button>
 
                 </div>
@@ -171,7 +171,7 @@
                 <div style="display: flex">
                     <div class="form-inline PlusMinus" style="margin-right: 30px">
                         <button id="minus" class="Y_btn" onclick="Count(this.id)">-</button>
-                        <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">                       
+                        <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">
                         <button id="plus" class="Y_btn" onclick="Count(this.id)">+</button>
                     </div>
                     <button type="button" class="btn btn-dark" onclick="addTocart()">加入購物車</button>
@@ -230,8 +230,8 @@
     }
 </script>
 <script>
-    function addTocart() {        
-        const qty = document.querySelector("#buyQty").value;        
+    function addTocart() {
+        const qty = document.querySelector("#buyQty").value;
         fetch('/Customer/AddToCart', {
             method: 'POST',
             headers: {
@@ -248,12 +248,28 @@
             }
         });
     }
-    
+
 </script>
-<script>
+<script type="text/javascript">
+        fetch('/Customer/CheckFavor', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `ProductId=${@id}`
+        }).then(function (response) {
+            if (response) {
+                $("#star").css("display", "none");
+                $("#starlight").css("display", "block");
+            } else {
+                $("#starlight").css("display", "none");
+                $("#star").css("display", "block");
+            }
+        });
+</script>
+<script>    
 
-
-    function cancelFavor() {        
+    function cancelFavor() {
         fetch('/Customer/CancelFavorite', {
             method: 'POST',
             headers: {
@@ -265,14 +281,14 @@
         }).then(function (data) {
             if (data.result) {
                 alert(data.msg);
-                $("#star1").css("display", "none");
-                $("#star2").css("display", "block");
+                $("#starlight").css("display", "none");
+                $("#star").css("display", "block");
             } else {
                 alert(data.msg);
             }
         });
     }
-    function addFavor() {       
+    function addFavor() {
         fetch('/Customer/AddFavorite', {
             method: 'POST',
             headers: {
@@ -283,8 +299,8 @@
             return response.json();
         }).then(function (data) {
             if (data.result) {
-                $("#star2").css("display", "none");
-                $("#star1").css("display", "block");
+                $("#star").css("display", "none");
+                $("#starlight").css("display", "block");
                 alert(data.msg);
             } else {
                 alert(data.msg);
