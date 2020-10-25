@@ -445,6 +445,9 @@
     <Compile Include="tPromotion.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tPromotionCategory.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tStatu.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
@@ -459,6 +462,7 @@
     </Compile>
     <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\DiaryViewModel.cs" />
     <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
     <Compile Include="ViewModels\FavoriteViewModel.cs" />
@@ -499,6 +503,7 @@
     <Content Include="Views\Customer\收藏清單.cshtml" />
     <Content Include="Views\Customer\會員中心.cshtml" />
     <Content Include="Views\Customer\修改會員資料.cshtml" />
+    <Content Include="Views\Employee\工作日誌.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
