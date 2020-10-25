@@ -34,6 +34,12 @@ namespace MotaiProject.Controllers
             
         }
 
+        public ActionResult 員工登出()
+        {
+            Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = null;
+            return RedirectToAction("員工首頁");
+        }
+
         public ActionResult 員工首頁()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
@@ -193,17 +199,42 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("員工看產品頁面");
         }
-        public ActionResult Delete(int id)
+
+        public ActionResult 工作日誌()
         {
-            MotaiDataEntities db = new MotaiDataEntities();
-            tProduct prod = db.tProducts.FirstOrDefault(p => p.ProductId == id);
-            if (prod != null)
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-                db.tProducts.Remove(prod);
-                db.SaveChanges();
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                var dlist = dbContext.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId));
+                List<DiaryViewModel> diarylist = new List<DiaryViewModel>();
+                foreach (tDiary item in dlist)
+                {
+                    DiaryViewModel diary = new DiaryViewModel();
+                    diary.Diary = item;
+                    diarylist.Add(diary);
+                }
+                return View(diarylist);
+            }
+            return RedirectToAction("員工登入");
+        }
+
+        public ActionResult 新增日誌()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
 
             }
-            return RedirectToAction("員工看產品頁面");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult 新增日誌(DiaryViewModel data)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+
+            }
+                return RedirectToAction("員工首頁");
         }
     }
 }

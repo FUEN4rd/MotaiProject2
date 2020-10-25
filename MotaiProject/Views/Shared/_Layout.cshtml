@@ -19,13 +19,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("員工首頁", "員工首頁", "Employee", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("員工新增", "新增員工", "Employee", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("產品頁面", "員工看產品頁面", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("工作日誌", "工作日誌", "Employee", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
+            </div>
+            <div>
+                @Html.ActionLink("登出","員工登出")
             </div>
         </div>
     </div>

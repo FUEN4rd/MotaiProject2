@@ -16,6 +16,7 @@ namespace MotaiProject
     {
         public int PromotionId { get; set; }
         public string PromotionName { get; set; }
+        public int PromotinoCategory { get; set; }
         public System.DateTime pPromotionStartDate { get; set; }
         public System.DateTime pPromotionDeadline { get; set; }
         public string pPromotionWeb { get; set; }
@@ -24,5 +25,6 @@ namespace MotaiProject
         public double pDiscount { get; set; }
     
         public virtual tOrder tOrder { get; set; }
+        public virtual tPromotionCategory tPromotionCategory { get; set; }
     }
 }

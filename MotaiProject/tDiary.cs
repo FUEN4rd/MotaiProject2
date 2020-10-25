@@ -19,7 +19,9 @@ namespace MotaiProject
         public System.DateTime dDate { get; set; }
         public string dWeather { get; set; }
         public string dDiaryNote { get; set; }
+        public int dWarehouseNameId { get; set; }
     
         public virtual tEmployee tEmployee { get; set; }
+        public virtual tWarehouseName tWarehouseName { get; set; }
     }
 }

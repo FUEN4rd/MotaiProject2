@@ -17,10 +17,12 @@ namespace MotaiProject
         public int TransferId { get; set; }
         public int tProductId { get; set; }
         public int tProductQty { get; set; }
+        public int tEmployeeId { get; set; }
         public int tWNIdOut { get; set; }
         public int tWNIdIn { get; set; }
         public System.DateTime tDate { get; set; }
     
+        public virtual tEmployee tEmployee { get; set; }
         public virtual tProduct tProduct { get; set; }
         public virtual tWarehouseName tWarehouseName { get; set; }
         public virtual tWarehouseName tWarehouseName1 { get; set; }

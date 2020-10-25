@@ -19,6 +19,7 @@ namespace MotaiProject
         {
             this.tDiaries = new HashSet<tDiary>();
             this.tOrders = new HashSet<tOrder>();
+            this.tTransfers = new HashSet<tTransfer>();
         }
     
         public int EmployeeId { get; set; }
@@ -34,5 +35,7 @@ namespace MotaiProject
         public virtual tPosition tPosition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrder> tOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tTransfer> tTransfers { get; set; }
     }
 }
