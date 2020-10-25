@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MotaiProject.ViewModels
 {
@@ -29,5 +30,7 @@ namespace MotaiProject.ViewModels
         public string dWeather { get { return this.Diary.dWeather; } set { this.Diary.dWeather = value; } }
         public string dDiaryNote { get { return this.Diary.dDiaryNote; } set { this.Diary.dDiaryNote = value; } }
         public int dWarehouseNameId { get { return this.Diary.dWarehouseNameId; } set { this.Diary.dWarehouseNameId = value; } }
+
+        public IEnumerable<SelectListItem> WarehouseName { get; set; }
     }
 }

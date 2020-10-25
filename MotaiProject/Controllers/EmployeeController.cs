@@ -221,11 +221,20 @@ namespace MotaiProject.Controllers
 
         public ActionResult 新增日誌()
         {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            DiaryViewModel newDiary = new DiaryViewModel();
+            var warehouses = new ClassMethod().GetCategoryAll();
+            List<SelectListItem> WareList = new List<SelectListItem>();
+            foreach (var item in warehouses)
             {
-
+                WareList.Add(new SelectListItem()
+                {
+                    Text = item.Value,
+                    Value = item.Key.ToString()
+                });
             }
-            return View();
+            newDiary.WarehouseName = WareList;
+           
+            return View(newDiary);
         }
         [HttpPost]
         public ActionResult 新增日誌(DiaryViewModel data)
