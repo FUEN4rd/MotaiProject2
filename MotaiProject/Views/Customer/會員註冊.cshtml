@@ -2,13 +2,14 @@
 
 @{
     Layout = "~/Views/Shared/_Layout登入.cshtml";
+    
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>會員註冊</h4>
         <hr />
@@ -24,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cAccount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cAccount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.cAccount, new { htmlAttributes = new { @class = "form-control",id="Account" } })
                 @Html.ValidationMessageFor(model => model.cAccount, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -87,11 +88,40 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="註冊" class="btn btn-default" />
+                <input type="submit" value="註冊" class="btn btn-default" onclick="check()" />
                 @Html.ActionLink("回到首頁", "首頁")
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div id="demo"></div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function a() {
+            var account = $("#Account").val();
+        }
+      
+        function check() {
+            //var form = document.getElementsByTagName("form");
+            //var formdata = new ;         
+            console.log(formdata);
+            $.ajax({
+                url: "/Customer/會員註冊",
+                type: "POST",
+                data: { "n新會員模組":formdata },
+                success: function (data) {
+                    console.log(data);
+                    var result = data ? "註冊成功" : "註冊失敗555";
+                    alert(result);
+                }
+            })
+        }
+
+
+    </script>
 }
 
 

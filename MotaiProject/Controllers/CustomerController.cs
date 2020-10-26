@@ -81,20 +81,35 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
+        //CustomerViewModel n新會員模組
         [HttpPost]
-        public ActionResult 會員註冊(CustomerViewModel n新會員模組)
+        public bool 會員註冊(CustomerViewModel n新會員模組)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (dbContext.tCustomers.Count() == 0)
             {
-                n新會員模組.CustomerId = 1;
+                //n新會員模組.CustomerId = 1;
             }
-
             tCustomer n新會員 = new tCustomer();
-            n新會員 = n新會員模組.Customer;
-            dbContext.tCustomers.Add(n新會員);
-            dbContext.SaveChanges();
-            return RedirectToAction("首頁");
+            //n新會員 = n新會員模組.Customer;
+
+            List<tCustomer> cust = new List<tCustomer>();
+            foreach(var item in cust)
+            {
+                if(item.cAccount == n新會員.cAccount)
+                {
+                    return false;
+                }
+                else
+                {
+                    dbContext.tCustomers.Add(n新會員);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+            //return RedirectToAction("首頁");
+
         }
 
         public ActionResult 忘記密碼()
