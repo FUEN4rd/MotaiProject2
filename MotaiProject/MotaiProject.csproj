@@ -508,6 +508,7 @@
     <Content Include="Views\Employee\工作日誌.cshtml" />
     <Content Include="Views\Employee\新增日誌.cshtml" />
     <Content Include="Views\Employee\會計審核.cshtml" />
+    <Content Include="Views\Employee\修改日誌.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

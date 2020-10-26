@@ -246,6 +246,21 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工首頁");
         }
 
+        public ActionResult 修改日誌(int id)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                MotaiDataEntities db = new MotaiDataEntities();
+                tDiary diary = db.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
+                DiaryViewModel Diary = new DiaryViewModel();
+                Diary.Diary = diary;
+                return View(Diary);
+            }
+            return View("員工登入");
+            
+        }
+
         public ActionResult 會計審核()
         {
             OrderViewModel CheckOrder = new OrderViewModel();
