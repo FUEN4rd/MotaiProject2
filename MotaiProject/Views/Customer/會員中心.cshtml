@@ -233,7 +233,7 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                        <button type="submit" class="btn btn-danger" id="pwch"></button>
+                                        <button type="submit" class="btn btn-danger d-none" id="pwch"></button>
                                         }
                                         <div>
                                             確認密碼
@@ -267,7 +267,7 @@
     //var checkpass = pa[2].value;
     //console.log(oldpass + "+" + checkpass);
     const clearbox = (item) => {
-        //item.value = "";
+        item.value = "";
         item.type = "Password";
     }
     pa.forEach(clearbox);
