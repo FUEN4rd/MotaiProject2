@@ -245,5 +245,11 @@ namespace MotaiProject.Controllers
             }
                 return RedirectToAction("員工首頁");
         }
+
+        public ActionResult 會計審核()
+        {
+            OrderViewModel CheckOrder = new OrderViewModel();
+            return View(CheckOrder);
+        }
     }
 }

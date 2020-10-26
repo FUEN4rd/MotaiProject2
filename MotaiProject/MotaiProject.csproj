@@ -507,6 +507,7 @@
     <Content Include="Views\Customer\修改會員資料.cshtml" />
     <Content Include="Views\Employee\工作日誌.cshtml" />
     <Content Include="Views\Employee\新增日誌.cshtml" />
+    <Content Include="Views\Employee\會計審核.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
