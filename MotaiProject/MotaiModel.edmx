@@ -61,7 +61,7 @@
             <PropertyRef Name="OrderId" />
           </Key>
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="oCustomerId" Type="int" Nullable="false" />
+          <Property Name="oCustomerId" Type="int" />
           <Property Name="oAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="oDate" Type="date" Nullable="false" />
           <Property Name="oDeliverDate" Type="date" />
@@ -70,6 +70,7 @@
           <Property Name="oCheckDate" Type="date" />
           <Property Name="oPromotionId" Type="int" />
           <Property Name="cNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="oWarehouseName" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tOrderDetail">
           <Key>
@@ -296,7 +297,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tOrder_tCustomer">
-          <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
+          <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="0..1" />
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tCustomer">
@@ -328,6 +329,18 @@
             </Principal>
             <Dependent Role="tOrder">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tWarehouseName">
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseName">
+              <PropertyRef Name="WarehouseNameId" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="oWarehouseName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -609,6 +622,10 @@
             <End Role="tPromotion" EntitySet="tPromotion" />
             <End Role="tOrder" EntitySet="tOrder" />
           </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tWarehouseName" Association="Self.FK_tOrder_tWarehouseName">
+            <End Role="tWarehouseName" EntitySet="tWarehouseName" />
+            <End Role="tOrder" EntitySet="tOrder" />
+          </AssociationSet>
           <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
             <End Role="tOrder" EntitySet="tOrder" />
             <End Role="tOrderDetail" EntitySet="tOrderDetail" />
@@ -758,7 +775,7 @@
             <PropertyRef Name="OrderId" />
           </Key>
           <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="oCustomerId" Type="Int32" Nullable="false" />
+          <Property Name="oCustomerId" Type="Int32" />
           <Property Name="oAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="oDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="oDeliverDate" Type="DateTime" Precision="0" />
@@ -767,9 +784,11 @@
           <Property Name="oCheckDate" Type="DateTime" Precision="0" />
           <Property Name="oPromotionId" Type="Int32" />
           <Property Name="cNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oWarehouseName" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tCustomer" Relationship="Self.FK_tOrder_tCustomer" FromRole="tOrder" ToRole="tCustomer" />
           <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrder_tEmployee" FromRole="tOrder" ToRole="tEmployee" />
           <NavigationProperty Name="tPromotion" Relationship="Self.FK_tOrder_tPromotion" FromRole="tOrder" ToRole="tPromotion" />
+          <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tOrder_tWarehouseName" FromRole="tOrder" ToRole="tWarehouseName" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrder" ToRole="tOrderDetail" />
           <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrder" FromRole="tOrder" ToRole="tOrderPay" />
         </EntityType>
@@ -944,6 +963,7 @@
           <Property Name="WarehouseNameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WarehouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tDiaries" Relationship="Self.FK_tDiary_tWarehouseName" FromRole="tWarehouseName" ToRole="tDiary" />
+          <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrder" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrderDetail" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tWarehouseName" ToRole="tTransfer" />
           <NavigationProperty Name="tTransfers1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tWarehouseName" ToRole="tTransfer" />
@@ -986,7 +1006,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tOrder_tCustomer">
-          <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="1" />
+          <End Role="tCustomer" Type="Self.tCustomer" Multiplicity="0..1" />
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tCustomer">
@@ -1090,6 +1110,18 @@
             </Principal>
             <Dependent Role="tOrder">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrder_tWarehouseName">
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseName">
+              <PropertyRef Name="WarehouseNameId" />
+            </Principal>
+            <Dependent Role="tOrder">
+              <PropertyRef Name="oWarehouseName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1355,6 +1387,10 @@
             <End Role="tPromotion" EntitySet="tPromotions" />
             <End Role="tOrder" EntitySet="tOrders" />
           </AssociationSet>
+          <AssociationSet Name="FK_tOrder_tWarehouseName" Association="Self.FK_tOrder_tWarehouseName">
+            <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+            <End Role="tOrder" EntitySet="tOrders" />
+          </AssociationSet>
           <AssociationSet Name="FK_tOrderDetail_tOrder" Association="Self.FK_tOrderDetail_tOrder">
             <End Role="tOrder" EntitySet="tOrders" />
             <End Role="tOrderDetail" EntitySet="tOrderDetails" />
@@ -1495,6 +1531,7 @@
                 <ScalarProperty Name="oCheckDate" ColumnName="oCheckDate" />
                 <ScalarProperty Name="oPromotionId" ColumnName="oPromotionId" />
                 <ScalarProperty Name="cNote" ColumnName="cNote" />
+                <ScalarProperty Name="oWarehouseName" ColumnName="oWarehouseName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
