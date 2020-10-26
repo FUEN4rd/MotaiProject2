@@ -22,7 +22,7 @@ namespace MotaiProject
         }
     
         public int OrderId { get; set; }
-        public int oCustomerId { get; set; }
+        public Nullable<int> oCustomerId { get; set; }
         public string oAddress { get; set; }
         public System.DateTime oDate { get; set; }
         public Nullable<System.DateTime> oDeliverDate { get; set; }
@@ -31,10 +31,12 @@ namespace MotaiProject
         public Nullable<System.DateTime> oCheckDate { get; set; }
         public Nullable<int> oPromotionId { get; set; }
         public string cNote { get; set; }
+        public int oWarehouseName { get; set; }
     
         public virtual tCustomer tCustomer { get; set; }
         public virtual tEmployee tEmployee { get; set; }
         public virtual tPromotion tPromotion { get; set; }
+        public virtual tWarehouseName tWarehouseName { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
