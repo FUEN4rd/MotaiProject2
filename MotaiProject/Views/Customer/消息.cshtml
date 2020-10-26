@@ -12,9 +12,9 @@
 @*輪播牆*@
  
 <div class="container">
-    <h2>消息</h2>
 
-    
+
+
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:300px;height:300px;margin:0 auto; ">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -36,21 +36,21 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-      
 
+    <h2>消息</h2>
 
     <table class="table">
         <tr>
-            <th style="display:none">
+            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionName)
             </th>
-            <th style="display:none">
+            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionStartDate)
             </th>
-            <th style="display:none">
+            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionDeadline)
             </th>
             <th>
@@ -62,7 +62,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().pDiscountCode)
             </th>
-            <th style="display:none">
+            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().pDiscount)
             </th>
         </tr>
