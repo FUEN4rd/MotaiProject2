@@ -41,6 +41,7 @@
             position: relative;
             width: 100vw;
             height: 100vh;
+            /*overflow: hidden;*/
         }
 
         .inner-container {
@@ -48,12 +49,11 @@
             left: 0;
             overflow-x: hidden;
             overflow-y: scroll;
-            min-height: 100vh;
         }
 
         .bc_content {
             width: 100vw;
-            min-height: 100vh;
+            height: 100vh;
         }
             /* for Chrome */
             .inner-container::-webkit-scrollbar {
@@ -315,11 +315,11 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">會員登入</h4>
+                                    <h4 class="modal-title  Y_black" id="exampleModalLabel">會員登入</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -327,19 +327,19 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group form-inline">
-                                            <label for="loginAccount" class="col-form-label">帳號:</label>
-                                            <div class="col-md-10">
+                                            <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
+                                            <div class="col-md-10 ">
                                                 @*<input id="userPassword" type="password" required>*@
-                                                @Html.Editor("cAccount")
+                                                @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black" } })
                                                 @*@Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control" } })*@
 
                                                 @*@Html.ValidationMessageFor("cAccount", "必填", new { @class = "text-danger" })*@
                                             </div>
                                         </div>
                                         <div class="form-group form-inline">
-                                            <label for="loginPassword" class="col-form-label">密碼:</label>
+                                            <label for="loginPassword" class="col-form-label Y_black">密碼:</label>
                                             <div class="col-md-10">
-                                                @Html.Editor("cPassword")
+                                                @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black" } })
                                             </div>
                                         </div>
                                         <div class="form-group form-inline">
@@ -367,17 +367,17 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel">收藏頁面，請先登入</h4>
+                                <h4 class="modal-title  Y_black" id="exampleModalLabel">收藏</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                是否要登入?
+                            <div class="modal-body  Y_black">
+                                請先登入，是否要登入?
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
+                                <button type="button" class="btn btn-secondary  Y_black" data-dismiss="modal">取消</button>
                             </div>
                         </div>
                     </div>
@@ -386,17 +386,17 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel">購物車</h4>
+                                <h4 class="modal-title  Y_black" id="exampleModalLabel">購物車</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body  Y_black">
                                 請先登入，是否要登入?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
+                                <button type="button" class="btn btn-secondary  Y_black" data-dismiss="modal">取消</button>
                             </div>
                         </div>
                     </div>
