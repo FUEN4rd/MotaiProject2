@@ -35,15 +35,12 @@
         }
        
         /* 滾輪 */
-        .outer-container,
-        .bc_content {
-            width: 100vw;
-            height: 100vh;
-        }
+
 
         .outer-container {
             position: relative;
-            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
         }
 
         .inner-container {
@@ -51,6 +48,11 @@
             left: 0;
             overflow-x: hidden;
             overflow-y: scroll;
+            min-height: 100vh;
+        }
+
+        .bc_content {
+            width: 100vw;
             min-height: 100vh;
         }
             /* for Chrome */
