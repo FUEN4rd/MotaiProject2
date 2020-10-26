@@ -4,7 +4,7 @@
 
 @{
     /**/
-
+    decimal count = 0;
     ViewBag.Title = "購物車清單";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
     tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
@@ -144,6 +144,7 @@
     new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
                     </td>
                 </tr>
+                count += item.Status.pTotal; 
             }
         </tbody>
     </table>
@@ -168,8 +169,7 @@
             <hr />
             <div id="info"></div>
             <script>
-                document.
-                document.querySelector("#info").innerHTML = "小計: "+@ViewBag.pro;
+                document.querySelector("#info").innerHTML = "小計: 新台幣"+@count+"元";
             </script>
             運費
             <br />
