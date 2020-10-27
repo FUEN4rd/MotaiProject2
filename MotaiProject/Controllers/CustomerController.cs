@@ -213,7 +213,7 @@ namespace MotaiProject.Controllers
             ViewBag.Qty = product.pQty;
             ProductViewModel prod = new ProductViewModel();
             prod.Product = product;
-            prod.pQty = product.pQty;
+            prod.pQty = (int)product.pQty;
             return View(prod);
         }
 

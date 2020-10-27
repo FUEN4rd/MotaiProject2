@@ -14,11 +14,22 @@ namespace MotaiProject
     
     public partial class tShipList
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tShipList()
+        {
+            this.tShipDetails = new HashSet<tShipDetail>();
+        }
+    
         public int ShipId { get; set; }
         public int sEmployeeId { get; set; }
         public int sShipSerialValue { get; set; }
         public int sOrderId { get; set; }
         public System.DateTime sShipDate { get; set; }
         public string sShipNote { get; set; }
+    
+        public virtual tEmployee tEmployee { get; set; }
+        public virtual tOrder tOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tShipDetail> tShipDetails { get; set; }
     }
 }

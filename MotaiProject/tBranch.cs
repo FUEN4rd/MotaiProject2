@@ -23,8 +23,6 @@ namespace MotaiProject
         public int BranchId { get; set; }
         public string bBranch { get; set; }
     
-        public virtual tBranch tBranch1 { get; set; }
-        public virtual tBranch tBranch2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tEmployee> tEmployees { get; set; }
     }

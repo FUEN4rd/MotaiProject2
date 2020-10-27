@@ -259,18 +259,6 @@
           <Property Name="WarehouseNameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WarehouseName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_tBranch_tBranch">
-          <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
-          <End Role="tBranch1" Type="Self.tBranch" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tBranch">
-              <PropertyRef Name="BranchId" />
-            </Principal>
-            <Dependent Role="tBranch1">
-              <PropertyRef Name="BranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tDiary_tEmployee">
           <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
           <End Role="tDiary" Type="Self.tDiary" Multiplicity="*" />
@@ -496,6 +484,78 @@
             </Principal>
             <Dependent Role="tPromotion">
               <PropertyRef Name="PromotinoCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tOrderDetail">
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrderDetail">
+              <PropertyRef Name="oOrderDetailId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="sOrderDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="sProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tShipList">
+          <End Role="tShipList" Type="Self.tShipList" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tShipList">
+              <PropertyRef Name="ShipId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="ShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tWarehouseName">
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseName">
+              <PropertyRef Name="WarehouseNameId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="sWarehouseNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipList_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tShipList" Type="Self.tShipList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="tShipList">
+              <PropertyRef Name="sEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipList_tOrder">
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+          <End Role="tShipList" Type="Self.tShipList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="tShipList">
+              <PropertyRef Name="sOrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -619,6 +679,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tWarehouse_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tWarehouse">
+              <PropertyRef Name="wProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tWarehouse_tWarehouseName">
           <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
           <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
@@ -657,10 +729,6 @@
           <EntitySet Name="tTransfer" EntityType="Self.tTransfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tWarehouse" EntityType="Self.tWarehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tWarehouseName" EntityType="Self.tWarehouseName" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_tBranch_tBranch" Association="Self.FK_tBranch_tBranch">
-            <End Role="tBranch" EntitySet="tBranch" />
-            <End Role="tBranch1" EntitySet="tBranch" />
-          </AssociationSet>
           <AssociationSet Name="FK_tDiary_tEmployee" Association="Self.FK_tDiary_tEmployee">
             <End Role="tEmployee" EntitySet="tEmployee" />
             <End Role="tDiary" EntitySet="tDiary" />
@@ -737,6 +805,30 @@
             <End Role="tPromotionCategory" EntitySet="tPromotionCategory" />
             <End Role="tPromotion" EntitySet="tPromotion" />
           </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tOrderDetail" Association="Self.FK_tShipDetail_tOrderDetail">
+            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
+            <End Role="tShipDetail" EntitySet="tShipDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tProduct" Association="Self.FK_tShipDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tShipDetail" EntitySet="tShipDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tShipList" Association="Self.FK_tShipDetail_tShipList">
+            <End Role="tShipList" EntitySet="tShipList" />
+            <End Role="tShipDetail" EntitySet="tShipDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tWarehouseName" Association="Self.FK_tShipDetail_tWarehouseName">
+            <End Role="tWarehouseName" EntitySet="tWarehouseName" />
+            <End Role="tShipDetail" EntitySet="tShipDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipList_tEmployee" Association="Self.FK_tShipList_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tShipList" EntitySet="tShipList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipList_tOrder" Association="Self.FK_tShipList_tOrder">
+            <End Role="tOrder" EntitySet="tOrder" />
+            <End Role="tShipList" EntitySet="tShipList" />
+          </AssociationSet>
           <AssociationSet Name="FK_tStatus_tCustomer" Association="Self.FK_tStatus_tCustomer">
             <End Role="tCustomer" EntitySet="tCustomer" />
             <End Role="tStatus" EntitySet="tStatus" />
@@ -777,6 +869,10 @@
             <End Role="tWarehouseName" EntitySet="tWarehouseName" />
             <End Role="tTransfer" EntitySet="tTransfer" />
           </AssociationSet>
+          <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tWarehouse" EntitySet="tWarehouse" />
+          </AssociationSet>
           <AssociationSet Name="FK_tWarehouse_tWarehouseName" Association="Self.FK_tWarehouse_tWarehouseName">
             <End Role="tWarehouseName" EntitySet="tWarehouseName" />
             <End Role="tWarehouse" EntitySet="tWarehouse" />
@@ -793,8 +889,6 @@
           </Key>
           <Property Name="BranchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="bBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tBranch1" Relationship="Self.FK_tBranch_tBranch" FromRole="tBranch" ToRole="tBranch1" />
-          <NavigationProperty Name="tBranch2" Relationship="Self.FK_tBranch_tBranch" FromRole="tBranch1" ToRole="tBranch" />
           <NavigationProperty Name="tEmployees" Relationship="Self.FK_tEmployee_tBranch" FromRole="tBranch" ToRole="tEmployee" />
         </EntityType>
         <EntityType Name="tCustomer">
@@ -841,6 +935,7 @@
           <NavigationProperty Name="tDiaries" Relationship="Self.FK_tDiary_tEmployee" FromRole="tEmployee" ToRole="tDiary" />
           <NavigationProperty Name="tPosition" Relationship="Self.FK_tEmployee_tPosition" FromRole="tEmployee" ToRole="tPosition" />
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tEmployee" FromRole="tEmployee" ToRole="tOrder" />
+          <NavigationProperty Name="tShipLists" Relationship="Self.FK_tShipList_tEmployee" FromRole="tEmployee" ToRole="tShipList" />
           <NavigationProperty Name="tStockLists" Relationship="Self.FK_tStockList_tEmployee" FromRole="tEmployee" ToRole="tStockList" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tEmployee" FromRole="tEmployee" ToRole="tTransfer" />
         </EntityType>
@@ -875,6 +970,7 @@
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tOrder_tWarehouseName" FromRole="tOrder" ToRole="tWarehouseName" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrder" ToRole="tOrderDetail" />
           <NavigationProperty Name="tOrderPays" Relationship="Self.FK_tOrderPay_tOrder" FromRole="tOrder" ToRole="tOrderPay" />
+          <NavigationProperty Name="tShipLists" Relationship="Self.FK_tShipList_tOrder" FromRole="tOrder" ToRole="tShipList" />
         </EntityType>
         <EntityType Name="tOrderDetail">
           <Key>
@@ -887,6 +983,7 @@
           <Property Name="oNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
+          <NavigationProperty Name="tShipDetails" Relationship="Self.FK_tShipDetail_tOrderDetail" FromRole="tOrderDetail" ToRole="tShipDetail" />
         </EntityType>
         <EntityType Name="tOrderPay">
           <Key>
@@ -938,9 +1035,11 @@
           <NavigationProperty Name="tProductMaterial" Relationship="Self.FK_tProduct_tProductMaterial" FromRole="tProduct" ToRole="tProductMaterial" />
           <NavigationProperty Name="tProductSize" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProduct" ToRole="tProductSize" />
           <NavigationProperty Name="tProductImages" Relationship="Self.FK_tProductImage_tProduct" FromRole="tProduct" ToRole="tProductImage" />
+          <NavigationProperty Name="tShipDetails" Relationship="Self.FK_tShipDetail_tProduct" FromRole="tProduct" ToRole="tShipDetail" />
           <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
           <NavigationProperty Name="tStockDetails" Relationship="Self.FK_tStockDetail_tProduct" FromRole="tProduct" ToRole="tStockDetail" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
+          <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
         </EntityType>
         <EntityType Name="tProductCategory">
           <Key>
@@ -1011,6 +1110,10 @@
           <Property Name="sProductId" Type="Int32" Nullable="false" />
           <Property Name="sQuantity" Type="Int32" Nullable="false" />
           <Property Name="sWarehouseNameId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tOrderDetail" Relationship="Self.FK_tShipDetail_tOrderDetail" FromRole="tShipDetail" ToRole="tOrderDetail" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_tShipDetail_tProduct" FromRole="tShipDetail" ToRole="tProduct" />
+          <NavigationProperty Name="tShipList" Relationship="Self.FK_tShipDetail_tShipList" FromRole="tShipDetail" ToRole="tShipList" />
+          <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tShipDetail_tWarehouseName" FromRole="tShipDetail" ToRole="tWarehouseName" />
         </EntityType>
         <EntityType Name="tShipList">
           <Key>
@@ -1022,6 +1125,9 @@
           <Property Name="sOrderId" Type="Int32" Nullable="false" />
           <Property Name="sShipDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="sShipNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tShipList_tEmployee" FromRole="tShipList" ToRole="tEmployee" />
+          <NavigationProperty Name="tOrder" Relationship="Self.FK_tShipList_tOrder" FromRole="tShipList" ToRole="tOrder" />
+          <NavigationProperty Name="tShipDetails" Relationship="Self.FK_tShipDetail_tShipList" FromRole="tShipList" ToRole="tShipDetail" />
         </EntityType>
         <EntityType Name="tStatu">
           <Key>
@@ -1088,6 +1194,7 @@
           <Property Name="WarehouseNameId" Type="Int32" Nullable="false" />
           <Property Name="wProductId" Type="Int32" Nullable="false" />
           <Property Name="wPQty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tWarehouse" ToRole="tProduct" />
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouse" ToRole="tWarehouseName" />
         </EntityType>
         <EntityType Name="tWarehouseName">
@@ -1098,23 +1205,12 @@
           <Property Name="WarehouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tDiaries" Relationship="Self.FK_tDiary_tWarehouseName" FromRole="tWarehouseName" ToRole="tDiary" />
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrder" />
+          <NavigationProperty Name="tShipDetails" Relationship="Self.FK_tShipDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tShipDetail" />
           <NavigationProperty Name="tStockDetails" Relationship="Self.FK_tStockDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tStockDetail" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tWarehouseName" ToRole="tTransfer" />
           <NavigationProperty Name="tTransfers1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tWarehouseName" ToRole="tTransfer" />
           <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouseName" ToRole="tWarehouse" />
         </EntityType>
-        <Association Name="FK_tBranch_tBranch">
-          <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
-          <End Role="tBranch1" Type="Self.tBranch" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tBranch">
-              <PropertyRef Name="BranchId" />
-            </Principal>
-            <Dependent Role="tBranch1">
-              <PropertyRef Name="BranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tEmployee_tBranch">
           <End Role="tBranch" Type="Self.tBranch" Multiplicity="1" />
           <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="*" />
@@ -1211,6 +1307,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tShipList_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tShipList" Type="Self.tShipList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="tShipList">
+              <PropertyRef Name="sEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tStockList_tEmployee">
           <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
           <End Role="tStockList" Type="Self.tStockList" Multiplicity="*" />
@@ -1295,6 +1403,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tShipList_tOrder">
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+          <End Role="tShipList" Type="Self.tShipList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="tShipList">
+              <PropertyRef Name="sOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tOrderDetail_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
           <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
@@ -1304,6 +1424,18 @@
             </Principal>
             <Dependent Role="tOrderDetail">
               <PropertyRef Name="oProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tOrderDetail">
+          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrderDetail">
+              <PropertyRef Name="oOrderDetailId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="sOrderDetailId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1367,6 +1499,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tShipDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="sProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tStatus_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
           <End Role="tStatus" Type="Self.tStatu" Multiplicity="*" />
@@ -1403,6 +1547,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tWarehouse_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tWarehouse">
+              <PropertyRef Name="wProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tPromotion_tPromotionCategory">
           <End Role="tPromotionCategory" Type="Self.tPromotionCategory" Multiplicity="1" />
           <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="*" />
@@ -1412,6 +1568,30 @@
             </Principal>
             <Dependent Role="tPromotion">
               <PropertyRef Name="PromotinoCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tShipList">
+          <End Role="tShipList" Type="Self.tShipList" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tShipList">
+              <PropertyRef Name="ShipId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="ShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tShipDetail_tWarehouseName">
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+          <End Role="tShipDetail" Type="Self.tShipDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseName">
+              <PropertyRef Name="WarehouseNameId" />
+            </Principal>
+            <Dependent Role="tShipDetail">
+              <PropertyRef Name="sWarehouseNameId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1501,10 +1681,6 @@
           <EntitySet Name="tTransfers" EntityType="Self.tTransfer" />
           <EntitySet Name="tWarehouses" EntityType="Self.tWarehouse" />
           <EntitySet Name="tWarehouseNames" EntityType="Self.tWarehouseName" />
-          <AssociationSet Name="FK_tBranch_tBranch" Association="Self.FK_tBranch_tBranch">
-            <End Role="tBranch" EntitySet="tBranches" />
-            <End Role="tBranch1" EntitySet="tBranches" />
-          </AssociationSet>
           <AssociationSet Name="FK_tEmployee_tBranch" Association="Self.FK_tEmployee_tBranch">
             <End Role="tBranch" EntitySet="tBranches" />
             <End Role="tEmployee" EntitySet="tEmployees" />
@@ -1537,6 +1713,10 @@
             <End Role="tEmployee" EntitySet="tEmployees" />
             <End Role="tOrder" EntitySet="tOrders" />
           </AssociationSet>
+          <AssociationSet Name="FK_tShipList_tEmployee" Association="Self.FK_tShipList_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tShipList" EntitySet="tShipLists" />
+          </AssociationSet>
           <AssociationSet Name="FK_tStockList_tEmployee" Association="Self.FK_tStockList_tEmployee">
             <End Role="tEmployee" EntitySet="tEmployees" />
             <End Role="tStockList" EntitySet="tStockLists" />
@@ -1565,9 +1745,17 @@
             <End Role="tOrder" EntitySet="tOrders" />
             <End Role="tOrderPay" EntitySet="tOrderPays" />
           </AssociationSet>
+          <AssociationSet Name="FK_tShipList_tOrder" Association="Self.FK_tShipList_tOrder">
+            <End Role="tOrder" EntitySet="tOrders" />
+            <End Role="tShipList" EntitySet="tShipLists" />
+          </AssociationSet>
           <AssociationSet Name="FK_tOrderDetail_tProduct" Association="Self.FK_tOrderDetail_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tOrderDetail" Association="Self.FK_tShipDetail_tOrderDetail">
+            <End Role="tOrderDetail" EntitySet="tOrderDetails" />
+            <End Role="tShipDetail" EntitySet="tShipDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tOrderPay_tOrderPayType" Association="Self.FK_tOrderPay_tOrderPayType">
             <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
@@ -1589,6 +1777,10 @@
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tProductImage" EntitySet="tProductImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tProduct" Association="Self.FK_tShipDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tShipDetail" EntitySet="tShipDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_tStatus_tProduct" Association="Self.FK_tStatus_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tStatus" EntitySet="tStatus" />
@@ -1601,9 +1793,21 @@
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tTransfer" EntitySet="tTransfers" />
           </AssociationSet>
+          <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tWarehouse" EntitySet="tWarehouses" />
+          </AssociationSet>
           <AssociationSet Name="FK_tPromotion_tPromotionCategory" Association="Self.FK_tPromotion_tPromotionCategory">
             <End Role="tPromotionCategory" EntitySet="tPromotionCategories" />
             <End Role="tPromotion" EntitySet="tPromotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tShipList" Association="Self.FK_tShipDetail_tShipList">
+            <End Role="tShipList" EntitySet="tShipLists" />
+            <End Role="tShipDetail" EntitySet="tShipDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tShipDetail_tWarehouseName" Association="Self.FK_tShipDetail_tWarehouseName">
+            <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+            <End Role="tShipDetail" EntitySet="tShipDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tStockDetail_tStockList" Association="Self.FK_tStockDetail_tStockList">
             <End Role="tStockList" EntitySet="tStockLists" />

@@ -19,6 +19,7 @@ namespace MotaiProject
         {
             this.tOrderDetails = new HashSet<tOrderDetail>();
             this.tOrderPays = new HashSet<tOrderPay>();
+            this.tShipLists = new HashSet<tShipList>();
         }
     
         public int OrderId { get; set; }
@@ -41,5 +42,7 @@ namespace MotaiProject
         public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderPay> tOrderPays { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tShipList> tShipLists { get; set; }
     }
 }
