@@ -1,4 +1,6 @@
-﻿@using MotaiProject.Models
+﻿@model MotaiProject.ViewModels.EmployeeLoginViewModel
+@using MotaiProject.Models
+
 @{
     ViewBag.Title = "員工首頁";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,4 +13,40 @@
 }
 
 <h2>@welcome 員工首頁</h2>
-
+<div class="row">
+    <div class="card" id="collapseExample">
+        <div class="card-body" style="background-color:azure">
+            <div>
+                舊密碼
+                <div class="col-md-10 card-text">
+                    @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "oldpass" } })
+                </div>
+            </div>
+            @using (Html.BeginForm("修改會員資料", "Customer", FormMethod.Post))//要改
+            {
+                <form method="post">
+                    <div>
+                        新密碼
+                        <div class="col-md-10 card-text">
+                            @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "newpass" } })
+                        </div>
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-danger d-none" id="pwch"></button>
+            }
+            <button class="btn btn-danger" id="changepassword" onclick="cha()" style="margin-top:10px">修改密碼</button>
+            <p id="warning"></p>
+        </div>
+    </div>
+</div>
+<script>
+    var pa = document.querySelectorAll(".form-control");
+    var oldpass = pa[0].value;
+    //var checkpass = pa[2].value;
+    //console.log(oldpass + "+" + checkpass);
+    const clearbox = (item) => {
+        item.value = "";
+        item.type = "Password";
+    }
+    pa.forEach(clearbox);
+</script>
