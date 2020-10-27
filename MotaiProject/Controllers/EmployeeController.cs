@@ -227,6 +227,8 @@ namespace MotaiProject.Controllers
 
         public ActionResult 新增日誌()
         {
+            tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+            ViewBag.name = emp.eName;
             DiaryViewModel newDiary = new DiaryViewModel();
             var warehouses = new ClassMethod().GetCategoryAll();
             List<SelectListItem> WareList = new List<SelectListItem>();
@@ -247,7 +249,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-
+                
             }
                 return RedirectToAction("員工首頁");
         }
