@@ -324,7 +324,7 @@ namespace MotaiProject.Controllers
             }
         }
 
-        public bool CheckFavor(int ProductId)
+        public JsonResult CheckFavor(int ProductId)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
@@ -332,16 +332,16 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities db = new MotaiDataEntities();
                 if(db.tFavorites.Where(f => f.fProductId.Equals(ProductId) && f.fCustomerId.Equals(cust.CustomerId)).FirstOrDefault() == null)
                 {
-                    return false;
+                    return Json(new { check = false });
                 }
                 else
                 {
-                    return true;
+                    return Json(new { check = true });
                 }
             }
             else
             {
-                return false;
+                return Json(new { check = false });
             }            
         }
 
