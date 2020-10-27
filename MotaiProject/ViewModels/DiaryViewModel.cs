@@ -46,7 +46,7 @@ namespace MotaiProject.ViewModels
         public string dWeather { get { return this.Diary.dWeather; } set { this.Diary.dWeather = value; } }
         public string dDiaryNote { get { return this.Diary.dDiaryNote; } set { this.Diary.dDiaryNote = value; } }
         public int dWarehouseNameId { get { return this.Diary.dWarehouseNameId; } set { this.Diary.dWarehouseNameId = value; } }
-        public string eAccount { get { return this.employeesetid.eAccount; } set { employeesetid.eAccount = value; } }
+        public string eName { get { return this.employeesetid.eAccount; } set { employeesetid.eAccount = value; } }
         public IEnumerable<SelectListItem> WarehouseName { get; set; }
     }
     

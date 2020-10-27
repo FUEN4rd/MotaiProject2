@@ -17,12 +17,14 @@ namespace MotaiProject
         public int PromotionId { get; set; }
         public string PromotionName { get; set; }
         public int PromotinoCategory { get; set; }
+        public string PromotionDescription { get; set; }
         public System.DateTime pPromotionStartDate { get; set; }
         public System.DateTime pPromotionDeadline { get; set; }
         public string pPromotionWeb { get; set; }
         public string pADimage { get; set; }
         public string pDiscountCode { get; set; }
         public double pDiscount { get; set; }
+        public System.DateTime pPromotionPostDate { get; set; }
     
         public virtual tOrder tOrder { get; set; }
         public virtual tPromotionCategory tPromotionCategory { get; set; }

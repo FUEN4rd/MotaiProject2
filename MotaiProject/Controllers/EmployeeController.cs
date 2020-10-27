@@ -37,7 +37,7 @@ namespace MotaiProject.Controllers
         public ActionResult 員工登出()
         {
             Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = null;
-            return RedirectToAction("員工首頁");
+            return RedirectToAction("員工登入");
         }
 
         public ActionResult 員工首頁()
@@ -46,7 +46,13 @@ namespace MotaiProject.Controllers
             {
                 return RedirectToAction("員工登入");
             }
-            return View();
+            else
+            {
+                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                EmployeeViewModels employee = new EmployeeViewModels();
+                employee.Employee = emp;
+                return View(employee);
+            }
         }
         //員工
         public ActionResult 新增員工()
@@ -221,6 +227,8 @@ namespace MotaiProject.Controllers
 
         public ActionResult 新增日誌()
         {
+            tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+            ViewBag.name = emp.eName;
             DiaryViewModel newDiary = new DiaryViewModel();
             var warehouses = new ClassMethod().GetCategoryAll();
             List<SelectListItem> WareList = new List<SelectListItem>();
@@ -241,7 +249,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-
+                
             }
                 return RedirectToAction("員工首頁");
         }
@@ -266,5 +274,6 @@ namespace MotaiProject.Controllers
             OrderViewModel CheckOrder = new OrderViewModel();
             return View(CheckOrder);
         }
+
     }
 }
