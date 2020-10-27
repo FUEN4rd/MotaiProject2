@@ -47,24 +47,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionDeadline)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionWeb)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().pADimage)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().pDiscountCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().pDiscount)
-            </th>
+            
         </tr>
 
         @foreach (var item in Model)
@@ -77,22 +67,10 @@
                     @Html.DisplayFor(modelItem => item.PromotionName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.pPromotionStartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pPromotionDeadline)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.pPromotionWeb)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.pADimage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pDiscountCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pDiscount)
                 </td>
             </tr>
         }
