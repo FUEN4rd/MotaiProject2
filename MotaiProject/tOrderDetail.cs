@@ -14,6 +14,12 @@ namespace MotaiProject
     
     public partial class tOrderDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tOrderDetail()
+        {
+            this.tShipDetails = new HashSet<tShipDetail>();
+        }
+    
         public int oOrderDetailId { get; set; }
         public int oOrderId { get; set; }
         public int oProductId { get; set; }
@@ -22,5 +28,7 @@ namespace MotaiProject
     
         public virtual tOrder tOrder { get; set; }
         public virtual tProduct tProduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tShipDetail> tShipDetails { get; set; }
     }
 }

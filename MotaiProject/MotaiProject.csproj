@@ -380,6 +380,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassMethod.cs" />
+    <Compile Include="Models\CommodityMethod.cs" />
     <Compile Include="Models\CSession關鍵字.cs" />
     <Compile Include="MotaiModel.Context.cs">
       <AutoGen>True</AutoGen>

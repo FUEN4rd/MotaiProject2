@@ -20,9 +20,11 @@ namespace MotaiProject
             this.tFavorites = new HashSet<tFavorite>();
             this.tOrderDetails = new HashSet<tOrderDetail>();
             this.tProductImages = new HashSet<tProductImage>();
+            this.tShipDetails = new HashSet<tShipDetail>();
             this.tStatus = new HashSet<tStatu>();
             this.tStockDetails = new HashSet<tStockDetail>();
             this.tTransfers = new HashSet<tTransfer>();
+            this.tWarehouses = new HashSet<tWarehouse>();
         }
     
         public int ProductId { get; set; }
@@ -47,10 +49,14 @@ namespace MotaiProject
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tProductImage> tProductImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tShipDetail> tShipDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tStatu> tStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tStockDetail> tStockDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tTransfer> tTransfers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tWarehouse> tWarehouses { get; set; }
     }
 }
