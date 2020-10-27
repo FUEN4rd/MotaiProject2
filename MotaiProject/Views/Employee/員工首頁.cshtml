@@ -1,4 +1,4 @@
-﻿@model MotaiProject.ViewModels.EmployeeLoginViewModel
+﻿@model MotaiProject.ViewModels.EmployeeViewModels
 @using MotaiProject.Models
 
 @{
@@ -43,7 +43,7 @@
     var pa = document.querySelectorAll(".form-control");
     var oldpass = pa[0].value;
     //var checkpass = pa[2].value;
-    //console.log(oldpass + "+" + checkpass);
+    console.log(oldpass);
     const clearbox = (item) => {
         item.value = "";
         item.type = "Password";
