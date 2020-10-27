@@ -54,7 +54,7 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
-        public JsonResult ChangePassword(int EmployeeId,string ePassword)
+        public JsonResult ChangePassword(int EmployeeId,string ePassword,string oldpass)
         {//要用到其他地方
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
@@ -63,16 +63,19 @@ namespace MotaiProject.Controllers
                 //tEmployee changeemp = new tEmployee();
                 //changeemp =emp;
                 //changeemp.EmployeeId= EmployeeId;
-
                 //dbContext.tEmployees.Add(changeemp);
-                //dbContext.SaveChanges();
-                tEmployee employee = dbContext.tEmployees.Find(EmployeeId);
-                if (employee != null)
+                //dbContext.SaveChanges();    
+                if (emp.ePassword==oldpass)
                 {                  
-                    employee.ePassword=ePassword;
+                    emp.ePassword=ePassword;
                     dbContext.SaveChanges();
+                    return Json(new { result = true, msg = "更新成功" });
                 }
-                return Json(new { result = true, msg = "更新成功" });
+                else
+                {
+                    return Json(new { result = false, msg = "舊密碼錯誤" });
+                }
+                
             }
             else
             {
