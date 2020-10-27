@@ -118,8 +118,8 @@ namespace MotaiProject.Controllers
         //        }
         //    }
         //    dbContext.tCustomers.Add(n新會員);
-        //            dbContext.SaveChanges();
-        //            return true;
+        //    dbContext.SaveChanges();
+        //    return true;
         //}
 
         public ActionResult 忘記密碼()
@@ -220,7 +220,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }        
-        
+        //加入購物車
         public JsonResult AddToCart(int ProductId, int buyQty)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
@@ -284,7 +284,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }
-
+        //加入收藏
         public JsonResult AddFavorite(int ProductId)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
