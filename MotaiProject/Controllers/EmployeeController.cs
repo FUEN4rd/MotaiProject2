@@ -54,6 +54,29 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
+        public JsonResult ChangePassword(int EmployeeId)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tEmployee changeemp = new tEmployee();
+                //if (dbContext.tFavorites.Count().Equals(0))
+                //{
+                //    favor.FavoriteId = 1;
+                //}
+                changeemp =emp;
+                changeemp.EmployeeId= EmployeeId;
+                
+                dbContext.tEmployees.Add(changeemp);
+                dbContext.SaveChanges();
+                return Json(new { result = true, msg = "更新成功" });
+            }
+            else
+            {
+                return Json(new { result = false, msg = "請先登入" });
+            }
+        }
         //員工
         public ActionResult 新增員工()
         {
