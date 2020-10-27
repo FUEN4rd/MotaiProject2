@@ -64,10 +64,14 @@ namespace MotaiProject.Controllers
                 //changeemp =emp;
                 //changeemp.EmployeeId= EmployeeId;
                 //dbContext.tEmployees.Add(changeemp);
-                //dbContext.SaveChanges();    
+                //dbContext.SaveChanges()
+                ;    
                 if (emp.ePassword==oldpass)
                 {                  
                     emp.ePassword=ePassword;
+                    Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = emp;
+                    tEmployee changePwd = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
+                    changePwd.ePassword = ePassword;
                     dbContext.SaveChanges();
                     return Json(new { result = true, msg = "更新成功" });
                 }
