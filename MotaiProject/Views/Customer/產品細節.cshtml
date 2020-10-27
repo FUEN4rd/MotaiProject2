@@ -1,5 +1,9 @@
 ﻿@model MotaiProject.ViewModels.ProductViewModel
+@using MotaiProject.Models
 @{
+
+
+    tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
     ViewBag.Title = "產品細節";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
     int id = Model.ProductId;
@@ -113,7 +117,7 @@
                                 <div class="carousel-item" id="imagepic">
                                     <img src="@Url.Action(item)" class="d-block w-100" alt="..." />
                                 </div>
-                            }                            
+                            }
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -247,7 +251,7 @@
             var TorF = eval(data.check);
             if (TorF) {
                 $("#star").css("display", "none");
-                $("#starlight").css("display", "block");                
+                $("#starlight").css("display", "block");
             } else {
                 $("#starlight").css("display", "none");
                 $("#star").css("display", "block");
@@ -300,7 +304,118 @@
     }
 
     $(document).ready(function () {
-        $("#imageli").addClass("active");
-        $("#imagepic").addClass("active");
+        $("#star").addClass("active");
+        console.log("star-ready");
+        $("#starlight").addClass("active");
+        console.log("starlight-ready");
     })
 </script>
+@*觸發尚未登入*@
+
+<div>
+    @{
+        if (cust == null)
+        {
+            using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title  Y_black" id="exampleModalLabel">會員登入</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group form-inline">
+                                        <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
+                                        <div class="col-md-10 ">
+                                            @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-inline">
+                                        <label for="loginPassword" class="col-form-label Y_black">密碼:</label>
+                                        <div class="col-md-10">
+                                            @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-inline">
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("忘記密碼", "忘記密碼", "Customer", null, null)
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">登入</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal fade" id="star" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title  Y_black" id="exampleModalLabel">請先登入</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body  Y_black">
+                            是否要登入?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
+                            <button type="button" class="btn btn-secondary  Y_black" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="starlight" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title  Y_black" id="exampleModalLabel">請先登入</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body  Y_black">
+                            是否要登入?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
+                            <button type="button" class="btn btn-secondary  Y_black" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <script>
+                
+                $(document).ready(function () {
+                    $("#star_origin").removeAttr("data-toggle");
+                    $("#star_origin").removeAttr("data-target");
+                })
+                $(document).ready(function () {
+                    $("#shop_origin").removeAttr("data-toggle");
+                    $("#shop_origin").removeAttr("data-target");
+                })
+            </script>
+        }
+    }
+</div>

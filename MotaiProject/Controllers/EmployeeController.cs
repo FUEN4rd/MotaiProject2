@@ -261,6 +261,7 @@ namespace MotaiProject.Controllers
         {
             tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             ViewBag.name = emp.eName;
+            ViewBag.empId = emp.EmployeeId;
             DiaryViewModel newDiary = new DiaryViewModel();
             var warehouses = new ClassMethod().GetCategoryAll();
             List<SelectListItem> WareList = new List<SelectListItem>();
@@ -281,7 +282,12 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-                
+                MotaiDataEntities db = new MotaiDataEntities();
+                tDiary diary = new tDiary();
+                diary = data.Diary;
+                db.tDiaries.Add(diary);
+                db.SaveChanges();
+                return RedirectToAction("員工首頁");
             }
                 return RedirectToAction("員工首頁");
         }
