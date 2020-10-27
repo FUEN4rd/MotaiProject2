@@ -39,8 +39,11 @@ namespace MotaiProject.ViewModels
         public string oCheck { get { return this.Order.oCheck; } set { Order.oCheck = value; } }
         [DisplayName("審核時間")]
         public Nullable<System.DateTime> oCheckDate { get { return this.Order.oCheckDate; } set { Order.oCheckDate = value; } }
-        [DisplayName("升遷編號")]
+        [DisplayName("優惠")]
         public Nullable<int> oPromotionId { get { return this.Order.oPromotionId; } set { Order.oPromotionId = value; } }
-
+        [DisplayName("備註")]
+        public string cNote { get; set; }
+        [DisplayName("出貨倉儲")]
+        public int oWarehouseName { get; set; }
     }
 }
