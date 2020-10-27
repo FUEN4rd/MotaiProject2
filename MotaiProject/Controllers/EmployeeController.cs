@@ -54,22 +54,24 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
-        public JsonResult ChangePassword(int EmployeeId)
-        {
+        public JsonResult ChangePassword(int EmployeeId,string ePassword)
+        {//要用到其他地方
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
-                tEmployee changeemp = new tEmployee();
-                //if (dbContext.tFavorites.Count().Equals(0))
-                //{
-                //    favor.FavoriteId = 1;
-                //}
-                changeemp =emp;
-                changeemp.EmployeeId= EmployeeId;
-                
-                dbContext.tEmployees.Add(changeemp);
-                dbContext.SaveChanges();
+                //tEmployee changeemp = new tEmployee();
+                //changeemp =emp;
+                //changeemp.EmployeeId= EmployeeId;
+
+                //dbContext.tEmployees.Add(changeemp);
+                //dbContext.SaveChanges();
+                tEmployee employee = dbContext.tEmployees.Find(EmployeeId);
+                if (employee != null)
+                {                  
+                    employee.ePassword=ePassword;
+                    dbContext.SaveChanges();
+                }
                 return Json(new { result = true, msg = "更新成功" });
             }
             else

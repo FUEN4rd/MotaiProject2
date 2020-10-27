@@ -22,19 +22,13 @@
                     @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "oldpass" } })
                 </div>
             </div>
-            @using (Html.BeginForm("修改會員資料", "Customer", FormMethod.Post))//要改
-            {
-                <form method="post">
-                    <div>
-                        新密碼
-                        <div class="col-md-10 card-text">
-                            @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "newpass" } })
-                        </div>
-                    </div>
-                </form>
-                <button type="submit" class="btn btn-danger d-none" id="pwch"></button>
-            }
-            <button class="btn btn-danger" id="changepassword" onclick="cha()" style="margin-top:10px">修改密碼</button>
+            <div>
+                新密碼
+                <div class="col-md-10 card-text">
+                    @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "newpass" } })
+                </div>
+            </div>
+            <button class="btn btn-danger" id="changepassword" onclick="changepassword()" style="margin-top:10px">修改密碼</button>
             <p id="warning"></p>
         </div>
     </div>
@@ -53,12 +47,14 @@
 
 
     function changepassword() {
-        fetch('/Empolyee/ChangePassword', {
+        let newpass = document.querySelector("#newpass").value;
+        console.log(newpass);
+        fetch('/Employee/ChangePassword', {
             method: 'POST',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
-            body: `EmpolyeeId=${@Model.EmployeeId}`
+            body: `EmployeeId=${@Model.EmployeeId}&ePassword=${newpass}`
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
