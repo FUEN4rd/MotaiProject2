@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tBranch">
           <Key>
             <PropertyRef Name="BranchId" />
@@ -158,12 +158,14 @@
           <Property Name="PromotionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PromotionName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PromotinoCategory" Type="int" Nullable="false" />
+          <Property Name="PromotionDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pPromotionStartDate" Type="date" Nullable="false" />
           <Property Name="pPromotionDeadline" Type="date" Nullable="false" />
           <Property Name="pPromotionWeb" Type="nvarchar(max)" />
           <Property Name="pADimage" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pDiscountCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pDiscount" Type="float" Nullable="false" />
+          <Property Name="pPromotionPostDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="tPromotionCategory">
           <Key>
@@ -699,8 +701,7 @@
             <End Role="tWarehouse" EntitySet="tWarehouse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MotaiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -898,6 +899,7 @@
           <Property Name="PromotionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PromotinoCategory" Type="Int32" Nullable="false" />
+          <Property Name="PromotionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pPromotionStartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pPromotionDeadline" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pPromotionWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -906,6 +908,7 @@
           <Property Name="pDiscount" Type="Double" Nullable="false" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrder_tPromotion" FromRole="tPromotion" ToRole="tOrder" />
           <NavigationProperty Name="tPromotionCategory" Relationship="Self.FK_tPromotion_tPromotionCategory" FromRole="tPromotion" ToRole="tPromotionCategory" />
+          <Property Name="pPromotionPostDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="tPromotionCategory">
           <Key>
@@ -1626,9 +1629,11 @@
           <EntitySetMapping Name="tPromotions">
             <EntityTypeMapping TypeName="MotaiDataModel.tPromotion">
               <MappingFragment StoreEntitySet="tPromotion">
+                <ScalarProperty Name="pPromotionPostDate" ColumnName="pPromotionPostDate" />
                 <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
                 <ScalarProperty Name="PromotinoCategory" ColumnName="PromotinoCategory" />
+                <ScalarProperty Name="PromotionDescription" ColumnName="PromotionDescription" />
                 <ScalarProperty Name="pPromotionStartDate" ColumnName="pPromotionStartDate" />
                 <ScalarProperty Name="pPromotionDeadline" ColumnName="pPromotionDeadline" />
                 <ScalarProperty Name="pPromotionWeb" ColumnName="pPromotionWeb" />

@@ -41,38 +41,39 @@
 
     <table class="table">
         <tr>
-            <th>
+            <th style="display:none">
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionName)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionWeb)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().sPromotinoCategory)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().pADimage)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PromotionDescription)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().pPromotionPostDate)
+            </th>
+
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+        <tr>
+            <a href="@Url.Action(item.pPromotionWeb)">
+                <td style="display:none">
                     @Html.DisplayFor(modelItem => item.PromotionId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PromotionName)
+                    @Html.DisplayFor(modelItem => item.sPromotinoCategory)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.pPromotionWeb)
-                </td>
+                    @Html.DisplayFor(modelItem => item.PromotionDescription)
+                </td>                
                 <td>
-                    @Html.DisplayFor(modelItem => item.pADimage)
+                    @Html.DisplayFor(modelItem => item.pPromotionPostDate)
                 </td>
-            </tr>
+            </a>
+        </tr>
         }
 
     </table>

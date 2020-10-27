@@ -30,7 +30,7 @@ namespace MotaiProject.Controllers
 
             int cpage = page < 1 ? 1 : page;
             //資料庫讀取 tPromotions 為資料庫名稱
-            var promotion = db.tPromotions.OrderBy(c => c.PromotionId).ToList();
+            var promotion = db.tPromotions.OrderByDescending(c => c.PromotionId).ToList();
             //開新List 取值
             List<PromotionViewModel> reslsit = new List<PromotionViewModel>();
             foreach (var items in promotion)
