@@ -49,7 +49,7 @@
     function changepassword() {
         let newpass = document.querySelector("#newpass").value;
         let oldpass = document.querySelector("#oldpass").value;
-        console.log(newpass);
+        //console.log(newpass);
         fetch('/Employee/ChangePassword', {
             method: 'POST',
             headers: {
@@ -59,13 +59,7 @@
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
-            //if (data.result) {
                 $("#warning").text(data.msg);
-            //}
-            //    alert(data.msg);
-            //} else {
-            //    alert(data.msg);
-            //}
         });
     }
 </script>
