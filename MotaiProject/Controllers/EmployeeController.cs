@@ -54,7 +54,7 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
-        public JsonResult ChangePassword(int EmployeeId,string ePassword)
+        public JsonResult ChangePassword(int EmployeeId,string ePassword,string oldpass)
         {//要用到其他地方
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
@@ -63,16 +63,23 @@ namespace MotaiProject.Controllers
                 //tEmployee changeemp = new tEmployee();
                 //changeemp =emp;
                 //changeemp.EmployeeId= EmployeeId;
-
                 //dbContext.tEmployees.Add(changeemp);
-                //dbContext.SaveChanges();
-                tEmployee employee = dbContext.tEmployees.Find(EmployeeId);
-                if (employee != null)
+                //dbContext.SaveChanges()
+                ;    
+                if (emp.ePassword==oldpass)
                 {                  
-                    employee.ePassword=ePassword;
+                    emp.ePassword=ePassword;
+                    Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = emp;
+                    tEmployee changePwd = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
+                    changePwd.ePassword = ePassword;
                     dbContext.SaveChanges();
+                    return Json(new { result = true, msg = "更新成功" });
                 }
-                return Json(new { result = true, msg = "更新成功" });
+                else
+                {
+                    return Json(new { result = false, msg = "舊密碼錯誤" });
+                }
+                
             }
             else
             {
@@ -254,6 +261,7 @@ namespace MotaiProject.Controllers
         {
             tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             ViewBag.name = emp.eName;
+            ViewBag.empId = emp.EmployeeId;
             DiaryViewModel newDiary = new DiaryViewModel();
             var warehouses = new ClassMethod().GetCategoryAll();
             List<SelectListItem> WareList = new List<SelectListItem>();
@@ -274,7 +282,12 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-                
+                MotaiDataEntities db = new MotaiDataEntities();
+                tDiary diary = new tDiary();
+                diary = data.Diary;
+                db.tDiaries.Add(diary);
+                db.SaveChanges();
+                return RedirectToAction("員工首頁");
             }
                 return RedirectToAction("員工首頁");
         }

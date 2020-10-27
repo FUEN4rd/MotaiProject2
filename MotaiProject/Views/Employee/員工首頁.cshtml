@@ -35,7 +35,7 @@
 </div>
 <script>
     var pa = document.querySelectorAll(".form-control");
-    var oldpass = pa[0].value;
+    //var oldpass = pa[0].value;
     //var checkpass = pa[2].value;
     console.log(oldpass);
     const clearbox = (item) => {
@@ -48,23 +48,18 @@
 
     function changepassword() {
         let newpass = document.querySelector("#newpass").value;
-        console.log(newpass);
+        let oldpass = document.querySelector("#oldpass").value;
+        //console.log(newpass);
         fetch('/Employee/ChangePassword', {
             method: 'POST',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
             },
-            body: `EmployeeId=${@Model.EmployeeId}&ePassword=${newpass}`
+            body: `EmployeeId=${@Model.EmployeeId}&ePassword=${newpass}&oldpass=${oldpass}`
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
-            if (data.result) {
-                $("#warning").text("修改完成");
-            }
-            //    alert(data.msg);
-            //} else {
-            //    alert(data.msg);
-            //}
+                $("#warning").text(data.msg);
         });
     }
 </script>

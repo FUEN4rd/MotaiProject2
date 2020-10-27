@@ -94,7 +94,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="註冊" class="btn btn-default"  />
+                    <input type="submit" value="註冊" class="btn btn-default"  id="ok"  onclick="check()"/>
                 </div>
             </div>
         </div>
@@ -112,6 +112,7 @@
 </div>
 
 <script>
+
     function check() {
         var Account = $("#Account").val();
         var Password = $("#Password").val();
@@ -141,6 +142,7 @@
                 var result = data ? "註冊成功" : "註冊失敗555";
                 console.log(data);
                 alert(result);
+               
             }
         });
     };

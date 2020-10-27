@@ -1,5 +1,9 @@
 ﻿@model MotaiProject.ViewModels.ProductViewModel
+@using MotaiProject.Models
 @{
+
+
+    tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
     ViewBag.Title = "產品細節";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
     int id = Model.ProductId;
@@ -113,7 +117,7 @@
                                 <div class="carousel-item" id="imagepic">
                                     <img src="@Url.Action(item)" class="d-block w-100" alt="..." />
                                 </div>
-                            }                            
+                            }
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -138,11 +142,11 @@
 
                     <button type="button" class="btn Y_btn" data-toggle="tooltip" data-placement="top" title="收藏"
                             id="starlight" onclick="cancelFavor()">
-                        <svg id="starlight" height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" /></svg>
+                        <svg  height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" /></svg>
                     </button>
                     <button type="button" class="btn Y_btn" data-toggle="tooltip" data-placement="top" title="收藏"
                             id="star" onclick="addFavor()">
-                        <svg id="star" height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" /></svg>
+                        <svg  height="32px" width="50px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" viewBox="0 0 576 512"><path fill="#F2EDD8" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" /></svg>
                     </button>
 
                 </div>
@@ -247,7 +251,7 @@
             var TorF = eval(data.check);
             if (TorF) {
                 $("#star").css("display", "none");
-                $("#starlight").css("display", "block");                
+                $("#starlight").css("display", "block");
             } else {
                 $("#starlight").css("display", "none");
                 $("#star").css("display", "block");
@@ -299,8 +303,115 @@
         });
     }
 
-    $(document).ready(function () {
-        $("#imageli").addClass("active");
-        $("#imagepic").addClass("active");
-    })
 </script>
+@*觸發尚未登入*@
+
+<div>
+    @{
+        if (cust == null)
+        {
+            using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title  Y_black" id="exampleModalLabel">會員登入</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group form-inline">
+                                        <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
+                                        <div class="col-md-10 ">
+                                            @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-inline">
+                                        <label for="loginPassword" class="col-form-label Y_black">密碼:</label>
+                                        <div class="col-md-10">
+                                            @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-inline">
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.ActionLink("忘記密碼", "忘記密碼", "Customer", null, null)
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">登入</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal fade" id="star" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title  Y_black" id="exampleModalLabel">請先登入</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body  Y_black">
+                            是否要登入?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
+                            <button type="button" class="btn btn-secondary  Y_black" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="starlight" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title  Y_black" id="exampleModalLabel">請先登入</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body  Y_black">
+                            是否要登入?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
+                            <button type="button" class="btn btn-secondary  Y_black" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <script>
+                
+                $(document).ready(function () {
+                    $("#star").removeAttr("data-toggle");
+                    $("#star").removeAttr("data-target");
+                    console.log("remove-star");
+                })
+                $(document).ready(function () {
+                    $("#starlight").removeAttr("data-toggle");
+                    $("#starlight").removeAttr("data-target");
+                    console.log("remove-starlight");
+                })
+            </script>
+        }
+    }
+</div>

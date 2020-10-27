@@ -76,6 +76,33 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("首頁");
         }
+        public JsonResult CustomerChangePassword(int CustomerId, string cPassword, string oldpass)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                
+                if (customer.cPassword == oldpass)
+                {
+                    customer.cPassword = cPassword;
+                    Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = customer;
+                    tCustomer changePwd = dbContext.tCustomers.Where(c => c.CustomerId.Equals(customer.CustomerId)).FirstOrDefault();
+                    changePwd.cPassword = cPassword;
+                    dbContext.SaveChanges();
+                    return Json(new { result = true, msg = "更新成功" });
+                }
+                else
+                {
+                    return Json(new { result = false, msg = "舊密碼錯誤" });
+                }
+
+            }
+            else
+            {
+                return Json(new { result = false, msg = "請先登入" });
+            }
+        }
 
         public ActionResult 會員註冊()
         {
@@ -118,8 +145,8 @@ namespace MotaiProject.Controllers
         //        }
         //    }
         //    dbContext.tCustomers.Add(n新會員);
-        //            dbContext.SaveChanges();
-        //            return true;
+        //    dbContext.SaveChanges();
+        //    return true;
         //}
 
         public ActionResult 忘記密碼()
@@ -220,7 +247,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }        
-        
+        //加入購物車
         public JsonResult AddToCart(int ProductId, int buyQty)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
@@ -284,7 +311,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
         }
-
+        //加入收藏
         public JsonResult AddFavorite(int ProductId)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
