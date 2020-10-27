@@ -121,17 +121,17 @@
                                 </div>
                             }
                             <div class="carousel-item active">
-                                    <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://cdn.pixabay.com/photo/2020/03/30/10/18/electric-scooter-4983759_1280.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://cdn.pixabay.com/photo/2020/04/12/08/50/child-5033381_1280.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
+                                <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
+                                     class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://cdn.pixabay.com/photo/2020/03/30/10/18/electric-scooter-4983759_1280.jpg"
+                                     class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://cdn.pixabay.com/photo/2020/04/12/08/50/child-5033381_1280.jpg"
+                                     class="d-block w-100" alt="...">
+                            </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -240,13 +240,14 @@
             body: `ProductId=${@id}&buyQty=${qty}`
         }).then(function (response) {
             return response.json();
-        }).then(function (data) {
-            if (data.result) {
-                alert(data.msg);
-            } else {
-                alert(data.msg);
-            }
-        });
+        })
+            .then(function (data) {
+            //if (data.result) {
+            //    alert(data.msg);
+            //} else {
+            //    alert(data.msg);
+            })
+
     }
 
 </script>
@@ -267,7 +268,8 @@
             }
         });
 </script>
-<script>    
+<script>
+
 
     function cancelFavor() {
         fetch('/Customer/CancelFavorite', {
@@ -280,12 +282,13 @@
             return response.json();
         }).then(function (data) {
             if (data.result) {
-                alert(data.msg);
+                //alert(data.msg);
                 $("#starlight").css("display", "none");
                 $("#star").css("display", "block");
-            } else {
-                alert(data.msg);
             }
+            //} else {
+            //    alert(data.msg);
+            //}
         });
     }
     function addFavor() {
@@ -301,10 +304,11 @@
             if (data.result) {
                 $("#star").css("display", "none");
                 $("#starlight").css("display", "block");
-                alert(data.msg);
-            } else {
-                alert(data.msg);
             }
+            //    alert(data.msg);
+            //} else {
+            //    alert(data.msg);
+            //}
         });
     }
 
