@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tBranch">
           <Key>
             <PropertyRef Name="BranchId" />
@@ -74,13 +74,12 @@
         </EntityType>
         <EntityType Name="tOrderDetail">
           <Key>
-            <PropertyRef Name="oDetailId" />
+            <PropertyRef Name="oOrderDetailId" />
           </Key>
-          <Property Name="oDetailId" Type="int" Nullable="false" />
+          <Property Name="oOrderDetailId" Type="int" Nullable="false" />
           <Property Name="oOrderId" Type="int" Nullable="false" />
           <Property Name="oProductId" Type="int" Nullable="false" />
           <Property Name="oProductQty" Type="int" Nullable="false" />
-          <Property Name="oWarehouseId" Type="int" Nullable="false" />
           <Property Name="oNote" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tOrderPay">
@@ -89,8 +88,10 @@
           </Key>
           <Property Name="oPayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="oOrderId" Type="int" Nullable="false" />
+          <Property Name="oOrderInstallment" Type="int" Nullable="false" />
           <Property Name="oPayType" Type="int" Nullable="false" />
           <Property Name="oPayment" Type="money" Nullable="false" />
+          <Property Name="oPayDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="tOrderPayType">
           <Key>
@@ -120,7 +121,7 @@
           <Property Name="pWeight" Type="float" Nullable="false" />
           <Property Name="pIntroduction" Type="nvarchar(max)" />
           <Property Name="pPrice" Type="money" Nullable="false" />
-          <Property Name="pQty" Type="int" Nullable="false" />
+          <Property Name="pQty" Type="int" />
         </EntityType>
         <EntityType Name="tProductCategory">
           <Key>
@@ -174,6 +175,28 @@
           <Property Name="PromotionCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PromtionCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tShipDetail">
+          <Key>
+            <PropertyRef Name="ShipDetailId" />
+          </Key>
+          <Property Name="ShipDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShipId" Type="int" Nullable="false" />
+          <Property Name="sOrderDetailId" Type="int" Nullable="false" />
+          <Property Name="sProductId" Type="int" Nullable="false" />
+          <Property Name="sQuantity" Type="int" Nullable="false" />
+          <Property Name="sWarehouseNameId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tShipList">
+          <Key>
+            <PropertyRef Name="ShipId" />
+          </Key>
+          <Property Name="ShipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sEmployeeId" Type="int" Nullable="false" />
+          <Property Name="sShipSerialValue" Type="int" Nullable="false" />
+          <Property Name="sOrderId" Type="int" Nullable="false" />
+          <Property Name="sShipDate" Type="date" Nullable="false" />
+          <Property Name="sShipNote" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="tStatus">
           <Key>
             <PropertyRef Name="StatusId" />
@@ -182,6 +205,30 @@
           <Property Name="sCustomerId" Type="int" Nullable="false" />
           <Property Name="sProductId" Type="int" Nullable="false" />
           <Property Name="sProductQty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tStockDetail">
+          <Key>
+            <PropertyRef Name="StockDetailId" />
+          </Key>
+          <Property Name="StockDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sStockId" Type="int" Nullable="false" />
+          <Property Name="sProductId" Type="int" Nullable="false" />
+          <Property Name="sCost" Type="money" Nullable="false" />
+          <Property Name="sQuantity" Type="int" Nullable="false" />
+          <Property Name="sWarehouseNameId" Type="int" Nullable="false" />
+          <Property Name="sNote" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tStockList">
+          <Key>
+            <PropertyRef Name="StockId" />
+          </Key>
+          <Property Name="StockId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sEmployeeId" Type="int" Nullable="false" />
+          <Property Name="sStockSerialValue" Type="int" Nullable="false" />
+          <Property Name="sVendor" Type="nvarchar" MaxLength="50" />
+          <Property Name="sVendorTel" Type="nvarchar" MaxLength="50" />
+          <Property Name="sStockDate" Type="date" Nullable="false" />
+          <Property Name="sStockNote" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tTransfer">
           <Key>
@@ -194,6 +241,7 @@
           <Property Name="tWNIdOut" Type="int" Nullable="false" />
           <Property Name="tWNIdIn" Type="int" Nullable="false" />
           <Property Name="tDate" Type="date" Nullable="false" />
+          <Property Name="tNote" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tWarehouse">
           <Key>
@@ -202,10 +250,7 @@
           <Property Name="WarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WarehouseNameId" Type="int" Nullable="false" />
           <Property Name="wProductId" Type="int" Nullable="false" />
-          <Property Name="wQuantity" Type="int" />
-          <Property Name="wSerialValue" Type="int" Nullable="false" />
-          <Property Name="wStockDate" Type="date" Nullable="false" />
-          <Property Name="wShipmentDate" Type="date" />
+          <Property Name="wPQty" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tWarehouseName">
           <Key>
@@ -370,18 +415,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tOrderDetail_tWarehouseName">
-          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
-          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tWarehouseName">
-              <PropertyRef Name="WarehouseNameId" />
-            </Principal>
-            <Dependent Role="tOrderDetail">
-              <PropertyRef Name="oWarehouseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tOrderPay_tOrder">
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
           <End Role="tOrderPay" Type="Self.tOrderPay" Multiplicity="*" />
@@ -490,6 +523,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tStockDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tStockDetail" Type="Self.tStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tStockDetail">
+              <PropertyRef Name="sProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStockDetail_tStockList">
+          <End Role="tStockList" Type="Self.tStockList" Multiplicity="1" />
+          <End Role="tStockDetail" Type="Self.tStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStockList">
+              <PropertyRef Name="StockId" />
+            </Principal>
+            <Dependent Role="tStockDetail">
+              <PropertyRef Name="sStockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStockDetail_tWarehouseName">
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+          <End Role="tStockDetail" Type="Self.tStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseName">
+              <PropertyRef Name="WarehouseNameId" />
+            </Principal>
+            <Dependent Role="tStockDetail">
+              <PropertyRef Name="sWarehouseNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStockList_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tStockList" Type="Self.tStockList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="tStockList">
+              <PropertyRef Name="sEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tTransfer_tEmployee">
           <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
           <End Role="tTransfer" Type="Self.tTransfer" Multiplicity="*" />
@@ -538,18 +619,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tWarehouse_tProduct">
-          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
-          <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tProduct">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="tWarehouse">
-              <PropertyRef Name="wProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tWarehouse_tWarehouseName">
           <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
           <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
@@ -580,7 +649,11 @@
           <EntitySet Name="tProductSize" EntityType="Self.tProductSize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tPromotion" EntityType="Self.tPromotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tPromotionCategory" EntityType="Self.tPromotionCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tShipDetail" EntityType="Self.tShipDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tShipList" EntityType="Self.tShipList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tStatus" EntityType="Self.tStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStockDetail" EntityType="Self.tStockDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStockList" EntityType="Self.tStockList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tTransfer" EntityType="Self.tTransfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tWarehouse" EntityType="Self.tWarehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tWarehouseName" EntityType="Self.tWarehouseName" Schema="dbo" store:Type="Tables" />
@@ -636,10 +709,6 @@
             <End Role="tProduct" EntitySet="tProduct" />
             <End Role="tOrderDetail" EntitySet="tOrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_tOrderDetail_tWarehouseName" Association="Self.FK_tOrderDetail_tWarehouseName">
-            <End Role="tWarehouseName" EntitySet="tWarehouseName" />
-            <End Role="tOrderDetail" EntitySet="tOrderDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_tOrderPay_tOrder" Association="Self.FK_tOrderPay_tOrder">
             <End Role="tOrder" EntitySet="tOrder" />
             <End Role="tOrderPay" EntitySet="tOrderPay" />
@@ -676,6 +745,22 @@
             <End Role="tProduct" EntitySet="tProduct" />
             <End Role="tStatus" EntitySet="tStatus" />
           </AssociationSet>
+          <AssociationSet Name="FK_tStockDetail_tProduct" Association="Self.FK_tStockDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProduct" />
+            <End Role="tStockDetail" EntitySet="tStockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStockDetail_tStockList" Association="Self.FK_tStockDetail_tStockList">
+            <End Role="tStockList" EntitySet="tStockList" />
+            <End Role="tStockDetail" EntitySet="tStockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStockDetail_tWarehouseName" Association="Self.FK_tStockDetail_tWarehouseName">
+            <End Role="tWarehouseName" EntitySet="tWarehouseName" />
+            <End Role="tStockDetail" EntitySet="tStockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStockList_tEmployee" Association="Self.FK_tStockList_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployee" />
+            <End Role="tStockList" EntitySet="tStockList" />
+          </AssociationSet>
           <AssociationSet Name="FK_tTransfer_tEmployee" Association="Self.FK_tTransfer_tEmployee">
             <End Role="tEmployee" EntitySet="tEmployee" />
             <End Role="tTransfer" EntitySet="tTransfer" />
@@ -692,16 +777,13 @@
             <End Role="tWarehouseName" EntitySet="tWarehouseName" />
             <End Role="tTransfer" EntitySet="tTransfer" />
           </AssociationSet>
-          <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
-            <End Role="tProduct" EntitySet="tProduct" />
-            <End Role="tWarehouse" EntitySet="tWarehouse" />
-          </AssociationSet>
           <AssociationSet Name="FK_tWarehouse_tWarehouseName" Association="Self.FK_tWarehouse_tWarehouseName">
             <End Role="tWarehouseName" EntitySet="tWarehouseName" />
             <End Role="tWarehouse" EntitySet="tWarehouse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MotaiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -759,6 +841,7 @@
           <NavigationProperty Name="tDiaries" Relationship="Self.FK_tDiary_tEmployee" FromRole="tEmployee" ToRole="tDiary" />
           <NavigationProperty Name="tPosition" Relationship="Self.FK_tEmployee_tPosition" FromRole="tEmployee" ToRole="tPosition" />
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tEmployee" FromRole="tEmployee" ToRole="tOrder" />
+          <NavigationProperty Name="tStockLists" Relationship="Self.FK_tStockList_tEmployee" FromRole="tEmployee" ToRole="tStockList" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tEmployee" FromRole="tEmployee" ToRole="tTransfer" />
         </EntityType>
         <EntityType Name="tFavorite">
@@ -795,17 +878,15 @@
         </EntityType>
         <EntityType Name="tOrderDetail">
           <Key>
-            <PropertyRef Name="oDetailId" />
+            <PropertyRef Name="oOrderDetailId" />
           </Key>
-          <Property Name="oDetailId" Type="Int32" Nullable="false" />
+          <Property Name="oOrderDetailId" Type="Int32" Nullable="false" />
           <Property Name="oOrderId" Type="Int32" Nullable="false" />
           <Property Name="oProductId" Type="Int32" Nullable="false" />
           <Property Name="oProductQty" Type="Int32" Nullable="false" />
-          <Property Name="oWarehouseId" Type="Int32" Nullable="false" />
           <Property Name="oNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderDetail_tOrder" FromRole="tOrderDetail" ToRole="tOrder" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tOrderDetail" ToRole="tProduct" />
-          <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tOrderDetail" ToRole="tWarehouseName" />
         </EntityType>
         <EntityType Name="tOrderPay">
           <Key>
@@ -813,8 +894,10 @@
           </Key>
           <Property Name="oPayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="oOrderId" Type="Int32" Nullable="false" />
+          <Property Name="oOrderInstallment" Type="Int32" Nullable="false" />
           <Property Name="oPayType" Type="Int32" Nullable="false" />
           <Property Name="oPayment" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="oPayDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrderPay_tOrder" FromRole="tOrderPay" ToRole="tOrder" />
           <NavigationProperty Name="tOrderPayType" Relationship="Self.FK_tOrderPay_tOrderPayType" FromRole="tOrderPay" ToRole="tOrderPayType" />
         </EntityType>
@@ -848,7 +931,7 @@
           <Property Name="pWeight" Type="Double" Nullable="false" />
           <Property Name="pIntroduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="pPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="pQty" Type="Int32" Nullable="false" />
+          <Property Name="pQty" Type="Int32" />
           <NavigationProperty Name="tFavorites" Relationship="Self.FK_tFavorite_tProduct" FromRole="tProduct" ToRole="tFavorite" />
           <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tProduct" FromRole="tProduct" ToRole="tOrderDetail" />
           <NavigationProperty Name="tProductCategory" Relationship="Self.FK_tProduct_tProductCategory" FromRole="tProduct" ToRole="tProductCategory" />
@@ -856,8 +939,8 @@
           <NavigationProperty Name="tProductSize" Relationship="Self.FK_tProduct_tProductSize" FromRole="tProduct" ToRole="tProductSize" />
           <NavigationProperty Name="tProductImages" Relationship="Self.FK_tProductImage_tProduct" FromRole="tProduct" ToRole="tProductImage" />
           <NavigationProperty Name="tStatus" Relationship="Self.FK_tStatus_tProduct" FromRole="tProduct" ToRole="tStatus" />
+          <NavigationProperty Name="tStockDetails" Relationship="Self.FK_tStockDetail_tProduct" FromRole="tProduct" ToRole="tStockDetail" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tProduct" FromRole="tProduct" ToRole="tTransfer" />
-          <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tProduct" ToRole="tWarehouse" />
         </EntityType>
         <EntityType Name="tProductCategory">
           <Key>
@@ -906,9 +989,9 @@
           <Property Name="pADimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pDiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pDiscount" Type="Double" Nullable="false" />
+          <Property Name="pPromotionPostDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrder_tPromotion" FromRole="tPromotion" ToRole="tOrder" />
           <NavigationProperty Name="tPromotionCategory" Relationship="Self.FK_tPromotion_tPromotionCategory" FromRole="tPromotion" ToRole="tPromotionCategory" />
-          <Property Name="pPromotionPostDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="tPromotionCategory">
           <Key>
@@ -917,6 +1000,28 @@
           <Property Name="PromotionCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PromtionCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tPromotions" Relationship="Self.FK_tPromotion_tPromotionCategory" FromRole="tPromotionCategory" ToRole="tPromotion" />
+        </EntityType>
+        <EntityType Name="tShipDetail">
+          <Key>
+            <PropertyRef Name="ShipDetailId" />
+          </Key>
+          <Property Name="ShipDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShipId" Type="Int32" Nullable="false" />
+          <Property Name="sOrderDetailId" Type="Int32" Nullable="false" />
+          <Property Name="sProductId" Type="Int32" Nullable="false" />
+          <Property Name="sQuantity" Type="Int32" Nullable="false" />
+          <Property Name="sWarehouseNameId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tShipList">
+          <Key>
+            <PropertyRef Name="ShipId" />
+          </Key>
+          <Property Name="ShipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="sShipSerialValue" Type="Int32" Nullable="false" />
+          <Property Name="sOrderId" Type="Int32" Nullable="false" />
+          <Property Name="sShipDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sShipNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tStatu">
           <Key>
@@ -929,6 +1034,35 @@
           <NavigationProperty Name="tCustomer" Relationship="Self.FK_tStatus_tCustomer" FromRole="tStatus" ToRole="tCustomer" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tStatus_tProduct" FromRole="tStatus" ToRole="tProduct" />
         </EntityType>
+        <EntityType Name="tStockDetail">
+          <Key>
+            <PropertyRef Name="StockDetailId" />
+          </Key>
+          <Property Name="StockDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sStockId" Type="Int32" Nullable="false" />
+          <Property Name="sProductId" Type="Int32" Nullable="false" />
+          <Property Name="sCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="sQuantity" Type="Int32" Nullable="false" />
+          <Property Name="sWarehouseNameId" Type="Int32" Nullable="false" />
+          <Property Name="sNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tProduct" Relationship="Self.FK_tStockDetail_tProduct" FromRole="tStockDetail" ToRole="tProduct" />
+          <NavigationProperty Name="tStockList" Relationship="Self.FK_tStockDetail_tStockList" FromRole="tStockDetail" ToRole="tStockList" />
+          <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tStockDetail_tWarehouseName" FromRole="tStockDetail" ToRole="tWarehouseName" />
+        </EntityType>
+        <EntityType Name="tStockList">
+          <Key>
+            <PropertyRef Name="StockId" />
+          </Key>
+          <Property Name="StockId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sEmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="sStockSerialValue" Type="Int32" Nullable="false" />
+          <Property Name="sVendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sVendorTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sStockDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sStockNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tEmployee" Relationship="Self.FK_tStockList_tEmployee" FromRole="tStockList" ToRole="tEmployee" />
+          <NavigationProperty Name="tStockDetails" Relationship="Self.FK_tStockDetail_tStockList" FromRole="tStockList" ToRole="tStockDetail" />
+        </EntityType>
         <EntityType Name="tTransfer">
           <Key>
             <PropertyRef Name="TransferId" />
@@ -940,6 +1074,7 @@
           <Property Name="tWNIdOut" Type="Int32" Nullable="false" />
           <Property Name="tWNIdIn" Type="Int32" Nullable="false" />
           <Property Name="tDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tEmployee" Relationship="Self.FK_tTransfer_tEmployee" FromRole="tTransfer" ToRole="tEmployee" />
           <NavigationProperty Name="tProduct" Relationship="Self.FK_tTransfer_tProduct" FromRole="tTransfer" ToRole="tProduct" />
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tTransfer" ToRole="tWarehouseName" />
@@ -952,11 +1087,7 @@
           <Property Name="WarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WarehouseNameId" Type="Int32" Nullable="false" />
           <Property Name="wProductId" Type="Int32" Nullable="false" />
-          <Property Name="wQuantity" Type="Int32" />
-          <Property Name="wSerialValue" Type="Int32" Nullable="false" />
-          <Property Name="wStockDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="wShipmentDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="tProduct" Relationship="Self.FK_tWarehouse_tProduct" FromRole="tWarehouse" ToRole="tProduct" />
+          <Property Name="wPQty" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tWarehouseName" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouse" ToRole="tWarehouseName" />
         </EntityType>
         <EntityType Name="tWarehouseName">
@@ -967,7 +1098,7 @@
           <Property Name="WarehouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tDiaries" Relationship="Self.FK_tDiary_tWarehouseName" FromRole="tWarehouseName" ToRole="tDiary" />
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrder" />
-          <NavigationProperty Name="tOrderDetails" Relationship="Self.FK_tOrderDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tOrderDetail" />
+          <NavigationProperty Name="tStockDetails" Relationship="Self.FK_tStockDetail_tWarehouseName" FromRole="tWarehouseName" ToRole="tStockDetail" />
           <NavigationProperty Name="tTransfers" Relationship="Self.FK_tTransfer_tWarehouseIn" FromRole="tWarehouseName" ToRole="tTransfer" />
           <NavigationProperty Name="tTransfers1" Relationship="Self.FK_tTransfer_tWarehouseOut" FromRole="tWarehouseName" ToRole="tTransfer" />
           <NavigationProperty Name="tWarehouses" Relationship="Self.FK_tWarehouse_tWarehouseName" FromRole="tWarehouseName" ToRole="tWarehouse" />
@@ -1080,6 +1211,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tStockList_tEmployee">
+          <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
+          <End Role="tStockList" Type="Self.tStockList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="tStockList">
+              <PropertyRef Name="sEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tTransfer_tEmployee">
           <End Role="tEmployee" Type="Self.tEmployee" Multiplicity="1" />
           <End Role="tTransfer" Type="Self.tTransfer" Multiplicity="*" />
@@ -1164,18 +1307,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tOrderDetail_tWarehouseName">
-          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
-          <End Role="tOrderDetail" Type="Self.tOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tWarehouseName">
-              <PropertyRef Name="WarehouseNameId" />
-            </Principal>
-            <Dependent Role="tOrderDetail">
-              <PropertyRef Name="oWarehouseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tOrderPay_tOrderPayType">
           <End Role="tOrderPayType" Type="Self.tOrderPayType" Multiplicity="1" />
           <End Role="tOrderPay" Type="Self.tOrderPay" Multiplicity="*" />
@@ -1248,6 +1379,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tStockDetail_tProduct">
+          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
+          <End Role="tStockDetail" Type="Self.tStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tProduct">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="tStockDetail">
+              <PropertyRef Name="sProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tTransfer_tProduct">
           <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
           <End Role="tTransfer" Type="Self.tTransfer" Multiplicity="*" />
@@ -1260,18 +1403,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tWarehouse_tProduct">
-          <End Role="tProduct" Type="Self.tProduct" Multiplicity="1" />
-          <End Role="tWarehouse" Type="Self.tWarehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tProduct">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="tWarehouse">
-              <PropertyRef Name="wProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tPromotion_tPromotionCategory">
           <End Role="tPromotionCategory" Type="Self.tPromotionCategory" Multiplicity="1" />
           <End Role="tPromotion" Type="Self.tPromotion" Multiplicity="*" />
@@ -1281,6 +1412,30 @@
             </Principal>
             <Dependent Role="tPromotion">
               <PropertyRef Name="PromotinoCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStockDetail_tStockList">
+          <End Role="tStockList" Type="Self.tStockList" Multiplicity="1" />
+          <End Role="tStockDetail" Type="Self.tStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStockList">
+              <PropertyRef Name="StockId" />
+            </Principal>
+            <Dependent Role="tStockDetail">
+              <PropertyRef Name="sStockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStockDetail_tWarehouseName">
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
+          <End Role="tStockDetail" Type="Self.tStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWarehouseName">
+              <PropertyRef Name="WarehouseNameId" />
+            </Principal>
+            <Dependent Role="tStockDetail">
+              <PropertyRef Name="sWarehouseNameId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1338,7 +1493,11 @@
           <EntitySet Name="tProductSizes" EntityType="Self.tProductSize" />
           <EntitySet Name="tPromotions" EntityType="Self.tPromotion" />
           <EntitySet Name="tPromotionCategories" EntityType="Self.tPromotionCategory" />
+          <EntitySet Name="tShipDetails" EntityType="Self.tShipDetail" />
+          <EntitySet Name="tShipLists" EntityType="Self.tShipList" />
           <EntitySet Name="tStatus" EntityType="Self.tStatu" />
+          <EntitySet Name="tStockDetails" EntityType="Self.tStockDetail" />
+          <EntitySet Name="tStockLists" EntityType="Self.tStockList" />
           <EntitySet Name="tTransfers" EntityType="Self.tTransfer" />
           <EntitySet Name="tWarehouses" EntityType="Self.tWarehouse" />
           <EntitySet Name="tWarehouseNames" EntityType="Self.tWarehouseName" />
@@ -1378,6 +1537,10 @@
             <End Role="tEmployee" EntitySet="tEmployees" />
             <End Role="tOrder" EntitySet="tOrders" />
           </AssociationSet>
+          <AssociationSet Name="FK_tStockList_tEmployee" Association="Self.FK_tStockList_tEmployee">
+            <End Role="tEmployee" EntitySet="tEmployees" />
+            <End Role="tStockList" EntitySet="tStockLists" />
+          </AssociationSet>
           <AssociationSet Name="FK_tTransfer_tEmployee" Association="Self.FK_tTransfer_tEmployee">
             <End Role="tEmployee" EntitySet="tEmployees" />
             <End Role="tTransfer" EntitySet="tTransfers" />
@@ -1406,10 +1569,6 @@
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tOrderDetail" EntitySet="tOrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_tOrderDetail_tWarehouseName" Association="Self.FK_tOrderDetail_tWarehouseName">
-            <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
-            <End Role="tOrderDetail" EntitySet="tOrderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_tOrderPay_tOrderPayType" Association="Self.FK_tOrderPay_tOrderPayType">
             <End Role="tOrderPayType" EntitySet="tOrderPayTypes" />
             <End Role="tOrderPay" EntitySet="tOrderPays" />
@@ -1434,17 +1593,25 @@
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tStatus" EntitySet="tStatus" />
           </AssociationSet>
+          <AssociationSet Name="FK_tStockDetail_tProduct" Association="Self.FK_tStockDetail_tProduct">
+            <End Role="tProduct" EntitySet="tProducts" />
+            <End Role="tStockDetail" EntitySet="tStockDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_tTransfer_tProduct" Association="Self.FK_tTransfer_tProduct">
             <End Role="tProduct" EntitySet="tProducts" />
             <End Role="tTransfer" EntitySet="tTransfers" />
           </AssociationSet>
-          <AssociationSet Name="FK_tWarehouse_tProduct" Association="Self.FK_tWarehouse_tProduct">
-            <End Role="tProduct" EntitySet="tProducts" />
-            <End Role="tWarehouse" EntitySet="tWarehouses" />
-          </AssociationSet>
           <AssociationSet Name="FK_tPromotion_tPromotionCategory" Association="Self.FK_tPromotion_tPromotionCategory">
             <End Role="tPromotionCategory" EntitySet="tPromotionCategories" />
             <End Role="tPromotion" EntitySet="tPromotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStockDetail_tStockList" Association="Self.FK_tStockDetail_tStockList">
+            <End Role="tStockList" EntitySet="tStockLists" />
+            <End Role="tStockDetail" EntitySet="tStockDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStockDetail_tWarehouseName" Association="Self.FK_tStockDetail_tWarehouseName">
+            <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
+            <End Role="tStockDetail" EntitySet="tStockDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tTransfer_tWarehouseIn" Association="Self.FK_tTransfer_tWarehouseIn">
             <End Role="tWarehouseName" EntitySet="tWarehouseNames" />
@@ -1541,11 +1708,10 @@
           <EntitySetMapping Name="tOrderDetails">
             <EntityTypeMapping TypeName="MotaiDataModel.tOrderDetail">
               <MappingFragment StoreEntitySet="tOrderDetail">
-                <ScalarProperty Name="oDetailId" ColumnName="oDetailId" />
+                <ScalarProperty Name="oOrderDetailId" ColumnName="oOrderDetailId" />
                 <ScalarProperty Name="oOrderId" ColumnName="oOrderId" />
                 <ScalarProperty Name="oProductId" ColumnName="oProductId" />
                 <ScalarProperty Name="oProductQty" ColumnName="oProductQty" />
-                <ScalarProperty Name="oWarehouseId" ColumnName="oWarehouseId" />
                 <ScalarProperty Name="oNote" ColumnName="oNote" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1555,8 +1721,10 @@
               <MappingFragment StoreEntitySet="tOrderPay">
                 <ScalarProperty Name="oPayId" ColumnName="oPayId" />
                 <ScalarProperty Name="oOrderId" ColumnName="oOrderId" />
+                <ScalarProperty Name="oOrderInstallment" ColumnName="oOrderInstallment" />
                 <ScalarProperty Name="oPayType" ColumnName="oPayType" />
                 <ScalarProperty Name="oPayment" ColumnName="oPayment" />
+                <ScalarProperty Name="oPayDate" ColumnName="oPayDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1629,7 +1797,6 @@
           <EntitySetMapping Name="tPromotions">
             <EntityTypeMapping TypeName="MotaiDataModel.tPromotion">
               <MappingFragment StoreEntitySet="tPromotion">
-                <ScalarProperty Name="pPromotionPostDate" ColumnName="pPromotionPostDate" />
                 <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
                 <ScalarProperty Name="PromotinoCategory" ColumnName="PromotinoCategory" />
@@ -1640,6 +1807,7 @@
                 <ScalarProperty Name="pADimage" ColumnName="pADimage" />
                 <ScalarProperty Name="pDiscountCode" ColumnName="pDiscountCode" />
                 <ScalarProperty Name="pDiscount" ColumnName="pDiscount" />
+                <ScalarProperty Name="pPromotionPostDate" ColumnName="pPromotionPostDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1648,6 +1816,30 @@
               <MappingFragment StoreEntitySet="tPromotionCategory">
                 <ScalarProperty Name="PromotionCategoryID" ColumnName="PromotionCategoryID" />
                 <ScalarProperty Name="PromtionCategory" ColumnName="PromtionCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tShipDetails">
+            <EntityTypeMapping TypeName="MotaiDataModel.tShipDetail">
+              <MappingFragment StoreEntitySet="tShipDetail">
+                <ScalarProperty Name="ShipDetailId" ColumnName="ShipDetailId" />
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="sOrderDetailId" ColumnName="sOrderDetailId" />
+                <ScalarProperty Name="sProductId" ColumnName="sProductId" />
+                <ScalarProperty Name="sQuantity" ColumnName="sQuantity" />
+                <ScalarProperty Name="sWarehouseNameId" ColumnName="sWarehouseNameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tShipLists">
+            <EntityTypeMapping TypeName="MotaiDataModel.tShipList">
+              <MappingFragment StoreEntitySet="tShipList">
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="sEmployeeId" ColumnName="sEmployeeId" />
+                <ScalarProperty Name="sShipSerialValue" ColumnName="sShipSerialValue" />
+                <ScalarProperty Name="sOrderId" ColumnName="sOrderId" />
+                <ScalarProperty Name="sShipDate" ColumnName="sShipDate" />
+                <ScalarProperty Name="sShipNote" ColumnName="sShipNote" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1661,6 +1853,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tStockDetails">
+            <EntityTypeMapping TypeName="MotaiDataModel.tStockDetail">
+              <MappingFragment StoreEntitySet="tStockDetail">
+                <ScalarProperty Name="StockDetailId" ColumnName="StockDetailId" />
+                <ScalarProperty Name="sStockId" ColumnName="sStockId" />
+                <ScalarProperty Name="sProductId" ColumnName="sProductId" />
+                <ScalarProperty Name="sCost" ColumnName="sCost" />
+                <ScalarProperty Name="sQuantity" ColumnName="sQuantity" />
+                <ScalarProperty Name="sWarehouseNameId" ColumnName="sWarehouseNameId" />
+                <ScalarProperty Name="sNote" ColumnName="sNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tStockLists">
+            <EntityTypeMapping TypeName="MotaiDataModel.tStockList">
+              <MappingFragment StoreEntitySet="tStockList">
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="sEmployeeId" ColumnName="sEmployeeId" />
+                <ScalarProperty Name="sStockSerialValue" ColumnName="sStockSerialValue" />
+                <ScalarProperty Name="sVendor" ColumnName="sVendor" />
+                <ScalarProperty Name="sVendorTel" ColumnName="sVendorTel" />
+                <ScalarProperty Name="sStockDate" ColumnName="sStockDate" />
+                <ScalarProperty Name="sStockNote" ColumnName="sStockNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tTransfers">
             <EntityTypeMapping TypeName="MotaiDataModel.tTransfer">
               <MappingFragment StoreEntitySet="tTransfer">
@@ -1671,6 +1889,7 @@
                 <ScalarProperty Name="tWNIdOut" ColumnName="tWNIdOut" />
                 <ScalarProperty Name="tWNIdIn" ColumnName="tWNIdIn" />
                 <ScalarProperty Name="tDate" ColumnName="tDate" />
+                <ScalarProperty Name="tNote" ColumnName="tNote" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1680,10 +1899,7 @@
                 <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
                 <ScalarProperty Name="WarehouseNameId" ColumnName="WarehouseNameId" />
                 <ScalarProperty Name="wProductId" ColumnName="wProductId" />
-                <ScalarProperty Name="wQuantity" ColumnName="wQuantity" />
-                <ScalarProperty Name="wSerialValue" ColumnName="wSerialValue" />
-                <ScalarProperty Name="wStockDate" ColumnName="wStockDate" />
-                <ScalarProperty Name="wShipmentDate" ColumnName="wShipmentDate" />
+                <ScalarProperty Name="wPQty" ColumnName="wPQty" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

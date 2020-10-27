@@ -12,15 +12,13 @@ namespace MotaiProject
     using System;
     using System.Collections.Generic;
     
-    public partial class tOrderDetail
+    public partial class tShipList
     {
-        public int oOrderDetailId { get; set; }
-        public int oOrderId { get; set; }
-        public int oProductId { get; set; }
-        public int oProductQty { get; set; }
-        public string oNote { get; set; }
-    
-        public virtual tOrder tOrder { get; set; }
-        public virtual tProduct tProduct { get; set; }
+        public int ShipId { get; set; }
+        public int sEmployeeId { get; set; }
+        public int sShipSerialValue { get; set; }
+        public int sOrderId { get; set; }
+        public System.DateTime sShipDate { get; set; }
+        public string sShipNote { get; set; }
     }
 }

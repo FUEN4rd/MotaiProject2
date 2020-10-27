@@ -448,7 +448,19 @@
     <Compile Include="tPromotionCategory.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tShipDetail.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tShipList.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tStatu.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tStockDetail.cs">
+      <DependentUpon>MotaiModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tStockList.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tTransfer.cs">
@@ -472,6 +484,7 @@
     <Compile Include="ViewModels\StatusCartViewModel.cs" />
     <Compile Include="ViewModels\PromotionViewModel.cs" />
     <Compile Include="ViewModels\StatusCustomerViewModel.cs" />
+    <Compile Include="ViewModels\StockViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

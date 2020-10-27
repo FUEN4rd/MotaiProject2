@@ -16,8 +16,10 @@ namespace MotaiProject
     {
         public int oPayId { get; set; }
         public int oOrderId { get; set; }
+        public int oOrderInstallment { get; set; }
         public int oPayType { get; set; }
         public decimal oPayment { get; set; }
+        public System.DateTime oPayDate { get; set; }
     
         public virtual tOrder tOrder { get; set; }
         public virtual tOrderPayType tOrderPayType { get; set; }

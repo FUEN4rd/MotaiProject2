@@ -21,6 +21,7 @@ namespace MotaiProject
         public int tWNIdOut { get; set; }
         public int tWNIdIn { get; set; }
         public System.DateTime tDate { get; set; }
+        public string tNote { get; set; }
     
         public virtual tEmployee tEmployee { get; set; }
         public virtual tProduct tProduct { get; set; }

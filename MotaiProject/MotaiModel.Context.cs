@@ -42,7 +42,11 @@ namespace MotaiProject
         public virtual DbSet<tProductSize> tProductSizes { get; set; }
         public virtual DbSet<tPromotion> tPromotions { get; set; }
         public virtual DbSet<tPromotionCategory> tPromotionCategories { get; set; }
+        public virtual DbSet<tShipDetail> tShipDetails { get; set; }
+        public virtual DbSet<tShipList> tShipLists { get; set; }
         public virtual DbSet<tStatu> tStatus { get; set; }
+        public virtual DbSet<tStockDetail> tStockDetails { get; set; }
+        public virtual DbSet<tStockList> tStockLists { get; set; }
         public virtual DbSet<tTransfer> tTransfers { get; set; }
         public virtual DbSet<tWarehouse> tWarehouses { get; set; }
         public virtual DbSet<tWarehouseName> tWarehouseNames { get; set; }
