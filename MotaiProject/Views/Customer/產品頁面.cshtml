@@ -34,5 +34,229 @@
                 </div>
             }
         </div>
+
+        <div id=Nulldiv></div>
+        <!-- 篩選器頭 -->
+        <div class="btn-group" role="group">
+
+            <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                分類
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <div class="form-group">
+                    <a class="dropdown-item" href="#" onclick="cl(`C1`)">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="佛像" id="C1"
+                                   onclick="bt1(this.value,this.id+1,this.id)">
+                            <label class="form-check-label" for="dropdownCheck">
+                                佛像
+                            </label>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="#" onclick="cl(`C2`)">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="餐具" id="C2"
+                                   onclick="bt1(this.value,this.id+1,this.id)">
+                            <label class="form-check-label" for="dropdownCheck">
+                                餐具
+                            </label>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                材質
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <div class="form-group">
+                    <a class="dropdown-item" href="#">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="杉木" id="W1"
+                                onclick="bt1(this.value,this.id+1,this.id)">
+                            <label class="form-check-label" for="dropdownCheck">
+                                杉木
+                            </label>
+                        </div>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="和闐玉" id="W2"
+                                onclick="bt1(this.value,this.id+1,this.id)">
+                            <label class="form-check-label" for="dropdownCheck">
+                                和闐玉
+                            </label>
+                        </div>
+                    </a>
+                </div>
+            </div> -->
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    材質
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <div class="form-group">
+                        <a class="dropdown-item" href="#" onclick="cl(`W1`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="杉木" id="W1"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    杉木
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <div class="form-check" onclick="cl(`W2`)">
+                                <input type="checkbox" class="form-check-input" value="和闐玉" id="W2"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    和闐玉
+                                </label>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    單價
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <div class="form-group">
+                        <a class="dropdown-item" href="#" onclick="cl(`P1`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="NTD. 5,000以下" id="P1"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    NTD. 5,000以下
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`P2`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="NTD. 5,000~50,000" id="P2"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    NTD. 5,000~50,000
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`P3`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="NTD. 50,000~200,000" id="P3"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    NTD. 50,000~200,000
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`P4`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="NTD. 200,000~1,000,000"
+                                       id="P4" onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    NTD. 200,000~1,000,000
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`P5`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="NTD. 1,000,000以上" id="P5"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    NTD. 1,000,000以上
+                                </label>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    尺寸
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <div class="form-group">
+                        <a class="dropdown-item" href="#" onclick="cl(`S1`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="配飾" id="S1"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    配飾
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`S2`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="小" id="S2"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    小
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`S3`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="中" id="S3"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    中
+                                </label>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="cl(`S4`)">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" value="大" id="S4"
+                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                <label class="form-check-label" for="dropdownCheck">
+                                    大
+                                </label>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 篩選器尾 -->
     </div>
+    <script type="text/javascript">
+        //onclick事件傳入value值和id
+        function bt1(value, id, id2) {
+            //判斷點選的按鈕的id是否存在,不存在則建立,存在則alert
+            if (!document.getElementById(id)) {
+                //建立input元素
+                var inp = document.createElement("input");
+                inp.type = "button";
+                //傳入點選按鈕的value值到新的按鈕
+                inp.value = value + " X";
+                //傳入點選按鈕的id到新的按鈕(傳入是id+1防止重複)
+                inp.id = id;
+                //嵌入class
+                inp.className = "btn btn-light";
+                //當方法有引數時，用onclick = 方法名(引數)時就有錯了，需要在方法名前面加function()
+                inp.onclick = function () {
+                    b1(id, id2);
+                };
+                document.getElementById("Nulldiv").appendChild(inp);
+            } else {
+                document.getElementById(id).remove();
+            }
+        }
+        function b1(id, id2) {
+            document.getElementById(id).remove();
+            document.getElementById(id2).checked = false;
+        }
+
+
+        function cl(id) {
+            document.getElementById(id).click();
+        }
+    </script>
 </content>
