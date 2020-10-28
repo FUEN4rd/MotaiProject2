@@ -1,8 +1,10 @@
-﻿@model MotaiProject.ViewModels.CustomerViewModel
+﻿@model MotaiProject.ViewModels.MemberViewModel
+@using MotaiProject.Models
 
 @{
     ViewBag.Title = "會員中心";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
+    tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
 }
 <style>
     * {
@@ -188,7 +190,7 @@
                     </div>
                 </div>
                 <div>
-                    @Html.ActionLink("修改個人資料", "修改會員資料", new { @class = "btn-Y_yellow", CustomerId = Model.CustomerId, style = "color: #ff0000;" })
+                    @Html.ActionLink("修改個人資料", "修改會員資料", new { @class = "btn-Y_yellow", CustomerId = cust.CustomerId, style = "color: #ff0000;" })
                 </div>
             </div>
         </div>
@@ -238,7 +240,7 @@
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "checkpass" } })
                                             </div>
                                         </div>
-                                        <button class="btn btn-danger" id="changepassword" onclick="customerchangepassword()">修改密碼</button>
+                                        <button class="btn btn-danger" id="changepassword" onclick="customerChangePassword()">修改密碼</button>
                                         <p id="warning"></p>
                                     </div>
                                 </div>
@@ -254,11 +256,6 @@
 </div>
 
 
-
-<div style="display:none">
-    @Html.DisplayFor(model => model.CustomerId)
-</div>
-
 <script>
     var pa = document.querySelectorAll(".form-control");
     var oldpass = pa[0].value;
@@ -268,32 +265,9 @@
         item.value = "";
         item.type = "Password";
     }
-    pa.forEach(clearbox);
+    pa.forEach(clearbox);    
 
-    //console.log(oldpass2 + "+" + checkpass2);
-
-
-    //function cha() {
-    //    let oldpass2 = pa[0].value;
-    //    let newpass = pa[1].value;
-    //    let checkpass2 = pa[2].value;
-    //    if ((oldpass === oldpass2) && (newpass === checkpass2)) {
-    //        console.log("0")
-    //        document.querySelector("#pwch").click();
-    //    }
-    //    else if (oldpass != oldpass2) {
-    //        document.querySelector("#warning").innerHTML = "舊密碼錯誤";
-    //    }
-    //    else if (newpass != checkpass2) {
-    //        document.querySelector("#warning").innerHTML = "密碼確認錯誤";
-    //    }
-    //    else {
-    //        document.querySelector("#warning").innerHTML = "密碼格式錯誤";
-    //    }
-    //    console.log(oldpass2, newpass, checkpass2);
-    //}
-
-    function customerchangepassword() {
+    function customerChangePassword() {
         
 
         let newpass = document.querySelector("#newpass").value;
@@ -305,7 +279,7 @@
                 headers: {
                     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                 },
-                body: `CustomerId=${@Model.CustomerId}&cPassword=${newpass}&oldpass=${oldpass}`
+                body: `CustomerId=${cust.CustomerId}&cPassword=${newpass}&oldpass=${oldpass}`
             }).then(function (response) {
 
                 return response.json();

@@ -115,7 +115,7 @@
                             @foreach (var item in Model.psImage)
                             {
                                 <div class="carousel-item" id="imagepic">
-                                    <img src="@Url.Action(item)" class="d-block w-100" alt="..." />
+                                    <img src="@Url.Content(item)" class="d-block w-100" alt="..." />
                                 </div>
                             }
                         </div>

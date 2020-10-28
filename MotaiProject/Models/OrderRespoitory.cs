@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MotaiProject.Models
 {
-    public class CommodityMethod
+    public class OrderRespoitory
     {
     }
 }

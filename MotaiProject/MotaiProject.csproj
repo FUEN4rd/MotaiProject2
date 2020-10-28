@@ -374,13 +374,15 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CommodityController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClassMethod.cs" />
-    <Compile Include="Models\CommodityMethod.cs" />
+    <Compile Include="Models\OrderRespoitory.cs" />
+    <Compile Include="Models\ProductRespoitory.cs" />
+    <Compile Include="Models\CommodityRespoitory.cs" />
     <Compile Include="Models\CSession關鍵字.cs" />
     <Compile Include="MotaiModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -474,17 +476,11 @@
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\CommodityViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
-    <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
-    <Compile Include="ViewModels\ShipDetailViewModel.cs" />
-    <Compile Include="ViewModels\ShipListViewModel.cs" />
-    <Compile Include="ViewModels\StatusCartViewModel.cs" />
-    <Compile Include="ViewModels\StatusCustomerViewModel.cs" />
-    <Compile Include="ViewModels\StockDetailViewModel.cs" />
-    <Compile Include="ViewModels\StockViewModel.cs" />
-    <Compile Include="ViewModels\TransferViewModel.cs" />
-    <Compile Include="ViewModels\WareHouseViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\PromotionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -494,7 +490,6 @@
     <Content Include="Views\Employee\員工登入.cshtml" />
     <Content Include="Views\Customer\首頁.cshtml" />
     <Content Include="Views\Customer\會員註冊.cshtml" />
-    <Content Include="Views\Customer\已登入首頁.cshtml" />
     <Content Include="Views\Employee\新增員工.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Employee\員工首頁.cshtml" />
@@ -531,6 +526,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
+    <Folder Include="Views\Commodity\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

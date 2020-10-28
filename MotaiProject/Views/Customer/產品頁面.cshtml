@@ -248,7 +248,7 @@
             @foreach (var item in Model)
             {
                 <div class=" col-12 col-md-6 col-xl-3 ">
-                    <a href="@Url.Action("產品細節","Customer", new { id = item.ProductId })">
+                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId })">
                         <img src="@Url.Action(item.epsImage)" class="img-fluid " alt="..." />
                         <div class="Y_productInfo">
                             <h4>

@@ -40,7 +40,16 @@ namespace MotaiProject.Controllers
                 //實體化 class
                 PromotionViewModel res = new PromotionViewModel();
                 //Prom 讀取入get set
-                res.Prom = items;
+                res.PromotionName = items.PromotionName;
+                res.sPromotinoCategory = items.tPromotionCategory.PromtionCategory;
+                res.PromotionDescription = items.PromotionDescription;
+                res.pPromotionStartDate = items.pPromotionStartDate;
+                res.pPromotionDeadline = items.pPromotionDeadline;
+                res.pPromotionWeb = items.pPromotionWeb;
+                res.pADimage = items.pADimage;
+                res.pDiscountCode = items.pDiscountCode;
+                res.pDiscount = items.pDiscount;
+                res.pPromotionPostDate = items.pPromotionPostDate;
                 //
                 reslsit.Add(res);
             }
@@ -61,8 +70,6 @@ namespace MotaiProject.Controllers
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;
-                CustomerViewModel cust = new CustomerViewModel();
-                cust.Customer = d資料確認;
                 return RedirectToAction("首頁");
             }
             return RedirectToAction("首頁");
@@ -72,9 +79,16 @@ namespace MotaiProject.Controllers
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                CustomerViewModel customer = new CustomerViewModel();
-                customer.Customer = cust;
-                return View(customer);
+                MemberViewModel member = new MemberViewModel();
+                member.cName = cust.cName;
+                member.cTelePhone = cust.cTelePhone;
+                member.cCellPhone = cust.cCellPhone;
+                member.cAddress = cust.cAddress;
+                member.cGUI = cust.cGUI;
+                member.cEmail = cust.cEmail;
+                member.cAccount = cust.cAccount;
+                member.cPassword = cust.cPassword;
+                return View(member);
             }
             return RedirectToAction("首頁");
         }
@@ -109,27 +123,7 @@ namespace MotaiProject.Controllers
         public ActionResult 會員註冊()
         {
             return View();
-        }
-        //[HttpPost]
-        //public ActionResult 會員註冊(RegisterViewModel newMember)
-        //{
-        //    if (newMember.cPassword == newMember.cConfirmPassword)
-        //    {
-        //        MotaiDataEntities dbContext = new MotaiDataEntities();
-        //        tCustomer newmember = new tCustomer();
-        //        newmember.cAccount = newMember.cAccount;
-        //        newmember.cPassword = newMember.cPassword;
-        //        newmember.cName = newMember.cName;
-        //        newmember.cTelePhone = newMember.cTelePhone;
-        //        newmember.cCellPhone = newMember.cCellPhone;
-        //        newmember.cAddress = newMember.cAddress;
-        //        newmember.cGUI = newMember.cGUI;
-        //        newmember.cEmail = newMember.cEmail;
-        //        dbContext.tCustomers.Add(newmember);
-        //        dbContext.SaveChanges();
-        //    }
-        //    return RedirectToAction("首頁");
-        //}
+        }        
         [HttpPost]
         public JsonResult 會員註冊(RegisterViewModel newMember)
         {
@@ -175,60 +169,52 @@ namespace MotaiProject.Controllers
             {
                 return RedirectToAction("會員中心");
             }
-            CustomerViewModel customer = new CustomerViewModel();
-            customer.Customer = cust;
+            MemberViewModel customer = new MemberViewModel();
+            customer.cAccount = cust.cAccount;
+            customer.cPassword = cust.cPassword;
+            customer.cName = cust.cName;
+            customer.cTelePhone = cust.cTelePhone;
+            customer.cCellPhone = cust.cCellPhone;
+            customer.cAddress = cust.cAddress;
+            customer.cGUI = cust.cGUI;
+            customer.cEmail = cust.cEmail;
             return View(customer);
         }
         [HttpPost]
-        public ActionResult 修改會員資料(CustomerViewModel c)
+        public ActionResult 修改會員資料(MemberViewModel member)
         {
-            MotaiDataEntities db = new MotaiDataEntities();
-            tCustomer cust = db.tCustomers.Find(c.CustomerId);
-            if (cust != null)
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
-                cust.cName = c.cName;
-                cust.cPassword = c.cPassword;
-                //cust.cTelePhone = c.cTelePhone;
-                cust.cGUI = c.cGUI;
-                cust.cEmail = c.cEmail;
-                //cust.cAddress = c.cAddress;
-                cust.cAccount = c.cAccount;
-                db.SaveChanges();
+                tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                tCustomer cust = db.tCustomers.Find(customer.CustomerId);
+                if (cust != null)
+                {
+                    cust.cName = member.cName;
+                    cust.cTelePhone = member.cTelePhone;
+                    cust.cGUI = member.cGUI;
+                    cust.cEmail = member.cEmail;
+                    cust.cAddress = member.cAddress;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("會員中心");
             }
-            return RedirectToAction("會員中心");
+            return RedirectToAction("首頁");
         }
 
+        //Product
+        private ProductRespoitory productRespotiory = new ProductRespoitory();
+
         public ActionResult 產品頁面()
-        {
-            MotaiDataEntities db = new MotaiDataEntities();
-            List<tProduct> prod = db.tProducts.ToList();
-            List<ProductViewModel> productlist = new List<ProductViewModel>();
-            foreach (tProduct item in prod)
-            {
-                List<tProductImage> images = db.tProductImages.Where(i => i.ProductId.Equals(item.ProductId)).ToList();
-                ProductViewModel Prod = new ProductViewModel();
-                Prod.Product = item;
-                foreach (var imageitem in images)
-                {
-                    Prod.psImage.Add(imageitem.pImage);
-                }
-                productlist.Add(Prod);
-            }
+        {            
+            List<ProductViewModel> productlist = productRespotiory.GetProductAll();
             return View(productlist);
         }
-        public ActionResult 產品細節(int id)
+        public ActionResult 產品細節(int ProductId)
         {
-            MotaiDataEntities db = new MotaiDataEntities();
-            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == id);
-            if (product == null)
-            {
-                return RedirectToAction("List");
-            }
-            ViewBag.Qty = product.pQty;
-            ProductViewModel prod = new ProductViewModel();
-            prod.Product = product;
-            prod.pQty = (int)product.pQty;
-            return View(prod);
+            ProductViewModel Prod = productRespotiory.GetProductById(ProductId);
+            ViewBag.Qty = Prod.pQty;
+            return View(Prod);
         }
 
         public ActionResult 購物車清單()
@@ -239,21 +225,17 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;                
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
-                List<StatusCustomerViewModel> cartList = new List<StatusCustomerViewModel>();
+                List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
                 
                 foreach (var items in StateList)
                 {                 
-                    tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();                   
-                    StatusCustomerViewModel cartC = new StatusCustomerViewModel();
-                    StatusCartViewModel s = new StatusCartViewModel();
-                    s.Product = cartProd;
-                    s.Status = items;
-                    s.sProductQty = items.sProductQty;
-                    cartC.Status = s;
+                    tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
+                    StatusCartViewModel cartC = new StatusCartViewModel();
+                    cartC.pName = cartProd.pName;
+                    cartC.pPrice = cartProd.pPrice;
+                    cartC.sProductQty = items.sProductQty;
                     cartList.Add(cartC);
-                }
-
-                
+                }                
                 return View(cartList);
             }
             else

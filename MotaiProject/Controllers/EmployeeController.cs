@@ -111,27 +111,21 @@ namespace MotaiProject.Controllers
         }
 
         //產品
+        private ProductRespoitory productRespotiory = new ProductRespoitory();
         public ActionResult 員工看產品頁面()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入");
             }
-            var q = from p in (new MotaiDataEntities()).tProducts
-                    select p;
             List<ProductViewModel> productlist = new List<ProductViewModel>();
-            foreach (tProduct item in q)
-            {
-                ProductViewModel prod = new ProductViewModel();
-                prod.Product = item;
-                productlist.Add(prod);
-            }
+            productlist = productRespotiory.GetProductAll();
             return View(productlist);
         }
         public ActionResult 新增產品()
         {
             ProductViewModel newprod = new ProductViewModel();
-            var categories = new ClassMethod().GetCategoryAll();
+            var categories = new ProductRespoitory().GetCategoryAll();
             List<SelectListItem> Cateitems = new List<SelectListItem>();
             foreach (var c in categories)
             {
@@ -143,7 +137,7 @@ namespace MotaiProject.Controllers
             }
             newprod.Categories = Cateitems;
 
-            var materials = new ClassMethod().GetMaterialAll();
+            var materials = new ProductRespoitory().GetMaterialAll();
             List<SelectListItem> Mateitems = new List<SelectListItem>();
             foreach (var m in materials)
             {
@@ -155,7 +149,7 @@ namespace MotaiProject.Controllers
             }
             newprod.Materials = Mateitems;
 
-            var sizes = new ClassMethod().GetSizeAll();
+            var sizes = new ProductRespoitory().GetSizeAll();
             List<SelectListItem> Sizeitems = new List<SelectListItem>();
             foreach (var s in sizes)
             {
@@ -194,9 +188,9 @@ namespace MotaiProject.Controllers
                         tProductImage image = new tProductImage();
                         FileInfo file = new FileInfo(uploagFile.FileName);
                         string photoName = Guid.NewGuid().ToString() + file.Extension;
-                        uploagFile.SaveAs(Server.MapPath("../Content/" + photoName));
+                        uploagFile.SaveAs(Server.MapPath("../images/" + photoName));
                         image.ProductId = ProductId;
-                        image.pImage = "../Content/" + photoName;
+                        image.pImage = "~/images/" + photoName;
                         db.tProductImages.Add(image);
                     }
                 }
@@ -207,18 +201,27 @@ namespace MotaiProject.Controllers
         public ActionResult 修改產品(int id)
         {
             MotaiDataEntities db = new MotaiDataEntities();
-            tProduct prod = db.tProducts.FirstOrDefault(p => p.ProductId == id);
-            if (prod == null)
+            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == id);
+            if (product == null)
             {
                 return RedirectToAction("員工看產品頁面");
             }
-            ProductViewModel product = new ProductViewModel();
-            product.Product = prod;
-            return View(product);
+            ProductViewModel Prod = new ProductViewModel();
+            Prod.pNumber = product.pNumber;
+            Prod.pName = product.pName;
+            Prod.psCategory = product.tProductCategory.Category;
+            Prod.psMaterial = product.tProductMaterial.Material;
+            Prod.psSize = product.tProductSize.Size;
+            Prod.pLxWxH = product.pLxWxH;
+            Prod.pWeight = product.pWeight;
+            Prod.pIntroduction = product.pIntroduction;
+            Prod.pPrice = product.pPrice;
+            Prod.pQty = (int)product.pQty;
+            return View(Prod);
 
         }
         [HttpPost]
-        public ActionResult 修改產品(ProductViewModel p)
+        public ActionResult 修改產品(EmpProductViewModel p)
         {
             MotaiDataEntities db = new MotaiDataEntities();
             tProduct prod = db.tProducts.Find(p.ProductId);
@@ -232,7 +235,6 @@ namespace MotaiProject.Controllers
                 prod.pLxWxH = p.pLxWxH;
                 prod.pWeight = p.pWeight;
                 prod.pPrice = p.pPrice;
-                prod.pQty = p.pQty;
                 db.SaveChanges();
             }
             return RedirectToAction("員工看產品頁面");
@@ -263,7 +265,7 @@ namespace MotaiProject.Controllers
             ViewBag.name = emp.eName;
             ViewBag.empId = emp.EmployeeId;
             DiaryViewModel newDiary = new DiaryViewModel();
-            var warehouses = new ClassMethod().GetCategoryAll();
+            var warehouses = new ProductRespoitory().GetCategoryAll();
             List<SelectListItem> WareList = new List<SelectListItem>();
             foreach (var item in warehouses)
             {
