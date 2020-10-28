@@ -473,7 +473,6 @@
     <Compile Include="tWarehouseName.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CustomerLoginViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\DiaryViewModel.cs" />
     <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
