@@ -14,28 +14,46 @@
             color: #FCD492;
             height: 90px;
         }
+
+        .btn-brown_me {
+            color: #fff;
+            background-color: #A7674C;
+            border-color: #A7674C;
+        }
+
+            .btn-brown_me:hover {
+                color: #fff;
+                background-color: #A7674C;
+                border-color: #F2EDD8;
+            }
+
+            .btn-brown_me:focus,
+            .btn-brown_me.focus {
+                box-shadow: 0 0 0 0.2rem#F2EDD8;
+            }
+
+            .btn-brown_me.disabled,
+            .btn-brown_me:disabled {
+                color: #fff;
+                background-color: #A7674C;
+                border-color: #A7674C;
+            }
+
+            .btn-brown_me:not(:disabled):not(.disabled):active,
+            .btn-brown_me:not(:disabled):not(.disabled).active,
+            .show > .btn-brown_me.dropdown-toggle {
+                color: #fff;
+                background-color: #A7674C;
+                border-color: #A7674C;
+            }
+
+                .btn-brown_me:not(:disabled):not(.disabled):active:focus,
+                .btn-brown_me:not(:disabled):not(.disabled).active:focus,
+                .show > .btn-brown_me.dropdown-toggle:focus {
+                    box-shadow: 0 0 0 0.2rem#F2EDD8;
+                }
     </style>
     <div class="container">
-        <div class="row ">
-            @foreach (var item in Model)
-            {
-                <div class=" col-12 col-md-6 col-xl-3 ">
-                    <a href="@Url.Action("產品細節","Customer", new { id = item.ProductId })">
-                        <img src="@Url.Action(item.epsImage)" class="img-fluid " alt="..." />
-                        <div class="Y_productInfo">
-                            <h4>
-                                <b>@Html.DisplayFor(modelItem => item.pName)</b>
-                            </h4>
-                            <h5>
-                                <b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>
-                            </h5>
-                        </div>
-                    </a>
-                </div>
-            }
-        </div>
-
-        <div id=Nulldiv></div>
         <!-- 篩選器頭 -->
         <div class="btn-group" role="group">
 
@@ -67,30 +85,30 @@
             </div>
 
             <!-- <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                材質
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <div class="form-group">
-                    <a class="dropdown-item" href="#">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="杉木" id="W1"
-                                onclick="bt1(this.value,this.id+1,this.id)">
-                            <label class="form-check-label" for="dropdownCheck">
-                                杉木
-                            </label>
-                        </div>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="和闐玉" id="W2"
-                                onclick="bt1(this.value,this.id+1,this.id)">
-                            <label class="form-check-label" for="dropdownCheck">
-                                和闐玉
-                            </label>
-                        </div>
-                    </a>
-                </div>
-            </div> -->
+            材質
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <div class="form-group">
+                <a class="dropdown-item" href="#">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" value="杉木" id="W1"
+                            onclick="bt1(this.value,this.id+1,this.id)">
+                        <label class="form-check-label" for="dropdownCheck">
+                            杉木
+                        </label>
+                    </div>
+                </a>
+                <a class="dropdown-item" href="#">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" value="和闐玉" id="W2"
+                            onclick="bt1(this.value,this.id+1,this.id)">
+                        <label class="form-check-label" for="dropdownCheck">
+                            和闐玉
+                        </label>
+                    </div>
+                </a>
+            </div>
+        </div> -->
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -224,7 +242,28 @@
                 </div>
             </div>
         </div>
+        <div id=Nulldiv></div>
         <!-- 篩選器尾 -->
+        <div class="row ">
+            @foreach (var item in Model)
+            {
+                <div class=" col-12 col-md-6 col-xl-3 ">
+                    <a href="@Url.Action("產品細節","Customer", new { id = item.ProductId })">
+                        <img src="@Url.Action(item.epsImage)" class="img-fluid " alt="..." />
+                        <div class="Y_productInfo">
+                            <h4>
+                                <b>@Html.DisplayFor(modelItem => item.pName)</b>
+                            </h4>
+                            <h5>
+                                <b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>
+                            </h5>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+
+
     </div>
     <script type="text/javascript">
         //onclick事件傳入value值和id
