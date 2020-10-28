@@ -473,18 +473,13 @@
     <Compile Include="tWarehouseName.cs">
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModels\DiaryViewModel.cs" />
-    <Compile Include="ViewModels\EmployeeLoginViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
-    <Compile Include="ViewModels\FavoriteViewModel.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
-    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ShipDetailViewModel.cs" />
     <Compile Include="ViewModels\ShipListViewModel.cs" />
     <Compile Include="ViewModels\StatusCartViewModel.cs" />
-    <Compile Include="ViewModels\PromotionViewModel.cs" />
     <Compile Include="ViewModels\StatusCustomerViewModel.cs" />
     <Compile Include="ViewModels\StockDetailViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />

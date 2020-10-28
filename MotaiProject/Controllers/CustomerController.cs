@@ -17,13 +17,15 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
+        //Logout
         [HttpPost]
         public ActionResult 登出()
         {
             Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = null;
             return RedirectToAction("首頁");
         }
-        int pageSize = 10;
+        //Promotion
+        int pageSize = 5;
         public ActionResult 消息(int page = 1)
         {
             MotaiDataEntities db = new MotaiDataEntities();
@@ -108,46 +110,58 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public ActionResult 會員註冊(RegisterViewModel newMember)
+        //{
+        //    if (newMember.cPassword == newMember.cConfirmPassword)
+        //    {
+        //        MotaiDataEntities dbContext = new MotaiDataEntities();
+        //        tCustomer newmember = new tCustomer();
+        //        newmember.cAccount = newMember.cAccount;
+        //        newmember.cPassword = newMember.cPassword;
+        //        newmember.cName = newMember.cName;
+        //        newmember.cTelePhone = newMember.cTelePhone;
+        //        newmember.cCellPhone = newMember.cCellPhone;
+        //        newmember.cAddress = newMember.cAddress;
+        //        newmember.cGUI = newMember.cGUI;
+        //        newmember.cEmail = newMember.cEmail;
+        //        dbContext.tCustomers.Add(newmember);
+        //        dbContext.SaveChanges();
+        //    }
+        //    return RedirectToAction("首頁");
+        //}
         [HttpPost]
-        public ActionResult 會員註冊(CustomerViewModel n新會員模組)
+        public JsonResult 會員註冊(RegisterViewModel newMember)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            if (dbContext.tCustomers.Count() == 0)
+            List<tCustomer> custo = dbContext.tCustomers.ToList();
+            foreach (var item in custo)
             {
-                n新會員模組.CustomerId = 1;
+                if (item.cAccount == newMember.cAccount)
+                {
+                    return Json(new {msg = "帳號已被註冊" });
+                }else if(item.cEmail == newMember.cEmail)
+                {
+                    return Json(new { msg = "信箱已被使用" });
+                }
             }
-
-            tCustomer n新會員 = new tCustomer();
-            n新會員 = n新會員模組.Customer;
-            dbContext.tCustomers.Add(n新會員);
-            dbContext.SaveChanges();
-            return RedirectToAction("首頁");
+            if (newMember.cPassword == newMember.cConfirmPassword)
+            {
+                tCustomer newmember = new tCustomer();
+                newmember.cAccount = newMember.cAccount;
+                newmember.cPassword = newMember.cPassword;
+                newmember.cName = newMember.cName;
+                newmember.cTelePhone = newMember.cTelePhone;
+                newmember.cCellPhone = newMember.cCellPhone;
+                newmember.cAddress = newMember.cAddress;
+                newmember.cGUI = newMember.cGUI;
+                newmember.cEmail = newMember.cEmail;
+                dbContext.tCustomers.Add(newmember);
+                dbContext.SaveChanges();
+                return Json(new { msg = "註冊成功" });
+            }
+            return Json(new {msg = "註冊失敗" });
         }
-        //[HttpPost]
-        //public bool 會員註冊(CustomerViewModel n新會員模組)
-        //{
-        //    MotaiDataEntities dbContext = new MotaiDataEntities();
-        //    if (dbContext.tCustomers.Count() == 0)
-        //    {
-        //        //n新會員模組.CustomerId = 1;
-        //    }
-        //    tCustomer n新會員 = new tCustomer();
-        //    n新會員 = n新會員模組.Customer;
-
-        //    List<tCustomer> custo = dbContext.tCustomers.ToList();
-
-        //    //List<tCustomer> cust = new List<tCustomer>();
-        //    foreach (var item in custo)
-        //    {
-        //        if (item.cAccount == n新會員.cAccount)
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    dbContext.tCustomers.Add(n新會員);
-        //    dbContext.SaveChanges();
-        //    return true;
-        //}
 
         public ActionResult 忘記密碼()
         {
