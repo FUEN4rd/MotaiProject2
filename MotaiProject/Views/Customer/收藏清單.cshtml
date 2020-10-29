@@ -139,7 +139,7 @@
             let cart = document.getElementById(`cart${id2}`);
             cart.style.marginLeft = "50%";
             cart.style.marginTop = "-30px";
-            cart.setAttribute("onclick", "");
+            cart.setAttribute("onclick", `addTocart(${id2})`);
         }
     </script>
     <div class="container">
@@ -259,63 +259,84 @@
         }
     </script>
     <script>
-        $(function () {
+        function addTocart(productid) {       
+        fetch('/Customer/AddToCart', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `ProductId=${productid}&buyQty=1`
+        }).then(function (response) {
+            return response.json();
+        })
+            .then(function (data) {
+                alert(data.msg);
 
-            let slideNum = 0;
-            let slideCount = $(".slides li").length;
-            let lastIndex = slideCount - 5;
-
-
-            // let play = window.setInterval(setPlay, 1500);
-            function setPlay() {
-                show();
-                slideNum++
-                if (slideNum > lastIndex) {
-                    slideNum = 0;
-                }
-            }
-
-            function stopPlay() {
-                clearInterval(play);
-            }
-
-            function show() {
-                let move = 0 - 240 * slideNum;
-                $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
-                $("ul.slides").css("left", move);
-            }
-
-            // $(".wrapper").hover(function () {
-            //     stopPlay();
-            //     console.log("stop");
-            // }, function () {
-            //     play = window.setInterval(setPlay, 500);
-            //     console.log("play");
-            // });
-
-            $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
-            $(".dot li").mouseenter(function () {
-                slideNum = $(this).index();
-                show();
-            });
-
-            $("#prevSlide").click(function () {
-                slideNum--;
-                if (slideNum < 0) {
-                    slideNum = lastIndex;
-                }
-                show();
             })
 
-            $("#nextSlide").click(function () {
-                slideNum++;
-                if (slideNum > lastIndex) {
-                    slideNum = 0;
-                }
-                show();
-            })
+    }
 
-        });
+    </script>
+
+
+    <script>
+                $(function () {
+
+                    let slideNum = 0;
+                    let slideCount = $(".slides li").length;
+                    let lastIndex = slideCount - 5;
+
+
+                    // let play = window.setInterval(setPlay, 1500);
+                    function setPlay() {
+                        show();
+                        slideNum++
+                        if (slideNum > lastIndex) {
+                            slideNum = 0;
+                        }
+                    }
+
+                    function stopPlay() {
+                        clearInterval(play);
+                    }
+
+                    function show() {
+                        let move = 0 - 240 * slideNum;
+                        $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+                        $("ul.slides").css("left", move);
+                    }
+
+                    // $(".wrapper").hover(function () {
+                    //     stopPlay();
+                    //     console.log("stop");
+                    // }, function () {
+                    //     play = window.setInterval(setPlay, 500);
+                    //     console.log("play");
+                    // });
+
+                    $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
+                    $(".dot li").mouseenter(function () {
+                        slideNum = $(this).index();
+                        show();
+                    });
+
+                    $("#prevSlide").click(function () {
+                        slideNum--;
+                        if (slideNum < 0) {
+                            slideNum = lastIndex;
+                        }
+                        show();
+                    })
+
+                    $("#nextSlide").click(function () {
+                        slideNum++;
+                        if (slideNum > lastIndex) {
+                            slideNum = 0;
+                        }
+                        show();
+                    })
+
+                });
     </script>
 </content>
 
