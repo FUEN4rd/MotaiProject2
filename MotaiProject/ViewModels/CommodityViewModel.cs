@@ -50,7 +50,7 @@ namespace MotaiProject.ViewModels
         public IEnumerable<SelectListItem> WareHouseInNames { get; set; }
     }
     //進貨
-    public class StockViewModel
+    public class StockListViewModel
     {
         public int StockId { get; set; }
         public int sEmployeeId { get; set; }
@@ -61,6 +61,23 @@ namespace MotaiProject.ViewModels
         public string sVendorTel { get; set; }
         public DateTime sStockDate { get; set; }
         public string sStockNote { get; set; }
+        public List<StockDetailViewModel> StockDetails { get; set; }
+
+        public IEnumerable<SelectListItem> EmpNames { get; set; }
+    }
+    public class StockCreateViewModel
+    {
+        public int StockId { get; set; }
+        public int sEmployeeId { get; set; }
+        [DisplayName("員工名")]
+        public string EmpName { get; set; }
+        public int sStockSerialValue { get; set; }
+        public string sVendor { get; set; }
+        public string sVendorTel { get; set; }
+        public DateTime sStockDate { get; set; }
+        public string sStockNote { get; set; }
+        public StockDetailViewModel StockDetail { get; set; }
+        public List<StockDetailViewModel> StockDetails { get; set; }
 
         public IEnumerable<SelectListItem> EmpNames { get; set; }
     }
@@ -68,14 +85,17 @@ namespace MotaiProject.ViewModels
     {
         public int StockDetailId { get; set; }
         public int sStockId { get; set; }
+        public int sProductId { get; set; }
         [DisplayName("商品名")]
         public string ProductName { get; set; }
-        public int sProductId { get; set; }
+        [DisplayName("成本")]
         public decimal sCost { get; set; }
+        [DisplayName("數量")]
         public int sQuantity { get; set; }
         [DisplayName("倉儲名")]
         public string WareHouseName { get; set; }
         public int sWarehouseNameId { get; set; }
+        [DisplayName("備註")]
         public string sNote { get; set; }
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }

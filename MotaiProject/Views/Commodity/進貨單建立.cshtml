@@ -1,0 +1,217 @@
+﻿@model MotaiProject.ViewModels.StockCreateViewModel
+@using MotaiProject.ViewModels
+@{
+    ViewBag.Title = "進貨單建立";
+Layout = "~/Views/Shared/_Layout.cshtml";
+int count = 0;
+}
+
+<h2>進貨單建立</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>StockListViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.StockId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StockId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sEmployeeId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sEmployeeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmpName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmpName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmpName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sStockSerialValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sStockSerialValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sStockSerialValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sVendor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sVendor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sVendor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sVendorTel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sVendorTel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sVendorTel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sStockDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sStockDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sStockDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sStockNote, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sStockNote, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sStockNote, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.StockDetail.ProductName)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.StockDetail.sCost)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.StockDetail.sQuantity)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.StockDetail.WareHouseNames)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.StockDetail.sNote)
+                    </th>
+                    <th>新增/刪除</th>
+                </tr>
+            </thead>
+            <tbody id="detail">
+                @*@foreach (var item in Model.StockDetails)
+                {
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.ProductNames)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sQuantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WareHouseNames)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sNote)
+                    </td>
+                    <td>
+                        <input type="button" onclick="deleteDetail()" />
+                    </td>
+                </tr>
+                }*@
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <input type="button" onclick="createDetail()" />
+                    </td>
+                </tr>
+                @*<tr id="stock@(count)">
+                    <td scope="row">
+                        @Html.DropDownList("sProductId", Model.StockDetail.ProductNames, new { htmlAttributes = new { @id = "Name" + count } })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.StockDetail.sCost, new { htmlAttributes = new { @id = "Cost" + count } })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.StockDetail.sQuantity, new { htmlAttributes = new { @id = "Qty" + count } })
+                    </td>
+                    <td>
+                        @Html.DropDownList("sWarehouseNameId", Model.StockDetail.WareHouseNames, new { htmlAttributes = new { @id = "WHName" + count } })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.StockDetail.sNote, new { htmlAttributes = new { @id = "Note" + count } })
+                    </td>
+                    <td>
+                        <input type="button" onclick="createDetail()" />
+                    </td>
+                </tr>*@
+                }
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="新贈進貨單" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    function createDetail() {
+        var pName = $("#Name@(count)").val();
+        var Cost = $("#Cost@(count)").val();
+        var Qty = $("#Qty@(count)".val();
+        var WHName = $("#WHName@(count)".val();
+        var Note = $("#Note@(count)".val();
+
+        var stockDetail = {
+            ProductName: pName,
+            sCost: Cost,
+            sQuantity: Qty,
+            WareHouseName: WHName,
+            sNote: Note,
+        }
+
+        $.ajax({
+            url: "@Url.Action("createStockDetail", "Commodity")",
+            type: "POST",
+            data: { "stockDetail": stockDetail },
+            success: function (data) {                
+                $("#detail").children().remove();
+                $("#detail").html(data);
+            }
+        });
+
+       
+        @count++;
+    }
+</script>
