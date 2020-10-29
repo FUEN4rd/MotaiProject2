@@ -50,6 +50,7 @@ namespace MotaiProject.Models
         {
             tProduct product = dbContext.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             ProductViewModel Prod = new ProductViewModel();
+            Prod.ProductId = product.ProductId;
             Prod.pNumber = product.pNumber;
             Prod.pName = product.pName;
             Prod.psCategory = product.tProductCategory.Category;

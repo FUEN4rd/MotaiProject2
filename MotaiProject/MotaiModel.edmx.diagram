@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="MotaiDataModel.tCustomer" Width="1.5" PointX="0.75" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tDiary" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tEmployee" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tFavorite" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tFavorite" Width="1.5" PointX="5.625" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tOrder" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tOrderDetail" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MotaiDataModel.tOrderPay" Width="1.5" PointX="8.25" PointY="21.5" IsExpanded="true" />
