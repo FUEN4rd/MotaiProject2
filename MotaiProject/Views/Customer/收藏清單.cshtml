@@ -24,25 +24,20 @@
         margin: 100px auto;
     }
 
-    ul {
-        margin: 0;
-        padding: 0;
-        position: absolute;
-    }
-
-    li {
-        margin: 20px;
-        padding: 0;
-        list-style: none;
-    }
 
     ul.slides {
         width: 2200px;
         left: 0px;
         transition: all 1s;
+        margin: 0;
+        padding: 0;
+        position: absolute;
     }
 
         ul.slides li {
+            margin: 20px;
+            padding: 0;
+            list-style: none;
             width: 200px;
             height: 300px;
             overflow: hidden;
@@ -302,8 +297,7 @@
         }).then(function (response) {
             return response.json();
                 }).then(function (data) {
-                    console.log(data);
-
+                    console.log(data);                    
         });
     }
     </script>
