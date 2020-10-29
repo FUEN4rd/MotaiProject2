@@ -176,7 +176,9 @@
                 }
             </div>
         </div>
-        <div class="container-fluid" style="height:200px"></div>
+        <div class="container-fluid" style="height:200px">
+            <button class="btn btn-primary" onclick="favororder()">測試</button>
+        </div>
         @*<script>
                 window.onload = collect(2, "七彩玉花瓶", 123456);
                 window.onload = collect(3, 564321, 123456);
@@ -293,10 +295,24 @@
                     alert(data.msg);
 
                 })
-
         }
-
     </script>
+    <script type="text/javascript">
+        function favororder() {
+            fetch('/Customer/收藏排名', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+        }).then(function (response) {
+            return response.json();
+                }).then(function (data) {
+                    console.log(data);
+
+        });
+    }
+    </script>
+
 
 
     <script>
