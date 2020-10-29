@@ -231,6 +231,7 @@ namespace MotaiProject.Controllers
                 {                 
                     tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
                     StatusCartViewModel cartC = new StatusCartViewModel();
+                    cartC.StatusId = items.StatusId;
                     cartC.pName = cartProd.pName;
                     cartC.pPrice = cartProd.pPrice;
                     cartC.sProductQty = items.sProductQty;
