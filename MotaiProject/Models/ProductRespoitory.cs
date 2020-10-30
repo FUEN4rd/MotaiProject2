@@ -102,13 +102,6 @@ namespace MotaiProject.Models
                 });
             }
             return selectLists;
-        }        
-
-        //Employee
-        public Dictionary<int, string> GetEmployeeAll()
-        {
-            var empNames = dbContext.tEmployees.OrderBy(e => e.eName);
-            return empNames.ToDictionary(eid => eid.EmployeeId, en => en.eName);
-        }
+        }                
     }
 }

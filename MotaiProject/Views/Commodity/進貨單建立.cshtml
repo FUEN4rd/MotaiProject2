@@ -9,8 +9,8 @@ int count = 0;
 <h2>進貨單建立</h2>
 
 
-@using (Html.BeginForm())
-{
+
+@{
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -22,22 +22,6 @@ int count = 0;
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StockId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.sEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.sEmployeeId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sEmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmpName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmpName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmpName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -126,27 +110,30 @@ int count = 0;
                     </td>
                 </tr>
                 }*@
-                <tr>
-                    <td>
+                @*<tr>
+                    <td scope="row">
+                        <input type="text" name="ProductNames" list="namelist"/>
+                        <datalist id="namelist">
 
+                        </datalist>
                     </td>
                     <td>
-
+                        <input type="text" name="sCost"/>
                     </td>
                     <td>
-
+                        <input type="text" name="sQuantity"/>
                     </td>
                     <td>
-
+                        <input type="text" name="WareHouseNames" list=""/>
                     </td>
                     <td>
-
+                        <textarea name="sNote"></textarea>
                     </td>
                     <td>
-                        <input type="button" onclick="createDetail()" />
+                        <input type="button" value="加入" onclick="createDetail()" />
                     </td>
-                </tr>
-                @*<tr id="stock@(count)">
+                </tr>*@
+                <tr id="stock@(count)">
                     <td scope="row">
                         @Html.DropDownList("sProductId", Model.StockDetail.ProductNames, new { htmlAttributes = new { @id = "Name" + count } })
                     </td>
@@ -160,19 +147,18 @@ int count = 0;
                         @Html.DropDownList("sWarehouseNameId", Model.StockDetail.WareHouseNames, new { htmlAttributes = new { @id = "WHName" + count } })
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.StockDetail.sNote, new { htmlAttributes = new { @id = "Note" + count } })
+                        @Html.TextAreaFor(model => model.StockDetail.sNote, new { htmlAttributes = new { @id = "Note" + count } })
                     </td>
                     <td>
-                        <input type="button" onclick="createDetail()" />
+                        <input type="button" value="加入" onclick="createDetail()" />
                     </td>
-                </tr>*@
-                }
+                </tr>
             </tbody>
         </table>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="新贈進貨單" class="btn btn-default" />
+                <input type="submit" value="新增進貨單" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -185,6 +171,10 @@ int count = 0;
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready({
+    });
+</script>
 <script>
     function createDetail() {
         var pName = $("#Name@(count)").val();

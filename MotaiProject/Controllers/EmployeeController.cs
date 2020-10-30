@@ -125,16 +125,16 @@ namespace MotaiProject.Controllers
         public ActionResult 新增產品()
         {
             ProductViewModel newprod = new ProductViewModel();
-            var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);            
+            var categories = productRespotiory.GetCategoryAll();
+            List<SelectListItem> Cateitems = productRespotiory.GetSelectList(categories);            
             newprod.Categories = Cateitems;
 
-            var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
+            var materials = productRespotiory.GetMaterialAll();
+            List<SelectListItem> Mateitems = productRespotiory.GetSelectList(materials);
             newprod.Materials = Mateitems;
 
-            var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
+            var sizes = productRespotiory.GetSizeAll();
+            List<SelectListItem> Sizeitems = productRespotiory.GetSelectList(sizes);
             newprod.Sizes = Sizeitems;
             return View(newprod);
         }

@@ -54,8 +54,6 @@ namespace MotaiProject.ViewModels
     {
         public int StockId { get; set; }
         public int sEmployeeId { get; set; }
-        [DisplayName("員工名")]
-        public string EmpName { get; set; }
         public int sStockSerialValue { get; set; }
         public string sVendor { get; set; }
         public string sVendorTel { get; set; }
@@ -63,23 +61,20 @@ namespace MotaiProject.ViewModels
         public string sStockNote { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
 
-        public IEnumerable<SelectListItem> EmpNames { get; set; }
+
     }
     public class StockCreateViewModel
     {
         public int StockId { get; set; }
         public int sEmployeeId { get; set; }
-        [DisplayName("員工名")]
-        public string EmpName { get; set; }
         public int sStockSerialValue { get; set; }
         public string sVendor { get; set; }
         public string sVendorTel { get; set; }
-        public DateTime sStockDate { get; set; }
+        public DateTime sStockDate { get { return DateTime.Now; } set { } }
         public string sStockNote { get; set; }
         public StockDetailViewModel StockDetail { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
 
-        public IEnumerable<SelectListItem> EmpNames { get; set; }
     }
     public class StockDetailViewModel
     {
@@ -107,14 +102,11 @@ namespace MotaiProject.ViewModels
     {
         public int ShipId { get; set; }
         public int sEmployeeId { get; set; }
-        [DisplayName("員工名")]
-        public string EmpName { get; set; }
         public int sShipSerialValue { get; set; }
         public int sOrderId { get; set; }
-        public DateTime sShipDate { get; set; }
+        public DateTime sShipDate { get { return DateTime.Now; } set { } }
         public string sShipNote { get; set; }
 
-        public IEnumerable<SelectListItem> EmpNames { get; set; }
     }
     public class ShipDetailViewModel
     {
