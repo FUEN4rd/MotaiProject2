@@ -38,15 +38,59 @@ namespace MotaiProject.Controllers
             
         }
         [HttpPost]
-        public JsonResult 進貨單建立(StockListViewModel stockList)
+        public JsonResult 進貨單建立(StockCreateViewModel stockList)
         {
             return Json(new { });
         }
         [HttpPost]
         public string createStockDetail(StockDetailViewModel stockDetail)
         {
-            string data="";
+            if(Session[CSession關鍵字.SK_STOCKDETAIL] == null)
+            {
+                List<StockDetailViewModel> stocks = new List<StockDetailViewModel>();
+                stocks.Add(stockDetail);
+                Session[CSession關鍵字.SK_STOCKDETAIL] = stocks;
+            }
+            else
+            {
+                List<StockDetailViewModel> stocks = Session[CSession關鍵字.SK_STOCKDETAIL] as List<StockDetailViewModel>;
+                stocks.Add(stockDetail);
+                Session[CSession關鍵字.SK_STOCKDETAIL] = stocks;
+            }                        
+            string data = "<tr><td scope='row'>";
+            if (stockDetail.sNote != null)
+            {                
+                data += stockDetail.ProductName.ToString() + "</td><td>";
+                data += stockDetail.sCost.ToString() + "</td><td>";
+                data += stockDetail.sQuantity.ToString() + "</td><td>";
+                data += stockDetail.WareHouseName.ToString() + "</td><td>";
+                if (stockDetail.sNote.Length > 10)
+                {
+                    for(int i=0;i< stockDetail.sNote.Length / 10; i++)
+                    {
+                        data += stockDetail.sNote.Substring(i * 10, 10)+"<br>";
+                    }
+                    data += "</td>";
+                }
+                else
+                {
+                    data += stockDetail.sNote.ToString() + "</td>";
+                }                            
+            }
+            else
+            {                
+                data += stockDetail.ProductName.ToString() + "</td><td>";
+                data += stockDetail.sCost.ToString() + "</td><td>";
+                data += stockDetail.sQuantity.ToString() + "</td><td>";
+                data += stockDetail.WareHouseName.ToString() + "</td><td>";
+                data += "</td>";                
+            }
             return data;
+        }
+
+        public ActionResult 進貨單查詢()
+        {
+            return View();
         }
     }
 }

@@ -63,19 +63,6 @@ namespace MotaiProject.ViewModels
 
 
     }
-    public class StockCreateViewModel
-    {
-        public int StockId { get; set; }
-        public int sEmployeeId { get; set; }
-        public int sStockSerialValue { get; set; }
-        public string sVendor { get; set; }
-        public string sVendorTel { get; set; }
-        public DateTime sStockDate { get { return DateTime.Now; } set { } }
-        public string sStockNote { get; set; }
-        public StockDetailViewModel StockDetail { get; set; }
-        public List<StockDetailViewModel> StockDetails { get; set; }
-
-    }
     public class StockDetailViewModel
     {
         public int StockDetailId { get; set; }
@@ -95,6 +82,18 @@ namespace MotaiProject.ViewModels
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
+    }
+    public class StockCreateViewModel
+    {
+        public int StockId { get; set; }
+        public int sEmployeeId { get; set; }
+        public int sStockSerialValue { get; set; }
+        public string sVendor { get; set; }
+        public string sVendorTel { get; set; }
+        public DateTime sStockDate { get { return DateTime.Now; } set { } }
+        public string sStockNote { get; set; }
+        public StockDetailViewModel StockDetail { get; set; }
+        public List<StockDetailViewModel> StockDetails { get; set; }
     }
 
     //出貨
