@@ -126,39 +126,15 @@ namespace MotaiProject.Controllers
         {
             ProductViewModel newprod = new ProductViewModel();
             var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new List<SelectListItem>();
-            foreach (var c in categories)
-            {
-                Cateitems.Add(new SelectListItem()
-                {
-                    Text = c.Value,
-                    Value = c.Key.ToString()
-                });
-            }
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);            
             newprod.Categories = Cateitems;
 
             var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new List<SelectListItem>();
-            foreach (var m in materials)
-            {
-                Mateitems.Add(new SelectListItem()
-                {
-                    Text = m.Value,
-                    Value = m.Key.ToString()
-                });
-            }
+            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
             newprod.Materials = Mateitems;
 
             var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new List<SelectListItem>();
-            foreach (var s in sizes)
-            {
-                Sizeitems.Add(new SelectListItem()
-                {
-                    Text = s.Value,
-                    Value = s.Key.ToString()
-                });
-            }
+            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
             newprod.Sizes = Sizeitems;
             return View(newprod);
         }

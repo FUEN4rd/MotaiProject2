@@ -8,12 +8,13 @@
 <style>
     .cardrow {
         height : 400px;
+        width:300px;
         padding : 10px;
         margin : 10px;
     }
     .cardimg{
-        width:300px;
-        height:200px;
+        width:100%;
+        height:50%;
     }
     .wrapper {
         position: relative;
@@ -23,25 +24,20 @@
         margin: 100px auto;
     }
 
-    ul {
-        margin: 0;
-        padding: 0;
-        position: absolute;
-    }
-
-    li {
-        margin: 20px;
-        padding: 0;
-        list-style: none;
-    }
 
     ul.slides {
         width: 2200px;
         left: 0px;
         transition: all 1s;
+        margin: 0;
+        padding: 0;
+        position: absolute;
     }
 
         ul.slides li {
+            margin: 20px;
+            padding: 0;
+            list-style: none;
             width: 200px;
             height: 300px;
             overflow: hidden;
@@ -154,12 +150,12 @@
 
 
         <div class="container row">
-            <div id="productrow" class="card-group container">
+
                 @if (Model != null)
                 {
                     foreach (var item in Model)
                     {
-                        <div id="card@(item.fProductId)" class="card col-xl-4 col-md-6 cardrow">
+                        <div id="card@(item.fProductId)" class="card  cardrow">
                             <img id="img@(item.fProductId)" src = "https://img.ruten.com.tw/s1/5/6d/55/21506424980821_486.jpg" class="card-img-top cardimg"/>@*產品圖*@
                             <div id="cardbody@(item.fProductId)" class="card-body d-block">
                                 <h5 class="card-title d-flex">@item.pName</h5>
@@ -174,15 +170,11 @@
                         </div>
                     }
                 }
-            </div>
+
         </div>
-        <div class="container-fluid" style="height:200px"></div>
-        @*<script>
-                window.onload = collect(2, "七彩玉花瓶", 123456);
-                window.onload = collect(3, 564321, 123456);
-            </script>*@
-
-
+        <div class="container-fluid" style="height:200px">
+            <button class="btn btn-primary" onclick="favororder()">測試</button>
+        </div>
 
 
     </div>
@@ -293,10 +285,23 @@
                     alert(data.msg);
 
                 })
-
         }
-
     </script>
+    <script type="text/javascript">
+        function favororder() {
+            fetch('/Customer/收藏排名', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+        }).then(function (response) {
+            return response.json();
+                }).then(function (data) {
+                    console.log(data);                    
+        });
+    }
+    </script>
+
 
 
     <script>

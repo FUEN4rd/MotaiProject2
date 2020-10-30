@@ -401,5 +401,34 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
 
         }
+
+        public JsonResult 收藏排名()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            var favorOrderby = (from i in dbContext.tFavorites
+                             group i by i.fProductId into j
+                             select new
+                             {
+                                 Pid = j.Key,
+                                 Pcount = j.Count(),
+                             }).OrderByDescending(j => j.Pcount).Take(10);           
+                                                                 
+            return Json(new { favorOrderby });
+
+        }
+
+        public JsonResult 購買排名()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            var buyOrderby = (from i in dbContext.tOrderDetails
+                                group i by i.oProductId into j
+                                select new
+                                {
+                                    Pid = j.Key,
+                                    Pcount = j.Sum(p=>p.oProductQty),
+                                }).OrderByDescending(j => j.Pcount).Take(10);
+
+            return Json(new { buyOrderby });
+        }
     }
 }
