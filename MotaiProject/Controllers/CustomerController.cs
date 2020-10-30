@@ -411,7 +411,7 @@ namespace MotaiProject.Controllers
                              {
                                  Pid = j.Key,
                                  Pcount = j.Count(),
-                             }).OrderByDescending(j => j.Pcount).Take(10);           
+                             }).OrderByDescending(j => j.Pcount).Take(10).ToArray();           
                                                                  
             return Json(new { favorOrderby });
 
@@ -426,7 +426,7 @@ namespace MotaiProject.Controllers
                                 {
                                     Pid = j.Key,
                                     Pcount = j.Sum(p=>p.oProductQty),
-                                }).OrderByDescending(j => j.Pcount).Take(10);
+                                }).OrderByDescending(j => j.Pcount).Take(10).ToArray();
 
             return Json(new { buyOrderby });
         }
