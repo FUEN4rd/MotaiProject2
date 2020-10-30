@@ -172,9 +172,9 @@
                 }
 
         </div>
-        <div class="container-fluid" style="height:200px">
+        @*<div class="container-fluid" style="height:200px">
             <button class="btn btn-primary" onclick="favororder()">測試</button>
-        </div>
+        </div>*@
 
 
     </div>
@@ -184,8 +184,16 @@
                 <div class="row">
                     <div class="wrapper">
                         <ul class="slides">
+                            @*<li>
+                                <img id="img1" src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
+                                     alt="">
+                            </li>
                             <li>
-                                <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
+                                <img id="img2" src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
+                                     alt="">
+                            </li>
+                            <li>
+                                <img id="img3" src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
                                      alt="">
                             </li>
                             <li>
@@ -215,15 +223,14 @@
                             <li>
                                 <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
                                      alt="">
-                            </li>
-                            <li>
-                                <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
-                                     alt="">
-                            </li>
-                            <li>
-                                <img src="https://cdn.pixabay.com/photo/2020/08/14/14/49/women-5488183_1280.jpg"
-                                     alt="">
-                            </li>
+                            </li>*@
+                            @for (int i = 1; i < 11; i++)
+                            {
+                                <li>
+                                    <img id="orderimg@(i)" src=""
+                                         alt="">
+                                </li>
+                            }
                         </ul>
                         <div id="prevSlide" class="slide_btn">
                             <i class="carousel-control-prev-icon"></i>
@@ -288,7 +295,7 @@
         }
     </script>
     <script type="text/javascript">
-        function favororder() {
+        (function favororder() {
             fetch('/Customer/收藏排名', {
             method: 'POST',
             headers: {
@@ -297,9 +304,17 @@
         }).then(function (response) {
             return response.json();
                 }).then(function (data) {
-                    console.log(data);                    
+                    //console.log((try { } catch{ }) ? "yes" : "arg");
+                    //console.log(data.favorOrderby[0]["Pid"])
+                    for (let i = 1; i < 11; i++) {
+                        let xx = $(`#orderimg${i}`);
+                        xx.attr("src", "https://sites.google.com/a/netcmmi.com/share/_/rsrc/1473734124982/img/png/s/star-e01.png");
+                        let S = data.favorOrderby[i-1]["Pid"];
+                        xx.attr("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer")?ProductId=${S}'`)
+                    }
+                    
         });
-    }
+        })()       
     </script>
 
 
