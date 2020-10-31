@@ -40,7 +40,46 @@ namespace MotaiProject.Controllers
         [HttpPost]
         public JsonResult 進貨單建立(StockCreateViewModel stockList)
         {
-            return Json(new { });
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                if (Session[CSession關鍵字.SK_STOCKDETAIL] == null)
+                {
+                    return Json(new {result=false,msg="進貨單尚未完成!",url=""});
+                }
+                else
+                {
+                    List<StockDetailViewModel> stocks = Session[CSession關鍵字.SK_STOCKDETAIL] as List<StockDetailViewModel>;
+                    MotaiDataEntities dbContext = new MotaiDataEntities();
+                    tStockList list = new tStockList();
+                    list.sEmployeeId = emp.EmployeeId;
+                    list.sStockSerialValue = stockList.sStockSerialValue;
+                    list.sVendor = stockList.sVendor;
+                    list.sVendorTel = stockList.sVendorTel;
+                    list.sStockDate = stockList.sStockDate;
+                    list.sStockNote = stockList.sStockNote;
+                    dbContext.tStockLists.Add(list);
+                    dbContext.SaveChanges();
+                    foreach (var items in stocks)
+                    {
+                        tStockDetail detail = new tStockDetail();
+                        detail.sStockId = dbContext.tStockLists.OrderByDescending(i => i.StockId).First().StockId;
+                        detail.sProductId = items.sProductId;
+                        detail.sCost = items.sCost;
+                        detail.sQuantity = items.sQuantity;
+                        detail.sWarehouseNameId = items.sWarehouseNameId;
+                        detail.sNote = items.sNote;
+                        dbContext.tStockDetails.Add(detail);
+                    }
+                    dbContext.SaveChanges();
+                    Session[CSession關鍵字.SK_STOCKDETAIL] = null;
+                    return Json(new { result=true,msg="新增成功",url=Url.Action("進貨單建立","Commodity")});
+                }
+            }
+            else
+            {
+                return Json(new { result = false, msg = "尚未登入!",url=Url.Action("員工登入","Employee")});
+            }
         }
         [HttpPost]
         public string createStockDetail(StockDetailViewModel stockDetail)
@@ -56,7 +95,11 @@ namespace MotaiProject.Controllers
                 List<StockDetailViewModel> stocks = Session[CSession關鍵字.SK_STOCKDETAIL] as List<StockDetailViewModel>;
                 stocks.Add(stockDetail);
                 Session[CSession關鍵字.SK_STOCKDETAIL] = stocks;
-            }                        
+            }
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            stockDetail.ProductName = dbContext.tProducts.Where(s => s.ProductId.Equals(stockDetail.sProductId)).FirstOrDefault().pName;
+            stockDetail.WareHouseName = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(stockDetail.sWarehouseNameId)).FirstOrDefault().WarehouseName;
+
             string data = "<tr><td scope='row'>";
             if (stockDetail.sNote != null)
             {                

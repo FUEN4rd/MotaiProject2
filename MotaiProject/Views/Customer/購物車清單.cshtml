@@ -18,18 +18,6 @@
         margin: 100px auto;
     }
 
-    /*ul {
-        margin: 0;
-        padding: 0;
-        position: absolute;
-    }
-
-    li {
-        margin: 20px;
-        padding: 0;
-        list-style: none;
-    }*/
-
     ul.slides {
         width: 2200px;
         left: 0px;
@@ -144,7 +132,7 @@
     new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
                     </td>
                 </tr>
-                count += item.pTotal; 
+                count += item.pTotal;
             }
         </tbody>
     </table>
@@ -180,63 +168,99 @@
 
 
     </div>
-    <div>
-
+    <div class="container">
+        <div class="row">
+            <div class="wrapper">
+                <ul class="slides">
+                    @for (int i = 1; i < 11; i++)
+                    {
+                        <li>
+                            <img id="orderimg@(i)" src=""
+                                 alt="">
+                        </li>
+                    }
+                </ul>
+                <div id="prevSlide" class="slide_btn">
+                    <i class="carousel-control-prev-icon"></i>
+                </div>
+                <div id="nextSlide" class="slide_btn">
+                    <i class="carousel-control-next-icon"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
-
-</div>
-
-
-@*<script>
-            $(function () {
-
-                let slideNum = 0;
-                let slideCount = $(".slides li").length;
-                let lastIndex = slideCount - 1;
-
-                function setPlay() {
-                    show();
-                    slideNum++
-                    if (slideNum > lastIndex) {
-                        slideNum = 0;
+    <script type="text/javascript">
+        (function favororder() {
+            fetch('/Customer/購買排名', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+        }).then(function (response) {
+            return response.json();
+                }).then(function (data) {
+                    //console.log((try { } catch{ }) ? "yes" : "arg");
+                    //console.log(data.favorOrderby[0]["Pid"])
+                    for (let i = 1; i < 11; i++) {
+                        let xx = $(`#orderimg${i}`);
+                        xx.attr("src", "https://sites.google.com/a/netcmmi.com/share/_/rsrc/1473734124982/img/png/s/star-e01.png");
+                        let S = data.buyOrderby[i-1]["Pid"];
+                        xx.attr("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer")?ProductId=${S}'`)
                     }
+
+        });
+        })()
+    </script>
+
+
+    <script>
+        $(function () {
+
+            let slideNum = 0;
+            let slideCount = $(".slides li").length;
+            let lastIndex = slideCount - 1;
+
+            function setPlay() {
+                show();
+                slideNum++
+                if (slideNum > lastIndex) {
+                    slideNum = 0;
                 }
+            }
 
-                function stopPlay() {
-                    clearInterval(play);
-                }
+            function stopPlay() {
+                clearInterval(play);
+            }
 
-                function show() {
-                    let move = 0 - 200 * slideNum;
-                    $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
-                    $("ul.slides").css("left", move);
-                }
+            function show() {
+                let move = 0 - 200 * slideNum;
+                $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+                $("ul.slides").css("left", move);
+            }
 
-                $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
-                $(".dot li").mouseenter(function () {
-                    slideNum = $(this).index();
-                    show();
-                });
-
-                $("#prevSlide").click(function () {
-                    slideNum--;
-                    if (slideNum < 0) {
-                        slideNum = lastIndex;
-                    }
-                    show();
-                })
-
-                $("#nextSlide").click(function () {
-                    slideNum++;
-                    if (slideNum > lastIndex) {
-                        slideNum = 0;
-                    }
-                    show();
-                })
-
+            $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
+            $(".dot li").mouseenter(function () {
+                slideNum = $(this).index();
+                show();
             });
-    </script>*@
+
+            $("#prevSlide").click(function () {
+                slideNum--;
+                if (slideNum < 0) {
+                    slideNum = lastIndex;
+                }
+                show();
+            })
+
+            $("#nextSlide").click(function () {
+                slideNum++;
+                if (slideNum > lastIndex) {
+                    slideNum = 0;
+                }
+                show();
+            })
+
+        });
+    </script>
 

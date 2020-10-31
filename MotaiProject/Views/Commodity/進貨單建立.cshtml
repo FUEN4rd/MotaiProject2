@@ -15,19 +15,11 @@
     <div class="form-horizontal">
         <h4>StockListViewModel</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.StockId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StockId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })        
         <div class="form-group">
             @Html.LabelFor(model => model.sStockSerialValue, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sStockSerialValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.sStockSerialValue, new { htmlAttributes = new { @class = "form-control", @id = "SerialValue" } })
                 @Html.ValidationMessageFor(model => model.sStockSerialValue, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sVendor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sVendor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.sVendor, new { htmlAttributes = new { @class = "form-control", @id = "Vendor" } })
                 @Html.ValidationMessageFor(model => model.sVendor, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sVendorTel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sVendorTel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.sVendorTel, new { htmlAttributes = new { @class = "form-control", @id = "VendorTel" } })
                 @Html.ValidationMessageFor(model => model.sVendorTel, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sStockDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sStockDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.sStockDate, new { htmlAttributes = new { @class = "form-control" , @id = "StockDate" } })
                 @Html.ValidationMessageFor(model => model.sStockDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sStockNote, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sStockNote, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.sStockNote, new { htmlAttributes = new { @class = "form-control", @id = "StockNote" } })
                 @Html.ValidationMessageFor(model => model.sStockNote, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,19 +80,19 @@
             <tbody id="detail">                
                 <tr>
                     <td scope="row">
-                        @Html.DropDownList("pName", Model.StockDetail.ProductNames, "請選擇商品", new { htmlAttributes = new { @id = "Name" } })
+                        @Html.DropDownListFor(model=>model.StockDetail.sProductId, Model.StockDetail.ProductNames, "請選擇商品")
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.StockDetail.sCost, new { htmlAttributes = new { @id = "Cost" } })
+                        @Html.EditorFor(model => model.StockDetail.sCost)
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.StockDetail.sQuantity, new { htmlAttributes = new { @id = "Qty" } })
+                        @Html.EditorFor(model => model.StockDetail.sQuantity)
                     </td>
                     <td>
-                        @Html.DropDownList("WHName", Model.StockDetail.WareHouseNames, "請選擇倉儲", new { htmlAttributes = new { @id = "WHName" } })
+                        @Html.DropDownListFor(model=>model.StockDetail.sWarehouseNameId, Model.StockDetail.WareHouseNames, "請選擇倉儲")
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.StockDetail.sNote, new { htmlAttributes = new { @id = "Note" } })
+                        @Html.EditorFor(model => model.StockDetail.sNote)
                     </td>
                     <td>
                         <input id="createDetail" type="button" value="加入" />
@@ -119,24 +111,30 @@
 
 <script>
     $(document).ready(function () {
-        var pName = "";
-        var WHName = "";
-        //var Note;
-        $("#pName").change(function() {
-            pName = $("#pName option:selected").text();
-        });
-        $("#WHName").change(function () {
-            WHName = $("#WHName option:selected").text();
-        });
+        //var pName = "";
+        //var WHName = "";        
+        //$("#StockDetail_sProductId").change(function () {
+        //    //pName = $("#pName option:selected").val();
+        //    pName = $("#StockDetail_sProductId").val();
+        //    console.log(pName);
+        //});
+        //$("#StockDetail_sWarehouseNameId").change(function () {
+        //    //WHName = $("#StockDetail_sWarehouseNameId option:selected").val();
+        //    WHName = $("#StockDetail_sWarehouseNameId").val();
+        //    console.log(WHName);
+        //});
         $("#createDetail").click(function () {
-            var Cost = $("#Cost").val();
-            var Qty = $("#Qty").val();
-            var Note = $("#Note").val();
+            var pName = $("#StockDetail_sProductId").val();
+            console.log(pName);
+            var Cost = $("#StockDetail_sCost").val();
+            var Qty = $("#StockDetail_sQuantity").val();
+            var WHName = $("#StockDetail_sWarehouseNameId").val();
+            var Note = $("#StockDetail_sNote").val();
             var stockDetail = {
-                ProductName: pName,
+                sProductId: pName,
                 sCost: Cost,
                 sQuantity: Qty,
-                WareHouseName: WHName,
+                sWarehouseNameId: WHName,
                 sNote: Note,
             };
             $.ajax({
@@ -154,24 +152,33 @@
         $(this).parent().remove();
     });
     $("#createStock").click(function () {
-        var Cost = $("#Cost").val();
-            var Qty = $("#Qty").val();
-            var Note = $("#Note").val();
-            var stockList = {                
-                sStockSerialValue: Cost,
-                sVendor: Qty,
-                sVendorTel: WHName,
-                sStockDate: Note,
-                sStockNote: Cost,
-            };
-            $.ajax({
-                url: "@Url.Action("進貨單建立", "Commodity")",
-                type: "POST",
-                data: { "stockList": stockList },
-                success: function (data) {
-                    var list = data + "<td class='stock'><input id='deleteDetail' type ='button' value='刪除'/></td>";
-                    $("#detail").prepend(list);
+        var SerialValue = $("#SerialValue").val();
+        var Vendor = $("#Vendor").val();
+        var VendorTel = $("#VendorTel").val();
+        var StockDate = $("#StockDate").val();
+        var StockNote = $("#StockNote").val();
+        var stockList = {
+            sStockSerialValue: SerialValue,
+            sVendor: Vendor,
+            sVendorTel: VendorTel,
+            sStockDate: StockDate,
+            sStockNote: StockNote,
+        };
+        $.ajax({
+            url: "@Url.Action("進貨單建立", "Commodity")",
+            type: "POST",
+            data: { "stockList": stockList },
+            success: function (data) {
+                if (data.result) {
+                    alert(data.msg);
+                    onSuccess(data.url);
+                } else {
+                    alert(data.msg);
                 }
-            });
+            }
+        });
+    });
+    var onSuccess = function (url) {        
+        window.location.href = url;        
     }
 </script>
