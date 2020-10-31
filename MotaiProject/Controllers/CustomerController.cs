@@ -68,6 +68,19 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("首頁");
         }
+
+        [HttpPost]
+        public JsonResult 忘記密碼寄信前(ForgotPasswordViewModel c電子郵件)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tCustomer d信箱確認 = dbContext.tCustomers.FirstOrDefault
+                (c => c.cEmail == c電子郵件.Email);
+            if (d信箱確認 != null)
+            {
+                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer") });
+            }
+            return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
+        }
         public ActionResult 會員中心()
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)

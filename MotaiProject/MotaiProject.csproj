@@ -374,6 +374,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BossController.cs" />
     <Compile Include="Controllers\CommodityController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -520,6 +521,7 @@
     <Content Include="Views\Employee\會計審核.cshtml" />
     <Content Include="Views\Employee\修改日誌.cshtml" />
     <Content Include="Views\Commodity\進貨單建立.cshtml" />
+    <Content Include="Views\Boss\Boss首頁.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
