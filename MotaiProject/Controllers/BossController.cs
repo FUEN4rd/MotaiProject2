@@ -67,7 +67,7 @@ namespace MotaiProject.Controllers
         }
 
         public ActionResult 工作日誌()
-        {
+        {//要再改
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 MotaiDataEntities dbContext = new MotaiDataEntities();
@@ -83,6 +83,35 @@ namespace MotaiProject.Controllers
                 return View(diarylist);
             }
             return RedirectToAction("員工登入", "Customer");
+        }
+        private ProductRespoitory productRespotiory = new ProductRespoitory();
+        public ActionResult Boss產品頁面()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Customer");
+            }
+            List<ProductViewModel> productlist = new List<ProductViewModel>();
+            productlist = productRespotiory.GetProductAll();
+            return View(productlist);
+        }
+        public ActionResult 銷售數據()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Customer");
+            }
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            var favorOrderby = from i in dbContext.tFavorites
+                                group i by i.fProductId into j
+                                select new
+                                {
+                                    Pid = j.Key,
+                                    Pcount = j.Count(),
+                                };
+
+            return View(favorOrderby);
+
         }
     }
 }
