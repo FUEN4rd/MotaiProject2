@@ -29,9 +29,37 @@ namespace MotaiProject.ViewModels
         public int oPayDate { get; set; }
         public int oPayTypeId { get; set; }
         public string oPayType { get; set; }
-
-    }    
-
+    }
+    public class CustomerOrderViewModel
+    {        
+        [DisplayName("消費時間")]
+        public DateTime oDate { get; set; }
+        [DisplayName("門市編號")]
+        public int oWarehouseName { get; set; }
+        [DisplayName("門市")]
+        public string WarehouseName { get; set; }
+        [DisplayName("員工編號")]
+        public Nullable<int> oEmployeeId { get; set; }
+        [DisplayName("專員")]
+        public string EmployeeName { get; set; }
+        [DisplayName("備註")]
+        public string cNote { get; set; }
+        public List<CustomerOrderDetailViewModel> CustomerOrderDetails { get; set; }
+    }
+    public class CustomerOrderDetailViewModel
+    {
+        [DisplayName("訂單編號")]
+        public int oOrderId { get; set; }
+        public int oProductId { get; set; }
+        [DisplayName("產品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("產品名稱")]
+        public string ProductName { get; set; }
+        [DisplayName("產品數量")]
+        public int oProductQty { get; set; }
+        [DisplayName("備註")]
+        public string oNote { get; set; }
+    }
     public class OrderViewModel
     {
         [DisplayName("訂單編號")]
@@ -54,7 +82,7 @@ namespace MotaiProject.ViewModels
         public Nullable<int> oPromotionId { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }
-        [DisplayName("出貨倉儲")]
+        [DisplayName("門市編號")]
         public int oWarehouseName { get; set; }
     }
 
@@ -66,9 +94,9 @@ namespace MotaiProject.ViewModels
         public int oOrderId { get; set; }
         public int oProductId { get; set; }
         [DisplayName("產品編號")]
-        public string oProductNum { get; set; }
+        public string ProductNum { get; set; }
         [DisplayName("產品名稱")]
-        public string oProductName { get; set; }
+        public string ProductName { get; set; }
         [DisplayName("產品數量")]
         public int oProductQty { get; set; }
         [DisplayName("備註")]

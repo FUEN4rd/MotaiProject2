@@ -66,6 +66,7 @@
         <AssociationConnector Association="MotaiDataModel.FK_tTransfer_tWarehouseIn" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tTransfer_tWarehouseOut" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tWarehouse_tWarehouseName" ManuallyRouted="false" />
+        <AssociationConnector Association="MotaiDataModel.FK_tOrder_tWarehouseName" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,6 +23,7 @@ namespace MotaiProject
             this.tTransfers = new HashSet<tTransfer>();
             this.tTransfers1 = new HashSet<tTransfer>();
             this.tWarehouses = new HashSet<tWarehouse>();
+            this.tOrders = new HashSet<tOrder>();
         }
     
         public int WarehouseNameId { get; set; }
@@ -40,5 +41,7 @@ namespace MotaiProject
         public virtual ICollection<tTransfer> tTransfers1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tWarehouse> tWarehouses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tOrder> tOrders { get; set; }
     }
 }

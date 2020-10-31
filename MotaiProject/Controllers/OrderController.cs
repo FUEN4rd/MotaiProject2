@@ -30,28 +30,39 @@ namespace MotaiProject.Controllers
             return View("首頁");
         }
 
-
-
         //客戶訂單
-        public ActionResult 客戶訂單()
+        public ActionResult 客戶看訂單()
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities db = new MotaiDataEntities();
-                List<tOrder> orderlist = db.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
-                List<OrderViewModel> OrderList = new List<OrderViewModel>();
-                foreach (var items in orderlist)
+                List<tOrder> orders = db.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
+                List<CustomerOrderViewModel> OrderList = new List<CustomerOrderViewModel>();
+                foreach (var items in orders)
                 {
-                    OrderViewModel order = new OrderViewModel();
-                    order.Order = items;
-                    OrderList.Add(order);
-                    db.SaveChanges();
+                    CustomerOrderViewModel order = new CustomerOrderViewModel();
+                    order.oDate = items.oDate;
+                    order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
+                    order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId.Equals(items.oEmployeeId)).FirstOrDefault().eName;
+                    order.cNote = items.cNote;
+                    List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId.Equals(items.OrderId)).ToList();
+                    List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();
+                    foreach(var itemDetail in orderdetails)
+                    {
+                        CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
+                        orderdetail.ProductNum = db.tProducts.Where(p => p.ProductId.Equals(itemDetail.oProductId)).FirstOrDefault().pNumber;
+                        orderdetail.ProductName = db.tProducts.Where(p => p.ProductId.Equals(itemDetail.oProductId)).FirstOrDefault().pName;
+                        orderdetail.oProductQty = itemDetail.oProductQty;
+                        orderdetail.oNote = itemDetail.oNote;
+                        OrderDetailList.Add(orderdetail);
+                    }
+                    order.CustomerOrderDetails = OrderDetailList;
+                    OrderList.Add(order);                    
                 }
                 return View(OrderList);
             }
             return RedirectToAction("首頁");
-
         }
     }
 }
