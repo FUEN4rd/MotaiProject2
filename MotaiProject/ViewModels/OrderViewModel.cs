@@ -6,6 +6,19 @@ using System.Web;
 
 namespace MotaiProject.ViewModels
 {
+    //訂單付款
+    public class Orderpay
+    {
+        public int oPayId { get; set; }
+        public int oOrderId { get; set; }
+        public int oOrderInstallment { get; set; }
+        public decimal oPayment { get; set; }
+        public int oPayDate { get; set; }
+        public int oPayTypeId { get; set; }
+        public string oPayType { get; set; }
+
+    }
+
     public class StatusCartViewModel
     {
         public int StatusId { get; set; }
@@ -17,44 +30,29 @@ namespace MotaiProject.ViewModels
         [DisplayName("購買數量")]
         public int sProductQty { get; set; }
         [DisplayName("小計")]
-        public decimal pTotal { get { return pPrice * sProductQty; } }
+        public decimal pTotal { get; set; }
     }
 
     public class OrderViewModel
     {
-        MotaiDataEntities dbContext = new MotaiDataEntities();
-        private tOrder ord;
-        public tOrder Order
-        {
-            get
-            {
-                if (ord == null)
-                {
-                    ord = new tOrder();
-                }
-                return ord;
-            }
-            set => ord = value;
-        }
-
         [DisplayName("訂單編號")]
-        public int OrderId { get { return this.Order.OrderId; } set { Order.OrderId = value; } }
+        public int OrderId { get; set; }
         [DisplayName("客戶編號")]
-        public int oCustomerId { get { return Convert.ToInt32(this.Order.oCustomerId); } set { Order.oCustomerId = value; } }
+        public int oCustomerId { get; set; }
         [DisplayName("訂單地址")]
-        public string oAddress { get { return this.Order.oAddress; } set { Order.oAddress = value; } }
+        public string oAddress { get; set; }
         [DisplayName("訂單時間")]
-        public DateTime oDate { get { return this.Order.oDate; } set { Order.oDate = value; } }
+        public DateTime oDate { get; set; }
         [DisplayName("交貨時間")]
-        public Nullable<System.DateTime> oDeliverDate { get { return this.Order.oDeliverDate; } set { Order.oDeliverDate = value; } }
+        public Nullable<System.DateTime> oDeliverDate { get; set; }
         [DisplayName("員工編號")]
-        public Nullable<int> oEmployeeId { get { return this.Order.oEmployeeId; } set { Order.oEmployeeId = value; } }
+        public Nullable<int> oEmployeeId { get; set; }
         [DisplayName("審核")]
-        public string oCheck { get { return this.Order.oCheck; } set { Order.oCheck = value; } }
+        public string oCheck { get; set; }
         [DisplayName("審核時間")]
-        public Nullable<System.DateTime> oCheckDate { get { return this.Order.oCheckDate; } set { Order.oCheckDate = value; } }
+        public Nullable<System.DateTime> oCheckDate { get; set; }
         [DisplayName("優惠")]
-        public Nullable<int> oPromotionId { get { return this.Order.oPromotionId; } set { Order.oPromotionId = value; } }
+        public Nullable<int> oPromotionId { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }
         [DisplayName("出貨倉儲")]
@@ -63,32 +61,18 @@ namespace MotaiProject.ViewModels
 
     public class OrderDetailViewModel
     {
-        MotaiDataEntities db = new MotaiDataEntities();
-        private tOrderDetail det;
-        public tOrderDetail Det
-        {
-            get
-            {
-                if (det == null)
-                {
-                    det = new tOrderDetail();
-                }
-                return det;
-            }
-            set => det = value;
-        }
         [DisplayName("詳細編號")]
-        public int oDetailId { get { return this.Det.oOrderDetailId; } set { Det.oOrderDetailId = value; } }
+        public int oDetailId { get; set; }
         [DisplayName("訂單編號")]
-        public int oOrderId { get { return this.Det.oOrderId; } set { Det.oOrderId = value; } }
-        public int oProductId { get { return this.Det.oProductId; } set { Det.oProductId = value; } }
+        public int oOrderId { get; set; }
+        public int oProductId { get; set; }
         [DisplayName("產品編號")]
-        public string oProductNum { get { return this.Det.tProduct.pNumber; } set { Det.tProduct.pNumber = value; } }
+        public string oProductNum { get; set; }
         [DisplayName("產品名稱")]
-        public string oProductName { get { return this.Det.tProduct.pName; } set { Det.tProduct.pName = value; } }
+        public string oProductName { get; set; }
         [DisplayName("產品數量")]
-        public int oProductQty { get { return this.Det.oProductQty; } set { Det.oProductQty = value; } }
+        public int oProductQty { get; set; }
         [DisplayName("備註")]
-        public string oNote { get { return this.Det.oNote; } set { Det.oNote = value; } }
+        public string oNote { get; set; }
     }
 }
