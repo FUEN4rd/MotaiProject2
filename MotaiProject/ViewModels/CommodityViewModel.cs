@@ -54,10 +54,15 @@ namespace MotaiProject.ViewModels
     {
         public int StockId { get; set; }
         public int sEmployeeId { get; set; }
+        [DisplayName("進貨單號")]
         public int sStockSerialValue { get; set; }
+        [DisplayName("聯絡人")]
         public string sVendor { get; set; }
+        [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
-        public DateTime sStockDate { get; set; }
+        [DisplayName("進貨日期")]
+        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
 
@@ -87,10 +92,15 @@ namespace MotaiProject.ViewModels
     {
         public int StockId { get; set; }
         public int sEmployeeId { get; set; }
+        [DisplayName("進貨單號")]
         public int sStockSerialValue { get; set; }
+        [DisplayName("聯絡人")]
         public string sVendor { get; set; }
+        [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
-        public DateTime sStockDate { get { return DateTime.Now; } set { } }
+        [DisplayName("進貨日期")]
+        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public StockDetailViewModel StockDetail { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
@@ -101,9 +111,13 @@ namespace MotaiProject.ViewModels
     {
         public int ShipId { get; set; }
         public int sEmployeeId { get; set; }
+        [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
+        [DisplayName("訂單號")]
         public int sOrderId { get; set; }
-        public DateTime sShipDate { get { return DateTime.Now; } set { } }
+        [DisplayName("出貨日期")]
+        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
 
     }
@@ -115,6 +129,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("商品名")]
         public string ProductName { get; set; }
         public int sProductId { get; set; }
+        [DisplayName("數量")]
         public int sQuantity { get; set; }
         [DisplayName("倉儲名")]
         public string WareHouseName { get; set; }
@@ -122,5 +137,19 @@ namespace MotaiProject.ViewModels
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
+    }
+    public class ShipCreateViewModel
+    {
+        public int ShipId { get; set; }
+        public int sEmployeeId { get; set; }
+        [DisplayName("出貨單號")]
+        public int sShipSerialValue { get; set; }
+        [DisplayName("訂單號")]
+        public int sOrderId { get; set; }
+        [DisplayName("出貨日期")]
+        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("出貨備註")]
+        public string sShipNote { get; set; }
+
     }
 }
