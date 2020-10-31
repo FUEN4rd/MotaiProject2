@@ -1,0 +1,66 @@
+﻿@model MotaiProject.ViewModels.EmployeeViewModels
+@using MotaiProject.Models
+@{
+    ViewBag.Title = "Boss首頁";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string welcome = "403 未經授權";
+    tEmployee Emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+    if (Emp != null)
+    {
+        welcome = Emp.eName;
+    }
+}
+
+
+<h2>@welcome Boss首頁</h2>
+<div class="row">
+    <div class="card" id="collapseExample">
+        <div class="card-body" style="background-color:azure">
+            <div>
+                舊密碼
+                <div class="col-md-10 card-text">
+                    @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "oldpass" } })
+                </div>
+            </div>
+            <div>
+                新密碼
+                <div class="col-md-10 card-text">
+                    @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "newpass" } })
+                </div>
+            </div>
+            <button class="btn btn-danger" id="changepassword" onclick="changepassword()" style="margin-top:10px">修改密碼</button>
+            <p id="warning"></p>
+        </div>
+    </div>
+</div>
+<script>
+    var pa = document.querySelectorAll(".form-control");
+    //var oldpass = pa[0].value;
+    //var checkpass = pa[2].value;
+    console.log(oldpass);
+    const clearbox = (item) => {
+        item.value = "";
+        item.type = "Password";
+    }
+    pa.forEach(clearbox);
+
+
+
+    function changepassword() {
+        let newpass = document.querySelector("#newpass").value;
+        let oldpass = document.querySelector("#oldpass").value;
+        //console.log(newpass);
+        fetch('/Boss/ChangePassword', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `EmployeeId=${@Model.EmployeeId}&ePassword=${newpass}&oldpass=${oldpass}`
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+                $("#warning").text(data.msg);
+        });
+    }
+</script>
+
