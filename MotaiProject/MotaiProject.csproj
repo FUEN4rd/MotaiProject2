@@ -522,6 +522,7 @@
     <Content Include="Views\Employee\修改日誌.cshtml" />
     <Content Include="Views\Commodity\進貨單建立.cshtml" />
     <Content Include="Views\Boss\Boss首頁.cshtml" />
+    <Content Include="Views\Order\實體店新增訂單.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -532,7 +533,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
-    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

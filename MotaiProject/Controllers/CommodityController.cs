@@ -15,8 +15,8 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
-        private CommodityRespoitory CommodityRespoitory = new CommodityRespoitory();
-        private ProductRespoitory ProductRespoitory = new ProductRespoitory();
+        private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
+        private ProductRespoitory productRespoitory = new ProductRespoitory();
         //進貨單
         public ActionResult 進貨單建立()
         {
@@ -26,10 +26,10 @@ namespace MotaiProject.Controllers
                 StockDetailViewModel detail = new StockDetailViewModel();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 model.sEmployeeId = emp.EmployeeId;
-                var productNames = ProductRespoitory.GetNameAll();
-                List<SelectListItem> productlist = ProductRespoitory.GetSelectList(productNames);
-                var warehouseNames = CommodityRespoitory.GetWarehouseAll();
-                List<SelectListItem> warehouselist = CommodityRespoitory.GetSelectList(warehouseNames);
+                var productNames = productRespoitory.GetNameAll();
+                List<SelectListItem> productlist = productRespoitory.GetSelectList(productNames);
+                var warehouseNames = commodityRespoitory.GetWarehouseAll();
+                List<SelectListItem> warehouselist = commodityRespoitory.GetSelectList(warehouseNames);
                 detail.WareHouseNames = warehouselist;
                 detail.ProductNames = productlist;
                 model.StockDetail = detail;
