@@ -11,8 +11,9 @@ namespace MotaiProject.Controllers
     public class OrderController : Controller
     {
         // GET: Order
-        public ActionResult Index()
+        public ActionResult 實體店新增訂單()
         {
+
             return View();
         }
         //韋宏訂單
@@ -63,6 +64,6 @@ namespace MotaiProject.Controllers
                 return View(OrderList);
             }
             return RedirectToAction("首頁");
-        //}
+        }
     }
 }
