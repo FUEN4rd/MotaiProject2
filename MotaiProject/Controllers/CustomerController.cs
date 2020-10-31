@@ -70,7 +70,7 @@ namespace MotaiProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult 忘記密碼寄信前(ForgotPasswordViewModel c電子郵件)
+        public JsonResult beforeSendEmail(ForgotPasswordViewModel c電子郵件)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             tCustomer d信箱確認 = dbContext.tCustomers.Where(c => c.cEmail == c電子郵件.Email).FirstOrDefault();
@@ -79,6 +79,27 @@ namespace MotaiProject.Controllers
                 return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer") });
             }
             return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
+        }
+        [HttpPost]
+        public JsonResult afterSendEmail(int CustomerId, string cPassword)
+        {
+            tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+
+            //if (a)
+            //{
+            //    customer.cPassword = cPassword;
+            //    Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = customer;
+            //    tCustomer changePwd = dbContext.tCustomers.Where(c => c.CustomerId.Equals(customer.CustomerId)).FirstOrDefault();
+            //    changePwd.cPassword = cPassword;
+            //    dbContext.SaveChanges();
+            //    return Json(new { result = true, msg = "更新成功" });
+            //}
+            //else
+            //    {
+            //    return Json(new { result = false, msg = "舊密碼錯誤" });
+            //}
+            return Json(new { result = false, msg = "舊密碼錯誤" });
         }
         public ActionResult 會員中心()
         {
