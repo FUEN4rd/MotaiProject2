@@ -17,6 +17,7 @@ namespace MotaiProject.Controllers
         }
         private CommodityRespoitory CommodityRespoitory = new CommodityRespoitory();
         private ProductRespoitory ProductRespoitory = new ProductRespoitory();
+        //進貨單
         public ActionResult 進貨單建立()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
@@ -130,8 +131,27 @@ namespace MotaiProject.Controllers
             }
             return data;
         }
-
         public ActionResult 進貨單查詢()
+        {
+            return View();
+        }
+
+        //出貨單
+        public ActionResult 出貨單建立()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+
+            }
+            return View();
+        }
+        public JsonResult 出貨單建立(int i)
+        {
+            return Json(new { });
+        }
+        //調貨單
+        //倉儲
+        public ActionResult 倉儲查詢()
         {
             return View();
         }
