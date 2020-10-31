@@ -6,19 +6,6 @@ using System.Web;
 
 namespace MotaiProject.ViewModels
 {
-    //訂單付款
-    public class Orderpay
-    {
-        public int oPayId { get; set; }
-        public int oOrderId { get; set; }
-        public int oOrderInstallment { get; set; }
-        public decimal oPayment { get; set; }
-        public int oPayDate { get; set; }
-        public int oPayTypeId { get; set; }
-        public string oPayType { get; set; }
-
-    }
-
     public class StatusCartViewModel
     {
         public int StatusId { get; set; }
@@ -32,6 +19,18 @@ namespace MotaiProject.ViewModels
         [DisplayName("小計")]
         public decimal pTotal { get; set; }
     }
+    //訂單付款
+    public class Orderpay
+    {
+        public int oPayId { get; set; }
+        public int oOrderId { get; set; }
+        public int oOrderInstallment { get; set; }
+        public decimal oPayment { get; set; }
+        public int oPayDate { get; set; }
+        public int oPayTypeId { get; set; }
+        public string oPayType { get; set; }
+
+    }    
 
     public class OrderViewModel
     {
