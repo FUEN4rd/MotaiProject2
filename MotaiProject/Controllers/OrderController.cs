@@ -11,11 +11,31 @@ namespace MotaiProject.Controllers
     public class OrderController : Controller
     {
         // GET: Order
+        private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();        
+        private ProductRespoitory productRespoitory = new ProductRespoitory();
         public ActionResult 實體店新增訂單()
         {
-
-            return View();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                EmployeeOrderViewModel model = new EmployeeOrderViewModel();
+                model.oEmployeeId = emp.EmployeeId;
+                var warehouseNames = commodityRespoitory.GetWarehouseAll();
+                List<SelectListItem> warehouselist = commodityRespoitory.GetSelectList(warehouseNames);
+                model.WareHouseNames = warehouselist;
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }                
         }
+        public JsonResult 實體店新增訂單(EmployeeOrderViewModel empOrder)
+        {
+            return Json(new { });
+        }
+
+
         //韋宏訂單
         public ActionResult 詳細訂單(int id)
         {
