@@ -63,6 +63,6 @@ namespace MotaiProject.Controllers
                 return View(OrderList);
             }
             return RedirectToAction("首頁");
-        }
+        //}
     }
 }
