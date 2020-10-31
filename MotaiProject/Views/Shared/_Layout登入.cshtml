@@ -33,7 +33,7 @@
             margin: 0;
             padding: 0;
         }
-       
+
         /* 滾輪 */
 
 
@@ -55,10 +55,10 @@
             width: 100vw;
             height: 100vh;
         }
-            /* for Chrome */
-            .inner-container::-webkit-scrollbar {
-                display: none;
-            }
+        /* for Chrome */
+        .inner-container::-webkit-scrollbar {
+            display: none;
+        }
 
         .element::-webkit-scrollbar {
             display: none
@@ -133,8 +133,6 @@
         .Y_black {
             color: #313737;
         }
-
-
     </style>
 </head>
 <body>
@@ -192,18 +190,26 @@
                         <br>
                     </div>
 
-                    <div class="nav " style="justify-content: center;">
-                        <li class="nav-item Y_nav-item_icon">
-                            @*<button type="button" class="btn" data-toggle="modal" data-target="#Login">
-                                    <svg href="#" fill="#A22E37" height="32px" width="50px"
-                                         viewBox="0 0 32 32">
-                                        <symbol id="lnr-user" viewBox="0 0 1024 1024"><title>user</title><path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path><path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path></symbol>
-                                        <use xlink:href="#lnr-user"></use>
-                                    </svg>
-                                </button>*@
-                            <a href="@Url.Action("會員中心", "Customer")" data-toggle="modal" data-target="#Login" id="login_origin">
+                    <div class="nav" style="justify-content: center;">
+                        <li class="nav-item Y_nav-item_icon" id="login_origin">
+                            <a href="#" data-toggle="modal" data-target="#Login">
                                 <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" viewBox="0 0 448 512"><path fill="#A22E37" d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" /></svg>
                             </a>
+                        </li>
+                        <li class="nav-item Y_nav-item_icon" style="display:none" id="login_after">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" viewBox="0 0 448 512"><path fill="#A22E37" d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" /></svg>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="@Url.Action("會員中心", "Customer")">會員中心</a>
+                                    <a class="dropdown-item" href="@Url.Action("過往訂單", "Customer")">過往訂單</a>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-item" style="display:flex;justify-content:flex-end">
+                                        <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#Logout">登出</button>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item Y_nav-item_icon">
                             <a href="@Url.Action("收藏清單","Customer")" data-toggle="modal" data-target="#Star" id="star_origin">
@@ -315,7 +321,7 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                    <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -347,7 +353,7 @@
                                                 @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
                                             </div>
                                             <div class="col-md-10">
-                                                @Html.ActionLink("忘記密碼", "忘記密碼", "Customer", null, null)
+                                                <button type="button" data-toggle="modal" class="btn btn-primary" data-dismiss="modal" data-target="#forgetPassword">忘記密碼</button>
                                             </div>
                                         </div>
                                     </form>
@@ -392,7 +398,7 @@
                                 </button>
                             </div>
                             <div class="modal-body  Y_black">
-                               是否要登入?
+                                是否要登入?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary  Y_black" data-dismiss="modal" data-toggle="modal" data-target="#Login">確認</button>
@@ -401,17 +407,86 @@
                         </div>
                     </div>
                 </div>
+
+
+                //using (Html.BeginForm("忘記密碼寄信前", "Customer", FormMethod.Post, null))
+                //{
+                @Html.AntiForgeryToken()
+                <div class="modal fade" id="forgetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe3" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabe3">忘記密碼</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="forgetEmail" class="col-form-label">電子郵件地址:</label>
+                                        <input type="text" class="form-control" id="forgetEmail">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" onclick="sendMail()" id="sendEmail">確認</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 //}
+                <script src="https://smtpjs.com/v3/smtp.js"></script>
+                <script>
+                    $("#sendEmail").click(function () {
+                        var forgetEmail = $("#forgetEmail").val();
+
+                    $.ajax({
+                    url: "@Url.Action("忘記密碼寄信前", "Customer")",
+                    type: "POST",
+                    data: { "c電子郵件": forgetEmail },
+                    success: function (data) {
+                    if (data.result) {
+                      alert(data.msg);
+                      onSuccess(data.url);
+                      //function () {
+                        //let forgetEmail = document.querySelector("#forgetEmail").value;
+                        Email.send({
+                            Host: "smtp.gmail.com",
+                            Username: "fuen12302@gmail.com",
+                            Password: "frcivdkwbllrcboy",
+                            To: forgetEmail,
+                            From: "fuen12302@gmail.com",
+                            Subject: "墨台 忘記密碼認證信",
+                            Body: `顏瑋婷 您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請，請參照以下說明重新設定您的密碼：[密碼重新設定方法]請連結到以下網頁，重新設定一組新的密碼。http://localhost:50720/ `
+                            //})
+                            //.then(
+                            //    message => alert(message)
+                            //);
+
+                        });
+                    } else {
+                            alert(data.msg);
+                        }                                                      
+              }
+        });
+    });
+    var onSuccess = function (url) {
+        window.location.href = url;
+    }
+
+
+                </script>
             }
             else
             {
                 <script>
-                    //const login = document.querySelector("#login_origin");
-                    //login.removeAttr("data-troggle");
-                    //login.removeAttr("data-target");
                     $(document).ready(function () {
-                        $("#login_origin").removeAttr("data-toggle");
-                        $("#login_origin").removeAttr("data-target");
+                        $("#login_origin").css("display", "none");
+                    })
+                    $(document).ready(function () {
+                        $("#login_after").removeAttr("style");
                     })
                     $(document).ready(function () {
                         $("#star_origin").removeAttr("data-toggle");
@@ -421,38 +496,31 @@
                         $("#shop_origin").removeAttr("data-toggle");
                         $("#shop_origin").removeAttr("data-target");
                     })
-                    @*css("href", "@Url.Action("會員中心", "Customer")";*@
                 </script>
-                @*<li class="nav-item Y_nav-item_icon">
-                        <a href="@Url.Action("會員中心", "Customer")" id="login">
-                            <svg height="30px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" viewBox="0 0 448 512"><path fill="#A22E37" d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z" /></svg>
-                        </a>
-                    </li>*@
 
-                @*using (Html.BeginForm("登出", "Customer", FormMethod.Post, null))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">登出視窗</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        是否要登出?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">確認</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    </div>
+                using (Html.BeginForm("登出", "Customer", FormMethod.Post, null))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="modal fade" id="Logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">登出視窗</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    是否要登出?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">確認</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                 </div>
                             </div>
                         </div>
-                    }*@
+                    </div>
+                }
             }
         }
     </div>
