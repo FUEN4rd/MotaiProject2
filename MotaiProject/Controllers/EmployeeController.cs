@@ -210,8 +210,11 @@ namespace MotaiProject.Controllers
             Prod.pNumber = product.pNumber;
             Prod.pName = product.pName;
             Prod.psCategory = product.tProductCategory.Category;
+            Prod.pCategory = product.pCategory;
             Prod.psMaterial = product.tProductMaterial.Material;
+            Prod.pMaterial = product.pMaterial;
             Prod.psSize = product.tProductSize.Size;
+            Prod.pSize = product.pSize;
             Prod.pLxWxH = product.pLxWxH;
             Prod.pWeight = product.pWeight;
             Prod.pIntroduction = product.pIntroduction;
