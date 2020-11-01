@@ -19,7 +19,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("購買數量")]
         public int sProductQty { get; set; }
         [DisplayName("小計")]
-        public decimal pTotal { get; set; }
+        public decimal pTotal { get { return sProductQty * pPrice; } }
     }
     //訂單付款
     public class Orderpay
