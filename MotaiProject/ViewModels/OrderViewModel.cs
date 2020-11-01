@@ -87,6 +87,9 @@ namespace MotaiProject.ViewModels
         [DisplayName("門市")]
         public string WarehouseName { get; set; }
 
+        public EmployeeOrderDetailViewModel empOrderDetail { get; set; }
+        public List<EmployeeOrderDetailViewModel> empOrderDetails { get; set; }
+
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
     }
     public class EmployeeOrderDetailViewModel
@@ -102,6 +105,8 @@ namespace MotaiProject.ViewModels
         public int oProductQty { get; set; }
         [DisplayName("備註")]
         public string oNote { get; set; }
+
+        public IEnumerable<SelectListItem> ProductNames { get; set; }
     }
     public class OrderViewModel
     {

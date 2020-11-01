@@ -12,78 +12,177 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>EmployeeOrderViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.cCellphone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cCellphone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cCellphone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oEmployeeId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.oEmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oPromotionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oPromotionId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oPromotionId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.cNote, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cNote, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cNote, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WarehouseName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.oWarehouseName,Model.WareHouseNames,"請選擇分店" ,new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oWarehouseName, "", new { @class = "text-danger" })
-            </div>
-        </div>        
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <h4>EmployeeOrderViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.cCellphone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cCellphone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cCellphone, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.oAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.oAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.oAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.oDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.oDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.oDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.oEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.oEmployeeId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.oEmployeeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.oPromotionId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.oPromotionId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.oPromotionId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.cNote, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cNote, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cNote, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.WarehouseName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.oWarehouseName, Model.WareHouseNames, "請選擇分店", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.oWarehouseName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.empOrderDetail.ProductName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.empOrderDetail.ProductNum)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.empOrderDetail.oProductQty)
+                </th>                
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.empOrderDetail.oNote)
+                </th>
+                <th>新增/刪除</th>
+            </tr>
+        </thead>
+        <tbody id="detail">
+            <tr>
+                <td scope="row">
+                    @Html.DropDownListFor(model => model.empOrderDetail.oProductId, Model.empOrderDetail.ProductNames, "請選擇商品")
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.empOrderDetail.ProductNum)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.empOrderDetail.oProductQty)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.empOrderDetail.oNote)
+                </td>
+                <td>
+                    <input id="createDetail" type="button" value="加入" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="createStock" type="submit" value="新增訂單" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#createDetail").click(function () {
+            var Name = $("#empOrderDetail_oProductId").val();
+            var Num = $("#empOrderDetail_ProductNum").val();
+            var Qty = $("#empOrderDetail_oProductQty").val();
+            var Note = $("#empOrderDetail_oNote").val();
+            var orderDetail = {
+                oProductId: Name,
+                ProductNum: Num,
+                oProductQty: Qty,
+                oNote: Note,
+            };
+            $.ajax({
+                url: "@Url.Action("createOrderDetail", "Order")",
+                type: "POST",
+                data: { "orderDetail": orderDetail },
+                success: function (data) {
+                    var list = data + "<td class='order'><input id='deleteDetail' type ='button' value='刪除'/></td>";
+                    $("#detail").prepend(list);
+                }
+            });
+        });        
+    });
+    $(document).on("click", ".order", function () {
+        $(this).parent().remove();
+    });
+    $("#createOrder").click(function () {
+        var Cellphone = $("#cCellphone").val();
+        var Address = $("#oAddress").val();
+        var Date = $("#oDate").val();
+        var Promotion = $("#oPromotionId").val();
+        var Note = $("#cNote").val();
+        var WarehouseName = $("#oWarehouseName").val();
+        var stockList = {
+            cCellphone: Cellphone,
+            oAddress: Address,
+            oDate: Date,
+            oPromotionId: Promotion,
+            cNote: Note,
+            oWarehouseName: WarehouseName,
+        };
+        $.ajax({
+            url: "@Url.Action("實體店新增訂單", "Order")",
+            type: "POST",
+            data: { "stockList": stockList },
+            success: function (data) {
+                if (data.result) {
+                    alert(data.msg);
+                    onSuccess(data.url);
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+    var onSuccess = function (url) {        
+        window.location.href = url;        
+    }
+</script>

@@ -11,5 +11,6 @@ namespace MotaiProject.Models
         public static readonly string SK_LOGINED_CUSTOMER = "SK_LOGINED_CUSTOMER";
         //public static readonly string SK_CUSTOMER_STATUS = "SK_CUSTOMER_STATUS";
         public static readonly string SK_STOCKDETAIL = "SK_STOCKDETAIL";
+        public static readonly string SK_ORDERDETAIL = "SK_ORDERDETAIL";
     }
 }
