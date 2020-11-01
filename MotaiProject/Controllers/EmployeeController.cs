@@ -127,6 +127,17 @@ namespace MotaiProject.Controllers
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
+            foreach(var items in productlist)
+            {
+                if (items.psImage.Count > 0)
+                {
+                    items.epsImage = Url.Content(items.psImage[0]);
+                }
+                else
+                {
+                    items.epsImage = "";
+                }
+            }
             return View(productlist);
         }
         public ActionResult 新增產品()
@@ -175,9 +186,9 @@ namespace MotaiProject.Controllers
                         tProductImage image = new tProductImage();
                         FileInfo file = new FileInfo(uploagFile.FileName);
                         string photoName = Guid.NewGuid().ToString() + file.Extension;
-                        uploagFile.SaveAs(Server.MapPath("../images/" + photoName));
+                        uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
                         image.ProductId = ProductId;
-                        image.pImage = "~/images/" + photoName;
+                        image.pImage = Url.Content("~/images/" + photoName);                        
                         db.tProductImages.Add(image);
                     }
                 }
@@ -193,7 +204,8 @@ namespace MotaiProject.Controllers
             {
                 return RedirectToAction("員工看產品頁面");
             }
-            ProductViewModel Prod = new ProductViewModel();
+            EmpProductViewModel Prod = new EmpProductViewModel();
+            Prod.ProductId = id;
             Prod.pNumber = product.pNumber;
             Prod.pName = product.pName;
             Prod.psCategory = product.tProductCategory.Category;
@@ -202,8 +214,16 @@ namespace MotaiProject.Controllers
             Prod.pLxWxH = product.pLxWxH;
             Prod.pWeight = product.pWeight;
             Prod.pIntroduction = product.pIntroduction;
-            Prod.pPrice = product.pPrice;
-            Prod.pQty = (int)product.pQty;
+            Prod.pPrice = product.pPrice;            
+            var categories = new ProductRespoitory().GetCategoryAll();
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+            Prod.Categories = Cateitems;
+            var materials = new ProductRespoitory().GetMaterialAll();
+            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
+            Prod.Materials = Mateitems;
+            var sizes = new ProductRespoitory().GetSizeAll();
+            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
+            Prod.Sizes = Sizeitems;
             return View(Prod);
 
         }
@@ -214,8 +234,8 @@ namespace MotaiProject.Controllers
             {
                 return RedirectToAction("員工登入");
             }
-            MotaiDataEntities db = new MotaiDataEntities();
-            tProduct prod = db.tProducts.Find(p.ProductId);
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tProduct prod = dbContext.tProducts.Find(p.ProductId);
             if (prod != null)
             {
                 prod.pNumber = p.pNumber;
@@ -225,10 +245,53 @@ namespace MotaiProject.Controllers
                 prod.pSize = p.pSize;
                 prod.pLxWxH = p.pLxWxH;
                 prod.pWeight = p.pWeight;
-                prod.pPrice = p.pPrice;
-                db.SaveChanges();
+                prod.pPrice = p.pPrice;                
+                if (p.pImage.Count() > 0)
+                {
+                    int index = 0;
+                    foreach (var uploagFile in p.pImage)
+                    {
+                        if (uploagFile.ContentLength > 0)
+                        {
+                            tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
+                            Directory.Delete(Url.Content(image.pImage));
+                            FileInfo file = new FileInfo(uploagFile.FileName);
+                            string photoName = Guid.NewGuid().ToString() + file.Extension;
+                            uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                            image.pImage = Url.Content("~/images/" + photoName);
+                            dbContext.tProductImages.Add(image);
+                        }
+                        else
+                        {
+                            tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
+                            dbContext.tProductImages.Remove(image);
+                        }
+                        index++;
+                    }
+                }
+                dbContext.SaveChanges();
             }
             return RedirectToAction("員工看產品頁面");
+        }
+        public JsonResult 修改產品讀圖(int ProductId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            var imageArray = dbContext.tProductImages.Where(i => i.ProductId.Equals(ProductId)).ToArray();
+            if (imageArray.Length > 0)
+            {
+                List<string> imagelist = new List<string>();
+                foreach (var items in imageArray)
+                {
+                    string image = Url.Content(items.pImage);
+                    imagelist.Add(image);
+                }
+                string[] imagearray = imagelist.ToArray();
+                return Json(new { images = imagearray });
+            }
+            else
+            {
+                return Json(new { images = "" });
+            }
         }
 
         public ActionResult 工作日誌()
@@ -318,7 +381,6 @@ namespace MotaiProject.Controllers
         {
             OrderViewModel CheckOrder = new OrderViewModel();
             return View(CheckOrder);
-        }
-
+        }        
     }
 }

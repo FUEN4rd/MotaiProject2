@@ -130,6 +130,9 @@
     <Content Include="Content\三尊佛.jpg" />
     <Content Include="Content\墨臺Logo.png" />
     <Content Include="Global.asax" />
+    <Content Include="images\5951d29d-e184-4dc2-a1e9-3a37331aaab2.PNG" />
+    <Content Include="images\7e52f9a4-10e3-4339-9719-66c63d0411ba.gif" />
+    <Content Include="images\c5d2f90e-f583-4d73-b4d6-815b37a92686.PNG" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap-grid.css" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap-reboot.css" />
@@ -532,7 +535,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
