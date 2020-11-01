@@ -25,6 +25,7 @@ namespace MotaiProject
         public string pDiscountCode { get; set; }
         public double pDiscount { get; set; }
         public System.DateTime pPromotionPostDate { get; set; }
+        public int pCondition { get; set; }
     
         public virtual tOrder tOrder { get; set; }
         public virtual tPromotionCategory tPromotionCategory { get; set; }

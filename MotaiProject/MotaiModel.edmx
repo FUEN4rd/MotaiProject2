@@ -167,6 +167,7 @@
           <Property Name="pDiscountCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pDiscount" Type="float" Nullable="false" />
           <Property Name="pPromotionPostDate" Type="date" Nullable="false" />
+          <Property Name="pCondition" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tPromotionCategory">
           <Key>
@@ -1090,6 +1091,7 @@
           <Property Name="pPromotionPostDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="tOrder" Relationship="Self.FK_tOrder_tPromotion" FromRole="tPromotion" ToRole="tOrder" />
           <NavigationProperty Name="tPromotionCategory" Relationship="Self.FK_tPromotion_tPromotionCategory" FromRole="tPromotion" ToRole="tPromotionCategory" />
+          <Property Name="pCondition" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tPromotionCategory">
           <Key>
@@ -2000,6 +2002,7 @@
           <EntitySetMapping Name="tPromotions">
             <EntityTypeMapping TypeName="MotaiDataModel.tPromotion">
               <MappingFragment StoreEntitySet="tPromotion">
+                <ScalarProperty Name="pCondition" ColumnName="pCondition" />
                 <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
                 <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
                 <ScalarProperty Name="PromotinoCategory" ColumnName="PromotinoCategory" />

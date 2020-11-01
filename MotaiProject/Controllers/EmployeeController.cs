@@ -189,7 +189,7 @@ namespace MotaiProject.Controllers
                         string photoName = Guid.NewGuid().ToString() + file.Extension;
                         uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
                         image.ProductId = ProductId;
-                        image.pImage = Url.Content("~/images/" + photoName);                        
+                        image.pImage = "~"+Url.Content("~/images/" + photoName);                        
                         db.tProductImages.Add(image);
                     }
                 }
@@ -246,29 +246,49 @@ namespace MotaiProject.Controllers
                 prod.pSize = p.pSize;
                 prod.pLxWxH = p.pLxWxH;
                 prod.pWeight = p.pWeight;
-                prod.pPrice = p.pPrice;                
-                if (p.pImage.Count() > 0)
+                prod.pPrice = p.pPrice;
+                List<tProductImage> oldImages = dbContext.tProductImages.Where(imgs => imgs.ProductId.Equals(p.ProductId)).ToList();
+                if (oldImages.Count > p.pImage.Count)
                 {
-                    int index = 0;
-                    foreach (var uploagFile in p.pImage)
+                    int index = 0;                    
+                    foreach(var oldItem in oldImages)
                     {
-                        if (uploagFile.ContentLength > 0)
+                        if(index< p.pImage.Count)
                         {
-                            tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
-                            Directory.Delete(Url.Content(image.pImage));
-                            FileInfo file = new FileInfo(uploagFile.FileName);
-                            string photoName = Guid.NewGuid().ToString() + file.Extension;
-                            uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
-                            image.pImage = Url.Content("~/images/" + photoName);
-                            dbContext.tProductImages.Add(image);
+                            if (p.pImage[index].ContentLength > 0)
+                            {
+                                FileInfo file = new FileInfo(p.pImage[index].FileName);
+                                string photoName = Guid.NewGuid().ToString() + file.Extension;
+                                p.pImage[index].SaveAs(Server.MapPath("~/images/" + photoName));
+                                oldItem.pImage = Url.Content("~/images/" + photoName);
+                                //Directory.Delete(Url.Content(oldItem.pImage));
+                            }
                         }
                         else
                         {
-                            tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
-                            dbContext.tProductImages.Remove(image);
+                            dbContext.tProductImages.Remove(oldItem);
                         }
                         index++;
                     }
+                    //foreach (var uploagFile in p.pImage)
+                    //{
+                    //    if (uploagFile.ContentLength > 0)
+                    //    {
+                    //        tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
+                    //        //Directory.Delete(Url.Content(image.pImage));
+                    //        FileInfo file = new FileInfo(uploagFile.FileName);
+                    //        string photoName = Guid.NewGuid().ToString() + file.Extension;
+                    //        uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                    //        image.pImage =Url.Content("~/images/" + photoName);
+                    //        //dbContext.tProductImages.Add(image);
+                    //    }
+                    //    else
+                    //    {
+                    //        tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
+                    //        dbContext.tProductImages.Remove(image);
+                    //    }
+                    //    index++;
+                    //}
                 }
                 dbContext.SaveChanges();
             }
