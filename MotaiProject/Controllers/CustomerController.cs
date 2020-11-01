@@ -76,45 +76,28 @@ namespace MotaiProject.Controllers
             tCustomer d信箱確認 = dbContext.tCustomers.Where(c => c.cEmail == c電子郵件.Email).FirstOrDefault();
             if (d信箱確認 != null)
             {
-                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer") });
+                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer"), password = d信箱確認.cPassword, name = d信箱確認.cName});
             }
             return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
         }
-        [HttpPost]
-        public JsonResult afterSendEmail(int CustomerId, string cPassword)
-        {
-            tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            MotaiDataEntities dbContext = new MotaiDataEntities();
 
-            //if (a)
-            //{
-            //    customer.cPassword = cPassword;
-            //    Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = customer;
-            //    tCustomer changePwd = dbContext.tCustomers.Where(c => c.CustomerId.Equals(customer.CustomerId)).FirstOrDefault();
-            //    changePwd.cPassword = cPassword;
-            //    dbContext.SaveChanges();
-            //    return Json(new { result = true, msg = "更新成功" });
-            //}
-            //else
-            //    {
-            //    return Json(new { result = false, msg = "舊密碼錯誤" });
-            //}
-            return Json(new { result = false, msg = "舊密碼錯誤" });
-        }
         public ActionResult 會員中心()
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                tCustomer custor = db.tCustomers.Find(cust.CustomerId);
                 MemberViewModel member = new MemberViewModel();
-                member.cName = cust.cName;
-                member.cTelePhone = cust.cTelePhone;
-                member.cCellPhone = cust.cCellPhone;
-                member.cAddress = cust.cAddress;
-                member.cGUI = cust.cGUI;
-                member.cEmail = cust.cEmail;
-                member.cAccount = cust.cAccount;
-                member.cPassword = cust.cPassword;
+                
+                member.cName = custor.cName;
+                member.cTelePhone = custor.cTelePhone;
+                member.cCellPhone = custor.cCellPhone;
+                member.cAddress = custor.cAddress;
+                member.cGUI = custor.cGUI;
+                member.cEmail = custor.cEmail;
+                member.cAccount = custor.cAccount;
+                member.cPassword = custor.cPassword;
                 return View(member);
             }
             return RedirectToAction("首頁");
