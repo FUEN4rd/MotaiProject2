@@ -310,7 +310,7 @@ namespace MotaiProject.Controllers
                 //Diary.Diary = diary;
                 return View(Diary);
             }
-            return View("員工登入");
+            return RedirectToAction("員工登入");
 
         }
 
