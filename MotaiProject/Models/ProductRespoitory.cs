@@ -1,6 +1,7 @@
 ﻿using MotaiProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,7 +31,7 @@ namespace MotaiProject.Models
                 Prod.pIntroduction = item.pIntroduction;
                 Prod.pPrice = item.pPrice;
                 Prod.pQty = (int)item.pQty;
-                Prod.psImage = GetProductShowImages(item);               
+                Prod.psImage = GetProductShowImages(item);                               
                 productlist.Add(Prod);
             }
             return productlist;
@@ -41,7 +42,7 @@ namespace MotaiProject.Models
             List<string> psImage = new List<string>();
             List<tProductImage> images = dbContext.tProductImages.Where(i => i.ProductId.Equals(product.ProductId)).ToList();
             foreach (var imageitem in images)
-            {
+            {                
                 psImage.Add(imageitem.pImage);
             }
             return psImage;

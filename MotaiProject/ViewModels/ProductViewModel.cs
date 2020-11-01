@@ -51,18 +51,19 @@ namespace MotaiProject.ViewModels
         public List<HttpPostedFileBase> pImage { get; set; }
         public string epsImage
         {
-            get
-            {
-                if (psImage.FirstOrDefault() == null)
-                {
-                    return "";
-                }
-                else
-                {
-                    return psImage[0];
-                }
-            }
-            set => psImage[0] = value;
+            get;set;
+            //get
+            //{
+            //    if (psImage.FirstOrDefault() == null)
+            //    {
+            //        return "";
+            //    }
+            //    else
+            //    {
+            //        return psImage[0];
+            //    }
+            //}
+            //set => psImage[0] = value;
         }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
@@ -118,6 +119,30 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("產品價格")]
         public decimal pPrice { get; set; }
+
+        [DisplayName("產品圖片")]
+        public List<string> psImage { get; set; }
+        public List<HttpPostedFileBase> pImage { get; set; }
+        public string epsImage
+        {
+            get; set;
+            //get
+            //{
+            //    if (psImage.FirstOrDefault() == null)
+            //    {
+            //        return "";
+            //    }
+            //    else
+            //    {
+            //        return psImage[0];
+            //    }
+            //}
+            //set => psImage[0] = value;
+        }
+
+        public IEnumerable<SelectListItem> Categories { get; set; }
+        public IEnumerable<SelectListItem> Materials { get; set; }
+        public IEnumerable<SelectListItem> Sizes { get; set; }
     }
 
 
