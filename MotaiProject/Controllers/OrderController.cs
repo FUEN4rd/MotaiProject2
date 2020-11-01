@@ -33,25 +33,25 @@ namespace MotaiProject.Controllers
 
 
         //客戶訂單
-        public ActionResult 客戶訂單()
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
-            {
-                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                MotaiDataEntities db = new MotaiDataEntities();
-                List<tOrder> orderlist = db.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
-                List<OrderViewModel> OrderList = new List<OrderViewModel>();
-                foreach (var items in orderlist)
-                {
-                    OrderViewModel order = new OrderViewModel();
-                    order.Order = items;
-                    OrderList.Add(order);
-                    db.SaveChanges();
-                }
-                return View(OrderList);
-            }
-            return RedirectToAction("首頁");
+        //public ActionResult 客戶訂單()
+        //{
+        //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+        //    {
+        //        tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+        //        MotaiDataEntities db = new MotaiDataEntities();
+        //        List<tOrder> orderlist = db.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
+        //        List<OrderViewModel> OrderList = new List<OrderViewModel>();
+        //        foreach (var items in orderlist)
+        //        {
+        //            OrderViewModel order = new OrderViewModel();
+        //            order.Order = items;
+        //            OrderList.Add(order);
+        //            db.SaveChanges();
+        //        }
+        //        return View(OrderList);
+        //    }
+        //    return RedirectToAction("首頁");
 
-        }
+        //}
     }
 }
