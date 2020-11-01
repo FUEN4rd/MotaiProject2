@@ -269,26 +269,7 @@ namespace MotaiProject.Controllers
                             dbContext.tProductImages.Remove(oldItem);
                         }
                         index++;
-                    }
-                    //foreach (var uploagFile in p.pImage)
-                    //{
-                    //    if (uploagFile.ContentLength > 0)
-                    //    {
-                    //        tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
-                    //        //Directory.Delete(Url.Content(image.pImage));
-                    //        FileInfo file = new FileInfo(uploagFile.FileName);
-                    //        string photoName = Guid.NewGuid().ToString() + file.Extension;
-                    //        uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
-                    //        image.pImage =Url.Content("~/images/" + photoName);
-                    //        //dbContext.tProductImages.Add(image);
-                    //    }
-                    //    else
-                    //    {
-                    //        tProductImage image = dbContext.tProductImages.Where(i => i.ProductId.Equals(p.ProductId)).ToList()[index];
-                    //        dbContext.tProductImages.Remove(image);
-                    //    }
-                    //    index++;
-                    //}
+                    }                    
                 }
                 dbContext.SaveChanges();
             }
