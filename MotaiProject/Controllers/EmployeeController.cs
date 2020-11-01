@@ -32,7 +32,7 @@ namespace MotaiProject.Controllers
                 Response.Write("帳號密碼錯誤!");
                 return View();
             }
-            
+
         }
 
         public ActionResult 員工登出()
@@ -51,25 +51,27 @@ namespace MotaiProject.Controllers
             {
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 EmployeeViewModels employee = new EmployeeViewModels();
-                employee.Employee = emp;
+                employee.EmployeeId = emp.EmployeeId;
+                employee.eName = emp.eName;
+                employee.eAccount = emp.eAccount;
                 return View(employee);
             }
         }
-        public JsonResult ChangePassword(int EmployeeId,string ePassword,string oldpass)
+        public JsonResult ChangePassword(int EmployeeId, string ePassword, string oldpass)
         {//要用到其他地方
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
-                //tEmployee changeemp = new tEmployee();
-                //changeemp =emp;
-                //changeemp.EmployeeId= EmployeeId;
-                //dbContext.tEmployees.Add(changeemp);
-                //dbContext.SaveChanges()
-                ;    
-                if (emp.ePassword==oldpass)
-                {                  
-                    emp.ePassword=ePassword;
+                tEmployee changeemp = new tEmployee();
+                changeemp = emp;
+                changeemp.EmployeeId = EmployeeId;
+                dbContext.tEmployees.Add(changeemp);
+                dbContext.SaveChanges()
+                ;
+                if (emp.ePassword == oldpass)
+                {
+                    emp.ePassword = ePassword;
                     Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = emp;
                     tEmployee changePwd = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
                     changePwd.ePassword = ePassword;
@@ -80,7 +82,7 @@ namespace MotaiProject.Controllers
                 {
                     return Json(new { result = false, msg = "舊密碼錯誤" });
                 }
-                
+
             }
             else
             {
@@ -97,15 +99,20 @@ namespace MotaiProject.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult 新增員工(EmployeeViewModels n新增員工)
+        public ActionResult 新增員工(EmployeeViewModels create員工)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (dbContext.tEmployees.Count().Equals(0))
             {
-                n新增員工.EmployeeId = 1;
+                create員工.EmployeeId = 1;
             }
             tEmployee n新員工 = new tEmployee();
-            n新員工 = n新增員工.Employee;
+            n新員工.eAccount = create員工.eAccount;
+            n新員工.EmployeeId = create員工.EmployeeId;
+            n新員工.ePassword = create員工.ePassword;
+            n新員工.eName = create員工.eName;
+            n新員工.ePosition = create員工.ePosition;
+            n新員工.eBranch = create員工.eBranch;
             dbContext.tEmployees.Add(n新員工);
             dbContext.SaveChanges();
             return RedirectToAction("員工首頁");
@@ -125,41 +132,21 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 新增產品()
         {
+            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
+            {
+                return RedirectToAction("員工登入");
+            }
             ProductViewModel newprod = new ProductViewModel();
             var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new List<SelectListItem>();
-            foreach (var c in categories)
-            {
-                Cateitems.Add(new SelectListItem()
-                {
-                    Text = c.Value,
-                    Value = c.Key.ToString()
-                });
-            }
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
             newprod.Categories = Cateitems;
 
             var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new List<SelectListItem>();
-            foreach (var m in materials)
-            {
-                Mateitems.Add(new SelectListItem()
-                {
-                    Text = m.Value,
-                    Value = m.Key.ToString()
-                });
-            }
+            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
             newprod.Materials = Mateitems;
 
             var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new List<SelectListItem>();
-            foreach (var s in sizes)
-            {
-                Sizeitems.Add(new SelectListItem()
-                {
-                    Text = s.Value,
-                    Value = s.Key.ToString()
-                });
-            }
+            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
             newprod.Sizes = Sizeitems;
             return View(newprod);
         }
@@ -177,14 +164,14 @@ namespace MotaiProject.Controllers
             prod.pPrice = n新增產品.pPrice;
             prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
-            
-            int ProductId = db.tProducts.OrderByDescending(o=>o.ProductId).First().ProductId;
+
+            int ProductId = db.tProducts.OrderByDescending(o => o.ProductId).First().ProductId;
             ProductId = ProductId + 1;
-            if(n新增產品.pImage.Count()> 0)
+            if (n新增產品.pImage.Count() > 0)
             {
-                foreach(var uploagFile in n新增產品.pImage)
+                foreach (var uploagFile in n新增產品.pImage)
                 {
-                    if(uploagFile.ContentLength > 0)
+                    if (uploagFile.ContentLength > 0)
                     {
                         tProductImage image = new tProductImage();
                         FileInfo file = new FileInfo(uploagFile.FileName);
@@ -195,7 +182,7 @@ namespace MotaiProject.Controllers
                         db.tProductImages.Add(image);
                     }
                 }
-            }            
+            }
             db.SaveChanges();
             return RedirectToAction("員工看產品頁面");
         }
@@ -224,6 +211,10 @@ namespace MotaiProject.Controllers
         [HttpPost]
         public ActionResult 修改產品(EmpProductViewModel p)
         {
+            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
+            {
+                return RedirectToAction("員工登入");
+            }
             MotaiDataEntities db = new MotaiDataEntities();
             tProduct prod = db.tProducts.Find(p.ProductId);
             if (prod != null)
@@ -245,17 +236,23 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
+
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId));
-                List<DiaryViewModel> diarylist = new List<DiaryViewModel>();
-                foreach (tDiary item in dlist)
+                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
+                List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
+                foreach (var item in dlist)
                 {
-                    DiaryViewModel diary = new DiaryViewModel();
-                    diary.Diary = item;
-                    diarylist.Add(diary);
+                    DiaryViewModel show = new DiaryViewModel();
+                    show.eName = item.tEmployee.eName;
+                    show.dDate = item.dDate;
+                    show.dWeather = item.dWeather;
+                    show.dDiaryNote = item.dDiaryNote;
+                    show.dWarehouseNameId = item.dWarehouseNameId;
+
+                    DSaw.Add(show);
                 }
-                return View(diarylist);
+                return View(DSaw);
             }
             return RedirectToAction("員工登入");
         }
@@ -263,6 +260,7 @@ namespace MotaiProject.Controllers
         public ActionResult 新增日誌()
         {
             tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+
             ViewBag.name = emp.eName;
             ViewBag.empId = emp.EmployeeId;
             DiaryViewModel newDiary = new DiaryViewModel();
@@ -277,7 +275,7 @@ namespace MotaiProject.Controllers
                 });
             }
             newDiary.WarehouseName = WareList;
-           
+
             return View(newDiary);
         }
         [HttpPost]
@@ -285,14 +283,21 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
+
                 MotaiDataEntities db = new MotaiDataEntities();
                 tDiary diary = new tDiary();
-                diary = data.Diary;
+                List<DiaryViewModel> DShow = new List<DiaryViewModel>();
+                diary.dEmployeeId = data.dEmployeeId;
+                diary.DiaryId = data.DiaryId;
+                diary.dDate = data.dDate;
+                diary.dWeather = data.dWeather;
+                diary.dWarehouseNameId = data.dWarehouseNameId;
+                diary.dDiaryNote = data.dDiaryNote;
                 db.tDiaries.Add(diary);
                 db.SaveChanges();
                 return RedirectToAction("員工首頁");
             }
-                return RedirectToAction("員工首頁");
+            return RedirectToAction("員工首頁");
         }
 
         public ActionResult 修改日誌(int id)
@@ -303,11 +308,11 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities db = new MotaiDataEntities();
                 tDiary diary = db.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
                 DiaryViewModel Diary = new DiaryViewModel();
-                Diary.Diary = diary;
+                //Diary.Diary = diary;
                 return View(Diary);
             }
             return View("員工登入");
-            
+
         }
 
         public ActionResult 會計審核()

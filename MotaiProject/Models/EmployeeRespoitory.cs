@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace MotaiProject.Models
 {
-    public class CommodityRespoitory
+    public class EmployeeRespoitory
     {
         MotaiDataEntities dbContext = new MotaiDataEntities();
-        //Warehouse
-        public Dictionary<int, string> GetWarehouseAll()
+        //Employee
+        public Dictionary<int, string> GetEmployeeAll()
         {
-            var warehouses = dbContext.tWarehouseNames.OrderBy(w => w.WarehouseName);
-            return warehouses.ToDictionary(wid => wid.WarehouseNameId, wn => wn.WarehouseName);
+            var empNames = dbContext.tEmployees.OrderBy(e => e.eName);
+            return empNames.ToDictionary(eid => eid.EmployeeId, en => en.eName);
         }
 
         public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,36 +51,62 @@ namespace MotaiProject.ViewModels
         public IEnumerable<SelectListItem> WareHouseInNames { get; set; }
     }
     //進貨
-    public class StockViewModel
+    public class StockListViewModel
     {
         public int StockId { get; set; }
         public int sEmployeeId { get; set; }
-        [DisplayName("員工名")]
-        public string EmpName { get; set; }
+        [DisplayName("進貨單號")]
         public int sStockSerialValue { get; set; }
+        [DisplayName("聯絡人")]
         public string sVendor { get; set; }
+        [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
-        public DateTime sStockDate { get; set; }
+        [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
+        public List<StockDetailViewModel> StockDetails { get; set; }
 
-        public IEnumerable<SelectListItem> EmpNames { get; set; }
+
     }
     public class StockDetailViewModel
     {
         public int StockDetailId { get; set; }
         public int sStockId { get; set; }
+        public int sProductId { get; set; }
         [DisplayName("商品名")]
         public string ProductName { get; set; }
-        public int sProductId { get; set; }
+        [DisplayName("成本")]
         public decimal sCost { get; set; }
+        [DisplayName("數量")]
         public int sQuantity { get; set; }
         [DisplayName("倉儲名")]
         public string WareHouseName { get; set; }
         public int sWarehouseNameId { get; set; }
+        [DisplayName("備註")]
         public string sNote { get; set; }
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
+    }
+    public class StockCreateViewModel
+    {
+        public int StockId { get; set; }
+        public int sEmployeeId { get; set; }
+        [DisplayName("進貨單號")]
+        public int sStockSerialValue { get; set; }
+        [DisplayName("聯絡人")]
+        public string sVendor { get; set; }
+        [DisplayName("聯絡方式")]
+        public string sVendorTel { get; set; }
+        [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("進貨備註")]
+        public string sStockNote { get; set; }
+        public StockDetailViewModel StockDetail { get; set; }
+        public List<StockDetailViewModel> StockDetails { get; set; }
     }
 
     //出貨
@@ -87,14 +114,16 @@ namespace MotaiProject.ViewModels
     {
         public int ShipId { get; set; }
         public int sEmployeeId { get; set; }
-        [DisplayName("員工名")]
-        public string EmpName { get; set; }
+        [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
+        [DisplayName("訂單號")]
         public int sOrderId { get; set; }
-        public DateTime sShipDate { get; set; }
+        [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
 
-        public IEnumerable<SelectListItem> EmpNames { get; set; }
     }
     public class ShipDetailViewModel
     {
@@ -104,6 +133,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("商品名")]
         public string ProductName { get; set; }
         public int sProductId { get; set; }
+        [DisplayName("數量")]
         public int sQuantity { get; set; }
         [DisplayName("倉儲名")]
         public string WareHouseName { get; set; }
@@ -111,5 +141,20 @@ namespace MotaiProject.ViewModels
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
+    }
+    public class ShipCreateViewModel
+    {
+        public int ShipId { get; set; }
+        public int sEmployeeId { get; set; }
+        [DisplayName("出貨單號")]
+        public int sShipSerialValue { get; set; }
+        [DisplayName("訂單號")]
+        public int sOrderId { get; set; }
+        [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("出貨備註")]
+        public string sShipNote { get; set; }
+
     }
 }

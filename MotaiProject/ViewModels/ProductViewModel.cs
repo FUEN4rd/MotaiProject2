@@ -72,7 +72,10 @@ namespace MotaiProject.ViewModels
 
     public class NewProductViewModel
     {
-
+        [DisplayName("產品名稱")]
+        public string pName { get; set; }
+        [DisplayName("產品介紹")]
+        public string pIntroduction { get; set; }
     }
 
     public class HotProductViewModel

@@ -10,54 +10,49 @@
 <p>
     @Html.ActionLink("新增", "新增日誌")
 </p>
-<table class="table">
+<table class="table" style="overflow:hidden">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DiaryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dEmployeeId)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.dDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dWeather)
+            @Html.DisplayNameFor(model => model.eName)
         </th>
-        <th style="width:50px;">
-            @Html.DisplayNameFor(model => model.dDiaryNote)
+        <th>
+            @Html.DisplayNameFor(model => model.dWeather)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.dWarehouseNameId)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.dDiaryNote)
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dEmployeeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dWeather)
-        </td>
-        <td >
-            @Html.DisplayFor(modelItem => item.dDiaryNote)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dWarehouseNameId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.dDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.eName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.dWeather)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dDiaryNote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dWarehouseNameId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+
+            </td>
+        </tr>
+    }
 
 </table>

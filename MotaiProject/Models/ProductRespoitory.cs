@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MotaiProject.Models
 {
@@ -89,18 +90,18 @@ namespace MotaiProject.Models
             return sizes.ToDictionary(mid => mid.pSizeId, mn => mn.Size);
         }
 
-        //Warehouse
-        public Dictionary<int, string> GetWarehouseAll()
+        public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)
         {
-            var warehouses = dbContext.tWarehouseNames.OrderBy(w => w.WarehouseName);
-            return warehouses.ToDictionary(wid => wid.WarehouseNameId, wn => wn.WarehouseName);
-        }
-
-        //Employee
-        public Dictionary<int, string> GetEmployeeAll()
-        {
-            var empNames = dbContext.tEmployees.OrderBy(e => e.eName);
-            return empNames.ToDictionary(eid => eid.EmployeeId, en => en.eName);
-        }
+            List<SelectListItem> selectLists = new List<SelectListItem>();
+            foreach (var items in dictionary)
+            {
+                selectLists.Add(new SelectListItem()
+                {
+                    Text = items.Value,
+                    Value = items.Key.ToString()
+                });
+            }
+            return selectLists;
+        }                
     }
 }

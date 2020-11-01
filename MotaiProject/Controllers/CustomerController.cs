@@ -25,7 +25,7 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
         }
         //Promotion
-        int pageSize = 5;
+        int pageSize = 10;
         public ActionResult 消息(int page = 1)
         {
             MotaiDataEntities db = new MotaiDataEntities();
@@ -34,28 +34,22 @@ namespace MotaiProject.Controllers
             //資料庫讀取 tPromotions 為資料庫名稱
             var promotion = db.tPromotions.OrderByDescending(c => c.PromotionId).ToList();
             //開新List 取值
-            List<PromotionViewModel> reslsit = new List<PromotionViewModel>();
+            List<news> reslsit = new List<news>();
             foreach (var items in promotion)
             {
                 //實體化 class
-                PromotionViewModel res = new PromotionViewModel();
+                news res = new news();
+                NewPromotionViewModel npv = new NewPromotionViewModel();
                 //Prom 讀取入get set
-                res.PromotionName = items.PromotionName;
-                res.sPromotinoCategory = items.tPromotionCategory.PromtionCategory;
-                res.PromotionDescription = items.PromotionDescription;
-                res.pPromotionStartDate = items.pPromotionStartDate;
-                res.pPromotionDeadline = items.pPromotionDeadline;
-                res.pPromotionWeb = items.pPromotionWeb;
-                res.pADimage = items.pADimage;
-                res.pDiscountCode = items.pDiscountCode;
-                res.pDiscount = items.pDiscount;
-                res.pPromotionPostDate = items.pPromotionPostDate;
-                //
+                npv.sPromotinoCategory = items.tPromotionCategory.PromtionCategory;
+                npv.PromotionDescription = items.PromotionDescription;
+                npv.pADimage = items.pADimage;
+                npv.pPromotionWeb = items.pPromotionWeb;
+                npv.pPromotionPostDate = items.pPromotionPostDate;
+                res.newPrmotion = npv;
                 reslsit.Add(res);
             }
             var result = reslsit.ToPagedList(cpage, pageSize);
-
-
             return View(result);
         }
 
@@ -73,6 +67,39 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("首頁");
             }
             return RedirectToAction("首頁");
+        }
+
+        [HttpPost]
+        public JsonResult beforeSendEmail(ForgotPasswordViewModel c電子郵件)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tCustomer d信箱確認 = dbContext.tCustomers.Where(c => c.cEmail == c電子郵件.Email).FirstOrDefault();
+            if (d信箱確認 != null)
+            {
+                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer") });
+            }
+            return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
+        }
+        [HttpPost]
+        public JsonResult afterSendEmail(int CustomerId, string cPassword)
+        {
+            tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+
+            //if (a)
+            //{
+            //    customer.cPassword = cPassword;
+            //    Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = customer;
+            //    tCustomer changePwd = dbContext.tCustomers.Where(c => c.CustomerId.Equals(customer.CustomerId)).FirstOrDefault();
+            //    changePwd.cPassword = cPassword;
+            //    dbContext.SaveChanges();
+            //    return Json(new { result = true, msg = "更新成功" });
+            //}
+            //else
+            //    {
+            //    return Json(new { result = false, msg = "舊密碼錯誤" });
+            //}
+            return Json(new { result = false, msg = "舊密碼錯誤" });
         }
         public ActionResult 會員中心()
         {
@@ -367,46 +394,7 @@ namespace MotaiProject.Controllers
             {
                 return Json(new { check = false });
             }            
-        }
-
-        //韋宏訂單
-        public ActionResult 詳細訂單(int id)
-        {
-            MotaiDataEntities db = new MotaiDataEntities();
-            var orderDetails = db.tOrderDetails.Where(o => o.oOrderId == id);
-            List<OrderDetailViewModel> orderdetail = new List<OrderDetailViewModel>();
-            List<OrderViewModel> OrderList = new List<OrderViewModel>();
-            if (orderdetail.FirstOrDefault() != null)
-            {
-                return View(OrderList);
-
-            }
-            return View("首頁");
-        }
-
-
-
-        //客戶訂單
-        public ActionResult 客戶訂單()
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
-            {
-                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                MotaiDataEntities db = new MotaiDataEntities();
-                List<tOrder> orderlist = db.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
-                List<OrderViewModel> OrderList = new List<OrderViewModel>();
-                foreach (var items in orderlist)
-                {
-                    OrderViewModel order = new OrderViewModel();
-                    order.Order = items;
-                    OrderList.Add(order);
-                    db.SaveChanges();
-                }
-                return View(OrderList);
-            }
-            return RedirectToAction("首頁");
-
-        }
+        }        
 
         public JsonResult 收藏排名()
         {
@@ -417,7 +405,7 @@ namespace MotaiProject.Controllers
                              {
                                  Pid = j.Key,
                                  Pcount = j.Count(),
-                             }).OrderByDescending(j => j.Pcount).Take(10);           
+                             }).OrderByDescending(j => j.Pcount).Take(10).ToArray();           
                                                                  
             return Json(new { favorOrderby });
 
@@ -432,7 +420,7 @@ namespace MotaiProject.Controllers
                                 {
                                     Pid = j.Key,
                                     Pcount = j.Sum(p=>p.oProductQty),
-                                }).OrderByDescending(j => j.Pcount).Take(10);
+                                }).OrderByDescending(j => j.Pcount).Take(10).ToArray();
 
             return Json(new { buyOrderby });
         }
