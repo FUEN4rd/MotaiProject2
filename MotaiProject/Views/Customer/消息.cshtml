@@ -62,12 +62,13 @@
                     @Html.DisplayFor(modelItem => item.newPrmotion.PromotionDescription)
                 </td>                
                 <td>
-                    @Html.DisplayFor(modelItem => item.newPrmotion.pPromotionWeb)
+                    @Html.DisplayFor(modelItem => item.newPrmotion.pPromotionPostDate)
                 </td>
             </a>
         </tr>
         }
     </table>
+    @Html.PagedListPager(Model,page=> Url.Action("消息",new { page}))
 </div>
 @*<div class="container">
     <h2>消息</h2>
