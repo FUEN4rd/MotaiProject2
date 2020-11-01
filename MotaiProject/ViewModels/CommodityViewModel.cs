@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -61,6 +62,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
@@ -99,6 +101,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
@@ -116,6 +119,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單號")]
         public int sOrderId { get; set; }
         [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
@@ -147,6 +151,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單號")]
         public int sOrderId { get; set; }
         [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
