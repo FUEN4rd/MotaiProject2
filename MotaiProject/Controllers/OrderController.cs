@@ -49,19 +49,20 @@ namespace MotaiProject.Controllers
                 {
                     List<EmployeeOrderDetailViewModel> orders = Session[CSession關鍵字.SK_ORDERDETAIL] as List<EmployeeOrderDetailViewModel>;
                     MotaiDataEntities dbContext = new MotaiDataEntities();
-                    tOrder list = new tOrder();
+                    tOrder list = new tOrder();                    
                     list.oEmployeeId = emp.EmployeeId;
                     list.oCustomerId = dbContext.tCustomers.Where(c=>c.cCellPhone.Equals(empOrder.cCellphone)).FirstOrDefault().CustomerId;
                     list.oAddress = empOrder.oAddress;
                     list.oDate = empOrder.oDate;
                     list.oPromotionId = empOrder.oPromotionId;
                     list.cNote = empOrder.cNote;
+                    list.oWarehouseName = empOrder.oWarehouseName;
                     dbContext.tOrders.Add(list);
                     dbContext.SaveChanges();
                     foreach (var items in orders)
                     {
                         tOrderDetail detail = new tOrderDetail();
-                        detail.oOrderId = dbContext.tOrderDetails.OrderByDescending(i => i.oOrderId).First().oOrderId;
+                        detail.oOrderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
                         detail.oProductId = items.oProductId;
                         detail.oProductQty = items.oProductQty;
                         detail.oNote = items.oNote;
