@@ -390,6 +390,41 @@ namespace MotaiProject.Controllers
         {
             OrderViewModel CheckOrder = new OrderViewModel();
             return View(CheckOrder);
-        }        
+        }
+
+        private PromotionRespoitory Createpromotion = new PromotionRespoitory();
+        public ActionResult 新增消息()
+        {
+            if (CSession關鍵字.SK_LOGINED_EMPLOYEE != null)
+            {
+                Createpromotion newprod = new Createpromotion();
+                var categories = new ProductRespoitory().GetCategoryAll();
+                List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+                newprod.Categories = Cateitems;
+                return View();
+            }
+            return RedirectToAction("員工登入");
+        }
+        [HttpPost]
+        public ActionResult 新增消息(Createpromotion create消息)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+           
+            tPromotion n消息 = new tPromotion();
+            n消息.PromotionName = create消息.PromotionName;
+            n消息.PromotinoCategory = create消息.PromotinoCategory;
+            n消息.PromotionDescription = create消息.PromotionDescription;
+            n消息.pPromotionStartDate = create消息.pPromotionStartDate;
+            n消息.pPromotionDeadline = create消息.pPromotionDeadline;
+            n消息.pADimage = create消息.pADimage;
+            n消息.pDiscountCode = create消息.pDiscountCode;
+            n消息.pDiscount = create消息.pDiscount;
+            n消息.pPromotionPostDate = create消息.pPromotionPostDate;
+            n消息.pCondition = create消息.pCondition;
+
+            dbContext.tPromotions.Add(n消息);
+            dbContext.SaveChanges();
+            return RedirectToAction("員工首頁");
+        }
     }
 }

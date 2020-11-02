@@ -55,5 +55,25 @@ namespace MotaiProject.Models
             return Promo;
         }
 
+        public Dictionary<int, string> GetCategoryAll()
+        {
+            var categories = dbContext.tProductCategories.OrderBy(c => c.Category);
+            return categories.ToDictionary(cid => cid.pCategoryId, cn => cn.Category);
+        }
+
+        public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)
+        {
+            List<SelectListItem> selectLists = new List<SelectListItem>();
+            foreach (var items in dictionary)
+            {
+                selectLists.Add(new SelectListItem()
+                {
+                    Text = items.Value,
+                    Value = items.Key.ToString()
+                });
+            }
+            return selectLists;
+        }
+
     }
 }

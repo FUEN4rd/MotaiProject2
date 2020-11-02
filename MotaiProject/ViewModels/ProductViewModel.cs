@@ -52,18 +52,6 @@ namespace MotaiProject.ViewModels
         public string epsImage
         {
             get;set;
-            //get
-            //{
-            //    if (psImage.FirstOrDefault() == null)
-            //    {
-            //        return "";
-            //    }
-            //    else
-            //    {
-            //        return psImage[0];
-            //    }
-            //}
-            //set => psImage[0] = value;
         }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
