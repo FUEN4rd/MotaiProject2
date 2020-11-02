@@ -151,7 +151,18 @@
         });        
     });
     $(document).on("click", ".order", function () {
-        $(this).parent().remove();
+        $(this).parent().addClass("deleteclick");
+        var trArr = Array.from($(this).parent().parent()[0].rows);
+        var index = trArr.indexOf($(this).parent()[0]);
+        $.ajax({
+            url: "@Url.Action("deleteOrderDetail", "Order")",
+            type: "POST",
+            data: { "index": index },
+            success: function (data) {
+                alert(data.msg);
+                }
+            });
+        $(this).parent().remove();   
     });
     $("#createOrder").click(function () {
         var Cellphone = $("#cCellphone").val();

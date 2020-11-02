@@ -15,7 +15,7 @@
     <div class="form-horizontal">
         <h4>StockListViewModel</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.sStockSerialValue, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sStockDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sStockDate, new { htmlAttributes = new { @class = "form-control" , @id = "StockDate" } })
+                @Html.EditorFor(model => model.sStockDate, new { htmlAttributes = new { @class = "form-control", @id = "StockDate" } })
                 @Html.ValidationMessageFor(model => model.sStockDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -77,10 +77,10 @@
                     <th>新增/刪除</th>
                 </tr>
             </thead>
-            <tbody id="detail">                
+            <tbody id="detail">
                 <tr>
                     <td scope="row">
-                        @Html.DropDownListFor(model=>model.StockDetail.sProductId, Model.StockDetail.ProductNames, "請選擇商品")
+                        @Html.DropDownListFor(model => model.StockDetail.sProductId, Model.StockDetail.ProductNames, "請選擇商品")
                     </td>
                     <td>
                         @Html.EditorFor(model => model.StockDetail.sCost)
@@ -89,7 +89,7 @@
                         @Html.EditorFor(model => model.StockDetail.sQuantity)
                     </td>
                     <td>
-                        @Html.DropDownListFor(model=>model.StockDetail.sWarehouseNameId, Model.StockDetail.WareHouseNames, "請選擇倉儲")
+                        @Html.DropDownListFor(model => model.StockDetail.sWarehouseNameId, Model.StockDetail.WareHouseNames, "請選擇倉儲")
                     </td>
                     <td>
                         @Html.EditorFor(model => model.StockDetail.sNote)
@@ -133,15 +133,20 @@
                     $("#detail").prepend(list);
                 }
             });
-        });        
+        });
     });
     $(document).on("click", ".stock", function () {
-        console.log($(this).parent().parent()[0].rows);
         $(this).parent().addClass("deleteclick");
-        console.log($(this).parent()[0]);
-        var trArr = $(this).parent().parent()[0].rows;
-        var index = trArr.findIndex(el => el.className.is("deleteclick"));
-        console.log(index);
+        var trArr = Array.from($(this).parent().parent()[0].rows);
+        var index = trArr.indexOf($(this).parent()[0]);
+        $.ajax({
+            url: "@Url.Action("deleteStockDetail", "Commodity")",
+            type: "POST",
+            data: { "index": index },
+            success: function (data) {
+                alert(data.msg);
+                }
+            });
         $(this).parent().remove();
     });
     $("#createStock").click(function () {
@@ -171,7 +176,7 @@
             }
         });
     });
-    var onSuccess = function (url) {        
-        window.location.href = url;        
+    var onSuccess = function (url) {
+        window.location.href = url;
     }
 </script>

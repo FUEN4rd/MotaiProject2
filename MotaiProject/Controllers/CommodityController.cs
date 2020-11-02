@@ -131,11 +131,14 @@ namespace MotaiProject.Controllers
             }
             return data;
         }
-        //補刪除json deleteDetail
+        //刪除json deleteDetail
         [HttpPost]
-        public JsonResult deleteStockDetail()
+        public JsonResult deleteStockDetail(int index)
         {
-            return Json(new { });
+            List<StockDetailViewModel> stocks = Session[CSession關鍵字.SK_STOCKDETAIL] as List<StockDetailViewModel>;
+            stocks.RemoveAt(index);
+            Session[CSession關鍵字.SK_STOCKDETAIL] = stocks;
+            return Json(new {msg="已刪除" });
         }
         public ActionResult 進貨單查詢()
         {

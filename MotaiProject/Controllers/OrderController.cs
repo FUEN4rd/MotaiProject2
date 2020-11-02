@@ -123,12 +123,17 @@ namespace MotaiProject.Controllers
             }
             return data;
         }
-        //補刪除Json deleteDetail
+        //刪除Json deleteDetail
         [HttpPost]
-        public JsonResult deleteOrderDetail()
+        public JsonResult deleteOrderDetail(int index)
         {
-            return Json(new { });
+            List<EmployeeOrderDetailViewModel> orders = Session[CSession關鍵字.SK_ORDERDETAIL] as List<EmployeeOrderDetailViewModel>;
+            orders.RemoveAt(index);
+            Session[CSession關鍵字.SK_ORDERDETAIL] = orders;
+            return Json(new { msg = "已刪除" });
         }
+
+
         //韋宏訂單
         public ActionResult 詳細訂單(int id)
         {
