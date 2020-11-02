@@ -139,6 +139,7 @@
     <Content Include="images\5951d29d-e184-4dc2-a1e9-3a37331aaab2.PNG" />
     <Content Include="images\7e52f9a4-10e3-4339-9719-66c63d0411ba.gif" />
     <Content Include="images\c5d2f90e-f583-4d73-b4d6-815b37a92686.PNG" />
+    <Content Include="images\Employee_login.png" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap-grid.css" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="lib\twitter-bootstrap\css\bootstrap-reboot.css" />
@@ -493,6 +494,7 @@
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\BossViewModel.cs" />
     <Compile Include="ViewModels\CommodityViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
@@ -541,6 +543,7 @@
     <Content Include="Views\Boss\Boss產品頁面.cshtml" />
     <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
     <Content Include="Views\Shared\_LayoutBoss.cshtml" />
+    <Content Include="Views\Employee\新增消息.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
