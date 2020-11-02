@@ -14,14 +14,14 @@ namespace MotaiProject.Controllers
         public ActionResult Boss登出()
         {
             Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = null;
-            return RedirectToAction("員工登入","Customer");
+            return RedirectToAction("員工登入", "Employee");
         }
 
         public ActionResult Boss首頁()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入", "Customer");
+                return RedirectToAction("員工登入", "Employee");
             }
             else
             {
@@ -39,12 +39,6 @@ namespace MotaiProject.Controllers
             {
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
-                //tEmployee changeemp = new tEmployee();
-                //changeemp =emp;
-                //changeemp.EmployeeId= EmployeeId;
-                //dbContext.tEmployees.Add(changeemp);
-                //dbContext.SaveChanges()
-                ;
                 if (emp.ePassword == oldpass)
                 {
                     emp.ePassword = ePassword;
@@ -66,40 +60,57 @@ namespace MotaiProject.Controllers
             }
         }
 
-        public ActionResult 工作日誌()
-        {//要再改
+        public ActionResult Boss看工作日誌()
+        {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
+
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId));
-                List<DiaryViewModel> diarylist = new List<DiaryViewModel>();
-                foreach (tDiary item in dlist)
+                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
+                List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
+                foreach (var item in dlist)
                 {
-                    DiaryViewModel diary = new DiaryViewModel();
-                    //diary.Diary = item;
-                    diarylist.Add(diary);
+                    DiaryViewModel show = new DiaryViewModel();
+                    show.eName = item.tEmployee.eName;
+                    show.dDate = item.dDate;
+                    show.dWeather = item.dWeather;
+                    show.dDiaryNote = item.dDiaryNote;
+                    show.dWarehouseNameId = item.dWarehouseNameId;
+
+                    DSaw.Add(show);
                 }
-                return View(diarylist);
+                return View(DSaw);
             }
-            return RedirectToAction("員工登入", "Customer");
+            return RedirectToAction("員工登入", "Employee");
         }
         private ProductRespoitory productRespotiory = new ProductRespoitory();
-        public ActionResult Boss產品頁面()
+        public ActionResult Boss看產品頁面()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入", "Customer");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
+            foreach (var items in productlist)
+            {
+                if (items.psImage.Count > 0)
+                {
+                    items.epsImage = Url.Content(items.psImage[0]);
+                }
+                else
+                {
+                    items.epsImage = "";
+                }
+            }
             return View(productlist);
         }
         public ActionResult 銷售數據()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入", "Customer");
+                return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             var favorOrderby = from i in dbContext.tFavorites

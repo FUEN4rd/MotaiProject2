@@ -111,21 +111,8 @@
 
 <script>
     $(document).ready(function () {
-        //var pName = "";
-        //var WHName = "";        
-        //$("#StockDetail_sProductId").change(function () {
-        //    //pName = $("#pName option:selected").val();
-        //    pName = $("#StockDetail_sProductId").val();
-        //    console.log(pName);
-        //});
-        //$("#StockDetail_sWarehouseNameId").change(function () {
-        //    //WHName = $("#StockDetail_sWarehouseNameId option:selected").val();
-        //    WHName = $("#StockDetail_sWarehouseNameId").val();
-        //    console.log(WHName);
-        //});
         $("#createDetail").click(function () {
             var pName = $("#StockDetail_sProductId").val();
-            console.log(pName);
             var Cost = $("#StockDetail_sCost").val();
             var Qty = $("#StockDetail_sQuantity").val();
             var WHName = $("#StockDetail_sWarehouseNameId").val();
@@ -149,6 +136,12 @@
         });        
     });
     $(document).on("click", ".stock", function () {
+        console.log($(this).parent().parent()[0].rows);
+        $(this).parent().addClass("deleteclick");
+        console.log($(this).parent()[0]);
+        var trArr = $(this).parent().parent()[0].rows;
+        var index = trArr.findIndex(el => el.className.is("deleteclick"));
+        console.log(index);
         $(this).parent().remove();
     });
     $("#createStock").click(function () {

@@ -131,6 +131,12 @@ namespace MotaiProject.Controllers
             }
             return data;
         }
+        //補刪除json deleteDetail
+        [HttpPost]
+        public JsonResult deleteStockDetail()
+        {
+            return Json(new { });
+        }
         public ActionResult 進貨單查詢()
         {
             return View();
