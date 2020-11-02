@@ -335,17 +335,10 @@ namespace MotaiProject.Controllers
             ViewBag.name = emp.eName;
             ViewBag.empId = emp.EmployeeId;
             DiaryViewModel newDiary = new DiaryViewModel();
-            var warehouses = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> WareList = new List<SelectListItem>();
-            foreach (var item in warehouses)
-            {
-                WareList.Add(new SelectListItem()
-                {
-                    Text = item.Value,
-                    Value = item.Key.ToString()
-                });
-            }
-            newDiary.WarehouseName = WareList;
+            var warehouses = new CommodityRespoitory().GetWarehouseAll();
+            List<SelectListItem> WareList = new EmployeeRespoitory().GetSelectList(warehouses);
+            
+            newDiary.warehouses = WareList;
 
             return View(newDiary);
         }
@@ -393,38 +386,37 @@ namespace MotaiProject.Controllers
         }
 
         private PromotionRespoitory Createpromotion = new PromotionRespoitory();
-        public ActionResult 新增消息()
-        {
-            if (CSession關鍵字.SK_LOGINED_EMPLOYEE != null)
-            {
-                Createpromotion newprod = new Createpromotion();
-                var categories = new ProductRespoitory().GetCategoryAll();
-                List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
-                newprod.Categories = Cateitems;
-                return View();
-            }
-            return RedirectToAction("員工登入");
-        }
-        [HttpPost]
-        public ActionResult 新增消息(Createpromotion create消息)
-        {
-            MotaiDataEntities dbContext = new MotaiDataEntities();
-           
-            tPromotion n消息 = new tPromotion();
-            n消息.PromotionName = create消息.PromotionName;
-            n消息.PromotinoCategory = create消息.PromotinoCategory;
-            n消息.PromotionDescription = create消息.PromotionDescription;
-            n消息.pPromotionStartDate = create消息.pPromotionStartDate;
-            n消息.pPromotionDeadline = create消息.pPromotionDeadline;
-            n消息.pADimage = create消息.pADimage;
-            n消息.pDiscountCode = create消息.pDiscountCode;
-            n消息.pDiscount = create消息.pDiscount;
-            n消息.pPromotionPostDate = create消息.pPromotionPostDate;
-            n消息.pCondition = create消息.pCondition;
+        //public ActionResult 新增消息()
+        //{
+        //    if (CSession關鍵字.SK_LOGINED_EMPLOYEE != null)
+        //    {
+        //        Createpromotion newprod = new Createpromotion();
+        //        var categories = new ProductRespoitory().GetCategoryAll();
+        //        List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+        //        newprod.Categories = Cateitems;
+        //        return View();
+        //    }
+        //    return RedirectToAction("員工登入");
+        //}
+        //[HttpPost]
+        //public ActionResult 新增消息(Createpromotion create消息)
+        //{
+        //    MotaiDataEntities dbContext = new MotaiDataEntities();     
+        //    tPromotion n消息 = new tPromotion();
+        //    n消息.PromotionName = create消息.PromotionName;
+        //    n消息.PromotinoCategory = create消息.PromotinoCategory;
+        //    n消息.PromotionDescription = create消息.PromotionDescription;
+        //    n消息.pPromotionStartDate = create消息.pPromotionStartDate;
+        //    n消息.pPromotionDeadline = create消息.pPromotionDeadline;
+        //    n消息.pADimage = create消息.pADimage;
+        //    n消息.pDiscountCode = create消息.pDiscountCode;
+        //    n消息.pDiscount = create消息.pDiscount;
+        //    n消息.pPromotionPostDate = create消息.pPromotionPostDate;
+        //    n消息.pCondition = create消息.pCondition;
 
-            dbContext.tPromotions.Add(n消息);
-            dbContext.SaveChanges();
-            return RedirectToAction("員工首頁");
-        }
+        //    dbContext.tPromotions.Add(n消息);
+        //    dbContext.SaveChanges();
+        //    return RedirectToAction("員工首頁");
+        //}
     }
 }
