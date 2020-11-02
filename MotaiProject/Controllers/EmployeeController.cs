@@ -25,6 +25,10 @@ namespace MotaiProject.Controllers
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = d資料確認;
+                if (d資料確認.eBranch == 1)
+                {
+                    return RedirectToAction("Boss首頁", "Boss");
+                }
                 return RedirectToAction("員工首頁");
             }
             else

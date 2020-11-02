@@ -400,6 +400,7 @@
     <Compile Include="Models\ProductRespoitory.cs" />
     <Compile Include="Models\CommodityRespoitory.cs" />
     <Compile Include="Models\CSession關鍵字.cs" />
+    <Compile Include="Models\PromotionRespoitory.cs" />
     <Compile Include="MotaiModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -536,6 +537,10 @@
     <Content Include="Views\Commodity\進貨單建立.cshtml" />
     <Content Include="Views\Boss\Boss首頁.cshtml" />
     <Content Include="Views\Order\實體店新增訂單.cshtml" />
+    <Content Include="Views\Customer\消息細節.cshtml" />
+    <Content Include="Views\Boss\Boss產品頁面.cshtml" />
+    <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
+    <Content Include="Views\Shared\_LayoutBoss.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -2,7 +2,7 @@
 @using MotaiProject.Models
 @{
     ViewBag.Title = "Boss首頁";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
     string welcome = "403 未經授權";
     tEmployee Emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
     if (Emp != null)
