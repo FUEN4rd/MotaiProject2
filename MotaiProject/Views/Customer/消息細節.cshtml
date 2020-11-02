@@ -1,0 +1,107 @@
+﻿@model MotaiProject.ViewModels.DetailPromotionViewModel
+
+@{
+    ViewBag.Title = "消息細節";
+    Layout = "~/Views/Shared/_Layout登入.cshtml";
+}
+
+<h2>消息細節</h2>
+
+<div>
+    <h4>DetailPromotionViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sPromotinoCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sPromotinoCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PromotionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PromotionDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pADimage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pADimage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pPromotionWeb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pPromotionWeb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pPromotionPostDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pPromotionPostDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PromotionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PromotionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pCondition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pCondition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pDiscountCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pDiscountCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pPromotionStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pPromotionStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pPromotionDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pPromotionDeadline)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

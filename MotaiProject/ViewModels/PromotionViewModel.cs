@@ -21,12 +21,50 @@ namespace MotaiProject.ViewModels
         [DisplayName("公告日期")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime pPromotionPostDate { get; set; }
+
+
+        [DisplayName("Id")]
+        public int PromotionId { get; set; }
+    }
+
+    public class DetailPromotionViewModel
+    {
+        [DisplayName("類別")]
+        public string sPromotinoCategory { get; set; }
+        [DisplayName("介紹")]
+        public string PromotionDescription { get; set; }
+        [DisplayName("圖片")]
+        public string pADimage { get; set; }
+        [DisplayName("網頁連結")]
+        public string pPromotionWeb { get; set; }
+        [DisplayName("公告日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public System.DateTime pPromotionPostDate { get; set; }
+
+        [DisplayName("Id")]
+        public int PromotionId { get; set; }
+        [DisplayName("名稱")]
+        public string PromotionName { get; set; }
+        [DisplayName("條件")]
+        public int pCondition { get; set; }
+        [DisplayName("折扣")]
+        public double pDiscount { get; set; }
+        [DisplayName("折扣碼")]
+        public string pDiscountCode { get; set; }
+        [DisplayName("開始日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public System.DateTime pPromotionStartDate { get; set; }
+        [DisplayName("結束日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public System.DateTime pPromotionDeadline { get; set; }
+        
     }
 
     public class news
     {
         //public PromotionViewModel newProm { get; set; }
-        public NewPromotionViewModel newPrmotion { get; set; }
+        public NewPromotionViewModel newPromotion { get; set; }
         public NewProductViewModel newProduct { get; set; }
+        public DetailPromotionViewModel detailPromotion { get; set; }
     }
 }
