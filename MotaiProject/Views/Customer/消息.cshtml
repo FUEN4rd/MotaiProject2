@@ -10,7 +10,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @*輪播牆*@
- 
+
 <div class="container">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:300px;height:300px;margin:0 auto; ">
         <div class="carousel-inner">
@@ -39,74 +39,73 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPrmotion.sPromotinoCategory)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPrmotion.PromotionDescription)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPrmotion.pPromotionPostDate)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
             </th>
 
         </tr>
 
         @foreach (var item in Model)
         {
-        <tr>
-            <a href="@Url.Action(item.newPrmotion.pPromotionWeb)">
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.newPrmotion.sPromotinoCategory)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.newPrmotion.PromotionDescription)
-                </td>                
-                <td>
-                    @Html.DisplayFor(modelItem => item.newPrmotion.pPromotionPostDate)
-                </td>
-            </a>
-        </tr>
-        }
-    </table>
-    @Html.PagedListPager(Model,page=> Url.Action("消息",new { page}))
-</div>
-@*<div class="container">
-    <h2>消息</h2>
-    <table class="table">
-        <tr>
-            <th style="display:none">
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.PromotionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.sPromotinoCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.PromotionDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.pPromotionPostDate)
-            </th>
-
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <a href="@Url.Action(item.newProm.pPromotionWeb)">
-                    <td style="display:none">
-                        @Html.DisplayFor(modelItem => item.newProm.PromotionId)
+            <tr>               
+                    <td>
+                        @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.newProm.sPromotinoCategory)
+                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })">
+                            @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
+                        </a>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.newProm.PromotionDescription)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.newProm.pPromotionStartDate)
-                    </td>
-                </a>
+                        @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
+                    </td>                
             </tr>
         }
     </table>
-</div>*@
+    @Html.PagedListPager(Model, page => Url.Action("消息", new { page }))
+</div>
+@*<div class="container">
+        <h2>消息</h2>
+        <table class="table">
+            <tr>
+                <th style="display:none">
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.PromotionId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.sPromotinoCategory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.PromotionDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.pPromotionPostDate)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <a href="@Url.Action(item.newProm.pPromotionWeb)">
+                        <td style="display:none">
+                            @Html.DisplayFor(modelItem => item.newProm.PromotionId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.newProm.sPromotinoCategory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.newProm.PromotionDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.newProm.pPromotionStartDate)
+                        </td>
+                    </a>
+                </tr>
+            }
+        </table>
+    </div>*@

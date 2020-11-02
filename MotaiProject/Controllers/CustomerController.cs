@@ -44,15 +44,21 @@ namespace MotaiProject.Controllers
                 npv.sPromotinoCategory = items.tPromotionCategory.PromtionCategory;
                 npv.PromotionDescription = items.PromotionDescription;
                 npv.pADimage = items.pADimage;
-                npv.pPromotionWeb = items.pPromotionWeb;
                 npv.pPromotionPostDate = items.pPromotionPostDate;
-                res.newPrmotion = npv;
+                npv.PromotionId = items.PromotionId;
+
+                res.newPromotion = npv;
                 reslsit.Add(res);
             }
             var result = reslsit.ToPagedList(cpage, pageSize);
             return View(result);
         }
-
+        private PromotionRespoitory promotionRespotiory = new PromotionRespoitory();
+        public ActionResult 消息細節(int PromotionId)
+        {
+            DetailPromotionViewModel Promo = promotionRespotiory.GetPromotionById(PromotionId);
+            return View(Promo);
+        }
 
         //GET: 會員登入
         [HttpPost]
