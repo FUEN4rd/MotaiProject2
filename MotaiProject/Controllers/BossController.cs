@@ -85,7 +85,7 @@ namespace MotaiProject.Controllers
             return RedirectToAction("員工登入", "Employee");
         }
         private ProductRespoitory productRespotiory = new ProductRespoitory();
-        public ActionResult Boss看產品頁面()
+        public ActionResult Boss產品頁面()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {

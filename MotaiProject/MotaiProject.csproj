@@ -538,6 +538,7 @@
     <Content Include="Views\Order\實體店新增訂單.cshtml" />
     <Content Include="Views\Boss\Boss產品頁面.cshtml" />
     <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
+    <Content Include="Views\Shared\_LayoutBoss.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
