@@ -14,6 +14,12 @@ namespace MotaiProject
     
     public partial class tPromotion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tPromotion()
+        {
+            this.tOrders = new HashSet<tOrder>();
+        }
+    
         public int PromotionId { get; set; }
         public string PromotionName { get; set; }
         public int PromotinoCategory { get; set; }
@@ -23,11 +29,12 @@ namespace MotaiProject
         public string pPromotionWeb { get; set; }
         public string pADimage { get; set; }
         public string pDiscountCode { get; set; }
-        public double pDiscount { get; set; }
+        public Nullable<double> pDiscount { get; set; }
         public System.DateTime pPromotionPostDate { get; set; }
-        public int pCondition { get; set; }
+        public Nullable<int> pCondition { get; set; }
     
-        public virtual tOrder tOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tOrder> tOrders { get; set; }
         public virtual tPromotionCategory tPromotionCategory { get; set; }
     }
 }
