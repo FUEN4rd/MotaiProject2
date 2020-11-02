@@ -37,12 +37,12 @@ namespace MotaiProject
         public virtual tCustomer tCustomer { get; set; }
         public virtual tEmployee tEmployee { get; set; }
         public virtual tPromotion tPromotion { get; set; }
+        public virtual tWarehouseName tWarehouseName { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderDetail> tOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrderPay> tOrderPays { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tShipList> tShipLists { get; set; }
-        public virtual tWarehouseName tWarehouseName { get; set; }
     }
 }

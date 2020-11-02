@@ -20,8 +20,8 @@ namespace MotaiProject.Models
             {
                 DetailPromotionViewModel Promo = new DetailPromotionViewModel();
                 Promo.pADimage = item.pADimage;
-                Promo.pCondition = item.pCondition;
-                Promo.pDiscount = item.pDiscount;
+                Promo.pCondition = (int)item.pCondition;
+                Promo.pDiscount = (double)item.pDiscount;
                 Promo.pPromotionDeadline = item.pPromotionDeadline;
                 Promo.pPromotionPostDate = item.pPromotionPostDate;
                 Promo.pPromotionStartDate = item.pPromotionStartDate;
@@ -41,8 +41,8 @@ namespace MotaiProject.Models
             tPromotion promotion = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);
             DetailPromotionViewModel Promo = new DetailPromotionViewModel();
             Promo.pADimage = promotion.pADimage;
-            Promo.pCondition = promotion.pCondition;
-            Promo.pDiscount = promotion.pDiscount;
+            Promo.pCondition = (int)promotion.pCondition;
+            Promo.pDiscount = (double)promotion.pDiscount;
             Promo.pPromotionDeadline = promotion.pPromotionDeadline;
             Promo.pPromotionPostDate = promotion.pPromotionPostDate;
             Promo.pPromotionStartDate = promotion.pPromotionStartDate;
@@ -53,6 +53,26 @@ namespace MotaiProject.Models
             Promo.pDiscountCode = promotion.pDiscountCode;
             Promo.PromotionId = promotion.PromotionId;
             return Promo;
+        }
+
+        public Dictionary<int, string> GetCategoryAll()
+        {
+            var categories = dbContext.tProductCategories.OrderBy(c => c.Category);
+            return categories.ToDictionary(cid => cid.pCategoryId, cn => cn.Category);
+        }
+
+        public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)
+        {
+            List<SelectListItem> selectLists = new List<SelectListItem>();
+            foreach (var items in dictionary)
+            {
+                selectLists.Add(new SelectListItem()
+                {
+                    Text = items.Value,
+                    Value = items.Key.ToString()
+                });
+            }
+            return selectLists;
         }
 
     }

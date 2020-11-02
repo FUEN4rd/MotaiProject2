@@ -171,7 +171,7 @@
         var Promotion = $("#oPromotionId").val();
         var Note = $("#cNote").val();
         var WarehouseName = $("#oWarehouseName").val();
-        var stockList = {
+        var OrderList = {
             cCellphone: Cellphone,
             oAddress: Address,
             oDate: Date,
@@ -182,7 +182,7 @@
         $.ajax({
             url: "@Url.Action("實體店新增訂單", "Order")",
             type: "POST",
-            data: { "stockList": stockList },
+            data: { "empOrder": OrderList },
             success: function (data) {
                 if (data.result) {
                     alert(data.msg);

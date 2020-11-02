@@ -4,32 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f75b0657bd0047dbab7efff3d36da8b2" Name="Diagram1">
-        <EntityTypeShape EntityType="MotaiDataModel.tBranch" Width="1.5" PointX="3.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tCustomer" Width="1.5" PointX="0.75" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tDiary" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tEmployee" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tFavorite" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tOrder" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tOrderDetail" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tOrderPay" Width="1.5" PointX="8.25" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tOrderPayType" Width="1.5" PointX="6" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tPosition" Width="1.5" PointX="3.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tProduct" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tProductCategory" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tProductImage" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tProductMaterial" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tProductSize" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tPromotion" Width="1.5" PointX="0.75" PointY="23" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tPromotionCategory" Width="1.5" PointX="1.5" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tShipDetail" Width="1.5" PointX="10.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tShipList" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tStatu" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tStockDetail" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tStockList" Width="1.5" PointX="6" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tTransfer" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tWarehouse" Width="1.5" PointX="8.25" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MotaiDataModel.tWarehouseName" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="98d79ec73d9c46bba642c4e05a39cf2b" Name="Diagram1">
+        <EntityTypeShape EntityType="MotaiDataModel.tBranch" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tCustomer" Width="1.5" PointX="0.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tDiary" Width="1.5" PointX="8" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tEmployee" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tFavorite" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tOrder" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tOrderDetail" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tOrderPay" Width="1.5" PointX="5.25" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tOrderPayType" Width="1.5" PointX="3" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tPosition" Width="1.5" PointX="1.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tProduct" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tProductCategory" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tProductImage" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tProductMaterial" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tProductSize" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tPromotion" Width="1.5" PointX="0.75" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tPromotionCategory" Width="1.5" PointX="1.5" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tShipDetail" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tShipList" Width="1.5" PointX="6" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tStatu" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tStockDetail" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tStockList" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tTransfer" Width="1.5" PointX="8.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tWarehouse" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MotaiDataModel.tWarehouseName" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="MotaiDataModel.FK_tEmployee_tBranch" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tFavorite_tCustomer" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tOrder_tCustomer" ManuallyRouted="false" />
@@ -43,11 +43,11 @@
         <AssociationConnector Association="MotaiDataModel.FK_tTransfer_tEmployee" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tFavorite_tProduct" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tOrder_tPromotion" ManuallyRouted="false" />
+        <AssociationConnector Association="MotaiDataModel.FK_tOrder_tWarehouseName" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tOrderDetail_tOrder" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tOrderPay_tOrder" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tShipList_tOrder" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tOrderDetail_tProduct" ManuallyRouted="false" />
-        <AssociationConnector Association="MotaiDataModel.FK_tShipDetail_tOrderDetail" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tOrderPay_tOrderPayType" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tProduct_tProductCategory" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tProduct_tProductMaterial" ManuallyRouted="false" />
@@ -66,7 +66,6 @@
         <AssociationConnector Association="MotaiDataModel.FK_tTransfer_tWarehouseIn" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tTransfer_tWarehouseOut" ManuallyRouted="false" />
         <AssociationConnector Association="MotaiDataModel.FK_tWarehouse_tWarehouseName" ManuallyRouted="false" />
-        <AssociationConnector Association="MotaiDataModel.FK_tOrder_tWarehouseName" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

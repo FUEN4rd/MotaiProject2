@@ -21,7 +21,6 @@ namespace MotaiProject
         public int sQuantity { get; set; }
         public int sWarehouseNameId { get; set; }
     
-        public virtual tOrderDetail tOrderDetail { get; set; }
         public virtual tProduct tProduct { get; set; }
         public virtual tShipList tShipList { get; set; }
         public virtual tWarehouseName tWarehouseName { get; set; }

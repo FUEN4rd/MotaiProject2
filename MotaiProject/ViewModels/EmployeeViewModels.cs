@@ -50,9 +50,11 @@ namespace MotaiProject.ViewModels
         public string dWeather { get; set; }
         [DisplayName("備註")]
         public string dDiaryNote { get; set; }
-        [DisplayName("倉儲")]
+        [DisplayName("門市")]
         public int dWarehouseNameId { get; set; }
-        public IEnumerable<SelectListItem> WarehouseName { get; set; }
+
+        public IEnumerable<SelectListItem> warehouses { get; set; }
+
 
     }
 
