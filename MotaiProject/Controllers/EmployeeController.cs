@@ -327,7 +327,7 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("員工登入");
         }
-
+        private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         public ActionResult 新增日誌()
         {
             tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
@@ -335,16 +335,8 @@ namespace MotaiProject.Controllers
             ViewBag.name = emp.eName;
             ViewBag.empId = emp.EmployeeId;
             DiaryViewModel newDiary = new DiaryViewModel();
-            var warehouses = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> WareList = new List<SelectListItem>();
-            foreach (var item in warehouses)
-            {
-                WareList.Add(new SelectListItem()
-                {
-                    Text = item.Value,
-                    Value = item.Key.ToString()
-                });
-            }
+            var warehouses = commodityRespoitory.GetWarehouseAll();
+            List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);            
             newDiary.WarehouseName = WareList;
 
             return View(newDiary);
