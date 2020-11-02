@@ -4,104 +4,51 @@
     ViewBag.Title = "消息細節";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
+<style>
+    * {
+        color: #F2EDD8;
+    }
+</style>
+<div class="container">
+    <div>
+        <div>
+            <h3>@Html.DisplayFor(model => model.PromotionName)</h3>
+        </div>
+        <hr />
+        <div style="display:flex;justify-content:space-between">
+            <div>
 
-<h2>消息細節</h2>
+                <div>
+                    @Html.DisplayFor(model => model.sPromotinoCategory)
 
-<div>
-    <h4>DetailPromotionViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.sPromotinoCategory)
-        </dt>
+                    活動期間：
+                    @Html.DisplayFor(model => model.pPromotionStartDate)~
+                    @Html.DisplayFor(model => model.pPromotionDeadline)
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.sPromotinoCategory)
-        </dd>
+                <div>
+                    @Html.DisplayNameFor(model => model.PromotionDescription):
+                    @Html.DisplayFor(model => model.PromotionDescription)
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PromotionDescription)
-        </dt>
+                <div>
+                    滿額活動，
+                    @Html.DisplayFor(model => model.pCondition)現折
+                    @Html.DisplayFor(model => model.pDiscount)
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.PromotionDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pADimage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pADimage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pPromotionWeb)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pPromotionWeb)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pPromotionPostDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pPromotionPostDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PromotionName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PromotionName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pCondition)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pCondition)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pDiscount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pDiscount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pDiscountCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pDiscountCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pPromotionStartDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pPromotionStartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pPromotionDeadline)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pPromotionDeadline)
-        </dd>
-
-    </dl>
+                <div>
+                    @Html.DisplayNameFor(model => model.pDiscountCode):
+                    @Html.DisplayFor(model => model.pDiscountCode)
+                </div>
+                <div>
+                    <a href="@Html.DisplayFor(model => model.pPromotionWeb)">相關連結</a>
+                </div>
+            </div>
+            <div>
+                圖片
+                @Html.DisplayFor(model => model.pADimage)
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

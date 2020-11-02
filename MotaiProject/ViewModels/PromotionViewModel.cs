@@ -60,7 +60,7 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("類別")]
         public string sPromotinoCategory { get; set; }
-        [DisplayName("介紹")]
+        [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }
         [DisplayName("圖片")]
         public string pADimage { get; set; }
