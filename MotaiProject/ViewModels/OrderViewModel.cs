@@ -49,7 +49,9 @@ namespace MotaiProject.ViewModels
         public string EmployeeName { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }
+
         public List<CustomerOrderDetailViewModel> CustomerOrderDetails { get; set; }
+        public IEnumerable<SelectListItem> WareHouseNames { get; set; }
     }
     public class CustomerOrderDetailViewModel
     {
@@ -64,6 +66,8 @@ namespace MotaiProject.ViewModels
         public int oProductQty { get; set; }
         [DisplayName("備註")]
         public string oNote { get; set; }
+
+        public IEnumerable<SelectListItem> ProductNames { get; set; }
     }
     public class EmployeeOrderViewModel
     {
@@ -108,6 +112,13 @@ namespace MotaiProject.ViewModels
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
     }
+    public class EmployeeCheckoutViewModel
+    {
+        public EmployeeOrderViewModel Order { get; set; }
+        public List<EmployeeOrderDetailViewModel> orderDetails { get; set; }
+        public int TotalAmount { get; set; }
+    }
+
     public class OrderViewModel
     {
         [DisplayName("訂單編號")]
