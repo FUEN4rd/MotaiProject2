@@ -536,6 +536,8 @@
     <Content Include="Views\Commodity\進貨單建立.cshtml" />
     <Content Include="Views\Boss\Boss首頁.cshtml" />
     <Content Include="Views\Order\實體店新增訂單.cshtml" />
+    <Content Include="Views\Boss\Boss產品頁面.cshtml" />
+    <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
