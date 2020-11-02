@@ -494,6 +494,7 @@
       <DependentUpon>MotaiModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\BossViewModel.cs" />
     <Compile Include="ViewModels\CommodityViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />

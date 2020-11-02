@@ -67,7 +67,7 @@ namespace MotaiProject.Controllers
 
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
+                var dlist = dbContext.tDiaries.ToList();
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
                 foreach (var item in dlist)
                 {
@@ -107,7 +107,7 @@ namespace MotaiProject.Controllers
             return View(productlist);
         }
         public ActionResult 銷售數據()
-        {
+        {//改viewmodel
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入", "Employee");

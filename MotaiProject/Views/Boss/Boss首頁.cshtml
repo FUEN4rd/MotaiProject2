@@ -50,7 +50,7 @@
         let newpass = document.querySelector("#newpass").value;
         let oldpass = document.querySelector("#oldpass").value;
         //console.log(newpass);
-        fetch('/Boss/ChangePassword', {
+        fetch('@Url.Action("ChangePassword","Employee")', {
             method: 'POST',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
