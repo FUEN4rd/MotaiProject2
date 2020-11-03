@@ -562,6 +562,7 @@
     <Content Include="Views\People\員工登入.cshtml" />
     <Content Include="Views\People\新增員工.cshtml" />
     <Content Include="Views\People\人事看產品頁面.cshtml" />
+    <Content Include="Views\Boss\銷售報表.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
