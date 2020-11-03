@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.OrderViewModel>
+
+@{
+    ViewBag.Title = "會計查詢";
+    Layout = "~/Views/Shared/Layoutbusiness.cshtml";
+}
+
+<h2>業務會計查詢</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oCustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oDeliverDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oEmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oCheckDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oPromotionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cNote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oWarehouseName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oCustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oDeliverDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oEmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oCheckDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oPromotionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oWarehouseName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
