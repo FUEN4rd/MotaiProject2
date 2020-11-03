@@ -26,11 +26,18 @@ namespace MotaiProject.Models
                 Promo.pPromotionPostDate = item.pPromotionPostDate;
                 Promo.pPromotionStartDate = item.pPromotionStartDate;
                 Promo.pPromotionWeb = item.pPromotionWeb;
-                Promo.PromotionDescription = item.PromotionDescription;
                 Promo.sPromotinoCategory = item.tPromotionCategory.PromtionCategory;
                 Promo.PromotionName = item.PromotionName;
                 Promo.pDiscountCode = item.pDiscountCode;
                 Promo.PromotionId = item.PromotionId;
+                if (item.PromotionDescription.Length > 10)
+                {
+                    Promo.PromotionDescription = item.PromotionDescription.Substring(0, 10) + "...";
+                }
+                else
+                {
+                    Promo.PromotionDescription = item.PromotionDescription;
+                }
                 promotionlist.Add(Promo);
             }
             return promotionlist;

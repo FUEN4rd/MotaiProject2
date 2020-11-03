@@ -6,13 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace MotaiProject.Controllers
 {
-    public class AccountantController : Controller
+    public class PeopleController : Controller
     {
-        // GET: Accountant
-        public ActionResult Accountant首頁()
+        // GET: People
+        public ActionResult People首頁()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
@@ -28,8 +27,36 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
+        public ActionResult 新增員工()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult 新增員工(EmployeeViewModels create員工)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (dbContext.tEmployees.Count().Equals(0))
+            {
+                create員工.EmployeeId = 1;
+            }
+            tEmployee n新員工 = new tEmployee();
+            n新員工.eAccount = create員工.eAccount;
+            n新員工.EmployeeId = create員工.EmployeeId;
+            n新員工.ePassword = create員工.ePassword;
+            n新員工.eName = create員工.eName;
+            n新員工.ePosition = create員工.ePosition;
+            n新員工.eBranch = create員工.eBranch;
+            dbContext.tEmployees.Add(n新員工);
+            dbContext.SaveChanges();
+            return RedirectToAction("員工首頁");
+        }
+
         private ProductRespoitory productRespotiory = new ProductRespoitory();
-        public ActionResult 會計看產品頁面()
+        public ActionResult 人事看產品頁面()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
@@ -49,16 +76,6 @@ namespace MotaiProject.Controllers
                 }
             }
             return View(productlist);
-        }
-        public ActionResult 會計審核()
-        {
-            OrderViewModel CheckOrder = new OrderViewModel();
-            return View(CheckOrder);
-        }
-        public ActionResult 會計查詢()
-        {
-            List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
-            return View(CheckOrder);
         }
     }
 }

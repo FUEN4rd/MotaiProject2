@@ -29,15 +29,15 @@ namespace MotaiProject.Controllers
                     case 1:
                         return RedirectToAction("Boss首頁", "Boss");
                     case 2:
-                        return RedirectToAction("員工首頁", "Employee");
+                        return RedirectToAction("Business首頁", "Business");
                     case 3:
                         return RedirectToAction("Accountant首頁", "Accountant");
                     case 4:
-                        return RedirectToAction("員工首頁", "Employee");
+                        return RedirectToAction("People首頁", "People");
                     case 5:
                         return RedirectToAction("員工首頁", "Employee");
                     default:
-                        return RedirectToAction("員工首頁");
+                        return RedirectToAction("員工首頁", "Employee");
                 }
             }
             else
@@ -400,6 +400,19 @@ namespace MotaiProject.Controllers
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
             return View(CheckOrder);
         }
+
+
+        private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
+        public ActionResult 員工看消息()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
+            promotionlist = promotionRespoitory.GetPromotionAll();
+            return View(promotionlist);
+        }
         //private PromotionRespoitory Createpromotion = new PromotionRespoitory();
         //public ActionResult 新增消息()
         //{
@@ -416,7 +429,7 @@ namespace MotaiProject.Controllers
         //[HttpPost]
         //public ActionResult 新增消息(Createpromotion create消息)
         //{
-        //    MotaiDataEntities dbContext = new MotaiDataEntities();     
+        //    MotaiDataEntities dbContext = new MotaiDataEntities();
         //    tPromotion n消息 = new tPromotion();
         //    n消息.PromotionName = create消息.PromotionName;
         //    n消息.PromotinoCategory = create消息.PromotinoCategory;

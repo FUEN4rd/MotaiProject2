@@ -3,7 +3,7 @@
 @{
     tEmployee Emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
     ViewBag.Title = "會計審核";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/LayoutAccountant.cshtml";
 }
 
 <h2>會計審核</h2>
@@ -99,10 +99,10 @@
     <div>
         @if (Emp.eBranch == 3)
         {
-            @Html.ActionLink("回到首頁", "Accountant首頁", "Accountant");
+            @Html.ActionLink("回到會計首頁", "Accountant首頁", "Accountant");
         }
         
-        @Html.ActionLink("回到員工首頁", "員工首頁")
+       
     </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

@@ -4,6 +4,7 @@
 
 
 @{
+    string word;
     ViewBag.Title = "消息";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
@@ -58,18 +59,7 @@
                     </td>
                     <td>
                         <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })">
-                            @ViewBag.titles
-                            @{
-                                if (item.newPromotion.PromotionDescription.Length > 10)
-                                {
-                                    string r = item.newPromotion.PromotionDescription.Substring(0, 10) + "...";
-                                    ViewBag.titles = r;
-                                }
-                                else
-                                {
-                                    ViewBag.titles = item.newPromotion.PromotionDescription;
-                                }
-                            }
+                            @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
                         </a>
                     </td>
                     <td>    
