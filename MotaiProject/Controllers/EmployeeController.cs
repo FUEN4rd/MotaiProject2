@@ -29,7 +29,7 @@ namespace MotaiProject.Controllers
                     case 1:
                         return RedirectToAction("Boss首頁", "Boss");
                     case 2:
-                        return RedirectToAction("員工首頁", "Employee");
+                        return RedirectToAction("Business首頁", "Business");
                     case 3:
                         return RedirectToAction("Accountant首頁", "Accountant");
                     case 4:
