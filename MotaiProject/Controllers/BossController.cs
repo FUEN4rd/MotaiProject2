@@ -113,24 +113,51 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            Dictionary<int,int> favorOrder = (from i in dbContext.tFavorites
+            var favorOrder = (from i in dbContext.tFavorites
                                 group i by i.fProductId into j
                                 select new
                                 {
                                     Pid = j.Key,
                                     Pcount = j.Count(),
-                                }).ToDictionary(p=>p.Pid,p=>p.Pcount);
-            Dictionary<int, int> buyOrder = (from i in dbContext.tOrderDetails
-                                             group i by i.oProductId into j
-                                             select new
-                                             {
-                                                 Pid = j.Key,
-                                                 Pcount = j.Sum(p=>p.oProductQty)
-                                             }).ToDictionary(p => p.Pid, p => p.Pcount);
-            BossViewModel B = new BossViewModel();
-            B.favorOrder = favorOrder;
-            B.buyOrder = buyOrder;
-            return View(B);
+                                }).ToList();
+            var buyOrder = (from i in dbContext.tOrderDetails
+                            group i by i.oProductId into j
+                            select new
+                            {
+                                Pid = j.Key,
+                                Pcount = j.Sum(p => p.oProductQty)
+                            }).ToList();
+            List<BossViewModel> BossV = new List<BossViewModel>();
+            BossViewModel trans = new BossViewModel();
+            List<favorViewModel> favorV = new List<favorViewModel>();
+            List<buyViewModel> buyV = new List<buyViewModel>();
+
+            foreach(var item in favorOrder)
+            {  
+                favorViewModel favor = new favorViewModel();               
+                favor.favorID = item.Pid;
+                favor.faverCount = item.Pcount;
+                favorV.Add(favor);
+            }
+            foreach (var item in buyOrder)
+            {
+                buyViewModel buy = new buyViewModel();
+                buy.buyID = item.Pid;
+                buy.buyCount = item.Pcount;
+                buyV.Add(buy);
+            }
+            foreach(var item in favorV)
+            {
+                BossViewModel bv = new BossViewModel();
+                foreach (var item2 in buyV)
+                {
+                    bv.favorV = item;
+                    bv.buyV = item2;
+                }
+                BossV.Add(bv);
+            }
+            return View(BossV);
+
 
         }
     }
