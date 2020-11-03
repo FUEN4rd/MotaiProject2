@@ -337,7 +337,7 @@ namespace MotaiProject.Controllers
             DiaryViewModel newDiary = new DiaryViewModel();
             var warehouses = commodityRespoitory.GetWarehouseAll();
             List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);            
-            newDiary.WarehouseName = WareList;
+            //newDiary.WarehouseName = WareList;
 
             return View(newDiary);
         }

@@ -41,9 +41,14 @@
                     @Html.DisplayNameFor(model => model.pDiscountCode):
                     @Html.DisplayFor(model => model.pDiscountCode)
                 </div>
+                @{
+                    if(Model.pPromotionWeb != null)
+                    {
                 <div>
                     <a href="@Html.DisplayFor(model => model.pPromotionWeb)">相關連結</a>
                 </div>
+                    }                    
+                }
             </div>
             <div>
                 圖片
