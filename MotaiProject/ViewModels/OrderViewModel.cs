@@ -119,7 +119,7 @@ namespace MotaiProject.ViewModels
         public int TotalAmount { get; set; }
     }
 
-    public class OrderViewModel
+    public class OrderViewModel //審核
     {
         [DisplayName("訂單編號")]
         public int OrderId { get; set; }
