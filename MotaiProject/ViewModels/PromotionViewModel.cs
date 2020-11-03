@@ -48,8 +48,8 @@ namespace MotaiProject.ViewModels
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime pPromotionDeadline { get; set; }
         public string pDiscountCode { get; set; }
-        public double pDiscount { get; set; }
-        public int pCondition { get; set; }
+        public string pDiscount { get; set; }
+        public string pCondition { get; set; }
 
     }
 
