@@ -43,6 +43,20 @@ namespace MotaiProject.Controllers
                 //Prom 讀取入get set
                 npv.sPromotinoCategory = items.tPromotionCategory.PromtionCategory;
                 npv.PromotionDescription = items.PromotionDescription;
+                //ViewBag.L = npv.PromotionDescription;
+                //if (npv.PromotionDescription.Length>10)
+                //{
+                //    string word = npv.PromotionDescription.Split(10) + "...";
+
+                //    ViewBag.L = word;
+                //}
+                //else
+                //{
+                //    string word = npv.PromotionDescription;
+                //    ViewBag.L = word;
+                //}
+
+
                 npv.pADimage = items.pADimage;
                 npv.pPromotionPostDate = items.pPromotionPostDate;
                 npv.PromotionId = items.PromotionId;

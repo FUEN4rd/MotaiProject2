@@ -31,23 +31,29 @@
                     @Html.DisplayFor(model => model.PromotionDescription)
                 </div>
 
-                <div>
-                    滿額活動，
-                    @Html.DisplayFor(model => model.pCondition)現折
-                    @Html.DisplayFor(model => model.pDiscount)
-                </div>
+                @{
+                    if (Model.pCondition != null)
+                    {
+                        <div>
+                            滿額活動:
+                            @Html.DisplayFor(model => model.pCondition)現折
+                            @Html.DisplayFor(model => model.pDiscount)
+                        </div>
+                    }
+                }
 
                 <div>
                     @Html.DisplayNameFor(model => model.pDiscountCode):
                     @Html.DisplayFor(model => model.pDiscountCode)
                 </div>
+
                 @{
-                    if(Model.pPromotionWeb != null)
+                    if (Model.pPromotionWeb != null)
                     {
-                <div>
-                    <a href="@Html.DisplayFor(model => model.pPromotionWeb)">相關連結</a>
-                </div>
-                    }                    
+                        <div>
+                            <a href="@Html.DisplayFor(model => model.pPromotionWeb)">相關連結</a>
+                        </div>
+                    }
                 }
             </div>
             <div>

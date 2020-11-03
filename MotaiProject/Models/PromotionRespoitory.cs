@@ -41,8 +41,8 @@ namespace MotaiProject.Models
             tPromotion promotion = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);
             DetailPromotionViewModel Promo = new DetailPromotionViewModel();
             Promo.pADimage = promotion.pADimage;
-            //Promo.pCondition = (int)promotion.pCondition;
-            //Promo.pDiscount = (double)promotion.pDiscount;
+            Promo.pCondition = promotion.pCondition;
+            Promo.pDiscount = promotion.pDiscount;
             Promo.pPromotionDeadline = promotion.pPromotionDeadline;
             Promo.pPromotionPostDate = promotion.pPromotionPostDate;
             Promo.pPromotionStartDate = promotion.pPromotionStartDate;
