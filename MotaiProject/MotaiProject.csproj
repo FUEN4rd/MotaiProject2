@@ -548,7 +548,6 @@
     <Content Include="Views\Boss\Boss產品頁面.cshtml" />
     <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
     <Content Include="Views\Shared\_LayoutBoss.cshtml" />
-    <Content Include="Views\Employee\新增消息.cshtml" />
     <Content Include="Views\Employee\會計查詢.cshtml" />
     <Content Include="Views\Boss\銷售數據.cshtml" />
     <Content Include="Views\Shared\LayoutAccountant.cshtml" />
@@ -556,6 +555,8 @@
     <Content Include="Views\Accountant\會計看產品頁面.cshtml" />
     <Content Include="Views\Accountant\會計查詢.cshtml" />
     <Content Include="Views\Accountant\會計審核.cshtml" />
+    <Content Include="Views\Employee\新增消息.cshtml" />
+    <Content Include="Views\Employee\員工看消息.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
