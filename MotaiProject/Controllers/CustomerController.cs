@@ -231,6 +231,17 @@ namespace MotaiProject.Controllers
         public ActionResult 產品頁面()
         {            
             List<ProductViewModel> productlist = productRespotiory.GetProductAll();
+            foreach (var items in productlist)
+            {
+                if (items.psImage.Count > 0)
+                {
+                    items.epsImage = Url.Content(items.psImage[0]);
+                }
+                else
+                {
+                    items.epsImage = "";
+                }
+            }
             return View(productlist);
         }
         public ActionResult 產品細節(int ProductId)
