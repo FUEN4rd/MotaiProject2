@@ -32,7 +32,10 @@
 
         
     </script>
-    <ul class="nav flex-column" >
+    <ul class="nav flex-column">
+        <li id="0" class="nav-item">
+            @Html.ActionLink("員工首頁", "員工首頁", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+        </li>
         <li id="1" class="nav-item">
             @Html.ActionLink("員工新增", "新增員工", "Employee", new { area = "" }, new { @class = "navbar-brand" })
         </li>

@@ -2,7 +2,7 @@
 @using MotaiProject.Models
 @{
     ViewBag.Title = "Accountant首頁";
-    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    Layout = "~/Views/Shared/LayoutAccountant.cshtml";
     string welcome = "403 未經授權";
     tEmployee Emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
     if (Emp != null)
@@ -12,6 +12,7 @@
 }
 
 <h2>Accountant首頁</h2>
+
 <div class="row">
     <div class="card" id="collapseExample">
         <div class="card-body" style="background-color:azure">
@@ -42,6 +43,7 @@
         item.type = "Password";
     }
     pa.forEach(clearbox);
+
     function changepassword() {
         let newpass = document.querySelector("#newpass").value;
         let oldpass = document.querySelector("#oldpass").value;
@@ -59,3 +61,4 @@
         });
     }
 </script>
+

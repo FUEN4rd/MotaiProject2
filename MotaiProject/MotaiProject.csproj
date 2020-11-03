@@ -551,8 +551,8 @@
     <Content Include="Views\Employee\新增消息.cshtml" />
     <Content Include="Views\Employee\會計查詢.cshtml" />
     <Content Include="Views\Boss\銷售數據.cshtml" />
-    <Content Include="Views\Accountant\Accountant首頁.cshtml" />
     <Content Include="Views\Shared\LayoutAccountant.cshtml" />
+    <Content Include="Views\Accountant\Accountant首頁.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
