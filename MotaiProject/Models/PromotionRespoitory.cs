@@ -26,11 +26,18 @@ namespace MotaiProject.Models
                 Promo.pPromotionPostDate = item.pPromotionPostDate;
                 Promo.pPromotionStartDate = item.pPromotionStartDate;
                 Promo.pPromotionWeb = item.pPromotionWeb;
-                Promo.PromotionDescription = item.PromotionDescription;
                 Promo.sPromotinoCategory = item.tPromotionCategory.PromtionCategory;
                 Promo.PromotionName = item.PromotionName;
                 Promo.pDiscountCode = item.pDiscountCode;
                 Promo.PromotionId = item.PromotionId;
+                if (item.PromotionDescription.Length > 10)
+                {
+                    Promo.PromotionDescription = item.PromotionDescription.Substring(0, 10) + "...";
+                }
+                else
+                {
+                    Promo.PromotionDescription = item.PromotionDescription;
+                }
                 promotionlist.Add(Promo);
             }
             return promotionlist;
@@ -41,8 +48,8 @@ namespace MotaiProject.Models
             tPromotion promotion = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);
             DetailPromotionViewModel Promo = new DetailPromotionViewModel();
             Promo.pADimage = promotion.pADimage;
-            //Promo.pCondition = (int)promotion.pCondition;
-            //Promo.pDiscount = (double)promotion.pDiscount;
+            Promo.pCondition = promotion.pCondition;
+            Promo.pDiscount = promotion.pDiscount;
             Promo.pPromotionDeadline = promotion.pPromotionDeadline;
             Promo.pPromotionPostDate = promotion.pPromotionPostDate;
             Promo.pPromotionStartDate = promotion.pPromotionStartDate;
@@ -55,10 +62,10 @@ namespace MotaiProject.Models
             return Promo;
         }
 
-        public Dictionary<int, string> GetCategoryAll()
+        public Dictionary<int, string> GetPromoCategoryAll()
         {
-            var categories = dbContext.tProductCategories.OrderBy(c => c.Category);
-            return categories.ToDictionary(cid => cid.pCategoryId, cn => cn.Category);
+            var categories = dbContext.tPromotionCategories.OrderBy(c => c.PromtionCategory);
+            return categories.ToDictionary(cid => cid.PromotionCategoryID, cn => cn.PromtionCategory);
         }
 
         public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)

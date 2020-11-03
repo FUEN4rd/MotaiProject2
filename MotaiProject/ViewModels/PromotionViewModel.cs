@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MotaiProject.ViewModels
 {
@@ -31,7 +32,7 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("類別")]
         public int PromotinoCategory { get; set; }
-        [DisplayName("標題名稱(原活動名稱)")]
+        [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }
         [DisplayName("圖片")]
         public string pADimage { get; set; }
@@ -58,8 +59,10 @@ namespace MotaiProject.ViewModels
 
     public class DetailPromotionViewModel
     {
-        [DisplayName("類別")]
+        [DisplayName("類別(字串)")]
         public string sPromotinoCategory { get; set; }
+        [DisplayName("產品種類(數字)")]
+        public int pCategory { get; set; }
         [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }
         [DisplayName("圖片")]
@@ -86,7 +89,9 @@ namespace MotaiProject.ViewModels
         [DisplayName("結束日期")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime pPromotionDeadline { get; set; }
-        
+
+        public IEnumerable<SelectListItem> Categories { get; set; }
+
     }
 
     public class news

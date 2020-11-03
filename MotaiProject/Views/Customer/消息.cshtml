@@ -4,6 +4,7 @@
 
 
 @{
+    string word;
     ViewBag.Title = "消息";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
@@ -61,7 +62,7 @@
                             @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
                         </a>
                     </td>
-                    <td>
+                    <td>    
                         @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
                     </td>                
             </tr>
@@ -69,43 +70,3 @@
     </table>
     @Html.PagedListPager(Model, page => Url.Action("消息", new { page }))
 </div>
-@*<div class="container">
-        <h2>消息</h2>
-        <table class="table">
-            <tr>
-                <th style="display:none">
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.PromotionId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.sPromotinoCategory)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.PromotionDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newProm.pPromotionPostDate)
-                </th>
-
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <a href="@Url.Action(item.newProm.pPromotionWeb)">
-                        <td style="display:none">
-                            @Html.DisplayFor(modelItem => item.newProm.PromotionId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.newProm.sPromotinoCategory)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.newProm.PromotionDescription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.newProm.pPromotionStartDate)
-                        </td>
-                    </a>
-                </tr>
-            }
-        </table>
-    </div>*@
