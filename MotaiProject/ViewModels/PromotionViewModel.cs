@@ -31,7 +31,7 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("類別")]
         public int PromotinoCategory { get; set; }
-        [DisplayName("標題名稱(原活動名稱)")]
+        [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }
         [DisplayName("圖片")]
         public string pADimage { get; set; }

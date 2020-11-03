@@ -52,6 +52,8 @@ namespace MotaiProject.Controllers
                 //{
                 //    ViewBag.titles = npv.PromotionDescription;
                 //}
+
+
                 npv.pADimage = items.pADimage;
                 npv.pPromotionPostDate = items.pPromotionPostDate;
                 
