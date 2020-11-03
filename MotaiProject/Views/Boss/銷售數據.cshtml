@@ -18,6 +18,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @item.favorOrder.Keys
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })

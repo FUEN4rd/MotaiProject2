@@ -20,8 +20,8 @@ namespace MotaiProject.Models
             {
                 DetailPromotionViewModel Promo = new DetailPromotionViewModel();
                 Promo.pADimage = item.pADimage;
-                Promo.pCondition = (int)item.pCondition;
-                Promo.pDiscount = (double)item.pDiscount;
+                Promo.pCondition = item.pCondition;
+                Promo.pDiscount = item.pDiscount;
                 Promo.pPromotionDeadline = item.pPromotionDeadline;
                 Promo.pPromotionPostDate = item.pPromotionPostDate;
                 Promo.pPromotionStartDate = item.pPromotionStartDate;
