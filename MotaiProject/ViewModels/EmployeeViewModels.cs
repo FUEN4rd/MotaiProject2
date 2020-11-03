@@ -33,10 +33,9 @@ namespace MotaiProject.ViewModels
         public string ePassword { get; set; }
     }
 
-    //工作日誌
 
 
-    //新增日誌
+    //工作 新增日誌
     public class DiaryViewModel
     {
         [DisplayName("員工姓名")]
@@ -52,6 +51,8 @@ namespace MotaiProject.ViewModels
         public string dDiaryNote { get; set; }
         [DisplayName("門市")]
         public int dWarehouseNameId { get; set; }
+        [DisplayName("門市名稱")]
+        public string dWarehouseName { get; set; }
 
         public IEnumerable<SelectListItem> warehouses { get; set; }
 

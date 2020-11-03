@@ -7,5 +7,8 @@ namespace MotaiProject.Models
 {
     public class OrderRespoitory
     {
+        MotaiDataEntities dbContext = new MotaiDataEntities();
+       
+
     }
 }

@@ -310,17 +310,20 @@ namespace MotaiProject.Controllers
 
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
+                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();                
+                
+
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
                 foreach (var item in dlist)
                 {
+                    tWarehouseName warename = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(item.dWarehouseNameId)).FirstOrDefault();
                     DiaryViewModel show = new DiaryViewModel();
                     show.eName = item.tEmployee.eName;
                     show.dDate = item.dDate;
-                    show.dWeather = item.dWeather;
+                    show.dWeather = item.dWeather; 
                     show.dDiaryNote = item.dDiaryNote;
                     show.dWarehouseNameId = item.dWarehouseNameId;
-
+                    show.dWarehouseName = warename.WarehouseName;
                     DSaw.Add(show);
                 }
                 return View(DSaw);
