@@ -137,6 +137,29 @@ namespace MotaiProject.Controllers
 
         public ActionResult 實體結帳畫面(int OrderId)
         {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            EmployeeCheckoutViewModel model = new EmployeeCheckoutViewModel();
+            EmployeeOrderViewModel Order = new EmployeeOrderViewModel();
+            tOrder order = dbContext.tOrders.Where(o => o.OrderId.Equals(OrderId)).FirstOrDefault();
+            Order.oCustomerId = (int)order.oCustomerId;
+            Order.oAddress = order.oAddress;
+            Order.oDate = order.oDate;
+            Order.cNote = order.cNote;
+            List<tOrderDetail> orderDetails = dbContext.tOrderDetails.Where(od => od.oOrderId.Equals(OrderId)).ToList();
+            List<EmployeeOrderDetailViewModel> Orderdetails = new List<EmployeeOrderDetailViewModel>();
+            foreach(var itemdetails in orderDetails)
+            {
+                tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(itemdetails.oProductId)).FirstOrDefault();
+                EmployeeOrderDetailViewModel Orderdetail = new EmployeeOrderDetailViewModel();
+                Orderdetail.ProductName = product.pName;
+                Orderdetail.ProductNum = product.pNumber;
+                Orderdetail.oProductQty = itemdetails.oProductQty;
+                model.TotalAmount += itemdetails.oProductQty * Convert.ToInt32(product.pPrice);
+                Orderdetails.Add(Orderdetail);
+            }
+            
+            
+
             return View();
         }
         [HttpPost]

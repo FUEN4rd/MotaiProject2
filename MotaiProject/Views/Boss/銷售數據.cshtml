@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.BossViewModel>
+
+@{
+    ViewBag.Title = "銷售數據";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+}
+
+<h2>銷售數據</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.favorOrder.Keys
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -165,9 +165,9 @@
           <Property Name="pPromotionWeb" Type="nvarchar(max)" />
           <Property Name="pADimage" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pDiscountCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="pDiscount" Type="float" />
+          <Property Name="pDiscount" Type="nvarchar" MaxLength="50" />
           <Property Name="pPromotionPostDate" Type="date" Nullable="false" />
-          <Property Name="pCondition" Type="int" />
+          <Property Name="pCondition" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tPromotionCategory">
           <Key>
@@ -1071,9 +1071,9 @@
           <Property Name="pPromotionWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="pADimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pDiscountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pDiscount" Type="Double" />
+          <Property Name="pDiscount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pPromotionPostDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pCondition" Type="Int32" />
+          <Property Name="pCondition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tOrders" Relationship="Self.FK_tOrder_tPromotion" FromRole="tPromotion" ToRole="tOrder" />
           <NavigationProperty Name="tPromotionCategory" Relationship="Self.FK_tPromotion_tPromotionCategory" FromRole="tPromotion" ToRole="tPromotionCategory" />
         </EntityType>

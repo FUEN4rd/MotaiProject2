@@ -113,15 +113,24 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            var favorOrderby = from i in dbContext.tFavorites
+            Dictionary<int,int> favorOrder = (from i in dbContext.tFavorites
                                 group i by i.fProductId into j
                                 select new
                                 {
                                     Pid = j.Key,
                                     Pcount = j.Count(),
-                                };
-
-            return View(favorOrderby);
+                                }).ToDictionary(p=>p.Pid,p=>p.Pcount);
+            Dictionary<int, int> buyOrder = (from i in dbContext.tOrderDetails
+                                             group i by i.oProductId into j
+                                             select new
+                                             {
+                                                 Pid = j.Key,
+                                                 Pcount = j.Sum(p=>p.oProductQty)
+                                             }).ToDictionary(p => p.Pid, p => p.Pcount);
+            BossViewModel B = new BossViewModel();
+            B.favorOrder = favorOrder;
+            B.buyOrder = buyOrder;
+            return View(B);
 
         }
     }

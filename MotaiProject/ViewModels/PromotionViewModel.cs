@@ -48,8 +48,8 @@ namespace MotaiProject.ViewModels
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime pPromotionDeadline { get; set; }
         public string pDiscountCode { get; set; }
-        public double pDiscount { get; set; }
-        public int pCondition { get; set; }
+        public string pDiscount { get; set; }
+        public string pCondition { get; set; }
 
     }
 
@@ -75,9 +75,9 @@ namespace MotaiProject.ViewModels
         [DisplayName("名稱")]
         public string PromotionName { get; set; }
         [DisplayName("條件")]
-        public int pCondition { get; set; }
+        public string pCondition { get; set; }
         [DisplayName("折扣")]
-        public double pDiscount { get; set; }
+        public string pDiscount { get; set; }
         [DisplayName("折扣碼")]
         public string pDiscountCode { get; set; }
         [DisplayName("開始日期")]
