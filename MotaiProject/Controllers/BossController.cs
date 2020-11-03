@@ -107,7 +107,7 @@ namespace MotaiProject.Controllers
             return View(productlist);
         }
         public ActionResult 銷售數據()
-        {//改viewmodel
+        {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入", "Employee");
@@ -158,7 +158,55 @@ namespace MotaiProject.Controllers
             }
             return View(BossV);
 
+        }
 
+        public ActionResult 銷售報表()
+        {//等待補完
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+
+
+
+            var empd = from i in dbContext.tOrders
+                       join j in dbContext.tOrderDetails on i.OrderId equals j.oOrderId
+                       join k in dbContext.tEmployees on i.oEmployeeId equals k.EmployeeId
+                       join m in dbContext.tProducts on j.oProductId equals m.ProductId
+                       group i by new { i.oEmployeeId,i.oDate.Month,
+                           j.oProductQty,m.pPrice,k.eName } into dataE
+                       select new empData 
+                       {
+                           eName=dataE.Key.eName,
+                           tem =new temData{  oDate = dataE.Key.Month,
+                               Sale =(dataE.Key.oProductQty)*(int)dataE.Key.pPrice,},
+                       };
+            //void R(IQueryable<temData> tems )
+            //{
+            //    List<string> load = new List<string>();
+            //    foreach (var item in tems)
+            //    {
+            //        if (load.Find(x=>x.Contains(item.eName))!=null)
+            //        {
+            //            load.Add(item.eName);
+            //            var q = from i in tems
+            //                    where i.eName == item.eName
+            //                    group i by i.oDate into j
+            //                    select j;
+            //            empData E = new empData();
+            //            E.eName = item.eName;
+            //            E.tem.
+            //        }
+
+                    
+            //    }
+                
+            //}
+
+
+
+            return View(empd);
         }
     }
 }
