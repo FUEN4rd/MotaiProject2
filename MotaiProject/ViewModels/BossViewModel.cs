@@ -8,9 +8,19 @@ namespace MotaiProject.ViewModels
 {
     public class BossViewModel
     {
-        [DisplayName("收藏數據")]
-        public Dictionary<int,int> favorOrder { get; set; }
-        [DisplayName("購買數據")]
-        public Dictionary<int, int>  buyOrder { get; set; }
+        public favorViewModel favorV { get; set; }
+        public buyViewModel buyV{ get; set; }
+        
+    }
+
+    public class favorViewModel
+    {
+        public int favorID { get; set; }
+        public int faverCount { get; set; }
+    }
+    public class buyViewModel
+    {
+        public int buyID { get; set; }
+        public int buyCount { get; set; }
     }
 }

@@ -13,7 +13,6 @@ namespace MotaiProject.Controllers
     {
         // GET: Employee
         public ActionResult 員工登入()
-
         {
             return View();
         }
@@ -25,11 +24,21 @@ namespace MotaiProject.Controllers
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = d資料確認;
-                if (d資料確認.eBranch == 1)
+                switch (d資料確認.eBranch)
                 {
-                    return RedirectToAction("Boss首頁", "Boss");
+                    case 1:
+                        return RedirectToAction("Boss首頁", "Boss");
+                    case 2:
+                        return RedirectToAction("Boss首頁", "Boss");
+                    case 3:
+                        return RedirectToAction("Accountant首頁", "Accountant");
+                    case 4:
+                        return RedirectToAction("Boss首頁", "Boss");
+                    case 5:
+                        return RedirectToAction("Boss首頁", "Boss");
+                    default:
+                        return RedirectToAction("員工首頁");
                 }
-                return RedirectToAction("員工首頁");
             }
             else
             {
@@ -310,17 +319,20 @@ namespace MotaiProject.Controllers
 
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
+                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();                
+                
+
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
                 foreach (var item in dlist)
                 {
+                    tWarehouseName warename = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(item.dWarehouseNameId)).FirstOrDefault();
                     DiaryViewModel show = new DiaryViewModel();
                     show.eName = item.tEmployee.eName;
                     show.dDate = item.dDate;
-                    show.dWeather = item.dWeather;
+                    show.dWeather = item.dWeather; 
                     show.dDiaryNote = item.dDiaryNote;
                     show.dWarehouseNameId = item.dWarehouseNameId;
-
+                    show.dWarehouseName = warename.WarehouseName;
                     DSaw.Add(show);
                 }
                 return View(DSaw);
