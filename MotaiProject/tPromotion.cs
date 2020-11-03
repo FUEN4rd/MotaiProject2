@@ -29,9 +29,9 @@ namespace MotaiProject
         public string pPromotionWeb { get; set; }
         public string pADimage { get; set; }
         public string pDiscountCode { get; set; }
-        public Nullable<double> pDiscount { get; set; }
+        public string pDiscount { get; set; }
         public System.DateTime pPromotionPostDate { get; set; }
-        public Nullable<int> pCondition { get; set; }
+        public string pCondition { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tOrder> tOrders { get; set; }

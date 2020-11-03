@@ -27,12 +27,15 @@ namespace MotaiProject.ViewModels
     //訂單付款
     public class Orderpay
     {
-        public int oPayId { get; set; }
-        public int oOrderId { get; set; }
+        [DisplayName("訂單編號")]
+        public int oOrderId { get; set; }        
         public int oOrderInstallment { get; set; }
+        [DisplayName("付款金額")]
         public decimal oPayment { get; set; }
+        [DisplayName("付款日期")]
         public int oPayDate { get; set; }
         public int oPayTypeId { get; set; }
+        [DisplayName("付款方式")]
         public string oPayType { get; set; }
     }
     public class CustomerOrderViewModel
@@ -117,6 +120,7 @@ namespace MotaiProject.ViewModels
         public EmployeeOrderViewModel Order { get; set; }
         public List<EmployeeOrderDetailViewModel> orderDetails { get; set; }
         public int TotalAmount { get; set; }
+        public Orderpay orderPay { get; set; }
     }
 
     public class OrderViewModel //審核
