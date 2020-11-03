@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>
+
+@{
+    ViewBag.Title = "會計看產品頁面";
+    Layout = "~/Views/Shared/LayoutPeople.cshtml";
+}
+
+<h2>人事看產品頁面</h2>
+
+
+<table class="table">
+    <tr>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.psImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pLxWxH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pQty)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="display:none">
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pMaterial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pLxWxH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pQty)
+        </td>
+
+    </tr>
+}
+
+</table>

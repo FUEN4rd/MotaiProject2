@@ -397,6 +397,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -556,6 +557,11 @@
     <Content Include="Views\Accountant\會計看產品頁面.cshtml" />
     <Content Include="Views\Accountant\會計查詢.cshtml" />
     <Content Include="Views\Accountant\會計審核.cshtml" />
+    <Content Include="Views\People\People首頁.cshtml" />
+    <Content Include="Views\Shared\LayoutPeople.cshtml" />
+    <Content Include="Views\People\員工登入.cshtml" />
+    <Content Include="Views\People\新增員工.cshtml" />
+    <Content Include="Views\People\人事看產品頁面.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -565,9 +571,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\e人事\" />
-    <Folder Include="Views\e倉儲\" />
-    <Folder Include="Views\e會計\" />
     <Folder Include="Views\e業務\" />
   </ItemGroup>
   <ItemGroup>
