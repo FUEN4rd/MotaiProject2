@@ -553,6 +553,7 @@
     <Content Include="Views\Boss\銷售數據.cshtml" />
     <Content Include="Views\Shared\LayoutAccountant.cshtml" />
     <Content Include="Views\Accountant\Accountant首頁.cshtml" />
+    <Content Include="Views\Employee\員工看消息.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -42,21 +42,17 @@ namespace MotaiProject.Controllers
                 NewPromotionViewModel npv = new NewPromotionViewModel();
                 //Prom 讀取入get set
                 npv.sPromotinoCategory = items.tPromotionCategory.PromtionCategory;
-                npv.PromotionDescription = items.PromotionDescription;
-                //if (npv.PromotionDescription.Length > 10)
-                //{
-                //    string r = npv.PromotionDescription.Substring(0, 10) + "...";
-                //    ViewBag.titles= r;
-                //}
-                //else
-                //{
-                //    ViewBag.titles = npv.PromotionDescription;
-                //}
-
-
+                //npv.PromotionDescription = items.PromotionDescription;
+                if (items.PromotionDescription.Length > 10)
+                {
+                    npv.PromotionDescription = items.PromotionDescription.Substring(0, 10) + "...";                    
+                }
+                else
+                {
+                    npv.PromotionDescription = items.PromotionDescription;
+                }
                 npv.pADimage = items.pADimage;
-                npv.pPromotionPostDate = items.pPromotionPostDate;
-                
+                npv.pPromotionPostDate = items.pPromotionPostDate;               
                 npv.PromotionId = items.PromotionId;
                 res.newPromotion = npv;
                 reslsit.Add(res);
