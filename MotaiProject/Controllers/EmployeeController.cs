@@ -337,7 +337,7 @@ namespace MotaiProject.Controllers
             DiaryViewModel newDiary = new DiaryViewModel();
             var warehouses = commodityRespoitory.GetWarehouseAll();
             List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);            
-            //newDiary.WarehouseName = WareList;
+            newDiary.warehouses = WareList;
 
             return View(newDiary);
         }
@@ -383,8 +383,12 @@ namespace MotaiProject.Controllers
             OrderViewModel CheckOrder = new OrderViewModel();
             return View(CheckOrder);
         }
-
-        private PromotionRespoitory Createpromotion = new PromotionRespoitory();
+        public ActionResult 會計查詢()
+        {
+            List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
+            return View(CheckOrder);
+        }
+        //private PromotionRespoitory Createpromotion = new PromotionRespoitory();
         //public ActionResult 新增消息()
         //{
         //    if (CSession關鍵字.SK_LOGINED_EMPLOYEE != null)

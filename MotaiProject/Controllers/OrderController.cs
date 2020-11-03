@@ -43,7 +43,7 @@ namespace MotaiProject.Controllers
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 if (Session[CSession關鍵字.SK_ORDERDETAIL] == null)
                 {
-                    return Json(new { result = false, msg = "訂單尚未完成!", url = "" });
+                    return Json(new { result = false, msg = "訂單尚未完成!", url = ""});
                 }
                 else
                 {
@@ -70,7 +70,8 @@ namespace MotaiProject.Controllers
                     }
                     dbContext.SaveChanges();
                     Session[CSession關鍵字.SK_STOCKDETAIL] = null;
-                    return Json(new { result = true, msg = "新增成功", url = Url.Action("實體店新增訂單", "Order") });
+                    int OrderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
+                    return Json(new { result = true, msg = "新增成功", url = Url.Action("結帳畫面", "Order", OrderId)});
                 }
             }
             else
@@ -134,6 +135,15 @@ namespace MotaiProject.Controllers
             return Json(new { msg = "已刪除" });
         }
 
+        public ActionResult 實體結帳畫面(int OrderId)
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult 實體結帳畫面()
+        {
+            return Json(new { });
+        }
 
         //韋宏訂單
         public ActionResult 詳細訂單(int id)

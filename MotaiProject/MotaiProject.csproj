@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AllPay.Payment.Integration">
+      <HintPath>..\..\..\money\Payment_Net\AioSDK\AllPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -497,6 +500,7 @@
     <Compile Include="ViewModels\BossViewModel.cs" />
     <Compile Include="ViewModels\CommodityViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModels.cs" />
+    <Compile Include="ViewModels\OpayViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\PromotionViewModel.cs" />
@@ -544,6 +548,7 @@
     <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
     <Content Include="Views\Shared\_LayoutBoss.cshtml" />
     <Content Include="Views\Employee\新增消息.cshtml" />
+    <Content Include="Views\Employee\會計查詢.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
