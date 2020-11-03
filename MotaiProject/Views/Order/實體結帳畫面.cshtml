@@ -1,0 +1,140 @@
+﻿@model MotaiProject.ViewModels.EmployeeCheckoutViewModel
+
+@{
+    ViewBag.Title = "實體結帳畫面";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>實體結帳畫面</h2>
+
+<div>
+    <h4>EmployeeCheckoutViewModel</h4>
+    <hr />
+    <div style="display:none">
+        <h6>@Html.DisplayFor(model => model.orderDetails.FirstOrDefault().oOrderId)</h6>
+        @Html.HiddenFor(model => model.orderDetails.FirstOrDefault().oOrderId)
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.cCellphone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.cCellphone)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.oAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.oAddress)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.cNote)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.cNote)
+        </dd>
+    </dl>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().ProductNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().oProductQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().oNote))
+            </th>
+        </tr>
+        @foreach (var item in Model.orderDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oProductQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oNote)
+                </td>
+            </tr>
+        }
+    </table>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.oPromotionId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.oPromotionId)
+        </dd>
+    </dl>
+    <div>
+        <input type="radio" id="cash" name="payType" value="1">
+        <label for="cash">現金</label>
+    </div>
+    <div>
+        <input type="radio" id="creditCard" name="payType" value="2">
+        <label for="creditCard">信用卡</label>
+    </div>
+    <div>
+        <label for="payMoney">付款金額:</label>
+        <input id="payMoney" type="text" value="@Html.DisplayFor(model => model.TotalAmount)" />
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="orderCheckout" type="submit" value="結帳" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<script>
+    $("#orderCheckout").click(function () {
+        var method = $("input[name='payType']:checked").val();
+        var OrderId = $("#oOrderId").val();
+        var payMoney = $("#payMoney").val();
+        if (typeof (method) == "undefined") {
+            alert("請選取操作方式!");
+            return false;
+        } else
+        {
+            $.ajax({
+                url: "@Url.Action("OrderPay","Order")",
+                type: "POST",
+                data:
+                {
+                    "payType": method,
+                    "OrderId": OrderId,
+                    "payMoney": payMoney,
+                },
+                success: function (data) {
+                    alert(data.msg);
+                    window.location.href = data.url;
+                }
+            })
+        }
+
+
+    })
+</script>
