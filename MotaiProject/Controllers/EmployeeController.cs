@@ -13,7 +13,6 @@ namespace MotaiProject.Controllers
     {
         // GET: Employee
         public ActionResult 員工登入()
-
         {
             return View();
         }
@@ -32,7 +31,7 @@ namespace MotaiProject.Controllers
                     case 2:
                         return RedirectToAction("Boss首頁", "Boss");
                     case 3:
-                        return RedirectToAction("Boss首頁", "Boss");
+                        return RedirectToAction("Accountant首頁", "Accountant");
                     case 4:
                         return RedirectToAction("Boss首頁", "Boss");
                     case 5:

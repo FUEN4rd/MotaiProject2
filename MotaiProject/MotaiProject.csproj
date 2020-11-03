@@ -551,6 +551,8 @@
     <Content Include="Views\Employee\新增消息.cshtml" />
     <Content Include="Views\Employee\會計查詢.cshtml" />
     <Content Include="Views\Boss\銷售數據.cshtml" />
+    <Content Include="Views\Accountant\Accountant首頁.cshtml" />
+    <Content Include="Views\Shared\LayoutAccountant.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -560,7 +562,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Accountant\" />
     <Folder Include="Views\e人事\" />
     <Folder Include="Views\e倉儲\" />
     <Folder Include="Views\e會計\" />
