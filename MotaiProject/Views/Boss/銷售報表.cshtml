@@ -10,29 +10,49 @@
 
 <table class="table">
     <tr>
+        <th>
+            報表
+        </th>
         @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-        {
-            <th>
-                @Html.DisplayNameFor(modelitem => modelitem.tem.Keys)
-            </th>
+        {           
+            foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+            {
+                <th>
+                    @kvp2.Key
+                </th>
+            }
         }
 
     </tr>
 
     @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
     {
-
         <tr>
-            <td></td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            <td>@kvp.Key</td>
+            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+            {
+
+                <td>@kvp2.Value</td>
+
+            }
         </tr>
     }
 
 </table>
+
+@*@foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+    {
+        <div>
+            @kvp.Key
+            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+            {
+                <div>
+                    @kvp2.Key
+                    @kvp2.Value
+                </div>
+            }
+        </div>
+    }*@
 <canvas id="myChart" width="400" height="400"></canvas>
 <script>
     var ctx = document.getElementById('myChart');
