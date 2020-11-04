@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.DiaryViewModel>
+
+@{
+    ViewBag.Title = "工作日誌";
+    Layout = "~/Views/Shared/Layoutbusiness.cshtml";
+}
+
+<h2>工作日誌</h2>
+
+<p>
+    @Html.ActionLink("新增", "新增日誌")
+</p>
+<table class="table" style="overflow:hidden">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dWeather)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dWarehouseNameId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dDiaryNote)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.dDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.eName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.dWeather)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dWarehouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dDiaryNote)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+
+            </td>
+        </tr>
+    }
+
+</table>
