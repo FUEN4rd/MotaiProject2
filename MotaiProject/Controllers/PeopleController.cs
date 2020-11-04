@@ -53,6 +53,40 @@ namespace MotaiProject.Controllers
             }
             return View(employees);
         }
+   
+        public ActionResult 修改員工(int id)
+        {
+            if (CSession關鍵字.SK_LOGINED_EMPLOYEE==null)
+            {
+                return RedirectToAction("People首頁");
+            }
+            MotaiDataEntities dbcontext = new MotaiDataEntities();
+            tEmployee empse = dbcontext.tEmployees.FirstOrDefault(c=>c.EmployeeId==id);
+            EmployeeViewModels empall = new EmployeeViewModels();
+            empall.eName = empse.eName;
+            empall.eBranch = empse.eBranch;
+            empall.ePosition = empse.ePosition;
+            return View(empall);
+        }
+        [HttpPost]
+        public ActionResult 修改員工(EmployeeViewModels employee)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                MotaiDataEntities db = new MotaiDataEntities();
+                tEmployee emp = db.tEmployees.Find(employee.EmployeeId);
+                if (emp != null)
+                {
+                    emp.eBranch = employee.eBranch;
+                    emp.ePosition = employee.ePosition;
+                    emp.eName = employee.eName;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("People首頁");
+            }
+
+            return RedirectToAction("員工登入");
+        }
 
 
         public ActionResult 新增員工()

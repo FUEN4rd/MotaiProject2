@@ -16,9 +16,6 @@
             @Html.DisplayNameFor(model => model.EmployeeId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.eAccount)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.eName)
         </th>
         <th>
@@ -27,9 +24,7 @@
         <th>
             @Html.DisplayNameFor(model => model.eBranch)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ePassword)
-        </th>
+
         <th></th>
     </tr>
 
@@ -38,9 +33,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.EmployeeId)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.eAccount)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.eName)
         </td>
@@ -50,13 +43,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.eBranch)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.ePassword)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("修改", "修改員工", new {  id=item.EmployeeId }) |
+           
         </td>
     </tr>
 }
