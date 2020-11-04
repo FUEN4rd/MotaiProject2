@@ -167,7 +167,6 @@ namespace MotaiProject.Controllers
             n消息.PromotionDescription = create消息.PromotionDescription;
             n消息.pPromotionStartDate = create消息.pPromotionStartDate;
             n消息.pPromotionDeadline = create消息.pPromotionDeadline;
-            n消息.pADimage = create消息.pADimage;
             n消息.pDiscountCode = create消息.pDiscountCode;
             n消息.pDiscount = create消息.pDiscount;
             n消息.pCondition = create消息.pCondition;
@@ -176,8 +175,15 @@ namespace MotaiProject.Controllers
 
             int PromotionId = dbContext.tPromotions.OrderByDescending(o => o.PromotionId).First().PromotionId;
             PromotionId = PromotionId + 1;
-
-            dbContext.tPromotions.Add(n消息);
+            var uploagFile = create消息.upLoadimage;
+            if (uploagFile.ContentLength > 0)
+            {
+                FileInfo file = new FileInfo(uploagFile.FileName);
+                string photoName = Guid.NewGuid().ToString() + file.Extension;
+                uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                n消息.pADimage = "../../images/" + Url.Content(photoName);
+                dbContext.tPromotions.Add(n消息);
+            }
             dbContext.SaveChanges();
             return RedirectToAction("員工看消息");
         }

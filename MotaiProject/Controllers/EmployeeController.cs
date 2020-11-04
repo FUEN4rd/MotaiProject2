@@ -457,6 +457,7 @@ namespace MotaiProject.Controllers
                 List<SelectListItem> Cateitems = new CommodityRespoitory().GetSelectList(categories);
                 NewPromo.Categories = Cateitems;
                 return View(NewPromo);
+
             }
             return RedirectToAction("員工登入");
         }
@@ -471,7 +472,7 @@ namespace MotaiProject.Controllers
             n消息.PromotionDescription = create消息.PromotionDescription;
             n消息.pPromotionStartDate = create消息.pPromotionStartDate;
             n消息.pPromotionDeadline = create消息.pPromotionDeadline;
-            n消息.pADimage = create消息.pADimage;
+            //n消息.pADimage = create消息.pADimage;
             n消息.pDiscountCode = create消息.pDiscountCode;
             n消息.pDiscount = create消息.pDiscount;
             n消息.pCondition = create消息.pCondition;
@@ -481,9 +482,41 @@ namespace MotaiProject.Controllers
             int PromotionId = dbContext.tPromotions.OrderByDescending(o => o.PromotionId).First().PromotionId;
             PromotionId = PromotionId + 1;
 
-            dbContext.tPromotions.Add(n消息);
+            //if (create消息.upLoadimage.Count() > 0)
+            //{               
+            //    foreach (var uploagFile in create消息.upLoadimage)
+            //    {
+            //        if (uploagFile.ContentLength > 0)
+            //        {
+            //            FileInfo file = new FileInfo(uploagFile.FileName);
+            //            string photoName = Guid.NewGuid().ToString() + file.Extension;
+            //            uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+            //            n消息.pADimage = "~" + Url.Content("~/images/" + photoName);
+            //            dbContext.tPromotions.Add(n消息);
+            //            dbContext.SaveChanges();
+            //        }
+            //    }
+            //}
             dbContext.SaveChanges();
             return RedirectToAction("員工看消息");
+
+
+            //if (n新增產品.pImage.Count() > 0)
+            //{
+            //    foreach (var uploagFile in n新增產品.pImage)
+            //    {
+            //        if (uploagFile.ContentLength > 0)
+            //        {
+            //            tProductImage image = new tProductImage();
+            //            FileInfo file = new FileInfo(uploagFile.FileName);
+            //            string photoName = Guid.NewGuid().ToString() + file.Extension;
+            //            uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+            //            image.ProductId = ProductId;
+            //            image.pImage = "~" + Url.Content("~/images/" + photoName);
+            //            db.tProductImages.Add(image);
+            //        }
+            //    }
+            //}
         }
 
         public ActionResult 修改消息(int id)
