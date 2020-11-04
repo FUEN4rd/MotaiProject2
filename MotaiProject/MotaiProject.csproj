@@ -391,14 +391,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountantController.cs" />
     <Compile Include="Controllers\BossController.cs" />
-    <Compile Include="Controllers\BusinessController.cs" />
     <Compile Include="Controllers\CommodityController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
-    <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -550,27 +547,10 @@
     <Content Include="Views\Boss\Boss產品頁面.cshtml" />
     <Content Include="Views\Boss\Boss看工作日誌.cshtml" />
     <Content Include="Views\Shared\_LayoutBoss.cshtml" />
+    <Content Include="Views\Employee\新增消息.cshtml" />
     <Content Include="Views\Employee\會計查詢.cshtml" />
     <Content Include="Views\Boss\銷售數據.cshtml" />
-    <Content Include="Views\Shared\LayoutAccountant.cshtml" />
-    <Content Include="Views\Accountant\Accountant首頁.cshtml" />
-    <Content Include="Views\Accountant\會計看產品頁面.cshtml" />
-    <Content Include="Views\Accountant\會計查詢.cshtml" />
-    <Content Include="Views\Accountant\會計審核.cshtml" />
-    <Content Include="Views\People\People首頁.cshtml" />
-    <Content Include="Views\Shared\LayoutPeople.cshtml" />
-    <Content Include="Views\People\員工登入.cshtml" />
-    <Content Include="Views\People\新增員工.cshtml" />
-    <Content Include="Views\People\人事看產品頁面.cshtml" />
-    <Content Include="Views\Boss\銷售報表.cshtml" />
-    <Content Include="Views\business\business首頁.cshtml" />
-    <Content Include="Views\Shared\Layoutbusiness.cshtml" />
-    <Content Include="Views\business\新增產品.cshtml" />
-    <Content Include="Views\business\修改產品.cshtml" />
-    <Content Include="Views\business\業務看產品頁面.cshtml" />
-    <Content Include="Views\business\業務會計查詢.cshtml" />
-    <Content Include="Views\Employee\新增消息.cshtml" />
-    <Content Include="Views\Employee\員工看消息.cshtml" />
+    <Content Include="Views\Order\實體結帳畫面.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

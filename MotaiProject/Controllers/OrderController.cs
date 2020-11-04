@@ -1,4 +1,5 @@
-﻿using MotaiProject.Models;
+﻿using AllPay.Payment.Integration;
+using MotaiProject.Models;
 using MotaiProject.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace MotaiProject.Controllers
         // GET: Order
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();        
         private ProductRespoitory productRespoitory = new ProductRespoitory();
+        private OrderRespoitory orderRespoitory = new OrderRespoitory();
         public ActionResult 實體店新增訂單()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
@@ -140,7 +142,7 @@ namespace MotaiProject.Controllers
             MotaiDataEntities dbContext = new MotaiDataEntities();
             EmployeeCheckoutViewModel model = new EmployeeCheckoutViewModel();
             EmployeeOrderViewModel Order = new EmployeeOrderViewModel();
-            tOrder order = dbContext.tOrders.Where(o => o.OrderId.Equals(OrderId)).FirstOrDefault();
+            tOrder order = dbContext.tOrders.Where(o => o.OrderId.Equals(OrderId)).FirstOrDefault();            
             Order.oCustomerId = (int)order.oCustomerId;
             Order.oAddress = order.oAddress;
             Order.oDate = order.oDate;
@@ -151,21 +153,51 @@ namespace MotaiProject.Controllers
             {
                 tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(itemdetails.oProductId)).FirstOrDefault();
                 EmployeeOrderDetailViewModel Orderdetail = new EmployeeOrderDetailViewModel();
+                Orderdetail.oOrderId = OrderId;
                 Orderdetail.ProductName = product.pName;
                 Orderdetail.ProductNum = product.pNumber;
                 Orderdetail.oProductQty = itemdetails.oProductQty;
                 model.TotalAmount += itemdetails.oProductQty * Convert.ToInt32(product.pPrice);
                 Orderdetails.Add(Orderdetail);
             }
+            int promotionId = orderRespoitory.SelectPromotionId(model.TotalAmount, order.oDate);
+            if(promotionId != 0)
+            {
+                Order.oPromotionId = promotionId;
+            }            
+            model.Order = Order;
+            model.orderDetails = Orderdetails;
             
-            
-
-            return View();
+            return View(model);
         }
         [HttpPost]
-        public JsonResult 實體結帳畫面()
+        public JsonResult OrderPay(int payType,int OrderId,int payMoney)
         {
-            return Json(new { });
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tOrderPay pay = dbContext.tOrderPays.OrderByDescending(op=>op.oOrderInstallment).Where(op => op.oOrderId.Equals(OrderId)).FirstOrDefault();
+            if(pay == null)
+            {
+                tOrderPay orderPay = new tOrderPay();
+                orderPay.oOrderId = OrderId;
+                orderPay.oOrderInstallment = 1;
+                orderPay.oPayType = payType;
+                orderPay.oPayment = payMoney;
+                orderPay.oPayDate = DateTime.Now;
+                dbContext.tOrderPays.Add(orderPay);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                tOrderPay orderPay = new tOrderPay();
+                orderPay.oOrderId = OrderId;
+                orderPay.oOrderInstallment = pay.oOrderInstallment++;
+                orderPay.oPayType = payType;
+                orderPay.oPayment = payMoney;
+                orderPay.oPayDate = DateTime.Now;
+                dbContext.tOrderPays.Add(orderPay);
+                dbContext.SaveChanges();
+            }
+            return Json(new {msg="結帳完成",url=Url.Action("實體店新增訂單", "Order") });
         }
 
         //韋宏訂單
@@ -216,6 +248,80 @@ namespace MotaiProject.Controllers
                 return View(OrderList);
             }
             return RedirectToAction("首頁");
+        }
+
+        public JsonResult webOrder()
+        {
+            List<string> enErrors = new List<string>();
+            try
+            {
+                int OrderId =1;
+                using (AllInOne oPayment = new AllInOne())
+                {
+                    /* 服務參數 */
+                    oPayment.ServiceMethod = HttpMethod.HttpPOST;
+                    oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                    oPayment.HashKey = "5294y06JbISpM5x9";
+                    oPayment.HashIV = "v77hoKGq4kWxNNIS";
+                    oPayment.MerchantID = "2000132";
+                    /* 基本參數 */
+                    oPayment.Send.ReturnURL = Url.Action("訂單通知","Order");
+                    //oPayment.Send.ClientBackURL = "<<您要歐付寶返回按鈕導向的瀏覽器端網址>>";
+                    //oPayment.Send.OrderResultURL = "<<您要收到付款完成通知的瀏覽器端網址>>";
+                    oPayment.Send.MerchantTradeNo = OrderId+Guid.NewGuid().ToString();
+                    oPayment.Send.MerchantTradeDate = DateTime.Now;
+                    oPayment.Send.TotalAmount = Decimal.Parse("<<您此筆訂單的交易總金額>>");
+                    oPayment.Send.TradeDesc = "感謝購買墨台商品";
+                    oPayment.Send.ChoosePayment = PaymentMethod.ALL;
+                    oPayment.Send.Remark = "<<您要填寫的其他備註>>";
+                    oPayment.Send.ChooseSubPayment = PaymentMethodItem.None;
+                    oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.Yes;
+                    oPayment.Send.HoldTrade = HoldTradeType.No;
+                    oPayment.Send.DeviceSource = DeviceType.PC;
+                    oPayment.Send.UseRedeem = UseRedeemFlag.Yes; //購物金/紅包折抵
+                    oPayment.Send.IgnorePayment = "<<您不要顯示的付款方式>>"; // 例如財付通:Tenpay
+                                                                    // 加入選購商品資料。
+                    oPayment.Send.Items.Add(new Item()
+                    {
+                        Name = "<<產品A>>",
+                        Price = Decimal.Parse("<<單價>> "),
+                        Currency = " << 幣別 >> ",
+                        Quantity = Int32.Parse(" << 數量 >> "),
+                        URL = " << 產品說明位址 >> " });
+
+
+                    oPayment.Send.Items.Add(new Item()
+                    {
+                        Name = "<<產品B>>",
+                        Price = Decimal.Parse("<<單價>>"),
+                        Currency = "<<幣別>>",
+                        Quantity = Int32.Parse("<<數量>>"),
+                        URL = "<<產品說明位址>>"
+                    });
+                   
+                    // 當付款方式為 ALL 時，建議增加的參數。
+                    oPayment.SendExtend.PaymentInfoURL = "<<您要接收回傳自動櫃員機/超商/條碼付款相關資訊的網址。>> ";
+                    /* 產生訂單 */
+                    enErrors.AddRange(oPayment.CheckOut());
+                    /* 產生產生訂單 Html Code 的方法 */
+                    string szHtml = String.Empty;
+                    enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
+                }
+            }
+            catch (Exception ex)
+            {
+                // 例外錯誤處理。
+                enErrors.Add(ex.Message);
+            }
+            finally
+            {
+                // 顯示錯誤訊息。
+                if (enErrors.Count() > 0)
+                {
+                    string szErrorMessage = String.Join("\\r\\n", enErrors);
+                }
+            }
+            return Json(new { });
         }
     }
 }
