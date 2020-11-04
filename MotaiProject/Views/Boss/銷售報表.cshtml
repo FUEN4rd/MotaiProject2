@@ -1,35 +1,49 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.empData>
+﻿@model MotaiProject.ViewModels.empData
 
 @{
     ViewBag.Title = "銷售報表";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <h2>銷售報表</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.eName)
-        </th>
-        <th></th>
+        @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+        {
+            <th>
+                @Html.DisplayNameFor(modelitem => modelitem.tem.Keys)
+            </th>
+        }
+
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+    {
 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.eName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        <tr>
+            <td></td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['一月', '二月', '三月'],
+            datasets: [{
+                label: '銷售業績(百萬)',
+                data: [60, 49, 72]
+            }]
+        }
+    });
+</script>

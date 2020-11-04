@@ -25,11 +25,11 @@ namespace MotaiProject.ViewModels
     }
 
 
+
+
     public class empData
     {
-        [DisplayName("員工姓名")]
-        public string eName { get; set; }
-        public temData tem { get; set; }
+        public Dictionary<string,Dictionary<int,int>> tem { get; set; }
     }
 
     public class wareData
@@ -43,11 +43,5 @@ namespace MotaiProject.ViewModels
         public int pPrice { get; set; }
     }
 
-    public class temData
-    {
-        [DisplayName("員工姓名")]
-        public string eName { get; set; }
-        public int oDate { get; set; }
-        public int Sale{ get; set; }
-    }
+
 }

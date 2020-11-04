@@ -197,27 +197,54 @@ namespace MotaiProject.Controllers
             //    }
             //}
 
+            //List<tOrderDetail> tOrderDetails = dbContext.tOrderDetails.ToList();
+            //List<empData> empDatas = new List<empData>();
+            //foreach(tOrderDetail item in tOrderDetails)
+            //{
+            //    List<string> load = new List<string>();
+            //    if (load.Find(x => x.Contains(item.tOrder.tEmployee.eName)) != null)
+            //    {
+            //        load.Add(item.tOrder.tEmployee.eName);
+            //        empData emp = new empData();
+            //        emp.eName = item.tOrder.tEmployee.eName;
+
+
+            //        emp.tem = new temData
+            //        {
+            //            Sale = (item.oProductQty) * ((int)item.tProduct.pPrice),
+            //            oDate = item.tOrder.oDate.Month,                       
+            //            eName = emp.eName
+            //        };
+            //        empDatas.Add(emp);                   
+            //    }
+            //}
+
             List<tOrderDetail> tOrderDetails = dbContext.tOrderDetails.ToList();
-            List<empData> empDatas = new List<empData>();
-            foreach(tOrderDetail item in tOrderDetails)
+            empData emp = new empData();
+            emp.tem = new Dictionary<string, Dictionary<int, int>>();
+            List<string> load = new List<string>();
+            foreach (tOrderDetail item in tOrderDetails)
             {
-                List<string> load = new List<string>();
-                if (load.Find(x => x.Contains(item.tOrder.tEmployee.eName)) != null)
+                
+                string ENAME = item.tOrder.tEmployee.eName;
+                if (load.Find(x => x.Contains(ENAME)) == null)//抓人
                 {
-                    load.Add(item.tOrder.tEmployee.eName);
-                    empData emp = new empData();
-                    emp.eName = item.tOrder.tEmployee.eName;
-                    emp.tem = new temData
-                    {
-                        Sale = (item.oProductQty) * ((int)item.tProduct.pPrice),
-                        oDate = item.tOrder.oDate.Month,
-                        eName = emp.eName
-                    };                   
-                    empDatas.Add(emp);
+                    load.Add(ENAME);
+                    Dictionary<int, int> temD = new Dictionary<int, int>();
+                    //int K = item.tOrder.oDate.Month;
+                    //int V = (item.oProductQty) * ((int)item.tProduct.pPrice);
+                    for(int i = 1; i < 13; i++)
+                    {//抓月份
+                        var q = from search in tOrderDetails
+                                where search.tOrder.oDate.Month == i && search.tOrder.tEmployee.eName == ENAME
+                                select (search.oProductQty) * ((int)search.tProduct.pPrice);
+                        int V = q.Sum();
+                        temD.Add(i, V);
+                    }
+                    emp.tem.Add(ENAME, temD);
                 }
             }
-
-            return View();
+            return View(emp);
         }
     }
 }
