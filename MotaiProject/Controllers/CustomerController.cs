@@ -227,7 +227,7 @@ namespace MotaiProject.Controllers
 
         //Product
         private ProductRespoitory productRespotiory = new ProductRespoitory();
-
+        private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         public ActionResult 產品頁面()
         {            
             List<ProductViewModel> productlist = productRespotiory.GetProductAll();
@@ -260,7 +260,7 @@ namespace MotaiProject.Controllers
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;                
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
                 List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
-                
+                StatusCartGoToPayViewModel Cart = new StatusCartGoToPayViewModel();
                 foreach (var items in StateList)
                 {                 
                     tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
@@ -270,14 +270,18 @@ namespace MotaiProject.Controllers
                     cartC.pPrice = cartProd.pPrice;
                     cartC.sProductQty = items.sProductQty;
                     cartList.Add(cartC);
-                }                
-                return View(cartList);
+                }
+                Cart.Carts = cartList;
+                var warehouseNames = commodityRespoitory.GetWarehouseAll();
+                List<SelectListItem> warehouselist = commodityRespoitory.GetSelectList(warehouseNames);
+                Cart.warehouses = warehouselist;
+                return View(Cart);
             }
             else
             {
                 return RedirectToAction("首頁");
             }
-        }        
+        }
         //加入購物車
         public JsonResult AddToCart(int ProductId, int buyQty)
         {
