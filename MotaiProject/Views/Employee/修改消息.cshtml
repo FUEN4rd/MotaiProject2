@@ -17,11 +17,12 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+
     @*<div class="form-group">
-        @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.pCategory, Model.Categories, "請選擇分類", new { @class = "form-control", id = "pCategory" })
-            @Html.ValidationMessageFor(model => model.pCategory, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control "} })
+            @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
         </div>
     </div>*@
 
@@ -57,13 +58,7 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.PromotionName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -100,7 +95,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.pPromotionStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionStartDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.pPromotionStartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
             @Html.ValidationMessageFor(model => model.pPromotionStartDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -108,7 +103,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.pPromotionDeadline, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionDeadline, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.pPromotionDeadline, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
             @Html.ValidationMessageFor(model => model.pPromotionDeadline, "", new { @class = "text-danger" })
         </div>
     </div>
