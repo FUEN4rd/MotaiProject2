@@ -36,16 +36,22 @@ namespace MotaiProject.Controllers
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入");
-            }            
-            //var employeeAll = employeeRespoitory.GetEmployeeAll();
-            //var employeelist = employeeRespoitory.GetSelectList(employeeAll);
-            EmployeeViewModels employeeModels = new EmployeeViewModels();
-            List<tEmployee> employees = dbContext.tEmployees.ToList();
-            foreach(var item in employees)
-            {
-
             }
-            return View(employeeModels);
+            tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+            var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
+
+            List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
+            foreach(var item in empall)
+            {
+                EmployeeViewModels employeeModel = new EmployeeViewModels();
+                
+                employeeModel.eAccount = item.eAccount;
+                employeeModel.eBranch = item.eBranch;
+                employeeModel.eName = item.eName;
+                employeeModel.ePosition = item.ePosition;
+                employees.Add(employeeModel);
+            }
+            return View(employees);
         }
 
 
