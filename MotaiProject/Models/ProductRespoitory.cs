@@ -49,7 +49,7 @@ namespace MotaiProject.Models
         }
 
         public ProductViewModel GetProductById(int ProductId)
-        {
+        {            
             tProduct product = dbContext.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             ProductViewModel Prod = new ProductViewModel();
             Prod.ProductId = product.ProductId;
