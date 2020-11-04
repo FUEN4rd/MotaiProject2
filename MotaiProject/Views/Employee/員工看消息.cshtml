@@ -8,7 +8,7 @@
 <h2>員工看消息</h2>
 
 <p>
-    @Html.ActionLink("新增消息", "新增消息")
+    @Html.ActionLink("新增", "新增消息")
 </p>
 <table class="table">
     <tr>
@@ -88,7 +88,7 @@
             @Html.DisplayFor(modelItem => item.PromotionId)
         </td>
         <td>
-            @Html.ActionLink("編輯消息", "編輯消息", new { id = item.PromotionId })
+            @Html.ActionLink("編輯", "修改消息", new { id = item.PromotionId })
         </td>
     </tr>
 }

@@ -68,19 +68,6 @@ namespace MotaiProject.Models
             return categories.ToDictionary(cid => cid.PromotionCategoryID, cn => cn.PromtionCategory);
         }
 
-        public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)
-        {
-            List<SelectListItem> selectLists = new List<SelectListItem>();
-            foreach (var items in dictionary)
-            {
-                selectLists.Add(new SelectListItem()
-                {
-                    Text = items.Value,
-                    Value = items.Key.ToString()
-                });
-            }
-            return selectLists;
-        }
 
     }
 }
