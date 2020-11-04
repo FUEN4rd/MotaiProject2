@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.DetailPromotionViewModel>
+
+@{
+    ViewBag.Title = "員工看消息";
+    Layout = "~/Views/Shared/LayoutPeople.cshtml";
+}
+
+<h2>員工看消息</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sPromotinoCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PromotionDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pADimage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pPromotionWeb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pPromotionPostDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PromotionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pCondition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pDiscount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pDiscountCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pPromotionStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pPromotionDeadline)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sPromotinoCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PromotionDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pADimage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pPromotionWeb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pPromotionPostDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PromotionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pCondition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pDiscount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pDiscountCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pPromotionStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pPromotionDeadline)
+        </td>
+        <td style="display:none">
+            @Html.DisplayFor(modelItem => item.PromotionId)
+        </td>
+
+    </tr>
+}
+
+</table>

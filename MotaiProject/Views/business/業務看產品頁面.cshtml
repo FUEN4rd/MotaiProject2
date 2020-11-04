@@ -7,10 +7,8 @@
 }
 
 <h2>員工看產品頁面</h2>
-1
-<p>
-    @Html.ActionLink("新增", "新增產品")
-</p>
+
+
 <table class="table">
     <tr>
         <th style="display:none">
@@ -84,9 +82,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.pQty)
         </td>
-        <td>
-            @Html.ActionLink("修改產品", "修改產品", new { id = item.ProductId })            
-        </td>
+
     </tr>
 }
 

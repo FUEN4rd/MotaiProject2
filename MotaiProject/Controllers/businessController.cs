@@ -50,163 +50,7 @@ namespace MotaiProject.Controllers
             }
             return View(productlist);
         }
-        public ActionResult 新增產品()
-        {
-            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
-            {
-                return RedirectToAction("員工登入");
-            }
-            ProductViewModel newprod = new ProductViewModel();
-            var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
-            newprod.Categories = Cateitems;
 
-            var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
-            newprod.Materials = Mateitems;
-
-            var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
-            newprod.Sizes = Sizeitems;
-            return View(newprod);
-        }
-        [HttpPost]
-        public ActionResult 新增產品(ProductViewModel n新增產品)
-        {
-            MotaiDataEntities db = new MotaiDataEntities();
-            tProduct prod = new tProduct();
-            prod.pNumber = n新增產品.pNumber;
-            prod.pName = n新增產品.pName;
-            prod.pCategory = n新增產品.pCategory;
-            prod.pMaterial = n新增產品.pMaterial;
-            prod.pSize = n新增產品.pSize;
-            prod.pLxWxH = n新增產品.pLxWxH;
-            prod.pPrice = n新增產品.pPrice;
-            prod.pQty = n新增產品.pQty;
-            db.tProducts.Add(prod);
-
-            int ProductId = db.tProducts.OrderByDescending(o => o.ProductId).First().ProductId;
-            ProductId = ProductId + 1;
-            if (n新增產品.pImage.Count() > 0)
-            {
-                foreach (var uploagFile in n新增產品.pImage)
-                {
-                    if (uploagFile.ContentLength > 0)
-                    {
-                        tProductImage image = new tProductImage();
-                        FileInfo file = new FileInfo(uploagFile.FileName);
-                        string photoName = Guid.NewGuid().ToString() + file.Extension;
-                        uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
-                        image.ProductId = ProductId;
-                        image.pImage = "~" + Url.Content("~/images/" + photoName);
-                        db.tProductImages.Add(image);
-                    }
-                }
-            }
-            db.SaveChanges();
-            return RedirectToAction("員工看產品頁面");
-        }
-        public ActionResult 修改產品(int id)
-        {
-            MotaiDataEntities db = new MotaiDataEntities();
-            tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == id);
-            if (product == null)
-            {
-                return RedirectToAction("員工看產品頁面");
-            }
-            EmpProductViewModel Prod = new EmpProductViewModel();
-            Prod.ProductId = id;
-            Prod.pNumber = product.pNumber;
-            Prod.pName = product.pName;
-            Prod.psCategory = product.tProductCategory.Category;
-            Prod.pCategory = product.pCategory;
-            Prod.psMaterial = product.tProductMaterial.Material;
-            Prod.pMaterial = product.pMaterial;
-            Prod.psSize = product.tProductSize.Size;
-            Prod.pSize = product.pSize;
-            Prod.pLxWxH = product.pLxWxH;
-            Prod.pWeight = product.pWeight;
-            Prod.pIntroduction = product.pIntroduction;
-            Prod.pPrice = product.pPrice;
-            var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
-            Prod.Categories = Cateitems;
-            var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
-            Prod.Materials = Mateitems;
-            var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
-            Prod.Sizes = Sizeitems;
-            return View(Prod);
-
-        }
-        [HttpPost]
-        public ActionResult 修改產品(EmpProductViewModel p)
-        {
-            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
-            {
-                return RedirectToAction("員工登入");
-            }
-            MotaiDataEntities dbContext = new MotaiDataEntities();
-            tProduct prod = dbContext.tProducts.Find(p.ProductId);
-            if (prod != null)
-            {
-                prod.pNumber = p.pNumber;
-                prod.pName = p.pName;
-                prod.pCategory = p.pCategory;
-                prod.pMaterial = p.pMaterial;
-                prod.pSize = p.pSize;
-                prod.pLxWxH = p.pLxWxH;
-                prod.pWeight = p.pWeight;
-                prod.pPrice = p.pPrice;
-                List<tProductImage> oldImages = dbContext.tProductImages.Where(imgs => imgs.ProductId.Equals(p.ProductId)).ToList();
-                if (oldImages.Count > p.pImage.Count)
-                {
-                    int index = 0;
-                    foreach (var oldItem in oldImages)
-                    {
-                        if (index < p.pImage.Count)
-                        {
-                            if (p.pImage[index].ContentLength > 0)
-                            {
-                                FileInfo file = new FileInfo(p.pImage[index].FileName);
-                                string photoName = Guid.NewGuid().ToString() + file.Extension;
-                                p.pImage[index].SaveAs(Server.MapPath("~/images/" + photoName));
-                                oldItem.pImage = Url.Content("~/images/" + photoName);
-                                //Directory.Delete(Url.Content(oldItem.pImage));
-                            }
-                        }
-                        else
-                        {
-                            dbContext.tProductImages.Remove(oldItem);
-                        }
-                        index++;
-                    }
-                }
-                dbContext.SaveChanges();
-            }
-            return RedirectToAction("員工看產品頁面");
-        }
-        public JsonResult 修改產品讀圖(int ProductId)
-        {
-            MotaiDataEntities dbContext = new MotaiDataEntities();
-            var imageArray = dbContext.tProductImages.Where(i => i.ProductId.Equals(ProductId)).ToArray();
-            if (imageArray.Length > 0)
-            {
-                List<string> imagelist = new List<string>();
-                foreach (var items in imageArray)
-                {
-                    string image = Url.Content(items.pImage);
-                    imagelist.Add(image);
-                }
-                string[] imagearray = imagelist.ToArray();
-                return Json(new { images = imagearray });
-            }
-            else
-            {
-                return Json(new { images = "" });
-            }
-        }
         public ActionResult 工作日誌()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
@@ -288,6 +132,111 @@ namespace MotaiProject.Controllers
         {
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
             return View(CheckOrder);
+        }
+        private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
+        public ActionResult 員工看消息()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
+            promotionlist = promotionRespoitory.GetPromotionAll();
+            return View(promotionlist);
+        }
+        public ActionResult 新增消息()
+        {
+            if (CSession關鍵字.SK_LOGINED_EMPLOYEE != null)
+            {
+                DetailPromotionViewModel NewPromo = new DetailPromotionViewModel();
+                var categories = new PromotionRespoitory().GetPromoCategoryAll();
+                List<SelectListItem> Cateitems = new CommodityRespoitory().GetSelectList(categories);
+                NewPromo.Categories = Cateitems;
+                return View(NewPromo);
+            }
+            return RedirectToAction("員工登入");
+        }
+
+        [HttpPost]
+        public ActionResult 新增消息(DetailPromotionViewModel create消息)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tPromotion n消息 = new tPromotion();
+            n消息.PromotionName = create消息.PromotionName;
+            n消息.PromotinoCategory = create消息.pCategory;
+            n消息.PromotionDescription = create消息.PromotionDescription;
+            n消息.pPromotionStartDate = create消息.pPromotionStartDate;
+            n消息.pPromotionDeadline = create消息.pPromotionDeadline;
+            n消息.pADimage = create消息.pADimage;
+            n消息.pDiscountCode = create消息.pDiscountCode;
+            n消息.pDiscount = create消息.pDiscount;
+            n消息.pCondition = create消息.pCondition;
+            var date = DateTime.Now;
+            n消息.pPromotionPostDate = date;
+
+            int PromotionId = dbContext.tPromotions.OrderByDescending(o => o.PromotionId).First().PromotionId;
+            PromotionId = PromotionId + 1;
+
+            dbContext.tPromotions.Add(n消息);
+            dbContext.SaveChanges();
+            return RedirectToAction("員工看消息");
+        }
+
+        public ActionResult 修改消息(int id)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tPromotion promotion = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == id);
+            if (promotion == null)
+            {
+                return RedirectToAction("員工看產品頁面");
+            }
+            DetailPromotionViewModel Promo = new DetailPromotionViewModel();
+            Promo.pADimage = promotion.pADimage;
+            Promo.pCondition = promotion.pCondition;
+            Promo.pDiscount = promotion.pDiscount;
+            Promo.pPromotionDeadline = promotion.pPromotionDeadline;
+            Promo.pPromotionPostDate = promotion.pPromotionPostDate;
+            Promo.pPromotionStartDate = promotion.pPromotionStartDate;
+            Promo.pPromotionWeb = promotion.pPromotionWeb;
+            Promo.PromotionDescription = promotion.PromotionDescription;
+            Promo.sPromotinoCategory = promotion.tPromotionCategory.PromtionCategory;
+            Promo.PromotionName = promotion.PromotionName;
+            Promo.pDiscountCode = promotion.pDiscountCode;
+            Promo.PromotionId = promotion.PromotionId;
+
+            Promo.sPromotinoCategory = promotion.tPromotionCategory.PromtionCategory;
+            Promo.pCategory = promotion.PromotinoCategory;
+            var categories = new ProductRespoitory().GetCategoryAll();
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+            Promo.Categories = Cateitems;
+            return View(Promo);
+        }
+        [HttpPost]
+        public ActionResult 修改消息(DetailPromotionViewModel promotion)
+        {
+            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == promotion.PromotionId);
+            if (Promo != null)
+            {
+                Promo.pADimage = promotion.pADimage;
+                Promo.pCondition = promotion.pCondition;
+                Promo.pDiscount = promotion.pDiscount;
+                Promo.pPromotionDeadline = promotion.pPromotionDeadline;
+                Promo.pPromotionPostDate = promotion.pPromotionPostDate;
+                Promo.pPromotionStartDate = promotion.pPromotionStartDate;
+                Promo.pPromotionWeb = promotion.pPromotionWeb;
+                Promo.PromotionDescription = promotion.PromotionDescription;
+                Promo.PromotinoCategory = promotion.pCategory;
+                Promo.PromotionName = promotion.PromotionName;
+                Promo.pDiscountCode = promotion.pDiscountCode;
+                Promo.PromotionId = promotion.PromotionId;
+                dbContext.SaveChanges();
+            }
+            return RedirectToAction("員工看消息");
         }
     }
 }
