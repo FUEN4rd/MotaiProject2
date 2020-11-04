@@ -41,6 +41,16 @@
             -moz-background-size: cover;
             -ms-background-size: cover;*/
         }
+
+
+        .Y_memberName_border {
+            border-radius: 10px;
+            border-color: white;
+            border-width: 2px;
+            border-style: solid;
+            background-color: white;
+            padding: 30px;
+        }
     </style>
 
 </head>
@@ -69,18 +79,19 @@
                 @Html.ActionLink("登出", "員工登出")
             </li>
         </ul>*@
-    <div class="schedule landingDetail container"style="margin-top:580px;margin-left:300px"  >
-        <div class="form-group">
-            <div class="col-md-6">
-                <div class="container" style="display:flex" >
-                    @RenderBody()
-                    <hr />
-                    <footer>
-                        <p>&copy; @DateTime.Now.Year - 墨臺</p>
-                    </footer>
-                </div>
+    @*<div class="schedule landingDetail container"style="margin-top:580px;margin-left:300px"  >*@
+    <div class="container">
+    <div class="form-group">
+        <div class="col-md-6">
+            <div class="container Y_memberName_border" style="width:800px; margin:auto" >
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - 墨臺</p>
+                </footer>
             </div>
         </div>
+    </div>
     </div>
 
 
