@@ -189,8 +189,16 @@ namespace MotaiProject.Controllers
             prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
 
-            int ProductId = db.tProducts.OrderByDescending(o => o.ProductId).First().ProductId;
-            ProductId = ProductId + 1;
+            tProduct Product = db.tProducts.OrderByDescending(o => o.ProductId).FirstOrDefault();
+            int ProductId;
+            if (Product == null)
+            {
+                ProductId = 1;
+            }
+            else
+            {
+                ProductId = Product.ProductId++;
+            }
             if (n新增產品.pImage.Count() > 0)
             {
                 foreach (var uploagFile in n新增產品.pImage)
