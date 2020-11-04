@@ -189,8 +189,17 @@ namespace MotaiProject.Controllers
             prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
 
-            int ProductId = db.tProducts.OrderByDescending(o => o.ProductId).First().ProductId;
-            ProductId = ProductId + 1;
+            tProduct Product = db.tProducts.OrderByDescending(o => o.ProductId).FirstOrDefault();
+            int ProductId;
+            if (Product == null)
+            {
+                ProductId = 1;
+            }
+            else
+            {
+                ProductId = Product.ProductId;
+                ProductId++;
+            }
             if (n新增產品.pImage.Count() > 0)
             {
                 foreach (var uploagFile in n新增產品.pImage)
@@ -285,7 +294,32 @@ namespace MotaiProject.Controllers
                             dbContext.tProductImages.Remove(oldItem);
                         }
                         index++;
-                    }                    
+                    }
+                }
+                else
+                {
+                    int index = 0;
+                    foreach (var item in p.pImage)
+                    {
+                        if (index < oldImages.Count)
+                        {
+                            FileInfo file = new FileInfo(item.FileName);
+                            string photoName = Guid.NewGuid().ToString() + file.Extension;
+                            item.SaveAs(Server.MapPath("~/images/" + photoName));
+                            oldImages[index].pImage = Url.Content("~/images/" + photoName);
+                        }
+                        else
+                        {
+                            tProductImage image = new tProductImage();
+                            FileInfo file = new FileInfo(item.FileName);
+                            string photoName = Guid.NewGuid().ToString() + file.Extension;
+                            item.SaveAs(Server.MapPath("~/images/" + photoName));
+                            image.ProductId = p.ProductId;
+                            image.pImage = "~" + Url.Content("~/images/" + photoName);
+                            dbContext.tProductImages.Add(image);
+                        }
+                        index++;
+                    }
                 }
                 dbContext.SaveChanges();
             }

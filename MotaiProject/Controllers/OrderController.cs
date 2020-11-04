@@ -249,9 +249,10 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("首頁");
         }
-
-        public JsonResult webOrder()
+        //網購寫入訂單
+        public JsonResult webOrder(WebPay payData)
         {
+
             List<string> enErrors = new List<string>();
             try
             {

@@ -19,10 +19,24 @@ namespace MotaiProject.ViewModels
         [DisplayName("購買數量")]
         public int sProductQty { get; set; }
 
-      
         public int pIntPrice { get { return Convert.ToInt32(pPrice); } }
         [DisplayName("小計")]
         public int pTotal { get { return sProductQty * pIntPrice; } }
+    }
+    public class StatusCartGoToPayViewModel
+    {
+        public List<StatusCartViewModel> Carts { get; set; }
+
+        [DisplayName("運送門市選擇")]
+        public int WarehouseNameId { get; set; }
+        [DisplayName("門市名稱")]
+        public string WarehouseName { get; set; }
+        public IEnumerable<SelectListItem> warehouses { get; set; }
+    }
+    public class WebPay
+    {
+        public string shipAddress { get; set; }
+        public List<StatusCartGoToPayViewModel> Carts { get; set; }
     }
     //訂單付款
     public class Orderpay

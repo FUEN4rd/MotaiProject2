@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.StatusCartViewModel>
+﻿@model MotaiProject.ViewModels.StatusCartGoToPayViewModel
 @*@model MotaiProject.ViewModels.StatusCustomerViewModel*@
 @using MotaiProject.Models
 
@@ -108,9 +108,9 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="buyData">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Carts)
             {
                 <tr>
                     <td scope="row">
@@ -125,9 +125,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.pTotal)
                     </td>
-                    <td>
-                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    <td>                        
                         @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
     new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
                     </td>
@@ -139,8 +137,16 @@
     </div>
     <div>
         <div style="display:inline-grid">
-            <p>@Html.RadioButton("address", cust.cAddress, true, false)自家住宅</p>
-            <p>@Html.RadioButton("address", cust.cAddress, false, true)門市 </p>
+            <div>
+                <input type="radio" id="customerAddress" name="Address" value="1">
+                <label for="cash">自家住宅</label>
+                <p id="cAddress">@cust.cAddress</p>
+            </div>
+            <div>
+                <input type="radio" id="storeAddress" name="Address" value="2">
+                <label for="creditCard">門市</label>
+                @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
+            </div>
         </div>
         <div>
             <ul>
@@ -165,7 +171,7 @@
             <br />
             折扣
             <br />
-            <button type="button" class="btn btn-dark" onclick="">確定結帳</button>
+            <button id="webCheckout" type="button" class="btn btn-dark" onclick="">確定結帳</button>
         </div>
 
     </div>
@@ -201,8 +207,7 @@
         }).then(function (response) {
             return response.json();
                 }).then(function (data) {
-                    //console.log((try { } catch{ }) ? "yes" : "arg");
-                    //console.log(data.favorOrderby[0]["Pid"])
+                    //圖片需要從
                     for (let i = 1; i < 11; i++) {
                         let xx = $(`#orderimg${i}`);
                         xx.attr("src", "https://sites.google.com/a/netcmmi.com/share/_/rsrc/1473734124982/img/png/s/star-e01.png");
@@ -265,7 +270,33 @@
         });
     </script>
 
-<script>
+<script>    
+    $("#webCheckout").click(function () {
+        var table = document.getElementById("buyData");
+        var cAddress = $("#cAddress").val();
+        var store = $("#WarehouseNameId").val();
+        var method = $("input[name='Address']:checked").val();
+        var shipaddress;
+        if (method == 1) {
+            shipaddress = cAddress;
+        } else {
+            shipaddress = store;
+        }
+        for (const i = 0; i < table.rows.length; i++) {
 
+        }
+        var webPayData = {
+            shipAddress: shipaddress,
+        }
+        $.ajax({
+                url: "@Url.Action("webOrder", "Order")",
+                type: "POST",
+            data: { "payData": webPayData },
+                success: function (data) {
+                    var list = data + "<td class='order'><input id='deleteDetail' type ='button' value='刪除'/></td>";
+                    $("#detail").prepend(list);
+                }
+            });
+    });
 </script>
 
