@@ -507,6 +507,28 @@ namespace MotaiProject.Controllers
                 dbContext.SaveChanges();
             }
             return RedirectToAction("員工看消息");
-        }               
+        }
+
+
+        public JsonResult 修改消息讀圖(int id)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            var imageArray = dbContext.tProductImages.Where(i => i.ProductId.Equals(id)).ToArray();
+            if (imageArray.Length > 0)
+            {
+                List<string> imagelist = new List<string>();
+                foreach (var items in imageArray)
+                {
+                    string image = Url.Content(items.pImage);
+                    imagelist.Add(image);
+                }
+                string[] imagearray = imagelist.ToArray();
+                return Json(new { images = imagearray });
+            }
+            else
+            {
+                return Json(new { images = "" });
+            }
+        }
     }
 }

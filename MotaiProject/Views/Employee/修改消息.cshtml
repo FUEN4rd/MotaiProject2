@@ -19,12 +19,12 @@
 
 
     @*<div class="form-group">
-        @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control "} })
-            @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
+            @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control "} })
+                @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -107,6 +107,15 @@
             @Html.ValidationMessageFor(model => model.pPromotionDeadline, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pADimage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="filefield" name="pImage" multiple accept="image/*" />
+        </div>
+        <div id="img-container" name="pImage"></div>
+    </div>
+
     <div style="display:none">
         @Html.EditorFor(model => model.PromotionId, new { htmlAttributes = new { @class = "form-control" } })
     </div>
@@ -125,3 +134,40 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    const filefield = document.querySelector('#filefield');
+    const container = document.querySelector('#img-container');
+    $(document).ready(function () {
+        fetch('@Url.Action("修改消息讀圖", "Employee")', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `ProductId=${@Model.ProductId}`
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            for (let i = 0; i < data.images.length; i++) {
+                onReader(data.images[i]);
+            }
+        });
+    });
+    const onReader = function (event) {
+        let tpl = `<img class="myimg" src="${event}" alt="" width="450px">`;
+        container.innerHTML += tpl;
+    }
+    const onReaderLoaded = function (event) {
+        let tpl = `<img class="myimg" src="${event.target.result}" alt="" width="450px">`;
+        container.innerHTML += tpl;
+    }
+
+    filefield.addEventListener('change', function (event) {
+        container.innerHTML = "";
+        console.log(filefield.files);
+        for (let i = 0; i < filefield.files.length; i++) {
+            const reader = new FileReader();
+            reader.addEventListener('load', onReaderLoaded);
+            reader.readAsDataURL(filefield.files[i]);
+        }
+    });
+</script>
