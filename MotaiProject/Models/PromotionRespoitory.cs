@@ -62,10 +62,10 @@ namespace MotaiProject.Models
             return Promo;
         }
 
-        public Dictionary<int, string> GetCategoryAll()
+        public Dictionary<int, string> GetPromoCategoryAll()
         {
-            var categories = dbContext.tProductCategories.OrderBy(c => c.Category);
-            return categories.ToDictionary(cid => cid.pCategoryId, cn => cn.Category);
+            var categories = dbContext.tPromotionCategories.OrderBy(c => c.PromtionCategory);
+            return categories.ToDictionary(cid => cid.PromotionCategoryID, cn => cn.PromtionCategory);
         }
 
         public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)

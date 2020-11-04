@@ -167,60 +167,57 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
+            //var empd = from i in dbContext.tOrders
+            //           join j in dbContext.tOrderDetails on i.OrderId equals j.oOrderId
+            //           join k in dbContext.tEmployees on i.oEmployeeId equals k.EmployeeId
+            //           join m in dbContext.tProducts on j.oProductId equals m.ProductId
+            //           group i by new { i.oEmployeeId,i.oDate.Month,
+            //               j.oProductQty,m.pPrice,k.eName } into dataE
+            //           select new empData 
+            //           {
+            //               eName=dataE.Key.eName,
+            //               tem =new temData{  oDate = dataE.Key.Month,
+            //                   Sale =(dataE.Key.oProductQty)*(int)dataE.Key.pPrice,},
+            //           };
+            //void R(IQueryable<temData> tems)
+            //{
+            //    List<string> load = new List<string>();
+            //    foreach (var item in tems)
+            //    {
+            //        if (load.Find(x => x.Contains(item.eName)) != null)
+            //        {
+            //            load.Add(item.eName);
+            //            var q = from i in tems
+            //                    where i.eName == item.eName
+            //                    group i by i.oDate into j
+            //                    select j;
+            //            empData E = new empData();
+            //            E.eName = item.eName;                       
+            //        }
+            //    }
+            //}
 
-
-
-            IQueryable<temData> empd = from i in dbContext.tOrders
-                       join j in dbContext.tOrderDetails on i.OrderId equals j.oOrderId
-                       join k in dbContext.tEmployees on i.oEmployeeId equals k.EmployeeId
-                       join m in dbContext.tProducts on j.oProductId equals m.ProductId
-                       group i by new { i.oEmployeeId,i.oDate.Month,
-                           j.oProductQty,m.pPrice,k.eName } into dataE
-                       select new temData
-                       {
-                           eName=dataE.Key.eName,
-                           oDate = dataE.Key.Month,                
-                           oProductQty=dataE.Key.oProductQty,
-                           pPrice=(int)dataE.Key.pPrice,
-                       };
-            void R(IQueryable<temData> tems )
+            List<tOrderDetail> tOrderDetails = dbContext.tOrderDetails.ToList();
+            List<empData> empDatas = new List<empData>();
+            foreach(tOrderDetail item in tOrderDetails)
             {
-                foreach(var item in tems)
+                List<string> load = new List<string>();
+                if (load.Find(x => x.Contains(item.tOrder.tEmployee.eName)) != null)
                 {
-                    var q = from i in tems
-                            where i.eName == item.eName
-                            select i;
-                    
+                    load.Add(item.tOrder.tEmployee.eName);
+                    empData emp = new empData();
+                    emp.eName = item.tOrder.tEmployee.eName;
+                    emp.tem = new temData
+                    {
+                        Sale = (item.oProductQty) * ((int)item.tProduct.pPrice),
+                        oDate = item.tOrder.oDate.Month,
+                        eName = emp.eName
+                    };                   
+                    empDatas.Add(emp);
                 }
-                
             }
 
-
-            //from j in dbContext.tOrderDetails
-            //from k in dbContext.tEmployees
-            //from m in dbContext.tProducts
-
-            //where
-            //i.OrderId == j.oOrderId &&
-            //i.oEmployeeId == k.EmployeeId &&
-            //j.oProductId == m.ProductId                       
-            //{
-            //EmployeeId=empgroup.Key, 
-            //eName=
-            //oProductId
-            //oProductQty
-            //pPrice
-            //}
-            
-            foreach(var item in empd)
-            {
-                empData empData = new empData();
-                
-            };
-
-
-
-            return View(empd);
+            return View();
         }
     }
 }
