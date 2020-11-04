@@ -161,7 +161,7 @@ namespace MotaiProject.Controllers
         }
 
         public ActionResult 銷售報表()
-        {//等待補完
+        {//暫時完成
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入", "Employee");
@@ -245,6 +245,41 @@ namespace MotaiProject.Controllers
                 }
             }
             return View(emp);
+        }
+
+        public ActionResult 店鋪報表()
+        {//未測試
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+
+            List<tOrderDetail> tOrderDetails = dbContext.tOrderDetails.ToList();
+            wareData ware = new wareData();
+            ware.waretem = new Dictionary<int, Dictionary<int, int>>();
+            List<int> load = new List<int>();
+            foreach (tOrderDetail item in tOrderDetails)
+            {
+
+                int wNAME = item.tOrder.tWarehouseName.WarehouseNameId;
+                if (!load.Contains(wNAME))//抓店
+                {
+                    load.Add(wNAME);
+                    Dictionary<int, int> temD = new Dictionary<int, int>();
+                    for (int i = 1; i < 13; i++)
+                    {//抓月份
+                        var q = from search in tOrderDetails
+                                where search.tOrder.oDate.Month == i && search.tOrder.tWarehouseName.WarehouseNameId == wNAME
+                                select (search.oProductQty) * ((int)search.tProduct.pPrice);
+                        int V = q.Sum();//合併月份內營收
+                        temD.Add(i, V);
+                    }
+                    ware.waretem.Add(wNAME, temD);
+                }
+            }
+            //應該會在view多寫一組list判斷店鋪名
+            return View(ware);
         }
     }
 }

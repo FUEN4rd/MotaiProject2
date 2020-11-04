@@ -18,32 +18,23 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            margin-bottom: 50px;
-            /*overflow:hidden;
+            /*margin-bottom: 50px;*/
+
+            /*box-shadow: 0px 300px 300px rgba(248, 255, 255,0.7), 0 0px 0 #bbb, 0 0px 0 #aaa,0px 0 0px rgba(228,162,50,3) inset;            
+            overflow:hidden;
             border-width:1px;
             border-style:solid;
-            border-color:#dedede #bababa #aaa #bababa;*/
-            /*border-style: outset;
-            border-width: 5px;*/
-            box-shadow:0px 300px 300px rgba(248, 255, 255,0.7), 0 0px 0 #bbb, 0 0px 0 #aaa,0px 0 0px rgba(228,162,50,3) inset;
-           
-            
-            
-            
-            
-
-
-         
-          
-            /*border-color;*/
-            /*-webkit-background-size: cover;
+            border-color:#dedede #bababa #aaa #bababa;
+            border-style: outset;
+            border-width: 5px;
+            border-color;
+            -webkit-background-size: cover;
             -o-background-size: cover;
             -moz-background-size: cover;
             -ms-background-size: cover;*/
         }
 
-
-        .Y_memberName_border {
+        .Y_EmpLogin_border {
             border-radius: 10px;
             border-color: white;
             border-width: 2px;
@@ -54,36 +45,10 @@
     </style>
 
 </head>
-<body class="container">
-    @*<script>
-
-
-        </script>*@
-    @*<ul class="nav flex-column">
-            <li id="0" class="nav-item">
-                @Html.ActionLink("員工首頁", "員工首頁", "Employee", new { area = "" }, new { @class = "navbar-brand" })
-            </li>
-            <li id="1" class="nav-item">
-                @Html.ActionLink("員工新增", "新增員工", "Employee", new { area = "" }, new { @class = "navbar-brand" })
-            </li>
-            <li id="2" class="nav-item">
-                @Html.ActionLink("產品頁面", "員工看產品頁面", "Employee", new { area = "" }, new { @class = "navbar-brand" })
-            </li>
-            <li id="3" class="nav-item">
-                @Html.ActionLink("工作日誌", "工作日誌", "Employee", new { area = "" }, new { @class = "navbar-brand" })
-            </li>
-            <li id="4" class="nav-item">
-                @Html.ActionLink("會計審核", "會計審核", "Employee", new { area = "" }, new { @class = "navbar-brand" })
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("登出", "員工登出")
-            </li>
-        </ul>*@
-    @*<div class="schedule landingDetail container"style="margin-top:580px;margin-left:300px"  >*@
-    <div class="container">
+<body>
     <div class="form-group">
-        <div class="col-md-6">
-            <div class="container Y_memberName_border" style="width:800px; margin:auto" >
+        <div class="col-md-6" style="width:800px; margin:auto; padding-top:100px;padding-bottom:100px">
+            <div class="container Y_EmpLogin_border"  >
                 @RenderBody()
                 <hr />
                 <footer>
@@ -92,8 +57,6 @@
             </div>
         </div>
     </div>
-    </div>
-
 
     <script src="../../Scripts/jquery-3.5.1.min.js"></script>
     <script src="../../Scripts/jquery.validate.min.js"></script>

@@ -35,7 +35,7 @@ namespace MotaiProject.Controllers
                     case 4:
                         return RedirectToAction("People首頁", "People");
                     case 5:
-                        return RedirectToAction("員工首頁", "Employee");
+                        return RedirectToAction("Commodity首頁", "Commodity");
                     default:
                         return RedirectToAction("員工首頁", "Employee");
                 }
@@ -189,8 +189,16 @@ namespace MotaiProject.Controllers
             prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
 
-            int ProductId = db.tProducts.OrderByDescending(o => o.ProductId).First().ProductId;
-            ProductId = ProductId + 1;
+            tProduct Product = db.tProducts.OrderByDescending(o => o.ProductId).FirstOrDefault();
+            int ProductId;
+            if (Product == null)
+            {
+                ProductId = 1;
+            }
+            else
+            {
+                ProductId = Product.ProductId++;
+            }
             if (n新增產品.pImage.Count() > 0)
             {
                 foreach (var uploagFile in n新增產品.pImage)
@@ -507,6 +515,28 @@ namespace MotaiProject.Controllers
                 dbContext.SaveChanges();
             }
             return RedirectToAction("員工看消息");
-        }               
+        }
+
+
+        public JsonResult 修改消息讀圖(int id)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            var imageArray = dbContext.tProductImages.Where(i => i.ProductId.Equals(id)).ToArray();
+            if (imageArray.Length > 0)
+            {
+                List<string> imagelist = new List<string>();
+                foreach (var items in imageArray)
+                {
+                    string image = Url.Content(items.pImage);
+                    imagelist.Add(image);
+                }
+                string[] imagearray = imagelist.ToArray();
+                return Json(new { images = imagearray });
+            }
+            else
+            {
+                return Json(new { images = "" });
+            }
+        }
     }
 }

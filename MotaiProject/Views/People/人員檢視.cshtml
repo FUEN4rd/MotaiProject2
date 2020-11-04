@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.EmployeeViewModels>
+
+@{
+    ViewBag.Title = "人員檢視";
+    Layout = "~/Views/Shared/LayoutPeople.cshtml";
+}
+
+<h2>人員檢視</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ePosition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eBranch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ePassword)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eAccount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ePosition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eBranch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ePassword)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

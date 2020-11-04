@@ -27,6 +27,28 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
+
+
+        private EmployeeRespoitory employeeRespoitory = new EmployeeRespoitory();
+        public ActionResult 人員檢視()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }            
+            //var employeeAll = employeeRespoitory.GetEmployeeAll();
+            //var employeelist = employeeRespoitory.GetSelectList(employeeAll);
+            EmployeeViewModels employeeModels = new EmployeeViewModels();
+            List<tEmployee> employees = dbContext.tEmployees.ToList();
+            foreach(var item in employees)
+            {
+
+            }
+            return View(employeeModels);
+        }
+
+
         public ActionResult 新增員工()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
@@ -81,57 +103,7 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("員工登入");
         }
-        private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
-        public ActionResult 新增日誌()
-        {
-            tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-
-            ViewBag.name = emp.eName;
-            ViewBag.empId = emp.EmployeeId;
-            DiaryViewModel newDiary = new DiaryViewModel();
-            var warehouses = commodityRespoitory.GetWarehouseAll();
-            List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);
-            newDiary.warehouses = WareList;
-
-            return View(newDiary);
-        }
-        [HttpPost]
-        public ActionResult 新增日誌(DiaryViewModel data)
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
-            {
-
-                MotaiDataEntities db = new MotaiDataEntities();
-                tDiary diary = new tDiary();
-                List<DiaryViewModel> DShow = new List<DiaryViewModel>();
-                diary.dEmployeeId = data.dEmployeeId;
-                diary.DiaryId = data.DiaryId;
-                diary.dDate = data.dDate;
-                diary.dWeather = data.dWeather;
-                diary.dWarehouseNameId = data.dWarehouseNameId;
-                diary.dDiaryNote = data.dDiaryNote;
-                db.tDiaries.Add(diary);
-                db.SaveChanges();
-                return RedirectToAction("員工首頁");
-            }
-            return RedirectToAction("員工首頁");
-        }
-
-        public ActionResult 修改日誌(int id)
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
-            {
-                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                MotaiDataEntities db = new MotaiDataEntities();
-                tDiary diary = db.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
-                DiaryViewModel Diary = new DiaryViewModel();
-                //Diary.Diary = diary;
-                return View(Diary);
-            }
-            return RedirectToAction("員工登入");
-
-        }
-
+        
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         public ActionResult 人事看產品頁面()
         {
@@ -153,6 +125,17 @@ namespace MotaiProject.Controllers
                 }
             }
             return View(productlist);
+        }
+        private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
+        public ActionResult 員工看消息()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
+            promotionlist = promotionRespoitory.GetPromotionAll();
+            return View(promotionlist);
         }
     }
 }
