@@ -587,6 +587,8 @@
     <Content Include="Views\Commodity\新增產品.cshtml" />
     <Content Include="Views\Commodity\修改產品.cshtml" />
     <Content Include="Views\Commodity\Commodity首頁.cshtml" />
+    <Content Include="Views\People\人員檢視.cshtml" />
+    <Content Include="Views\Boss\店鋪報表.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

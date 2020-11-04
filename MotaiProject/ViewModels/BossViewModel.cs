@@ -34,14 +34,8 @@ namespace MotaiProject.ViewModels
 
     public class wareData
     {
-        [DisplayName("店面")]
-        public int oWarehouseName { get; set; }
-        [DisplayName("店面名")]
-        public string oWName { get; set; }
-        public int oProductId { get; set; }
-        public int oProductQty { get; set; }
-        public int pPrice { get; set; }
+        public Dictionary<int, Dictionary<int, int>> waretem { get; set; }
     }
-
-
 }
+
+
