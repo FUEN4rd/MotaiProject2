@@ -14,7 +14,7 @@
             報表
         </th>
         @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-        {           
+        {
             foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
             {
                 <th>
@@ -53,17 +53,31 @@
             }
         </div>
     }*@
-<canvas id="myChart" width="400" height="400"></canvas>
+<div style="width:500px;height:500px">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['一月', '二月', '三月'],
-            datasets: [{
-                label: '銷售業績(百萬)',
-                data: [60, 49, 72]
-            }]
+            labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            datasets: [
+            @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+            {
+                <text>
+                {
+                    label: '@kvp.Key',
+                    data: [
+                        @foreach (KeyValuePair<int, int> kvp2 in kvp.Value){
+                            @kvp2.Value<Text>,</Text>
+                        }
+                    ],
+                },
+                </text>
+            }
+            ]
         }
     });
 </script>
