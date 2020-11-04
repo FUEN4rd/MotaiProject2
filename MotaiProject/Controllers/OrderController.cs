@@ -281,26 +281,18 @@ namespace MotaiProject.Controllers
                     oPayment.Send.DeviceSource = DeviceType.PC;
                     oPayment.Send.UseRedeem = UseRedeemFlag.Yes; //購物金/紅包折抵
                     //oPayment.Send.IgnorePayment = "<<您不要顯示的付款方式>>"; // 例如財付通:Tenpay
-                                                                    // 加入選購商品資料。
-                    oPayment.Send.Items.Add(new Item()
+                    // 加入選購商品資料。
+                    foreach(var item in payData.Items)
                     {
-                        Name = "<<產品A>>",
-                        Price = Decimal.Parse("<<單價>> "),
-                        Currency = " << 幣別 >> ",
-                        Quantity = Int32.Parse(" << 數量 >> "),
-                        URL = " << 產品說明位址 >> "
-                    });
-
-
-                    oPayment.Send.Items.Add(new Item()
-                    {
-                        Name = "<<產品B>>",
-                        Price = Decimal.Parse("<<單價>>"),
-                        Currency = "<<幣別>>",
-                        Quantity = Int32.Parse("<<數量>>"),
-                        URL = "<<產品說明位址>>"
-                    });
-
+                        oPayment.Send.Items.Add(new Item()
+                        {
+                            Name = item.Name,
+                            Price = Decimal.Parse(item.Price),
+                            Currency = "NTD",
+                            Quantity = item.Quantity,
+                            URL = "<< 產品說明位址 >>"
+                        });
+                    }
                     // 當付款方式為 ALL 時，建議增加的參數。
                     oPayment.SendExtend.PaymentInfoURL = "<<您要接收回傳自動櫃員機/超商/條碼付款相關資訊的網址。>> ";
                     /* 產生訂單 */
