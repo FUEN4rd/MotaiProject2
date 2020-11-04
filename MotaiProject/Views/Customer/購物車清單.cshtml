@@ -136,6 +136,7 @@
             }
         </tbody>
     </table>
+    </div>
     <div>
         <div style="display:inline-grid">
             <p>@Html.RadioButton("address", cust.cAddress, true, false)自家住宅</p>
@@ -192,7 +193,7 @@
 
     <script type="text/javascript">
         (function favororder() {
-            fetch('/Customer/購買排名', {
+            fetch('@Url.Action("購買排名", "Customer")', {
             method: 'POST',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -263,4 +264,8 @@
 
         });
     </script>
+
+<script>
+
+</script>
 
