@@ -278,6 +278,7 @@ namespace MotaiProject.Controllers
                     ware.waretem.Add(wNAME, temD);
                 }
             }
+            //應該會在view多寫一組list判斷店鋪名
             return View(ware);
         }
     }

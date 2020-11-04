@@ -1,8 +1,90 @@
-﻿
+﻿@model MotaiProject.ViewModels.wareData
+
 @{
     ViewBag.Title = "店鋪報表";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+    int datacolor = 0;
+    List<string> L = new List<string>
+{"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
 }
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <h2>店鋪報表</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            報表
+        </th>
+        @foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
+        {
+            foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+            {
+                <th>
+                    @kvp2.Key
+                </th>
+            }
+        }
+
+    </tr>
+
+    @foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
+    {
+        <tr>
+            <td>@kvp.Key</td>
+            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+            {
+
+                <td>@kvp2.Value</td>
+
+            }
+        </tr>
+    }
+
+</table>
+
+@*@foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+    {
+        <div>
+            @kvp.Key
+            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+            {
+                <div>
+                    @kvp2.Key
+                    @kvp2.Value
+                </div>
+            }
+        </div>
+    }*@
+<div style="width:500px;height:500px">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            datasets: [
+            @foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
+            {
+                <text>
+                {
+                    label: '@kvp.Key',
+                    backgroundColor: '@L[datacolor]',
+                    borderColor: '@L[datacolor]',
+                    data: [
+                        @foreach (KeyValuePair<int, int> kvp2 in kvp.Value){
+                            @kvp2.Value<Text>,</Text>
+                        }
+                    ],
+                },
+                </text>
+                datacolor++;
+            }
+            ]
+        }
+    });
+
+
+</script>
