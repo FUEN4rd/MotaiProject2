@@ -81,8 +81,7 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("員工登入");
         }
-
-
+        
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         public ActionResult 人事看產品頁面()
         {

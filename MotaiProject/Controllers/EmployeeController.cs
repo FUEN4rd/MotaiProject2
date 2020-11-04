@@ -35,7 +35,7 @@ namespace MotaiProject.Controllers
                     case 4:
                         return RedirectToAction("People首頁", "People");
                     case 5:
-                        return RedirectToAction("員工首頁", "Employee");
+                        return RedirectToAction("Commodity首頁", "Commodity");
                     default:
                         return RedirectToAction("員工首頁", "Employee");
                 }
