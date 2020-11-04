@@ -220,7 +220,8 @@ namespace MotaiProject.Controllers
             //}
 
             List<tOrderDetail> tOrderDetails = dbContext.tOrderDetails.ToList();
-            Dictionary<string, Dictionary<int, int>> emp = new Dictionary<string, Dictionary<int, int>>();
+            empData emp = new empData();
+            emp.tem = new Dictionary<string, Dictionary<int, int>>();
             List<string> load = new List<string>();
             foreach (tOrderDetail item in tOrderDetails)
             {
@@ -229,7 +230,7 @@ namespace MotaiProject.Controllers
                 if (load.Find(x => x.Contains(ENAME)) == null)//抓人
                 {
                     load.Add(ENAME);
-                    Dictionary<int, int> tem = new Dictionary<int, int>();
+                    Dictionary<int, int> temD = new Dictionary<int, int>();
                     //int K = item.tOrder.oDate.Month;
                     //int V = (item.oProductQty) * ((int)item.tProduct.pPrice);
                     for(int i = 1; i < 13; i++)
@@ -238,9 +239,9 @@ namespace MotaiProject.Controllers
                                 where search.tOrder.oDate.Month == i && search.tOrder.tEmployee.eName == ENAME
                                 select (search.oProductQty) * ((int)search.tProduct.pPrice);
                         int V = q.Sum();
-                        tem.Add(i, V);
+                        temD.Add(i, V);
                     }
-                    emp.Add(ENAME, tem);
+                    emp.tem.Add(ENAME, temD);
                 }
             }
             return View(emp);

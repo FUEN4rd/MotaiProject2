@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.empData>
+﻿@model MotaiProject.ViewModels.empData
 
 @{
     ViewBag.Title = "銷售報表";
@@ -12,24 +12,26 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.eName)
-        </th>
-        <th></th>
+        @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+        {
+            <th>
+                @Html.DisplayNameFor(modelitem => modelitem.tem.Keys)
+            </th>
+        }
+
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+    {
 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.eName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        <tr>
+            <td></td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
