@@ -21,7 +21,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("員工部門")]
         public int eBranch { get; set; }
         [DisplayName("員工密碼")]
-        public string ePassword { get; set; }
+        public string ePassword { get; set; }        
     }
 
     public class EmployeeLoginViewModel
@@ -34,6 +34,10 @@ namespace MotaiProject.ViewModels
     }
 
 
+    public class ChangeBranchViewModel
+    {
+        public IEnumerable<SelectListItem> employees { get; set; }
+    }
 
     //工作 新增日誌
     public class DiaryViewModel

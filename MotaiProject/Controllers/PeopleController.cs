@@ -27,6 +27,28 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
+
+
+        private EmployeeRespoitory employeeRespoitory = new EmployeeRespoitory();
+        public ActionResult 人員檢視()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }            
+            //var employeeAll = employeeRespoitory.GetEmployeeAll();
+            //var employeelist = employeeRespoitory.GetSelectList(employeeAll);
+            EmployeeViewModels employeeModels = new EmployeeViewModels();
+            List<tEmployee> employees = dbContext.tEmployees.ToList();
+            foreach(var item in employees)
+            {
+
+            }
+            return View(employeeModels);
+        }
+
+
         public ActionResult 新增員工()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
