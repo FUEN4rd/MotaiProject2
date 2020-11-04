@@ -65,8 +65,8 @@ namespace MotaiProject.ViewModels
         public int pCategory { get; set; }
         [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }
-        [DisplayName("圖片")]
-        public string pADimage { get; set; }
+        //[DisplayName("圖片")]
+        //public string pADimage { get; set; }
         [DisplayName("網頁連結")]
         public string pPromotionWeb { get; set; }
         [DisplayName("公告日期")]
@@ -89,6 +89,10 @@ namespace MotaiProject.ViewModels
         [DisplayName("結束日期")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime pPromotionDeadline { get; set; }
+
+        [DisplayName("消息圖片")]
+        public HttpPostedFileBase upLoadimage { get; set; }
+        public string pADimage { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
 
