@@ -26,6 +26,14 @@
                 #wrapper #content-wrapper #content {
                     flex: 1 0 auto;
                 }
+        body {
+            background: url("/images/Employee_login.png");
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
     </style>
 
 </head>
@@ -132,7 +140,9 @@
 
         </ul>
         <div class="container body-content;">
-            @RenderBody()
+            <div style="background-color:rgba(255, 255, 255,0.3) ;width:960px; border-radius:10px; margin-top:50px;">
+                @RenderBody()
+            </div>
             <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - 墨臺</p>
