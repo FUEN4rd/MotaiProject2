@@ -42,7 +42,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ePosition, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ePosition, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.ePosition, Model.Position, "請選擇職位", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ePosition, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -50,7 +50,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.eBranch, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.eBranch, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.eBranch, Model.Branch, "請選擇職位", new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.eBranch, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -71,6 +71,6 @@
 </div>
 }
     <div>
-        @Html.ActionLink("回到首頁", "People首頁")
+        @Html.ActionLink("回到人員檢視", "人員檢視")
     </div>
 

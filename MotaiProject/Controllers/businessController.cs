@@ -120,6 +120,10 @@ namespace MotaiProject.Controllers
                 tDiary diary = db.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
                 DiaryViewModel Diary = new DiaryViewModel();
                 //Diary.Diary = diary;
+                var warehouses = commodityRespoitory.GetWarehouseAll();
+
+                List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);
+                Diary.warehouses = WareList;
                 return View(Diary);
             }
             return RedirectToAction("員工登入");
