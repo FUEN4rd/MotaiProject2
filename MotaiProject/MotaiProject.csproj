@@ -596,6 +596,7 @@
     <Content Include="Views\Boss\店鋪報表.cshtml" />
     <Content Include="Views\People\修改員工.cshtml" />
     <Content Include="Views\Boss\人員檢視.cshtml" />
+    <Content Include="Views\Order\ordernotice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
