@@ -127,7 +127,7 @@ namespace MotaiProject.Controllers
                                   Pcount = j.Count(),
                                   Pname = j.Key.pName,
                                   Pcategory=j.Key.Category
-                                }).ToList();
+                                }).OrderByDescending(j=>j.Pcount).ToList();
             var buyOrder = (from i in tOrderDetails
                             group i by new
                             {
@@ -141,8 +141,7 @@ namespace MotaiProject.Controllers
                                 Pcount = j.Sum(p => p.oProductQty),
                                 Pname = j.Key.pName,
                                 Pcategory = j.Key.Category
-                            }).ToList();
-            //List<BossViewModel> BossV = new List<BossViewModel>();
+                            }).OrderByDescending(j => j.Pcount).ToList();
             BossViewModel boss = new BossViewModel();
             List<favorViewModel> favorV = new List<favorViewModel>();
             List<buyViewModel> buyV = new List<buyViewModel>();
@@ -186,16 +185,7 @@ namespace MotaiProject.Controllers
                 buy.pName = item.Pname;
                 buyV.Add(buy);
             }
-            //foreach(var item in favorV)
-            //{
-            //    BossViewModel bv = new BossViewModel();
-            //    foreach (var item2 in buyV)
-            //    {
-            //        bv.favorV = item;
-            //        bv.buyV = item2;
-            //    }
-            //    BossV.Add(bv);
-            //}
+
             boss.buyV = buyV;
             boss.favorV = favorV;
 
@@ -291,7 +281,7 @@ namespace MotaiProject.Controllers
         }
 
         public ActionResult 店鋪報表()
-        {//未測試
+        {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入", "Employee");
@@ -321,8 +311,31 @@ namespace MotaiProject.Controllers
                     ware.waretem.Add(wNAME, temD);
                 }
             }
-            //應該會在view多寫一組list判斷店鋪名
             return View(ware);
+        }
+
+        private EmployeeRespoitory employeeRespoitory = new EmployeeRespoitory();
+        public ActionResult 人員檢視()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+            var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
+            List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
+            foreach (var item in empall)
+            {
+                EmployeeViewModels employeeModel = new EmployeeViewModels();
+                employeeModel.EmployeeId = item.EmployeeId;
+                employeeModel.eAccount = item.eAccount;
+                employeeModel.eName = item.eName;
+                employeeModel.sPosition = item.tPosition.pPosition;
+                employeeModel.sBranch = item.tBranch.bBranch;
+                employees.Add(employeeModel);
+            }
+            return View(employees);
         }
     }
 }
