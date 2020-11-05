@@ -35,7 +35,7 @@ namespace MotaiProject.Controllers
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
@@ -57,7 +57,7 @@ namespace MotaiProject.Controllers
         {
             if (CSession關鍵字.SK_LOGINED_EMPLOYEE==null)
             {
-                return RedirectToAction("People首頁");
+                return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbcontext = new MotaiDataEntities();
             tEmployee empse = dbcontext.tEmployees.FirstOrDefault(c=>c.EmployeeId==id);
@@ -80,7 +80,6 @@ namespace MotaiProject.Controllers
             {
                 MotaiDataEntities db = new MotaiDataEntities();
                 tEmployee emp = db.tEmployees.Find(employee.EmployeeId);
-                EmployeeViewModels empview = new EmployeeViewModels();
                 if (emp != null)
                 {
                     emp.eBranch = employee.eBranch;
@@ -91,7 +90,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("人員檢視");
             }
 
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
         }
 
 
@@ -99,9 +98,17 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
-            return View();
+
+            EmployeeViewModels empall = new EmployeeViewModels();
+            var vBranch = new ProductRespoitory().GetBranchName();
+            List<SelectListItem> Branch = new ProductRespoitory().GetPositionName(vBranch);
+            empall.Branch = Branch;
+            var vPosition = new ProductRespoitory().GetPositionName();
+            List<SelectListItem> Position = new ProductRespoitory().GetPositionName(vPosition);
+            empall.Position = Position;
+            return View(empall);
         }
         [HttpPost]
         public ActionResult 新增員工(EmployeeViewModels create員工)
@@ -111,6 +118,8 @@ namespace MotaiProject.Controllers
             {
                 create員工.EmployeeId = 1;
             }
+            
+
             tEmployee n新員工 = new tEmployee();
             n新員工.eAccount = create員工.eAccount;
             n新員工.EmployeeId = create員工.EmployeeId;
@@ -119,6 +128,8 @@ namespace MotaiProject.Controllers
             n新員工.ePosition = create員工.ePosition;
             n新員工.eBranch = create員工.eBranch;
             dbContext.tEmployees.Add(n新員工);
+
+
             dbContext.SaveChanges();
             return RedirectToAction("人員檢視");
         }
@@ -147,7 +158,7 @@ namespace MotaiProject.Controllers
                 }
                 return View(DSaw);
             }
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
         }
         
         private ProductRespoitory productRespotiory = new ProductRespoitory();
@@ -155,7 +166,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
@@ -177,7 +188,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
             promotionlist = promotionRespoitory.GetPromotionAll();

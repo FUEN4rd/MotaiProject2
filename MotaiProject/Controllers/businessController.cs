@@ -33,7 +33,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
@@ -67,13 +67,14 @@ namespace MotaiProject.Controllers
                     show.dDate = item.dDate;
                     show.dWeather = item.dWeather;
                     show.dDiaryNote = item.dDiaryNote;
+                    show.DiaryId = item.DiaryId;
                     show.dWarehouseNameId = item.dWarehouseNameId;
                     show.dWarehouseName = warename.WarehouseName;
                     DSaw.Add(show);
                 }
                 return View(DSaw);
             }
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
         }
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         public ActionResult 新增日誌()
@@ -115,16 +116,48 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 MotaiDataEntities db = new MotaiDataEntities();
-                tDiary diary = db.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
+                tDiary diary = db.tDiaries.FirstOrDefault(m=>m.DiaryId==id);
                 DiaryViewModel Diary = new DiaryViewModel();
-                //Diary.Diary = diary;
+                Diary.DiaryId = id;
+                Diary.dEmployeeId = diary.dEmployeeId;
+                Diary.eName = diary.tEmployee.eName;
+                Diary.dWeather = diary.dWeather;
+                Diary.dDate = diary.dDate;
+                Diary.dDiaryNote = diary.dDiaryNote;
+                Diary.dWarehouseNameId = diary.dWarehouseNameId;
+
+                var warehouses = commodityRespoitory.GetWarehouseAll();
+                List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);
+                Diary.warehouses = WareList;
                 return View(Diary);
             }
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
 
         }
+        [HttpPost]
+        public ActionResult 修改日誌(DiaryViewModel m)
+        {
+
+            MotaiDataEntities dbcontext = new MotaiDataEntities();
+            tDiary diary = dbcontext.tDiaries.Find(m.DiaryId);
+            if (diary != null)
+            {
+                diary.DiaryId = m.DiaryId;
+                diary.dEmployeeId = m.dEmployeeId;
+                diary.dDate = m.dDate;
+                diary.dDiaryNote = m.dDiaryNote;
+                diary.dWeather = m.dWeather;
+                diary.dWarehouseNameId = m.dWarehouseNameId;
+                dbcontext.SaveChanges();
+                return RedirectToAction("工作日誌");
+            }
+
+            return View("業務看產品頁面");
+        }
+
+
+
         public ActionResult 業務會計查詢()
         {
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();

@@ -12,6 +12,9 @@
 </p>
 <table class="table" style="overflow:hidden">
     <tr>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.DiaryId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.dDate)
         </th>
@@ -32,6 +35,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td style="display:none">
+                @Html.DisplayFor(model=>item.DiaryId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dDate)
             </td>
@@ -49,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.dDiaryNote)
             </td>
             <td>
-                @Html.ActionLink("修改", "修改日誌", new { id=item.DiaryId}) 
+                @Html.ActionLink("修改","修改日誌", new { id=item.DiaryId}) 
 
             </td>
         </tr>
