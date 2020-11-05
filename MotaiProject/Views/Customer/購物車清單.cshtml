@@ -87,110 +87,115 @@
 
 
 <div class="container">
+    <form id="frmOrder" name="frmOrder" method="post" action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Carts.First().pName)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Carts.First().pPrice)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Carts.First().sProductQty)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Carts.First().pTotal)
+                    </th>
+                    <th scope="col">
+                        刪除
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="buyData">
 
-    <table class="table table-light">
-        <thead>
-            <tr>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.Carts.First().pName)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.Carts.First().pPrice)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.Carts.First().sProductQty)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.Carts.First().pTotal)
-                </th>
-                <th scope="col">
-                    刪除
-                </th>
-            </tr>
-        </thead>
-        <tbody id="buyData">
+                @foreach (var item in Model.Carts)
+                {
+                    <tr>
+                        <td style="display:none" name="Id">
+                            @Html.DisplayFor(modelItem => item.ProductId)
+                        </td>
+                        <td scope="row" name="Name">
+                            @Html.DisplayFor(modelItem => item.pName)
+                        </td>
+                        <td name="Price">
+                            @Html.DisplayFor(modelItem => item.pIntPrice)
+                        </td>
+                        <td name="Quantity">
+                            @Html.DisplayFor(modelItem => item.sProductQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.pTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
+        new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
+                        </td>
+                    </tr>
+                    count += item.pTotal;
+                }
+            </tbody>
+        </table>
 
-            @foreach (var item in Model.Carts)
-            {
-            <tr>
-                <td style="display:none">
-                    @Html.DisplayFor(modelItem => item.ProductId)
-                </td>
-                <td scope="row">
-                    @Html.DisplayFor(modelItem => item.pName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pIntPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.sProductQty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pTotal)
-                </td>
-                <td>
-                    @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
-new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
-                </td>
-            </tr>
-                count += item.pTotal;
-            }
-        </tbody>
-    </table>
-    </div>
-<div>
-    <div style="display:inline-grid">
-        <div>
-            <input type="radio" id="customerAddress" name="Address" value="1">
-            <label for="customerAddress">自家住宅</label>
-            <p id="cAddress">@cust.cAddress</p>
-        </div>
-        <div>
-            <input type="radio" id="storeAddress" name="Address" value="2">
-            <label for="storeAddress">門市</label>
-            @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
-        </div>
-    </div>
-    <div>
-        <ul>
-            <li>
-                1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
-                <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
-            </li>
-            <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
-            <li> 3.不同帳號的交易紀錄無法移轉。</li>
-        </ul>
-    </div>
-
-    <div>
-        訂單資訊
-        <hr />
-        <div>小計: 新台幣<b id="info"></b>元</div>
-        <script>
-                document.querySelector("#info").innerHTML = @count;
-
-        </script>
-        運費
-        <br />
-        折扣
-        <br />
         <div style="display:inline-grid">
             <div>
-                <input type="radio" id="cash" name="payType" value="1">
-                <label for="cash">現金</label>
+                <input type="radio" id="customerAddress" name="Address" value="1">
+                <label for="customerAddress">自家住宅</label>
+                <p id="cAddress">@cust.cAddress</p>
             </div>
             <div>
-                <input type="radio" id="creditCard" name="payType" value="2">
-                <label for="creditCard">信用卡</label>
-            </div>
-            <div>
-                <input type="radio" id="opay" name="payType" value="3">
-                <label for="opay">歐付寶</label>
+                <input type="radio" id="storeAddress" name="Address" value="2">
+                <label for="storeAddress">門市</label>
+                @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
             </div>
         </div>
-        <button id="webCheckout" type="button" class="btn btn-dark">確定結帳</button>
-    </div>
-    <script>
+        <div>
+            <ul>
+                <li>
+                    1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
+                    <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
+                </li>
+                <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
+                <li> 3.不同帳號的交易紀錄無法移轉。</li>
+            </ul>
+        </div>
+
+        <div>
+            訂單資訊
+            <hr />
+            <div>
+                小計: 新台幣
+                <b id="info"></b>元
+            </div>
+            <script>
+                document.querySelector("#info").innerHTML = @count;
+
+            </script>
+            運費
+            <br />
+            折扣
+            <br />
+            <div style="display:inline-grid">
+                <div>
+                    <input type="radio" id="cash" name="payType" value="1">
+                    <label for="cash">現金</label>
+                </div>
+                <div>
+                    <input type="radio" id="creditCard" name="payType" value="2">
+                    <label for="creditCard">信用卡</label>
+                </div>
+                <div>
+                    <input type="radio" id="opay" name="payType" value="3">
+                    <label for="opay">歐付寶</label>
+                </div>
+            </div>
+            <button id="webCheckout" type="submit" class="btn btn-dark">確定結帳</button>
+            @*<a href="javascript: void (0)">TRY</a>*@
+        </div>
+    </form>
+</div>
+<script>
 
     $("#webCheckout").click(function () {
         var table = document.getElementById("buyData");
@@ -227,81 +232,80 @@ new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
             data: { "payData": webPayData },
             success: function (data) {
                 console.log(data);
-                $.ajax({
-                    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
-                    headers: {
-                        "Access- Control - Allow - Origin": "*",
-                    },
-                    dataType:"json",
-                    contentType:"application/json",
-                    type: "POST",
-                    data: {
-                        AllInOne: data
-                        //MerchantID: dataparse.MerchantID,
-                        //MerchantTradeNo: dataparse.Send.MerchantTradeNo,
-                        //MerchantTradeDate: dataparse.Send.MerchantTradeDate,
-                        //PaymentType: "aio",
-                        //Items: dataparse.Send.Items,
-                        //TotalAmount: dataparse.Send.TotalAmount,
-                        //TradeDesc: dataparse.Send.TradeDesc,
-                        //ChoosePayment: dataparse.Send.ChoosePayment,
-                        //ReturnURL: dataparse.Send.ReturnURL
-                    },
-                    success: function (caca) {
-                        //window.location.href = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
-                        console.log("345");
-                    },
-                    error: function (jqXHR, exception) {
-                        var msg = '';
-                        if (jqXHR.status === 0) {
-                            msg = 'Not connect.\n Verify Network.';
-                        } else if (jqXHR.status == 404) {
-                            msg = 'Requested page not found. [404]';
-                        } else if (jqXHR.status == 500) {
-                            msg = 'Internal Server Error [500].';
-                        } else if (exception === 'parsererror') {
-                            msg = 'Requested JSON parse failed.';
-                        } else if (exception === 'timeout') {
-                            msg = 'Time out error.';
-                        } else if (exception === 'abort') {
-                            msg = 'Ajax request aborted.';
-                        } else {
-                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                        }
-                        $('#post').html(msg);
-                    },
-                    complete: function () {
-                        console.log("123"); 
-                    }
-                })
+                //$.ajax({
+                //    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
+                //    headers: {
+                //        "Access- Control - Allow - Origin": "*",
+                //    },
+                //    dataType:"json",
+                //    contentType:"application/json",
+                //    type: "POST",
+                //    data: {
+                //        AllInOne: data
+                //        //MerchantID: dataparse.MerchantID,
+                //        //MerchantTradeNo: dataparse.Send.MerchantTradeNo,
+                //        //MerchantTradeDate: dataparse.Send.MerchantTradeDate,
+                //        //PaymentType: "aio",
+                //        //Items: dataparse.Send.Items,
+                //        //TotalAmount: dataparse.Send.TotalAmount,
+                //        //TradeDesc: dataparse.Send.TradeDesc,
+                //        //ChoosePayment: dataparse.Send.ChoosePayment,
+                //        //ReturnURL: dataparse.Send.ReturnURL
+                //    },
+                //    success: function (caca) {
+                //        //window.location.href = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                //        console.log("345");
+                //    },
+                //    error: function (jqXHR, exception) {
+                //        var msg = '';
+                //        if (jqXHR.status === 0) {
+                //            msg = 'Not connect.\n Verify Network.';
+                //        } else if (jqXHR.status == 404) {
+                //            msg = 'Requested page not found. [404]';
+                //        } else if (jqXHR.status == 500) {
+                //            msg = 'Internal Server Error [500].';
+                //        } else if (exception === 'parsererror') {
+                //            msg = 'Requested JSON parse failed.';
+                //        } else if (exception === 'timeout') {
+                //            msg = 'Time out error.';
+                //        } else if (exception === 'abort') {
+                //            msg = 'Ajax request aborted.';
+                //        } else {
+                //            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                //        }
+                //        $('#post').html(msg);
+                //    },
+                //    complete: function () {
+                //        console.log("123");
+                //    }
+                //})
                 }
             });
     });
-    </script>
-</div>
-    <div class="container">
-        <div class="row">
-            <div class="wrapper">
-                <ul class="slides">
-                    @for (int i = 1; i < 11; i++)
-                    {
-                        <li>
-                            <img id="orderimg@(i)" src=""
-                                 alt="">
-                        </li>
-                    }
-                </ul>
-                <div id="prevSlide" class="slide_btn">
-                    <i class="carousel-control-prev-icon"></i>
-                </div>
-                <div id="nextSlide" class="slide_btn">
-                    <i class="carousel-control-next-icon"></i>
-                </div>
+</script>
+<div class="container">
+    <div class="row">
+        <div class="wrapper">
+            <ul class="slides">
+                @for (int i = 1; i < 11; i++)
+                {
+                    <li>
+                        <img id="orderimg@(i)" src=""
+                             alt="">
+                    </li>
+                }
+            </ul>
+            <div id="prevSlide" class="slide_btn">
+                <i class="carousel-control-prev-icon"></i>
+            </div>
+            <div id="nextSlide" class="slide_btn">
+                <i class="carousel-control-next-icon"></i>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         (function favororder() {
             fetch('@Url.Action("購買排名", "Customer")', {
             method: 'POST',
@@ -321,57 +325,57 @@ new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
 
         });
         })()
-    </script>
+</script>
 
 
-    <script>
-        $(function () {
+<script>
+    $(function () {
 
-            let slideNum = 0;
-            let slideCount = $(".slides li").length;
-            let lastIndex = slideCount - 1;
+        let slideNum = 0;
+        let slideCount = $(".slides li").length;
+        let lastIndex = slideCount - 1;
 
-            function setPlay() {
-                show();
-                slideNum++
-                if (slideNum > lastIndex) {
-                    slideNum = 0;
-                }
+        function setPlay() {
+            show();
+            slideNum++
+            if (slideNum > lastIndex) {
+                slideNum = 0;
             }
+        }
 
-            function stopPlay() {
-                clearInterval(play);
-            }
+        function stopPlay() {
+            clearInterval(play);
+        }
 
-            function show() {
-                let move = 0 - 200 * slideNum;
-                $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
-                $("ul.slides").css("left", move);
-            }
+        function show() {
+            let move = 0 - 200 * slideNum;
+            $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+            $("ul.slides").css("left", move);
+        }
 
-            $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
-            $(".dot li").mouseenter(function () {
-                slideNum = $(this).index();
-                show();
-            });
-
-            $("#prevSlide").click(function () {
-                slideNum--;
-                if (slideNum < 0) {
-                    slideNum = lastIndex;
-                }
-                show();
-            })
-
-            $("#nextSlide").click(function () {
-                slideNum++;
-                if (slideNum > lastIndex) {
-                    slideNum = 0;
-                }
-                show();
-            })
-
+        $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
+        $(".dot li").mouseenter(function () {
+            slideNum = $(this).index();
+            show();
         });
-    </script>
+
+        $("#prevSlide").click(function () {
+            slideNum--;
+            if (slideNum < 0) {
+                slideNum = lastIndex;
+            }
+            show();
+        })
+
+        $("#nextSlide").click(function () {
+            slideNum++;
+            if (slideNum > lastIndex) {
+                slideNum = 0;
+            }
+            show();
+        })
+
+    });
+</script>
 
 

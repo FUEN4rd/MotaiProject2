@@ -4,6 +4,8 @@ using MotaiProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http.Cors;
 using System.Web.Mvc;
@@ -256,7 +258,7 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
-        public AllInOneMetadata webOrder(WebPay payData)
+        public ActionResult webOrder(WebPay payData)
         {
             List<string> enErrors = new List<string>();
             try
@@ -265,7 +267,7 @@ namespace MotaiProject.Controllers
                 using (AllInOne oPayment = new AllInOne())
                 {
                     /* 服務參數 */
-                    oPayment.ServiceMethod = HttpMethod.HttpPOST;
+                    oPayment.ServiceMethod = AllPay.Payment.Integration.HttpMethod.HttpPOST;
                     oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
                     oPayment.HashKey = "5294y06JbISpM5x9";
                     oPayment.HashIV = "v77hoKGq4kWxNNIS";
@@ -320,7 +322,7 @@ namespace MotaiProject.Controllers
                     /* 產生產生訂單 Html Code 的方法 */
                     string szHtml = String.Empty;
                     enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
-                    //return oPayment;
+                    return RedirectToRoute(oPayment.ServiceURL);
                     //return RedirectToRoute("https://payment-stage.opay.tw/Cashier/AioCheckOut/V5", oPayment);
                 }
             }
@@ -337,6 +339,14 @@ namespace MotaiProject.Controllers
                     string szErrorMessage = String.Join("\\r\\n", enErrors);
                 }
             }
+            AllInOne x = new AllInOne();
+            return View();
+        }
+
+        public HttpResponseMessage PostComplex()
+        {
+            var response = new HttpResponseMessage(HttpStatusCode.Created);
+            return response;
         }
     }
 }
