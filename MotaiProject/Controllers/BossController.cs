@@ -320,7 +320,7 @@ namespace MotaiProject.Controllers
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();

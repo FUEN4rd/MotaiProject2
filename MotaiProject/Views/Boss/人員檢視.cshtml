@@ -7,68 +7,33 @@
 
 <h2>人員檢視</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.eAccount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.eName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ePosition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sPosition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.eBranch)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sBranch)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ePassword)
-        </th>
-        <th></th>
-    </tr>
+
+<table class="table table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.eName)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.ePosition)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.eBranch)
+            </th>
+        </tr>
+    </thead>
+    
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.eAccount)
-        </td>
-        <td>
+        <td scope="row">
             @Html.DisplayFor(modelItem => item.eName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ePosition)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.sPosition)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.eBranch)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.sBranch)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ePassword)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
