@@ -228,7 +228,6 @@ namespace MotaiProject.Controllers
             tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == promotion.PromotionId);
             if (Promo != null)
             {
-                Promo.pADimage = promotion.pADimage;
                 Promo.pCondition = promotion.pCondition;
                 Promo.pDiscount = promotion.pDiscount;
                 Promo.pPromotionDeadline = promotion.pPromotionDeadline;
@@ -240,9 +239,36 @@ namespace MotaiProject.Controllers
                 Promo.PromotionName = promotion.PromotionName;
                 Promo.pDiscountCode = promotion.pDiscountCode;
                 Promo.PromotionId = promotion.PromotionId;
+
+                var uploagFile = promotion.upLoadimage;
+                if (uploagFile.ContentLength > 0)
+                {
+                    FileInfo file = new FileInfo(uploagFile.FileName);
+                    string photoName = Guid.NewGuid().ToString() + file.Extension;
+                    uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                    Promo.pADimage = "../../images/" + Url.Content(photoName);
+                    dbContext.tPromotions.Add(Promo);
+                }
+
                 dbContext.SaveChanges();
             }
             return RedirectToAction("員工看消息");
         }
+
+        public JsonResult 修改消息讀圖(int PromotionId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);
+            if (Promo.pADimage != null)
+            {
+                string image = Url.Content(Promo.pADimage);
+                return Json(new { images = image });
+            }
+            else
+            {
+                return Json(new { images = "" });
+            }
+        }
+
     }
 }

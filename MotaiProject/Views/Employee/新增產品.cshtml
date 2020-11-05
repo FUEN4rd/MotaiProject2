@@ -122,19 +122,20 @@
 <script>
     const filefield = document.querySelector('#filefield');
     const container = document.querySelector('#img-container');
-
-
+    
     const onReaderLoaded = function (event) {
         let tpl = `<img class="myimg" src="${event.target.result}" alt="" width="450px">`;
-        container.innerHTML += tpl;
+        container.innerHTML += tpl;      
     }
 
     filefield.addEventListener('change', function (event) {
-
+        container.innerHTML = "";
         for (let i = 0; i < filefield.files.length; i++) {
             const reader = new FileReader();
             reader.addEventListener('load', onReaderLoaded);
             reader.readAsDataURL(filefield.files[i]);
+          
         }
+
     });
 </script>
