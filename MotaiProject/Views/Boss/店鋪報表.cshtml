@@ -6,6 +6,7 @@
     int datacolor = 0;
     List<string> L = new List<string>
 {"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
+    List<string> Wname = new List<string> { "礁溪 - 麒麟門市", "鶯歌 - 光點門市", "台南 - 新仁門市", "高雄 - 鳳山門市", "苗栗 - 三義門市" };
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <h2>店鋪報表</h2>
@@ -70,7 +71,7 @@
             {
                 <text>
                 {
-                    label: '@kvp.Key',
+                    label: '@Wname[kvp.Key-1]',
                     backgroundColor: '@L[datacolor]',
                     borderColor: '@L[datacolor]',
                     data: [
