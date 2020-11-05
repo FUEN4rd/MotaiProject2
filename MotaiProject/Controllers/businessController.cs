@@ -228,7 +228,6 @@ namespace MotaiProject.Controllers
             tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == promotion.PromotionId);
             if (Promo != null)
             {
-                //Promo.pADimage = promotion.pADimage;
                 Promo.pCondition = promotion.pCondition;
                 Promo.pDiscount = promotion.pDiscount;
                 Promo.pPromotionDeadline = promotion.pPromotionDeadline;
@@ -259,15 +258,17 @@ namespace MotaiProject.Controllers
         public JsonResult 修改消息讀圖(int PromotionId)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);           
+            tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);
             if (Promo.pADimage != null)
-            { 
-                return Json(new { images = Promo.pADimage });
+            {
+                string image = Url.Content(Promo.pADimage);
+                return Json(new { images = image });
             }
             else
             {
                 return Json(new { images = "" });
             }
         }
+
     }
 }

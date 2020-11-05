@@ -28,33 +28,31 @@ namespace MotaiProject.ViewModels
         public int PromotionId { get; set; }
     }
 
-    public class Createpromotion
-    {
-        [DisplayName("類別")]
-        public int PromotinoCategory { get; set; }
-        [DisplayName("活動介紹")]
-        public string PromotionDescription { get; set; }
-        [DisplayName("圖片")]
-        public string pADimage { get; set; }
-        [DisplayName("網頁連結")]
-        public string pPromotionWeb { get; set; }
-        [DisplayName("公告日期")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public System.DateTime pPromotionPostDate { get; set; }
+    //public class Createpromotion
+    //{
+    //    [DisplayName("類別")]
+    //    public int PromotinoCategory { get; set; }
+    //    [DisplayName("活動介紹")]
+    //    public string PromotionDescription { get; set; }
+    //    [DisplayName("圖片")]
+    //    public string pADimage { get; set; }
+    //    [DisplayName("網頁連結")]
+    //    public string pPromotionWeb { get; set; }
+    //    [DisplayName("公告日期")]
+    //    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+    //    public System.DateTime pPromotionPostDate { get; set; }
 
-        public int PromotionId { get; }
-        public string PromotionName { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public System.DateTime pPromotionStartDate { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public System.DateTime pPromotionDeadline { get; set; }
-        public string pDiscountCode { get; set; }
-        public string pDiscount { get; set; }
-        public string pCondition { get; set; }
+    //    public int PromotionId { get; }
+    //    public string PromotionName { get; set; }
+    //    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+    //    public System.DateTime pPromotionStartDate { get; set; }
+    //    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+    //    public System.DateTime pPromotionDeadline { get; set; }
+    //    public string pDiscountCode { get; set; }
+    //    public string pDiscount { get; set; }
+    //    public string pCondition { get; set; }
 
-    }
-
-
+    //}
 
 
     public class DetailPromotionViewModel
@@ -91,9 +89,9 @@ namespace MotaiProject.ViewModels
         public System.DateTime pPromotionDeadline { get; set; }
 
         [DisplayName("消息圖片")]
-        public HttpPostedFileBase upLoadimage { get; set; }
         public string pADimage { get; set; }
-
+        public HttpPostedFileBase upLoadimage { get; set; }
+     
         public IEnumerable<SelectListItem> Categories { get; set; }
 
     }
