@@ -16,6 +16,13 @@
         #wrapper {
             display: flex;
         }
+        body {
+            background: url("/images/Employee_login.png");
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
 
             #wrapper #content-wrapper {
                 background-color: #f8f9fc;
@@ -95,13 +102,15 @@
 
         </ul>
         <div class="container body-content;">
-            @RenderBody()
+            <div style="background-color:rgba(255, 255, 255,0.3) ;width:960px; border-radius:10px; margin-top:50px;">
+                @RenderBody()
+            </div>
             <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - 墨臺</p>
             </footer>
         </div>
-    </div>
+        </div>
 
     <script src="../../Scripts/jquery-3.5.1.min.js"></script>
     <script src="../../Scripts/jquery.validate.min.js"></script>

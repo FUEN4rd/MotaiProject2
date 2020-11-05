@@ -12,23 +12,25 @@
 }
 
 <h2>人事首頁</h2>
-<div class="row">
-    <div class="card" id="collapseExample">
-        <div class="card-body" style="background-color:azure">
-            <div>
-                舊密碼
-                <div class="col-md-10 card-text">
-                    @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "oldpass" } })
+<div class="container">
+    <div class="row">
+        <div class="card" id="collapseExample">
+            <div class="card-body" style="background-color:azure">
+                <div>
+                    舊密碼
+                    <div class="col-md-10 card-text">
+                        @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "oldpass" } })
+                    </div>
                 </div>
-            </div>
-            <div>
-                新密碼
-                <div class="col-md-10 card-text">
-                    @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "newpass" } })
+                <div>
+                    新密碼
+                    <div class="col-md-10 card-text">
+                        @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control card-text", @id = "newpass" } })
+                    </div>
                 </div>
+                <button class="btn btn-danger" id="changepassword" onclick="changepassword()" style="margin-top:10px">修改密碼</button>
+                <p id="warning"></p>
             </div>
-            <button class="btn btn-danger" id="changepassword" onclick="changepassword()" style="margin-top:10px">修改密碼</button>
-            <p id="warning"></p>
         </div>
     </div>
 </div>
