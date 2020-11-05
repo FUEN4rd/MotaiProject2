@@ -588,6 +588,7 @@
     <Content Include="Views\business\新增消息.cshtml" />
     <Content Include="Views\People\人員檢視.cshtml" />
     <Content Include="Views\Boss\店鋪報表.cshtml" />
+    <Content Include="Views\People\修改員工.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

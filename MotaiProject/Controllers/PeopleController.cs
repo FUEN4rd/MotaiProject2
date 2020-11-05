@@ -44,7 +44,7 @@ namespace MotaiProject.Controllers
             foreach(var item in empall)
             {
                 EmployeeViewModels employeeModel = new EmployeeViewModels();
-                
+                employeeModel.EmployeeId = item.EmployeeId;
                 employeeModel.eAccount = item.eAccount;
                 employeeModel.eBranch = item.eBranch;
                 employeeModel.eName = item.eName;
@@ -66,6 +66,7 @@ namespace MotaiProject.Controllers
             empall.eName = empse.eName;
             empall.eBranch = empse.eBranch;
             empall.ePosition = empse.ePosition;
+            empall.EmployeeId = empse.EmployeeId;
             return View(empall);
         }
         [HttpPost]
@@ -75,6 +76,7 @@ namespace MotaiProject.Controllers
             {
                 MotaiDataEntities db = new MotaiDataEntities();
                 tEmployee emp = db.tEmployees.Find(employee.EmployeeId);
+                EmployeeViewModels empview = new EmployeeViewModels();
                 if (emp != null)
                 {
                     emp.eBranch = employee.eBranch;
@@ -82,7 +84,7 @@ namespace MotaiProject.Controllers
                     emp.eName = employee.eName;
                     db.SaveChanges();
                 }
-                return RedirectToAction("People首頁");
+                return RedirectToAction("人員檢視");
             }
 
             return RedirectToAction("員工登入");
