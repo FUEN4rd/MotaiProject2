@@ -12,6 +12,9 @@
 </p>
 <table class="table" style="overflow:hidden">
     <tr>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.DiaryId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.dDate)
         </th>
@@ -32,6 +35,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td style="display:none">
+                @Html.DisplayFor(model=>item.DiaryId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dDate)
             </td>
