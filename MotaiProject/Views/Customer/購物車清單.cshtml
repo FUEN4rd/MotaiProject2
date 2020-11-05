@@ -112,69 +112,138 @@
 
             @foreach (var item in Model.Carts)
             {
-                <tr>
-                    <td scope="row">
-                        @Html.DisplayFor(modelItem => item.pName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pIntPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sProductQty)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.pTotal)
-                    </td>
-                    <td>                        
-                        @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
-    new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
-                    </td>
-                </tr>
+            <tr>
+                <td style="display:none">
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td scope="row">
+                    @Html.DisplayFor(modelItem => item.pName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pIntPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sProductQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pTotal)
+                </td>
+                <td>
+                    @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
+new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
+                </td>
+            </tr>
                 count += item.pTotal;
             }
         </tbody>
     </table>
     </div>
+<div>
+    <div style="display:inline-grid">
+        <div>
+            <input type="radio" id="customerAddress" name="Address" value="1">
+            <label for="customerAddress">自家住宅</label>
+            <p id="cAddress">@cust.cAddress</p>
+        </div>
+        <div>
+            <input type="radio" id="storeAddress" name="Address" value="2">
+            <label for="storeAddress">門市</label>
+            @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
+        </div>
+    </div>
     <div>
+        <ul>
+            <li>
+                1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
+                <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
+            </li>
+            <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
+            <li> 3.不同帳號的交易紀錄無法移轉。</li>
+        </ul>
+    </div>
+
+    <div>
+        訂單資訊
+        <hr />
+        <div>小計: 新台幣<b id="info"></b>元</div>
+        <script>
+                document.querySelector("#info").innerHTML = @count;
+
+        </script>
+        運費
+        <br />
+        折扣
+        <br />
         <div style="display:inline-grid">
             <div>
-                <input type="radio" id="customerAddress" name="Address" value="1">
-                <label for="cash">自家住宅</label>
-                <p id="cAddress">@cust.cAddress</p>
+                <input type="radio" id="cash" name="payType" value="1">
+                <label for="cash">現金</label>
             </div>
             <div>
-                <input type="radio" id="storeAddress" name="Address" value="2">
-                <label for="creditCard">門市</label>
-                @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
+                <input type="radio" id="creditCard" name="payType" value="2">
+                <label for="creditCard">信用卡</label>
+            </div>
+            <div>
+                <input type="radio" id="opay" name="payType" value="3">
+                <label for="opay">歐付寶</label>
             </div>
         </div>
-        <div>
-            <ul>
-                <li>
-                    1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
-                    <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
-                </li>
-                <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
-                <li> 3.不同帳號的交易紀錄無法移轉。</li>
-            </ul>
-        </div>
-
-        <div>
-            訂單資訊
-            <hr />
-            <div>小計: 新台幣<b id="info"></b>元</div>
-            <script>
-                document.querySelector("#info").innerHTML = @count;
-                
-            </script>
-            運費
-            <br />
-            折扣
-            <br />
-            <button id="webCheckout" type="button" class="btn btn-dark" onclick="">確定結帳</button>
-        </div>
-
+        <button id="webCheckout" type="button" class="btn btn-dark">確定結帳</button>
     </div>
+    <script>
+
+    $("#webCheckout").click(function () {
+        var table = document.getElementById("buyData");
+        var cAddress = $("#cAddress").text();
+        var total = $("#info").text();
+        var store = $("#WarehouseNameId").text();
+        var method = $("input[name='Address']:checked").val();
+        var shipaddress;
+        if (method == 1) {
+            shipaddress = cAddress;
+        } else {
+            shipaddress = store;
+        }
+        var payType = $("input[name='payType']:checked").val();
+        var rowArr = new Object;
+        for (let i = 0; i < table.rows.length; i++) {
+            rowArr[i] = new Object;
+            rowArr[i] = {
+                Id: table.rows[i].cells[0].innerHTML.split("\n")[1],
+                Name: table.rows[i].cells[1].innerHTML.split("\n")[1],
+                Price: table.rows[i].cells[2].innerHTML.split("\n")[1],
+                Quantity: table.rows[i].cells[3].innerHTML.split("\n")[1],
+            }
+        }
+        console.log(rowArr);
+        var webPayData = {
+            totalPay: total,
+            shipAddress: shipaddress,
+            Items: rowArr,
+            payType: payType,
+        }
+        $.ajax({
+                url: "@Url.Action("webOrder", "Order")",
+                type: "POST",
+            data: { "payData": webPayData },
+            success: function (data) {
+                console.log(data);
+                $.ajax({
+                    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
+                    type: "POST",
+                    data: {
+                        "MerchantID": data.MerchantID,
+                        "Send": data.Send,
+                    },
+                    success: function (caca) {
+
+                    }
+                })
+                }
+            });
+    });
+    </script>
+</div>
     <div class="container">
         <div class="row">
             <div class="wrapper">
@@ -270,41 +339,4 @@
         });
     </script>
 
-<script>    
-    $("#webCheckout").click(function () {
-        var table = document.getElementById("buyData");
-        var cAddress = $("#cAddress").val();
-        var total = $("#info").val();
-        var store = $("#WarehouseNameId").val();
-        var method = $("input[name='Address']:checked").val();
-        var shipaddress;
-        if (method == 1) {
-            shipaddress = cAddress;
-        } else {
-            shipaddress = store;
-        }
-        var rowArr = new Array(table.rows.length);
-        for (const i = 0; i < table.rows.length; i++) {
-            var cellArr = new Array(3);
-            for (const j = 0; j < 3; j++) {
-                cellArr.push(table.rows[i].cells[j].innerHTML);
-            }
-            rowArr.push(cellArr);
-        }
-        var webPayData = {
-            totalPay: total,
-            shipAddress: shipaddress,
-            Items: rowArr,
-        }
-        $.ajax({
-                url: "@Url.Action("webOrder", "Order")",
-                type: "POST",
-            data: { "payData": webPayData },
-                success: function (data) {
-                    var list = data + "<td class='order'><input id='deleteDetail' type ='button' value='刪除'/></td>";
-                    $("#detail").prepend(list);
-                }
-            });
-    });
-</script>
 

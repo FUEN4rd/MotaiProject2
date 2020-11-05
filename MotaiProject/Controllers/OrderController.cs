@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 
 namespace MotaiProject.Controllers
 {
+    [EnableCors(origins:"*",headers:"*",methods:"*")]
     public class OrderController : Controller
     {
         // GET: Order
@@ -271,9 +273,17 @@ namespace MotaiProject.Controllers
                     //oPayment.Send.OrderResultURL = "<<您要收到付款完成通知的瀏覽器端網址>>";
                     oPayment.Send.MerchantTradeNo = OrderId + Guid.NewGuid().ToString();
                     oPayment.Send.MerchantTradeDate = DateTime.Now;
-                    oPayment.Send.TotalAmount = Decimal.Parse("<<您此筆訂單的交易總金額>>");
+                    oPayment.Send.TotalAmount = Decimal.Parse(payData.totalPay);
                     oPayment.Send.TradeDesc = "感謝購買墨台商品";
-                    oPayment.Send.ChoosePayment = PaymentMethod.ALL;
+                    if(payData.payType == 1)
+                    {
+                        oPayment.Send.ChoosePayment = PaymentMethod.ATM;
+                    }
+                    else
+                    {
+                        oPayment.Send.ChoosePayment = PaymentMethod.Credit;
+                    }
+                    //oPayment.Send.ChoosePayment = PaymentMethod.ALL;
                     //oPayment.Send.Remark = "<<您要填寫的其他備註>>";
                     oPayment.Send.ChooseSubPayment = PaymentMethodItem.None;
                     oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.Yes;
@@ -289,7 +299,7 @@ namespace MotaiProject.Controllers
                             Name = item.Name,
                             Price = Decimal.Parse(item.Price),
                             Currency = "NTD",
-                            Quantity = item.Quantity,
+                            Quantity = int.Parse(item.Quantity),
                             URL = "<< 產品說明位址 >>"
                         });
                     }
@@ -300,6 +310,7 @@ namespace MotaiProject.Controllers
                     /* 產生產生訂單 Html Code 的方法 */
                     string szHtml = String.Empty;
                     enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
+                    return Json(new { opay = oPayment });
                 }
             }
             catch (Exception ex)

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-
+using System.Web.Http.Cors;
 
 namespace MotaiProject.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomerController : Controller
     {
         // GET: Customer
@@ -266,6 +267,7 @@ namespace MotaiProject.Controllers
                     tProduct cartProd = dbContext.tProducts.Where(p => p.ProductId == items.sProductId).FirstOrDefault();
                     StatusCartViewModel cartC = new StatusCartViewModel();
                     cartC.StatusId = items.StatusId;
+                    cartC.ProductId = items.sProductId;
                     cartC.pName = cartProd.pName;
                     cartC.pPrice = cartProd.pPrice;
                     cartC.sProductQty = items.sProductQty;
