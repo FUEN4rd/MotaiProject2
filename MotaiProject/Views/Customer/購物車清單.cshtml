@@ -92,16 +92,16 @@
         <thead>
             <tr>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.pName)
+                    @Html.DisplayNameFor(model => model.Carts.First().pName)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.pPrice)
+                    @Html.DisplayNameFor(model => model.Carts.First().pPrice)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.sProductQty)
+                    @Html.DisplayNameFor(model => model.Carts.First().sProductQty)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.pTotal)
+                    @Html.DisplayNameFor(model => model.Carts.First().pTotal)
                 </th>
                 <th scope="col">
                     刪除
@@ -162,9 +162,9 @@
         <div>
             訂單資訊
             <hr />
-            <div id="info"></div>
+            <div>小計: 新台幣<b id="info"></b>元</div>
             <script>
-                document.querySelector("#info").innerHTML = "小計: 新台幣" +@count+"元";
+                document.querySelector("#info").innerHTML = @count;
                 
             </script>
             運費
@@ -274,6 +274,7 @@
     $("#webCheckout").click(function () {
         var table = document.getElementById("buyData");
         var cAddress = $("#cAddress").val();
+        var total = $("#info").val();
         var store = $("#WarehouseNameId").val();
         var method = $("input[name='Address']:checked").val();
         var shipaddress;
@@ -282,11 +283,18 @@
         } else {
             shipaddress = store;
         }
+        var rowArr = new Array(table.rows.length);
         for (const i = 0; i < table.rows.length; i++) {
-
+            var cellArr = new Array(3);
+            for (const j = 0; j < 3; j++) {
+                cellArr.push(table.rows[i].cells[j].innerHTML);
+            }
+            rowArr.push(cellArr);
         }
         var webPayData = {
+            totalPay: total,
             shipAddress: shipaddress,
+            Items: rowArr,
         }
         $.ajax({
                 url: "@Url.Action("webOrder", "Order")",

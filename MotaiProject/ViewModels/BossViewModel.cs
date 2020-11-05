@@ -8,20 +8,38 @@ namespace MotaiProject.ViewModels
 {
     public class BossViewModel
     {
-        public favorViewModel favorV { get; set; }
-        public buyViewModel buyV{ get; set; }
+        public List<favorViewModel> favorV { get; set; }
+        public List<buyViewModel> buyV{ get; set; }
         
     }
 
     public class favorViewModel
     {
-        public int favorID { get; set; }
+        [DisplayName("產品名稱")]
+        public string pName { get; set; }
         public int faverCount { get; set; }
+        //public List<string> psImage { get; set; }
+        //public List<HttpPostedFileBase> pImage { get; set; }
+        public string epsImage
+        {
+            get; set;
+        }
+        [DisplayName("分類")]
+        public string psCategory { get; set; }
     }
     public class buyViewModel
     {
-        public int buyID { get; set; }
+        [DisplayName("產品名稱")]
+        public string pName { get; set; }
         public int buyCount { get; set; }
+        //public List<string> psImage { get; set; }
+        //public List<HttpPostedFileBase> pImage { get; set; }
+        public string epsImage
+        {
+            get; set;
+        }
+        [DisplayName("分類")]
+        public string psCategory { get; set; }
     }
 
 

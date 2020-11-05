@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AllPay.Payment.Integration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -35,8 +36,16 @@ namespace MotaiProject.ViewModels
     }
     public class WebPay
     {
+        public string totalPay { get; set; }
         public string shipAddress { get; set; }
-        public List<StatusCartGoToPayViewModel> Carts { get; set; }
+        public List<ProductItem> Items { get; set; }
+    }
+    public class ProductItem
+    {
+        public string Name { get; set; }
+        public string Price { get; set; }
+        public int Quantity { get; set; }
+        public string URL { get; set; }
     }
     //訂單付款
     public class Orderpay

@@ -18,10 +18,15 @@ namespace MotaiProject.ViewModels
         public string eName { get; set; }
         [DisplayName("員工職位")]
         public int ePosition { get; set; }
+        public string pPosition { get; set; }
+
         [DisplayName("員工部門")]
         public int eBranch { get; set; }
         [DisplayName("員工密碼")]
-        public string ePassword { get; set; }        
+        public string ePassword { get; set; }
+        
+        public IEnumerable<SelectListItem> Branch { get; set; }
+        public IEnumerable<SelectListItem> Position { get; set; }
     }
 
     public class EmployeeLoginViewModel
