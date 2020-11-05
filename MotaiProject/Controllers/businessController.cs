@@ -55,12 +55,9 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
-
-
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
                 foreach (var item in dlist)
                 {
@@ -109,9 +106,9 @@ namespace MotaiProject.Controllers
                 diary.dDiaryNote = data.dDiaryNote;
                 db.tDiaries.Add(diary);
                 db.SaveChanges();
-                return RedirectToAction("員工首頁");
+                return RedirectToAction("工作日誌");
             }
-            return RedirectToAction("員工首頁");
+            return RedirectToAction("員工登入","Employee");
         }
 
         public ActionResult 修改日誌(int id)
