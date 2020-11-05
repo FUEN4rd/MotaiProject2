@@ -213,7 +213,7 @@ namespace MotaiProject.Controllers
             Promo.sPromotinoCategory = promotion.tPromotionCategory.PromtionCategory;
             Promo.pCategory = promotion.PromotinoCategory;
             var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetPositionName(categories);
             Promo.Categories = Cateitems;
             return View(Promo);
         }

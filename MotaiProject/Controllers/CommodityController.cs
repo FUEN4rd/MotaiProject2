@@ -59,15 +59,15 @@ namespace MotaiProject.Controllers
             }
             ProductViewModel newprod = new ProductViewModel();
             var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetPositionName(categories);
             newprod.Categories = Cateitems;
 
             var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
+            List<SelectListItem> Mateitems = new ProductRespoitory().GetPositionName(materials);
             newprod.Materials = Mateitems;
 
             var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
+            List<SelectListItem> Sizeitems = new ProductRespoitory().GetPositionName(sizes);
             newprod.Sizes = Sizeitems;
             return View(newprod);
         }
@@ -139,13 +139,13 @@ namespace MotaiProject.Controllers
             Prod.pIntroduction = product.pIntroduction;
             Prod.pPrice = product.pPrice;
             var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetPositionName(categories);
             Prod.Categories = Cateitems;
             var materials = new ProductRespoitory().GetMaterialAll();
-            List<SelectListItem> Mateitems = new ProductRespoitory().GetSelectList(materials);
+            List<SelectListItem> Mateitems = new ProductRespoitory().GetPositionName(materials);
             Prod.Materials = Mateitems;
             var sizes = new ProductRespoitory().GetSizeAll();
-            List<SelectListItem> Sizeitems = new ProductRespoitory().GetSelectList(sizes);
+            List<SelectListItem> Sizeitems = new ProductRespoitory().GetPositionName(sizes);
             Prod.Sizes = Sizeitems;
             return View(Prod);
 
@@ -262,7 +262,7 @@ namespace MotaiProject.Controllers
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 model.sEmployeeId = emp.EmployeeId;
                 var productNames = productRespoitory.GetNameAll();
-                List<SelectListItem> productlist = productRespoitory.GetSelectList(productNames);
+                List<SelectListItem> productlist = productRespoitory.GetPositionName(productNames);
                 var warehouseNames = commodityRespoitory.GetWarehouseAll();
                 List<SelectListItem> warehouselist = commodityRespoitory.GetSelectList(warehouseNames);
                 detail.WareHouseNames = warehouselist;

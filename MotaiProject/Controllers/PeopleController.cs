@@ -39,16 +39,15 @@ namespace MotaiProject.Controllers
             }
             tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
-
             List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
             foreach(var item in empall)
             {
                 EmployeeViewModels employeeModel = new EmployeeViewModels();
                 employeeModel.EmployeeId = item.EmployeeId;
-                employeeModel.eAccount = item.eAccount;
-                employeeModel.eBranch = item.eBranch;
+                employeeModel.eAccount = item.eAccount;                
                 employeeModel.eName = item.eName;
-                employeeModel.ePosition = item.ePosition;
+                employeeModel.sPosition = item.tPosition.pPosition;
+                employeeModel.sBranch = item.tBranch.bBranch;
                 employees.Add(employeeModel);
             }
             return View(employees);
@@ -63,8 +62,13 @@ namespace MotaiProject.Controllers
             MotaiDataEntities dbcontext = new MotaiDataEntities();
             tEmployee empse = dbcontext.tEmployees.FirstOrDefault(c=>c.EmployeeId==id);
             EmployeeViewModels empall = new EmployeeViewModels();
+            var vBranch = new ProductRespoitory().GetBranchName();
+            List<SelectListItem> Branch = new ProductRespoitory().GetPositionName(vBranch);
+            empall.Branch = Branch;
+            var vPosition = new ProductRespoitory().GetPositionName();
+            List<SelectListItem> Position = new ProductRespoitory().GetPositionName(vPosition);
+            empall.Position= Position;
             empall.eName = empse.eName;
-            empall.eBranch = empse.eBranch;
             empall.ePosition = empse.ePosition;
             empall.EmployeeId = empse.EmployeeId;
             return View(empall);
@@ -116,7 +120,7 @@ namespace MotaiProject.Controllers
             n新員工.eBranch = create員工.eBranch;
             dbContext.tEmployees.Add(n新員工);
             dbContext.SaveChanges();
-            return RedirectToAction("員工首頁");
+            return RedirectToAction("人員檢視");
         }
         public ActionResult 工作日誌()
         {

@@ -18,10 +18,10 @@ namespace MotaiProject.ViewModels
         public string eName { get; set; }
         [DisplayName("員工職位")]
         public int ePosition { get; set; }
-        public string pPosition { get; set; }
-
+        public string sPosition { get; set; }
         [DisplayName("員工部門")]
         public int eBranch { get; set; }
+        public string sBranch { get; set; }
         [DisplayName("員工密碼")]
         public string ePassword { get; set; }
         

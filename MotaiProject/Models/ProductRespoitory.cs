@@ -67,6 +67,17 @@ namespace MotaiProject.Models
             return Prod;
         }
 
+        public Dictionary<int, string> GetBranchName()
+        {
+            var branch = dbContext.tBranches.OrderBy(b => b.bBranch);
+            return branch.ToDictionary(bid => bid.BranchId, bn => bn.bBranch);
+        }
+        public Dictionary<int, string> GetPositionName()
+        {
+            var position = dbContext.tPositions.OrderBy(b => b.pPosition);
+            return position.ToDictionary(bid => bid.PositionId, bn => bn.pPosition);
+        }
+
         public Dictionary<int, string> GetNameAll()
         {
             var pNames = dbContext.tProducts.OrderBy(p => p.pName);
@@ -91,7 +102,7 @@ namespace MotaiProject.Models
             return sizes.ToDictionary(mid => mid.pSizeId, mn => mn.Size);
         }
 
-        public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)
+        public List<SelectListItem> GetPositionName(Dictionary<int, string> dictionary)
         {
             List<SelectListItem> selectLists = new List<SelectListItem>();
             foreach (var items in dictionary)
