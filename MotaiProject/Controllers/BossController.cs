@@ -127,7 +127,7 @@ namespace MotaiProject.Controllers
                                   Pcount = j.Count(),
                                   Pname = j.Key.pName,
                                   Pcategory=j.Key.Category
-                                }).ToList();
+                                }).OrderByDescending(j=>j.Pcount).ToList();
             var buyOrder = (from i in tOrderDetails
                             group i by new
                             {
@@ -141,7 +141,7 @@ namespace MotaiProject.Controllers
                                 Pcount = j.Sum(p => p.oProductQty),
                                 Pname = j.Key.pName,
                                 Pcategory = j.Key.Category
-                            }).ToList();
+                            }).OrderByDescending(j => j.Pcount).ToList();
             //List<BossViewModel> BossV = new List<BossViewModel>();
             BossViewModel boss = new BossViewModel();
             List<favorViewModel> favorV = new List<favorViewModel>();
@@ -186,16 +186,7 @@ namespace MotaiProject.Controllers
                 buy.pName = item.Pname;
                 buyV.Add(buy);
             }
-            //foreach(var item in favorV)
-            //{
-            //    BossViewModel bv = new BossViewModel();
-            //    foreach (var item2 in buyV)
-            //    {
-            //        bv.favorV = item;
-            //        bv.buyV = item2;
-            //    }
-            //    BossV.Add(bv);
-            //}
+
             boss.buyV = buyV;
             boss.favorV = favorV;
 
