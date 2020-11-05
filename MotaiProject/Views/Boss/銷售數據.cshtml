@@ -1,27 +1,85 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.BossViewModel>
+﻿@model MotaiProject.ViewModels.BossViewModel
 
 @{
-    ViewBag.Title = "銷售數據";
+    ViewBag.Title = "商品數據";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
-
-<h2>銷售數據(商品的)</h2>
+<style>
+    .table img{
+        width:300px;
+        height:300px;
+    }
+</style>
+<h2>銷售數據</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            圖片
+        </th>
+        <th>
+            產品名
+        </th>
+        <th>
+            分類
+        </th>
+        <th>
+            總收藏數量
+        </th>
     </tr>
 
-@foreach (var item in Model) {   
+    @foreach (var item in Model.favorV)
+    {
     <tr>
-        <td>            
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        <td>
+            <img src="@item.epsImage" />
+        </td>
+        <td>
+            @item.pName
+        </td>
+        <td>
+            @item.psCategory
+        </td>
+        <td>
+            @item.faverCount
         </td>
     </tr>
-}
+    }
+</table>
+<table class="table">
+    <tr>
+        <th>
+            圖片
+        </th>
+        <th>
+            產品名
+        </th>
+        <th>
+            分類
+        </th>
+        <th>
+            總購買數量
+        </th>
+    </tr>
+    @foreach (var item in Model.buyV)
+    {
+        <tr>
+            <td>
+                <img src="@item.epsImage" />
+            </td>
+            <td>
+                @item.pName
+            </td>
+            <td>
+                @item.psCategory
+            </td>
+            <td>
+                @item.buyCount
+            </td>
+        </tr>
+    }
 
 </table>
