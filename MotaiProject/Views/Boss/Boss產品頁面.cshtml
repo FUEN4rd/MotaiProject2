@@ -9,46 +9,45 @@
 
 <table class="table">
     <tr>
-        <th style="display:none">
+        <th scope="col" class="text-nowrap" style="display:none">
             @Html.DisplayNameFor(model => model.ProductId)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.psImage)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pNumber)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pName)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pCategory)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pMaterial)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pSize)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pLxWxH)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pWeight)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pPrice)
         </th>
-        <th>
+        <th scope="col" class="text-nowrap">
             @Html.DisplayNameFor(model => model.pQty)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td style="display:none">
+            <td scope="row" style="display:none">
                 @Html.DisplayFor(modelItem => item.ProductId)
             </td>
             <td>
@@ -81,9 +80,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.pQty)
             </td>
-            <td>
-                @Html.ActionLink("修改產品", "修改產品", new { id = item.ProductId })
-            </td>
+
         </tr>
     }
 

@@ -8,7 +8,7 @@
 <h2>修改消息</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("修改消息", "business", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -19,12 +19,12 @@
 
 
     @*<div class="form-group">
-        @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control "} })
-            @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
+            @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control "} })
+                @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,22 +43,12 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.pADimage, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pADimage, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.pADimage, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.pPromotionWeb, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.pPromotionWeb, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.pPromotionWeb, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
 
     <div class="form-group">
         @Html.LabelFor(model => model.PromotionName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -107,9 +97,19 @@
             @Html.ValidationMessageFor(model => model.pPromotionDeadline, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.upLoadimage, htmlAttributes: new { @class = "control-label col-md-2" })      
+        <div class="col-md-10">
+            <input type="file" id="filefield" name="upLoadimage" multiple accept="image/*" />
+        </div>
+        <div id="img-container" name="upLoadimage"></div>
+    </div>
+
     <div style="display:none">
         @Html.EditorFor(model => model.PromotionId, new { htmlAttributes = new { @class = "form-control" } })
     </div>
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Save" class="btn btn-default" />
@@ -125,3 +125,55 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    //const filefield = document.querySelector('#filefield');
+    //const container = document.querySelector('#img-container');
+
+    //const onReaderLoaded = function (event) {
+    //    let tpl = `<img class="myimg" src="${event.target.result}" alt="" width="450px">`;
+    //    container.innerHTML = tpl;
+    //}
+
+    //filefield.addEventListener('change', function (event) {
+    //    const reader = new FileReader();
+    //    reader.addEventListener('load', onReaderLoaded);
+    //    reader.readAsDataURL(filefield.files[0]);
+    //});
+
+
+    const filefield = document.querySelector('#filefield');
+    const container = document.querySelector('#img-container');
+    $(document).ready(function () {
+        fetch('@Url.Action("修改消息讀圖", "business")', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            body: `PromotionId=${@Model.PromotionId}`
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            //for (let i = 0; i < data.images.length; i++) {
+                onReader(data.images);
+            //}
+        });
+    });
+    const onReader = function (event) {
+        let tpl = `<img class="myimg" src="${event}" alt="" width="450px">`;
+        container.innerHTML = tpl;
+    }
+    const onReaderLoaded = function (event) {
+        let tpl = `<img class="myimg" src="${event.target.result}" alt="" width="450px">`;
+        container.innerHTML = tpl;
+    }
+
+    filefield.addEventListener('change', function (event) {
+        container.innerHTML = "";
+        console.log(filefield.files);
+        //for (let i = 0; i < filefield.files.length; i++) {
+            const reader = new FileReader();
+            reader.addEventListener('load', onReaderLoaded);
+            reader.readAsDataURL(filefield.files[i]);
+        //}
+    });
+</script>

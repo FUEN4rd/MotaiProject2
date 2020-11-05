@@ -35,20 +35,19 @@ namespace MotaiProject.Controllers
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
-
             List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
             foreach(var item in empall)
             {
                 EmployeeViewModels employeeModel = new EmployeeViewModels();
-                
-                employeeModel.eAccount = item.eAccount;
-                employeeModel.eBranch = item.eBranch;
+                employeeModel.EmployeeId = item.EmployeeId;
+                employeeModel.eAccount = item.eAccount;                
                 employeeModel.eName = item.eName;
-                employeeModel.ePosition = item.ePosition;
+                employeeModel.sPosition = item.tPosition.pPosition;
+                employeeModel.sBranch = item.tBranch.bBranch;
                 employees.Add(employeeModel);
             }
             return View(employees);
@@ -58,14 +57,20 @@ namespace MotaiProject.Controllers
         {
             if (CSession關鍵字.SK_LOGINED_EMPLOYEE==null)
             {
-                return RedirectToAction("People首頁");
+                return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbcontext = new MotaiDataEntities();
             tEmployee empse = dbcontext.tEmployees.FirstOrDefault(c=>c.EmployeeId==id);
             EmployeeViewModels empall = new EmployeeViewModels();
+            var vBranch = new ProductRespoitory().GetBranchName();
+            List<SelectListItem> Branch = new ProductRespoitory().GetPositionName(vBranch);
+            empall.Branch = Branch;
+            var vPosition = new ProductRespoitory().GetPositionName();
+            List<SelectListItem> Position = new ProductRespoitory().GetPositionName(vPosition);
+            empall.Position= Position;
             empall.eName = empse.eName;
-            empall.eBranch = empse.eBranch;
             empall.ePosition = empse.ePosition;
+            empall.EmployeeId = empse.EmployeeId;
             return View(empall);
         }
         [HttpPost]
@@ -82,10 +87,10 @@ namespace MotaiProject.Controllers
                     emp.eName = employee.eName;
                     db.SaveChanges();
                 }
-                return RedirectToAction("People首頁");
+                return RedirectToAction("人員檢視");
             }
 
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
         }
 
 
@@ -93,9 +98,17 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
-            return View();
+
+            EmployeeViewModels empall = new EmployeeViewModels();
+            var vBranch = new ProductRespoitory().GetBranchName();
+            List<SelectListItem> Branch = new ProductRespoitory().GetPositionName(vBranch);
+            empall.Branch = Branch;
+            var vPosition = new ProductRespoitory().GetPositionName();
+            List<SelectListItem> Position = new ProductRespoitory().GetPositionName(vPosition);
+            empall.Position = Position;
+            return View(empall);
         }
         [HttpPost]
         public ActionResult 新增員工(EmployeeViewModels create員工)
@@ -105,6 +118,8 @@ namespace MotaiProject.Controllers
             {
                 create員工.EmployeeId = 1;
             }
+            
+
             tEmployee n新員工 = new tEmployee();
             n新員工.eAccount = create員工.eAccount;
             n新員工.EmployeeId = create員工.EmployeeId;
@@ -113,8 +128,10 @@ namespace MotaiProject.Controllers
             n新員工.ePosition = create員工.ePosition;
             n新員工.eBranch = create員工.eBranch;
             dbContext.tEmployees.Add(n新員工);
+
+
             dbContext.SaveChanges();
-            return RedirectToAction("員工首頁");
+            return RedirectToAction("人員檢視");
         }
         public ActionResult 工作日誌()
         {
@@ -141,7 +158,7 @@ namespace MotaiProject.Controllers
                 }
                 return View(DSaw);
             }
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
         }
         
         private ProductRespoitory productRespotiory = new ProductRespoitory();
@@ -149,7 +166,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
@@ -171,7 +188,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
             promotionlist = promotionRespoitory.GetPromotionAll();

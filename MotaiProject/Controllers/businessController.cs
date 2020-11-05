@@ -33,7 +33,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
@@ -55,12 +55,9 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
-
-
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
                 foreach (var item in dlist)
                 {
@@ -70,13 +67,14 @@ namespace MotaiProject.Controllers
                     show.dDate = item.dDate;
                     show.dWeather = item.dWeather;
                     show.dDiaryNote = item.dDiaryNote;
+                    show.DiaryId = item.DiaryId;
                     show.dWarehouseNameId = item.dWarehouseNameId;
                     show.dWarehouseName = warename.WarehouseName;
                     DSaw.Add(show);
                 }
                 return View(DSaw);
             }
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
         }
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         public ActionResult 新增日誌()
@@ -109,25 +107,57 @@ namespace MotaiProject.Controllers
                 diary.dDiaryNote = data.dDiaryNote;
                 db.tDiaries.Add(diary);
                 db.SaveChanges();
-                return RedirectToAction("員工首頁");
+                return RedirectToAction("工作日誌");
             }
-            return RedirectToAction("員工首頁");
+            return RedirectToAction("員工登入","Employee");
         }
 
         public ActionResult 修改日誌(int id)
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 MotaiDataEntities db = new MotaiDataEntities();
-                tDiary diary = db.tDiaries.Where(d => d.dEmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
+                tDiary diary = db.tDiaries.FirstOrDefault(m=>m.DiaryId==id);
                 DiaryViewModel Diary = new DiaryViewModel();
-                //Diary.Diary = diary;
+                Diary.DiaryId = id;
+                Diary.dEmployeeId = diary.dEmployeeId;
+                Diary.eName = diary.tEmployee.eName;
+                Diary.dWeather = diary.dWeather;
+                Diary.dDate = diary.dDate;
+                Diary.dDiaryNote = diary.dDiaryNote;
+                Diary.dWarehouseNameId = diary.dWarehouseNameId;
+
+                var warehouses = commodityRespoitory.GetWarehouseAll();
+                List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);
+                Diary.warehouses = WareList;
                 return View(Diary);
             }
-            return RedirectToAction("員工登入");
+            return RedirectToAction("員工登入", "Employee");
 
         }
+        [HttpPost]
+        public ActionResult 修改日誌(DiaryViewModel m)
+        {
+
+            MotaiDataEntities dbcontext = new MotaiDataEntities();
+            tDiary diary = dbcontext.tDiaries.Find(m.DiaryId);
+            if (diary != null)
+            {
+                diary.DiaryId = m.DiaryId;
+                diary.dEmployeeId = m.dEmployeeId;
+                diary.dDate = m.dDate;
+                diary.dDiaryNote = m.dDiaryNote;
+                diary.dWeather = m.dWeather;
+                diary.dWarehouseNameId = m.dWarehouseNameId;
+                dbcontext.SaveChanges();
+                return RedirectToAction("工作日誌");
+            }
+
+            return View("業務看產品頁面");
+        }
+
+
+
         public ActionResult 業務會計查詢()
         {
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
@@ -213,7 +243,7 @@ namespace MotaiProject.Controllers
             Promo.sPromotinoCategory = promotion.tPromotionCategory.PromtionCategory;
             Promo.pCategory = promotion.PromotinoCategory;
             var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetSelectList(categories);
+            List<SelectListItem> Cateitems = new ProductRespoitory().GetPositionName(categories);
             Promo.Categories = Cateitems;
             return View(Promo);
         }
@@ -228,7 +258,6 @@ namespace MotaiProject.Controllers
             tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == promotion.PromotionId);
             if (Promo != null)
             {
-                Promo.pADimage = promotion.pADimage;
                 Promo.pCondition = promotion.pCondition;
                 Promo.pDiscount = promotion.pDiscount;
                 Promo.pPromotionDeadline = promotion.pPromotionDeadline;
@@ -240,9 +269,36 @@ namespace MotaiProject.Controllers
                 Promo.PromotionName = promotion.PromotionName;
                 Promo.pDiscountCode = promotion.pDiscountCode;
                 Promo.PromotionId = promotion.PromotionId;
+
+                var uploagFile = promotion.upLoadimage;
+                if (uploagFile.ContentLength > 0)
+                {
+                    FileInfo file = new FileInfo(uploagFile.FileName);
+                    string photoName = Guid.NewGuid().ToString() + file.Extension;
+                    uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                    Promo.pADimage = "../../images/" + Url.Content(photoName);
+                    dbContext.tPromotions.Add(Promo);
+                }
+
                 dbContext.SaveChanges();
             }
             return RedirectToAction("員工看消息");
         }
+
+        public JsonResult 修改消息讀圖(int PromotionId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tPromotion Promo = dbContext.tPromotions.FirstOrDefault(p => p.PromotionId == PromotionId);
+            if (Promo.pADimage != null)
+            {
+                string image = Url.Content(Promo.pADimage);
+                return Json(new { images = image });
+            }
+            else
+            {
+                return Json(new { images = "" });
+            }
+        }
+
     }
 }

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.EmployeeViewModels>
+
+@{
+    ViewBag.Title = "人員檢視";
+    Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+}
+
+<h2>人員檢視</h2>
+
+
+<table class="table table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.eName)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.ePosition)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.eBranch)
+            </th>
+        </tr>
+    </thead>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td scope="row">
+            @Html.DisplayFor(modelItem => item.eName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sPosition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sBranch)
+        </td>
+    </tr>
+}
+
+</table>

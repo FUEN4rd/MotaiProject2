@@ -113,50 +113,83 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            var favorOrder = (from i in dbContext.tFavorites
-                                group i by i.fProductId into j
-                                select new
-                                {
-                                    Pid = j.Key,
-                                    Pcount = j.Count(),
-                                }).ToList();
-            var buyOrder = (from i in dbContext.tOrderDetails
-                            group i by i.oProductId into j
+            List<tFavorite> tFavorites = dbContext.tFavorites.ToList();
+            List<tOrderDetail> tOrderDetails = dbContext.tOrderDetails.ToList();
+            var favorOrder = (from i in tFavorites
+                              group i by new {
+                                  i.fProductId,
+                                  i.tProduct.pName,
+                                  i.tProduct.tProductCategory.Category,
+                              } into j
+                              select new
+                              {
+                                  Pid = j.Key.fProductId,
+                                  Pcount = j.Count(),
+                                  Pname = j.Key.pName,
+                                  Pcategory=j.Key.Category
+                                }).OrderByDescending(j=>j.Pcount).ToList();
+            var buyOrder = (from i in tOrderDetails
+                            group i by new
+                            {
+                                i.oProductId,
+                                i.tProduct.pName,
+                                i.tProduct.tProductCategory.Category,
+                            } into j
                             select new
                             {
-                                Pid = j.Key,
-                                Pcount = j.Sum(p => p.oProductQty)
-                            }).ToList();
-            List<BossViewModel> BossV = new List<BossViewModel>();
-            BossViewModel trans = new BossViewModel();
+                                Pid = j.Key.oProductId,
+                                Pcount = j.Sum(p => p.oProductQty),
+                                Pname = j.Key.pName,
+                                Pcategory = j.Key.Category
+                            }).OrderByDescending(j => j.Pcount).ToList();
+            BossViewModel boss = new BossViewModel();
             List<favorViewModel> favorV = new List<favorViewModel>();
             List<buyViewModel> buyV = new List<buyViewModel>();
-
             foreach(var item in favorOrder)
             {  
-                favorViewModel favor = new favorViewModel();               
-                favor.favorID = item.Pid;
+                favorViewModel favor = new favorViewModel();
+                tProduct p = new tProduct();
+                List<string> pimage = new List<string>();
+                p.ProductId = item.Pid;
+                pimage = productRespotiory.GetProductShowImages(p);
+                if (pimage.Count > 0)
+                {
+                    favor.epsImage = Url.Content(pimage[0]);
+                }
+                else
+                {
+                    favor.epsImage = "";
+                }
                 favor.faverCount = item.Pcount;
+                favor.psCategory = item.Pcategory;
+                favor.pName = item.Pname;
                 favorV.Add(favor);
             }
             foreach (var item in buyOrder)
             {
                 buyViewModel buy = new buyViewModel();
-                buy.buyID = item.Pid;
+                tProduct p = new tProduct();
+                List<string> pimage = new List<string>();
+                p.ProductId = item.Pid;
+                pimage = productRespotiory.GetProductShowImages(p);
+                if (pimage.Count > 0)
+                {
+                    buy.epsImage = Url.Content(pimage[0]);
+                }
+                else
+                {
+                    buy.epsImage = "";
+                }            
                 buy.buyCount = item.Pcount;
+                buy.psCategory = item.Pcategory;
+                buy.pName = item.Pname;
                 buyV.Add(buy);
             }
-            foreach(var item in favorV)
-            {
-                BossViewModel bv = new BossViewModel();
-                foreach (var item2 in buyV)
-                {
-                    bv.favorV = item;
-                    bv.buyV = item2;
-                }
-                BossV.Add(bv);
-            }
-            return View(BossV);
+
+            boss.buyV = buyV;
+            boss.favorV = favorV;
+
+            return View(boss);
 
         }
 
@@ -248,7 +281,7 @@ namespace MotaiProject.Controllers
         }
 
         public ActionResult 店鋪報表()
-        {//未測試
+        {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入", "Employee");
@@ -278,8 +311,31 @@ namespace MotaiProject.Controllers
                     ware.waretem.Add(wNAME, temD);
                 }
             }
-            //應該會在view多寫一組list判斷店鋪名
             return View(ware);
+        }
+
+        private EmployeeRespoitory employeeRespoitory = new EmployeeRespoitory();
+        public ActionResult 人員檢視()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
+            tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+            var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
+            List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
+            foreach (var item in empall)
+            {
+                EmployeeViewModels employeeModel = new EmployeeViewModels();
+                employeeModel.EmployeeId = item.EmployeeId;
+                employeeModel.eAccount = item.eAccount;
+                employeeModel.eName = item.eName;
+                employeeModel.sPosition = item.tPosition.pPosition;
+                employeeModel.sBranch = item.tBranch.bBranch;
+                employees.Add(employeeModel);
+            }
+            return View(employees);
         }
     }
 }

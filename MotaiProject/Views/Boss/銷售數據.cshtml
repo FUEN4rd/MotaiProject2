@@ -1,27 +1,166 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.BossViewModel>
+﻿@model MotaiProject.ViewModels.BossViewModel
 
 @{
-    ViewBag.Title = "銷售數據";
+    ViewBag.Title = "商品數據";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
+    List<string> L = new List<string>
+{"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
+    int datacolor = 0;
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<style>
+    .table img {
+        width: 300px;
+        height: 300px;
+    }
+</style>
+<h2>銷售數據</h2>
 
-<h2>銷售數據(商品的)</h2>
+@*<table class="table">
+        <tr>
+            <th>
+                圖片
+            </th>
+            <th>
+                產品名
+            </th>
+            <th>
+                分類
+            </th>
+            <th>
+                總收藏數量
+            </th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-    </tr>
+        @foreach (var item in Model.favorV)
+        {
+            <tr>
+                <td>
+                    <img src="@item.epsImage" />
+                </td>
+                <td>
+                    @item.pName
+                </td>
+                <td>
+                    @item.psCategory
+                </td>
+                <td>
+                    @item.faverCount
+                </td>
+            </tr>
+        }
+    </table>
+    <table class="table">
+        <tr>
+            <th>
+                圖片
+            </th>
+            <th>
+                產品名
+            </th>
+            <th>
+                分類
+            </th>
+            <th>
+                總購買數量
+            </th>
+        </tr>
+        @foreach (var item in Model.buyV)
+        {
+            <tr>
+                <td>
+                    <img src="@item.epsImage" />
+                </td>
+                <td>
+                    @item.pName
+                </td>
+                <td>
+                    @item.psCategory
+                </td>
+                <td>
+                    @item.buyCount
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {   
-    <tr>
-        <td>            
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    </table>*@
 
-</table>
+<div style="width:500px;height:500px">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+<div style="width:500px;height:500px">
+    <canvas id="myChart2" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart2 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                '購買排名',
+            ],
+            datasets: [
+            @foreach (var item in Model.buyV) {
+<Text>
+                {//再改
+                    label: '@item.pName',
+                    backgroundColor: '@L[datacolor]',
+                    borderColor: '@L[datacolor]',
+                    data: [
+
+                     @item.buyCount,
+
+                    ],
+                },</Text>
+                datacolor++;
+            }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('myChart2');
+    var myChart2 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                '收藏排名',
+            ],
+            datasets: [
+            @foreach (var item in Model.favorV) {
+<Text>
+                {
+                    label: '@item.pName',
+                    backgroundColor: '@L[datacolor]',
+                    borderColor: '@L[datacolor]',
+                    data: [
+
+                     @item.faverCount,
+
+                    ],
+                },</Text>
+                datacolor++;
+            }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+</script>

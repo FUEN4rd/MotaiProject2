@@ -68,6 +68,5 @@ namespace MotaiProject.Models
             return categories.ToDictionary(cid => cid.PromotionCategoryID, cn => cn.PromtionCategory);
         }
 
-
     }
 }
