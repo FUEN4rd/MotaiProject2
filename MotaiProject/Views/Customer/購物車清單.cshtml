@@ -232,53 +232,53 @@
             data: { "payData": webPayData },
             success: function (data) {
                 console.log(data);
-                //$.ajax({
-                //    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
-                //    headers: {
-                //        "Access- Control - Allow - Origin": "*",
-                //    },
-                //    dataType:"json",
-                //    contentType:"application/json",
-                //    type: "POST",
-                //    data: {
-                //        AllInOne: data
-                //        //MerchantID: dataparse.MerchantID,
-                //        //MerchantTradeNo: dataparse.Send.MerchantTradeNo,
-                //        //MerchantTradeDate: dataparse.Send.MerchantTradeDate,
-                //        //PaymentType: "aio",
-                //        //Items: dataparse.Send.Items,
-                //        //TotalAmount: dataparse.Send.TotalAmount,
-                //        //TradeDesc: dataparse.Send.TradeDesc,
-                //        //ChoosePayment: dataparse.Send.ChoosePayment,
-                //        //ReturnURL: dataparse.Send.ReturnURL
-                //    },
-                //    success: function (caca) {
-                //        //window.location.href = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
-                //        console.log("345");
-                //    },
-                //    error: function (jqXHR, exception) {
-                //        var msg = '';
-                //        if (jqXHR.status === 0) {
-                //            msg = 'Not connect.\n Verify Network.';
-                //        } else if (jqXHR.status == 404) {
-                //            msg = 'Requested page not found. [404]';
-                //        } else if (jqXHR.status == 500) {
-                //            msg = 'Internal Server Error [500].';
-                //        } else if (exception === 'parsererror') {
-                //            msg = 'Requested JSON parse failed.';
-                //        } else if (exception === 'timeout') {
-                //            msg = 'Time out error.';
-                //        } else if (exception === 'abort') {
-                //            msg = 'Ajax request aborted.';
-                //        } else {
-                //            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                //        }
-                //        $('#post').html(msg);
-                //    },
-                //    complete: function () {
-                //        console.log("123");
-                //    }
-                //})
+                $.ajax({
+                    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
+                    headers: {
+                        "Access- Control - Allow - Origin": "*",
+                    },
+                    dataType:"json",
+                    contentType:"application/json",
+                    type: "POST",
+                    data: {
+                        data
+                        //MerchantID: dataparse.MerchantID,
+                        //MerchantTradeNo: dataparse.Send.MerchantTradeNo,
+                        //MerchantTradeDate: dataparse.Send.MerchantTradeDate,
+                        //PaymentType: "aio",
+                        //Items: dataparse.Send.Items,
+                        //TotalAmount: dataparse.Send.TotalAmount,
+                        //TradeDesc: dataparse.Send.TradeDesc,
+                        //ChoosePayment: dataparse.Send.ChoosePayment,
+                        //ReturnURL: dataparse.Send.ReturnURL
+                    },
+                    success: function (caca) {
+                        //window.location.href = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                        console.log("345");
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        $('#post').html(msg);
+                    },
+                    complete: function () {
+                        console.log("123");
+                    }
+                })
                 }
             });
     });

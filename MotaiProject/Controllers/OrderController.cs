@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Http.Cors;
 using System.Web.Mvc;
@@ -260,6 +261,8 @@ namespace MotaiProject.Controllers
         }
         public ActionResult webOrder(WebPay payData)
         {
+            WebClient remote = new WebClient();
+            remote.Encoding = Encoding.UTF8;
             List<string> enErrors = new List<string>();
             try
             {
@@ -274,8 +277,8 @@ namespace MotaiProject.Controllers
                     oPayment.MerchantID = "2000132";
                     /* 基本參數 */
                     oPayment.Send.ReturnURL = "https://192.168.32.79" + Url.Action("ordernotice", "Order");
-                    //oPayment.Send.ClientBackURL = "<<您要歐付寶返回按鈕導向的瀏覽器端網址>>";
-                    //oPayment.Send.OrderResultURL = "<<您要收到付款完成通知的瀏覽器端網址>>";
+                    oPayment.Send.ClientBackURL = "http://localhost:50720/";
+                    oPayment.Send.OrderResultURL = "<<您要收到付款完成通知的瀏覽器端網址>>";
                     string[] trade = Guid.NewGuid().ToString().Split('-');
                     string tradeno="";
                     foreach(var items in trade)
@@ -283,7 +286,7 @@ namespace MotaiProject.Controllers
                         tradeno += items;
                     }
                     oPayment.Send.MerchantTradeNo = OrderId + tradeno.Substring(0,16);
-                    oPayment.Send.MerchantTradeDate = DateTime.Now;
+                    oPayment.Send.MerchantTradeDate = DateTime.Now.AddSeconds(20);
                     oPayment.Send.TotalAmount = Decimal.Parse(payData.totalPay);
                     oPayment.Send.TradeDesc = "感謝購買墨台商品";
                     if(payData.payType == 1)
@@ -296,15 +299,15 @@ namespace MotaiProject.Controllers
                         oPayment.Send.ChoosePayment = PaymentMethod.Credit;
                     }
                     //oPayment.Send.ChoosePayment = PaymentMethod.ALL;
-                    //oPayment.Send.Remark = "<<您要填寫的其他備註>>";
+                    oPayment.Send.Remark = "饒了我吧";
                     oPayment.Send.ChooseSubPayment = PaymentMethodItem.None;
                     oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.Yes;
                     oPayment.Send.HoldTrade = HoldTradeType.No;
                     oPayment.Send.DeviceSource = DeviceType.PC;
                     oPayment.Send.UseRedeem = UseRedeemFlag.No; //購物金/紅包折抵
-                    //oPayment.Send.IgnorePayment = "<<您不要顯示的付款方式>>"; // 例如財付通:Tenpay
+                    oPayment.Send.IgnorePayment = ""; // 例如財付通:Tenpay
                     // 加入選購商品資料。
-                    foreach(var item in payData.Items)
+                    foreach (var item in payData.Items)
                     {
                         oPayment.Send.Items.Add(new Item()
                         {
@@ -322,8 +325,8 @@ namespace MotaiProject.Controllers
                     /* 產生產生訂單 Html Code 的方法 */
                     string szHtml = String.Empty;
                     enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
-                    return RedirectToRoute(oPayment.ServiceURL);
-                    //return RedirectToRoute("https://payment-stage.opay.tw/Cashier/AioCheckOut/V5", oPayment);
+                    //string response = remote.UploadString("https://payment-stage.opay.tw/Cashier/AioCheckOut/V5", Json(oPayment).ToString());
+                    return View(oPayment);
                 }
             }
             catch (Exception ex)
