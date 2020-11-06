@@ -103,6 +103,14 @@ namespace MotaiProject.Models
             Order.sWarehouseName = item.tWarehouseName.WarehouseName;
             Order.seName = item.tEmployee.eName;
             Order.scName = item.tCustomer.cName;
+
+            //var receivableMoney = from tp in dbContext.tOrderPays
+            //                      from tpt in dbContext.tOrderPayTypes
+            //                      where tp.oPayType == tpt.oPayTypeId
+            //                      select
+
+
+            //                      Order.card = item.tOrderPays.
             return Order;
         }
 
