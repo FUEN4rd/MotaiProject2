@@ -6,17 +6,27 @@
 }
 
 <h2>會計查詢</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<style>
+    .linkdisabled {
+        cursor: text;
+    }
+</style>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+    <label class="form-check-label" for="inlineCheckbox1">1</label>
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+    <label class="form-check-label" for="inlineCheckbox2">2</label>
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+    <label class="form-check-label" for="inlineCheckbox3">3</label>
+</div>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.OrderId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oCustomerId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.oAddress)
@@ -28,67 +38,128 @@
             @Html.DisplayNameFor(model => model.oDeliverDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.oEmployeeId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.oCheck)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.oCheckDate)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.cNote)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.oPromotionId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cNote)
+            @Html.DisplayNameFor(model => model.spDiscount)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.oWarehouseName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sWarehouseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oEmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oCustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.scName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.receivable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.received)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.surplus)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oCustomerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oDeliverDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oEmployeeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oCheck)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oCheckDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oPromotionId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cNote)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.oWarehouseName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oDeliverDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oCheck)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oCheckDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cNote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oPromotionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.spDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oWarehouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sWarehouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oEmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.seName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oCustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.scName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.receivable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.received)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surplus)
+            </td>
+            <td>
+                @*@Html.ActionLink("審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-default linkdisabled" })*@
+
+                @if (item.surplus <= 0)
+                {
+                    @Html.ActionLink("待審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-default" })
+                }
+                else if (item.oCheck != null)
+                {
+                    <div>已審核</div>
+                }
+                else
+                {
+                    <div>未完成</div>
+                }
+            </td>
+        </tr>
+    }
 
 </table>
+<script>
+    if ($("#inlineCheckbox1").checked = true) { };
+
+</script>
