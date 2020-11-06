@@ -55,6 +55,12 @@ namespace MotaiProject.ViewModels
             get;set;
         }
 
+        [DisplayName("總分類")]
+        public List<string> AllCategory { get; set; }
+        [DisplayName("總材質")]
+        public List<string> AllMaterial { get; set; }
+        [DisplayName("總規格")]
+        public List<string> AllSize { get; set; }
 
 
         public IEnumerable<SelectListItem> Categories { get; set; }
