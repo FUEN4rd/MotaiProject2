@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>
 
 @{
-    ViewBag.Title = "員工看產品頁面";
+    ViewBag.Title = "倉儲看產品頁面";
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
 
-<h2>員工看產品頁面</h2>
+<h2>倉儲看產品頁面</h2>
 
 <p>
     @Html.ActionLink("新增", "新增產品")
@@ -23,6 +23,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.pName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pIntroduction)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.pCategory)
@@ -54,13 +57,16 @@
             @Html.DisplayFor(modelItem => item.ProductId)
         </td>
         <td>
-            <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90"/>
+            <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pIntroduction)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pCategory)
@@ -84,7 +90,7 @@
             @Html.DisplayFor(modelItem => item.pQty)
         </td>
         <td>
-            @Html.ActionLink("修改產品", "修改產品", new { id = item.ProductId })            
+            @Html.ActionLink("修改產品", "修改產品", new { id = item.ProductId })
         </td>
     </tr>
 }

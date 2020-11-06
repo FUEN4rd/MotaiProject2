@@ -579,7 +579,6 @@
     <Content Include="Views\business\業務會計查詢.cshtml" />
     <Content Include="Views\business\業務看產品頁面.cshtml" />
     <Content Include="Views\People\People首頁.cshtml" />
-    <Content Include="Views\People\人事看產品頁面.cshtml" />
     <Content Include="Views\People\員工登入.cshtml" />
     <Content Include="Views\People\新增員工.cshtml" />
     <Content Include="Views\Shared\LayoutAccountant.cshtml" />
@@ -595,10 +594,9 @@
     <Content Include="Views\Employee\員工看消息.cshtml" />
     <Content Include="Views\Accountant\員工看消息.cshtml" />
     <Content Include="Views\business\員工看消息.cshtml" />
-    <Content Include="Views\People\員工看消息.cshtml" />
     <Content Include="Views\business\修改消息.cshtml" />
     <Content Include="Views\Shared\LayoutCommodity.cshtml" />
-    <Content Include="Views\Commodity\員工看產品頁面.cshtml" />
+    <Content Include="Views\Commodity\倉儲看產品頁面.cshtml" />
     <Content Include="Views\Commodity\新增產品.cshtml" />
     <Content Include="Views\Commodity\修改產品.cshtml" />
     <Content Include="Views\Commodity\Commodity首頁.cshtml" />
@@ -609,8 +607,11 @@
     <Content Include="Views\Boss\人員檢視.cshtml" />
     <Content Include="Views\Order\ordernotice.cshtml" />
     <Content Include="Views\Order\webOrder.cshtml" />
-    <Content Include="Views\Accountant\會計查詢.cshtml" />
-    <Content Include="Views\Accountant\會計審核.cshtml" />
+    
+    
+    <Content Include="Views\Commodity\出貨單建立.cshtml" />
+    <Content Include="Views\Commodity\進貨單查詢.cshtml" />
+    <Content Include="Views\Commodity\出貨單查詢.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.ShipSelectViewModel>
+
+@{
+    ViewBag.Title = "出貨單查詢";
+    Layout = "~/Views/Shared/LayoutCommodity.cshtml";
+}
+
+<h2>出貨單查詢</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipSerialValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipNote)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipSerialValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipNote)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDetails.First().ProductNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDetails.First().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDetails.First().OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDetails.First().sQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDetails.First().WareHouseName)
+            </th>
+        </tr>
+        foreach (var itemdetail in item.ShipDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.ProductNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.sQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.WareHouseName)
+                </td>
+            </tr>
+        }
+    }
+</table>

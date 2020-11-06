@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.OrderShipShowViewModel>
+
+@{
+    ViewBag.Title = "出貨單建立";
+    Layout = "~/Views/Shared/LayoutCommodity.cshtml";
+}
+
+<h2>出貨單建立</h2>
+<form method="post">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.oAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.oDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.oCheck)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.oCheckDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cNote)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="radio" name="SelectOrder" value="@Html.DisplayFor(modelItem => item.OrderId)" />
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oCheck)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.oCheckDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cNote)
+                </td>
+            </tr>
+        }
+    </table>
+    <table id="OrderDetail" class="table"></table>
+    <input type="submit" value="新增出貨單" />
+</form>
+<script>
+    $("input[name='SelectOrder']").change(function () {
+        var orderId = $("input[name='SelectOrder']:checked").val();
+        $.ajax({
+            url:"@Url.Action("showOrderDetail", "Commodity")",
+            type: "POST",
+            data: { "OrderId": orderId },
+            success: function (data) {
+                console.log(data[0]);
+                const title = "<tr><th>產品編號</th>" +
+                    "<th>產品名稱</th>" +
+                    "<th>產品數量</th>" +
+                    "<th>備註</th></tr>";
+                $("#OrderDetail").html(title);
+                for (let i = 0; i < data.length; i++) {
+                    var Num = data[i].ProductNum;
+                    var Name = data[i].ProductName;
+                    var Qty = data[i].oProductQty;
+                    var Note = data[i].oNote;
+                    if (Note == null) {
+                        Note = "";
+                    }
+                    $("#OrderDetail").append("<tr><td>" + Num + "</td>" +
+                        "<td>" + Name + "</td>" +
+                        "<td>" + Qty + "</td>" +
+                        "<td>" + Note + "</td></tr>");
+                }
+            }
+        });
+    })
+</script>

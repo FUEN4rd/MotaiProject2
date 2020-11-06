@@ -89,7 +89,6 @@ namespace MotaiProject.Controllers
                 }
                 return RedirectToAction("人員檢視");
             }
-
             return RedirectToAction("員工登入", "Employee");
         }
 
@@ -159,40 +158,7 @@ namespace MotaiProject.Controllers
                 return View(DSaw);
             }
             return RedirectToAction("員工登入", "Employee");
-        }
-        
-        private ProductRespoitory productRespotiory = new ProductRespoitory();
-        public ActionResult 人事看產品頁面()
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
-            {
-                return RedirectToAction("員工登入", "Employee");
-            }
-            List<ProductViewModel> productlist = new List<ProductViewModel>();
-            productlist = productRespotiory.GetProductAll();
-            foreach (var items in productlist)
-            {
-                if (items.psImage.Count > 0)
-                {
-                    items.epsImage = Url.Content(items.psImage[0]);
-                }
-                else
-                {
-                    items.epsImage = "";
-                }
-            }
-            return View(productlist);
-        }
-        private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
-        public ActionResult 員工看消息()
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
-            {
-                return RedirectToAction("員工登入", "Employee");
-            }
-            List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
-            promotionlist = promotionRespoitory.GetPromotionAll();
-            return View(promotionlist);
-        }
+        }        
+
     }
 }

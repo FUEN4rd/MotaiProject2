@@ -108,8 +108,6 @@ namespace MotaiProject.Models
             //                      from tpt in dbContext.tOrderPayTypes
             //                      where tp.oPayType == tpt.oPayTypeId
             //                      select
-
-
             //                      Order.card = item.tOrderPays.
             return Order;
         }

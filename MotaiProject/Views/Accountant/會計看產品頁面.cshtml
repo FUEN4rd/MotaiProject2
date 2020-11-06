@@ -23,13 +23,16 @@
             @Html.DisplayNameFor(model => model.pName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pCategory)
+            @Html.DisplayNameFor(model => model.pIntroduction)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pMaterial)
+            @Html.DisplayNameFor(model => model.psCategory)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.pSize)
+            @Html.DisplayNameFor(model => model.psMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.psSize)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.pLxWxH)
@@ -52,13 +55,16 @@
             @Html.DisplayFor(modelItem => item.ProductId)
         </td>
         <td>
-            <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90"/>
+            <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pIntroduction)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pCategory)
