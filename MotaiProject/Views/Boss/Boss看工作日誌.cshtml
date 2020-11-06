@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
 
-<h2>Boss看工作日誌</h2>
+<h2>工作日誌總覽</h2>
 
 
 <table class="table" style="overflow:hidden">
@@ -35,7 +35,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.eName)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.dWeather)
             </td>
@@ -45,10 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.dWarehouseNameId)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
 
-            </td>
         </tr>
     }
 
