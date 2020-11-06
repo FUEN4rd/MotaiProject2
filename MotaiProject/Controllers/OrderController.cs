@@ -263,6 +263,7 @@ namespace MotaiProject.Controllers
         {
             WebClient remote = new WebClient();
             remote.Encoding = Encoding.UTF8;
+            string szHtml = String.Empty;
             List<string> enErrors = new List<string>();
             try
             {
@@ -299,6 +300,7 @@ namespace MotaiProject.Controllers
                         oPayment.Send.ChoosePayment = PaymentMethod.Credit;
                     }
                     //oPayment.Send.ChoosePayment = PaymentMethod.ALL;
+                    //oPayment.Send.PaymentType;
                     oPayment.Send.Remark = "饒了我吧";
                     oPayment.Send.ChooseSubPayment = PaymentMethodItem.None;
                     oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.Yes;
@@ -306,6 +308,7 @@ namespace MotaiProject.Controllers
                     oPayment.Send.DeviceSource = DeviceType.PC;
                     oPayment.Send.UseRedeem = UseRedeemFlag.No; //購物金/紅包折抵
                     oPayment.Send.IgnorePayment = ""; // 例如財付通:Tenpay
+                    //oPayment.Send.PaymentType = "aio";
                     // 加入選購商品資料。
                     foreach (var item in payData.Items)
                     {
@@ -323,10 +326,10 @@ namespace MotaiProject.Controllers
                     /* 產生訂單 */
                     enErrors.AddRange(oPayment.CheckOut());
                     /* 產生產生訂單 Html Code 的方法 */
-                    string szHtml = String.Empty;
+                    //string szHtml = String.Empty;
                     enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
                     //string response = remote.UploadString("https://payment-stage.opay.tw/Cashier/AioCheckOut/V5", Json(oPayment).ToString());
-                    return View(oPayment);
+                    return Json(oPayment);
                 }
             }
             catch (Exception ex)
@@ -342,8 +345,8 @@ namespace MotaiProject.Controllers
                     string szErrorMessage = String.Join("\\r\\n", enErrors);
                 }
             }
-            AllInOne x = new AllInOne();
-            return View();
+            ViewBag.AllPayRedirect = szHtml;
+            return RedirectToAction("PayResult");
         }
 
         public HttpResponseMessage PostComplex()
