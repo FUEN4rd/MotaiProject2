@@ -1,110 +1,105 @@
 ﻿@model MotaiProject.ViewModels.OrderViewModel
-@using MotaiProject.Models
+
 @{
-    tEmployee Emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
     ViewBag.Title = "會計審核";
     Layout = "~/Views/Shared/LayoutAccountant.cshtml";
 }
 
 <h2>會計審核</h2>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>OrderViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.OrderId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OrderId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
-            </div>
+<div>
+    <h4>OrderViewModel</h4>
+    <hr />
+        <div>
+            @Html.DisplayNameFor(model => model.OrderId)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oCustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oCustomerId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oCustomerId, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayFor(model => model.OrderId)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oAddress, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayNameFor(model => model.oDate)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oDate, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayFor(model => model.oDate)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oDeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oDeliverDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oDeliverDate, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayNameFor(model => model.oAddress)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oEmployeeId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oEmployeeId, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayFor(model => model.oAddress)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oCheck, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oCheck, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oCheck, "", new { @class = "text-danger" })
-            </div>
+
+
+        <div>
+            @Html.DisplayNameFor(model => model.oDeliverDate)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oCheckDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oCheckDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oCheckDate, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayFor(model => model.oDeliverDate)
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.oPromotionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oPromotionId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oPromotionId, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @Html.DisplayNameFor(model => model.oCheck)
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div>
+            @Html.DisplayFor(model => model.oCheck)
         </div>
-    </div>
-}
-    <div>
-        @if (Emp.eBranch == 3)
-        {
-            @Html.ActionLink("回到會計首頁", "Accountant首頁", "Accountant");
-        }
-        
-       
-    </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <div>
+            @Html.DisplayNameFor(model => model.oCheckDate)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.oCheckDate)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cNote)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.cNote)
+        </div>
+
+        <div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.spDiscount)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.spDiscount)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.sWarehouseName)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.sWarehouseName)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.seName)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.seName)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.scName)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.scName)
+        </div>
+        <button type="button" class="btn btn-dark"style="width:30px;height:30px;" onclick="alertCheck()">審核</button>
+</div>

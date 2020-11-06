@@ -152,26 +152,45 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("訂單編號")]
         public int OrderId { get; set; }
-        [DisplayName("客戶編號")]
-        public int oCustomerId { get; set; }
         [DisplayName("訂單地址")]
         public string oAddress { get; set; }
         [DisplayName("訂單時間")]
         public DateTime oDate { get; set; }
         [DisplayName("交貨時間")]
         public Nullable<System.DateTime> oDeliverDate { get; set; }
-        [DisplayName("員工編號")]
-        public Nullable<int> oEmployeeId { get; set; }
         [DisplayName("審核")]
         public string oCheck { get; set; }
         [DisplayName("審核時間")]
         public Nullable<System.DateTime> oCheckDate { get; set; }
-        [DisplayName("優惠")]
-        public Nullable<int> oPromotionId { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }
+
+        [DisplayName("優惠")]
+        public Nullable<int> oPromotionId { get; set; }
+        [DisplayName("折扣金額")]
+        public Nullable<int> spDiscount { get; set; }
+
         [DisplayName("門市編號")]
         public int oWarehouseName { get; set; }
+        [DisplayName("門市名稱")]
+        public string sWarehouseName { get; set; }
+
+        [DisplayName("員工編號")]
+        public Nullable<int> oEmployeeId { get; set; }
+        [DisplayName("員工名字")]
+        public string seName { get; set; }
+
+        [DisplayName("客戶編號")]
+        public int oCustomerId { get; set; }
+        [DisplayName("客戶名字")]
+        public string scName { get; set; }
+
+        [DisplayName("應收帳款")]
+        public int receivable { get; set; }
+        [DisplayName("已收帳款")]
+        public int received { get; set; }
+        [DisplayName("剩餘帳款")]
+        public int surplus { get; set; }
     }
 
     public class OrderDetailViewModel
