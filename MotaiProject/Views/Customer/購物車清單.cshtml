@@ -318,7 +318,8 @@
                     //圖片需要從
                     for (let i = 1; i < 11; i++) {
                         let xx = $(`#orderimg${i}`);
-                        xx.attr("src", "https://sites.google.com/a/netcmmi.com/share/_/rsrc/1473734124982/img/png/s/star-e01.png");
+                        let S2 = data.buyOrderby[i - 1]["Pimage"];
+                        xx.attr("src", `${S2}`);
                         let S = data.buyOrderby[i-1]["Pid"];
                         xx.attr("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer")?ProductId=${S}'`)
                     }
