@@ -116,13 +116,13 @@
                         <td style="display:none" name="Id">
                             @Html.DisplayFor(modelItem => item.ProductId)
                         </td>
-                        <td scope="row" name="Name">
+                        <td scope="row">
                             @Html.DisplayFor(modelItem => item.pName)
                         </td>
-                        <td name="Price">
+                        <td>
                             @Html.DisplayFor(modelItem => item.pIntPrice)
                         </td>
-                        <td name="Quantity">
+                        <td>
                             @Html.DisplayFor(modelItem => item.sProductQty)
                         </td>
                         <td>
@@ -232,53 +232,73 @@
             data: { "payData": webPayData },
             success: function (data) {
                 console.log(data);
-                $.ajax({
-                    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
-                    headers: {
-                        "Access- Control - Allow - Origin": "*",
-                    },
-                    dataType:"json",
-                    contentType:"application/json",
-                    type: "POST",
-                    data: {
-                        data
-                        //MerchantID: dataparse.MerchantID,
-                        //MerchantTradeNo: dataparse.Send.MerchantTradeNo,
-                        //MerchantTradeDate: dataparse.Send.MerchantTradeDate,
-                        //PaymentType: "aio",
-                        //Items: dataparse.Send.Items,
-                        //TotalAmount: dataparse.Send.TotalAmount,
-                        //TradeDesc: dataparse.Send.TradeDesc,
-                        //ChoosePayment: dataparse.Send.ChoosePayment,
-                        //ReturnURL: dataparse.Send.ReturnURL
-                    },
-                    success: function (caca) {
-                        //window.location.href = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
-                        console.log("345");
-                    },
-                    error: function (jqXHR, exception) {
-                        var msg = '';
-                        if (jqXHR.status === 0) {
-                            msg = 'Not connect.\n Verify Network.';
-                        } else if (jqXHR.status == 404) {
-                            msg = 'Requested page not found. [404]';
-                        } else if (jqXHR.status == 500) {
-                            msg = 'Internal Server Error [500].';
-                        } else if (exception === 'parsererror') {
-                            msg = 'Requested JSON parse failed.';
-                        } else if (exception === 'timeout') {
-                            msg = 'Time out error.';
-                        } else if (exception === 'abort') {
-                            msg = 'Ajax request aborted.';
-                        } else {
-                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                        }
-                        $('#post').html(msg);
-                    },
-                    complete: function () {
-                        console.log("123");
+                //能跳轉頁面但提示缺少PaymentType參數，PaymentType在C#後端唯protected set
+                function post(URL, PARAMS) {
+                    var temp = document.createElement("form");
+                    temp.action = URL;
+                    temp.method = "post";
+                    temp.style.display = "none";
+                    for (var x in PARAMS) {
+                        var opt = document.createElement("textarea");
+                        opt.name = x;
+                        opt.value = PARAMS[x];
+                        // alert(opt.name)      
+                        temp.appendChild(opt);
                     }
-                })
+                    document.body.appendChild(temp);
+                    temp.submit();
+                    return temp;
+                }
+                //呼叫方法 如      
+                post('https://payment-stage.opay.tw/Cashier/AioCheckOut/V5', data);
+                //
+                //$.ajax({
+                //    url: "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5",
+                //    headers: {
+                //        "Access- Control - Allow - Origin": "*",
+                //    },
+                //    dataType:"json",
+                //    contentType:"application/json",
+                //    type: "POST",
+                //    data: {
+                //        data
+                //        //MerchantID: dataparse.MerchantID,
+                //        //MerchantTradeNo: dataparse.Send.MerchantTradeNo,
+                //        //MerchantTradeDate: dataparse.Send.MerchantTradeDate,
+                //        //PaymentType: "aio",
+                //        //Items: dataparse.Send.Items,
+                //        //TotalAmount: dataparse.Send.TotalAmount,
+                //        //TradeDesc: dataparse.Send.TradeDesc,
+                //        //ChoosePayment: dataparse.Send.ChoosePayment,
+                //        //ReturnURL: dataparse.Send.ReturnURL
+                //    },
+                //    success: function (caca) {
+                //        //window.location.href = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                //        console.log("345");
+                //    },
+                //    error: function (jqXHR, exception) {
+                //        var msg = '';
+                //        if (jqXHR.status === 0) {
+                //            msg = 'Not connect.\n Verify Network.';
+                //        } else if (jqXHR.status == 404) {
+                //            msg = 'Requested page not found. [404]';
+                //        } else if (jqXHR.status == 500) {
+                //            msg = 'Internal Server Error [500].';
+                //        } else if (exception === 'parsererror') {
+                //            msg = 'Requested JSON parse failed.';
+                //        } else if (exception === 'timeout') {
+                //            msg = 'Time out error.';
+                //        } else if (exception === 'abort') {
+                //            msg = 'Ajax request aborted.';
+                //        } else {
+                //            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                //        }
+                //        $('#post').html(msg);
+                //    },
+                //    complete: function () {
+                //        console.log("123");
+                //    }
+                //})
                 }
             });
     });

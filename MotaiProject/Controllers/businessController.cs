@@ -197,6 +197,7 @@ namespace MotaiProject.Controllers
             n消息.PromotionDescription = create消息.PromotionDescription;
             n消息.pPromotionStartDate = create消息.pPromotionStartDate;
             n消息.pPromotionDeadline = create消息.pPromotionDeadline;
+            n消息.pPromotionWeb = create消息.pPromotionWeb;
             n消息.pDiscountCode = create消息.pDiscountCode;
             n消息.pDiscount = create消息.pDiscount;
             n消息.pCondition = create消息.pCondition;
@@ -240,10 +241,11 @@ namespace MotaiProject.Controllers
             Promo.pDiscountCode = promotion.pDiscountCode;
             Promo.PromotionId = promotion.PromotionId;
 
+
             Promo.sPromotinoCategory = promotion.tPromotionCategory.PromtionCategory;
             Promo.pCategory = promotion.PromotinoCategory;
-            var categories = new ProductRespoitory().GetCategoryAll();
-            List<SelectListItem> Cateitems = new ProductRespoitory().GetPositionName(categories);
+            var categories = new PromotionRespoitory().GetPromoCategoryAll();
+            List<SelectListItem> Cateitems = commodityRespoitory.GetSelectList(categories);//???? 黑人問號
             Promo.Categories = Cateitems;
             return View(Promo);
         }
@@ -269,17 +271,12 @@ namespace MotaiProject.Controllers
                 Promo.PromotionName = promotion.PromotionName;
                 Promo.pDiscountCode = promotion.pDiscountCode;
                 Promo.PromotionId = promotion.PromotionId;
-
+                Promo.pPromotionPostDate = DateTime.Now;
                 var uploagFile = promotion.upLoadimage;
-                if (uploagFile.ContentLength > 0)
-                {
-                    FileInfo file = new FileInfo(uploagFile.FileName);
-                    string photoName = Guid.NewGuid().ToString() + file.Extension;
-                    uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
-                    Promo.pADimage = "../../images/" + Url.Content(photoName);
-                    dbContext.tPromotions.Add(Promo);
-                }
-
+                FileInfo file = new FileInfo(uploagFile.FileName);
+                string photoName = Guid.NewGuid().ToString() + file.Extension;
+                uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                Promo.pADimage = "../../images/" + Url.Content(photoName);
                 dbContext.SaveChanges();
             }
             return RedirectToAction("員工看消息");
@@ -299,6 +296,5 @@ namespace MotaiProject.Controllers
                 return Json(new { images = "" });
             }
         }
-
     }
 }
