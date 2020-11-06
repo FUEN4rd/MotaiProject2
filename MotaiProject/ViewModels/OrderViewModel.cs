@@ -191,6 +191,15 @@ namespace MotaiProject.ViewModels
         public int received { get; set; }
         [DisplayName("剩餘帳款")]
         public int surplus { get; set; }
+
+        [DisplayName("現金")]
+        public int cash { get; set; }
+        [DisplayName("信用卡")]
+        public int card { get; set; }
+        [DisplayName("代金券")]
+        public int Voucher { get; set; }
+        [DisplayName("寄售代收")]
+        public int consignment { get; set; }
     }
 
     public class OrderDetailViewModel

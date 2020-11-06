@@ -6,100 +6,70 @@
 }
 
 <h2>會計審核</h2>
-
-<div>
-    <h4>OrderViewModel</h4>
-    <hr />
+<hr />
+<div style="display:flex;justify-content:space-between">
+    <div>
         <div>
-            @Html.DisplayNameFor(model => model.OrderId)
-        </div>
-
-        <div>
+            @Html.DisplayNameFor(model => model.OrderId)：
             @Html.DisplayFor(model => model.OrderId)
         </div>
 
         <div>
-            @Html.DisplayNameFor(model => model.oDate)
-        </div>
-
-        <div>
+            @Html.DisplayNameFor(model => model.oDate)：
             @Html.DisplayFor(model => model.oDate)
         </div>
 
         <div>
-            @Html.DisplayNameFor(model => model.oAddress)
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.oAddress)
-        </div>
-
-
-
-        <div>
-            @Html.DisplayNameFor(model => model.oDeliverDate)
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.oDeliverDate)
-        </div>
-
-        <div>
-            @Html.DisplayNameFor(model => model.oCheck)
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.oCheck)
-        </div>
-
-        <div>
-            @Html.DisplayNameFor(model => model.oCheckDate)
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.oCheckDate)
-        </div>
-
-        <div>
-            @Html.DisplayNameFor(model => model.cNote)
-        </div>
-
-        <div>
-            @Html.DisplayFor(model => model.cNote)
-        </div>
-
-        <div>
-
-        <div>
-            @Html.DisplayNameFor(model => model.spDiscount)
-        </div>
-
-        <div>
+            @Html.DisplayNameFor(model => model.spDiscount)：
             @Html.DisplayFor(model => model.spDiscount)
         </div>
 
-        <div>
-            @Html.DisplayNameFor(model => model.sWarehouseName)
-        </div>
+
 
         <div>
+            @Html.DisplayNameFor(model => model.sWarehouseName)：
             @Html.DisplayFor(model => model.sWarehouseName)
         </div>
 
         <div>
-            @Html.DisplayNameFor(model => model.seName)
-        </div>
-
-        <div>
+            @Html.DisplayNameFor(model => model.seName)：
             @Html.DisplayFor(model => model.seName)
         </div>
 
         <div>
-            @Html.DisplayNameFor(model => model.scName)
+            @Html.DisplayNameFor(model => model.scName)：
+            @Html.DisplayFor(model => model.scName)
         </div>
 
         <div>
-            @Html.DisplayFor(model => model.scName)
+            @Html.DisplayNameFor(model => model.cNote)：
+            @Html.DisplayFor(model => model.cNote)
         </div>
-        <button type="button" class="btn btn-dark"style="width:30px;height:30px;" onclick="alertCheck()">審核</button>
+    </div>
+    <a class="btn btn-danger" data-toggle="modal" data-target="#checkOk" style="width:90px;height:90px;border-radius:45px;display:flex;align-items:center;justify-content:center" id="checkOkfunction">
+        審核
+    </a>
+    <!-- Modal -->
+    <div class="modal fade" id="checkOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">審核</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    確認審核，剩餘為零
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:location.href='@Url.Action("會計查詢","Accountant")'">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+
+</script>
