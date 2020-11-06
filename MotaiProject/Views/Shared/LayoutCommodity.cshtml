@@ -50,7 +50,7 @@
                     <i class="fas fa-laugh-wink"></i>
                 </li>
                 <li class="sidebar-brand-text mx-3">
-                    <span>@Html.ActionLink("會計首頁", "Commodity首頁", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
+                    <span>@Html.ActionLink("倉儲首頁", "Commodity首頁", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
 
                 </li>
             </a>
@@ -60,10 +60,26 @@
 
             <!-- Nav Item - Dashboard -->
             @*<li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+
+                <span>@Html.ActionLink("消息頁面", "員工看消息", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="buttons.html">Buttons</a>
+                    <a class="collapse-item" href="cards.html">Cards</a>
+                </div>
+            </div>
+        </li>*@
+
+
+            <!-- Nav Item - Pages Collapse Menu 葉面折疊菜單 -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-
-                    <span>@Html.ActionLink("消息頁面", "員工看消息", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
+                    <span>@Html.ActionLink("產品頁面", "倉儲看產品頁面", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -72,14 +88,24 @@
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
-            </li>*@
-
-
-            <!-- Nav Item - Pages Collapse Menu 葉面折疊菜單 -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>@Html.ActionLink("產品頁面", "員工看產品頁面", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
+                    <span>@Html.ActionLink("出貨單建立", "出貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>@Html.ActionLink("進貨單建立", "進貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
