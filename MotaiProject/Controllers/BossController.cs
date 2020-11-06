@@ -33,32 +33,32 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
-        public JsonResult ChangePassword(int EmployeeId, string ePassword, string oldpass)
-        {//要用到其他地方
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
-            {
-                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                MotaiDataEntities dbContext = new MotaiDataEntities();
-                if (emp.ePassword == oldpass)
-                {
-                    emp.ePassword = ePassword;
-                    Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = emp;
-                    tEmployee changePwd = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
-                    changePwd.ePassword = ePassword;
-                    dbContext.SaveChanges();
-                    return Json(new { result = true, msg = "更新成功" });
-                }
-                else
-                {
-                    return Json(new { result = false, msg = "舊密碼錯誤" });
-                }
+        //public JsonResult ChangePassword(int EmployeeId, string ePassword, string oldpass)
+        //{//要用到其他地方
+        //    if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+        //    {
+        //        tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+        //        MotaiDataEntities dbContext = new MotaiDataEntities();
+        //        if (emp.ePassword == oldpass)
+        //        {
+        //            emp.ePassword = ePassword;
+        //            Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = emp;
+        //            tEmployee changePwd = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(emp.EmployeeId)).FirstOrDefault();
+        //            changePwd.ePassword = ePassword;
+        //            dbContext.SaveChanges();
+        //            return Json(new { result = true, msg = "更新成功" });
+        //        }
+        //        else
+        //        {
+        //            return Json(new { result = false, msg = "舊密碼錯誤" });
+        //        }
 
-            }
-            else
-            {
-                return Json(new { result = false, msg = "請先登入" });
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        return Json(new { result = false, msg = "請先登入" });
+        //    }
+        //}
 
         public ActionResult Boss看工作日誌()
         {
