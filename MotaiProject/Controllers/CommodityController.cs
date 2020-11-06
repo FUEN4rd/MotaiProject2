@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace MotaiProject.Controllers
 {
@@ -30,7 +31,7 @@ namespace MotaiProject.Controllers
         }
 
         private ProductRespoitory productRespotiory = new ProductRespoitory();
-        public ActionResult 員工看產品頁面()
+        public ActionResult 倉儲看產品頁面()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
@@ -114,7 +115,7 @@ namespace MotaiProject.Controllers
                 }
             }
             db.SaveChanges();
-            return RedirectToAction("員工看產品頁面");
+            return RedirectToAction("倉儲看產品頁面");
         }
         public ActionResult 修改產品(int id)
         {
@@ -122,7 +123,7 @@ namespace MotaiProject.Controllers
             tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == id);
             if (product == null)
             {
-                return RedirectToAction("員工看產品頁面");
+                return RedirectToAction("倉儲看產品頁面");
             }
             EmpProductViewModel Prod = new EmpProductViewModel();
             Prod.ProductId = id;
@@ -220,7 +221,7 @@ namespace MotaiProject.Controllers
                 }
                 dbContext.SaveChanges();
             }
-            return RedirectToAction("員工看產品頁面");
+            return RedirectToAction("倉儲看產品頁面");
         }
         public JsonResult 修改產品讀圖(int ProductId)
         {
@@ -377,21 +378,125 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 進貨單查詢()
         {
-            return View();
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tStockList> tStockLists = dbContext.tStockLists.ToList();
+            List<StockSelectViewModel> stockSelects = new List<StockSelectViewModel>();
+            foreach(var item in tStockLists)
+            {
+                List<tStockDetail> tStockDetails = dbContext.tStockDetails.Where(sd => sd.sStockId.Equals(item.StockId)).ToList();
+                StockSelectViewModel select = new StockSelectViewModel();
+                List<StockSelectDetailModel> details = new List<StockSelectDetailModel>();
+                foreach(var itemdetail in tStockDetails)
+                {
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(itemdetail.sProductId)).FirstOrDefault();
+                    tWarehouseName warehouseName = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(itemdetail.sWarehouseNameId)).FirstOrDefault();
+                    StockSelectDetailModel selectDetail = new StockSelectDetailModel();
+                    selectDetail.ProductNum = product.pNumber;
+                    selectDetail.ProductName = product.pName;
+                    selectDetail.sCost = itemdetail.sCost;
+                    selectDetail.sQuantity = itemdetail.sQuantity;
+                    selectDetail.WareHouseName = warehouseName.WarehouseName;
+                    selectDetail.sNote = itemdetail.sNote;
+                    details.Add(selectDetail);
+                }
+                tEmployee employee = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(item.sEmployeeId)).FirstOrDefault();
+                select.EmployeeName = employee.eName;
+                select.sStockSerialValue = item.sStockSerialValue;
+                select.sVendor = item.sVendor;
+                select.sVendorTel = item.sVendorTel;
+                select.sStockDate = item.sStockDate;
+                select.sStockNote = item.sStockNote;
+                select.StockDetails = details;
+                stockSelects.Add(select);
+            }
+            return View(stockSelects);
         }
 
         //出貨單
         public ActionResult 出貨單建立()
         {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
-
+                List<tOrder> orderSearch = dbContext.tOrders.Where(o => o.oCheck != null).ToList();
+                List<OrderShipShowViewModel> orderShips = new List<OrderShipShowViewModel>();
+                foreach(var item in orderSearch)
+                {
+                    OrderShipShowViewModel orderShip = new OrderShipShowViewModel();
+                    orderShip.OrderId = item.OrderId;
+                    orderShip.oAddress = item.oAddress;
+                    orderShip.oCheck = item.oCheck;
+                    orderShip.oCheckDate = item.oCheckDate;
+                    orderShip.cNote = item.cNote;
+                    orderShip.oDate = DateTime.Now;
+                    orderShips.Add(orderShip);
+                }
+                return View(orderShips);
             }
-            return View();
+            return RedirectToAction("員工登入", "Employee");
         }
-        public JsonResult 出貨單建立(int i)
+        public JsonResult showOrderDetail(int OrderId)
         {
-            return Json(new { });
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tOrderDetail> orderDetailSearchs = dbContext.tOrderDetails.Where(od => od.oOrderId.Equals(OrderId)).ToList();
+            List<OrderDetailShipShowViewModel> orderDetails = new List<OrderDetailShipShowViewModel>();
+            foreach(var item in orderDetailSearchs)
+            {
+                tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(item.oProductId)).FirstOrDefault();
+                OrderDetailShipShowViewModel orderdetail = new OrderDetailShipShowViewModel();
+                orderdetail.ProductNum = product.pNumber;
+                orderdetail.ProductName = product.pName;
+                orderdetail.oProductQty = item.oProductQty;
+                orderdetail.oNote = item.oNote;
+                orderDetails.Add(orderdetail);
+            }
+            return Json(orderDetails);
+        }
+        [HttpPost]
+        public ActionResult 出貨單建立(int OrderId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                tEmployee employee = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                tStockList stockList = new tStockList();
+                stockList.sEmployeeId = employee.EmployeeId;
+                
+            }
+            return RedirectToAction("出貨單查詢");
+        }
+        public ActionResult 出貨單查詢()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tShipList> tShipLists = dbContext.tShipLists.ToList();
+            List<ShipSelectViewModel> shipSelects = new List<ShipSelectViewModel>();
+            foreach (var item in tShipLists)
+            {
+                List<tShipDetail> tShipDetails = dbContext.tShipDetails.Where(sd => sd.ShipId.Equals(item.ShipId)).ToList();
+                ShipSelectViewModel select = new ShipSelectViewModel();
+                List<ShipSelectDetailModel> details = new List<ShipSelectDetailModel>();
+                foreach (var itemdetail in tShipDetails)
+                {
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(itemdetail.sProductId)).FirstOrDefault();
+                    tWarehouseName warehouseName = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(itemdetail.sWarehouseNameId)).FirstOrDefault();
+                    tOrderDetail orderd = dbContext.tOrderDetails.Where(o => o.oOrderDetailId.Equals(itemdetail.sOrderDetailId)).FirstOrDefault();
+                    ShipSelectDetailModel selectDetail = new ShipSelectDetailModel();
+                    selectDetail.ProductNum = product.pNumber;
+                    selectDetail.ProductName = product.pName;
+                    selectDetail.OrderId = orderd.oOrderId;
+                    selectDetail.sQuantity = itemdetail.sQuantity;
+                    selectDetail.WareHouseName = warehouseName.WarehouseName;
+                    details.Add(selectDetail);
+                }
+                tEmployee employee = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(item.sEmployeeId)).FirstOrDefault();
+                select.EmployeeName = employee.eName;
+                select.ShipSerialValue = item.sShipSerialValue;
+                select.ShipDate = item.sShipDate;
+                select.ShipNote = item.sShipNote;
+                select.ShipDetails = details;
+                shipSelects.Add(select);
+            }
+            return View(shipSelects);
         }
         //調貨單
         //倉儲

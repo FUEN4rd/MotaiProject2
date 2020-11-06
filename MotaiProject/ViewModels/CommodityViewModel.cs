@@ -51,6 +51,7 @@ namespace MotaiProject.ViewModels
         public IEnumerable<SelectListItem> WareHouseInNames { get; set; }
     }
     //進貨
+    //進貨單建立
     public class StockListViewModel
     {
         public int StockId { get; set; }
@@ -67,8 +68,6 @@ namespace MotaiProject.ViewModels
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
-
-
     }
     public class StockDetailViewModel
     {
@@ -108,7 +107,39 @@ namespace MotaiProject.ViewModels
         public StockDetailViewModel StockDetail { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
     }
-
+    //進貨單查詢
+    public class StockSelectViewModel
+    {
+        [DisplayName("負責人")]
+        public string EmployeeName { get; set; }
+        [DisplayName("進貨單號")]
+        public int sStockSerialValue { get; set; }
+        [DisplayName("聯絡人")]
+        public string sVendor { get; set; }
+        [DisplayName("聯絡方式")]
+        public string sVendorTel { get; set; }
+        [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("進貨備註")]
+        public string sStockNote { get; set; }
+        public List<StockSelectDetailModel> StockDetails { get; set; }
+    }
+    public class StockSelectDetailModel
+    {
+        [DisplayName("商品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("商品名")]
+        public string ProductName { get; set; }
+        [DisplayName("成本")]
+        public decimal sCost { get; set; }
+        [DisplayName("數量")]
+        public int sQuantity { get; set; }
+        [DisplayName("倉儲名")]
+        public string WareHouseName { get; set; }
+        [DisplayName("備註")]
+        public string sNote { get; set; }
+    }
     //出貨
     public class ShipListViewModel
     {
@@ -156,5 +187,59 @@ namespace MotaiProject.ViewModels
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
 
+    }
+    //出貨單建立
+    public class OrderShipShowViewModel
+    {
+        [DisplayName("訂單編號")]
+        public int OrderId { get; set; }
+        [DisplayName("訂單地址")]
+        public string oAddress { get; set; }
+        [DisplayName("訂單時間")]
+        public DateTime oDate { get; set; }
+        [DisplayName("審核")]
+        public string oCheck { get; set; }
+        [DisplayName("審核時間")]
+        public Nullable<System.DateTime> oCheckDate { get; set; }
+        [DisplayName("備註")]
+        public string cNote { get; set; }
+    }
+    public class OrderDetailShipShowViewModel
+    {
+        [DisplayName("產品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("產品名稱")]
+        public string ProductName { get; set; }
+        [DisplayName("產品數量")]
+        public int oProductQty { get; set; }
+        [DisplayName("備註")]
+        public string oNote { get; set; }
+    }
+    //出貨單查詢
+    public class ShipSelectViewModel
+    {
+        [DisplayName("負責人")]
+        public string EmployeeName { get; set; }
+        [DisplayName("出貨單號")]
+        public int ShipSerialValue { get; set; }
+        [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime ShipDate { get { return DateTime.Now.Date; } set { } }
+        [DisplayName("出貨備註")]
+        public string ShipNote { get; set; }
+        public List<ShipSelectDetailModel> ShipDetails { get; set; }
+    }
+    public class ShipSelectDetailModel
+    {
+        [DisplayName("商品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("商品名")]
+        public string ProductName { get; set; }
+        [DisplayName("對應訂單")]
+        public int OrderId { get; set; }
+        [DisplayName("數量")]
+        public int sQuantity { get; set; }
+        [DisplayName("倉儲名")]
+        public string WareHouseName { get; set; }
     }
 }

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.StockSelectViewModel>
+
+@{
+    ViewBag.Title = "進貨單查詢";
+    Layout = "~/Views/Shared/LayoutCommodity.cshtml";
+}
+
+<h2>進貨單查詢</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sStockSerialValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sVendor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sVendorTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sStockDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sStockNote)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sStockSerialValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sVendor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sVendorTel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sStockDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sStockNote)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDetails.First().ProductNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDetails.First().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDetails.First().sCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDetails.First().sQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDetails.First().WareHouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDetails.First().sNote)
+            </th>
+        </tr>
+        foreach (var itemdetail in item.StockDetails)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => itemdetail.ProductNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => itemdetail.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => itemdetail.sCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => itemdetail.sQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => itemdetail.WareHouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => itemdetail.sNote)
+            </td>
+        </tr>
+        }
+    }
+</table>
