@@ -267,6 +267,7 @@
                 for (var i = 0; i < R.length; i++) {
                     R[i].classList.remove("thisisnotselected");
                 }
+                beSelect();
 
             } else {
                 document.getElementById(id).remove();
@@ -275,15 +276,16 @@
                 for (var i = 0; i < R.length; i++) {
                     R[i].classList.add("thisisnotselected");
                 }
+                beSelect();
             }
         }
         function b1(id, id2) {
             document.getElementById(id).remove();
             document.getElementById(id2).checked = false;
             document.getElementById(id2).parentNode.parentNode.classList.remove("bg-info");//改色
+            beSelect();
         }
         //全部加1個class 抓分類class 再把選到的東西拔掉一個class  最後設定class屬性display:none
-        //
         function cl(id) {
             document.getElementById(id).click();
         }
@@ -298,7 +300,7 @@
                     S[i].style.display = "block";
                 }
             }
-        }
+        }//改變屬性
         //console.log(document.getElementById("Nulldiv").innerHTML == "");//true
     </script>
 </content>
