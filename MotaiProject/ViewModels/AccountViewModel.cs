@@ -144,6 +144,10 @@ namespace MotaiProject.ViewModels
         public string pName { get { return this.Product.pName; } set { Product.pName = value; } }
         [DisplayName("產品單價")]
         public decimal pPrice { get { return this.Product.pPrice; } set { Product.pPrice = value; } }
+        public string epsImage
+        {
+            get; set;
+        }
     }
 
 }

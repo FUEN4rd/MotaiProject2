@@ -37,15 +37,17 @@ namespace MotaiProject.ViewModels
     public class WebPay
     {
         public string totalPay { get; set; }
+        public int payType { get; set; }
         public string shipAddress { get; set; }
         public List<ProductItem> Items { get; set; }
     }
     public class ProductItem
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
-        public int Quantity { get; set; }
-        public string URL { get; set; }
+        public string Quantity { get; set; }
+        //public string URL { get; set; }
     }
     //訂單付款
     public class Orderpay

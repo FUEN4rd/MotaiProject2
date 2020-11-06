@@ -94,29 +94,37 @@
 
 <script>
     var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
+    var myChart2 = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: [
-                 @foreach (var item in Model.buyV)
-                 {
-                     <Text>'@item.pName',</Text>
-                 }
+                '購買排名',
             ],
             datasets: [
-                {
-                         label: '總購買數量',
+            @foreach (var item in Model.buyV) {
+<Text>
+                {//再改
+                    label: '@item.pName',
                     backgroundColor: '@L[datacolor]',
                     borderColor: '@L[datacolor]',
                     data: [
-                 @foreach (var item in Model.buyV)
-                 {
-                     @item.buyCount<Text>,</Text>
-                     datacolor++;
-                 }
+
+                     @item.buyCount,
+
                     ],
-                },
+                },</Text>
+                datacolor++;
+            }
             ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
         }
     });
 </script>
@@ -131,7 +139,7 @@
             datasets: [
             @foreach (var item in Model.favorV) {
 <Text>
-                {//再改
+                {
                     label: '@item.pName',
                     backgroundColor: '@L[datacolor]',
                     borderColor: '@L[datacolor]',
@@ -144,6 +152,15 @@
                 datacolor++;
             }
             ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
         }
     });
 </script>
