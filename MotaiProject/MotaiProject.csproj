@@ -574,8 +574,6 @@
     <Content Include="Views\Boss\銷售數據.cshtml" />
     <Content Include="Views\Order\實體結帳畫面.cshtml" />
     <Content Include="Views\Accountant\Accountant首頁.cshtml" />
-    <Content Include="Views\Accountant\會計審核.cshtml" />
-    <Content Include="Views\Accountant\會計查詢.cshtml" />
     <Content Include="Views\Accountant\會計看產品頁面.cshtml" />
     <Content Include="Views\business\business首頁.cshtml" />
     <Content Include="Views\business\業務會計查詢.cshtml" />
@@ -611,6 +609,8 @@
     <Content Include="Views\Boss\人員檢視.cshtml" />
     <Content Include="Views\Order\ordernotice.cshtml" />
     <Content Include="Views\Order\webOrder.cshtml" />
+    
+    
     <Content Include="Views\Commodity\出貨單建立.cshtml" />
     <Content Include="Views\Commodity\進貨單查詢.cshtml" />
     <Content Include="Views\Commodity\出貨單查詢.cshtml" />

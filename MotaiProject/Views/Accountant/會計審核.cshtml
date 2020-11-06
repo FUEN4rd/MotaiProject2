@@ -1,110 +1,75 @@
 ﻿@model MotaiProject.ViewModels.OrderViewModel
-@using MotaiProject.Models
+
 @{
-    tEmployee Emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
     ViewBag.Title = "會計審核";
     Layout = "~/Views/Shared/LayoutAccountant.cshtml";
 }
 
 <h2>會計審核</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>OrderViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.OrderId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OrderId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oCustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oCustomerId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oCustomerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oDeliverDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oDeliverDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oDeliverDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oEmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oEmployeeId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oEmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oCheck, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oCheck, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oCheck, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oCheckDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oCheckDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oCheckDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.oPromotionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.oPromotionId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.oPromotionId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+<hr />
+<div style="display:flex;justify-content:space-between">
     <div>
-        @if (Emp.eBranch == 3)
-        {
-            @Html.ActionLink("回到會計首頁", "Accountant首頁", "Accountant");
-        }
-        
-       
-    </div>
+        <div>
+            @Html.DisplayNameFor(model => model.OrderId)：
+            @Html.DisplayFor(model => model.OrderId)
+        </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <div>
+            @Html.DisplayNameFor(model => model.oDate)：
+            @Html.DisplayFor(model => model.oDate)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.spDiscount)：
+            @Html.DisplayFor(model => model.spDiscount)
+        </div>
+
+
+
+        <div>
+            @Html.DisplayNameFor(model => model.sWarehouseName)：
+            @Html.DisplayFor(model => model.sWarehouseName)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.seName)：
+            @Html.DisplayFor(model => model.seName)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.scName)：
+            @Html.DisplayFor(model => model.scName)
+        </div>
+
+        <div>
+            @Html.DisplayNameFor(model => model.cNote)：
+            @Html.DisplayFor(model => model.cNote)
+        </div>
+    </div>
+    <a class="btn btn-danger" data-toggle="modal" data-target="#checkOk" style="width:90px;height:90px;border-radius:45px;display:flex;align-items:center;justify-content:center" id="checkOkfunction">
+        審核
+    </a>
+    <!-- Modal -->
+    <div class="modal fade" id="checkOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">審核</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    確認審核，剩餘為零
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:location.href='@Url.Action("會計查詢","Accountant")'">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>

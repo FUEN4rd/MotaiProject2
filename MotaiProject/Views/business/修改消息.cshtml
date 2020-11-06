@@ -18,13 +18,13 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-    @*<div class="form-group">
+    <div class="form-group">
             @Html.LabelFor(model => model.pPromotionPostDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control "} })
+                @Html.EditorFor(model => model.pPromotionPostDate, new { htmlAttributes = new { @class = "form-control " , @readonly = "readonly" } } )
                 @Html.ValidationMessageFor(model => model.pPromotionPostDate, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -85,7 +85,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.pPromotionStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionStartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.EditorFor(model => model.pPromotionStartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" ,@id="start" } })
             @Html.ValidationMessageFor(model => model.pPromotionStartDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -93,7 +93,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.pPromotionDeadline, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionDeadline, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+            @Html.EditorFor(model => model.pPromotionDeadline, new { htmlAttributes = new { @class = "form-control", @type = "date" ,@id="dead"} })
             @Html.ValidationMessageFor(model => model.pPromotionDeadline, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -176,4 +176,21 @@
             reader.readAsDataURL(filefield.files[i]);
         //}
     });
+
+
+    const change = document.getElementById('dead');
+
+    change.addEventListener('blur', function ckdate() {
+        var starttime = $('#start').val();
+        var endtime = $('#dead').val();
+        var start = new Date(starttime.replace("-", "/").replace("-", "/"));
+        var end = new Date(endtime.replace("-", "/").replace("-", "/"));
+        if (end < start) {
+            alert('结束日期不能小于開始日期！');
+            return false;
+        }
+        else {
+            return true;
+        }
+    })
 </script>

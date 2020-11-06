@@ -52,6 +52,9 @@
                 .show > .btn-brown_me.dropdown-toggle:focus {
                     box-shadow: 0 0 0 0.2rem#F2EDD8;
                 }
+        .dropdown-item{
+            margin-bottom:4px;
+        }
     </style>
     <div class="container">
         <!-- 篩選器頭 -->
@@ -65,7 +68,7 @@
                 <div class="form-group">
                     <a class="dropdown-item" href="#" onclick="cl(`C1`)">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="佛像" id="C1"
+                            <input type="checkbox" class="form-check-input d-none" value="佛像" id="C1"
                                    onclick="bt1(this.value,this.id+1,this.id)">
                             <label class="form-check-label" for="dropdownCheck">
                                 佛像
@@ -74,7 +77,7 @@
                     </a>
                     <a class="dropdown-item" href="#" onclick="cl(`C2`)">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="餐具" id="C2"
+                            <input type="checkbox" class="form-check-input d-none" value="餐具" id="C2"
                                    onclick="bt1(this.value,this.id+1,this.id)">
                             <label class="form-check-label" for="dropdownCheck">
                                 餐具
@@ -84,31 +87,6 @@
                 </div>
             </div>
 
-            <!-- <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            材質
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <div class="form-group">
-                <a class="dropdown-item" href="#">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="杉木" id="W1"
-                            onclick="bt1(this.value,this.id+1,this.id)">
-                        <label class="form-check-label" for="dropdownCheck">
-                            杉木
-                        </label>
-                    </div>
-                </a>
-                <a class="dropdown-item" href="#">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="和闐玉" id="W2"
-                            onclick="bt1(this.value,this.id+1,this.id)">
-                        <label class="form-check-label" for="dropdownCheck">
-                            和闐玉
-                        </label>
-                    </div>
-                </a>
-            </div>
-        </div> -->
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -118,7 +96,7 @@
                     <div class="form-group">
                         <a class="dropdown-item" href="#" onclick="cl(`W1`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="杉木" id="W1"
+                                <input type="checkbox" class="form-check-input d-none" value="杉木" id="W1"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     杉木
@@ -127,7 +105,7 @@
                         </a>
                         <a class="dropdown-item" href="#">
                             <div class="form-check" onclick="cl(`W2`)">
-                                <input type="checkbox" class="form-check-input" value="和闐玉" id="W2"
+                                <input type="checkbox" class="form-check-input d-none" value="和闐玉" id="W2"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     和闐玉
@@ -147,7 +125,7 @@
                     <div class="form-group">
                         <a class="dropdown-item" href="#" onclick="cl(`P1`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="NTD. 5,000以下" id="P1"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD. 5,000以下" id="P1"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     NTD. 5,000以下
@@ -156,7 +134,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P2`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="NTD. 5,000~50,000" id="P2"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD. 5,000~50,000" id="P2"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     NTD. 5,000~50,000
@@ -165,7 +143,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P3`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="NTD. 50,000~200,000" id="P3"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD. 50,000~200,000" id="P3"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     NTD. 50,000~200,000
@@ -174,7 +152,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P4`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="NTD. 200,000~1,000,000"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD. 200,000~1,000,000"
                                        id="P4" onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     NTD. 200,000~1,000,000
@@ -183,7 +161,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P5`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="NTD. 1,000,000以上" id="P5"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD. 1,000,000以上" id="P5"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     NTD. 1,000,000以上
@@ -204,7 +182,7 @@
                     <div class="form-group">
                         <a class="dropdown-item" href="#" onclick="cl(`S1`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="配飾" id="S1"
+                                <input type="checkbox" class="form-check-input d-none" value="配飾" id="S1"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     配飾
@@ -213,7 +191,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`S2`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="小" id="S2"
+                                <input type="checkbox" class="form-check-input d-none" value="小" id="S2"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     小
@@ -222,7 +200,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`S3`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="中" id="S3"
+                                <input type="checkbox" class="form-check-input d-none" value="中" id="S3"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     中
@@ -231,7 +209,7 @@
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`S4`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" value="大" id="S4"
+                                <input type="checkbox" class="form-check-input d-none" value="大" id="S4"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
                                     大
@@ -247,7 +225,7 @@
         <div class="row ">
             @foreach (var item in Model)
             {
-                <div class=" col-12 col-md-6 col-xl-3 ">
+                <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @(item.pPriceGroup) @(item.Sizes) @(item.Materials) @(item.psCategory) " id="product@(item.ProductId)">
                     <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId })">
                         <img src="@Html.DisplayFor(modelItem => item.epsImage)" class="img-fluid " alt="..." />
                         <div class="Y_productInfo">
@@ -281,21 +259,55 @@
                 inp.className = "btn btn-light";
                 //當方法有引數時，用onclick = 方法名(引數)時就有錯了，需要在方法名前面加function()
                 inp.onclick = function () {
-                    b1(id, id2);
+                    b1(id, id2, value);
                 };
                 document.getElementById("Nulldiv").appendChild(inp);
+                document.getElementById(`${id2}`).parentNode.parentNode.classList.add("bg-info");//改色
+                let R = document.getElementsByClassName(`${value}`);
+                for (var i = 0; i < R.length; i++) {
+                    R[i].style.display = "block";
+                    R[i].classList.remove("thisisnotselected");
+                }
+                beSelect();
+
             } else {
                 document.getElementById(id).remove();
+                document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("bg-info");//改色
+                let R = document.getElementsByClassName(`${value}`);
+                for (var i = 0; i < R.length; i++) {
+                    R[i].style.display = "block";
+                    R[i].classList.add("thisisnotselected");
+                }
+                beSelect();
             }
         }
-        function b1(id, id2) {
+        function b1(id, id2,value) {
             document.getElementById(id).remove();
             document.getElementById(id2).checked = false;
+            document.getElementById(id2).parentNode.parentNode.classList.remove("bg-info");//改色
+            let R = document.getElementsByClassName(`${value}`);
+            for (var i = 0; i < R.length; i++) {
+                R[i].style.display = "block";
+                R[i].classList.add("thisisnotselected");
+            }
+            beSelect();
         }
-
-
+        //全部加1個class 抓分類class 再把選到的東西拔掉一個class  最後設定class屬性display:none
         function cl(id) {
             document.getElementById(id).click();
         }
+
+        function beSelect() {
+            var S = document.getElementsByClassName("thisisnotselected");
+            for (var i = 0; i < S.length; i++) {
+                S[i].style.display = "none";
+            }
+            if (document.getElementById("Nulldiv").innerHTML == "") {
+                for (var i = 0; i < S.length; i++) {
+                    S[i].style.display = "block";
+                }
+            }
+        }//改變屬性
+        //console.log(document.getElementById("Nulldiv").innerHTML == "");//true
     </script>
 </content>

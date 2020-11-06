@@ -78,16 +78,50 @@ namespace MotaiProject.Controllers
             }
             return View(productlist);
         }
-        public ActionResult 會計審核()
-        {
-            OrderViewModel CheckOrder = new OrderViewModel();
-            return View(CheckOrder);
-        }
+
+        private OrderRespoitory orderRespoitory = new OrderRespoitory();
         public ActionResult 會計查詢()
         {
-            List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
-            return View(CheckOrder);
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            List<OrderViewModel> orderlist = new List<OrderViewModel>();
+            orderlist = orderRespoitory.GetOrderAll();
+            foreach (var bag in orderlist)
+            {
+                ViewData["bag.OrderId"] = "bag.surplus";
+            }
+            return View(orderlist);
         }
+        public ActionResult 會計審核(int Id)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            //OrderViewModel orderlist = new OrderViewModel(); orderlist = orderRespoitory.GetOrderbyId(Id);
+            var orderlistId = new OrderRespoitory().poGetOrderbyId(Id);
+            //List<OrderViewModel> orderlist = new List<OrderViewModel>();
+            //orderlist.Add(orderlistId);
+            return View(orderlistId);
+        }
+        [HttpPost]
+        public ActionResult 會計審核(OrderViewModel checkOrder)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }  
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tOrder tcheckOrder = dbContext.tOrders.FirstOrDefault(p => p.OrderId == checkOrder.OrderId);
+            tcheckOrder.oCheck = checkOrder.oCheck;
+            var date = DateTime.Now;
+            checkOrder.oCheckDate = date;
+            dbContext.SaveChanges();
+            return RedirectToAction("會計查詢");
+        }
+
         private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
         public ActionResult 員工看消息()
         {
