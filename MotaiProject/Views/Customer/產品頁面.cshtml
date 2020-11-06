@@ -225,7 +225,7 @@
         <div class="row ">
             @foreach (var item in Model)
             {
-                <div class=" col-12 col-md-6 col-xl-3 " id="product@(item.ProductId)">
+                <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @item.Sizes @item.Materials @item.psCategory " id="product@(item.ProductId)">
                     <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId })">
                         <img src="@Html.DisplayFor(modelItem => item.epsImage)" class="img-fluid " alt="..." />
                         <div class="Y_productInfo">
@@ -262,19 +262,43 @@
                     b1(id, id2);
                 };
                 document.getElementById("Nulldiv").appendChild(inp);
-                document.getElementById(`${id2}`).parentNode.parentNode.classList.add("bg-info");
+                document.getElementById(`${id2}`).parentNode.parentNode.classList.add("bg-info");//改色
+                let R = document.getElementsByClassName(`${value}`);
+                for (var i = 0; i < R.length; i++) {
+                    R[i].classList.remove("thisisnotselected");
+                }
+
             } else {
                 document.getElementById(id).remove();
+                document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("bg-info");//改色
+                let R = document.getElementsByClassName(`${value}`);
+                for (var i = 0; i < R.length; i++) {
+                    R[i].classList.add("thisisnotselected");
+                }
             }
         }
         function b1(id, id2) {
             document.getElementById(id).remove();
             document.getElementById(id2).checked = false;
+            document.getElementById(id2).parentNode.parentNode.classList.remove("bg-info");//改色
         }
-
-
+        //全部加1個class 抓分類class 再把選到的東西拔掉一個class  最後設定class屬性display:none
+        //
         function cl(id) {
             document.getElementById(id).click();
         }
+
+        function beSelect() {
+            var S = document.getElementsByClassName("thisisnotselected");
+            for (var i = 0; i < S.length; i++) {
+                S[i].style.display = "none";
+            }
+            if (document.getElementById("Nulldiv").innerHTML == "") {
+                for (var i = 0; i < S.length; i++) {
+                    S[i].style.display = "block";
+                }
+            }
+        }
+        //console.log(document.getElementById("Nulldiv").innerHTML == "");//true
     </script>
 </content>
