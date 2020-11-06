@@ -42,6 +42,7 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("產品價格")]
         public decimal pPrice { get; set; }
+        public string pPriceGroup { get; set; }
 
         [DisplayName("產品數量")]
         public int pQty { get { return 10; } set { } }
@@ -53,6 +54,8 @@ namespace MotaiProject.ViewModels
         {
             get;set;
         }
+
+
 
         public IEnumerable<SelectListItem> Categories { get; set; }
         public IEnumerable<SelectListItem> Materials { get; set; }
