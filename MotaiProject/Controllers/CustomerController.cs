@@ -334,12 +334,24 @@ namespace MotaiProject.Controllers
                 List<FavoriteViewModel> favorList = new List<FavoriteViewModel>();
                 foreach (var items in FavorList)
                 {
-                    tProduct favorProd = dbContext.tProducts.Where(p => p.ProductId == items.fProductId).FirstOrDefault();
+                    tProduct favorProd = dbContext.tProducts.Where(pp => pp.ProductId == items.fProductId).FirstOrDefault();
                     FavoriteViewModel favor = new FavoriteViewModel();
                     favor.fProductId = items.fProductId;
                     favor.fCustomerId = cust.CustomerId;
                     favor.Product = favorProd;
                     favorList.Add(favor);
+                    tProduct p = new tProduct();
+                    List<string> pimage = new List<string>();
+                    p.ProductId = favor.fProductId;
+                    pimage = productRespotiory.GetProductShowImages(p);
+                    if (pimage.Count > 0)
+                    {
+                        favor.epsImage = Url.Content(pimage[0]);
+                    }
+                    else
+                    {
+                        favor.epsImage = "";
+                    }
                 }
                 return View(favorList);
             }            
@@ -412,12 +424,28 @@ namespace MotaiProject.Controllers
         public JsonResult 收藏排名()
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            var favorOrderby = (from i in dbContext.tFavorites
-                             group i by i.fProductId into j
-                             select new
-                             {
-                                 Pid = j.Key,
-                                 Pcount = j.Count(),
+            List<tFavorite> favordb = dbContext.tFavorites.ToList();
+            string func(int i){
+                tProduct p = new tProduct();
+                List<string> pimage = new List<string>();
+                p.ProductId = i;
+                pimage = productRespotiory.GetProductShowImages(p);
+                if (pimage.Count > 0)
+                {
+                    return Url.Content(pimage[0]);
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            var favorOrderby = (from i in favordb
+                                group i by  i.fProductId into j
+                                select new
+                                {
+                                    Pid = j.Key,
+                                    Pimage = func(j.Key),
+                                    Pcount = j.Count(),
                              }).OrderByDescending(j => j.Pcount).Take(10).ToArray();           
                                                                  
             return Json(new { favorOrderby });
@@ -427,12 +455,30 @@ namespace MotaiProject.Controllers
         public JsonResult 購買排名()
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            var buyOrderby = (from i in dbContext.tOrderDetails
-                                group i by i.oProductId into j
-                                select new
-                                {
-                                    Pid = j.Key,
-                                    Pcount = j.Sum(p=>p.oProductQty),
+            List<tOrderDetail> orderdb = dbContext.tOrderDetails.ToList();
+            //這樣才能在linq內使用函式
+            string func(int i)
+            {
+                tProduct p = new tProduct();
+                List<string> pimage = new List<string>();
+                p.ProductId = i;
+                pimage = productRespotiory.GetProductShowImages(p);
+                if (pimage.Count > 0)
+                {
+                    return Url.Content(pimage[0]);
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            var buyOrderby = (from i in orderdb
+                              group i by i.oProductId into j
+                              select new
+                              {
+                                  Pid = j.Key,
+                                  Pimage = func(j.Key),
+                                  Pcount = j.Sum(p=>p.oProductQty),
                                 }).OrderByDescending(j => j.Pcount).Take(10).ToArray();
 
             return Json(new { buyOrderby });

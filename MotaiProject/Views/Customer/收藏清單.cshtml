@@ -156,7 +156,7 @@
                     foreach (var item in Model)
                     {
                         <div id="card@(item.fProductId)" class="card  cardrow">
-                            <img id="img@(item.fProductId)" src = "" class="card-img-top cardimg"/>@*產品圖*@
+                            <img id="img@(item.fProductId)" src = "@(item.epsImage)" class="card-img-top cardimg"/>@*產品圖*@
                             <div id="cardbody@(item.fProductId)" class="card-body d-block">
                                 <h5 class="card-title d-flex">@item.pName</h5>
                                 <p class="card-text d-block">@item.pPrice</p>
@@ -308,8 +308,9 @@
                     //console.log(data.favorOrderby[0]["Pid"])
                     for (let i = 1; i < 11; i++) {
                         let xx = $(`#orderimg${i}`);
-                        xx.attr("src", "https://sites.google.com/a/netcmmi.com/share/_/rsrc/1473734124982/img/png/s/star-e01.png");
-                        let S = data.favorOrderby[i-1]["Pid"];
+                        let S = data.favorOrderby[i - 1]["Pid"];
+                        let S2 = data.favorOrderby[i - 1]["Pimage"];
+                        xx.attr("src", `${S2}`);
                         xx.attr("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer")?ProductId=${S}'`)
                     }
                     
