@@ -83,6 +83,7 @@ namespace MotaiProject.Controllers
             prod.pSize = n新增產品.pSize;
             prod.pLxWxH = n新增產品.pLxWxH;
             prod.pPrice = n新增產品.pPrice;
+            prod.pWeight = n新增產品.pWeight;
             prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
 
