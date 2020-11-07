@@ -46,15 +46,11 @@
         <ul class="navbar-nav sidebar accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <li class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </li>
+        
                 <li class="sidebar-brand-text mx-3">
                     <span>@Html.ActionLink("會計首頁", "Accountant首頁", "Accountant", new { area = "" }, new { @class = "navbar-brand" })</span>
-
                 </li>
-            </a>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -63,16 +59,8 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-
                     <span>@Html.ActionLink("消息頁面", "員工看消息", "Accountant", new { area = "" }, new { @class = "navbar-brand" })</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
             </li>
 
 
@@ -82,13 +70,7 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>@Html.ActionLink("產品頁面", "會計看產品頁面", "Accountant", new { area = "" }, new { @class = "navbar-brand" })</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
+
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -97,15 +79,7 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>@Html.ActionLink("會計查詢", "會計查詢", "Accountant", new { area = "" }, new { @class = "navbar-brand" })</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
+                
             </li>
 
             @*Nav Item - Pages Collapse Menu*@
