@@ -25,6 +25,9 @@ namespace MotaiProject.ViewModels
         [DisplayName("員工密碼")]
         public string ePassword { get; set; }
         
+
+
+        public string epQty { get; }
         public IEnumerable<SelectListItem> Branch { get; set; }
         public IEnumerable<SelectListItem> Position { get; set; }
     }
