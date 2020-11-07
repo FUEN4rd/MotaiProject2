@@ -188,13 +188,15 @@ namespace MotaiProject.ViewModels
         public int sEmployeeId { get; set; }
         [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
-        [DisplayName("訂單號")]
-        public int sOrderId { get; set; }
-        [DisplayName("出貨日期")]
+        [DisplayName("處理訂單單號")]
+        public int SelectOrder { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
+        [DisplayName("出貨日期")]
         public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
+
+        public List<OrderShipShowViewModel> ShipShows { get; set; }
 
     }
     //出貨單建立
@@ -223,6 +225,17 @@ namespace MotaiProject.ViewModels
         public int oProductQty { get; set; }
         [DisplayName("備註")]
         public string oNote { get; set; }
+    }
+    public class WareShipChooseViewModel
+    {
+        [DisplayName("倉儲名")]
+        public string WareHouseName { get; set; }
+        [DisplayName("產品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("產品名稱")]
+        public string ProductName { get; set; }
+        [DisplayName("倉儲庫存")]
+        public int ProductQty { get; set; }
     }
     //出貨單查詢
     public class ShipSelectViewModel

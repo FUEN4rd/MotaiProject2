@@ -257,6 +257,7 @@ namespace MotaiProject.Controllers
         //進貨單
         public ActionResult 進貨單建立()
         {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 StockCreateViewModel model = new StockCreateViewModel();
@@ -269,6 +270,10 @@ namespace MotaiProject.Controllers
                 List<SelectListItem> warehouselist = commodityRespoitory.GetSelectList(warehouseNames);
                 detail.WareHouseNames = warehouselist;
                 detail.ProductNames = productlist;
+                DateTime today = DateTime.Now.Date;
+                var count = dbContext.tStockLists.Where(s => s.sStockDate == today).ToList().Count;
+                count++;
+                model.sStockSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd")+count.ToString("0000"));
                 model.StockDetail = detail;
                 return View(model);
             }
@@ -430,12 +435,15 @@ namespace MotaiProject.Controllers
         //出貨單
         public ActionResult 出貨單建立()
         {
-            MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                ShipCreateViewModel model = new ShipCreateViewModel();
+                int lastId = dbContext.tStockLists.OrderByDescending(s => s.StockId).FirstOrDefault().StockId++;
+                model.sShipSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd") + lastId.ToString("0000"));
                 List<tOrder> orderSearch = dbContext.tOrders.Where(o => o.oCheck != null).ToList();
                 List<OrderShipShowViewModel> orderShips = new List<OrderShipShowViewModel>();
-                foreach(var item in orderSearch)
+                foreach (var item in orderSearch)
                 {
                     OrderShipShowViewModel orderShip = new OrderShipShowViewModel();
                     orderShip.OrderId = item.OrderId;
@@ -446,7 +454,8 @@ namespace MotaiProject.Controllers
                     orderShip.oDate = DateTime.Now;
                     orderShips.Add(orderShip);
                 }
-                return View(orderShips);
+                model.ShipShows = orderShips;
+                return View(model);
             }
             return RedirectToAction("員工登入", "Employee");
         }
@@ -467,15 +476,36 @@ namespace MotaiProject.Controllers
             }
             return Json(orderDetails);
         }
+        public JsonResult chooseShipWare(int OrderId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tOrderDetail> orderDetailSearchs = dbContext.tOrderDetails.Where(od => od.oOrderId.Equals(OrderId)).ToList();
+            List<WareShipChooseViewModel> ChooseList = new List<WareShipChooseViewModel>();
+            foreach(var item in orderDetailSearchs)
+            {
+                List<tWarehouse> wareList = dbContext.tWarehouses.Where(w => w.wProductId.Equals(item.oProductId)).ToList();
+                foreach(var itemware in wareList)
+                {
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(item.oProductId)).FirstOrDefault();
+                    WareShipChooseViewModel wareChoose = new WareShipChooseViewModel();
+                    wareChoose.WareHouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(itemware.WarehouseId)).FirstOrDefault().WarehouseName;
+                    wareChoose.ProductNum = product.pNumber;
+                    wareChoose.ProductName = product.pName;
+                    wareChoose.ProductQty = itemware.wPQty;
+                    ChooseList.Add(wareChoose);
+                }
+            }
+            return Json(ChooseList);
+        }
         [HttpPost]
-        public ActionResult 出貨單建立(int OrderId)
+        public ActionResult 出貨單建立(int orderid)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 tEmployee employee = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                tStockList stockList = new tStockList();
-                stockList.sEmployeeId = employee.EmployeeId;
+                tShipList shipList = new tShipList();
+                shipList.sEmployeeId = employee.EmployeeId;
                 
             }
             return RedirectToAction("出貨單查詢");
