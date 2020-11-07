@@ -409,7 +409,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 @Html.AntiForgeryToken()
                 <div class="modal fade" id="forgetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe3" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -429,9 +429,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                @*<button type="submit" class="btn btn-primary" id="sendEmail">確認</button>*@
-                                <button type="submit" class="btn btn-primary" onclick="sendMail2()">確認</button>
-
+                                <button type="submit" class="btn btn-primary" id="sendEmail">確認</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                             </div>
                         </div>
@@ -440,26 +438,26 @@
                 <script src="https://smtpjs.com/v3/smtp.js"></script>
                 <script>
                     $("#sendEmail").click(function () {
-                        var forgetEmail = $("#forgetEmail").val();
+                        //var forgetEmail = $("#forgetEmail").val();
+                        let forgetEmail = document.querySelector("#forgetEmail").value;
 
                     $.ajax({
                     url: "@Url.Action("beforeSendEmail", "Customer")",
                     type: "POST",
                     data: { "Email": forgetEmail },
-                    success: function (data) {
-                    if (data.result) {
-                        alert(data.msg);
-                        onSuccess(data.url);                        
-                        Email.send({
-                            SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
-                            To: forgetEmail,
-                            From: "fuen12302@gmail.com",
-                            Subject: "墨台 忘記密碼認證信",
-                            Body: `顏瑋婷 您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請，請參照以下說明重新設定您的密碼：[密碼重新設定方法]請連結到以下網頁，重新設定一組新的密碼。http://localhost:50720/ `
-                        }).then(
-                            message => alert(message)
-                            );
-                        } else {
+                        success: function (data) {
+                            if (data.result) {                            
+                                Email.send({
+                                SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
+                                    To: forgetEmail,
+                                        From: "fuen12302@gmail.com",
+                                    Subject: "墨台 忘記密碼認證信",
+                                    Body: data.name + ` 您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。<br />請您回到首頁，以此密碼登入：` + data.password +`<br />登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。<br />首頁連結： http://localhost:50720/ `
+                            })
+                                alert(data.msg);
+                                onSuccess(data.url);
+                            }                                                 
+                    else {
                             alert(data.msg);
                             onSuccess(data.url);
                                 }
@@ -469,24 +467,6 @@
                                                                                                                                  
                     var onSuccess = function (url) {
                         window.location.href = url;
-                    }
-
-
-                    function sendMail2() {
-                        let forgetEmail = document.querySelector("#forgetEmail").value;
-                        Email.send({
-                            //Host: "smtp.gmail.com",
-                            //Username: "fuen12302@gmail.com",
-                            //Password: "frcivdkwbllrcboy",
-                            SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
-                            To: forgetEmail,
-                            From: "fuen12302@gmail.com",
-                            Subject: "墨台 忘記密碼認證信",
-                            Body: `顏瑋婷 您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請，請參照以下說明重新設定您的密碼：[密碼重新設定方法]請連結到以下網頁，重新設定一組新的密碼。 http://localhost:50720/ `
-                        })
-                            .then(
-                                message => alert(message)
-                            );
                     }
                 </script>
             }

@@ -168,7 +168,9 @@ namespace MotaiProject.ViewModels
         [DisplayName("優惠")]
         public Nullable<int> oPromotionId { get; set; }
         [DisplayName("折扣金額")]
-        public Nullable<int> spDiscount { get; set; }
+        public Nullable<int> pDiscount { get; set; }
+        [DisplayName("活動名稱")]
+        public string PromotionName { get; set; }
 
         [DisplayName("門市編號")]
         public int oWarehouseName { get; set; }
@@ -186,20 +188,24 @@ namespace MotaiProject.ViewModels
         public string scName { get; set; }
 
         [DisplayName("應收帳款")]
-        public int receivable { get; set; }
+        public Nullable<int> receivable { get; set; }
         [DisplayName("已收帳款")]
-        public int received { get; set; }
+        public Nullable<int> received { get; set; }
         [DisplayName("剩餘帳款")]
-        public int surplus { get; set; }
+        public Nullable<int> surplus { get; set; }
 
         [DisplayName("現金")]
-        public int cash { get; set; }
+        public Nullable<int> cash { get; set; }
         [DisplayName("信用卡")]
-        public int card { get; set; }
+        public Nullable<int> card { get; set; }
         [DisplayName("代金券")]
-        public int Voucher { get; set; }
+        public Nullable<int> voucher { get; set; }
         [DisplayName("寄售代收")]
-        public int consignment { get; set; }
+        public Nullable<int> consignment { get; set; }
+
+        [DisplayName("原價")]
+        public int originalPrice { get; set; }
+
     }
 
     public class OrderDetailViewModel
