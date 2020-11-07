@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.DetailPromotionViewModel>
 
 @{
-    ViewBag.Title = "員工看消息";
-    Layout = "~/Views/Shared/LayoutAccountant.cshtml";
+
+                ViewBag.Title = "員工看消息";
+                Layout = "~/Views/Shared/LayoutAccountant.cshtml";
 }
 
 <h2>員工看消息</h2>
@@ -46,47 +47,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.sPromotinoCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PromotionDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pADimage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPromotionWeb)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPromotionPostDate)
-        </td>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.sPromotinoCategory)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PromotionDescription)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.pADimage)*@
+        <img src="@Html.DisplayFor(modelItem => item.pADimage)" width="90" height="90" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pPromotionWeb)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pPromotionPostDate)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.PromotionName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pCondition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pDiscount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pDiscountCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPromotionStartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPromotionDeadline)
-        </td>
-        <td style="display:none">
-            @Html.DisplayFor(modelItem => item.PromotionId)
-        </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PromotionName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pCondition)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pDiscount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pDiscountCode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pPromotionStartDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pPromotionDeadline)
+    </td>
+    <td style="display:none">
+        @Html.DisplayFor(modelItem => item.PromotionId)
+    </td>
 
-    </tr>
+</tr>
 }
 
 </table>

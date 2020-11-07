@@ -32,7 +32,7 @@ namespace MotaiProject.Models
                 Promo.PromotionId = item.PromotionId;
                 if (item.PromotionDescription.Length > 10)
                 {
-                    Promo.PromotionDescription = item.PromotionDescription.Substring(0, 10) + "...";
+                    Promo.PromotionDescription = item.PromotionDescription.Substring(0, 7) + "...";
                 }
                 else
                 {

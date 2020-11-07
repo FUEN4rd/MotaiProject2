@@ -27,6 +27,17 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
+        private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
+        public ActionResult 員工看消息()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入");
+            }
+            List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
+            promotionlist = promotionRespoitory.GetPromotionAll();
+            return View(promotionlist);
+        }
 
 
         private EmployeeRespoitory employeeRespoitory = new EmployeeRespoitory();
