@@ -308,6 +308,20 @@ namespace MotaiProject.Controllers
                         detail.sWarehouseNameId = items.sWarehouseNameId;
                         detail.sNote = items.sNote;
                         dbContext.tStockDetails.Add(detail);
+                        //倉儲變動
+                        tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId.Equals(items.sWarehouseNameId) && w.wProductId.Equals(items.sProductId)).FirstOrDefault();
+                        if(Warehouse != null)
+                        {
+                            Warehouse.wPQty += items.sQuantity;
+                        }
+                        else
+                        {
+                            tWarehouse warehouse = new tWarehouse();
+                            warehouse.WarehouseNameId = items.sWarehouseNameId;
+                            warehouse.wProductId = items.sProductId;
+                            warehouse.wPQty = items.sQuantity;
+                            dbContext.tWarehouses.Add(warehouse);
+                        }
                     }
                     dbContext.SaveChanges();
                     Session[CSession關鍵字.SK_STOCKDETAIL] = null;
@@ -500,10 +514,25 @@ namespace MotaiProject.Controllers
             return View(shipSelects);
         }
         //調貨單
+        public ActionResult 調貨單()
+        {
+            return View();
+        }
         //倉儲
         public ActionResult 倉儲查詢()
         {
-            return View();
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
+            List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
+            foreach(var item in tWarehouses)
+            {
+                WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
+                wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
+                wareInventory.ProductName = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pName;
+                wareInventory.ProductQty = item.wPQty;
+                InventoryList.Add(wareInventory);
+            }
+            return View(InventoryList);
         }
     }
 }

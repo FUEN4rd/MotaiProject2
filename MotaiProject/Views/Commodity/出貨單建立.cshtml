@@ -55,6 +55,7 @@
         }
     </table>
     <table id="OrderDetail" class="table"></table>
+    <table id="Inventory" class="table"></table>
     <input type="submit" value="新增出貨單" />
 </form>
 <script>
@@ -86,5 +87,13 @@
                 }
             }
         });
+        $.ajax({
+            url:,
+            type: "POST",
+            data: {},
+            success: function (data) {
+
+            }
+        })
     })
 </script>

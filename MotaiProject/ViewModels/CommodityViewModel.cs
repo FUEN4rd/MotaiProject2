@@ -25,7 +25,16 @@ namespace MotaiProject.ViewModels
         public IEnumerable<SelectListItem> ProductNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
     }
-
+    //倉儲查詢
+    public class WareInventorySelectViewModel
+    {
+        [DisplayName("倉儲名")]
+        public string WarehouseName { get; set; }
+        [DisplayName("商品名")]
+        public string ProductName { get; set; }
+        [DisplayName("倉儲庫存")]
+        public int ProductQty { get; set; }
+    }
     public class TransferViewModel
     {
         public int TransferId { get; set; }
