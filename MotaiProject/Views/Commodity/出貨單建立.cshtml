@@ -55,6 +55,7 @@
         }
     </table>
     <table id="OrderDetail" class="table"></table>
+    <table id="Inventory" class="table"></table>
     <input type="submit" value="新增出貨單" />
 </form>
 <script>
@@ -83,6 +84,31 @@
                         "<td>" + Name + "</td>" +
                         "<td>" + Qty + "</td>" +
                         "<td>" + Note + "</td></tr>");
+                }
+            }
+        });
+        $.ajax({
+            url: "@Url.Action("chooseShipWare","Commodity")",
+            type: "POST",
+            data: { "OrderId": orderId },
+            success: function (data) {
+                const title = "<tr><th>倉儲名</th>" +
+                    "<th>產品編號</th>" +
+                    "<th>產品名稱</th>" +
+                    "<th>倉儲庫存</th>" +
+                    "<th>出貨數量</th></tr>";
+                $("#Inventory").html(title);
+                for (let i = 0; i < data.length; i++) {
+                    var wName = data[i].WareHouseName;
+                    var Num = data[i].ProductNum;
+                    var pName = data[i].ProductName;
+                    var Qty = data[i].ProductQty;
+                    $("#Inventory").append("<tr><td>" + wName + "</td>" +
+                        "<td>" + Num + "</td>" +
+                        "<td>" + pName + "</td>" +
+                        "<td>" + Qty + "</td>" +
+                        "<td><input ></td>" +
+                        "</tr >");
                 }
             }
         });
