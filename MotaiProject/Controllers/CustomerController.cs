@@ -38,10 +38,13 @@ namespace MotaiProject.Controllers
         public ActionResult 消息(int page = 1)
         {
             MotaiDataEntities db = new MotaiDataEntities();
-
-            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-            ViewBag.Count = count;
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
+                ViewBag.Count = count;
+            }
+                
 
             int cpage = page < 1 ? 1 : page;
             //資料庫讀取 tPromotions 為資料庫名稱
@@ -260,10 +263,14 @@ namespace MotaiProject.Controllers
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         public ActionResult 產品頁面()
         {
-            MotaiDataEntities dbContext = new MotaiDataEntities();
-            tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-            int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-            ViewBag.Count = count;
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
+                ViewBag.Count = count;
+            }
+               
 
             List<ProductViewModel> productlist = productRespotiory.GetProductAll();
             MotaiDataEntities db = new MotaiDataEntities();

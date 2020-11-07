@@ -16,6 +16,7 @@
         #wrapper {
             display: flex;
         }
+
         body {
             background: url("/images/Employee_login.png");
             background-position: center 0;
@@ -24,15 +25,15 @@
             background-size: cover;
         }
 
-            #wrapper #content-wrapper {
-                background-color: #f8f9fc;
-                width: 100%;
-                overflow-x: hidden;
-            }
+        #wrapper #content-wrapper {
+            background-color: #f8f9fc;
+            width: 100%;
+            overflow-x: hidden;
+        }
 
-                #wrapper #content-wrapper #content {
-                    flex: 1 0 auto;
-                }
+            #wrapper #content-wrapper #content {
+                flex: 1 0 auto;
+            }
     </style>
 
 </head>
@@ -45,75 +46,47 @@
         <ul class="navbar-nav sidebar accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <li class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </li>
-                <li class="sidebar-brand-text mx-3">
-                    <span>@Html.ActionLink("人事首頁", "People首頁", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-                </li>
-            </a>
+
+            <li class="sidebar-brand-text mx-3">
+                <span>@Html.ActionLink("人事首頁", "People首頁", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                <i class="fas fa-fw fa-cog"></i>
+                <span>@Html.ActionLink("消息頁面", "員工看消息", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
 
-                    <span>@Html.ActionLink("消息頁面", "員工看消息", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-                </a>
-                @*<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>*@
             </li>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>@Html.ActionLink("員工檢視", "人員檢視", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-                </a>
-                @*<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>*@
+               
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>@Html.ActionLink("員工新增", "新增員工", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-                </a>
-                @*<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>*@
+              
             </li>
 
 
             <!-- Nav Item - Pages Collapse Menu 葉面折疊菜單 -->
             @*<li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>@Html.ActionLink("產品頁面", "人事看產品頁面", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>@Html.ActionLink("產品頁面", "人事看產品頁面", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Components:</h6>
+                            <a class="collapse-item" href="buttons.html">Buttons</a>
+                            <a class="collapse-item" href="cards.html">Cards</a>
+                        </div>
                     </div>
-                </div>
-            </li>*@
+                </li>*@
 
 
 
