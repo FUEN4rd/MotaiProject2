@@ -124,6 +124,24 @@ namespace MotaiProject.Controllers
             return RedirectToAction("會計查詢");
         }
 
+        public JsonResult orderCheck(int Id)
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return Json(new { result = false, msg = "請先登入" });
+            }
+            else
+            {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tOrder order = dbContext.tOrders.Where(o => o.OrderId.Equals(Id)).FirstOrDefault();
+                order.oCheck = "checked";
+                order.oCheckDate = DateTime.Now;
+                dbContext.SaveChanges();
+                return Json(new { msg = "審核成功", url = Url.Action("會計查詢", "Accountant") });
+            }
+        }
+
+
         private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
         public ActionResult 員工看消息()
         {

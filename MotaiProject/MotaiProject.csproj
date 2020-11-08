@@ -612,6 +612,8 @@
     <Content Include="Views\Commodity\出貨單查詢.cshtml" />
     <Content Include="Views\People\員工看消息.cshtml" />
     <Content Include="Views\Commodity\倉儲查詢.cshtml" />
+    <Content Include="Views\Accountant\會計審核.cshtml" />
+    <Content Include="Views\Accountant\會計查詢.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

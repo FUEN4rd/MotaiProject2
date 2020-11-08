@@ -111,7 +111,10 @@ namespace MotaiProject.Controllers
             tCustomer d信箱確認 = dbContext.tCustomers.Where(c => c.cEmail == c電子郵件.Email).FirstOrDefault();
             if (d信箱確認 != null)
             {
-                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer"), password = d信箱確認.cPassword, name = d信箱確認.cName});
+                string passwordG = Guid.NewGuid().ToString();
+                d信箱確認.cPassword = passwordG;
+                dbContext.SaveChanges();
+                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer"), password = passwordG, name = d信箱確認.cName,});                
             }
             return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
         }

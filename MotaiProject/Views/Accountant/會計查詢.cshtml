@@ -50,7 +50,7 @@
             @Html.DisplayNameFor(model => model.oPromotionId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.spDiscount)
+            @Html.DisplayNameFor(model => model.pDiscount)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.oWarehouseName)
@@ -110,7 +110,7 @@
                 @Html.DisplayFor(modelItem => item.oPromotionId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.spDiscount)
+                @Html.DisplayFor(modelItem => item.pDiscount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.oWarehouseName)
@@ -142,17 +142,17 @@
             <td>
                 @*@Html.ActionLink("審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-default linkdisabled" })*@
 
-                @if (item.surplus <= 0)
+                @if (item.oCheck != null)
                 {
-                    @Html.ActionLink("待審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-default" })
+                        <div>已審核</div>
                 }
-                else if (item.oCheck != null)
+                else if(item.surplus <= 0)
                 {
-                    <div>已審核</div>
+                @Html.ActionLink("待審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-default" })
                 }
-                else
+                else                
                 {
-                    <div>未完成</div>
+                <div>未完成</div>
                 }
             </td>
         </tr>
