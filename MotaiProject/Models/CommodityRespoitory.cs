@@ -16,9 +16,6 @@ namespace MotaiProject.Models
             return warehouses.ToDictionary(wid => wid.WarehouseNameId, wn => wn.WarehouseName);
         }
 
-        
-
-
         public List<SelectListItem> GetSelectList(Dictionary<int, string> dictionary)
         {
             List<SelectListItem> selectLists = new List<SelectListItem>();

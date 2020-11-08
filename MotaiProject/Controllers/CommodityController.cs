@@ -438,9 +438,11 @@ namespace MotaiProject.Controllers
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 MotaiDataEntities dbContext = new MotaiDataEntities();
-                ShipCreateViewModel model = new ShipCreateViewModel();
-                int lastId = dbContext.tStockLists.OrderByDescending(s => s.StockId).FirstOrDefault().StockId++;
-                model.sShipSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd") + lastId.ToString("0000"));
+                ShipCreateShowViewModel model = new ShipCreateShowViewModel();
+                DateTime today = DateTime.Now.Date;
+                var count = dbContext.tShipLists.Where(s => s.sShipDate == today).ToList().Count;
+                count++;
+                model.sShipSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd") + count.ToString("0000"));
                 List<tOrder> orderSearch = dbContext.tOrders.Where(o => o.oCheck != null).ToList();
                 List<OrderShipShowViewModel> orderShips = new List<OrderShipShowViewModel>();
                 foreach (var item in orderSearch)
@@ -489,6 +491,9 @@ namespace MotaiProject.Controllers
                     tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(item.oProductId)).FirstOrDefault();
                     WareShipChooseViewModel wareChoose = new WareShipChooseViewModel();
                     wareChoose.WareHouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(itemware.WarehouseId)).FirstOrDefault().WarehouseName;
+                    wareChoose.WareHouseId = itemware.WarehouseId;
+                    wareChoose.OrderDetailId = item.oOrderDetailId;
+                    wareChoose.ProductId = product.ProductId;
                     wareChoose.ProductNum = product.pNumber;
                     wareChoose.ProductName = product.pName;
                     wareChoose.ProductQty = itemware.wPQty;
@@ -498,15 +503,45 @@ namespace MotaiProject.Controllers
             return Json(ChooseList);
         }
         [HttpPost]
-        public ActionResult 出貨單建立(int orderid)
+        public ActionResult 出貨單建立(ShipCreateModel ShipList)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
                 tEmployee employee = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                tShipList shipList = new tShipList();
-                shipList.sEmployeeId = employee.EmployeeId;
-                
+                tShipList tShiplist = new tShipList();
+                tShiplist.sEmployeeId = employee.EmployeeId;
+                tShiplist.sShipSerialValue = ShipList.ShipSerialValue;
+                tShiplist.sOrderId = ShipList.SelectOrder;
+                tShiplist.sShipDate = ShipList.ShipDate;
+                tShiplist.sShipNote = ShipList.ShipNote;
+                dbContext.tShipLists.Add(tShiplist);
+                dbContext.SaveChanges();
+                for(int i = 0; i < ShipList.WareHouseId.Count; i++)
+                {
+                    tShipDetail tShipdetail = new tShipDetail();
+                    tShipdetail.ShipId = dbContext.tShipLists.OrderByDescending(s => s.ShipId).First().ShipId;
+                    tShipdetail.sOrderDetailId = ShipList.OrderDetailId[i];
+                    tShipdetail.sProductId = ShipList.ProductId[i];
+                    tShipdetail.sQuantity = ShipList.ShipProductQty[i];
+                    tShipdetail.sWarehouseNameId = ShipList.WareHouseId[i];
+                    dbContext.tShipDetails.Add(tShipdetail);
+                    //倉儲變動
+                    tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId.Equals(ShipList.WareHouseId[i]) && w.wProductId.Equals(ShipList.ProductId[i])).FirstOrDefault();
+                    if (Warehouse != null)
+                    {
+                        Warehouse.wPQty += ShipList.ShipProductQty[i];
+                    }
+                    else
+                    {
+                        tWarehouse warehouse = new tWarehouse();
+                        warehouse.WarehouseNameId = ShipList.WareHouseId[i];
+                        warehouse.wProductId = ShipList.ProductId[i];
+                        warehouse.wPQty = ShipList.ShipProductQty[i];
+                        dbContext.tWarehouses.Add(warehouse);
+                    }
+                }
+                dbContext.SaveChanges();
             }
             return RedirectToAction("出貨單查詢");
         }
@@ -546,7 +581,28 @@ namespace MotaiProject.Controllers
         //調貨單
         public ActionResult 調貨單()
         {
-            return View();
+            //todo:調貨單介面
+            TransferViewModel model = new TransferViewModel();
+            var dicProduct = productRespotiory.GetProductNameAll();
+            model.ProductNames = productRespoitory.GetSelectList(dicProduct);
+            var dicWarehouse = commodityRespoitory.GetWarehouseAll();
+            model.WareHouseInNames = commodityRespoitory.GetSelectList(dicWarehouse);
+            return View(model);
+        }
+        public JsonResult WareOutSearch(int ProductId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tWarehouse> warehouseOut = dbContext.tWarehouses.Where(w => w.wProductId.Equals(ProductId)).ToList();
+            List<WarehouseOutList> outLists = new List<WarehouseOutList>();
+            foreach (var item in warehouseOut)
+            {
+                tWarehouseName name = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault();
+                WarehouseOutList outList = new WarehouseOutList();
+                outList.WarehouseIdOut = item.WarehouseNameId;
+                outList.WarehouseNameOut = name.WarehouseName;
+                outLists.Add(outList);
+            }
+            return Json(outLists);
         }
         //倉儲
         public ActionResult 倉儲查詢()

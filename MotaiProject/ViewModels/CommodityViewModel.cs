@@ -35,29 +35,39 @@ namespace MotaiProject.ViewModels
         [DisplayName("倉儲庫存")]
         public int ProductQty { get; set; }
     }
+    //調貨
     public class TransferViewModel
     {
-        public int TransferId { get; set; }
-        public int tProductId { get; set; }
         [DisplayName("商品名")]
+        public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public int tProductQty { get; set; }
-        [DisplayName("員工名")]
-        public string EmpName { get; set; }
-        public int tEmployeeId { get; set; }
-        [DisplayName("調出倉儲")]
+        [DisplayName("調貨數量")]
+        public int ProductQty { get; set; }
         public string WareHouseOutName { get; set; }
-        public int tWNIdOut { get; set; }
-        [DisplayName("調進倉儲名")]
+        [DisplayName("調出倉儲")]
+        public int WarehouseIdOut { get; set; }
         public string WareHouseInName { get; set; }
-        public int tWNIdIn { get; set; }
-        public System.DateTime tDate { get; set; }
+        [DisplayName("調進倉儲")]
+        public int WarehouseIdIn { get; set; }
+        public DateTime Date { get { return DateTime.Now; } set { } }
         public string tNote { get; set; }
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
-        public IEnumerable<SelectListItem> EmpNames { get; set; }
-        public IEnumerable<SelectListItem> WareHouseOutNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseInNames { get; set; }
+    }
+    public class TransferSaveModel
+    {
+        public int ProductId { get; set; }
+        public int ProductQty { get; set; }
+        public int WarehouseIdOut { get; set; }
+        public int WarehouseIdIn { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Note { get; set; }
+    }
+    public class WarehouseOutList
+    {
+        public int WarehouseIdOut { get; set; }
+        public string WarehouseNameOut { get; set; }
     }
     //進貨
     //進貨單建立
@@ -168,7 +178,7 @@ namespace MotaiProject.ViewModels
     public class ShipDetailViewModel
     {
         public int ShipDetailId { get; set; }
-        public int sStockId { get; set; }
+        public int ShipId { get; set; }
         public int sOrderDetailId { get; set; }
         [DisplayName("商品名")]
         public string ProductName { get; set; }
@@ -182,24 +192,23 @@ namespace MotaiProject.ViewModels
         public IEnumerable<SelectListItem> ProductNames { get; set; }
         public IEnumerable<SelectListItem> WareHouseNames { get; set; }
     }
-    public class ShipCreateViewModel
+    //出貨單建立畫面
+    public class ShipCreateShowViewModel
     {
         public int ShipId { get; set; }
         public int sEmployeeId { get; set; }
         [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
-        [DisplayName("處理訂單單號")]
-        public int SelectOrder { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         [DisplayName("出貨日期")]
         public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
-
-        public List<OrderShipShowViewModel> ShipShows { get; set; }
-
+        public List<OrderShipShowViewModel> ShipShows
+        {
+            get; set;
+        }
     }
-    //出貨單建立
     public class OrderShipShowViewModel
     {
         [DisplayName("訂單編號")]
@@ -230,12 +239,26 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("倉儲名")]
         public string WareHouseName { get; set; }
+        public int WareHouseId { get; set; }
+        public int ProductId { get; set; }
+        public int OrderDetailId { get; set; }
         [DisplayName("產品編號")]
         public string ProductNum { get; set; }
         [DisplayName("產品名稱")]
         public string ProductName { get; set; }
         [DisplayName("倉儲庫存")]
         public int ProductQty { get; set; }
+    }
+    public class ShipCreateModel
+    {
+        public int ShipSerialValue { get; set; }
+        public DateTime ShipDate { get; set; }
+        public string ShipNote { get; set; }
+        public int SelectOrder { get; set; }
+        public List<int> WareHouseId { get; set; }
+        public List<int> ProductId { get; set; }
+        public List<int> ShipProductQty { get; set; }
+        public List<int> OrderDetailId { get; set; }
     }
     //出貨單查詢
     public class ShipSelectViewModel
