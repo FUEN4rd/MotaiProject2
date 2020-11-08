@@ -102,8 +102,22 @@ namespace MotaiProject.Models
                 //}
 
                 Order.receivable = receivableTotal;
+                var surplus = receivableTotal - receivedTotal;
+                Order.surplus = surplus;
 
-                Order.surplus = receivableTotal - receivedTotal;
+                if(item.oCheck != null)
+                {
+                    Order.htmlName = "tr_hidden1";
+                }
+                else if (surplus <= 0)
+                {
+                    Order.htmlName = "tr_hidden2";
+                }
+                else
+                {
+                    Order.htmlName = "tr_hidden3";
+                }
+
 
                 orderlist.Add(Order);
             }
