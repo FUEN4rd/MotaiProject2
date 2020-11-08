@@ -298,11 +298,11 @@ namespace MotaiProject.Controllers
                     items.epsImage = "";
                 }
 
-                if (items.pPrice < 5000) { items.pPriceGroup = "NTD. 5,000以下"; }
-                else if (items.pPrice < 50000) { items.pPriceGroup = "NTD. 5,000~50,000"; }
-                else if (items.pPrice < 200000) { items.pPriceGroup = "NTD. 50,000~200,000"; }
-                else if (items.pPrice < 1000000) { items.pPriceGroup = "NTD. 200,000~1,000,000"; }
-                else { items.pPriceGroup = "NTD. 1,000,000以上"; }
+                if (items.pPrice < 5000) { items.pPriceGroup = "NTD.5,000以下"; }
+                else if (items.pPrice < 50000) { items.pPriceGroup = "NTD.5,000~50,000"; }
+                else if (items.pPrice < 200000) { items.pPriceGroup = "NTD.50,000~200,000"; }
+                else if (items.pPrice < 1000000) { items.pPriceGroup = "NTD.200,000~1,000,000"; }
+                else { items.pPriceGroup = "NTD.1,000,000以上"; }
                 items.AllCategory = L;
                 items.AllMaterial = L2;
                 items.AllSize = L3;//只有有出現的商品

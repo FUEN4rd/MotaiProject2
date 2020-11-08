@@ -105,7 +105,7 @@
                         {<text>
                                 <a class="dropdown-item" href="#" onclick="cl(`C@(xr)`)">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input d-none" value="C@(item2)" id="C@(xr)"
+                                        <input type="checkbox" class="form-check-input d-none" value="@(item2)" id="C@(xr)"
                                                onclick="bt1(this.value,this.id+1,this.id)">
                                         <label class="form-check-label" for="dropdownCheck">
                                             @item2
@@ -157,7 +157,7 @@
                             {<text>
                                     <a class="dropdown-item" href="#" onclick="cl(`W@(xr2)`)">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input d-none" value="W@(item2)" id="W@(xr2)"
+                                            <input type="checkbox" class="form-check-input d-none" value="@(item2)" id="W@(xr2)"
                                                    onclick="bt1(this.value,this.id+1,this.id)">
                                             <label class="form-check-label" for="dropdownCheck">
                                                 @item2
@@ -182,46 +182,46 @@
                     <div class="form-group">
                         <a class="dropdown-item" href="#" onclick="cl(`P1`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="PNTD. 5,000以下" id="P1"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD.5,000以下" id="P1"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
-                                    NTD. 5,000以下
+                                    NTD.5,000以下
                                 </label>
                             </div>
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P2`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="PNTD. 5,000~50,000" id="P2"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD.5,000~50,000" id="P2"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
-                                    NTD. 5,000~50,000
+                                    NTD.5,000~50,000
                                 </label>
                             </div>
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P3`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="PNTD. 50,000~200,000" id="P3"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD.50,000~200,000" id="P3"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
-                                    NTD. 50,000~200,000
+                                    NTD.50,000~200,000
                                 </label>
                             </div>
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P4`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="PNTD. 200,000~1,000,000"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD.200,000~1,000,000"
                                        id="P4" onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
-                                    NTD. 200,000~1,000,000
+                                    NTD.200,000~1,000,000
                                 </label>
                             </div>
                         </a>
                         <a class="dropdown-item" href="#" onclick="cl(`P5`)">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="PNTD. 1,000,000以上" id="P5"
+                                <input type="checkbox" class="form-check-input d-none" value="NTD.1,000,000以上" id="P5"
                                        onclick="bt1(this.value,this.id+1,this.id)">
                                 <label class="form-check-label" for="dropdownCheck">
-                                    NTD. 1,000,000以上
+                                    NTD.1,000,000以上
                                 </label>
                             </div>
                         </a>
@@ -284,7 +284,7 @@
                             {<text>
                                     <a class="dropdown-item" href="#" onclick="cl(`S@(xr3)`)">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input d-none" value="S@(item2)" id="S@(xr3)"
+                                            <input type="checkbox" class="form-check-input d-none" value="@(item2)" id="S@(xr3)"
                                                    onclick="bt1(this.value,this.id+1,this.id)">
                                             <label class="form-check-label" for="dropdownCheck">
                                                 @item2
@@ -307,7 +307,7 @@
         <div class="row ">
             @foreach (var item in Model)
             {
-                <div class=" col-12 col-md-6 col-xl-3 thisisnotselected P@(item.pPriceGroup) S@(item.psSize) W@(item.psMaterial) C@(item.psCategory) " id="product@(item.ProductId)">
+                <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @(item.pPriceGroup) @(item.psSize) @(item.psMaterial) @(item.psCategory) " id="product@(item.ProductId)">
                     <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId })">
                         <img src="@Html.DisplayFor(modelItem => item.epsImage)" class="img-fluid " alt="..." />
                         <div class="Y_productInfo">
@@ -334,7 +334,7 @@
                 var inp = document.createElement("input");
                 inp.type = "button";
                 //傳入點選按鈕的value值到新的按鈕
-                inp.value =  value.substr(1) + " X";
+                inp.value =  value;
                 //傳入點選按鈕的id到新的按鈕(傳入是id+1防止重複)
                 inp.id = id;
                 //嵌入class
@@ -355,21 +355,32 @@
                     Nulld.classList.add(`${id2.charAt(0)}`);
                 }
                 if (document.getElementsByClassName(`${id2.charAt(0)}`)[0] == null) {//交集=>把還沒篩掉的當選取範圍
-                    var beselected = document.getElementsByName("inArea");
-                   
-                    for (var i = 0; i < beselected.length; i++) {
+                    var beselected = document.getElementsByName("inArea");//不能用for因為是動態的讀取
+                    var X = beselected.length;
+                    //節點的物件是動態的
+
+                    for (var i = 0; i < X - 1; i++) {//不可以用none                       
                         beselected[i].classList.add("thisisnotselected");
-                        if (beselected[i].classList.contains(`${value}`)) {
+                        if (beselected[i].classList.contains(value)) {
                             beselected[i].classList.remove("displayisnone");
                             beselected[i].classList.remove("thisisnotselected");
+                            beselected[i].setAttribute("name", "inArea");
                         }
                         else {
-                            beselected[i].classList.remove("displayisnone");
+                            beselected[i].classList.add("displayisnone");
                             beselected[i].classList.add("thisisnotselected");
-                            beselected[i].setAttribute("name", "");
+                            beselected[i].classList.add("tem");
+                            //beselected[i].setAttribute("name", "");
                         }
-                    }                    
-                    beSelect();//沒問題了
+                    }
+                    var B = document.getElementsByClassName("tem");
+                    while (B.length > 0) {
+                        B[0].classList.add("thisisnotselected");
+                        B[0].setAttribute("name", "");
+                        B[0].classList.remove("tem");
+                    }
+                    
+                    beSelect();
                 }
                 else {
                     for (var i = 0; i < R.length; i++) {
@@ -395,43 +406,146 @@
                     Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
                 }
                 if (!((Nulld.classList.contains("C")) || (Nulld.classList.contains("W")) || (Nulld.classList.contains("P")) || (Nulld.classList.contains("S")))) {
-                    //都沒有
+                    //都沒有 好像可以改用下面的
                     for (var i = 0; i < R.length; i++) {
                         R[i].classList.remove("displayisnone");
                         R[i].classList.add("thisisnotselected");
                         R[i].setAttribute("name", "");
                     }
                 }
-                else {//還有
-                    //if () {
-
-                    //}
-                    for (var i = 0; i < R.length; i++) {//再判斷
-                        R[i].classList.remove("displayisnone");
+                else {//還有 有問題
+                    var i = 0;
+                    var buttonarray = [];
+                    while (Nulld.childNodes.item(i) != null) {
+                        var rr = Nulld.childNodes.item(i).value;
+                        var y=rr.substr(0, rr.length - 1);
+                        buttonarray.push(y);                       
+                        i++;
+                    }//抓按鈕還有哪些
+                    console.log(buttonarray.length);
+                    for (var i = 0; i < R.length; i++) {
                         R[i].classList.add("thisisnotselected");
                         R[i].setAttribute("name", "");
                     }
+                    for (var i = 0; i < R.length; i++) {//判斷+回來
+                        for (var j = 0; j < buttonarray.length; j++) {
+                            if (R[i].classList.contains(`${buttonarray[j]}`)) {
+                                R[i].classList.add("tempItem");
+                            }
+                            else {
+                                 console.log("ok");
+                            }
+                        }
+                        //R[i].classList.remove("displayisnone");
+                        //R[i].classList.add("thisisnotselected");
+                        //R[i].setAttribute("name", "");
+                    }
+
+
+                    var B = document.getElementsByClassName("tempItem");
+                    while (B.length > 0) {
+                        B[0].classList.remove("displayisnone");
+                        B[0].classList.remove("thisisnotselected");
+                        B[0].setAttribute("name", "inArea");
+                        B[0].classList.remove("temItem");
+                    }
+
+
+
+                    //for (var j = 0; j < buttonarray.length; j++) {
+                    //    console.log(buttonarray[j]);
+                    //    var selectitem = document.getElementsByClassName(`${buttonarray[j]}`);
+                    //    console.log(selectitem);
+                    //    for (var k = 0; k < selectitem.length; k++) {//要再下判斷
+                    //        selectitem[k].classList.remove("displayisnone");
+                    //        selectitem[k].classList.remove("thisisnotselected");
+                    //        selectitem[k].setAttribute("name", "inArea");
+                    //    }
+                        
+                    //}                             
                 }
-                beSelect();
-                
-            }
+                beSelect();               
+            }                      
         }
         function b1(id, id2, value) {//跟取消一樣
-            document.getElementById(id).remove();
-            document.getElementById(id2).checked = false;
-            document.getElementById(id2).parentNode.parentNode.classList.remove("bg-info");//改色
-            let R = document.getElementsByClassName(`${value}`);
+            //document.getElementById(id).remove();
+            //document.getElementById(id2).checked = false;
+            //document.getElementById(id2).parentNode.parentNode.classList.remove("bg-info");//改色
+            //let R = document.getElementsByClassName(`${value}`);
+            //var Nulld = document.getElementById("Nulldiv");
+            //if (document.getElementsByClassName(`${id2.charAt(0)}Button`).item(0) == null) {//種類按鈕歸零的時候
+            //    Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
+            //}      
+            //for (var i = 0; i < R.length; i++) {
+            //    R[i].classList.remove("displayisnone");
+            //    R[i].classList.add("thisisnotselected");
+            //    R[i].setAttribute("name", "");
+            //}
             var Nulld = document.getElementById("Nulldiv");
+            document.getElementById(id).remove();
+            document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("bg-info");//改色
+            let R = document.getElementsByClassName(`${value}`);
             if (document.getElementsByClassName(`${id2.charAt(0)}Button`).item(0) == null) {//種類按鈕歸零的時候
                 Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
-            }      
-            for (var i = 0; i < R.length; i++) {
-                R[i].classList.remove("displayisnone");
-                R[i].classList.add("thisisnotselected");
-                R[i].setAttribute("name", "");
             }
-            beSelect();
+            if (!((Nulld.classList.contains("C")) || (Nulld.classList.contains("W")) || (Nulld.classList.contains("P")) || (Nulld.classList.contains("S")))) {
+                //都沒有 好像可以改用下面的
+                for (var i = 0; i < R.length; i++) {
+                    R[i].classList.remove("displayisnone");
+                    R[i].classList.add("thisisnotselected");
+                    R[i].setAttribute("name", "");
+                }
+            }
+            else {//還有 有問題
+                var i = 0;
+                var buttonarray = [];
+                while (Nulld.childNodes.item(i) != null) {
+                    var rr = Nulld.childNodes.item(i).value;
+                    var y = rr.substr(0, rr.length - 1);
+                    buttonarray.push(y);
+                    i++;
+                }//抓按鈕還有哪些
+                console.log(buttonarray.length);
+                for (var i = 0; i < R.length; i++) {//清空+判斷
+                    for (var j = 0; j < buttonarray.length; j++) {
+                        if (R[i].classList.contains(`${buttonarray[j]}`)) {
+                            console.log("ok");
+                        }
+                        else {
+                            R[i].classList.add("tempItam");
+                        }
+                    }
+                    //R[i].classList.remove("displayisnone");
+                    //R[i].classList.add("thisisnotselected");
+                    //R[i].setAttribute("name", "");
+                }
+
+
+                var B = document.getElementsByClassName("temItem");
+                while (B.length > 0) {
+                    B[0].classList.add("thisisnotselected");
+                    B[0].setAttribute("name", "");
+                    B[0].classList.remove("temItem");
+                }
+
+
+
+                //for (var j = 0; j < buttonarray.length; j++) {
+                //    console.log(buttonarray[j]);
+                //    var selectitem = document.getElementsByClassName(`${buttonarray[j]}`);
+                //    console.log(selectitem);
+                //    for (var k = 0; k < selectitem.length; k++) {//要再下判斷
+                //        selectitem[k].classList.remove("displayisnone");
+                //        selectitem[k].classList.remove("thisisnotselected");
+                //        selectitem[k].setAttribute("name", "inArea");
+                //    }
+
+                //}                             
+            }
+            beSelect(); 
         }
+
+
         //全部加1個class 抓分類class 再把選到的東西拔掉一個class  最後加入class屬性是display:none
         function cl(id) {
             document.getElementById(id).click();
@@ -443,7 +557,7 @@
             for (var i = 0; i < S.length; i++) {
                 S[i].classList.add("displayisnone");
             }
-            if (Nulld.innerHTML == "") {
+            if (Nulld.innerHTML == "") {//整張表都是空的
                 for (var i = 0; i < S.length; i++) {
                     S[i].classList.remove("displayisnone");
                     S[i].setAttribute("name", "");
@@ -465,5 +579,7 @@
                 x2 = x.lastChild;
             }
         }
+
+        //console.log(document.getElementsByClassName("NTD.5,000以下"));
     </script>
 </content>

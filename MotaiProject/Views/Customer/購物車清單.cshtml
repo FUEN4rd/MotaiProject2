@@ -231,6 +231,7 @@
                 type: "POST",
             data: { "payData": webPayData },
             success: function (data) {
+                console.log(JSON.stringify(data));
                 console.log(data);
                 //能跳轉頁面但提示缺少PaymentType參數，PaymentType在C#後端唯protected set
                 function post(URL, PARAMS) {
@@ -241,7 +242,7 @@
                     for (var x in PARAMS) {
                         var opt = document.createElement("textarea");
                         opt.name = x;
-                        opt.value = PARAMS[x];
+                        opt.value = JSON.stringify(PARAMS[x]);
                         // alert(opt.name)      
                         temp.appendChild(opt);
                     }
