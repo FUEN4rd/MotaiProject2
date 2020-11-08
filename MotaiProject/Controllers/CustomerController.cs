@@ -274,7 +274,6 @@ namespace MotaiProject.Controllers
                 ViewBag.Count = count;
             }
                
-
             List<ProductViewModel> productlist = productRespotiory.GetProductAll();
             MotaiDataEntities db = new MotaiDataEntities();
             List<tProduct> CAdb = db.tProducts.ToList();

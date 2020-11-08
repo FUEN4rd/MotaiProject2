@@ -206,6 +206,8 @@ namespace MotaiProject.ViewModels
         [DisplayName("原價")]
         public int originalPrice { get; set; }
 
+        [DisplayName("htmlName")]
+        public string htmlName { get; set; }
     }
 
     public class OrderDetailViewModel

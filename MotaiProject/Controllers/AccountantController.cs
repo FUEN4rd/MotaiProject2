@@ -90,10 +90,10 @@ namespace MotaiProject.Controllers
             }
             List<OrderViewModel> orderlist = new List<OrderViewModel>();
             orderlist = orderRespoitory.GetOrderAll();
-            foreach (var bag in orderlist)
-            {
-                ViewData["bag.OrderId"] = "bag.surplus";
-            }
+            //foreach (var bag in orderlist)
+            //{
+            //    ViewData["bag.OrderId"] = "bag.surplus";
+            //}
             return View(orderlist);
         }
         public ActionResult 會計審核(int Id)
