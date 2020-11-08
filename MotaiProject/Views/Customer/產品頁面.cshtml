@@ -330,11 +330,12 @@
         function bt1(value, id, id2) {
             //判斷點選的按鈕的id是否存在,不存在則建立,存在則alert
             if (!document.getElementById(id)) {
+                value = TransferString(value);
                 //建立input元素
                 var inp = document.createElement("input");
                 inp.type = "button";
                 //傳入點選按鈕的value值到新的按鈕
-                inp.value =  value;
+                inp.value =  value+"X";
                 //傳入點選按鈕的id到新的按鈕(傳入是id+1防止重複)
                 inp.id = id;
                 //嵌入class
@@ -388,14 +389,11 @@
                         R[i].classList.remove("thisisnotselected");
                         R[i].setAttribute("name", "inArea");
                     }
-                    //var beselected = document.getElementsByName("inArea");
-                    //console.log(beselected[0]);
 
                     Nulld.classList.add(`${id2.charAt(0)}`);//要判斷是否為成重覆值
                     beSelect();
                 }
                 
-                //console.log();
 
             } else {//取消
                 var Nulld = document.getElementById("Nulldiv");
@@ -406,19 +404,21 @@
                     Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
                 }
                 if (!((Nulld.classList.contains("C")) || (Nulld.classList.contains("W")) || (Nulld.classList.contains("P")) || (Nulld.classList.contains("S")))) {
-                    //都沒有 好像可以改用下面的
+                    //都沒有 好像可以改用下面的 清空
                     for (var i = 0; i < R.length; i++) {
                         R[i].classList.remove("displayisnone");
                         R[i].classList.add("thisisnotselected");
                         R[i].setAttribute("name", "");
                     }
                 }
-                else {//還有 有問題
+                else {//還有 有問題 選取範圍反了
+                    //也許可以重傳參數再跑一次=>beclean後跑if
                     var i = 0;
                     var buttonarray = [];
                     while (Nulld.childNodes.item(i) != null) {
                         var rr = Nulld.childNodes.item(i).value;
-                        var y=rr.substr(0, rr.length - 1);
+                        var q = rr.substr(0, rr.length - 1);
+                        var y = TransferString(q);
                         buttonarray.push(y);                       
                         i++;
                     }//抓按鈕還有哪些
@@ -427,28 +427,31 @@
                         R[i].classList.add("thisisnotselected");
                         R[i].setAttribute("name", "");
                     }
-                    for (var i = 0; i < R.length; i++) {//判斷+回來
-                        for (var j = 0; j < buttonarray.length; j++) {
-                            if (R[i].classList.contains(`${buttonarray[j]}`)) {
-                                R[i].classList.add("tempItem");
-                            }
-                            else {
-                                 console.log("ok");
-                            }
-                        }
-                        //R[i].classList.remove("displayisnone");
-                        //R[i].classList.add("thisisnotselected");
-                        //R[i].setAttribute("name", "");
-                    }
 
 
-                    var B = document.getElementsByClassName("tempItem");
-                    while (B.length > 0) {
-                        B[0].classList.remove("displayisnone");
-                        B[0].classList.remove("thisisnotselected");
-                        B[0].setAttribute("name", "inArea");
-                        B[0].classList.remove("temItem");
-                    }
+
+                    //for (var i = 0; i < R.length; i++) {//判斷+回來
+                    //    for (var j = 0; j < buttonarray.length; j++) {
+                    //        if (R[i].classList.contains(`${buttonarray[j]}`)) {
+                    //            R[i].classList.add("tempItem");
+                    //        }
+                    //        else {
+                    //             console.log("ok");
+                    //        }
+                    //    }
+                    //    //R[i].classList.remove("displayisnone");
+                    //    //R[i].classList.add("thisisnotselected");
+                    //    //R[i].setAttribute("name", "");
+                    //}
+
+
+                    //var B = document.getElementsByClassName("tempItem");
+                    //while (B.length > 0) {
+                    //    B[0].classList.remove("displayisnone");
+                    //    B[0].classList.remove("thisisnotselected");
+                    //    B[0].setAttribute("name", "inArea");
+                    //    B[0].classList.remove("tempItem");
+                    //}
 
 
 
@@ -512,7 +515,7 @@
                             console.log("ok");
                         }
                         else {
-                            R[i].classList.add("tempItam");
+                            R[i].classList.add("tempItem");
                         }
                     }
                     //R[i].classList.remove("displayisnone");
@@ -521,11 +524,11 @@
                 }
 
 
-                var B = document.getElementsByClassName("temItem");
+                var B = document.getElementsByClassName("tempItem");
                 while (B.length > 0) {
                     B[0].classList.add("thisisnotselected");
                     B[0].setAttribute("name", "");
-                    B[0].classList.remove("temItem");
+                    B[0].classList.remove("tempItem");
                 }
 
 
@@ -581,5 +584,16 @@
         }
 
         //console.log(document.getElementsByClassName("NTD.5,000以下"));
+
+        function TransferString(content) {//去掉奇怪符號
+            var string = content;
+            try {
+                string = string.replace(/\r\n/g, "")
+                string = string.replace(/\n/g, "");
+            } catch (e) {
+                console.log(e.message);
+            }
+            return string;
+        } 
     </script>
 </content>
