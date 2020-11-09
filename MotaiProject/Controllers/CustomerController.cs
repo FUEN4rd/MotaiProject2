@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.Web.Http.Cors;
+using System.Drawing;
+using System.Text;
+using System.IO;
 
 namespace MotaiProject.Controllers
 {
@@ -93,15 +96,90 @@ namespace MotaiProject.Controllers
         [HttpPost]
         public ActionResult 會員登入(CustomerLoginViewModel c登入資料)
         {
-            MotaiDataEntities dbContext = new MotaiDataEntities();
-            tCustomer d資料確認 = dbContext.tCustomers.FirstOrDefault
-                (c => c.cAccount == c登入資料.cAccount && c.cPassword.Equals(c登入資料.cPassword));
-            if (d資料確認 != null)
+            string code = Request.Form["code"].ToString();
+            if (code == TempData["code"].ToString())
             {
-                Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;             
+
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tCustomer d資料確認 = dbContext.tCustomers.FirstOrDefault
+                    (c => c.cAccount == c登入資料.cAccount && c.cPassword.Equals(c登入資料.cPassword));
+                if (d資料確認 != null)
+                {
+                    Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;
+                    return RedirectToAction("首頁");
+                }
                 return RedirectToAction("首頁");
             }
             return RedirectToAction("首頁");
+        }
+
+        [HttpPost]
+        public ActionResult Login()
+        {
+            string code = Request.Form["code"].ToString();
+            if (code == TempData["code"].ToString())
+            {
+                ViewBag.code = code;
+                ViewBag.Ans = TempData["code"];
+                ViewBag.Result = "驗證正確";
+                return View();
+            }
+            else
+            {
+                ViewBag.code = code;
+                ViewBag.Ans = TempData["code"];
+                ViewBag.Result = "驗證錯誤";
+                return View();
+            }
+        }
+        private string RandomCode(int length)
+        {
+            string s = "0123456789zxcvbnmasdfghjklqwertyuiop";
+            StringBuilder sb = new StringBuilder();
+            Random rand = new Random();
+            int index;
+            for (int i = 0; i < length; i++)
+            {
+                index = rand.Next(0, s.Length);
+                sb.Append(s[index]);
+            }
+            return sb.ToString();
+        }
+        private void PaintInterLine(Graphics g, int num, int width, int height)
+        {
+            Random r = new Random();
+            int startX, startY, endX, endY;
+            for (int i = 0; i < num; i++)
+            {
+                startX = r.Next(0, width);
+                startY = r.Next(0, height);
+                endX = r.Next(0, width);
+                endY = r.Next(0, height);
+                g.DrawLine(new Pen(Brushes.Red), startX, startY, endX, endY);
+            }
+        }
+        public ActionResult GetValidateCode()
+        {
+            byte[] data = null;
+            string code = RandomCode(5);
+            TempData["code"] = code;
+            //定義一個畫板
+            MemoryStream ms = new MemoryStream();
+            using (Bitmap map = new Bitmap(100, 40))
+            {
+                //畫筆,在指定畫板畫板上畫圖
+                //g.Dispose();
+                using (Graphics g = Graphics.FromImage(map))
+                {
+                    g.Clear(Color.White);
+                    g.DrawString(code, new Font("黑體", 18.0F), Brushes.Blue, new Point(10, 8));
+                    //繪製干擾線(數字代表幾條)
+                    PaintInterLine(g, 10, map.Width, map.Height);
+                }
+                map.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            data = ms.GetBuffer();
+            return File(data, "image/jpeg");
         }
 
         [HttpPost]
@@ -167,7 +245,6 @@ namespace MotaiProject.Controllers
                 {
                     return Json(new { result = false, msg = "舊密碼錯誤" });
                 }
-
             }
             else
             {
@@ -260,6 +337,23 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("首頁");
         }
+
+
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
 
         //Product
         private ProductRespoitory productRespotiory = new ProductRespoitory();

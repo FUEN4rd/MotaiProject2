@@ -69,10 +69,6 @@ namespace MotaiProject.Models
                     }
                 }
 
-                //var receivedMoney = from tP in dbContext.tOrderPays
-                //                    from tD in dbContext.tOrderDetails
-                //                    where tP.oOrderId == item.OrderId
-                //                    select new { paymentM= tP.oPayment, receivableM= tD.oProductQty * tD.tProduct.pPrice };
                 var receivedMoney = from tP in dbContext.tOrderPays
                                     where tP.oOrderId == item.OrderId
                                     select tP.oPayment;
@@ -89,7 +85,7 @@ namespace MotaiProject.Models
                 int receivableTotal = 0;
                 foreach (var receivableM in receivableMoney)
                 {
-                    receivableTotal = (int)receivableM + receivableTotal;
+                    receivableTotal += (int)receivableM;
                 }               
                 receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
                 //receivableTotal -= Convert.ToInt32(dbContext.tPromotions.Where(w => w.PromotionId.Equals(item.oPromotionId)).FirstOrDefault().pDiscount);
