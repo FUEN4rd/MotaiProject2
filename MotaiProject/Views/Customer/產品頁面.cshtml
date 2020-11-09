@@ -9,6 +9,23 @@
     bool listA = false;
     bool listB = false;
     bool listC = false;
+
+    List<string> LC = new List<string>();
+    List<string> LM = new List<string>();
+    List<string> LP = new List<string> {
+"NTD.5,000以下","NTD.5,000~50,000","NTD.50,000~200,000","NTD.200,000~1,000,000"
+};
+    List<string> LS = new List<string>();
+
+
+    foreach (var item in Model)
+    {
+        foreach (var cate in item.AllCategory) { LC.Add(cate); }
+        foreach (var cate in item.AllMaterial) { LM.Add(cate); }
+        foreach (var cate in item.AllSize) { LS.Add(cate); }
+        break;
+    }
+
 }
 <content>
     <style>
@@ -61,8 +78,9 @@
         .dropdown-item {
             margin-bottom: 4px;
         }
-        .displayisnone{
-            display:none;
+
+        .displayisnone {
+            display: none;
         }
     </style>
     <div class="container">
@@ -336,6 +354,30 @@
             //x1[0].click();名字抓的到
         })()
 
+            var JLC = [];
+            var JLM = [];
+            var JLP = [];
+            var JLS = [];
+          @foreach (var d in LC)
+          {
+              @:JLC.push("@d.Replace("\r\n", "")");
+          }
+            @foreach (var d in LM)
+          {
+              @:JLM.push("@d.Replace("\r\n", "")");
+          }
+            @foreach (var d in LP)
+          {
+              @:JLP.push("@d.Replace("\r\n", "")");
+          }
+            @foreach (var d in LS)
+          {
+              @:JLS.push("@d.Replace("\r\n", "")");
+          }
+            //console.log(JLC, JLM, JLP, JLS);
+            //console.log(JLS.indexOf("大"))
+
+
 
         //onclick事件傳入value值和id
         function bt1(value, id, id2) {
@@ -358,7 +400,7 @@
                 var Nulld = document.getElementById("Nulldiv");
                 Nulld.appendChild(inp);
                 document.getElementById(`${id2}`).parentNode.parentNode.classList.add("bg-info");//改色
-                
+
                 let R = document.getElementsByClassName(`${value}`);
 
                 //判斷要聯集還是交集
@@ -366,12 +408,15 @@
                 if (!((Nulld.classList.contains("C")) || (Nulld.classList.contains("W")) || (Nulld.classList.contains("P")) || (Nulld.classList.contains("S")))) {
                     Nulld.classList.add(`${id2.charAt(0)}`);
                 }
-                if (document.getElementsByClassName(`${id2.charAt(0)}`)[0] == null) {//交集=>把還沒篩掉的當選取範圍
-                    var beselected = document.getElementsByName("inArea");//不能用for因為是動態的讀取
-                    var X = beselected.length;
-                    //節點的物件是動態的
 
-                    for (var i = 0; i < X - 1; i++) {//不可以用none                       
+                var beselected = document.getElementsByName("inArea");//不能用for因為是動態的讀取
+                var X = beselected.length;
+                //節點的物件是動態的
+
+
+                if (document.getElementsByClassName(`${id2.charAt(0)}`)[0] == null) {//交集=>把還沒篩掉的當選取範圍
+
+                    for (var i = 0; i < X ; i++) {//不可以用none
                         beselected[i].classList.add("thisisnotselected");
                         if (beselected[i].classList.contains(value)) {
                             beselected[i].classList.remove("displayisnone");
@@ -391,20 +436,116 @@
                         B[0].setAttribute("name", "");
                         B[0].classList.remove("tem");
                     }
-                    
+                    Nulld.classList.add(`${id2.charAt(0)}`);//要判斷是否為成重覆值
                     beSelect();
-                }
-                else {
+                }//問題 else要抓別的限制條件
+                else {//進來要取連集的
+                    var ii = 0;
+                    var ita = -1;
+                    var buttonarray = [];
+                    var buttonarrayC = [];//TODO:要分成四個陣列
+                    var buttonarrayM = [];
+                    var buttonarrayP = [];
+                    var buttonarrayS = [];
+                    while (Nulld.childNodes.item(ii) != null) {
+                        var rr = Nulld.childNodes.item(ii).value;
+                        var q = rr.substr(0, rr.length - 1);
+                        var y = TransferString(q);
+                        buttonarray.push(y);
+                        if (JLC.indexOf(`${q}`) > ita) { buttonarrayC.push(y); }
+                        if (JLM.indexOf(`${q}`) > ita) { buttonarrayM.push(y); }
+                        if (JLP.indexOf(`${q}`) > ita) { buttonarrayP.push(y); }
+                        if (JLS.indexOf(`${q}`) > ita) { buttonarrayS.push(y); }
+
+                        ii++;
+                    }//抓按鈕還有哪些
+
+
                     for (var i = 0; i < R.length; i++) {
-                        R[i].classList.remove("displayisnone");
-                        R[i].classList.remove("thisisnotselected");
-                        R[i].setAttribute("name", "inArea");
+                        //抓除了自己以外的按鈕
+                        //
+
+                        if (buttonarray.length > 1) {//除了自己有別的按鈕
+                            //同類聯集她類交集=>同類有一個就上標記 各個分類都跑一次
+                            var A = false;
+                            var B = false;
+                            var C = false;
+                            var D = false;
+
+
+                            //沒有直接過 有再跑回圈
+
+                            if (buttonarrayC.length > 0) {
+                                for (var j = 0; j < buttonarrayC.length; j++) {//四種TOKEN
+                                    if (R[i].classList.contains(`${buttonarrayC[j]}`)) { A = true; }
+                                }
+                            }
+                            else {
+                                A = true;//沒有項目就不判斷
+                            }
+
+                            if (buttonarrayM.length > 0) {
+                                for (var j = 0; j < buttonarrayM.length; j++) {
+                                    if (R[i].classList.contains(`${buttonarrayM[j]}`)) { B = true; }
+                                }
+                            }
+                            else {
+                                B = true;
+                            }
+
+                            if (buttonarrayP.length > 0) {
+                                for (var j = 0; j < buttonarrayP.length; j++) {
+                                    if (R[i].classList.contains(`${buttonarrayP[j]}`)) { C = true; }
+                                }
+                            }
+                            else {
+                                C = true;
+                            }
+
+                            if (buttonarrayS.length > 0) {
+                                for (var j = 0; j < buttonarrayS.length; j++) {
+                                    if (R[i].classList.contains(`${buttonarrayS[j]}`)) { D = true; }
+                                }
+                            }
+                            else {
+                                D = true;
+                            }
+
+                            R[i].classList.add("thisisnotselected");
+                            R[i].setAttribute("name", "");//先移除
+
+                            if (A && B && C && D) {
+                                R[i].classList.remove("displayisnone");
+                                R[i].classList.remove("thisisnotselected");
+                                R[i].setAttribute("name", "inArea");//再加入
+                            }
+
+                        }
+                        else {
+                            R[i].classList.remove("displayisnone");
+                            R[i].classList.remove("thisisnotselected");
+                            R[i].setAttribute("name", "inArea");//第一筆
+                        }
+
+
                     }
+
+
+                    ////再挖除
+                    //var B = document.getElementsByClassName("notthis");
+                    //while (B.length > 0) {
+                    //    B[0].classList.add("thisisnotselected");
+                    //    B[0].setAttribute("name", "");
+                    //    B[0].classList.remove("notthis");
+                    //}
+
+
+
 
                     Nulld.classList.add(`${id2.charAt(0)}`);//要判斷是否為成重覆值
                     beSelect();
                 }
-                
+
 
             } else {//取消
                 var Nulld = document.getElementById("Nulldiv");
@@ -430,16 +571,12 @@
                         var rr = Nulld.childNodes.item(i).value;
                         var q = rr.substr(0, rr.length - 1);
                         var y = TransferString(q);
-                        buttonarray.push(y);                       
+                        buttonarray.push(y);
                         i++;
                     }//抓按鈕還有哪些
-                    //console.log(buttonarray.length);
-                    //for (var i = 0; i < R.length; i++) {
-                    //    R[i].classList.add("thisisnotselected");
-                    //    R[i].setAttribute("name", "");
-                    //}
+
                     bclean();//清空一輪
-                    for (var j = 0; j < buttonarray.length; j++) {
+                    for (var j = 0; j < buttonarray.length; j++) {//重來一輪
                         var clickevent = document.getElementsByName(`${buttonarray[j]}`);
                         clickevent[0].click();
 
@@ -480,11 +617,11 @@
                     //        selectitem[k].classList.remove("thisisnotselected");
                     //        selectitem[k].setAttribute("name", "inArea");
                     //    }
-                        
-                    //}                             
+
+                    //}
                 }
-                beSelect();               
-            }                      
+                beSelect();
+            }
         }
         function b1(id, id2, value) {//跟取消一樣
 
@@ -518,9 +655,9 @@
                     clickevent[0].click();
 
                 }
-                   
+
             }
-            beSelect(); 
+            beSelect();
         }
 
 
@@ -569,6 +706,6 @@
                 console.log(e.message);
             }
             return string;
-        } 
+        }
     </script>
 </content>
