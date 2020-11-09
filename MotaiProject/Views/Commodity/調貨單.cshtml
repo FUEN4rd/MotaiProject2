@@ -76,15 +76,14 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
-    console.log($("input[name='ProductId'].option"));
-    $("input[name='ProductId']").change(function () {
-        var ProductId = $("input[name='ProductId']:checked").val();
+    $("#ProductId").change(function () {
+        var ProductId = $("#ProductId option:selected").val();
         $.ajax({
             url: "@Url.Action("WareOutSearch", "Commodity")",
             type: "POST",
             data: { "ProductId": ProductId },
             success: function (data) {
-                console.log(data[0]);
+                console.log(data);
                 var option = "<option value>請選擇出貨倉</option>";
                 $("#WarehouseIdOut").html(option);
                 for (let i = 0; i < data.length; i++) {
@@ -93,6 +92,27 @@
                     $("#WarehouseIdOut").append("<option value='" + IdOut + "'>" + NameOut + "</option>");
                 }
 
+            }
+        });
+    });
+    $("#WarehouseIdOut").change(function () {
+        var WarehouseIdOut = $("#WarehouseIdOut option:selected").val();
+        var ProductId = $("#ProductId option:selected").val();
+        console.log($("#WarehouseIdOut option:selected").val());
+        $.ajax({
+            url: "@Url.Action("WareOutInventory", "Commodity")",
+            type: "POST",
+            data: {
+                "WarehouseIdOut": WarehouseIdOut,
+                "ProductId": ProductId,
+            },
+            success: function (data) {
+                console.log(data);
+                $("#ProductQty").change(function () {
+                    if ($("#ProductQty").val() > data) {
+                        $("#ProductQty").val(data);
+                    }
+                });
             }
         });
     });

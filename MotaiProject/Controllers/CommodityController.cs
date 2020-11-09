@@ -604,6 +604,18 @@ namespace MotaiProject.Controllers
             }
             return Json(outLists);
         }
+        public JsonResult WareOutInventory(int WarehouseIdOut,int ProductId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tWarehouse warehouse = dbContext.tWarehouses.Where(w => w.wProductId.Equals(ProductId) && w.WarehouseNameId.Equals(WarehouseIdOut)).FirstOrDefault();
+            int MaxQty = warehouse.wPQty;
+            return Json(MaxQty);
+        }
+        [HttpPost]
+        public ActionResult 調貨單(TransferSaveModel save)
+        {
+            return View();
+        }
         //倉儲
         public ActionResult 倉儲查詢()
         {
