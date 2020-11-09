@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.TransferSearchViewModel>
+
+@{
+    ViewBag.Title = "調貨單查詢";
+    Layout = "~/Views/Shared/LayoutCommodity.cshtml";
+}
+
+<h2>調貨單查詢</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WareHouseOutName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WareHouseInName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tNote)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WareHouseOutName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WareHouseInName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tNote)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
