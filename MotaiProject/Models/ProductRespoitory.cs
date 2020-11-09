@@ -24,6 +24,14 @@ namespace MotaiProject.Models
                 Prod.ProductId = item.ProductId;
                 Prod.pNumber = item.pNumber;
                 Prod.pName = item.pName;
+                if (Prod.pName.Length >= 10)
+                {
+                    Prod.pName = item.pName.Substring(0, 10);
+                }
+                else
+                {
+                    Prod.pName = Prod.pName;
+                }
                 Prod.psCategory = item.tProductCategory.Category;
                 Prod.psMaterial = item.tProductMaterial.Material;
                 Prod.psSize = item.tProductSize.Size;
