@@ -8,6 +8,7 @@
     * {
         color: #F2EDD8;
     }
+
 </style>
 <div class="container">
     <div>
@@ -46,7 +47,6 @@
                     @Html.DisplayNameFor(model => model.pDiscountCode):
                     @Html.DisplayFor(model => model.pDiscountCode)
                 </div>
-
                 @{
                     if (Model.pPromotionWeb != null)
                     {
@@ -56,7 +56,7 @@
                     }
                 }
             </div>
-            <div>
+            <div style="padding-bottom:50px;">
                 <img src="../..@Url.Content(Model.pADimage)" class="d-block w-100" alt="..." />
             </div>
         </div>
