@@ -325,7 +325,18 @@
 
 
     </div>
+
     <script type="text/javascript">
+        (function setname() {
+            var x = document.getElementsByClassName("form-check-input");
+            for (var i = 0; i < x.length; i++) {
+                x[i].setAttribute("name", TransferString(x[i].value));
+            }
+            //var x1 = document.getElementsByName("NTD.5,000以下");
+            //x1[0].click();名字抓的到
+        })()
+
+
         //onclick事件傳入value值和id
         function bt1(value, id, id2) {
             //判斷點選的按鈕的id是否存在,不存在則建立,存在則alert
@@ -412,7 +423,7 @@
                     }
                 }
                 else {//還有 有問題 選取範圍反了
-                    //也許可以重傳參數再跑一次=>beclean後跑if
+                    //也許可以重傳參數再跑一次=>bclean後跑if
                     var i = 0;
                     var buttonarray = [];
                     while (Nulld.childNodes.item(i) != null) {
@@ -422,12 +433,17 @@
                         buttonarray.push(y);                       
                         i++;
                     }//抓按鈕還有哪些
-                    console.log(buttonarray.length);
-                    for (var i = 0; i < R.length; i++) {
-                        R[i].classList.add("thisisnotselected");
-                        R[i].setAttribute("name", "");
-                    }
+                    //console.log(buttonarray.length);
+                    //for (var i = 0; i < R.length; i++) {
+                    //    R[i].classList.add("thisisnotselected");
+                    //    R[i].setAttribute("name", "");
+                    //}
+                    bclean();//清空一輪
+                    for (var j = 0; j < buttonarray.length; j++) {
+                        var clickevent = document.getElementsByName(`${buttonarray[j]}`);
+                        clickevent[0].click();
 
+                    }
 
 
                     //for (var i = 0; i < R.length; i++) {//判斷+回來
@@ -471,19 +487,7 @@
             }                      
         }
         function b1(id, id2, value) {//跟取消一樣
-            //document.getElementById(id).remove();
-            //document.getElementById(id2).checked = false;
-            //document.getElementById(id2).parentNode.parentNode.classList.remove("bg-info");//改色
-            //let R = document.getElementsByClassName(`${value}`);
-            //var Nulld = document.getElementById("Nulldiv");
-            //if (document.getElementsByClassName(`${id2.charAt(0)}Button`).item(0) == null) {//種類按鈕歸零的時候
-            //    Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
-            //}      
-            //for (var i = 0; i < R.length; i++) {
-            //    R[i].classList.remove("displayisnone");
-            //    R[i].classList.add("thisisnotselected");
-            //    R[i].setAttribute("name", "");
-            //}
+
             var Nulld = document.getElementById("Nulldiv");
             document.getElementById(id).remove();
             document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("bg-info");//改色
@@ -508,42 +512,13 @@
                     buttonarray.push(y);
                     i++;
                 }//抓按鈕還有哪些
-                console.log(buttonarray.length);
-                for (var i = 0; i < R.length; i++) {//清空+判斷
-                    for (var j = 0; j < buttonarray.length; j++) {
-                        if (R[i].classList.contains(`${buttonarray[j]}`)) {
-                            console.log("ok");
-                        }
-                        else {
-                            R[i].classList.add("tempItem");
-                        }
-                    }
-                    //R[i].classList.remove("displayisnone");
-                    //R[i].classList.add("thisisnotselected");
-                    //R[i].setAttribute("name", "");
+                bclean();
+                for (var j = 0; j < buttonarray.length; j++) {
+                    var clickevent = document.getElementsByName(`${buttonarray[j]}`);
+                    clickevent[0].click();
+
                 }
-
-
-                var B = document.getElementsByClassName("tempItem");
-                while (B.length > 0) {
-                    B[0].classList.add("thisisnotselected");
-                    B[0].setAttribute("name", "");
-                    B[0].classList.remove("tempItem");
-                }
-
-
-
-                //for (var j = 0; j < buttonarray.length; j++) {
-                //    console.log(buttonarray[j]);
-                //    var selectitem = document.getElementsByClassName(`${buttonarray[j]}`);
-                //    console.log(selectitem);
-                //    for (var k = 0; k < selectitem.length; k++) {//要再下判斷
-                //        selectitem[k].classList.remove("displayisnone");
-                //        selectitem[k].classList.remove("thisisnotselected");
-                //        selectitem[k].setAttribute("name", "inArea");
-                //    }
-
-                //}                             
+                   
             }
             beSelect(); 
         }
