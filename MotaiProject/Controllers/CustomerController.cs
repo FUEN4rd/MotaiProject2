@@ -23,9 +23,9 @@ namespace MotaiProject.Controllers
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;   
                 ViewBag.Count = count;
             }
-
             return View();
         }
+
         //Logout
         [HttpPost]
         public ActionResult 登出()
@@ -326,6 +326,19 @@ namespace MotaiProject.Controllers
             ProductViewModel Prod = productRespotiory.GetProductById(ProductId);
             ViewBag.Qty = Prod.pQty;
             return View(Prod);
+        }
+
+        [HttpPost]
+        public JsonResult 產品細節2()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
+                return Json( new {  mse = count });
+            }
+            return Json(new { mse = "ERROR" });
         }
 
         public ActionResult 購物車清單()

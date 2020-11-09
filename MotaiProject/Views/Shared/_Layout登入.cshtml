@@ -230,7 +230,7 @@
                             </a>
                         </div>
                         <div class="nav-item Y_nav-item_icon">
-                               <button style="margin-left:-12px;" id="btncart">@ViewBag.Count</button>
+                            <button style="margin-left:-12px;" id="btncart">@ViewBag.Count</button>
                         </div>
                     </div>
                 </nav>
@@ -322,12 +322,7 @@
         @{
             if (cust == null)
             {
-                @*<script>
-                        $(document).ready(function () {
-                            $("#login_origin").css("data-toggle", "modal");
-                            $("#login_origin").removeAttr("data-target", "#Login");
-                        })
-                    </script>*@
+               
                 using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
                 {
                     @Html.AntiForgeryToken()
@@ -346,11 +341,7 @@
                                         <div class="form-group form-inline">
                                             <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
                                             <div class="col-md-10 ">
-                                                @*<input id="userPassword" type="password" required>*@
                                                 @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black" } })
-                                                @*@Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control" } })*@
-
-                                                @*@Html.ValidationMessageFor("cAccount", "必填", new { @class = "text-danger" })*@
                                             </div>
                                         </div>
                                         <div class="form-group form-inline">
@@ -446,7 +437,7 @@
                 </div>
                 <script src="https://smtpjs.com/v3/smtp.js"></script>
                 <script>
-
+                    //隱藏
                     $("#btncart").addClass("disclass");
                 
                     $("#sendEmail").click(function () {
@@ -485,11 +476,10 @@
             else
             {
                 MotaiDataEntities dbContent = new MotaiDataEntities();
-                
-
                 <script>
-
+                    //顯示
                     $("#btncart").addClass("removedis");
+
 
                     $(document).ready(function () {
                         $("#login_origin").css("display", "none");

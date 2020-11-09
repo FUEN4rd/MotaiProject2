@@ -162,7 +162,7 @@
                         <input id="buyQty" name="buyQty" type="text" value=1 class="form-control3" style="text-align: center;">
                         <button id="plus" class="Y_btn" onclick="Count(this.id)">+</button>
                     </div>
-                    <button type="button" class="btn btn-dark" onclick="addTocart()">加入購物車</button>
+                    <button type="button" class="btn btn-dark" onclick="carcbuy(),addTocart()">加入購物車</button>
                 </div>
                 <h7 id="Qty">@Html.DisplayFor(model=>model.pQty)</h7><h7>件庫存</h7>
                 <hr>
@@ -234,7 +234,17 @@
                 alert(data.msg);
             }
         });
-    }        
+    }  
+
+    function carcbuy() {
+        $.ajax({
+            url: '/Customer/產品細節2',
+            type: 'POST',
+            success: function (data) {
+                document.querySelector('#btncart').innerHTML = data.mse;
+            }
+        })
+    }
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -271,13 +281,9 @@
             return response.json();
         }).then(function (data) {
             if (data.result) {
-                //alert(data.msg);
                 $("#starlight").css("display", "none");
                 $("#star").css("display", "block");
             }
-            //} else {
-            //    alert(data.msg);
-            //}
         });
     }
     function addFavor() {
@@ -294,12 +300,9 @@
                 $("#star").css("display", "none");
                 $("#starlight").css("display", "block");
             }
-            //    alert(data.msg);
-            //} else {
-            //    alert(data.msg);
-            //}
         });
-    }
+    };
+
 
 </script>
 @*觸發尚未登入*@
