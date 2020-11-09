@@ -85,7 +85,6 @@ namespace MotaiProject.Controllers
             prod.pLxWxH = n新增產品.pLxWxH;
             prod.pPrice = n新增產品.pPrice;
             prod.pWeight = n新增產品.pWeight;
-            prod.pQty = n新增產品.pQty;
             db.tProducts.Add(prod);
 
             tProduct Product = db.tProducts.OrderByDescending(o => o.ProductId).FirstOrDefault();
@@ -579,7 +578,7 @@ namespace MotaiProject.Controllers
             return View(shipSelects);
         }
         //調貨單
-        public ActionResult 調貨單()
+        public ActionResult 調貨單建立()
         {
             //todo:調貨單介面
             TransferViewModel model = new TransferViewModel();
@@ -612,9 +611,44 @@ namespace MotaiProject.Controllers
             return Json(MaxQty);
         }
         [HttpPost]
-        public ActionResult 調貨單(TransferSaveModel save)
+        public ActionResult 調貨單建立(TransferSaveModel save)
         {
-            return View();
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
+            {
+                tEmployee employee = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
+                tTransfer transfer = new tTransfer();
+                transfer.tProductId = save.ProductId;
+                transfer.tProductQty = save.ProductQty;
+                transfer.tEmployeeId = employee.EmployeeId;
+                transfer.tWNIdOut = save.WarehouseIdOut;
+                transfer.tWNIdIn = save.WarehouseIdIn;
+                transfer.tDate = save.Date;
+                transfer.tNote = save.Note;
+                dbContext.tTransfers.Add(transfer);
+                dbContext.SaveChanges();
+                return RedirectToAction("調貨單查詢","Commodity");
+            }
+            return RedirectToAction("員工登入","Employee");
+        }
+        public ActionResult 調貨單查詢()
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<TransferSearchViewModel> model = new List<TransferSearchViewModel>();
+            List<tTransfer> transfers = dbContext.tTransfers.ToList();
+            foreach (var item in transfers)
+            {
+                TransferSearchViewModel tItem = new TransferSearchViewModel();
+                tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(item.tProductId)).FirstOrDefault();
+                tItem.ProductName = product.pName;
+                tItem.ProductQty = item.tProductQty;
+                tItem.WareHouseOutName = dbContext.tWarehouseNames.Where(wo => wo.WarehouseNameId.Equals(item.tWNIdOut)).FirstOrDefault().WarehouseName;
+                tItem.WareHouseInName = dbContext.tWarehouseNames.Where(wi => wi.WarehouseNameId.Equals(item.tWNIdIn)).FirstOrDefault().WarehouseName;
+                tItem.Date = item.tDate;
+                tItem.tNote = item.tNote;
+                model.Add(tItem);
+            }
+            return View(model);
         }
         //倉儲
         public ActionResult 倉儲查詢()
