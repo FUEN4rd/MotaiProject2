@@ -14,7 +14,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sShipSerialValue, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sShipSerialValue, new { htmlAttributes = new { @class = "form-control", @id = "ShipSerialValue" ,@disabled = "disabled" } })
+                @Html.EditorFor(model => model.sShipSerialValue, new { htmlAttributes = new { @class = "form-control", @id = "ShipSerialValue" ,@disabled= "disabled" } })
                 @Html.ValidationMessageFor(model => model.sShipSerialValue, "", new { @class = "text-danger" })
             </div>
         </div>
