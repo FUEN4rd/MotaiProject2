@@ -36,6 +36,7 @@ namespace MotaiProject.ViewModels
         public int ProductQty { get; set; }
     }
     //調貨
+    //調貨單建立
     public class TransferViewModel
     {
         [DisplayName("商品名")]
@@ -68,6 +69,22 @@ namespace MotaiProject.ViewModels
     {
         public int WarehouseIdOut { get; set; }
         public string WarehouseNameOut { get; set; }
+    }
+    //調貨單查詢
+    public class TransferSearchViewModel
+    {
+        [DisplayName("商品名")]
+        public string ProductName { get; set; }
+        [DisplayName("調貨數量")]
+        public int ProductQty { get; set; }
+        [DisplayName("調出倉儲")]
+        public string WareHouseOutName { get; set; }
+        [DisplayName("調進倉儲")]
+        public string WareHouseInName { get; set; }
+        [DisplayName("調貨日期")]
+        public DateTime Date { get; set; }
+        [DisplayName("備註")]
+        public string tNote { get; set; }
     }
     //進貨
     //進貨單建立
