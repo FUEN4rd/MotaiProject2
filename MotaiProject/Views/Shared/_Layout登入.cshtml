@@ -322,7 +322,7 @@
         @{
             if (cust == null)
             {
-               
+
                 using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
                 {
                     @Html.AntiForgeryToken()
@@ -337,7 +337,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form method="post" id="form1" action="/Customer/會員登入">
                                         <div class="form-group form-inline">
                                             <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
                                             <div class="col-md-10 ">
@@ -349,6 +349,12 @@
                                             <div class="col-md-10">
                                                 @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black" } })
                                             </div>
+                                        </div>
+                                        <div class="form-group form-inline code">
+                                            <label class="col-form-label Y_black">驗證碼:</label>
+                                            <input type="text" name="code" />
+                                            <img id="codePicture" src="/Customer/GetValidateCode/" />
+                                            <div class="btn btn-primary" onclick="code()" id="codeBtn">換一組驗證碼</div>
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="col-md-10">
@@ -367,6 +373,24 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function code() {
+                            //$.ajax({
+                            //    type: "POST",
+                            //    url: "/Customer/GetValidateCode",
+                            //    success: function (data) {
+                            //        $("#codePicture").attr("src", data.picture);
+                            //        console.log(data.picture);
+                            //        //document.getElementById("codePicture").src = data.picture;
+                            //    }
+                            //});
+                            //$("#codePicture").attr("src", "Customer/GetValidateCode");
+                            document.getElementById("codePicture").src = "Customer/GetValidateCode";
+                        }
+                        //$("codeBtn").click(function () {
+                        //    document.getElementById("codePicture").src = "Customer/GetValidateCode";
+                        //})
+                    </script>
                 }
 
                 @Html.AntiForgeryToken()
@@ -409,7 +433,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 @Html.AntiForgeryToken()
                 <div class="modal fade" id="forgetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe3" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -439,7 +463,7 @@
                 <script>
                     //隱藏
                     $("#btncart").addClass("disclass");
-                
+
                     $("#sendEmail").click(function () {
                         //var forgetEmail = $("#forgetEmail").val();
                         let forgetEmail = document.querySelector("#forgetEmail").value;
@@ -449,7 +473,7 @@
                     type: "POST",
                     data: { "Email": forgetEmail },
                         success: function (data) {
-                            if (data.result) {                            
+                            if (data.result) {
                                 Email.send({
                                 SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
                                     To: forgetEmail,
@@ -459,7 +483,7 @@
                             })
                                 alert(data.msg);
                                 onSuccess(data.url);
-                            }                                                 
+                            }
                     else {
                             alert(data.msg);
                             onSuccess(data.url);
@@ -471,11 +495,15 @@
                     var onSuccess = function (url) {
                         window.location.href = url;
                     }
+
+
                 </script>
             }
             else
             {
                 MotaiDataEntities dbContent = new MotaiDataEntities();
+
+
                 <script>
                     //顯示
                     $("#btncart").addClass("removedis");

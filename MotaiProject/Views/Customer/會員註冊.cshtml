@@ -12,16 +12,16 @@
 
 @{
     @Html.AntiForgeryToken()
-
+<form>
     <div class="container">
         <div class="form-horizontal">
             <h4>會員註冊</h4>
-            <hr />            
+            <hr />
             <div class="form-group">
                 @Html.LabelFor(model => model.cAccount, htmlAttributes: new { @class = "control-label col-md-2" })
                 <span style="color: #FCD492;">註冊後不可更改帳號</span>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.cAccount, new { htmlAttributes = new { @class = "form-control", @id = "Account", @required = "required" } })                    
+                    @Html.EditorFor(model => model.cAccount, new { htmlAttributes = new { @class = "form-control", @id = "Account", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.cAccount, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.cPassword, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "Password",@type = "password", @required = "required" } })
+                    @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "Password", @type = "password", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.cPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -97,12 +97,10 @@
             </div>
         </div>
     </div>
-
-
+</form>
 }
 <div class="container">
     @Html.ActionLink("回到首頁", "首頁")
-
 </div>
 
 <script>

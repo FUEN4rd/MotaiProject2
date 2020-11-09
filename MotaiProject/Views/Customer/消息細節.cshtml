@@ -32,6 +32,7 @@
                     @Html.DisplayFor(model => model.PromotionDescription)
                 </div>
 
+
                 @{
                     if (Model.pCondition != null)
                     {
@@ -39,14 +40,15 @@
                             滿額活動:
                             @Html.DisplayFor(model => model.pCondition)現折
                             @Html.DisplayFor(model => model.pDiscount)
+                        </div> 
+                        
+                        <div>
+                            @Html.DisplayNameFor(model => model.pDiscountCode):
+                            @Html.DisplayFor(model => model.pDiscountCode)
                         </div>
                     }
                 }
 
-                <div>
-                    @Html.DisplayNameFor(model => model.pDiscountCode):
-                    @Html.DisplayFor(model => model.pDiscountCode)
-                </div>
                 @{
                     if (Model.pPromotionWeb != null)
                     {
