@@ -61,7 +61,8 @@ namespace MotaiProject.Models
         }
 
         public ProductViewModel GetProductById(int ProductId)
-        {            
+        {
+            tWarehouse warehouse = dbContext.tWarehouses.FirstOrDefault(p => p.wProductId == ProductId);
             tProduct product = dbContext.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             ProductViewModel Prod = new ProductViewModel();
             Prod.ProductId = product.ProductId;
@@ -74,7 +75,7 @@ namespace MotaiProject.Models
             Prod.pWeight = product.pWeight;
             Prod.pIntroduction = product.pIntroduction;
             Prod.pPrice = product.pPrice;
-            Prod.pQty = (int)product.pQty;
+            Prod.pQty = warehouse.wPQty;
             Prod.psImage = GetProductShowImages(product);
             return Prod;
         }

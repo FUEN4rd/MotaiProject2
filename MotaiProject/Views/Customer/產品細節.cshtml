@@ -2,11 +2,13 @@
 @using MotaiProject.Models
 @{
 
-
+    MotaiDataEntities dbcontent = new MotaiDataEntities();
     tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
     ViewBag.Title = "產品細節";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
     int id = Model.ProductId;
+
+
 }
 <content>
     <style>
@@ -97,7 +99,7 @@
             border-left: transparent;
         }
     </style>
-    <div class="container">
+    <div class="container" style="padding-bottom:110px;">
         <div class="row presize">
             <div class=" col-12 col-md-6 col-xl-6 ">
                 @{
@@ -111,7 +113,7 @@
                                 nub++;
                             }
                         </ol>
-                        <div class="carousel-inner">
+                        <div class="carousel-inner" style="padding-bottom:50px">
                             @foreach (var item in Model.psImage)
                             {
                                 <div class="carousel-item" id="imagepic">
@@ -162,8 +164,7 @@
                     </div>
                     <button type="button" class="btn btn-dark" onclick="addTocart()">加入購物車</button>
                 </div>
-                <h7 id="Qty">@Html.DisplayFor(model => model.pQty)</h7>
-                <h7>件庫存</h7>
+                <h7 id="Qty">@Html.DisplayFor(model=>model.pQty)</h7><h7>件庫存</h7>
                 <hr>
                 <div style="display: flex;">
                     <div class="Pintroduce_border">
