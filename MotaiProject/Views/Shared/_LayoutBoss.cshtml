@@ -80,74 +80,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @*<!-- Sidebar -->
-            <div class="navbar-nav navbar-light sidebar accordion bg-info">
 
-
-                <ul  id="accordionSidebar" style="padding:20px;list-style:none">
-                    <!-- Sidebar - Brand -->
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-                        <li class="sidebar-brand-icon rotate-n-15">
-                            <i class="fas fa-laugh-wink">
-                                <img style="height: auto;width: 60px;padding-bottom:40px" href="#" src="../../Content/墨臺Logo.png" alt="">
-                            </i>
-                        </li>
-                    </a>
-
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>@Html.ActionLink("修改密碼", "Boss首頁", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>@Html.ActionLink("產品頁面", "Boss產品頁面", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>@Html.ActionLink("工作日誌", "Boss看工作日誌", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>@Html.ActionLink("人員檢視", "人員檢視", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>@Html.ActionLink("商品數據", "銷售數據", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>@Html.ActionLink("銷售報表", "銷售報表", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-                    <li class="nav-item sidebar-brand d-flex align-items-center justify-content-center">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>@Html.ActionLink("店鋪報表", "店鋪報表", "Boss", new { area = "" }, new { @class = "navbar-brand" })</span>
-                        </a>
-                    </li>
-                    <hr class="sidebar-divider">
-
-                    <li class="nav-item d-flex justify-content-center">
-                        <a class="nav-link" href="" >
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>@Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class="text-dark"})</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>*@
 
         <!-- Side navigation -->
         <div class="sidenav bg-info">
@@ -170,7 +103,7 @@
 
 
 
-        <div class="container body-content;">
+        <div class="container body-content" style="padding-left:160px;min-width:600px">
             <div class="row" style="height:30px"></div>
             @RenderBody()
             <hr />

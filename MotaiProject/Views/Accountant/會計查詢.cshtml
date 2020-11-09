@@ -7,16 +7,8 @@
 
 <h2>會計查詢</h2>
 <style>
-    .linkdisabled {
-        cursor: text;
-    }
-
     .Y_hidden {
         display: none;
-    }
-
-    .Y_displayBlock {
-        display: block;
     }
 </style>
 <div class="form-check form-check-inline">
@@ -37,43 +29,13 @@
             @Html.DisplayNameFor(model => model.OrderId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.oAddress)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.oDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oDeliverDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oCheck)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oCheckDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cNote)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oPromotionId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pDiscount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oWarehouseName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.sWarehouseName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.oEmployeeId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.seName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.oCustomerId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.scName)
@@ -87,9 +49,9 @@
         <th>
             @Html.DisplayNameFor(model => model.surplus)
         </th>
-        <th></th>
+        <th>審核狀況</th>
     </tr>
-    <tbody id="orderData">
+    <tbody id="table">
         @foreach (var item in Model)
         {
             <tr name="@item.htmlName">
@@ -97,43 +59,13 @@
                     @Html.DisplayFor(modelItem => item.OrderId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.oAddress)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.oDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oDeliverDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oCheck)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oCheckDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cNote)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oPromotionId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pDiscount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oWarehouseName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.sWarehouseName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.oEmployeeId)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.seName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oCustomerId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.scName)
@@ -150,11 +82,12 @@
                 <td>
                     @if (item.oCheck != null)
                     {
+                        @Html.DisplayFor(modelItem => item.oCheckDate)
                         <div>已審核</div>
                     }
                     else if (item.surplus <= 0)
                     {
-                        @Html.ActionLink("待審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("待審核", "會計審核", new { Id = item.OrderId }, new { @class = "btn btn-danger" })
                     }
                     else
                     {
@@ -162,15 +95,13 @@
                     }
                 </td>
             </tr>
-
         }
     </tbody>
-
 </table>
 <script>
 
     $(document).ready(function () {
-        var table = document.getElementById("orderData");
+        var table = document.getElementById("table");
         var check1 = document.getElementById("alreadyCheck");
         var check2 = document.getElementById("unCheck");
         var check3 = document.getElementById("unFinish");
