@@ -45,7 +45,7 @@ namespace MotaiProject.ViewModels
         public string pPriceGroup { get; set; }
 
         [DisplayName("產品數量")]
-        public int pQty { get { return 10; } set { } }
+        public int pQty { get; set; }
 
         [DisplayName("產品圖片")]
         public List<string> psImage { get; set; }

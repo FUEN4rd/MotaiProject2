@@ -18,6 +18,7 @@ namespace MotaiProject.Models
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             foreach (tProduct item in prod)
             {
+                List<tWarehouse> warehouse = dbContext.tWarehouses.Where(w => w.wProductId.Equals(item.ProductId)).ToList();
                 List<tProductImage> images = dbContext.tProductImages.Where(i => i.ProductId.Equals(item.ProductId)).ToList();
                 ProductViewModel Prod = new ProductViewModel();
                 Prod.ProductId = item.ProductId;
@@ -30,7 +31,10 @@ namespace MotaiProject.Models
                 Prod.pWeight = item.pWeight;
                 Prod.pIntroduction = item.pIntroduction;
                 Prod.pPrice = item.pPrice;
-                Prod.pQty = (int)item.pQty;
+                foreach(var qty in warehouse)
+                {
+                    Prod.pQty += qty.wPQty;
+                }
                 Prod.psImage = GetProductShowImages(item);                               
                 productlist.Add(Prod);
             }
