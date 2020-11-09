@@ -321,12 +321,7 @@
         @{
             if (cust == null)
             {
-                @*<script>
-                        $(document).ready(function () {
-                            $("#login_origin").css("data-toggle", "modal");
-                            $("#login_origin").removeAttr("data-target", "#Login");
-                        })
-                    </script>*@
+
                 using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
                 {
                     @Html.AntiForgeryToken()
@@ -361,7 +356,8 @@
                                         <div class="form-group form-inline code">
                                             <label class="col-form-label Y_black">驗證碼:</label>
                                             <input type="text" name="code" />
-                                            <img id="code" src="/Customer/GetValidateCode/" />
+                                            <img id="codePicture" src="/Customer/GetValidateCode/" />
+                                            <div class="btn btn-primary" onclick="code()" id="codeBtn">換一組驗證碼</div>
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="col-md-10">
@@ -380,6 +376,24 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function code() {
+                            //$.ajax({
+                            //    type: "POST",
+                            //    url: "/Customer/GetValidateCode",
+                            //    success: function (data) {
+                            //        $("#codePicture").attr("src", data.picture);
+                            //        console.log(data.picture);
+                            //        //document.getElementById("codePicture").src = data.picture;
+                            //    }
+                            //});
+                            //$("#codePicture").attr("src", "Customer/GetValidateCode");
+                            document.getElementById("codePicture").src = "Customer/GetValidateCode";
+                        }
+                        //$("codeBtn").click(function () {
+                        //    document.getElementById("codePicture").src = "Customer/GetValidateCode";
+                        //})
+                    </script>
                 }
 
                 @Html.AntiForgeryToken()
@@ -422,7 +436,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 @Html.AntiForgeryToken()
                 <div class="modal fade" id="forgetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe3" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -452,7 +466,7 @@
                 <script>
 
                     $("#btncart").addClass("disclass");
-                
+
 
 
                     $("#sendEmail").click(function () {
@@ -464,7 +478,7 @@
                     type: "POST",
                     data: { "Email": forgetEmail },
                         success: function (data) {
-                            if (data.result) {                            
+                            if (data.result) {
                                 Email.send({
                                 SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
                                     To: forgetEmail,
@@ -474,7 +488,7 @@
                             })
                                 alert(data.msg);
                                 onSuccess(data.url);
-                            }                                                 
+                            }
                     else {
                             alert(data.msg);
                             onSuccess(data.url);
@@ -486,12 +500,14 @@
                     var onSuccess = function (url) {
                         window.location.href = url;
                     }
+
+
                 </script>
             }
             else
             {
                 MotaiDataEntities dbContent = new MotaiDataEntities();
-                
+
 
                 <script>
 

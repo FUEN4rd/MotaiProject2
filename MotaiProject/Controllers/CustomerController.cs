@@ -158,6 +158,9 @@ namespace MotaiProject.Controllers
                 g.DrawLine(new Pen(Brushes.Red), startX, startY, endX, endY);
             }
         }
+
+
+
         public ActionResult GetValidateCode()
         {
             byte[] data = null;
@@ -181,6 +184,35 @@ namespace MotaiProject.Controllers
             data = ms.GetBuffer();
             return File(data, "image/jpeg");
         }
+        ////[HttpPost]
+        //public JsonResult GetValidateCode()
+        //{
+        //    byte[] data = null;
+        //    string code = RandomCode(5);
+        //    TempData["code"] = code;
+        //    定義一個畫板
+        //    MemoryStream ms = new MemoryStream();
+        //    using (Bitmap map = new Bitmap(100, 40))
+        //    {
+        //        畫筆,在指定畫板畫板上畫圖
+        //        g.Dispose();
+        //        using (Graphics g = Graphics.FromImage(map))
+        //        {
+        //            g.Clear(Color.White);
+        //            g.DrawString(code, new Font("黑體", 18.0F), Brushes.Blue, new Point(10, 8));
+        //            繪製干擾線(數字代表幾條)
+        //            PaintInterLine(g, 10, map.Width, map.Height);
+        //        }
+        //        map.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    }
+        //    data = ms.GetBuffer();
+        //    return Json(new { picture = File(data, "image/jpeg") });
+        //}
+
+
+
+
+
 
         [HttpPost]
         public JsonResult beforeSendEmail(ForgotPasswordViewModel c電子郵件)
