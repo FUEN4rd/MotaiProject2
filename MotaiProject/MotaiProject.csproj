@@ -680,7 +680,7 @@
     <Content Include="Views\Shared\_LayoutBoss.cshtml" />
     <Content Include="Views\Employee\會計查詢.cshtml" />
     <Content Include="Views\Boss\銷售數據.cshtml" />
-    <Content Include="Views\Order\實體結帳畫面.cshtml" />
+    <Content Include="Views\Order\realCheckView.cshtml" />
     <Content Include="Views\Accountant\Accountant首頁.cshtml" />
     <Content Include="Views\Accountant\會計看產品頁面.cshtml" />
     <Content Include="Views\business\business首頁.cshtml" />
