@@ -77,7 +77,6 @@ namespace MotaiProject.Controllers
                         dbContext.tOrderDetails.Add(detail);
                     }
                     dbContext.SaveChanges();
-                    Session[CSession關鍵字.SK_STOCKDETAIL] = null;
                     int orderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
                     return Json(new { result = true, msg = "新增成功", url = Url.Action("realCheckView", "Order"), OrderId = orderId });
                 }

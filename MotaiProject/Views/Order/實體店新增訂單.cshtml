@@ -179,15 +179,8 @@
         $.ajax({
             url: "@Url.Action("實體店新增訂單", "Order")",
             type: "POST",
-            cache: false,
-            contentType:"application/json",
             data: { "empOrder": OrderList },
-            dataType:"json",
             success: function (data) {
-
-                data = $.parseJSON(data[0]);
-
-                alert(data.result);
                 if (data.result) {
                     alert(data.msg);
                     post(data.url, data.OrderId);
@@ -196,7 +189,6 @@
                     onFalse(data.url);
                 }
             },
-            Error: "fail"
         });
     });
     var onFalse = function (url) {        

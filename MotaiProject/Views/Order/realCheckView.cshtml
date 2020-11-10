@@ -105,10 +105,6 @@
         </div>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 <script>
     $("#orderCheckout").click(function () {
         var method = $("input[name='payType']:checked").val();
@@ -117,8 +113,7 @@
         if (typeof (method) == "undefined") {
             alert("請選取操作方式!");
             return false;
-        } else
-        {
+        } else {
             $.ajax({
                 url: "@Url.Action("OrderPay","Order")",
                 type: "POST",
@@ -132,9 +127,7 @@
                     alert(data.msg);
                     window.location.href = data.url;
                 }
-            })
+            });
         }
-
-
-    })
+    });
 </script>
