@@ -692,7 +692,6 @@
     <Content Include="Views\Shared\LayoutAccountant.cshtml" />
     <Content Include="Views\Shared\Layoutbusiness.cshtml" />
     <Content Include="Views\Shared\LayoutPeople.cshtml" />
-    <Content Include="Views\Accountant\工作日誌.cshtml" />
     <Content Include="Views\business\新增日誌.cshtml" />
     <Content Include="Views\business\工作日誌.cshtml" />
     <Content Include="Views\business\修改日誌.cshtml" />

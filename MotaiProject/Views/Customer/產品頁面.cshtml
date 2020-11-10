@@ -235,9 +235,11 @@
                     </div>
                 </div>
             </div>
+            <div id="productcount" style="color:azure;font-size:large;" class="d-flex">有54個</div>
         </div>
 
-        <div id=Nulldiv></div>
+        <div id=Nulldiv class="d-flex"></div>
+        
         <button onclick="bclean()" class="btn btn-light d-flex">清除所有選項</button>
         <!-- 篩選器尾 -->
         <div class="row ">
@@ -251,7 +253,8 @@
                                 <b>@Html.DisplayFor(modelItem => item.pName)</b>
                             </h4>
                             <h5>
-                                <b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>
+                                @*<b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>*@
+                                <b>NTD$ @((int)item.pPrice)</b>
                             </h5>
                         </div>
                     </a>
@@ -262,6 +265,7 @@
 
     </div>
 
+      
     <script type="text/javascript">
         (function setname() {
             var x = document.getElementsByClassName("form-check-input");
@@ -295,6 +299,19 @@
             //console.log(JLC, JLM, JLP, JLS);
             //console.log(JLS.indexOf("大"))
 
+        (function () {
+
+            var RR = document.getElementsByClassName("form-check-label");
+            var q = [];
+            for (var i = 0; i < RR.length; i++) {
+                q.push(RR[i].innerHTML.replace(/^\s*|\s*$/g, ""));
+            }
+            for (var i = 0; i < q.length; i++) {
+                var ii = document.getElementsByClassName(`${q[i]}`);
+                RR[i].innerHTML += `(${ii.length}個)`;
+            }
+
+        })()
 
 
         //onclick事件傳入value值和id
@@ -554,6 +571,7 @@
             for (var i = 0; i < S.length; i++) {
                 S[i].classList.add("displayisnone");
             }
+
             if (Nulld.innerHTML == "") {//整張表都是空的
                 //for (var i = 0; i < S.length; i++) {
                 //    S[i].classList.remove("displayisnone");
@@ -570,6 +588,11 @@
                 Nulld.classList.remove("W");
                 Nulld.classList.remove("P");
                 Nulld.classList.remove("S");
+                document.getElementById("productcount").innerHTML = `有${S.length}個`;
+            }
+            else {
+                var Z = document.getElementsByName("inArea");
+                document.getElementById("productcount").innerHTML = `有${Z.length}個`;
             }
         }//改變屬性
                     //console.log(document.getElementById("Nulldiv").innerHTML == "");//true
