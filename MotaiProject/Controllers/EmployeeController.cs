@@ -24,6 +24,7 @@ namespace MotaiProject.Controllers
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = d資料確認;
+
                 switch (d資料確認.eBranch)
                 {
                     case 1:

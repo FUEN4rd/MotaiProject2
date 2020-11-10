@@ -252,13 +252,6 @@ namespace MotaiProject.Controllers
             }
         }
 
-
-
-        // GET: Commodity
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         private ProductRespoitory productRespoitory = new ProductRespoitory();
         //進貨單
