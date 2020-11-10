@@ -51,7 +51,7 @@ namespace MotaiProject.Controllers
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 if (Session[CSession關鍵字.SK_ORDERDETAIL] == null)
                 {
-                    return Json(new { result = false, msg = "訂單尚未完成!", url = "" });
+                    return Json(new { result = false, msg = "訂單尚未完成!", url = Url.Action("實體店新增訂單","Order") });
                 }
                 else
                 {
@@ -77,17 +77,8 @@ namespace MotaiProject.Controllers
                         dbContext.tOrderDetails.Add(detail);
                     }
                     dbContext.SaveChanges();
-                    Session[CSession關鍵字.SK_STOCKDETAIL] = null;
-                    int OrderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
-
-                    //JsonResult json = new JsonResult();
-                    //json.ContentType = "text/html";
-                    //json.Data =  new { result = true, msg = "新增成功", url = Url.Action("realcheckview", "Order", new { OrderId }) };
-                    //return json;
-
-
-                    return Json(new { result = true, msg = "新增成功", url = Url.Action("realcheckview", "Order",new { OrderId }) });
-
+                    int orderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
+                    return Json(new { result = true, msg = "新增成功", url = Url.Action("realCheckView", "Order"), OrderId = orderId });
                 }
             }
             else
@@ -151,15 +142,7 @@ namespace MotaiProject.Controllers
             return Json(new { msg = "已刪除" });
         }
         //實體結帳畫面
-        public ActionResult realcheckview()
-        {
-            //抓訂單資料再選取未結帳完的訂單去結帳
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult realcheckview(int OrderId)
+        public ActionResult realCheckView(int OrderId)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             EmployeeCheckoutViewModel model = new EmployeeCheckoutViewModel();
@@ -276,19 +259,20 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
-        public ActionResult webOrder(WebPay payData)
+        public JsonResult webOrder(WebPay payData)
         {
             //HttpClient remote = new HttpClient();
             
             string szHtml = String.Empty;
             List<string> enErrors = new List<string>();
+            string error = "";
             try
             {
                 string OrderId = "0001";
                 using (AllInOne oPayment = new AllInOne())
                 {
                     /* 服務參數 */
-                    oPayment.ServiceMethod = AllPay.Payment.Integration.HttpMethod.ServerPOST;
+                    oPayment.ServiceMethod = AllPay.Payment.Integration.HttpMethod.HttpPOST;
                     oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
                     //oPayment.ServiceURL = "http://localhost" + Url.Action("購物車清單", "Customer"); ;
                     oPayment.HashKey = "5294y06JbISpM5x9";
@@ -299,7 +283,7 @@ namespace MotaiProject.Controllers
                     string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority;
                     oPayment.Send.ReturnURL = baseURI + Url.Action("ordernotice", "Order");
                     oPayment.Send.ClientBackURL = baseURI;
-                    oPayment.Send.OrderResultURL = "<<您要收到付款完成通知的瀏覽器端網址>>";
+                    oPayment.Send.OrderResultURL = baseURI;
                     string[] trade = Guid.NewGuid().ToString().Split('-');
                     string tradeno="";
                     foreach(var items in trade)
@@ -359,6 +343,7 @@ namespace MotaiProject.Controllers
                     //string szHtml = String.Empty;
                     enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
                     //string response = remote.UploadString("https://payment-stage.opay.tw/Cashier/AioCheckOut/V5", Json(oPayment).ToString());
+                    return Json(oPayment);
                 }
             }
             catch (Exception ex)
@@ -372,10 +357,10 @@ namespace MotaiProject.Controllers
                 if (enErrors.Count() > 0)
                 {
                     string szErrorMessage = String.Join("\\r\\n", enErrors);
+                    error = szErrorMessage;
                 }
             }
-            ViewBag.AllPayRedirect = szHtml;
-            return View();
+            return Json(new { });
             //var request = new HttpRequestMessage();
             //request.Content = new StringContent(szHtml);
             //request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");

@@ -113,15 +113,12 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input id="createStock" type="submit" value="新增訂單" class="btn btn-default" />
+            <input id="createOrder" type="submit" value="新增訂單" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -182,26 +179,31 @@
         $.ajax({
             url: "@Url.Action("實體店新增訂單", "Order")",
             type: "POST",
-            cache: false,
-            contentType:"application/json",
             data: { "empOrder": OrderList },
-            dataType:"json",
             success: function (data) {
-
-                data = $.parseJSON(data[0]);
-
-                alert(data.result);
                 if (data.result) {
                     alert(data.msg);
-                    onSuccess(data.url);
+                    post(data.url, data.OrderId);
                 } else {
                     alert(data.msg);
+                    onFalse(data.url);
                 }
             },
-            Error: "fail"
         });
     });
-    var onSuccess = function (url) {        
+    var onFalse = function (url) {        
         window.location.href = url;
+    }
+    function post(URL, PARAMS) {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "POST";
+        var inp = document.createElement("input");
+        inp.name = "OrderId";
+        inp.value = PARAMS;
+        temp.appendChild(inp);
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
     }
 </script>
