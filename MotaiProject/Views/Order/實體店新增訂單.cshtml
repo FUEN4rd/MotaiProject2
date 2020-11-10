@@ -182,18 +182,26 @@
         $.ajax({
             url: "@Url.Action("實體店新增訂單", "Order")",
             type: "POST",
+            cache: false,
+            contentType:"application/json",
             data: { "empOrder": OrderList },
+            dataType:"json",
             success: function (data) {
+
+                data = $.parseJSON(data[0]);
+
+                alert(data.result);
                 if (data.result) {
                     alert(data.msg);
                     onSuccess(data.url);
                 } else {
                     alert(data.msg);
                 }
-            }
+            },
+            Error: "fail"
         });
     });
     var onSuccess = function (url) {        
-        window.location.href = url;        
+        window.location.href = url;
     }
 </script>

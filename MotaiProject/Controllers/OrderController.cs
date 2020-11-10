@@ -79,7 +79,15 @@ namespace MotaiProject.Controllers
                     dbContext.SaveChanges();
                     Session[CSession關鍵字.SK_STOCKDETAIL] = null;
                     int OrderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
-                    return Json(new { result = true, msg = "新增成功", url = Url.Action("結帳畫面", "Order", OrderId) });
+
+                    //JsonResult json = new JsonResult();
+                    //json.ContentType = "text/html";
+                    //json.Data =  new { result = true, msg = "新增成功", url = Url.Action("realcheckview", "Order", new { OrderId }) };
+                    //return json;
+
+
+                    return Json(new { result = true, msg = "新增成功", url = Url.Action("realcheckview", "Order",new { OrderId }) });
+
                 }
             }
             else
@@ -142,8 +150,16 @@ namespace MotaiProject.Controllers
             Session[CSession關鍵字.SK_ORDERDETAIL] = orders;
             return Json(new { msg = "已刪除" });
         }
+        //實體結帳畫面
+        public ActionResult realcheckview()
+        {
+            //抓訂單資料再選取未結帳完的訂單去結帳
+            return View();
+        }
 
-        public ActionResult 實體結帳畫面(int OrderId)
+
+        [HttpPost]
+        public ActionResult realcheckview(int OrderId)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             EmployeeCheckoutViewModel model = new EmployeeCheckoutViewModel();
