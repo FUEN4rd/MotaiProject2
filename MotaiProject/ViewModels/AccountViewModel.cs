@@ -59,26 +59,34 @@ namespace MotaiProject.ViewModels
     public class RegisterViewModel
     {        
         [DisplayName("帳號")]
-        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
+        [Required(ErrorMessage = "必填")]
+        //[RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "長度需介於6~12字元")]
         public string cAccount { get; set; }
         [DisplayName("密碼")]
-        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
+        [Required(ErrorMessage = "必填")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "長度需介於6~12字元")]
         public string cPassword { get; set; }
         [DisplayName("確認密碼")]
-        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
+        [Required(ErrorMessage = "必填")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "長度需介於6~12字元")]
         public string cConfirmPassword { get; set; }
         [DisplayName("名字")]
+        [Required(ErrorMessage = "必填")]
         public string cName { get; set; }
-        [DisplayName("市話")]
+        [DisplayName("市話")]        
         public string cTelePhone { get; set; }
         [DisplayName("手機")]
+        [Required(ErrorMessage = "必填")]
         public string cCellPhone { get; set; }
         [DisplayName("地址")]
+        [Required(ErrorMessage = "必填")]
         public string cAddress { get; set; }
         [DisplayName("統一編號")]
         public string cGUI { get; set; }
         [DisplayName("Email")]
-        [EmailAddress]
+        [Required(ErrorMessage = "必填")]
+        [EmailAddress(ErrorMessage ="必須為Email格式")]
         public string cEmail { get; set; }
     }
 

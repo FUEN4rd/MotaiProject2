@@ -13,8 +13,16 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <style>
+        body {
+            background: url("/images/Employee_login.png");
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
         #wrapper {
             display: flex;
+            min-height: 100vh;
         }
 
             #wrapper #content-wrapper {
@@ -23,81 +31,87 @@
                 overflow-x: hidden;
             }
 
-                #wrapper #content-wrapper #content {
-                    flex: 10 auto;
+        .navbar-brand {
+            margin: 8px;
+        }
+
+        /* The sidebar menu */
+        .sidenav {
+            height: 100%; /* Full-height: remove this if you want "auto" height */
+            width: 160px; /* Set the width of the sidebar */
+            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+            z-index: 1; /* Stay on top */
+            top: 0; /* Stay at the top */
+            left: 0;
+            background-color: #111; /* Black */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 20px;
+        }
+
+            /* The navigation menu links */
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #000000;
+                display: block;
+            }
+
+                /* When you mouse over the navigation links, change their color */
+                .sidenav a:hover {
+                    color: #f1f1f1;
                 }
 
-        body {
-            background: url("/images/Employee_login.png");
-            background-position: center 0;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
+        /* Style page content */
+        .main {
+            margin-left: 160px; /* Same as the width of the sidebar */
+            padding: 0px 10px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+        @@media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
         }
     </style>
 
 </head>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
+
     <div id="wrapper">
+        <div class="sidenav" style="background-color:#A7674C">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink">
+                        <img style="height: auto;width: 100px;padding-bottom:40px" href="#" src="../../Content/墨臺Logo.png" alt="">
+                    </i>
+                </div>
+            </a>
+            @Html.ActionLink("業務部首頁", "Business首頁", "Business", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("消息頁面", "員工看消息", "Business", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("產品頁面", "業務看產品頁面", "Business", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("會計查詢", "業務會計查詢", "Business", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("工作日誌", "工作日誌", "Business", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("新增訂單", "實體店新增訂單", "Order", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("實體結帳", "realcheckview", "Order", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-
-            <li class="sidebar-brand-text mx-3">
-                <span>@Html.ActionLink("業務部首頁", "Business首頁", "Business", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("消息頁面", "員工看消息", "Business", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-
-            <li class="nav-item active">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>@Html.ActionLink("產品頁面", "業務看產品頁面", "Business", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>@Html.ActionLink("業務會計查詢", "業務會計查詢", "Business", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-folder"></i>
-                <span> @Html.ActionLink("工作日誌", "工作日誌", "Business", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-folder"></i>
-                <span> @Html.ActionLink("新增訂單", "實體店新增訂單", "Order", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-folder"></i>
-                <span> @Html.ActionLink("實體結帳", "realcheckview", "Order", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            @*Nav Item - Charts*@
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>@Html.ActionLink("登出", "員工登出", "Employee")</span>
-                </a>
-            </li>
-
-        </ul>
         <div class="container body-content;">
-            <div style="background-color:rgba(255, 255, 255,0.3) ;width:960px; border-radius:10px; margin-top:50px;">
+            <div style="background-color:rgba(255, 255, 255,0.8) ;width:960px; border-radius:10px; margin-top:50px;" class="main">
                 @RenderBody()
             </div>
             <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - 墨臺</p>
             </footer>
-        </div>
+        </div>           
     </div>
 
     <script src="../../Scripts/jquery-3.5.1.min.js"></script>

@@ -13,10 +13,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <style>
-        #wrapper {
-            display: flex;
-        }
-
         body {
             background: url("/images/Employee_login.png");
             background-position: center 0;
@@ -24,94 +20,81 @@
             background-attachment: fixed;
             background-size: cover;
         }
+        #wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+            #wrapper #content-wrapper {
+                background-color: #f8f9fc;
+                width: 100%;
+                overflow-x: hidden;
+            }
 
-        #wrapper #content-wrapper {
-            background-color: #f8f9fc;
-            width: 100%;
+        .navbar-brand {
+            margin: 8px;
+        }
+        .sidenav {
+            height: 100%; 
+            width: 160px; 
+            position: fixed; 
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
             overflow-x: hidden;
+            padding-top: 20px;
         }
 
-            #wrapper #content-wrapper #content {
-                flex: 1 0 auto;
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #000000;
+                display: block;
             }
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+         .main {
+            margin-left: 160px;
+            padding: 0px 10px;
+        }
+     @@media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
     </style>
 
 </head>
 <body id="page-top">
-
-    <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar accordion" id="accordionSidebar">
-
-            <li class="sidebar-brand-text mx-3">
-                <span>@Html.ActionLink("倉儲首頁", "Commodity首頁", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            @*<li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-
-                <span>@Html.ActionLink("消息頁面", "員工看消息", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
+        <div class="sidenav" style="background-color:#A7674C">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink">
+                        <img style="height: auto;width: 100px;padding-bottom:40px" href="#" src="../../Content/墨臺Logo.png" alt="">
+                    </i>
                 </div>
-            </div>
-        </li>*@
+            </a>
+            @Html.ActionLink("倉儲首頁", "Commodity首頁", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("產品頁面", "倉儲看產品頁面", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("進貨單查詢", "進貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("進貨單建立", "進貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("出貨單查詢", "出貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("出貨單建立", "出貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("調貨單查詢", "調貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("調貨單建立", "調貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("倉儲查詢", "倉儲查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
 
-
-            <!-- Nav Item - Pages Collapse Menu 葉面折疊菜單 -->
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("產品頁面", "倉儲看產品頁面", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("進貨單查詢", "倉儲查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("進貨單建立", "進貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("出貨單查詢", "出貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("出貨單建立", "出貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("調貨單建立", "調貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("調貨單查詢", "調貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("倉儲查詢", "倉儲查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-
-            <li class="nav-item">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>@Html.ActionLink("登出", "員工登出", "Employee")</span>
-            </li>
-
-        </ul>
         <div class="container body-content;">
-            <div style="background-color:rgba(255, 255, 255,0.3) ;width:960px; border-radius:10px; margin-top:50px;">
+            <div style="background-color:rgba(255, 255, 255,0.8) ;width:960px; border-radius:10px; margin-top:50px;" class="main">
                 @RenderBody()
             </div>
             <hr />
