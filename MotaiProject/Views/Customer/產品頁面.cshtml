@@ -245,7 +245,7 @@
             {
                 <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @(item.pPriceGroup.Replace("\r\n", "")) @(item.psSize.Replace("\r\n", "")) @(item.psMaterial.Replace("\r\n", "")) @(item.psCategory.Replace("\r\n", "")) product" id="product@(item.ProductId)">
                     <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId })">
-                        <img src="@Html.DisplayFor(modelItem => item.epsImage)" class="img-fluid " alt="..." />
+                        <img src="@Url.Content(item.epsImage)" class="img-fluid " alt="..." />
                         <div class="Y_productInfo">
                             <h4>
                                 <b>@Html.DisplayFor(modelItem => item.pName)</b>

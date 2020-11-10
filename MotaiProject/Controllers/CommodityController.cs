@@ -651,6 +651,21 @@ namespace MotaiProject.Controllers
                 transfer.tWNIdIn = save.WarehouseIdIn;
                 transfer.tDate = save.Date;
                 transfer.tNote = save.Note;
+                tWarehouse warehouseOut = dbContext.tWarehouses.Where(wo => wo.WarehouseNameId.Equals(save.WarehouseIdOut) && wo.wProductId.Equals(save.ProductId)).FirstOrDefault();
+                warehouseOut.wPQty = warehouseOut.wPQty - save.ProductQty;
+                tWarehouse warehouseIn = dbContext.tWarehouses.Where(wo => wo.WarehouseNameId.Equals(save.WarehouseIdIn) && wo.wProductId.Equals(save.ProductId)).FirstOrDefault();
+                if(warehouseIn == null)
+                {
+                    tWarehouse newwarehouseIn = new tWarehouse();
+                    newwarehouseIn.WarehouseNameId = save.WarehouseIdIn;
+                    newwarehouseIn.wProductId = save.ProductId;
+                    newwarehouseIn.wPQty = save.ProductQty;
+                    dbContext.tWarehouses.Add(newwarehouseIn);
+                }
+                else
+                {
+                    warehouseIn.wPQty = warehouseIn.wPQty + save.ProductQty;
+                }
                 dbContext.tTransfers.Add(transfer);
                 dbContext.SaveChanges();
                 return RedirectToAction("調貨單查詢","Commodity");
