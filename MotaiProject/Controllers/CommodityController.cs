@@ -692,18 +692,21 @@ namespace MotaiProject.Controllers
             {
                 return RedirectToAction("員工登入", "Employee");
             }
-            MotaiDataEntities dbContext = new MotaiDataEntities();
-            List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
-            List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
-            foreach(var item in tWarehouses)
+            else
             {
-                WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
-                wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
-                wareInventory.ProductName = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pName;
-                wareInventory.ProductQty = item.wPQty;
-                InventoryList.Add(wareInventory);
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
+                List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
+                foreach (var item in tWarehouses)
+                {
+                    WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
+                    wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
+                    wareInventory.ProductName = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pName;
+                    wareInventory.ProductQty = item.wPQty;
+                    InventoryList.Add(wareInventory);
+                }
+                return View(InventoryList);
             }
-            return View(InventoryList);
         }
     }
 }
