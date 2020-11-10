@@ -75,7 +75,14 @@ namespace MotaiProject.Models
             Prod.pWeight = product.pWeight;
             Prod.pIntroduction = product.pIntroduction;
             Prod.pPrice = product.pPrice;
-            Prod.pQty = warehouse.wPQty;
+            if (warehouse != null)
+            {
+                Prod.pQty = warehouse.wPQty;
+            }
+            else{
+                Prod.pQty = 0;
+            }
+            
             Prod.psImage = GetProductShowImages(product);
             return Prod;
         }
