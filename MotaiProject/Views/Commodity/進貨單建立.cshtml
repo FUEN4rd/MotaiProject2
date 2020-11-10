@@ -4,9 +4,16 @@
     ViewBag.Title = "進貨單建立";
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
+<style>
+    .txtwidth{
+        width:200px;
+    }
+    .doublewidth{
+        width:130px;
+    }
 
+</style>
 <h2>進貨單建立</h2>
-
 
 
 @{
@@ -56,7 +63,7 @@
             </div>
         </div>
 
-        <table class="table table-light">
+        <table class="col-md-10">
             <thead>
                 <tr>
                     <th scope="col">
@@ -69,7 +76,7 @@
                         @Html.DisplayNameFor(model => model.StockDetail.sQuantity)
                     </th>
                     <th scope="col">
-                        @Html.DisplayNameFor(model => model.StockDetail.WareHouseNames)
+                        @Html.DisplayNameFor(model => model.StockDetail.WareHouseName)
                     </th>
                     <th scope="col">
                         @Html.DisplayNameFor(model => model.StockDetail.sNote)
@@ -82,19 +89,19 @@
                     <td scope="row">
                         @Html.DropDownListFor(model => model.StockDetail.sProductId, Model.StockDetail.ProductNames, "請選擇商品")
                     </td>
-                    <td>
-                        @Html.EditorFor(model => model.StockDetail.sCost)
+                    <td >
+                        @Html.EditorFor(model => model.StockDetail.sCost, new { htmlAttributes = new { @class = "doublewidth" } })
                     </td>
-                    <td>
-                        @Html.EditorFor(model => model.StockDetail.sQuantity)
+                    <td >
+                        @Html.EditorFor(model => model.StockDetail.sQuantity, new { htmlAttributes = new { @class = "doublewidth" } })
                     </td>
                     <td>
                         @Html.DropDownListFor(model => model.StockDetail.sWarehouseNameId, Model.StockDetail.WareHouseNames, "請選擇倉儲")
                     </td>
-                    <td>
-                        @Html.EditorFor(model => model.StockDetail.sNote)
+                    <td >
+                        @Html.EditorFor(model => model.StockDetail.sNote ,new{ htmlAttributes = new { @class = "txtwidth" } })
                     </td>
-                    <td>
+                    <td >
                         <input id="createDetail" type="button" value="加入" />
                     </td>
                 </tr>
@@ -180,3 +187,4 @@
         window.location.href = url;
     }
 </script>
+
