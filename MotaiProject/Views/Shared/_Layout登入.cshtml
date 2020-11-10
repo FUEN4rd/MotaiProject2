@@ -159,7 +159,7 @@
                     </div>
                     <div class="nav nav-item active">
                         <a class="nav-link" href="#">
-                            <img style="height: auto;width: 60px" href="#" src="../../Content/墨臺Logo.png" alt="">
+                            <img style="height: auto;width: 60px" href="#" src="@Url.Content("../../Content/墨臺Logo.png") " alt="">
                             <span class="sr-only">(current)</span>
                         </a>
                     </div>
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                 </nav>
-                <div class="Y_bc_red">
+                <div class="Y_bc_red" background-image="@Url.Content("Content/background_RedCloud.png")">
                     <div class="body-content">
                         <div style="padding-top:130px">
                             @RenderBody()
@@ -354,7 +354,7 @@
                                         <div class="form-group form-inline code">
                                             <label class="col-form-label Y_black">驗證碼:</label>
                                             <input type="text" name="code" />
-                                            <img id="codePicture" src="/Customer/GetValidateCode/" />
+                                            <img id="codePicture" src="@Url.Action("GetValidateCode","Customer")" />
                                             <div class="btn btn-primary" onclick="code()" id="codeBtn">換一組驗證碼</div>
                                         </div>
                                         <div class="form-group form-inline">
