@@ -7,14 +7,55 @@
     List<string> L = new List<string>
 {"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
     List<string> Wname = new List<string> { "礁溪 - 麒麟門市", "鶯歌 - 光點門市", "台南 - 新仁門市", "高雄 - 鳳山門市", "苗栗 - 三義門市" };
+    int RR = 0;
+    int S = 0;
+    int person = 0;
+    foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
+    {
+        int temsave = 0;
+        foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+        {
+            RR += kvp2.Value;
+            temsave += kvp2.Value;
+        }
+        if (person < temsave) { S = kvp.Key; person = temsave; }
+    }
+
 }
+<style>
+    .cab {
+        margin: 10px;
+        width: 250px;
+    }
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <h2>店鋪報表</h2>
 
+<div class="row">
+    <div class="card text-white bg-primary mb-3 d-flex cab" style="max-width: 18rem;">
+        <div class="card-header"><h5>店鋪銷售總額</h5></div>
+        <div class="card-body">
+            <h5 class="card-text">$NTD @RR 元</h5>
+        </div>
+    </div>
+    <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
+        <div class="card-header"><h5>店鋪銷售第一</h5></div>
+        <div class="card-body">
+            <h5>@Wname[S]</h5>
+            <p class="card-text">$NTD @person 元</p>
+        </div>
+    </div>
+</div>
+
+
+
+<div style="width:500px;height:500px">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
 <table class="table">
     <tr>
         <th>
-            報表
+            店鋪\月份
         </th>
         @foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
         {
@@ -31,7 +72,7 @@
     @foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
     {
         <tr>
-            <td>@kvp.Key</td>
+            <td>@Wname[kvp.Key - 1]</td>
             @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
             {
 
@@ -42,24 +83,6 @@
     }
 
 </table>
-
-@*@foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-    {
-        <div>
-            @kvp.Key
-            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
-            {
-                <div>
-                    @kvp2.Key
-                    @kvp2.Value
-                </div>
-            }
-        </div>
-    }*@
-<div style="width:500px;height:500px">
-    <canvas id="myChart" width="400" height="400"></canvas>
-</div>
-
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
