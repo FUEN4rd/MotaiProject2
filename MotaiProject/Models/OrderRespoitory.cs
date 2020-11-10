@@ -54,7 +54,6 @@ namespace MotaiProject.Models
                 Order.sWarehouseName = item.tWarehouseName.WarehouseName;
                 Order.seName = item.tEmployee.eName;
                 Order.scName = item.tCustomer.cName;
-                Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
                 var note = item.cNote;
                 if (note != null)
                 {
@@ -86,8 +85,12 @@ namespace MotaiProject.Models
                 foreach (var receivableM in receivableMoney)
                 {
                     receivableTotal += (int)receivableM;
-                }               
-                receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
+                }
+                if (item.oPromotionId != null)
+                {
+                    Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
+                    receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
+                }
                 //receivableTotal -= Convert.ToInt32(dbContext.tPromotions.Where(w => w.PromotionId.Equals(item.oPromotionId)).FirstOrDefault().pDiscount);
                 //List<tOrderDetail> money = dbContext.tOrderDetails.Where(od => od.oOrderId.Equals(item.OrderId)).ToList();
                 //int receivableTotal = 0;
@@ -168,10 +171,12 @@ namespace MotaiProject.Models
                 receivableTotal += (int)receivableM;
             }
             Order.originalPrice = receivableTotal;
-            Order.receivable=receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
-
-            Order.PromotionName = item.tPromotion.PromotionName;
-            Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
+            if (item.oPromotionId != null)
+            {
+                Order.receivable = receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
+                Order.PromotionName = item.tPromotion.PromotionName;
+                Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
+            }
             return Order;
         }
 
