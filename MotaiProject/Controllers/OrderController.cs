@@ -260,10 +260,10 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
-        public HttpResponseMessage webOrder(WebPay payData)
+        public string webOrder(WebPay payData)
         {
-            //WebClient remote = new WebClient();
-            //remote.Encoding = Encoding.UTF8;
+            //HttpClient remote = new HttpClient();
+            
             string szHtml = String.Empty;
             List<string> enErrors = new List<string>();
             try
@@ -273,7 +273,8 @@ namespace MotaiProject.Controllers
                 {
                     /* 服務參數 */
                     oPayment.ServiceMethod = AllPay.Payment.Integration.HttpMethod.HttpPOST;
-                    oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                    //oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                    oPayment.ServiceURL = "https://192.168.32.79" + Url.Action("購物車清單", "Customer"); ;
                     oPayment.HashKey = "5294y06JbISpM5x9";
                     oPayment.HashIV = "v77hoKGq4kWxNNIS";
                     oPayment.MerchantID = "2000132";
@@ -355,11 +356,11 @@ namespace MotaiProject.Controllers
                     string szErrorMessage = String.Join("\\r\\n", enErrors);
                 }
             }
-            //return szHtml;
-            var response = new HttpResponseMessage();
-            response.Content = new StringContent(szHtml);
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
-            return response;
+            return szHtml;
+            //var request = new HttpRequestMessage();
+            //request.Content = new StringContent(szHtml);
+            //request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+            //return request;
         }
 
         public HttpResponseMessage PostComplex()
