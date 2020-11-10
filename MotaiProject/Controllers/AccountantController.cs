@@ -30,33 +30,6 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
-        public ActionResult 工作日誌()
-        {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
-            {
-
-                MotaiDataEntities dbContext = new MotaiDataEntities();
-                tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
-
-
-                List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
-                foreach (var item in dlist)
-                {
-                    tWarehouseName warename = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(item.dWarehouseNameId)).FirstOrDefault();
-                    DiaryViewModel show = new DiaryViewModel();
-                    show.eName = item.tEmployee.eName;
-                    show.dDate = item.dDate;
-                    show.dWeather = item.dWeather;
-                    show.dDiaryNote = item.dDiaryNote;
-                    show.dWarehouseNameId = item.dWarehouseNameId;
-                    show.dWarehouseName = warename.WarehouseName;
-                    DSaw.Add(show);
-                }
-                return View(DSaw);
-            }
-            return RedirectToAction("員工登入");
-        }
 
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         public ActionResult 會計看產品頁面()
