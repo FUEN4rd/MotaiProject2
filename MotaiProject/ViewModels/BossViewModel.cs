@@ -48,6 +48,7 @@ namespace MotaiProject.ViewModels
     public class empData
     {
         public Dictionary<string,Dictionary<int,int>> tem { get; set; }
+
     }
 
     public class wareData
