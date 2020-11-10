@@ -260,7 +260,7 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
-        public string webOrder(WebPay payData)
+        public ActionResult webOrder(WebPay payData)
         {
             //HttpClient remote = new HttpClient();
             
@@ -272,15 +272,17 @@ namespace MotaiProject.Controllers
                 using (AllInOne oPayment = new AllInOne())
                 {
                     /* 服務參數 */
-                    oPayment.ServiceMethod = AllPay.Payment.Integration.HttpMethod.HttpPOST;
-                    //oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
-                    oPayment.ServiceURL = "https://192.168.32.79" + Url.Action("購物車清單", "Customer"); ;
+                    oPayment.ServiceMethod = AllPay.Payment.Integration.HttpMethod.ServerPOST;
+                    oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+                    //oPayment.ServiceURL = "http://localhost" + Url.Action("購物車清單", "Customer"); ;
                     oPayment.HashKey = "5294y06JbISpM5x9";
                     oPayment.HashIV = "v77hoKGq4kWxNNIS";
                     oPayment.MerchantID = "2000132";
+                    //oPayment.MerchantID = System.Configuration.ConfigurationManager.AppSettings["MerchantID"];
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "https://192.168.32.79" + Url.Action("ordernotice", "Order");
-                    oPayment.Send.ClientBackURL = "http://localhost:50720/";
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority;
+                    oPayment.Send.ReturnURL = baseURI + Url.Action("ordernotice", "Order");
+                    oPayment.Send.ClientBackURL = baseURI;
                     oPayment.Send.OrderResultURL = "<<您要收到付款完成通知的瀏覽器端網址>>";
                     string[] trade = Guid.NewGuid().ToString().Split('-');
                     string tradeno="";
@@ -308,7 +310,7 @@ namespace MotaiProject.Controllers
                     //oPayment.Send.PaymentType;
                     oPayment.Send.Remark = "饒了我吧";
                     oPayment.Send.ChooseSubPayment = PaymentMethodItem.None;
-                    oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.Yes;
+                    oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.No;
                     oPayment.Send.HoldTrade = HoldTradeType.No;
                     oPayment.Send.DeviceSource = DeviceType.PC;
                     oPayment.Send.UseRedeem = UseRedeemFlag.No; //購物金/紅包折抵
@@ -356,7 +358,8 @@ namespace MotaiProject.Controllers
                     string szErrorMessage = String.Join("\\r\\n", enErrors);
                 }
             }
-            return szHtml;
+            ViewBag.AllPayRedirect = szHtml;
+            return View();
             //var request = new HttpRequestMessage();
             //request.Content = new StringContent(szHtml);
             //request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
