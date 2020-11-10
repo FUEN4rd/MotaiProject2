@@ -264,11 +264,6 @@ namespace MotaiProject.Controllers
         //進貨單
         public ActionResult 進貨單建立()
         {
-            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
-            {
-                return RedirectToAction("員工登入", "Employee");
-            }
-
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
@@ -289,8 +284,10 @@ namespace MotaiProject.Controllers
                 model.StockDetail = detail;
                 return View(model);
             }
-            return RedirectToAction("員工登入", "Employee");
-            
+            else
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
         }
         [HttpPost]
         public JsonResult 進貨單建立(StockCreateViewModel stockList)
