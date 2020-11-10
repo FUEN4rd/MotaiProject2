@@ -86,7 +86,7 @@
                 @Html.LabelFor(model => model.cEmail, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.cEmail, new { htmlAttributes = new { @class = "form-control", @id = "Email", @type = "Email", @required = "required" } })
-                    @Html.ValidationMessageFor(model => model.cEmail, "請輸入正確格式", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.cEmail, "", new { @class = "text-danger" })
                 </div>
             </div>
 
