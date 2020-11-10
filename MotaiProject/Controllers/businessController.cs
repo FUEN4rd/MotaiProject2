@@ -207,6 +207,10 @@ namespace MotaiProject.Controllers
             int PromotionId = dbContext.tPromotions.OrderByDescending(o => o.PromotionId).First().PromotionId;
             PromotionId = PromotionId + 1;
             var uploagFile = create消息.upLoadimage;
+            if(uploagFile == null)
+            {
+                
+            }
             if (uploagFile.ContentLength > 0)
             {
                 FileInfo file = new FileInfo(uploagFile.FileName);
@@ -273,10 +277,13 @@ namespace MotaiProject.Controllers
                 Promo.PromotionId = promotion.PromotionId;
                 Promo.pPromotionPostDate = DateTime.Now;
                 var uploagFile = promotion.upLoadimage;
-                FileInfo file = new FileInfo(uploagFile.FileName);
-                string photoName = Guid.NewGuid().ToString() + file.Extension;
-                uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
-                Promo.pADimage = "../../images/" + Url.Content(photoName);
+                if (uploagFile!=null)
+                {
+                    FileInfo file = new FileInfo(uploagFile.FileName);
+                    string photoName = Guid.NewGuid().ToString() + file.Extension;
+                    uploagFile.SaveAs(Server.MapPath("~/images/" + photoName));
+                    Promo.pADimage = "../../images/" + Url.Content(photoName);
+                }
                 dbContext.SaveChanges();
             }
             return RedirectToAction("員工看消息");

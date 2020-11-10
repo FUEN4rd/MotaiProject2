@@ -182,6 +182,10 @@ namespace MotaiProject.Controllers
                     {
                         if (index < p.pImage.Count)
                         {
+                            if (p.pImage[index] == null)
+                            {
+                                break;
+                            }
                             if (p.pImage[index].ContentLength > 0)
                             {
                                 FileInfo file = new FileInfo(p.pImage[index].FileName);
