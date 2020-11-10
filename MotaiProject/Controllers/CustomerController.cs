@@ -23,8 +23,8 @@ namespace MotaiProject.Controllers
             {
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;   
-                ViewBag.Count = count;
+                int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
+                ViewBag.Count = count + "件商品";
             }
             return View();
         }
@@ -45,7 +45,7 @@ namespace MotaiProject.Controllers
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
             }
                 
 
@@ -88,7 +88,7 @@ namespace MotaiProject.Controllers
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
 
             }
             DetailPromotionViewModel Promo = promotionRespotiory.GetPromotionById(PromotionId);
@@ -244,7 +244,7 @@ namespace MotaiProject.Controllers
 
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
 
 
                 member.cName = custor.cName;
@@ -388,24 +388,6 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
         }
 
-
-
-
-
-
-
-
-       
-
-
-
-
-
-
-
-
-
-        //Product
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         public ActionResult 產品頁面()
@@ -415,7 +397,7 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
             }
                
             List<ProductViewModel> productlist = productRespotiory.GetProductAll();
@@ -462,7 +444,7 @@ namespace MotaiProject.Controllers
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
             }
             ProductViewModel Prod = productRespotiory.GetProductById(ProductId);
             ViewBag.Qty = Prod.pQty;
@@ -489,8 +471,8 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
-              
+                ViewBag.Count = count + "件商品";
+
                 List<tStatu> StateList = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList();
                 List<StatusCartViewModel> cartList = new List<StatusCartViewModel>();
                 StatusCartGoToPayViewModel Cart = new StatusCartGoToPayViewModel();
@@ -524,8 +506,8 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities db = new MotaiDataEntities();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
-        
+                ViewBag.Count = count + "件商品";
+
                 var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
                 if (product != null && product.pQty > buyQty)
                 {
@@ -558,7 +540,7 @@ namespace MotaiProject.Controllers
                 db.SaveChanges();
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
             }
             return RedirectToAction("購物車清單");
         }
@@ -572,7 +554,7 @@ namespace MotaiProject.Controllers
                 List<FavoriteViewModel> favorList = new List<FavoriteViewModel>();
 
                 int count = dbContext.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
-                ViewBag.Count = count;
+                ViewBag.Count = count + "件商品";
 
                 foreach (var items in FavorList)
                 {
