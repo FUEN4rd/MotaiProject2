@@ -35,7 +35,7 @@ namespace MotaiProject.Controllers
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             List<ProductViewModel> productlist = new List<ProductViewModel>();
             productlist = productRespotiory.GetProductAll();
@@ -54,9 +54,9 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 新增產品()
         {
-            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             ProductViewModel newprod = new ProductViewModel();
             var categories = new ProductRespoitory().GetCategoryAll();
@@ -119,6 +119,10 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 修改產品(int id)
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
             MotaiDataEntities db = new MotaiDataEntities();
             tProduct product = db.tProducts.FirstOrDefault(p => p.ProductId == id);
             if (product == null)
@@ -154,9 +158,9 @@ namespace MotaiProject.Controllers
         [HttpPost]
         public ActionResult 修改產品(EmpProductViewModel p)
         {
-            if (CSession關鍵字.SK_LOGINED_EMPLOYEE == null)
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
-                return RedirectToAction("員工登入");
+                return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             tProduct prod = dbContext.tProducts.Find(p.ProductId);
@@ -247,15 +251,20 @@ namespace MotaiProject.Controllers
 
 
         // GET: Commodity
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
         private ProductRespoitory productRespoitory = new ProductRespoitory();
         //進貨單
         public ActionResult 進貨單建立()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
+
             MotaiDataEntities dbContext = new MotaiDataEntities();
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] != null)
             {
@@ -397,6 +406,10 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 進貨單查詢()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<tStockList> tStockLists = dbContext.tStockLists.ToList();
             List<StockSelectViewModel> stockSelects = new List<StockSelectViewModel>();
@@ -546,6 +559,10 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 出貨單查詢()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<tShipList> tShipLists = dbContext.tShipLists.ToList();
             List<ShipSelectViewModel> shipSelects = new List<ShipSelectViewModel>();
@@ -580,6 +597,11 @@ namespace MotaiProject.Controllers
         //調貨單
         public ActionResult 調貨單建立()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
+
             //todo:調貨單介面
             TransferViewModel model = new TransferViewModel();
             var dicProduct = productRespotiory.GetProductNameAll();
@@ -633,6 +655,10 @@ namespace MotaiProject.Controllers
         }
         public ActionResult 調貨單查詢()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<TransferSearchViewModel> model = new List<TransferSearchViewModel>();
             List<tTransfer> transfers = dbContext.tTransfers.ToList();
@@ -653,6 +679,10 @@ namespace MotaiProject.Controllers
         //倉儲
         public ActionResult 倉儲查詢()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
             List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
