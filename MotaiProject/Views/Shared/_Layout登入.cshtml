@@ -459,15 +459,21 @@
                         success: function (data) {
                             if (data.result) {
                                 Email.send({
-                                SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
+                                    SecureToken: "5f3d064a-777c-4199-beab-5718c73aad62",
+                                    //Host: "smtp.gmail.com",
+                                    //Username: "fuen12302@gmail.com",
+                                    //Password: "frcivdkwbllrcboy",
                                     To: forgetEmail,
                                     From: "fuen12302@gmail.com",
                                     Subject: "墨台 忘記密碼認證信",
                                     Body: data.name + ` 您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。<br />請您回到首頁，以此密碼登入：` + data.password +`<br />登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。<br />首頁連結： http://localhost:50720/ `
-                            })
-                                alert(data.msg);
-                                Console.log(data.msg);
-                                onSuccess(data.url);
+                                }).then(
+                                    message => alert(message)
+                                );
+
+                                //alert(data.msg);
+                                //Console.log(data.msg);
+                                //onSuccess(data.url);
                             }
                     else {
                             alert(data.msg);
