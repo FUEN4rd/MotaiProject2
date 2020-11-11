@@ -57,9 +57,9 @@ namespace MotaiProject.ViewModels
 
     public class DetailPromotionViewModel
     {
-        [DisplayName("類別(字串)")]
+        [DisplayName("類別")]
         public string sPromotinoCategory { get; set; }
-        [DisplayName("產品種類(數字)")]
+        [DisplayName("種類")]
         public int pCategory { get; set; }
         [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }

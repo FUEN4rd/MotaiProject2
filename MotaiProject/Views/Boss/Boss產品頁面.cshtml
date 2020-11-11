@@ -4,92 +4,92 @@
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
 
+<div class="bg-white" style="width:1200px;">
+    <h2>Boss產品頁面</h2>
 
-<h2>Boss產品頁面</h2>
+    <table class="table">
+        <tr>
+            <th scope="col" class="text-nowrap" style="display:none">
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.psImage)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pNumber)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pName)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pIntroduction)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pCategory)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pMaterial)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pSize)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pLxWxH)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pWeight)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pPrice)
+            </th>
+            <th scope="col" class="text-nowrap">
+                @Html.DisplayNameFor(model => model.pQty)
+            </th>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th scope="col" class="text-nowrap" style="display:none">
-            @Html.DisplayNameFor(model => model.ProductId)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.psImage)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pNumber)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pName)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pIntroduction)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pCategory)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pMaterial)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pSize)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pLxWxH)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pWeight)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pPrice)
-        </th>
-        <th scope="col" class="text-nowrap">
-            @Html.DisplayNameFor(model => model.pQty)
-        </th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="row" style="display:none">
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pIntroduction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.psCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.psMaterial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.psSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pLxWxH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pQty)
+                </td>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td scope="row" style="display:none">
-            @Html.DisplayFor(modelItem => item.ProductId)
-        </td>
-        <td>
-            <img src="@Html.DisplayFor(modelItem => item.epsImage)" width="90" height="90" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pIntroduction)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.psCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.psMaterial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.psSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pLxWxH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pQty)
-        </td>
+            </tr>
+        }
 
-    </tr>
-    }
-
-</table>
-
+    </table>
+</div>
 

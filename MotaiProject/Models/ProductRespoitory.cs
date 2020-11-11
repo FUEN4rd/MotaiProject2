@@ -62,7 +62,7 @@ namespace MotaiProject.Models
 
         public ProductViewModel GetProductById(int ProductId)
         {
-            tWarehouse warehouse = dbContext.tWarehouses.FirstOrDefault(p => p.wProductId == ProductId);
+            List<tWarehouse> warehouse = dbContext.tWarehouses.Where(p => p.wProductId == ProductId).ToList();
             tProduct product = dbContext.tProducts.FirstOrDefault(p => p.ProductId == ProductId);
             ProductViewModel Prod = new ProductViewModel();
             Prod.ProductId = product.ProductId;
@@ -77,7 +77,12 @@ namespace MotaiProject.Models
             Prod.pPrice = product.pPrice;
             if (warehouse != null)
             {
-                Prod.pQty = warehouse.wPQty;
+                int warehouseQty = 0;
+                foreach (var wareQty in warehouse)
+                {
+                    warehouseQty += wareQty.wPQty;
+                }
+                Prod.pQty = warehouseQty;
             }
             else{
                 Prod.pQty = 0;
