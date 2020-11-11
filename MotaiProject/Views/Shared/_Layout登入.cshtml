@@ -142,6 +142,9 @@
         .Y_black {
             color: #313737;
         }
+        /*.nav-item:hover {
+            color: #A7674C;
+        }*/
     </style>
 </head>
 <body>
@@ -162,8 +165,8 @@
                         </button>
                     </div>
                     <div class="nav nav-item active">
-                        <a class="nav-link" href="#">
-                            <img style="height: auto;width: 60px" href="@Url.Action("首頁","Customer")" src="@Url.Content("../../Content/墨臺Logo.png") " alt="">
+                        <a class="nav-link" href="@Url.Action("首頁","Customer")">
+                            <img style="height: auto;width: 60px" href="" src="@Url.Content("../../Content/墨臺Logo.png") " alt="">
                             <span class="sr-only">(current)</span>
                         </a>
                     </div>
@@ -621,7 +624,15 @@
         <!--than key-->
         <!--facebook messenger chatbot end-->*@
 
+    <script>
 
+        $(".navbar-brand").hover(function () {
+            $(this).css("color", "#A7674C");
+        }, function () {
+            $(this).css("color", "#A22E37");
+        });
+
+    </script>
 
 
 
