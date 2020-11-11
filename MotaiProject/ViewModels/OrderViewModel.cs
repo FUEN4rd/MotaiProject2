@@ -140,6 +140,7 @@ namespace MotaiProject.ViewModels
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }
     }
+    //訂單跳轉結帳
     public class EmployeeCheckoutViewModel
     {
         public EmployeeOrderViewModel Order { get; set; }
@@ -147,7 +148,11 @@ namespace MotaiProject.ViewModels
         public int TotalAmount { get; set; }
         public Orderpay orderPay { get; set; }
     }
+    //續期結帳跳轉
+    public class TwoCheckoutViewModel
+    {
 
+    }
     public class OrderViewModel //審核
     {
         [DisplayName("訂單編號")]

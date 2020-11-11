@@ -175,6 +175,11 @@ namespace MotaiProject.Controllers
 
             return View(model);
         }
+        //分期實體結帳畫面
+        public ActionResult 分期結帳畫面()
+        {
+            return View();
+        }
         [HttpPost]
         public JsonResult OrderPay(int payType, int OrderId, int payMoney)
         {
