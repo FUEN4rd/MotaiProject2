@@ -358,7 +358,7 @@
                                             <label class="col-form-label Y_black">驗證碼:</label>
                                             <input type="text" name="code" />
                                             <img id="codePicture" src="@Url.Action("GetValidateCode","Customer")" />
-                                            <div class="btn btn-primary" onclick="code()" id="codeBtn">換一組驗證碼</div>
+                                            <div class="btn btn-primary" onclick="code()">換一組驗證碼</div>
                                         </div>
                                         <div class="form-group form-inline">
                                             <div class="col-md-10">
@@ -488,7 +488,7 @@
 
                     var onSuccess = function (url) {
                         window.location.href = url;
-                    }
+                    };
 
                                    
                         function code() {
@@ -496,13 +496,13 @@
                             //    type: "POST",
                             //    url: "/Customer/GetValidateCode",
                             //    success: function (data) {
-                            //        $("#codePicture").attr("src", data.picture);
-                            //        console.log(data.picture);
-                            //        //document.getElementById("codePicture").src = data.picture;
+                            //        $("#codePicture").attr("src", data.result);
+                            //        console.log(data.result);
+                            //        document.getElementById("codePicture").src = data.picture;
                             //    }
                             //});
-                            //$("#codePicture").attr("src", "Customer/GetValidateCode");
-                            document.getElementById("codePicture").src = "Customer/GetValidateCode";
+                            $("#codePicture").attr("src", "/Customer/GetValidateCode/" + new Date().getTime());
+                            //document.getElementById("codePicture").src = "Customer/GetValidateCode";
                         }
                         //$("codeBtn").click(function () {
                         //    document.getElementById("codePicture").src = "Customer/GetValidateCode";

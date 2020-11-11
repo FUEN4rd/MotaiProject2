@@ -34,6 +34,8 @@ namespace MotaiProject.ViewModels
         public string ProductName { get; set; }
         [DisplayName("倉儲庫存")]
         public int ProductQty { get; set; }
+        [DisplayName("量少庫存")]
+        public int underStock { get; set; }
     }
     //調貨
     //調貨單建立

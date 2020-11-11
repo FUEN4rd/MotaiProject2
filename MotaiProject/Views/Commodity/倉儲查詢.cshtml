@@ -22,17 +22,27 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WarehouseName)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WarehouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+
+            @if (item.ProductQty < 1)
+            {
+                <td style="color:red">
+                    @Html.DisplayFor(modelItem => item.ProductQty)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
+            }
+            else
+            {
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductQty)
                 </td>
-            </tr>
+            }
+        </tr>
         }
     </tbody>
 </table>
