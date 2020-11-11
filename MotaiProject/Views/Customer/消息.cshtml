@@ -9,6 +9,15 @@
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+    .Y_productInfo {
+        padding: 10px 20px;
+        text-align: center;
+        line-height: 1.5em;
+        color: #FCD492;
+        height: 90px;
+    }
+</style>
 
 @*輪播牆*@
 
@@ -36,37 +45,38 @@
     </div>
 
     <h2>消息</h2>
+    
+        <table class="table Y_productInfo">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
+                </th>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
-            </th>
+            </tr>
 
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>               
+            @foreach (var item in Model)
+            {
+                <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
                     </td>
                     <td>
-                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })">
+                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;">
                             @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
                         </a>
                     </td>
-                    <td>    
+                    <td>
                         @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
-                    </td>                
-            </tr>
-        }
-    </table>
+                    </td>
+                </tr>
+            }
+        </table>
+   
     @Html.PagedListPager(Model, page => Url.Action("消息", new { page }))
 </div>

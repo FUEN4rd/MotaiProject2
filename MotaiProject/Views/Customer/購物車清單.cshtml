@@ -185,17 +185,13 @@
                     <input type="radio" id="creditCard" name="payType" value="2">
                     <label for="creditCard">信用卡</label>
                 </div>
-                <div>
-                    <input type="radio" id="opay" name="payType" value="3">
-                    <label for="opay">歐付寶</label>
-                </div>
             </div>
-            <button id="webCheckout" type="submit" class="btn btn-dark">確定結帳</button>
+            @*<button id="webCheckout" type="submit" class="btn btn-dark">確定結帳</button>*@
             @*<a href="javascript: void (0)">TRY</a>*@
         </div>
     </form>
-    <form method="post" action="@Url.Action("webOrder", "Order")">
-        <input type="submit" />
+    <form method="post" action="@Url.Action("webOrder", "Order")" id="webData">
+        <button id="webCheckout" type="button" class="btn btn-dark">確定結帳</button>
     </form>
 </div>
 <script>
@@ -213,100 +209,115 @@
             shipaddress = store;
         }
         var payType = $("input[name='payType']:checked").val();
-        var rowArr = new Object;
-        for (let i = 0; i < table.rows.length; i++) {
-            rowArr[i] = new Object;
-            rowArr[i] = {
-                Id: table.rows[i].cells[0].innerHTML.split("\n")[1],
-                Name: table.rows[i].cells[1].innerHTML.split("\n")[1],
-                Price: table.rows[i].cells[2].innerHTML.split("\n")[1],
-                Quantity: table.rows[i].cells[3].innerHTML.split("\n")[1],
-            }
-        }
+        //var rowArr = [];
+        //for (let i = 0; i < table.rows.length; i++) {
+        //    cellObj = new Object;
+        //    cellObj =
+        //    {
+        //        Id: table.rows[i].cells[0].innerHTML.split("\n")[1],
+        //        Name: table.rows[i].cells[1].innerHTML.split("\n")[1],
+        //        Price: table.rows[i].cells[2].innerHTML.split("\n")[1],
+        //        Quantity: table.rows[i].cells[3].innerHTML.split("\n")[1],
+        //    }
+        //    rowArr.push(JSON.stringify(cellObj));
+        //}
         var webPayData = {
             totalPay: total,
             shipAddress: shipaddress,
-            Items: rowArr,
+            //Items: JSON.stringify(rowArr),
             payType: payType,
         }
-
-        $.ajax({
+        //console.log(JSON.stringify(rowArr[0]));
+        //console.log(JSON.stringify(rowArr));
+        var temp = document.getElementById("webData");
+        for (var item in webPayData) {
+            var ipt = document.createElement("input");
+            ipt.name = item;
+            ipt.value = webPayData[item];
+            temp.appendChild(ipt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+        @*$.ajax({
             url: "@Url.Action("webOrder", "Order")",
             type: "POST",
             data: { "payData": webPayData },
             success: function (data) {
-                console.log(JSON.stringify(data));
-                console.log(JSON.stringify(data["Send"]));
-                //能跳轉頁面但提示缺少PaymentType參數，PaymentType在C#後端唯protected set
-                function post(URL, PARAMS) {
-                    var temp = document.createElement("form");
-                    temp.action = URL;
-                    temp.method = "post";
-                    //temp.style.display = "none";
-                    //for (var x in PARAMS) {
-                    //    var opt = document.createElement("input");
-                    //    if (typeof PARAMS[x] == "object") {
-                    //        for (var y in PARAMS[x]) {
-                    //            var opt = document.createElement("input");
-                    //            //console.log(PARAMS[x][y]);
-                    //            if (typeof PARAMS[x][y] == "object") {
-                    //                for (var z in PARAMS[x][y]) {
-                    //                    var opt = document.createElement("input");
-                    //                    if (typeof PARAMS[x][y][z] == "object") {
-                    //                        for (var w in PARAMS[x][y][z]) {
-                    //                            var opt = document.createElement("input");
-                    //                            opt.name = w;
-                    //                            opt.value = JSON.stringify(PARAMS[x][y][z][w]);
-                    //                            temp.appendChild(opt);
-                    //                        }
-                    //                    } else {
-                    //                        opt.name = z;
-                    //                        opt.value = JSON.stringify(PARAMS[x][y][z]);
-                    //                        temp.appendChild(opt);
-                    //                        console.log(JSON.stringify(PARAMS[x][y][z]));
-                    //                    }
-                    //                }
-                    //            } else {
-                    //                opt.name = y;
-                    //                opt.value = JSON.stringify(PARAMS[x][y]);
-                    //                temp.appendChild(opt);
-                    //                console.log(JSON.stringify(PARAMS[x][y]));
-                    //            }
-                    //        }
-                    //    } else {
-                    //        opt.name = x;
-                    //        opt.value = JSON.stringify(PARAMS[x]);
-                    //        console.log(opt);
-                    //        temp.appendChild(opt);
-                    //    }
-                    //}
-    
-                    //for (var x in PARAMS["Send"]) {
-                    //    var opt = document.createElement("textarea");
-                    //    console.log(JSON.stringify(PARAMS["Send"][x]));
-                    //    if (typeof PARAMS["Send"][x] == "object") {
-                    //        for (var y in PARAMS["Send"][x]) {
-                    //            if (typeof PARAMS["Send"][x][y] == "object") {
-                    //                for (var z in PARAMS["Send"][x][y]) {
-                    //                    opt.name = z;
-                    //                    opt.value = JSON.stringify(PARAMS["Send"][x][y][z]);
-                    //                    temp.appendChild(opt);
-                    //                    console.log(JSON.stringify(PARAMS["Send"][x][y][z]));
-                    //                }
-                    //            } else {
-                    //                opt.name = y;
-                    //                opt.value = JSON.stringify(PARAMS["Send"][x][y]);
-                    //                temp.appendChild(opt);
-                    //                console.log(JSON.stringify(PARAMS["Send"][x][y]));
-                    //            }
-                    //        }
-                    //    }
-                    //}
-                    console.log(temp);
-                    document.body.appendChild(temp);
-                    temp.submit();
-                    return temp;
-                }
+                console.log(data);
+                data;
+                //console.log(JSON.stringify(data));
+                //console.log(JSON.stringify(data["Send"]));
+                ////能跳轉頁面但提示缺少PaymentType參數，PaymentType在C#後端唯protected set
+                //function post(URL, PARAMS) {
+                //    var temp = document.createElement("form");
+                //    temp.action = URL;
+                //    temp.method = "post";
+                //    //temp.style.display = "none";
+                //    //for (var x in PARAMS) {
+                //    //    var opt = document.createElement("input");
+                //    //    if (typeof PARAMS[x] == "object") {
+                //    //        for (var y in PARAMS[x]) {
+                //    //            var opt = document.createElement("input");
+                //    //            //console.log(PARAMS[x][y]);
+                //    //            if (typeof PARAMS[x][y] == "object") {
+                //    //                for (var z in PARAMS[x][y]) {
+                //    //                    var opt = document.createElement("input");
+                //    //                    if (typeof PARAMS[x][y][z] == "object") {
+                //    //                        for (var w in PARAMS[x][y][z]) {
+                //    //                            var opt = document.createElement("input");
+                //    //                            opt.name = w;
+                //    //                            opt.value = JSON.stringify(PARAMS[x][y][z][w]);
+                //    //                            temp.appendChild(opt);
+                //    //                        }
+                //    //                    } else {
+                //    //                        opt.name = z;
+                //    //                        opt.value = JSON.stringify(PARAMS[x][y][z]);
+                //    //                        temp.appendChild(opt);
+                //    //                        console.log(JSON.stringify(PARAMS[x][y][z]));
+                //    //                    }
+                //    //                }
+                //    //            } else {
+                //    //                opt.name = y;
+                //    //                opt.value = JSON.stringify(PARAMS[x][y]);
+                //    //                temp.appendChild(opt);
+                //    //                console.log(JSON.stringify(PARAMS[x][y]));
+                //    //            }
+                //    //        }
+                //    //    } else {
+                //    //        opt.name = x;
+                //    //        opt.value = JSON.stringify(PARAMS[x]);
+                //    //        console.log(opt);
+                //    //        temp.appendChild(opt);
+                //    //    }
+                //    //}
+
+                //    //for (var x in PARAMS["Send"]) {
+                //    //    var opt = document.createElement("textarea");
+                //    //    console.log(JSON.stringify(PARAMS["Send"][x]));
+                //    //    if (typeof PARAMS["Send"][x] == "object") {
+                //    //        for (var y in PARAMS["Send"][x]) {
+                //    //            if (typeof PARAMS["Send"][x][y] == "object") {
+                //    //                for (var z in PARAMS["Send"][x][y]) {
+                //    //                    opt.name = z;
+                //    //                    opt.value = JSON.stringify(PARAMS["Send"][x][y][z]);
+                //    //                    temp.appendChild(opt);
+                //    //                    console.log(JSON.stringify(PARAMS["Send"][x][y][z]));
+                //    //                }
+                //    //            } else {
+                //    //                opt.name = y;
+                //    //                opt.value = JSON.stringify(PARAMS["Send"][x][y]);
+                //    //                temp.appendChild(opt);
+                //    //                console.log(JSON.stringify(PARAMS["Send"][x][y]));
+                //    //            }
+                //    //        }
+                //    //    }
+                //    //}
+                //    console.log(temp);
+                //    document.body.appendChild(temp);
+                //    temp.submit();
+                //    return temp;
+                //}
                 //呼叫方法 如
                 //post('https://payment-stage.opay.tw/Cashier/AioCheckOut/V5', data);
                 //post('', data);
@@ -359,7 +370,7 @@
                 //        console.log("123");
                 //    }
                 //})
-            });
+            });*@
     });
 </script>
 <div class="container">

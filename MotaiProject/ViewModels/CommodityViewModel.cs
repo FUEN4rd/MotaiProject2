@@ -34,6 +34,8 @@ namespace MotaiProject.ViewModels
         public string ProductName { get; set; }
         [DisplayName("倉儲庫存")]
         public int ProductQty { get; set; }
+        [DisplayName("量少庫存")]
+        public int underStock { get; set; }
     }
     //調貨
     //調貨單建立
@@ -50,7 +52,9 @@ namespace MotaiProject.ViewModels
         public string WareHouseInName { get; set; }
         [DisplayName("調進倉儲")]
         public int WarehouseIdIn { get; set; }
+        [DisplayName("調貨日期")]
         public DateTime Date { get { return DateTime.Now; } set { } }
+        [DisplayName("備註")]
         public string tNote { get; set; }
 
         public IEnumerable<SelectListItem> ProductNames { get; set; }

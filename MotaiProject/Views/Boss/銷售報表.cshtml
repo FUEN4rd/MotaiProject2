@@ -5,59 +5,88 @@
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
     int datacolor = 0;
     List<string> L = new List<string>
-    {"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
-}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<h2>銷售報表</h2>
-
-
-<table class="table">
-    <tr>
-        <th>
-            報表
-        </th>
-        @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-        {
-            foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
-            {
-                <th>
-                    @kvp2.Key
-                </th>
-            }
-        }
-
-    </tr>
-
-    @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+{"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
+    int RR = 0;
+    string S = "";
+    int person = 0;
+    foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
     {
-        <tr>
-            <td>@kvp.Key</td>
-            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
-            {
-
-                <td>@kvp2.Value</td>
-
-            }
-        </tr>
+        int temsave = 0;
+        foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+        {
+            RR += kvp2.Value;
+            temsave += kvp2.Value;
+        }
+        if (person < temsave) { S = kvp.Key; person = temsave; }
     }
 
-</table>
+}
+<style>
+    .cab {
+        margin: 10px;
+        width: 250px;
+    }
+</style>
 
-@*@foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-    {
-        <div>
-            @kvp.Key
-            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
-            {
-                <div>
-                    @kvp2.Key
-                    @kvp2.Value
-                </div>
-            }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+<div class="container-fluid bg-white">
+    <h2 class="bg-white">銷售報表</h2>
+    <div class="row">
+        <div class="card text-white bg-primary mb-3 d-flex cab" style="max-width: 18rem;">
+            <div class="card-header"><h5>員工銷售總額</h5></div>
+            <div class="card-body">
+                <h5 class="card-text">$NTD @RR 元</h5>
+            </div>
         </div>
-    }*@
-<div style="width:500px;height:500px">
-    <canvas id="myChart" width="400" height="400"></canvas>
+        <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
+            <div class="card-header"><h5>員工銷售第一</h5></div>
+            <div class="card-body">
+                <h5>@S</h5>
+                <p class="card-text">$NTD @person 元</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div style="width:500px;height:500px">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                員工\月份
+            </th>
+            @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+            {
+                foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+                {
+                    <th>
+                        @kvp2.Key
+                    </th>
+                }
+            }
+
+        </tr>
+
+        @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+        {
+            <tr>
+                <td>@kvp.Key</td>
+                @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+                {
+
+                    <td>@kvp2.Value</td>
+
+                }
+            </tr>
+        }
+
+    </table>
+
 </div>
 
 <script>
@@ -68,7 +97,7 @@
             labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
             datasets: [
             @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-            {               
+            {
                 <text>
                 {
                     label: '@kvp.Key',
@@ -82,6 +111,7 @@
                 },
                 </text>
                 datacolor++;
+                if (datacolor == L.Count) { datacolor = 0; }
             }
             ]
         }
