@@ -19,14 +19,12 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             else
-            {
-                
+            {       
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 EmployeeViewModels employee = new EmployeeViewModels();
                 employee.EmployeeId = emp.EmployeeId;
                 employee.eName = emp.eName;
                 employee.eAccount = emp.eAccount;
-
                 return View(employee);
             }
         }
