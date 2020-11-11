@@ -67,7 +67,7 @@
                         @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
                     </td>
                     <td>
-                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })">
+                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;">
                             @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
                         </a>
                     </td>
