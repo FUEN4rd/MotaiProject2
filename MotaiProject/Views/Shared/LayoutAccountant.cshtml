@@ -91,18 +91,17 @@
 
     <div id="wrapper">
         <div class="sidenav" style="background-color:#A7674C">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("首頁","Customer")">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink">
-                        <img style="height: auto;width: 100px;padding-bottom:40px" href="#" src="../../Content/墨臺Logo.png" alt="">
+                        <img style="height: auto;width: 100px;padding-bottom:40px" href="" src="../../Content/墨臺Logo.png" alt="">
                     </i>
                 </div>
             </a>
             @Html.ActionLink("會計首頁", "Accountant首頁", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("消息頁面", "員工看消息", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("產品頁面", "會計看產品頁面", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("會計查詢", "會計查詢", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("工作日誌", "工作日誌", "Accountant", new { area = "" }, new { @class = "navbar-brand" })         
+            @Html.ActionLink("會計查詢", "會計查詢", "Accountant", new { area = "" }, new { @class = "navbar-brand" })      
             @Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class = "navbar-brand" })
         </div>
 
