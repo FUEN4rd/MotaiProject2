@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "分期結帳畫面";
+    Layout = "~/Views/Shared/LayoutCommodity.cshtml";
+}
+
+<h2>分期結帳畫面</h2>
+<div>
+    <label for="searchCustomer">客戶手機:</label>
+    <input id="searchCustomer" type="text" />
+    <button id="searchOrder">搜尋訂單</button>
+</div>
+<div>
+    <table class="table" id="OrderList">
+    </table>
+    <table class="table" id="OrderDetail">
+
+    </table>
+</div>
+<script>
+    $("#searchOrder").click(function () {
+        var CustomerSearch = $("#searchCustomer").val();
+        $.ajax({
+            url:@Url.Action("SearchCustomerOrder", "Order"),
+            type: "POST",
+            data: { "CustomerCell": CustomerSearch },
+            success: function (data) {
+
+            }
+        });
+    });
+</script>

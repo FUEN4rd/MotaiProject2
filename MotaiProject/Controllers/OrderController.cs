@@ -171,6 +171,19 @@ namespace MotaiProject.Controllers
             if (promotionId != 0)
             {
                 Order.oPromotionId = promotionId;
+                tPromotion promotion = dbContext.tPromotions.Where(p => p.PromotionId.Equals(promotionId)).FirstOrDefault();
+                model.TotalAmount = model.TotalAmount - Convert.ToInt32(promotion.pDiscount);
+            }
+            model.AlreadyPay = 0;
+            model.Unpaid = model.TotalAmount;
+            if(dbContext.tOrderPays.Where(op => op.oOrderId.Equals(OrderId)).ToList() != null)
+            {
+                List<tOrderPay> pays = dbContext.tOrderPays.Where(op => op.oOrderId.Equals(OrderId)).ToList();
+                foreach(var item in pays)
+                {
+                    model.AlreadyPay += Convert.ToInt32(item.oPayment);
+                }
+                model.Unpaid = model.TotalAmount - model.AlreadyPay;
             }
             model.Order = Order;
             model.orderDetails = Orderdetails;
@@ -182,6 +195,34 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
+
+        public JsonResult SearchCustomerOrder(string CustomerCell)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tCustomer cust = dbContext.tCustomers.Where(c => c.cCellPhone.Equals(CustomerCell)).FirstOrDefault();
+            if(cust == null)
+            {
+                return Json(new {result= false , msg="查無資料" });
+            }
+            else
+            {
+                List<tOrder> orderlist = dbContext.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
+                List<SearchCustomerOrderModel> searchlist = new List<SearchCustomerOrderModel>();
+                foreach(var item in orderlist)
+                {
+                    if(item.oCheck == null)
+                    {
+                        SearchCustomerOrderModel search = new SearchCustomerOrderModel();
+                        search.orderId = item.OrderId;
+                        search.purchaseDate = item.oDate;
+                        search.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.oWarehouseName)).FirstOrDefault().WarehouseName;
+                        searchlist.Add(search);
+                    }
+                }
+            }
+            return Json(new { });
+        }
+        //實體結帳動作
         [HttpPost]
         public JsonResult OrderPay(int payType, int OrderId, int payMoney)
         {

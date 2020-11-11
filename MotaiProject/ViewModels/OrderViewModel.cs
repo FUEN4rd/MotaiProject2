@@ -144,12 +144,18 @@ namespace MotaiProject.ViewModels
         public EmployeeOrderViewModel Order { get; set; }
         public List<EmployeeOrderDetailViewModel> orderDetails { get; set; }
         public int TotalAmount { get; set; }
+        public int AlreadyPay { get; set; }
+        public int Unpaid { get; set; }
         public Orderpay orderPay { get; set; }
     }
     //續期結帳跳轉
-    public class TwoCheckoutViewModel
+    public class SearchCustomerOrderModel
     {
-
+        public int orderId { get; set; }
+        [DisplayName("購買日期")]
+        public DateTime purchaseDate { get; set; }
+        [DisplayName("購買門市")]
+        public string WarehouseName { get; set; }
     }
     public class OrderViewModel //審核
     {
