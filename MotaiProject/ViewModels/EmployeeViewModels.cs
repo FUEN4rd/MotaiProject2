@@ -8,6 +8,13 @@ using System.Web.Mvc;
 
 namespace MotaiProject.ViewModels
 {
+    public class orderselect
+    {
+        public EmployeeViewModels employeeaccount { get; set; }
+        public OrderViewModel orderwatch { get; set; }
+    }
+
+
     public class EmployeeViewModels
     {
         [DisplayName("員工編號")]
@@ -24,7 +31,8 @@ namespace MotaiProject.ViewModels
         public string sBranch { get; set; }
         [DisplayName("員工密碼")]
         public string ePassword { get; set; }
-        
+        [DisplayName("代辦事項")]
+        public int session { get; set; }
 
 
         public string epQty { get; }

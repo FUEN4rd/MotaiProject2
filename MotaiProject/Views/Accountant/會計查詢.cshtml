@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "會計查詢";
     Layout = "~/Views/Shared/LayoutAccountant.cshtml";
+    MotaiDataEntities dbContent = new MotaiDataEntities();
+
 }
 
 <h2>會計查詢</h2>
@@ -13,40 +15,40 @@
 </style>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="alreadyCheck" value="option1" checked>
-    <label class="form-check-label" for="alreadyCheck">已審核</label>
+    <label class="form-check-label" for="alreadyCheck">已審核<span id="sp1"></span></label>
 </div>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="unCheck" value="option2" checked>
-    <label class="form-check-label" for="unCheck">待審核</label>
+    <label class="form-check-label" for="unCheck">待審核<span id="sp2"></span></label>
 </div>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="unFinish" value="option3" checked>
-    <label class="form-check-label" for="unFinish">未完成</label>
+    <label class="form-check-label" for="unFinish">未完成<span id="sp3"></span></label>
 </div>
-<table class="table">
+<table class="table ">
     <tr>
-        <th>
+        <th style="width:70px">
             @Html.DisplayNameFor(model => model.OrderId)
         </th>
-        <th>
+        <th style="width:140px">
             @Html.DisplayNameFor(model => model.oDate)
         </th>
-        <th>
+        <th style="width:150px">
             @Html.DisplayNameFor(model => model.sWarehouseName)
         </th>
-        <th>
+        <th style="width:150px">
             @Html.DisplayNameFor(model => model.seName)
         </th>
-        <th>
+        <th style="width:120px">
             @Html.DisplayNameFor(model => model.scName)
         </th>
-        <th>
+        <th style="width:70px">
             @Html.DisplayNameFor(model => model.receivable)
         </th>
-        <th>
+        <th style="width:70px">
             @Html.DisplayNameFor(model => model.received)
         </th>
-        <th>
+        <th style="width:70px">
             @Html.DisplayNameFor(model => model.surplus)
         </th>
         <th>審核狀況</th>
@@ -99,6 +101,9 @@
     </tbody>
 </table>
 <script>
+    var unready = 0;
+    var inready = 0;
+    var onready = 0;
 
     $(document).ready(function () {
         var table = document.getElementById("table");
@@ -111,9 +116,11 @@
                 for (let i = 0; i < hidden1.length; i++) {
                     if (check1.checked == true) {
                         hidden1[i].classList.remove("Y_hidden");
+                     
                     }
                     else {
                         hidden1[i].classList.add("Y_hidden");
+                       
                     }
                 }
             });
@@ -122,9 +129,11 @@
                 for (let i = 0; i < hidden2.length; i++) {
                     if (check2.checked == true) {
                         hidden2[i].classList.remove("Y_hidden");
+                      
                     }
                     else {
                         hidden2[i].classList.add("Y_hidden");
+                       
                     }
                 }
             });
@@ -133,13 +142,31 @@
                 for (let i = 0; i < hidden3.length; i++) {
                     if (check3.checked == true) {
                         hidden3[i].classList.remove("Y_hidden");
+                        
                     }
                     else {
                         hidden3[i].classList.add("Y_hidden");
+                        
                     }
                 }
             });
         }
+        document.getElementById('sp1').innerHTML = "(" + onready + ")";
+        document.getElementById('sp2').innerHTML = "(" + inready + ")";
+        document.getElementById('sp3').innerHTML = "(" + unready + ")";
+
+    });
+    document.getElementById('alreadyCheck').addEventListener('change', function (event) {
+        document.getElementById('sp1').innerHTML = "(" + onready + ")";
+
+    });
+    document.getElementById('unCheck').addEventListener('change', function (event) {
+        document.getElementById('sp2').innerHTML = "(" + inready + ")";
+
+    });
+    document.getElementById('unFinish').addEventListener('change', function (event) {
+        document.getElementById('sp3').innerHTML = "(" + unready + ")";
+
     });
 
 

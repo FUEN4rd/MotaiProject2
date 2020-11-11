@@ -388,23 +388,6 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
         }
 
-
-
-
-
-
-
-
-       
-
-
-
-
-
-
-
-
-
         //Product
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
