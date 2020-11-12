@@ -152,7 +152,7 @@ namespace MotaiProject.ViewModels
     {
         public int orderId { get; set; }
         [DisplayName("購買日期")]
-        public DateTime purchaseDate { get; set; }
+        public string purchaseDate { get; set; }
         [DisplayName("購買門市")]
         public string WarehouseName { get; set; }
     }

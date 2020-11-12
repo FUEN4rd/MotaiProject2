@@ -10,6 +10,8 @@ namespace MotaiProject.ViewModels
 {
     public class CommodityViewModel
     {
+        public List<WareInventorySelectViewModel> InventorySelect { get; set; }
+        public List<WarningQuantityViewModel> InventoryWaring { get; set; }
     }
     public class WareHouseViewModel
     {
@@ -34,10 +36,16 @@ namespace MotaiProject.ViewModels
         public string ProductName { get; set; }
         [DisplayName("倉儲庫存")]
         public int ProductQty { get; set; }
-        [DisplayName("量少庫存")]
-        public int underStock { get; set; }
         [DisplayName("庫存總量")]
         public int allProductQty { get; set; }
+    }
+    //庫存警告
+    public class WarningQuantityViewModel
+    {
+        [DisplayName("商品名")]
+        public string ProductName { get; set; }
+        [DisplayName("量少庫存")]
+        public int underStock { get; set; }
     }
     //調貨
     //調貨單建立

@@ -535,7 +535,7 @@ namespace MotaiProject.Controllers
                     tShipdetail.sWarehouseNameId = ShipList.WareHouseId[i];
                     dbContext.tShipDetails.Add(tShipdetail);
                     //倉儲變動
-                    tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId.Equals(ShipList.WareHouseId[i]) && w.wProductId.Equals(ShipList.ProductId[i])).FirstOrDefault();
+                    tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId==ShipList.WareHouseId[i] && w.wProductId==ShipList.ProductId[i]).FirstOrDefault();
                     if (Warehouse != null)
                     {
                         Warehouse.wPQty += ShipList.ShipProductQty[i];
@@ -699,6 +699,7 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
                 List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
+                List<WarningQuantityViewModel> WarningList = new List<WarningQuantityViewModel>();
                 foreach (var item in tWarehouses)
                 {
                     WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
