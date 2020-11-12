@@ -699,6 +699,7 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
                 List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
+                List<WarningQuantityViewModel> WarningList = new List<WarningQuantityViewModel>();
                 foreach (var item in tWarehouses)
                 {
                     WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();

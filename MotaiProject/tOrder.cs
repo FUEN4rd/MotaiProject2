@@ -32,7 +32,7 @@ namespace MotaiProject
         public Nullable<System.DateTime> oCheckDate { get; set; }
         public Nullable<int> oPromotionId { get; set; }
         public string cNote { get; set; }
-        public Nullable<int> oWarehouseName { get; set; }
+        public int oWarehouseName { get; set; }
     
         public virtual tCustomer tCustomer { get; set; }
         public virtual tEmployee tEmployee { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MotaiDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tBranch">
           <Key>
             <PropertyRef Name="BranchId" />
@@ -70,7 +70,7 @@
           <Property Name="oCheckDate" Type="date" />
           <Property Name="oPromotionId" Type="int" />
           <Property Name="cNote" Type="nvarchar" MaxLength="50" />
-          <Property Name="oWarehouseName" Type="int" />
+          <Property Name="oWarehouseName" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tOrderDetail">
           <Key>
@@ -369,7 +369,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tOrder_tWarehouseName">
-          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="0..1" />
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tWarehouseName">
@@ -948,7 +948,7 @@
           <Property Name="oCheckDate" Type="DateTime" Precision="0" />
           <Property Name="oPromotionId" Type="Int32" />
           <Property Name="cNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="oWarehouseName" Type="Int32" />
+          <Property Name="oWarehouseName" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tCustomer" Relationship="Self.FK_tOrder_tCustomer" FromRole="tOrder" ToRole="tCustomer" />
           <NavigationProperty Name="tEmployee" Relationship="Self.FK_tOrder_tEmployee" FromRole="tOrder" ToRole="tEmployee" />
           <NavigationProperty Name="tPromotion" Relationship="Self.FK_tOrder_tPromotion" FromRole="tOrder" ToRole="tPromotion" />
@@ -1352,7 +1352,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tOrder_tWarehouseName">
-          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="0..1" />
+          <End Role="tWarehouseName" Type="Self.tWarehouseName" Multiplicity="1" />
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tWarehouseName">

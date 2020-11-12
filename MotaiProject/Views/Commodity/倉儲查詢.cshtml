@@ -7,9 +7,8 @@
 
 <h2>倉儲查詢</h2>
 
-@*@foreach (var item in Model)
 {
-    @if (item.allProductQty < 3)
+    @if (Model != null)
     {
         <div class="accordion" id="accordionExample">
             <div class="card">
@@ -22,53 +21,56 @@
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
-                        @Html.DisplayFor(modelItem => item.allProductQty)
+                        @foreach (var item in Model)
+                        {
+                            @Html.DisplayFor(modelItem => item.allProductQty)
+                        }
+                    </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    }       
-}*@
+            }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.WarehouseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductQty)
-        </th>
-    </tr>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WarehouseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-
-                @if (item.ProductQty < 1)
-                {
-                    <td style="color:red">
-                        @Html.DisplayFor(modelItem => item.ProductQty)
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductQty)
-                    </td>
-                }
+                <th>
+                    @Html.DisplayNameFor(model => model.WarehouseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductQty)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
-<script>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WarehouseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
 
-</script>
+                        @if (item.ProductQty < 1)
+                        {
+                            <td style="color:red">
+                                @Html.DisplayFor(modelItem => item.ProductQty)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductQty)
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <script>
+
+        </script>
