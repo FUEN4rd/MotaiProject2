@@ -533,7 +533,7 @@ namespace MotaiProject.Controllers
                     tShipdetail.sWarehouseNameId = ShipList.WareHouseId[i];
                     dbContext.tShipDetails.Add(tShipdetail);
                     //倉儲變動
-                    tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId.Equals(ShipList.WareHouseId[i]) && w.wProductId.Equals(ShipList.ProductId[i])).FirstOrDefault();
+                    tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId==ShipList.WareHouseId[i] && w.wProductId==ShipList.ProductId[i]).FirstOrDefault();
                     if (Warehouse != null)
                     {
                         Warehouse.wPQty += ShipList.ShipProductQty[i];

@@ -193,20 +193,25 @@ namespace MotaiProject.Controllers
         //分期實體結帳畫面
         public ActionResult 分期結帳畫面()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
             return View();
         }
-
+        //搜尋客戶訂單
         public JsonResult SearchCustomerOrder(string CustomerCell)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             tCustomer cust = dbContext.tCustomers.Where(c => c.cCellPhone.Equals(CustomerCell)).FirstOrDefault();
             if(cust == null)
             {
-                return Json(new {result= false , msg="查無資料" });
+                return Json(new {result= false , msg="查無此人" });
             }
             else
             {
-                List<tOrder> orderlist = dbContext.tOrders.Where(o => o.oCustomerId.Equals(cust.CustomerId)).ToList();
+                int custId = cust.CustomerId;
+                List<tOrder> orderlist = dbContext.tOrders.Where(o => o.oCustomerId == custId).ToList();
                 List<SearchCustomerOrderModel> searchlist = new List<SearchCustomerOrderModel>();
                 foreach(var item in orderlist)
                 {
@@ -214,13 +219,31 @@ namespace MotaiProject.Controllers
                     {
                         SearchCustomerOrderModel search = new SearchCustomerOrderModel();
                         search.orderId = item.OrderId;
-                        search.purchaseDate = item.oDate;
-                        search.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.oWarehouseName)).FirstOrDefault().WarehouseName;
+                        search.purchaseDate = item.oDate.ToString("yyyy/MM/dd");
+                        search.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId==item.oWarehouseName).FirstOrDefault().WarehouseName;
                         searchlist.Add(search);
                     }
                 }
+                return Json(new { result = true, list = searchlist });
             }
-            return Json(new { });
+        }
+        //顯示訂單詳細內容
+        public JsonResult showOrderDetail(int OrderId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            List<tOrderDetail> orderDetailSearchs = dbContext.tOrderDetails.Where(od => od.oOrderId.Equals(OrderId)).ToList();
+            List<OrderDetailShipShowViewModel> orderDetails = new List<OrderDetailShipShowViewModel>();
+            foreach (var item in orderDetailSearchs)
+            {
+                tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(item.oProductId)).FirstOrDefault();
+                OrderDetailShipShowViewModel orderdetail = new OrderDetailShipShowViewModel();
+                orderdetail.ProductNum = product.pNumber;
+                orderdetail.ProductName = product.pName;
+                orderdetail.oProductQty = item.oProductQty;
+                orderdetail.oNote = item.oNote;
+                orderDetails.Add(orderdetail);
+            }
+            return Json(orderDetails);
         }
         //實體結帳動作
         [HttpPost]

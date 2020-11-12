@@ -11,22 +11,66 @@
     <button id="searchOrder">搜尋訂單</button>
 </div>
 <div>
-    <table class="table" id="OrderList">
-    </table>
-    <table class="table" id="OrderDetail">
-
-    </table>
+    <form action="@Url.Action("realCheckView","Order")" method="post">
+        <table class="table" id="OrderList"></table>
+        <table class="table" id="OrderDetail"></table>
+        <input type="submit" value="前往結帳"/>
+    </form>
 </div>
 <script>
     $("#searchOrder").click(function () {
         var CustomerSearch = $("#searchCustomer").val();
         $.ajax({
-            url:@Url.Action("SearchCustomerOrder", "Order"),
+            url:"@Url.Action("SearchCustomerOrder", "Order")",
             type: "POST",
             data: { "CustomerCell": CustomerSearch },
             success: function (data) {
-
+                const title = "<tr><th>訂單選擇</th>" +
+                    "<th>購買日期</th>" +
+                    "<th>購買門市</th></tr>";
+                $("#OrderList").html(title);
+                if (!data.result) {
+                    alert(data.msg);
+                } else {
+                    for (let i = 0; i < data.list.length; i++) {
+                        var Id = data.list[i].orderId;
+                        var Date = data.list[i].purchaseDate;
+                        var Shop = data.list[i].WarehouseName;
+                        $("#OrderList").append("<tr><td><input type='radio' name='OrderId' value='" + Id + "' /></td>" +
+                            "<td>" + Date + "</td>" +
+                            "<td>" + Shop + "</td></tr>");
+                    }
+                }
             }
         });
     });
+    $(document).on("change", "input[name='OrderId']",function () {
+        var orderId = $("input[name='OrderId']:checked").val();
+        console.log(orderId);
+        $.ajax({
+            url: "@Url.Action("showOrderDetail","Order")",
+            type: "POST",
+            data: { "OrderId": orderId },
+            success: function (data) {
+                const title = "<tr><th>產品編號</th>" +
+                    "<th>產品名稱</th>" +
+                    "<th>產品數量</th>" +
+                    "<th>備註</th></tr>";
+                $("#OrderDetail").html(title);
+                for (let i = 0; i < data.length; i++) {
+                    var Num = data[i].ProductNum;
+                    var Name = data[i].ProductName;
+                    var Qty = data[i].oProductQty;
+                    var Note = data[i].oNote;
+                    if (Note == null) {
+                        Note = "";
+                    }
+                    $("#OrderDetail").append("<tr><td>" + Num + "</td>" +
+                        "<td>" + Name + "</td>" +
+                        "<td>" + Qty + "</td>" +
+                        "<td>" + Note + "</td></tr>");
+                }
+            }
+        });
+    })
 </script>
