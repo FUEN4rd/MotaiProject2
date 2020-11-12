@@ -699,43 +699,21 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
                 List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
-                WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
                 foreach (var item in tWarehouses)
                 {
+                    WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
                     wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
                     wareInventory.ProductName = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pName;
                     wareInventory.ProductQty = item.wPQty;
                     InventoryList.Add(wareInventory);
                 }
-                //List<ProductViewModel> productlist = new List<ProductViewModel>();
-                //productlist = productRespoitory.GetProductAll();
-                //wareInventory.allProductQty = productlist(t => t.pQty.Equals(0));
+
 
                 return View(InventoryList);
             }
         }
         
         
-        public string sqlget()
-        {
-            MotaiDataEntities dbContent = new MotaiDataEntities();
-            List <ProductViewModel> products = new List<ProductViewModel>();
-            
-            string a = "av";
-            return a;
-        }
-
-
-
-        public readonly string[] names = {"Anna","Brittany","Cinderella",
-            "Diana","Eva","Fiona", "Gunda","Hege","Inga","Johanna","Kitty",
-            "Linda","Nina","Ophelia", "Petunia","Amanda","Raquel","Cindy",
-            "Doris","Eve","Evita","Sunniva", "Tove","Unni","Violet",
-            "Liza","Elizabeth","Ellen","Wenche","Vicky"};
-
-        public string GetAutoComplete()
-        {
-            return string.Join(",", names);
-        }
+      
     }
 }

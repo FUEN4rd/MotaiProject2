@@ -19,12 +19,11 @@
             @Html.DisplayNameFor(model => model.eName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ePosition)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.eBranch)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.ePosition)
+        </th>
         <th></th>
     </tr>
 
@@ -38,15 +37,16 @@
             @Html.DisplayFor(modelItem => item.eName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sPosition)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.sBranch)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sPosition)
+        </td>
+
 
         <td>
-            @Html.ActionLink("修改", "修改員工", new {  id=item.EmployeeId })
-           
+            @Html.ActionLink("修改", "修改員工", new { id = item.EmployeeId })
+
         </td>
     </tr>
 }

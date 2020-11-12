@@ -52,8 +52,10 @@ namespace MotaiProject.Controllers
             }
             tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
+            var empall2 = empall.OrderBy(c => c.ePosition).ToList();
+            var empall3 = empall2.OrderBy(c => c.eBranch).ToList();
             List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
-            foreach(var item in empall)
+            foreach(var item in empall3)
             {
                 EmployeeViewModels employeeModel = new EmployeeViewModels();
                 employeeModel.EmployeeId = item.EmployeeId;
