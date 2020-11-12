@@ -19,11 +19,13 @@ namespace MotaiProject.Controllers
             }
             else
             {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 EmployeeViewModels employee = new EmployeeViewModels();
                 employee.EmployeeId = emp.EmployeeId;
                 employee.eName = emp.eName;
                 employee.eAccount = emp.eAccount;
+                employee.sPosition = emp.tPosition.pPosition;
                 return View(employee);
             }
         }
