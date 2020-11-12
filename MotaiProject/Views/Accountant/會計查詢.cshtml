@@ -3,8 +3,6 @@
 @{
     ViewBag.Title = "會計查詢";
     Layout = "~/Views/Shared/LayoutAccountant.cshtml";
-    MotaiDataEntities dbContent = new MotaiDataEntities();
-
 }
 
 <h2>會計查詢</h2>
@@ -15,40 +13,40 @@
 </style>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="alreadyCheck" value="option1" checked>
-    <label class="form-check-label" for="alreadyCheck">已審核<span id="sp1"></span></label>
+    <label class="form-check-label" for="alreadyCheck">已審核</label>(<span id="alreadyCheckC">0</span>)
 </div>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="unCheck" value="option2" checked>
-    <label class="form-check-label" for="unCheck">待審核<span id="sp2"></span></label>
+    <label class="form-check-label" for="unCheck">待審核</label>(<span id="unCheckC">0</span>)
 </div>
 <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="unFinish" value="option3" checked>
-    <label class="form-check-label" for="unFinish">未完成<span id="sp3"></span></label>
+    <label class="form-check-label" for="unFinish">未完成</label>(<span id="unFinishC">0</span>)
 </div>
-<table class="table ">
+<table class="table">
     <tr>
-        <th style="width:70px">
+        <th>
             @Html.DisplayNameFor(model => model.OrderId)
         </th>
-        <th style="width:140px">
+        <th>
             @Html.DisplayNameFor(model => model.oDate)
         </th>
-        <th style="width:150px">
+        <th>
             @Html.DisplayNameFor(model => model.sWarehouseName)
         </th>
-        <th style="width:150px">
+        <th>
             @Html.DisplayNameFor(model => model.seName)
         </th>
-        <th style="width:120px">
+        <th>
             @Html.DisplayNameFor(model => model.scName)
         </th>
-        <th style="width:70px">
+        <th>
             @Html.DisplayNameFor(model => model.receivable)
         </th>
-        <th style="width:70px">
+        <th>
             @Html.DisplayNameFor(model => model.received)
         </th>
-        <th style="width:70px">
+        <th>
             @Html.DisplayNameFor(model => model.surplus)
         </th>
         <th>審核狀況</th>
@@ -98,42 +96,48 @@
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
 <script>
-    var unready = 0;
-    var inready = 0;
-    var onready = 0;
-
+    
     $(document).ready(function () {
         var table = document.getElementById("table");
         var check1 = document.getElementById("alreadyCheck");
         var check2 = document.getElementById("unCheck");
         var check3 = document.getElementById("unFinish");
+
+        var hidden1 = document.getElementsByName("tr_hidden1");
+        var alreadyCheckC = hidden1.length;
+        $("#alreadyCheckC").text(alreadyCheckC);
+
+        var hidden2 = document.getElementsByName("tr_hidden2")
+        var unCheckC = hidden2.length;
+        $("#unCheckC").text(unCheckC);
+
+        var hidden3 = document.getElementsByName("tr_hidden3")
+        var unFinishC = hidden3.length;
+        $("#unFinishC").text(unFinishC);
+
         for (let i = 0; i < table.rows.length; i++) {
             check1.addEventListener('change', function (event) {
-                var hidden1 = document.getElementsByName("tr_hidden1")
+                //var hidden1 = document.getElementsByName("tr_hidden1")
                 for (let i = 0; i < hidden1.length; i++) {
                     if (check1.checked == true) {
                         hidden1[i].classList.remove("Y_hidden");
-                     
                     }
                     else {
                         hidden1[i].classList.add("Y_hidden");
-                       
                     }
-                }
+                }                
             });
-            check2.addEventListener('change', function (event) {
-                var hidden2 = document.getElementsByName("tr_hidden2")
+            check2.addEventListener('change', function (event) {                
                 for (let i = 0; i < hidden2.length; i++) {
                     if (check2.checked == true) {
                         hidden2[i].classList.remove("Y_hidden");
-                      
                     }
                     else {
                         hidden2[i].classList.add("Y_hidden");
-                       
                     }
                 }
             });
@@ -142,31 +146,13 @@
                 for (let i = 0; i < hidden3.length; i++) {
                     if (check3.checked == true) {
                         hidden3[i].classList.remove("Y_hidden");
-                        
                     }
                     else {
                         hidden3[i].classList.add("Y_hidden");
-                        
                     }
                 }
             });
         }
-        document.getElementById('sp1').innerHTML = "(" + onready + ")";
-        document.getElementById('sp2').innerHTML = "(" + inready + ")";
-        document.getElementById('sp3').innerHTML = "(" + unready + ")";
-
-    });
-    document.getElementById('alreadyCheck').addEventListener('change', function (event) {
-        document.getElementById('sp1').innerHTML = "(" + onready + ")";
-
-    });
-    document.getElementById('unCheck').addEventListener('change', function (event) {
-        document.getElementById('sp2').innerHTML = "(" + inready + ")";
-
-    });
-    document.getElementById('unFinish').addEventListener('change', function (event) {
-        document.getElementById('sp3').innerHTML = "(" + unready + ")";
-
     });
 
 

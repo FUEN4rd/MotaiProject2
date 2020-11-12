@@ -104,8 +104,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單地址")]
         public string oAddress { get; set; }
         [DisplayName("訂單時間")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime oDate { get {return DateTime.Now.Date; }set { } }
+        public DateTime oDate { get {return DateTime.Now; }set { } }
         [DisplayName("員工編號")]
         public Nullable<int> oEmployeeId { get; set; }
         [DisplayName("優惠")]

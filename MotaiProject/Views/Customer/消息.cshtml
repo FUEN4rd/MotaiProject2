@@ -24,15 +24,16 @@
 <div class="container">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:300px;height:300px;margin:0 auto; ">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/Content/墨臺Logo.png" style="width:300px;height:300px" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/Content/墨臺Logo.png" style="width:300px;height:300px" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/Content/墨臺Logo.png" style="width:300px;height:300px" class="d-block w-100" alt="...">
-            </div>
+            @{ int i = 0;
+                foreach (var item in Model)
+                {
+                    <div class="carousel-item" id="imagepic">
+                        <img src="~/@Url.Content(item.newPromotion.pADimage)" style="width:300px;height:300px" class="d-block w-100" alt="...">
+                    </div>
+                    i++;
+                    if (i == 3)
+                    {break; }
+                }}
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -43,40 +44,47 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
     <h2>消息</h2>
-    
-        <table class="table Y_productInfo">
+
+    <table class="table Y_productInfo">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
-                </th>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
+                </td>
+                <td>
+                    <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;">
+                        @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.newPromotion.pADimage)
+                    </td>*@
             </tr>
+        }
+    </table>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;">
-                            @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
-                        </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
-                    </td>
-                </tr>
-            }
-        </table>
-   
     @Html.PagedListPager(Model, page => Url.Action("消息", new { page }))
 </div>
+<script>
+    $(document).ready(function () {
+        $("#imagepic").addClass("active");
+    })
+</script>

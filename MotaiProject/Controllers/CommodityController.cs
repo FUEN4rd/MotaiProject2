@@ -21,11 +21,13 @@ namespace MotaiProject.Controllers
             }
             else
             {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 EmployeeViewModels employee = new EmployeeViewModels();
                 employee.EmployeeId = emp.EmployeeId;
                 employee.eName = emp.eName;
                 employee.eAccount = emp.eAccount;
+                employee.sPosition = emp.tPosition.pPosition;
                 return View(employee);
             }
         }
@@ -703,25 +705,15 @@ namespace MotaiProject.Controllers
                     wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
                     wareInventory.ProductName = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pName;
                     wareInventory.ProductQty = item.wPQty;
-
-                    //var underStockList = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pQty;
-
-
-                    var underStockList = from tp in dbContext.tProducts
-                                   where tp.ProductId == item.wProductId
-                                   select item.wPQty;
-                    int underStockQty;
-                    //foreach(var StockQty in underStockList)
-                    //{
-                    //    underStockQty += StockQty;
-                    //}
-                    //wareInventory.underStock = (item.wProductId.Equals(item.wProductId)).fi ;
-
                     InventoryList.Add(wareInventory);
                 }
+
 
                 return View(InventoryList);
             }
         }
+        
+        
+      
     }
 }

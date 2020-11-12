@@ -19,11 +19,13 @@ namespace MotaiProject.Controllers
             }
             else
             {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 EmployeeViewModels employee = new EmployeeViewModels();
                 employee.EmployeeId = emp.EmployeeId;
                 employee.eName = emp.eName;
                 employee.eAccount = emp.eAccount;
+                employee.sPosition = emp.tPosition.pPosition;
                 return View(employee);
             }
         }
@@ -50,8 +52,10 @@ namespace MotaiProject.Controllers
             }
             tEmployee empse = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             var empall = dbContext.tEmployees.OrderBy(c => c.eBranch).ToList();
+            var empall2 = empall.OrderBy(c => c.ePosition).ToList();
+            var empall3 = empall2.OrderBy(c => c.eBranch).ToList();
             List<EmployeeViewModels> employees = new List<EmployeeViewModels>();
-            foreach(var item in empall)
+            foreach(var item in empall3)
             {
                 EmployeeViewModels employeeModel = new EmployeeViewModels();
                 employeeModel.EmployeeId = item.EmployeeId;
