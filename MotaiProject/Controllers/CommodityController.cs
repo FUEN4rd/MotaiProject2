@@ -723,5 +723,28 @@ namespace MotaiProject.Controllers
                 return View(InventoryList);
             }
         }
+        
+        
+        public string sqlget()
+        {
+            MotaiDataEntities dbCintent = new MotaiDataEntities();
+            List<ProductViewModel> products = new List<ProductViewModel>();
+
+            string a = "av";
+            return a;
+        }
+
+
+
+        public readonly string[] names = {"Anna","Brittany","Cinderella",
+            "Diana","Eva","Fiona", "Gunda","Hege","Inga","Johanna","Kitty",
+            "Linda","Nina","Ophelia", "Petunia","Amanda","Raquel","Cindy",
+            "Doris","Eve","Evita","Sunniva", "Tove","Unni","Violet",
+            "Liza","Elizabeth","Ellen","Wenche","Vicky"};
+
+        public string GetAutoComplete()
+        {
+            return string.Join(",", names);
+        }
     }
 }
