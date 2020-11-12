@@ -699,28 +699,17 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
                 List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
+                WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
                 foreach (var item in tWarehouses)
                 {
-                    WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
                     wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
                     wareInventory.ProductName = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pName;
                     wareInventory.ProductQty = item.wPQty;
-
-                    //var underStockList = dbContext.tProducts.Where(pn => pn.ProductId.Equals(item.wProductId)).FirstOrDefault().pQty;
-
-
-                    var underStockList = from tp in dbContext.tProducts
-                                   where tp.ProductId == item.wProductId
-                                   select item.wPQty;
-                    int underStockQty;
-                    //foreach(var StockQty in underStockList)
-                    //{
-                    //    underStockQty += StockQty;
-                    //}
-                    //wareInventory.underStock = (item.wProductId.Equals(item.wProductId)).fi ;
-
                     InventoryList.Add(wareInventory);
                 }
+                //List<ProductViewModel> productlist = new List<ProductViewModel>();
+                //productlist = productRespoitory.GetProductAll();
+                //wareInventory.allProductQty = productlist(t => t.pQty.Equals(0));
 
                 return View(InventoryList);
             }
