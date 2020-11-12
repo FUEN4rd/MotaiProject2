@@ -96,8 +96,16 @@
         <label for="creditCard">信用卡</label>
     </div>
     <div>
+        <label>應付金額:</label>
+        @Html.DisplayFor(model => model.TotalAmount)
+    </div>
+    <div>
+        <label>已付金額:</label>
+        @Html.DisplayFor(model=>model.AlreadyPay)
+    </div>
+    <div>
         <label for="payMoney">付款金額:</label>
-        <input id="payMoney" type="text" value="@Html.DisplayFor(model => model.TotalAmount)" />
+        <input id="payMoney" type="text" value="@Html.DisplayFor(model => model.Unpaid)" />
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

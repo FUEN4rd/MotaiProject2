@@ -32,9 +32,86 @@ namespace MotaiProject.Models
         //    foreach(tOrderDetail item in order)
         //    {
         //        OrderViewModel Order = new OrderViewModel();
-                
-         
         //    }
+        //}
+
+        //public List<orderselect> GetEmpOrderAll()
+        //{
+        //    List<tOrder> order = dbContext.tOrders.ToList();
+        //    List<orderselect> orderlist = new List<orderselect>();
+        //    foreach (tOrder item in order)
+        //    {
+        //        orderselect Order = new orderselect();
+        //        OrderViewModel orderview = new OrderViewModel();
+        //        orderview.oAddress = item.oAddress;
+        //        orderview.oCheck = item.oCheck;
+        //        orderview.oCheckDate = item.oCheckDate;
+        //        orderview.oDate = item.oDate;
+        //        orderview.oDeliverDate = item.oDeliverDate;
+        //        orderview.OrderId = item.OrderId;
+
+        //        orderview.sWarehouseName = item.tWarehouseName.WarehouseName;
+        //        orderview.seName = item.tEmployee.eName;
+        //        orderview.scName = item.tCustomer.cName;
+        //        var note = item.cNote;
+        //        if (note != null)
+        //        {
+        //            if (note.Length > 10)
+        //            {
+        //                orderview.cNote = note.Substring(0, 10) + "...";
+        //            }
+
+        //            else
+        //            {
+        //                orderview.cNote = note;
+        //            }
+        //        }
+
+        //        var receivedMoney = from tP in dbContext.tOrderPays
+        //                            where tP.oOrderId == item.OrderId
+        //                            select tP.oPayment;
+        //        int receivedTotal = 0;
+        //        foreach (var receivedM in receivedMoney)
+        //        {
+        //            receivedTotal = (int)receivedM + receivedTotal;
+        //        }
+        //        orderview.received = receivedTotal;
+
+        //        var receivableMoney = from tp in dbContext.tOrderDetails
+        //                              where tp.oOrderId == item.OrderId
+        //                              select tp.oProductQty * tp.tProduct.pPrice;
+        //        int receivableTotal = 0;
+        //        foreach (var receivableM in receivableMoney)
+        //        {
+        //            receivableTotal += (int)receivableM;
+        //        }
+        //        if (item.oPromotionId != null)
+        //        {
+        //            orderview.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
+        //            receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
+        //        }
+
+        //        orderview.receivable = receivableTotal;
+        //        var surplus = receivableTotal - receivedTotal;
+        //        orderview.surplus = surplus;
+
+        //        if (item.oCheck != null)
+        //        {
+        //            orderview.htmlName = "tr_hidden1";
+        //        }
+        //        else if (surplus <= 0)
+        //        {
+        //            orderview.htmlName = "tr_hidden2";
+        //        }
+        //        else
+        //        {
+        //            orderview.htmlName = "tr_hidden3";
+        //        }
+        //        Order.orderwatch = orderview;
+
+        //        orderlist.Add(Order);
+        //    }
+        //    return orderlist;
         //}
 
         public List<OrderViewModel> GetOrderAll()
@@ -61,49 +138,45 @@ namespace MotaiProject.Models
                     {
                         Order.cNote = note.Substring(0, 10) + "...";
                     }
-
                     else
                     {
                         Order.cNote = note;
                     }
                 }
-
+                //變數 - 觀察付了多少錢
                 var receivedMoney = from tP in dbContext.tOrderPays
                                     where tP.oOrderId == item.OrderId
                                     select tP.oPayment;
+                //已收到
                 int receivedTotal = 0;
                 foreach (var receivedM in receivedMoney)
                 {
                     receivedTotal = (int)receivedM + receivedTotal;
                 }
+
                 Order.received = receivedTotal;
-               
+               //應收款
                 var receivableMoney = from tp in dbContext.tOrderDetails
                                       where tp.oOrderId == item.OrderId
-                                      select tp.oProductQty * tp.tProduct.pPrice ;                                     
+                                      select tp.oProductQty * tp.tProduct.pPrice ;
+                //全額
                 int receivableTotal = 0;
+
                 foreach (var receivableM in receivableMoney)
                 {
                     receivableTotal += (int)receivableM;
                 }
+                //折扣
                 if (item.oPromotionId != null)
                 {
                     Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
                     receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
                 }
-                //receivableTotal -= Convert.ToInt32(dbContext.tPromotions.Where(w => w.PromotionId.Equals(item.oPromotionId)).FirstOrDefault().pDiscount);
-                //List<tOrderDetail> money = dbContext.tOrderDetails.Where(od => od.oOrderId.Equals(item.OrderId)).ToList();
-                //int receivableTotal = 0;
-                //foreach(var itemmoney in money)
-                //{
-                //    int price = (int)dbContext.tProducts.Where(p => p.ProductId.Equals(itemmoney.oProductId)).FirstOrDefault().pPrice;
-                //    receivableTotal += itemmoney.oProductQty * price;
-                //}
 
                 Order.receivable = receivableTotal;
+                //應付款額-收款
                 var surplus = receivableTotal - receivedTotal;
                 Order.surplus = surplus;
-
                 if(item.oCheck != null)
                 {
                     Order.htmlName = "tr_hidden1";
@@ -116,8 +189,6 @@ namespace MotaiProject.Models
                 {
                     Order.htmlName = "tr_hidden3";
                 }
-
-
                 orderlist.Add(Order);
             }
             return orderlist;
@@ -135,7 +206,6 @@ namespace MotaiProject.Models
             Order.oDeliverDate = item.oDeliverDate;
             Order.oEmployeeId = item.oEmployeeId;
             Order.OrderId = item.OrderId;
-
             Order.sWarehouseName = item.tWarehouseName.WarehouseName;
             Order.seName = item.tEmployee.eName;
             Order.scName = item.tCustomer.cName;

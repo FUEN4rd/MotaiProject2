@@ -99,12 +99,11 @@
             @Html.ActionLink("會計查詢", "業務會計查詢", "Business", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("工作日誌", "工作日誌", "Business", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("新增訂單", "實體店新增訂單", "Order", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("實體結帳", "realcheckview", "Order", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class = "navbar-brand" })
         </div>
 
         <div class="container body-content;">
-            <div style="background-color:rgba(255, 255, 255,0.8) ;width:960px; border-radius:10px; margin-top:50px;" class="main">
+            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px; margin-left:-30px;" class="main">
                 @RenderBody()
             </div>
             <hr />

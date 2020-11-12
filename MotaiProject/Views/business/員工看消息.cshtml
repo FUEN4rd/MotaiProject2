@@ -6,10 +6,17 @@
 }
 
 <h2>員工看消息</h2>
+<style>
+    th{
+        width:140px;
+    }
+</style>
 
-<p>
-    @Html.ActionLink("新增", "新增消息")
-</p>
+
+<button class="btn btn-primary" style="background-color:white">
+    
+        @Html.ActionLink("新增", "新增消息")
+</button>
 <table class="table">
     <tr>
         <th>
@@ -22,16 +29,16 @@
             @Html.DisplayNameFor(model => model.pADimage)
         </th>
 
-        <th>
+        <th >
             @Html.DisplayNameFor(model => model.pPromotionPostDate)
         </th>
-        <th>
+        <th >
             @Html.DisplayNameFor(model => model.PromotionName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.pCondition)
         </th>
-        <th>
+        <th >
             @Html.DisplayNameFor(model => model.pDiscount)
         </th>
         <th>

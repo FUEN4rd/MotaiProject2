@@ -39,15 +39,13 @@ namespace MotaiProject.ViewModels
         public string totalPay { get; set; }
         public int payType { get; set; }
         public string shipAddress { get; set; }
-        public List<ProductItem> Items { get; set; }
     }
-    public class ProductItem
+    public class WebOrderModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Price { get; set; }
-        public string Quantity { get; set; }
-        //public string URL { get; set; }
+        public List<tStatu> boughtList { get; set; }
+        public WebPay webpay { get; set; }
+        public tCustomer customer { get; set; }
+        public DateTime payDate { get; set; }
     }
     //訂單付款
     public class Orderpay
@@ -146,12 +144,18 @@ namespace MotaiProject.ViewModels
         public EmployeeOrderViewModel Order { get; set; }
         public List<EmployeeOrderDetailViewModel> orderDetails { get; set; }
         public int TotalAmount { get; set; }
+        public int AlreadyPay { get; set; }
+        public int Unpaid { get; set; }
         public Orderpay orderPay { get; set; }
     }
     //續期結帳跳轉
-    public class TwoCheckoutViewModel
+    public class SearchCustomerOrderModel
     {
-
+        public int orderId { get; set; }
+        [DisplayName("購買日期")]
+        public DateTime purchaseDate { get; set; }
+        [DisplayName("購買門市")]
+        public string WarehouseName { get; set; }
     }
     public class OrderViewModel //審核
     {

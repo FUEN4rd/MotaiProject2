@@ -12,6 +12,7 @@ namespace MotaiProject.Controllers
     public class BusinessController : Controller
     {
         // GET: business
+        private EmployeeRespoitory employeeRespoitory = new EmployeeRespoitory();
         public ActionResult Business首頁()
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
@@ -20,11 +21,14 @@ namespace MotaiProject.Controllers
             }
             else
             {
+                MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 EmployeeViewModels employee = new EmployeeViewModels();
                 employee.EmployeeId = emp.EmployeeId;
                 employee.eName = emp.eName;
                 employee.eAccount = emp.eAccount;
+                employee.sPosition = emp.tPosition.pPosition;
+
                 return View(employee);
             }
         }
