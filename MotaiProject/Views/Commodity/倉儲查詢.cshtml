@@ -7,9 +7,10 @@
 
 <h2>倉儲查詢</h2>
 
-@*@foreach (var item in Model)
+@foreach (var item in Model)
 {
     @if (item.allProductQty < 3)
+                    
     {
         <div class="accordion" id="accordionExample">
             <div class="card">
@@ -28,7 +29,7 @@
             </div>
         </div>
     }       
-}*@
+}
 
 <table class="table">
     <tr>

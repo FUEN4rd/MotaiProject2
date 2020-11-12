@@ -17,22 +17,33 @@
         color: #FCD492;
         height: 90px;
     }
+    .Y_promotion_border {
+        border-radius: 10px;
+        border-color: #FCD492;
+        border-width: 2px;
+        border-style: solid;
+        padding-top: 7px;
+        display: flex;
+        width: 500px;
+        /*align-items: center;*/
+        /*background-color: #F2EDD8;*/
+    }
 </style>
 
 @*輪播牆*@
 
 <div class="container">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:300px;height:300px;margin:0 auto; ">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:800px;height:400px;margin:0 auto; ">
         <div class="carousel-inner">
             @{ int i = 0;
                 foreach (var item in Model)
                 {
                     <div class="carousel-item" id="imagepic">
-                        <img src="~/@Url.Content(item.newPromotion.pADimage)" style="width:300px;height:300px" class="d-block w-100" alt="...">
+                        <img src="~/@Url.Content(item.newPromotion.pADimage)" style="width:800px;height:400px" class="d-block w-100" alt="...">
                     </div>
                     i++;
                     if (i == 3)
-                    {break; }
+                    { break; }
                 }}
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -44,43 +55,55 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <h2>消息</h2>
-
-    <table class="table Y_productInfo">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
-            </th>
-
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <h2>消息公告</h2>
+    <span style="position: fixed; display: flex;width: 100%;justify-content: flex-end;">
+        <div class="card d-none d-xl-block" style="width: 18rem;">
+            <img src="@Url.Content("~/images/玉山ubear.png")" class="card-img-top" alt="...">
+            <div class="card-body" style="background-color:#A7674C">
+                <h5 class="card-title" style="color: #F2EDD8">玉山ＵBear信用卡</h5>
+                <p class="card-text" style="color: #F2EDD8">
+                    於新中寶刷玉山ＵBear信用卡，可享3.8現金回饋</b>
+                </p>
+                <a href=" #" class="btn btn-light" style="color: #A7674C">詳細資訊</a>
+            </div>
+        </div>
+    </span>
+    <div class="Y_promotion_border">
+        <table class="table Y_productInfo table-hover">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
-                </td>
-                <td>
-                    <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;">
-                        @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
-                    </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.newPromotion.pADimage)
-                    </td>*@
-            </tr>
-        }
-    </table>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
+                </th>
 
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;color:#F2EDD8">
+                            @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.newPromotion.pADimage)
+                        </td>*@
+                </tr>
+            }
+        </table>
+    </div>
     @Html.PagedListPager(Model, page => Url.Action("消息", new { page }))
 </div>
 <script>
