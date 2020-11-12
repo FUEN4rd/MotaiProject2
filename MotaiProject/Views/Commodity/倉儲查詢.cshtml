@@ -6,7 +6,30 @@
 }
 
 <h2>倉儲查詢</h2>
-<div id="warning"></div>
+
+@*@foreach (var item in Model)
+{
+    @if (item.allProductQty < 3)
+    {
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            商品庫存不足清單
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        @Html.DisplayFor(modelItem => item.allProductQty)
+                    </div>
+                </div>
+            </div>
+        </div>
+    }       
+}*@
+
 <table class="table">
     <tr>
         <th>
@@ -22,27 +45,27 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WarehouseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-
-            @if (item.ProductQty < 1)
-            {
-                <td style="color:red">
-                    @Html.DisplayFor(modelItem => item.ProductQty)
-                </td>
-            }
-            else
-            {
+            <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductQty)
+                    @Html.DisplayFor(modelItem => item.WarehouseName)
                 </td>
-            }
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+
+                @if (item.ProductQty < 1)
+                {
+                    <td style="color:red">
+                        @Html.DisplayFor(modelItem => item.ProductQty)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductQty)
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>

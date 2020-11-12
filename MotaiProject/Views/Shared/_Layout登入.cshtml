@@ -464,7 +464,7 @@
                     //隱藏
                     $("#btncart").addClass("disclass");
 
-                    $("#sendEmail").click(function () {
+                    @*$("#sendEmail").click(function () {
                         //var forgetEmail = $("#forgetEmail").val();
                         let forgetEmail = document.querySelector("#forgetEmail").value;
 
@@ -490,6 +490,26 @@
                                 //alert(data.msg);
                                 //Console.log(data.msg);
                                 //onSuccess(data.url);
+                            }
+                    else {
+                            alert(data.msg);
+                            onSuccess(data.url);
+                                }
+                            }
+                        });
+                    });*@
+
+                    $("#sendEmail").click(function () {
+                        let forgetEmail = document.querySelector("#forgetEmail").value;
+
+                    $.ajax({
+                    url: "@Url.Action("SendEmail", "Customer")",
+                    type: "POST",
+                    data: { "Email": forgetEmail },
+                        success: function (data) {
+                            if (data.result) {
+                                alert(data.msg);
+                                onSuccess(data.url);
                             }
                     else {
                             alert(data.msg);

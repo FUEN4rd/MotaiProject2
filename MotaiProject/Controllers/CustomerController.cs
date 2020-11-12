@@ -10,6 +10,8 @@ using System.Web.Http.Cors;
 using System.Drawing;
 using System.Text;
 using System.IO;
+using System.Net.Mail;
+using System.Net;
 
 namespace MotaiProject.Controllers
 {
@@ -186,8 +188,22 @@ namespace MotaiProject.Controllers
             return File(data, "image/jpeg");
         }
 
-        [HttpPost]
-        public JsonResult beforeSendEmail(ForgotPasswordViewModel c電子郵件)
+        //[HttpPost]
+        //public JsonResult beforeSendEmail(ForgotPasswordViewModel c電子郵件)
+        //{
+        //    MotaiDataEntities dbContext = new MotaiDataEntities();
+        //    tCustomer d信箱確認 = dbContext.tCustomers.Where(c => c.cEmail == c電子郵件.Email).FirstOrDefault();
+        //    if (d信箱確認 != null)
+        //    {
+        //        string passwordG = Guid.NewGuid().ToString();
+        //        d信箱確認.cPassword = passwordG;
+        //        dbContext.SaveChanges();
+        //        return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer"), password = passwordG, name = d信箱確認.cName,});                
+        //    }
+        //    return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
+        //}
+
+        public ActionResult SendEmail(ForgotPasswordViewModel c電子郵件)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             tCustomer d信箱確認 = dbContext.tCustomers.Where(c => c.cEmail == c電子郵件.Email).FirstOrDefault();
@@ -196,10 +212,37 @@ namespace MotaiProject.Controllers
                 string passwordG = Guid.NewGuid().ToString();
                 d信箱確認.cPassword = passwordG;
                 dbContext.SaveChanges();
-                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer"), password = passwordG, name = d信箱確認.cName,});                
+
+                SmtpClient Client = new SmtpClient()
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential()
+                    {
+                        UserName = "fuen12302@gmail.com",
+                        Password = "fuen12302"
+                    }
+                };
+                MailAddress FromEmail = new MailAddress("fuen12302@gmail.com", "墨台");
+                //    MailAddress ToEmail = new MailAddress("hongyeelin5@gmail.com", "HY LIN2");
+                MailAddress ToEmail = new MailAddress(c電子郵件.Email, d信箱確認.cName);
+                MailMessage Message = new MailMessage()
+                {
+                    From = FromEmail,
+                    Subject = "墨台 忘記密碼認證信",
+                    Body = d信箱確認.cName + "您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。\r\n請您回到首頁，以此密碼登入：" + d信箱確認.cPassword + "\r\n登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。\r\n首頁連結： http://localhost:50720/ "
+                    //  IsBodyHtml = true
+                };
+                Message.To.Add(ToEmail);
+                Client.Send(Message);
+                return Json(new { result = true, msg = "已寄出修改密碼的信件!", url = Url.Action("首頁", "Customer") });
             }
             return Json(new { result = false, msg = "此電子郵件尚未被註冊", url = Url.Action("會員註冊", "Customer") });
         }
+
 
         public ActionResult 會員中心()
         {
