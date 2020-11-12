@@ -81,8 +81,7 @@ namespace MotaiProject.Controllers
                 changeemp = emp;
                 changeemp.EmployeeId = EmployeeId;
                 dbContext.tEmployees.Add(changeemp);
-                dbContext.SaveChanges()
-                ;
+                dbContext.SaveChanges();
                 if (emp.ePassword == oldpass)
                 {
                     emp.ePassword = ePassword;

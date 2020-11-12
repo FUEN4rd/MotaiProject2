@@ -11,12 +11,6 @@
     @Html.ActionLink("新增", "新增產品")
 </p>
 
-<b>請輸入產品名稱</b><p>
-    <div class="ui-widget">
-        <label for="tags">名稱: </label>
-        <input id="tags">
-    </div>
-
     <table class="table">
         <tr>
             <th style="display:none">
@@ -31,9 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.pName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pIntroduction)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.psCategory)
             </th>
@@ -73,9 +65,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.pName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pIntroduction)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.psCategory)
                 </td>
@@ -105,21 +95,4 @@
 
     </table>
    
-
-    <script>
-        var availableTags;
-        $.ajax({
-            url: "/Commodity/GetAutoComplete",
-            type: "GET",
-            success: function (data) {
-                availableTags = data.split(",");
-                $("#tags").autocomplete({
-                    source: availableTags
-                });
-            }
-        });
-
-
-
-    </script>
 
