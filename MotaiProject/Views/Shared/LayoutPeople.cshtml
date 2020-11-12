@@ -82,59 +82,7 @@
 </head>
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    @*<div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-
-            <li class="sidebar-brand-text mx-3">
-                <span>@Html.ActionLink("人事首頁", "People首頁", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>@Html.ActionLink("消息頁面", "員工看消息", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>@Html.ActionLink("員工檢視", "人員檢視", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-
-            </li>
-            <li class="nav-item active">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>@Html.ActionLink("員工新增", "新增員工", "People", new { area = "" }, new { @class = "navbar-brand" })</span>
-
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>@Html.ActionLink("登出", "員工登出", "Employee")</span>
-                </a>
-            </li>
-
-        </ul>
-
-        <div class="container body-content;">
-            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px; margin-left:-30px;" class="main">
-                @RenderBody()
-            </div>
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - 墨臺</p>
-            </footer>
-        </div>
-    </div>*@
+    
 
 
     <div id="wrapper">
@@ -159,9 +107,8 @@
 
 
 
-        <div class="container body-content main" style="padding-left:160px;min-width:780px">
-            <div class="row" style="height:30px"></div>
-            <div class="container-fluid bg-white" style="">
+        <div class="container body-content;">
+            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px;" class="main">
                 @RenderBody()
             </div>
 

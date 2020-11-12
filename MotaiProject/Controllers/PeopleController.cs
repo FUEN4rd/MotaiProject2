@@ -1,5 +1,6 @@
 ﻿using MotaiProject.Models;
 using MotaiProject.ViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,16 +30,19 @@ namespace MotaiProject.Controllers
                 return View(employee);
             }
         }
+        int pageSize = 10;
         private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
-        public ActionResult 員工看消息()
+        public ActionResult 員工看消息(int page = 1)
         {
             if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
             {
                 return RedirectToAction("員工登入");
             }
+            int cpage = page < 1 ? 1 : page;
             List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
             promotionlist = promotionRespoitory.GetPromotionAll();
-            return View(promotionlist);
+            var resault = promotionlist.ToPagedList(cpage,pageSize);
+            return View(resault);
         }
 
 
