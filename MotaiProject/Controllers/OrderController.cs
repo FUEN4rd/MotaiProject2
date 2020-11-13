@@ -326,7 +326,7 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
         }
         //網購接受信用卡訂單
-        public void orderCredit(string callback)
+        public void orderCredit(string merchantTradeNo)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<string> enErrors = new List<string>();
@@ -346,46 +346,44 @@ namespace MotaiProject.Controllers
                     /* 支付後的回傳的基本參數 */
                     string szMerchantID = String.Empty;
                     string szMerchantTradeNo = String.Empty;
-                    string szPaymentDate = String.Empty;
-                    string szPaymentType = String.Empty;
-                    string szPaymentTypeChargeFee = String.Empty;
                     string szRtnCode = String.Empty;
                     string szRtnMsg = String.Empty;
-                    string szSimulatePaid = String.Empty;
-                    string szTradeAmt = String.Empty;
-                    string szTradeDate = String.Empty;
-                    string szTradeNo = String.Empty;
+                    /* 使用定期定額交易時，回傳的額外參數 */
+                    string szPeriodType = String.Empty;
+                    string szFrequency = String.Empty;
+                    string szExecTimes = String.Empty;
+                    string szAmount = String.Empty;
+                    string szGwsr = String.Empty;
+                    string szProcessDate = String.Empty;
+                    string szAuthCode = String.Empty;
+                    string szFirstAuthAmount = String.Empty;
+                    string szTotalSuccessTimes = String.Empty;
                     // 取得資料
                     foreach (string szKey in htFeedback.Keys)
                     {
                         switch (szKey)
                         {
-                            /* 支付後的回傳的基本參數 */
-                            case "MerchantID": szMerchantID = htFeedback[szKey].ToString();
-                                break;
+                            /* 使用定期定額交易時回傳的參數 */
+                            case "MerchantID": szMerchantID = htFeedback[szKey].ToString(); break;
                             case "MerchantTradeNo":
                                 szMerchantTradeNo = htFeedback[szKey].ToString();
                                 break;
-                            case "PaymentDate": szPaymentDate = htFeedback[szKey].ToString();
+                            case "RtnCode": szRtnCode = htFeedback[szKey].ToString(); break;
+                            case "RtnMsg": szRtnMsg = htFeedback[szKey].ToString(); break;
+                            case "PeriodType": szPeriodType = htFeedback[szKey].ToString(); break;
+                            case "Frequency": szFrequency = htFeedback[szKey].ToString(); break;
+                            case "ExecTimes": szExecTimes = htFeedback[szKey].ToString(); break;
+                            case "Amount": szAmount = htFeedback[szKey].ToString(); break;
+                            case "Gwsr": szGwsr = htFeedback[szKey].ToString(); break;
+                            case "ProcessDate": szProcessDate = htFeedback[szKey].ToString(); break;
+                            case "AuthCode": szAuthCode = htFeedback[szKey].ToString(); break;
+                            case "FirstAuthAmount":
+                                szFirstAuthAmount = htFeedback[szKey].ToString();
                                 break;
-                            case "PaymentType": szPaymentType = htFeedback[szKey].ToString();
+                            case "TotalSuccessTimes":
+                                szTotalSuccessTimes = htFeedback[szKey].ToString();
                                 break;
-                            case "PaymentTypeChargeFee":szPaymentTypeChargeFee =htFeedback[szKey].ToString();
-                                break;
-                            case "RtnCode": szRtnCode = htFeedback[szKey].ToString();
-                                break;
-                            case "RtnMsg": szRtnMsg = htFeedback[szKey].ToString();
-                                break;
-                            case "SimulatePaid": szSimulatePaid = htFeedback[szKey].ToString();
-                                break;
-                            case "TradeAmt": szTradeAmt = htFeedback[szKey].ToString();
-                                break;
-                            case "TradeDate": szTradeDate = htFeedback[szKey].ToString();
-                                break;
-                            case "TradeNo": szTradeNo = htFeedback[szKey].ToString();
-                                break;
-                            default:
-                                break;
+                            default: break;
                         }
                     }
                     WebOrderModel Trade = Session[szMerchantTradeNo] as WebOrderModel;
@@ -405,7 +403,7 @@ namespace MotaiProject.Controllers
                     pay.oPayment = Convert.ToInt32(Trade.webpay.totalPay);
                     pay.oPayDate = Trade.payDate;
                     dbContext.tOrderPays.Add(pay);
-                    foreach(var item in Trade.boughtList)
+                    foreach (var item in Trade.boughtList)
                     {
                         tOrderDetail orderDetail = new tOrderDetail();
                         orderDetail.oOrderId = CreateOrder.OrderId;
@@ -443,6 +441,123 @@ namespace MotaiProject.Controllers
                 this.Response.End();
             }
         }
+        //public void orderCredit(FormCollection callback)
+        //{
+        //    MotaiDataEntities dbContext = new MotaiDataEntities();
+        //    List<string> enErrors = new List<string>();
+        //    Hashtable htFeedback = null;
+        //    try
+        //    {
+        //        using (AllInOne oPayment = new AllInOne())
+        //        {
+        //            oPayment.HashKey = "5294y06JbISpM5x9";
+        //            oPayment.HashIV = "v77hoKGq4kWxNNIS";
+        //            /* 取回付款結果 */
+        //            enErrors.AddRange(oPayment.CheckOutFeedback(ref htFeedback));
+        //        }
+        //        // 取回所有資料
+        //        if (enErrors.Count() == 0)
+        //        {
+        //            /* 支付後的回傳的基本參數 */
+        //            string szMerchantID = String.Empty;
+        //            string szMerchantTradeNo = String.Empty;
+        //            string szPaymentDate = String.Empty;
+        //            string szPaymentType = String.Empty;
+        //            string szPaymentTypeChargeFee = String.Empty;
+        //            string szRtnCode = String.Empty;
+        //            string szRtnMsg = String.Empty;
+        //            string szSimulatePaid = String.Empty;
+        //            string szTradeAmt = String.Empty;
+        //            string szTradeDate = String.Empty;
+        //            string szTradeNo = String.Empty;
+        //            // 取得資料
+        //            foreach (string szKey in htFeedback.Keys)
+        //            {
+        //                switch (szKey)
+        //                {
+        //                    /* 支付後的回傳的基本參數 */
+        //                    case "MerchantID": szMerchantID = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "MerchantTradeNo":
+        //                        szMerchantTradeNo = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "PaymentDate": szPaymentDate = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "PaymentType": szPaymentType = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "PaymentTypeChargeFee":szPaymentTypeChargeFee =htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "RtnCode": szRtnCode = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "RtnMsg": szRtnMsg = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "SimulatePaid": szSimulatePaid = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "TradeAmt": szTradeAmt = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "TradeDate": szTradeDate = htFeedback[szKey].ToString();
+        //                        break;
+        //                    case "TradeNo": szTradeNo = htFeedback[szKey].ToString();
+        //                        break;
+        //                    default:
+        //                        break;
+        //                }
+        //            }
+        //            WebOrderModel Trade = Session[szMerchantTradeNo] as WebOrderModel;
+        //            //先建訂單
+        //            tOrder newOrder = new tOrder();
+        //            newOrder.oCustomerId = Trade.customer.CustomerId;
+        //            newOrder.oDate = Trade.payDate;
+        //            newOrder.oAddress = Trade.webpay.shipAddress;
+        //            newOrder.oWarehouseName = 1;
+        //            dbContext.tOrders.Add(newOrder);
+        //            dbContext.SaveChanges();
+        //            tOrder CreateOrder = dbContext.tOrders.OrderByDescending(o => o.OrderId).FirstOrDefault();
+        //            tOrderPay pay = new tOrderPay();
+        //            pay.oOrderId = CreateOrder.OrderId;
+        //            pay.oOrderInstallment = 1;
+        //            pay.oPayType = Trade.webpay.payType;
+        //            pay.oPayment = Convert.ToInt32(Trade.webpay.totalPay);
+        //            pay.oPayDate = Trade.payDate;
+        //            dbContext.tOrderPays.Add(pay);
+        //            foreach(var item in Trade.boughtList)
+        //            {
+        //                tOrderDetail orderDetail = new tOrderDetail();
+        //                orderDetail.oOrderId = CreateOrder.OrderId;
+        //                orderDetail.oProductId = item.sProductId;
+        //                orderDetail.oProductQty = item.sProductQty;
+        //                dbContext.tOrderDetails.Add(orderDetail);
+        //                dbContext.tStatus.Remove(item);
+        //            }
+        //            dbContext.SaveChanges();
+        //        }
+        //        else
+        //        {
+        //            // 其他資料處理。
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // 例外錯誤處理。
+        //        enErrors.Add(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        this.Response.Clear();
+        //        // 回覆成功訊息。
+        //        if (enErrors.Count() == 0)
+        //        {
+        //            this.Response.Write("1|OK");
+        //        }
+        //        // 回覆錯誤訊息。
+        //        else
+        //        {
+        //            this.Response.Write(String.Format("0|{0}", String.Join("\\r\\n", enErrors)));
+        //        }
+        //        this.Response.Flush();
+        //        this.Response.End();
+        //    }
+        //}
         //網購傳回ATM訂單
         public void orderATM(string callback)
         {
