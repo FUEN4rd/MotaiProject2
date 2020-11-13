@@ -161,10 +161,11 @@ namespace MotaiProject.Controllers
         }
 
 
-
+        private OrderRespoitory orderRespoitory = new OrderRespoitory();
         public ActionResult 業務會計查詢()
         {
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
+            CheckOrder = orderRespoitory.GetOrderAll();
             return View(CheckOrder);
         }
         private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
