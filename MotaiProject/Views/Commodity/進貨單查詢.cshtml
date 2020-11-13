@@ -3,96 +3,212 @@
 @{
     ViewBag.Title = "進貨單查詢";
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
+    int i = 0;
 }
-
+<style>
+</style>
 <h2>進貨單查詢</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sStockSerialValue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sVendor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sVendorTel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sStockDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sStockNote)
-        </th>
-    </tr>
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sStockSerialValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sVendor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sVendorTel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sStockDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sStockNote)
+            </th>
+        </tr>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sStockSerialValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sVendor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sVendorTel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sStockDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sStockNote)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockDetails.First().ProductNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockDetails.First().ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockDetails.First().sCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockDetails.First().sQuantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockDetails.First().WareHouseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockDetails.First().sNote)
+                </th>
+            </tr>
+            foreach (var itemdetail in item.StockDetails)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.ProductNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.sCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.sQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.WareHouseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => itemdetail.sNote)
+                </td>
+            </tr>
+            }
+        }
+    </table>*@
+
+
+<div class="accordion" id="accordionExample">
+    <div class="container" style="margin-left:-30px;width:68vw">
+        <table class="table" style="text-align:center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sStockSerialValue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sVendor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sVendorTel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sStockDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sStockNote)
+                </th>
+            </tr>
+        </table>
+    </div>
+    
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sStockSerialValue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sVendor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sVendorTel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sStockDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sStockNote)
-            </td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDetails.First().ProductNum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDetails.First().ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDetails.First().sCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDetails.First().sQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDetails.First().WareHouseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDetails.First().sNote)
-            </th>
-        </tr>
-        foreach (var itemdetail in item.StockDetails)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => itemdetail.ProductNum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => itemdetail.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => itemdetail.sCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => itemdetail.sQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => itemdetail.WareHouseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => itemdetail.sNote)
-            </td>
-        </tr>
-        }
+        <div class="card" style="padding:0px">
+            <div class="card-header" id="heading@(i)" style="padding:0px">
+                <div class="btn btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)"  style="padding:0px">
+                    <table class="table" text-align:center>
+                        <tr>
+                            <td style="width:100px">
+                                @item.EmployeeName.Replace("\r\n", "")
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.sStockSerialValue)
+                            </td>
+                            <td style="width:100px">
+                                @Html.DisplayFor(modelItem => item.sVendor)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.sVendorTel)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.sStockDate)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.sStockNote)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="collapse@(i)" class="collapse hide" aria-labelledby="heading@(i)" data-parent="#accordionExample">
+                <div class="card-body" style="width:100%">
+                    <table class="table text-dark" style="text-align:center">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockDetails.First().ProductNum)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockDetails.First().ProductName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockDetails.First().sCost)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockDetails.First().sQuantity)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockDetails.First().WareHouseName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockDetails.First().sNote)
+                            </th>
+                        </tr>
+                        @foreach (var itemdetail in item.StockDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductNum)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.sCost)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.sQuantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.WareHouseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.sNote)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        i++;
     }
-</table>
+</div>
+

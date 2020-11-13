@@ -160,13 +160,14 @@ namespace MotaiProject.Controllers
             return View("業務看產品頁面");
         }
 
-
-
-        public ActionResult 業務會計查詢()
+        private OrderRespoitory orderRespoitory = new OrderRespoitory();
+        public ActionResult 會計查詢()
         {
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
+            CheckOrder = orderRespoitory.GetOrderAll();
             return View(CheckOrder);
         }
+
         private PromotionRespoitory promotionRespoitory = new PromotionRespoitory();
         public ActionResult 員工看消息()
         {
