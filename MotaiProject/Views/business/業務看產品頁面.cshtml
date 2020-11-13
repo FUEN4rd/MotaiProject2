@@ -2,11 +2,11 @@
 
 @{
     
-    ViewBag.Title = "員工看產品頁面";
+    ViewBag.Title = "檢視產品";
     Layout = "~/Views/Shared/Layoutbusiness.cshtml";
 }
 
-<h2>員工看產品頁面</h2>
+<h2>檢視產品</h2>
 
 
 <table class="table">
@@ -22,9 +22,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.pName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pIntroduction)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.pCategory)
@@ -65,9 +62,6 @@
             @Html.DisplayFor(modelItem => item.pName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pIntroduction)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.psCategory)
         </td>
         <td>
@@ -83,7 +77,7 @@
             @Html.DisplayFor(modelItem => item.pWeight)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.pPrice)
+            @Html.DisplayFor(modelItem => item.pPrices)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.pQty)

@@ -176,7 +176,10 @@ namespace MotaiProject.Controllers
             }
             List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
             promotionlist = promotionRespoitory.GetPromotionAll();
-            return View(promotionlist);
+
+            var promotionlistpostID = promotionlist.OrderBy(p => p.pPromotionPostDate);
+
+            return View(promotionlistpostID);
         }
         public ActionResult 新增消息()
         {
