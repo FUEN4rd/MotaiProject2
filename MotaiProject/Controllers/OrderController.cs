@@ -583,10 +583,8 @@ namespace MotaiProject.Controllers
                         //oPayment.Send.OrderResultURL = baseURI;
                         int number = (DateTime.Now.Hour * 3600 + DateTime.Now.Minute * 60 + DateTime.Now.Second) * 3;
                         oPayment.Send.MerchantTradeNo = "MD" + DateTime.Now.Date.ToString("yyyyMMdd") + number.ToString("000000");
-                        //oPayment.Send.MerchantTradeDate = DateTime.Parse(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
                         oPayment.Send.MerchantTradeDate = DateTime.Now;
                         oPayment.Send.TotalAmount = Decimal.Parse(payData.totalPay);
-                        //oPayment.Send.TotalAmount = Decimal.Parse("10000");
                         oPayment.Send.TradeDesc = "感謝購買墨台商品";
                         if (payData.payType == 1)
                         {
