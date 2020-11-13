@@ -59,7 +59,7 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("類別")]
         public string sPromotinoCategory { get; set; }
-        [DisplayName("種類")]
+        [DisplayName("分類")]
         public int pCategory { get; set; }
         [DisplayName("活動介紹")]
         public string PromotionDescription { get; set; }
@@ -73,11 +73,11 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("Id")]
         public int PromotionId { get; set; }
-        [DisplayName("名稱")]
+        [DisplayName("活動名稱")]
         public string PromotionName { get; set; }
-        [DisplayName("條件")]
+        [DisplayName("條件金額")]
         public string pCondition { get; set; }
-        [DisplayName("折扣")]
+        [DisplayName("折扣金額")]
         public string pDiscount { get; set; }
         [DisplayName("折扣碼")]
         public string pDiscountCode { get; set; }
@@ -90,6 +90,7 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("消息圖片")]
         public string pADimage { get; set; }
+        [DisplayName("上傳圖片")]
         public HttpPostedFileBase upLoadimage { get; set; }
      
         public IEnumerable<SelectListItem> Categories { get; set; }

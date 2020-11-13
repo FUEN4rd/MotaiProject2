@@ -83,20 +83,21 @@
             </a>
             @Html.ActionLink("倉儲首頁", "Commodity首頁", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("產品頁面", "倉儲看產品頁面", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("進貨單查詢", "進貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("進貨單建立", "進貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("出貨單查詢", "出貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("出貨單建立", "出貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("調貨單查詢", "調貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("調貨單建立", "調貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("倉儲查詢", "倉儲查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("查詢進貨單", "進貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("建立進貨單", "進貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("查詢出貨單", "出貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("建立出貨單", "出貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("查詢調貨單", "調貨單查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("建立調貨單", "調貨單建立", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("查詢倉儲", "倉儲查詢", "Commodity", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class = "navbar-brand" })
         </div>
-
-        <div class="container body-content;">
-            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px; " class="main">
+        <div class="container body-content;" style="display:inline-grid;justify-content:center; height:auto">
+            <div></div>
+            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px; padding:30px;" class="main">
                 @RenderBody()
             </div>
+            <div></div>
             <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - 墨臺</p>

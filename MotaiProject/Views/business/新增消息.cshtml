@@ -13,45 +13,39 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>DetailPromotionViewModel</h4>
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
         @Html.LabelFor(model => model.pCategory, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-2">
             @Html.DropDownListFor(model => model.pCategory, Model.Categories, "請選擇分類", new { @class = "form-control", id = "pCategory" })
             @Html.ValidationMessageFor(model => model.pCategory, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.PromotionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PromotionDescription, new { htmlAttributes = new { @class = "form-control" , @required = "required" } })
-            @Html.ValidationMessageFor(model => model.PromotionDescription, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.pPromotionWeb, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionWeb, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.pPromotionWeb, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.PromotionName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.EditorFor(model => model.PromotionName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
             @Html.ValidationMessageFor(model => model.PromotionName, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.PromotionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.PromotionDescription, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+            @Html.ValidationMessageFor(model => model.PromotionDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
         @Html.LabelFor(model => model.pCondition, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-2">
             @Html.EditorFor(model => model.pCondition, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.pCondition, "", new { @class = "text-danger" })
         </div>
@@ -59,7 +53,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.pDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-2">
             @Html.EditorFor(model => model.pDiscount, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.pDiscount, "", new { @class = "text-danger" })
         </div>
@@ -67,7 +61,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.pDiscountCode, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-2">
             @Html.EditorFor(model => model.pDiscountCode, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.pDiscountCode, "", new { @class = "text-danger" })
         </div>
@@ -75,32 +69,40 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.pPromotionStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionStartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" ,@id= "start"} })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.pPromotionStartDate, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "start" } })
             @Html.ValidationMessageFor(model => model.pPromotionStartDate, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.pPromotionDeadline, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.pPromotionDeadline, new { htmlAttributes = new { @class = "form-control", @type = "date",@id="dead"} })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.pPromotionDeadline, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "dead" } })
             @Html.ValidationMessageFor(model => model.pPromotionDeadline, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(model => model.upLoadimage, htmlAttributes: new { @class = "control-label col-md-2"  })
+        @Html.LabelFor(model => model.pPromotionWeb, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.pPromotionWeb, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.pPromotionWeb, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.upLoadimage, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" id="filefield" name="upLoadimage" accept="image/*" , required = "required" />
+            <input type="file" id="filefield" name="upLoadimage" accept="image/*" , required="required" />
         </div>
         <div id="img-container"></div>
     </div>
 
 
+
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="新增" class="btn btn-default" />
         </div>
     </div>
 </div>

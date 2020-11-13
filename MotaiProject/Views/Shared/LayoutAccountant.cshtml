@@ -99,9 +99,7 @@
                 </div>
             </a>
             @Html.ActionLink("會計首頁", "Accountant首頁", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("消息頁面", "員工看消息", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("產品頁面", "會計看產品頁面", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
-            @Html.ActionLink("會計查詢", "會計查詢", "Accountant", new { area = "" }, new { @class = "navbar-brand" })      
+            @Html.ActionLink("審核會計帳", "會計查詢", "Accountant", new { area = "" }, new { @class = "navbar-brand" })
             @Html.ActionLink("登出", "員工登出", "Employee", new { area = "" }, new { @class = "navbar-brand" })
         </div>
 
@@ -109,10 +107,12 @@
 
 
 
-        <div class="container body-content;">
-            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px;" class="main">
+        <div class="container body-content;" style="display:inline-grid;justify-content:center; height:auto">
+            <div></div>
+            <div style="background-color:rgba(255, 255, 255,0.9) ;width:70vw; border-radius:10px; margin-top:50px; padding:30px;" class="main">
                 @RenderBody()
             </div>
+            <div></div>
             <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - 墨臺</p>
