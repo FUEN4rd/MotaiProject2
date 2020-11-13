@@ -28,7 +28,7 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("規格")]
         public string psSize { get; set; }
-        [DisplayName("產品大中小")]
+        [DisplayName("產品規格")]
         public int pSize { get; set; }
 
         [DisplayName("產品尺寸")]
@@ -42,6 +42,8 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("產品價格")]
         public decimal pPrice { get; set; }
+
+        public int pPrices { get { return Convert.ToInt32(pPrice);} }
         public string pPriceGroup { get; set; }
 
         [DisplayName("產品數量")]

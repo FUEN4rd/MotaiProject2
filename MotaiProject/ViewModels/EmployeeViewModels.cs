@@ -17,19 +17,19 @@ namespace MotaiProject.ViewModels
 
     public class EmployeeViewModels
     {
-        [DisplayName("員工編號")]
+        [DisplayName("職員編號")]
         public int EmployeeId { get; set; }
-        [DisplayName("員工帳號")]
+        [DisplayName("職員帳號")]
         public string eAccount { get; set; }
-        [DisplayName("員工姓名")]
+        [DisplayName("職員姓名")]
         public string eName { get; set; }
-        [DisplayName("員工職位")]
+        [DisplayName("職員職位")]
         public int ePosition { get; set; }
         public string sPosition { get; set; }
-        [DisplayName("員工部門")]
+        [DisplayName("職員部門")]
         public int eBranch { get; set; }
         public string sBranch { get; set; }
-        [DisplayName("員工密碼")]
+        [DisplayName("職員密碼")]
         public string ePassword { get; set; }
         [DisplayName("代辦事項")]
         public int session { get; set; }
@@ -42,9 +42,9 @@ namespace MotaiProject.ViewModels
 
     public class EmployeeLoginViewModel
     {
-        [DisplayName("員工帳號")]
+        [DisplayName("職員帳號")]
         public string eAccount { get; set; }
-        [DisplayName("員工密碼")]
+        [DisplayName("職員密碼")]
         //[RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
         public string ePassword { get; set; }
     }
