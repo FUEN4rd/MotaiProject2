@@ -2,13 +2,12 @@
 
 @{
     ViewBag.Title = "realCheckView";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Layoutbusiness.cshtml";
 }
 
 <h2>實體結帳畫面</h2>
 
 <div>
-    <h4>EmployeeCheckoutViewModel</h4>
     <hr />
     <div style="display:none">
         <h6>@Html.DisplayFor(model => model.orderDetails.FirstOrDefault().oOrderId)</h6>
