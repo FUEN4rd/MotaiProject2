@@ -326,7 +326,7 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
         }
         //網購接受信用卡訂單
-        public void orderCredit(FormCollection callback)
+        public void orderCredit(string merchantTradeNo)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<string> enErrors = new List<string>();
