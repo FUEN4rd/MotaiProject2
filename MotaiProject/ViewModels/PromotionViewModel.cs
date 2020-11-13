@@ -13,7 +13,7 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("類別")]
         public string sPromotinoCategory { get; set; }
-        [DisplayName("標題名稱(原活動名稱)")]
+        [DisplayName("消息名稱")]
         public string PromotionDescription { get; set; }
         [DisplayName("圖片")]
         public string pADimage { get; set; }
@@ -100,7 +100,7 @@ namespace MotaiProject.ViewModels
     {
         //public PromotionViewModel newProm { get; set; }
         public NewPromotionViewModel newPromotion { get; set; }
-        public NewProductViewModel newProduct { get; set; }
-        public DetailPromotionViewModel detailPromotion { get; set; }
+        //public NewProductViewModel newProduct { get; set; }
+        //public DetailPromotionViewModel detailPromotion { get; set; }
     }
 }
