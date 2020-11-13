@@ -243,9 +243,15 @@ namespace MotaiProject.Models
             Order.originalPrice = receivableTotal;
             if (item.oPromotionId != null)
             {
-                Order.receivable = receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
+                Order.receivable = receivableTotal - Convert.ToInt32(item.tPromotion.pDiscount);
                 Order.PromotionName = item.tPromotion.PromotionName;
                 Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
+            }
+            else
+            {
+                Order.receivable = receivableTotal;
+                Order.PromotionName = "無參與折扣活動";
+                Order.pDiscount=0;
             }
             return Order;
         }
