@@ -24,7 +24,7 @@
         border-style: solid;
         padding-top: 7px;
         display: flex;
-        width: 500px;
+        width: 700px;
         /*align-items: center;*/
         /*background-color: #F2EDD8;*/
     }
@@ -55,54 +55,59 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <h2>消息公告</h2>
-    <span style="position: fixed; display: flex;width: 100%;justify-content: flex-end;">
-        <div class="card d-none d-xl-block" style="width: 18rem;">
-            <img src="@Url.Content("~/images/玉山ubear.png")" class="card-img-top" alt="...">
-            <div class="card-body" style="background-color:#A7674C">
-                <h5 class="card-title" style="color: #F2EDD8">玉山ＵBear信用卡</h5>
-                <p class="card-text" style="color: #F2EDD8">
-                    於新中寶刷玉山ＵBear信用卡，可享3.8現金回饋</b>
-                </p>
-                <a href=" #" class="btn btn-light" style="color: #A7674C">詳細資訊</a>
-            </div>
-        </div>
-    </span>
-    <div class="Y_promotion_border">
-        <table class="table Y_productInfo table-hover">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
-                </th>
+    <h2 style="color: #FCD492;">消息公告</h2>
+    <div style="display:flex;justify-content:space-between">
+        @*<span style="position: fixed; width: 100%">*@
 
-            </tr>
+        @*</span>*@
+        <div class="Y_promotion_border">
+            <table class="table Y_productInfo table-hover">
+                <tr style="background-color:#A7674C">
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
+                    </th>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;color:#F2EDD8">
-                            @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
-                        </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
-                    </td>
-                    @*<td>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.newPromotion.sPromotinoCategory)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;color:#F2EDD8">
+                                @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.newPromotion.pPromotionPostDate)
+                        </td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.newPromotion.pADimage)
                         </td>*@
-                </tr>
-            }
-        </table>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div>
+            <div class="card d-none d-xl-block" style="width: 18rem;">
+                <img src="@Url.Content("~/images/玉山ubear.png")" class="card-img-top" alt="...">
+                <div class="card-body" style="background-color:#A7674C">
+                    <h5 class="card-title" style="color: #F2EDD8">玉山ＵBear信用卡</h5>
+                    <p class="card-text" style="color: #F2EDD8">
+                        於新中寶刷玉山ＵBear信用卡，可享3.8現金回饋</b>
+                    </p>
+                    <a href=" #" class="btn btn-light" style="color: #A7674C">詳細資訊</a>
+                </div>
+            </div>
+        </div>
     </div>
     @Html.PagedListPager(Model, page => Url.Action("消息", new { page }))
 </div>
