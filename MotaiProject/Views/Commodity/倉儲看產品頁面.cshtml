@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.ProductViewModel>
 
 @{
-    ViewBag.Title = "倉儲看產品頁面";
+    ViewBag.Title = "管理產品";
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
 
-<h2>倉儲看產品頁面</h2>
+<h2>管理產品</h2>
 <div style="position:absolute;right:300px">
     <label style="font-size:16px;padding-top:12px;padding-right:10px;line-height:16px;margin-bottom:-5px;">搜尋: </label>
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
@@ -84,7 +84,7 @@
                 @Html.DisplayFor(modelItem => item.pWeight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.pPrice)
+                @Html.DisplayFor(modelItem => item.pPrices)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.pQty)

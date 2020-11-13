@@ -29,6 +29,21 @@
 }
 <content>
     <style>
+        @@font-face {
+            font-family: custom-sans-serif;
+            src: local("標楷體"), local("微軟正黑體"), local("Microsoft JhengHei");
+            unicode-range: U+4E00-9FFF;
+        }
+
+        @@font-face {
+            font-family: custom-sans-serif;
+            src: local(Helvetica), local(Segoe UI);
+            unicode-range: U+00-024F
+        }
+        .custom-sans-serif {
+            font-family: custom-sans-serif
+        } 
+    
         .Y_productInfo {
             padding: 10px 20px;
             text-align: center;
@@ -82,13 +97,21 @@
         .displayisnone {
             display: none;
         }
+        .Y_yellow {
+            background-color: #FCD492;
+            color: #313737;
+        }
+        .Y_white {
+            background-color: #F2EDD8;
+            color: #313737;
+        }
     </style>
     <div class="container">
         <!-- 篩選器頭 -->
-        <div class="btn-group" role="group">
+        <div class="btn-group " role="group" style="align-items:center">
 
             <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                    aria-haspopup="true" aria-expanded="false" style="width:75.69px">
                 分類
             </button>
 
@@ -234,20 +257,20 @@
                     }
                     </div>
                 </div>
-            </div>
-            <div id="productcount" style="color:azure;font-size:large;" class="d-flex">有54個</div>
+            </div>            
+            <div id="productcount" style="color:#F2EDD8;font-size:large;" class="d-flex">共54件</div>
         </div>
-
-        <div id=Nulldiv class="d-flex"></div>
-        
-        <button onclick="bclean()" class="btn btn-light d-flex">清除所有選項</button>
+        <div class="d-flex" style="align-content:center">
+            <div id=Nulldiv class="d-flex"></div>
+            <button onclick="bclean()" class="btn btn-light Y_yellow d-none" id="shine" style="border-color:#A7674C;border-width:3px;border-radius:10px;">清除所有選項</button>
+        </div>
         <!-- 篩選器尾 -->
         <div class="row ">
             @foreach (var item in Model)
             {
                 <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @(item.pPriceGroup.Replace("\r\n", "")) @(item.psSize.Replace("\r\n", "")) @(item.psMaterial.Replace("\r\n", "")) @(item.psCategory.Replace("\r\n", "")) product" id="product@(item.ProductId)">
-                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId }) " style="text-decoration:none;">         
-                            <img src="@Url.Content(item.epsImage)" class="img-fluid" alt="..." />
+                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId }) " style="text-decoration:none;align-content:center">         
+                            <img src="@Url.Content(item.epsImage)" class="img-fluid" alt="..." style="height:400px;width:255px"/>
                             <div class="Y_productInfo">
                                 <h4>
                                     <b>@Html.DisplayFor(modelItem => item.pName)</b>
@@ -309,7 +332,7 @@
             }
             for (var i = 0; i < q.length; i++) {
                 var ii = document.getElementsByClassName(`${q[i]}`);
-                RR[i].innerHTML += `(${ii.length}個)`;
+                RR[i].innerHTML += `(${ii.length})`;
             }
 
         })()
@@ -319,23 +342,24 @@
         function bt1(value, id, id2) {
             //判斷點選的按鈕的id是否存在,不存在則建立,存在則alert
             if (!document.getElementById(id)) {
+                document.getElementById("shine").classList.remove("d-none");
                 value = TransferString(value);
                 //建立input元素
                 var inp = document.createElement("input");
                 inp.type = "button";
                 //傳入點選按鈕的value值到新的按鈕
-                inp.value =  value+"X";
+                inp.value =  value+" X";
                 //傳入點選按鈕的id到新的按鈕(傳入是id+1防止重複)
                 inp.id = id;
                 //嵌入class
-                inp.className = `btn btn-light ${id2.charAt(0)}Button`;
+                inp.className = `custom-sans-serif btn btn-light ${id2.charAt(0)}Button Y_white`;
                 //當方法有引數時，用onclick = 方法名(引數)時就有錯了，需要在方法名前面加function()
                 inp.onclick = function () {
                     b1(id, id2, value);
                 };
                 var Nulld = document.getElementById("Nulldiv");
                 Nulld.appendChild(inp);
-                document.getElementById(`${id2}`).parentNode.parentNode.classList.add("bg-info");//改色
+                document.getElementById(`${id2}`).parentNode.parentNode.classList.add("Y_yellow");//改色
 
                 let R = document.getElementsByClassName(`${value}`);
 
@@ -385,7 +409,7 @@
                     var buttonarrayS = [];
                     while (Nulld.childNodes.item(ii) != null) {
                         var rr = Nulld.childNodes.item(ii).value;
-                        var q = rr.substr(0, rr.length - 1);
+                        var q = rr.substr(0, rr.length - 2);
                         var y = TransferString(q);
                         buttonarray.push(y);
                         if (JLC.indexOf(`${q}`) > ita) { buttonarrayC.push(y); }
@@ -486,7 +510,7 @@
             } else {//取消
                 var Nulld = document.getElementById("Nulldiv");
                 document.getElementById(id).remove();
-                document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("bg-info");//改色
+                document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("Y_yellow");//改色
                 let R = document.getElementsByClassName(`${value}`);
                 if (document.getElementsByClassName(`${id2.charAt(0)}Button`).item(0) == null) {//種類按鈕歸零的時候
                     Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
@@ -505,7 +529,7 @@
                     var buttonarray = [];
                     while (Nulld.childNodes.item(i) != null) {
                         var rr = Nulld.childNodes.item(i).value;
-                        var q = rr.substr(0, rr.length - 1);
+                        var q = rr.substr(0, rr.length - 2);
                         var y = TransferString(q);
                         buttonarray.push(y);
                         i++;
@@ -520,13 +544,14 @@
 
                 }
                 beSelect();
+                document.getElementById("shine").classList.add("d-none");
             }
         }
         function b1(id, id2, value) {//OK
 
             var Nulld = document.getElementById("Nulldiv");
             document.getElementById(id).remove();
-            document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("bg-info");//改色
+            document.getElementById(`${id2}`).parentNode.parentNode.classList.remove("Y_yellow");//改色
             let R = document.getElementsByClassName(`${value}`);
             if (document.getElementsByClassName(`${id2.charAt(0)}Button`).item(0) == null) {//種類按鈕歸零的時候
                 Nulld.classList.remove(`${id2.charAt(0)}`);//拔掉種類判斷項
@@ -544,7 +569,7 @@
                 var buttonarray = [];
                 while (Nulld.childNodes.item(i) != null) {
                     var rr = Nulld.childNodes.item(i).value;
-                    var y = rr.substr(0, rr.length - 1);
+                    var y = rr.substr(0, rr.length - 2);
                     buttonarray.push(y);
                     i++;
                 }//抓按鈕還有哪些
@@ -558,6 +583,7 @@
 
             }
             beSelect();
+            document.getElementById("shine").classList.add("d-none");
         }
 
 
@@ -589,11 +615,11 @@
                 Nulld.classList.remove("W");
                 Nulld.classList.remove("P");
                 Nulld.classList.remove("S");
-                document.getElementById("productcount").innerHTML = `有${S.length}個`;
+                document.getElementById("productcount").innerHTML = `共${S.length}件`;
             }
             else {
                 var Z = document.getElementsByName("inArea");
-                document.getElementById("productcount").innerHTML = `有${Z.length}個`;
+                document.getElementById("productcount").innerHTML = `共${Z.length}件`;
             }
         }//改變屬性
                     //console.log(document.getElementById("Nulldiv").innerHTML == "");//true
@@ -620,5 +646,15 @@
             }
             return string;
         }
+
+        var shine = $("#shine")
+        if (document.getElementById("Nulldiv").innerHTML == null){
+            shine.css("display", "none");
+        }
+        else {
+            shine.css("display", "block");
+        }
+
+        
     </script>
 </content>
