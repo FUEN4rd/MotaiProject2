@@ -207,7 +207,7 @@ namespace MotaiProject.Models
             OrderViewModel Order = new OrderViewModel();
             Order.oAddress = item.oAddress;
             Order.oCheck = item.oCheck;
-            Order.oCheckDate = item.oCheckDate.Value.Date;
+            Order.oCheckDate = item.oCheckDate;
     
             Order.oDate = item.oDate.Date;
             Order.oDeliverDate = item.oDeliverDate;
