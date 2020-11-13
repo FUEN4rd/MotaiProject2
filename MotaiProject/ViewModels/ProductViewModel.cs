@@ -16,17 +16,17 @@ namespace MotaiProject.ViewModels
         [DisplayName("產品名稱")]
         public string pName { get; set; }
 
-        [DisplayName("分類")]
+        [DisplayName("產品分類")]
         public string psCategory { get; set; }
         [DisplayName("產品種類")]
         public int pCategory { get; set; }
 
-        [DisplayName("材質")]
+        [DisplayName("產品材質")]
         public string psMaterial { get; set; }
         [DisplayName("產品材質")]
         public int pMaterial { get; set; }
 
-        [DisplayName("規格")]
+        [DisplayName("產品規格")]
         public string psSize { get; set; }
         [DisplayName("產品規格")]
         public int pSize { get; set; }
@@ -51,6 +51,7 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("產品圖片")]
         public List<string> psImage { get; set; }
+        [DisplayName("產品圖片")]
         public List<HttpPostedFileBase> pImage { get; set; }
         public string epsImage
         {
@@ -102,7 +103,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("產品材質")]
         public int pMaterial { get; set; }
 
-        [DisplayName("規格")]
+        [DisplayName("產品規格")]
         public string psSize { get; set; }
         [DisplayName("產品大中小")]
         public int pSize { get; set; }
@@ -121,6 +122,7 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("產品圖片")]
         public List<string> psImage { get; set; }
+        [DisplayName("產品圖片")]
         public List<HttpPostedFileBase> pImage { get; set; }
         public string epsImage
         {

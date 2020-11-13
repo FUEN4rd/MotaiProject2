@@ -142,9 +142,13 @@ namespace MotaiProject.ViewModels
     {
         public EmployeeOrderViewModel Order { get; set; }
         public List<EmployeeOrderDetailViewModel> orderDetails { get; set; }
+        [DisplayName("總金額")]
         public int TotalAmount { get; set; }
+        [DisplayName("已付金額")]
         public int AlreadyPay { get; set; }
+        [DisplayName("尚未付款")]
         public int Unpaid { get; set; }
+        
         public Orderpay orderPay { get; set; }
     }
     //續期結帳跳轉

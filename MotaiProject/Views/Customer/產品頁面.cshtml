@@ -269,8 +269,8 @@
             @foreach (var item in Model)
             {
                 <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @(item.pPriceGroup.Replace("\r\n", "")) @(item.psSize.Replace("\r\n", "")) @(item.psMaterial.Replace("\r\n", "")) @(item.psCategory.Replace("\r\n", "")) product" id="product@(item.ProductId)">
-                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId }) " style="text-decoration:none;">         
-                            <img src="@Url.Content(item.epsImage)" class="img-fluid" alt="..." />
+                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId }) " style="text-decoration:none;align-content:center">         
+                            <img src="@Url.Content(item.epsImage)" class="img-fluid" alt="..." style="height:400px;width:255px"/>
                             <div class="Y_productInfo">
                                 <h4>
                                     <b>@Html.DisplayFor(modelItem => item.pName)</b>
