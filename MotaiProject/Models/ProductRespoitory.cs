@@ -91,6 +91,16 @@ namespace MotaiProject.Models
             Prod.psImage = GetProductShowImages(product);
             return Prod;
         }
+        public int GetProductQtyById(int productId)
+        {
+            var productInventories = dbContext.tWarehouses.Where(p => p.wProductId==productId).ToList();
+            int ProductQty = 0;
+            foreach (var item in productInventories)
+            {
+                ProductQty += item.wPQty;
+            }
+            return ProductQty;
+        }
 
         public Dictionary<int,string> GetProductNameAll()
         {
