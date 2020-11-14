@@ -4,11 +4,22 @@
     ViewBag.Title = "墨臺Motai";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    span {
+        padding: 0px;
+        font-size: 30px;
+    }
+</style>
 <div>
-    <p style="font-size:30px; padding-left:50px;">墨臺後台系統</p>
+    <p style="font-size:0px; padding-left:50px;">
+        <span onclick="Alogin(1)">墨</span>
+        <span onclick="Alogin(2)">臺</span>
+        <span onclick="Alogin(3)">後</span>
+        <span onclick="Alogin(4)">台</span>
+        <span onclick="Alogin(5)">系</span>
+        <span>統</span>
+    </p>
 </div>
-    
-
 
 @using (Html.BeginForm())
 {
@@ -17,21 +28,28 @@
         <div class="form-group">
             <div class="col-md-10" style="margin:0 auto">
                 @Html.LabelFor(model => model.eAccount, htmlAttributes: new { @class = "control-label col-md-5" })
-                @Html.EditorFor(model => model.eAccount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.eAccount, new { htmlAttributes = new { @class = "form-control", @id = "Acc" } })
                 @Html.ValidationMessageFor(model => model.eAccount, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            
+
             <div class="col-md-10" style="margin:0 auto">
                 @Html.LabelFor(model => model.ePassword, htmlAttributes: new { @class = "control-label col-md-5" })
-                @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control", @id = "Pass" } })
                 @Html.ValidationMessageFor(model => model.ePassword, "", new { @class = "text-danger" })
             </div>
         </div>
         <div style="display:flex; justify-content:center">
-            <button type="submit" class="btn btn-primary"  style="width:140px;height:50px;">登入</button>
+            <button type="submit" class="btn btn-primary" style="width:140px;height:50px;">登入</button>
         </div>
-        
+
     </form>
 }
+
+<script>
+    function Alogin(id) {
+        document.getElementById("Acc").value = `test0${id}`;
+        document.getElementById("Pass").value = `test0${id}`;
+    }
+</script>

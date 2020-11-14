@@ -352,7 +352,10 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title  Y_black" id="exampleModalLabel">會員登入</h4>
+                                    <h4 class="modal-title  Y_black" id="exampleModalLabel" style="font-size:0px">
+                                        <span onclick="Alogin()" style="font-size:30px">會員</span>
+                                        <span onclick="Blogin()" style="font-size:30px">登入</span>
+                                    </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -362,13 +365,13 @@
                                         <div class="form-group form-inline">
                                             <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
                                             <div class="col-md-10 ">
-                                                @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black" } })
+                                                @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black", @id = "Acc" } })
                                             </div>
                                         </div>
                                         <div class="form-group form-inline">
                                             <label for="loginPassword" class="col-form-label Y_black">密碼:</label>
                                             <div class="col-md-10">
-                                                @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black" } })
+                                                @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black", @id = "Pass" } })
                                             </div>
                                         </div>
                                         <div class="form-group form-inline code">
@@ -385,8 +388,10 @@
                                                 <button type="button" data-toggle="modal" class="btn btn-primary" data-dismiss="modal" data-target="#forgetPassword">忘記密碼</button>
                                             </div>
                                         </div>
+                                        
+                                        
                                     </form>
-                                </div>
+                                </div>   
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">登入</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -657,7 +662,16 @@
         });
 
     </script>
-
+    <script>
+        function Alogin() {
+            document.getElementById("Acc").value = "A123456a";
+            document.getElementById("Pass").value = "A123456a";
+        }
+        function Blogin() {
+            document.getElementById("Acc").value = "Yen111";
+            document.getElementById("Pass").value = "Yen111";
+        }
+    </script>
 
 
 </body>
