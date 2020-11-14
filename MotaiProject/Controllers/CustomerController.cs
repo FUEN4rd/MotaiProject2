@@ -520,20 +520,17 @@ namespace MotaiProject.Controllers
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
                 ViewBag.Count = count + "項";
-
+                List<tStatu> productStatusList = db.tStatus.Where(s => s.sCustomerId == cust.CustomerId&&s.sProductId==ProductId).ToList();
+                int statusQty = 0;
+                foreach(var statusitem in productStatusList)
+                {
+                    statusQty += statusitem.sProductQty;
+                }
                 var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
 
-                var q = (from i in db.tStatus
-                         where i.sProductId == ProductId
-                         select i).FirstOrDefault();
-                if (product != null && product.pQty > buyQty)
+                int productQty = productRespotiory.GetProductQtyById(ProductId);
+                if (product != null && productQty - statusQty >buyQty)
                 {
-                    if (q != null)
-                    {
-                        q.sProductQty += buyQty;
-                        db.SaveChanges();
-                        return Json(new { result = true, msg = "追加成功" });
-                    }
                     tStatu cart = new tStatu();
                     cart.sCustomerId = cust.CustomerId;
                     cart.sProductId = ProductId;
