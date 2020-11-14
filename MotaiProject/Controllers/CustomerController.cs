@@ -516,13 +516,24 @@ namespace MotaiProject.Controllers
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 MotaiDataEntities db = new MotaiDataEntities();
+
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
                 ViewBag.Count = count + "項";
 
                 var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+
+                var q = (from i in db.tStatus
+                         where i.sProductId == ProductId
+                         select i).FirstOrDefault();
                 if (product != null && product.pQty > buyQty)
                 {
+                    if (q != null)
+                    {
+                        q.sProductQty += buyQty;
+                        db.SaveChanges();
+                        return Json(new { result = true, msg = "追加成功" });
+                    }
                     tStatu cart = new tStatu();
                     cart.sCustomerId = cust.CustomerId;
                     cart.sProductId = ProductId;
