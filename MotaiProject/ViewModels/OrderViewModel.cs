@@ -64,6 +64,7 @@ namespace MotaiProject.ViewModels
     public class CustomerOrderViewModel
     {        
         [DisplayName("消費時間")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime oDate { get; set; }
         [DisplayName("門市編號")]
         public int oWarehouseName { get; set; }
