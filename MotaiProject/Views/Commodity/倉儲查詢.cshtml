@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.WareInventorySelectViewModel>
+﻿@model MotaiProject.ViewModels.CommodityViewModel
 
 @{
     ViewBag.Title = "倉儲查詢";
@@ -7,121 +7,78 @@
 
 
 
-<div style="display:flex;justify-content:space-between">
-    <h2>倉儲查詢</h2>
-    <div style="position:absolute;right:300px">
-        <label style="font-size:16px;padding-top:12px;padding-right:10px;line-height:16px;margin-bottom:-5px;">搜尋: </label>
-        <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
-    </div>
-</div>
-@if (Model != null)
-{
-    <div class="accordion" id="accordionExample">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        商品庫存不足清單
-                    </button>
-                </h2>
-            </div>
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                    @foreach (var item in Model)
-                    {
-                        @Html.DisplayFor(modelItem => item.allProductQty)
-                    }
+    @if (Model.InventoryWaring != null)
+    {
+        <div class="accordion  col-5" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            商品庫存不足清單
+                        </button>
+                    </h2>
                 </div>
-            </div>
-        </div>
-    </div>
-}
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.InventoryWaring.FirstOrDefault().ProductName)</th>
+                                <th>@Html.DisplayNameFor(model => model.InventoryWaring.FirstOrDefault().underStock)</th>
+                            </tr>
+                            @foreach (var item in Model.InventoryWaring)
+                            {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.underStock)</td>
+                            </tr>
+                            }
+                        </table>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            }
 
 
-<table class="table order-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.WarehouseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductQty)
-        </th>
-    </tr>
-    <tbody>
-        @foreach (var item in Model)
-        {
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WarehouseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-
-                @if (item.ProductQty < 1)
-                {
-                    <td style="color:red">
-                        @Html.DisplayFor(modelItem => item.ProductQty)
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductQty)
-                    </td>
-                }
+                <th>
+                    @Html.DisplayNameFor(model => model.InventorySelect.First().WarehouseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventorySelect.First().ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventorySelect.First().ProductQty)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+            <tbody>
+                @foreach (var item in Model.InventorySelect)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WarehouseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
 
-<script src="~/Content/js/jquery-3.5.1.min.js"></script>
-<script>
-    (function (document) {
-        'use strict';
-
-        // 建立 LightTableFilter
-        var LightTableFilter = (function (Arr) {
-
-            var _input;
-
-            // 資料輸入事件處理函數
-            function _onInputEvent(e) {
-                _input = e.target;
-                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                Arr.forEach.call(tables, function (table) {
-                    Arr.forEach.call(table.tBodies, function (tbody) {
-                        Arr.forEach.call(tbody.rows, _filter);
-                    });
-                });
-            }
-
-            // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
-            function _filter(row) {
-                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-            }
-
-            return {
-                // 初始化函數
-                init: function () {
-                    var inputs = document.getElementsByClassName('light-table-filter');
-                    Arr.forEach.call(inputs, function (input) {
-                        input.oninput = _onInputEvent;
-                    });
+                        @if (item.ProductQty < 1)
+                        {
+                            <td style="color:red">
+                                @Html.DisplayFor(modelItem => item.ProductQty)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductQty)
+                            </td>
+                        }
+                    </tr>
                 }
-            };
-        })(Array.prototype);
+            </tbody>
+        </table>
+        <script>
 
-        // 網頁載入完成後，啟動 LightTableFilter
-        document.addEventListener('readystatechange', function () {
-            if (document.readyState === 'complete') {
-                LightTableFilter.init();
-            }
-        });
-
-    })(document);
-</script>
+        </script>

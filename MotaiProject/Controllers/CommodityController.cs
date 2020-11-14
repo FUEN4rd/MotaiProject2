@@ -277,6 +277,7 @@ namespace MotaiProject.Controllers
                 count++;
                 model.sStockSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd")+count.ToString("0000"));
                 model.StockDetail = detail;
+                model.sStockDate = DateTime.Now;
                 return View(model);
             }
             else
@@ -451,6 +452,7 @@ namespace MotaiProject.Controllers
                 var count = dbContext.tShipLists.Where(s => s.sShipDate == today).ToList().Count;
                 count++;
                 model.sShipSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd") + count.ToString("0000"));
+                model.sShipDate = DateTime.Now;
                 List<tOrder> orderSearch = dbContext.tOrders.Where(o => o.oCheck != null).ToList();
                 List<OrderShipShowViewModel> orderShips = new List<OrderShipShowViewModel>();
                 foreach (var item in orderSearch)
@@ -461,7 +463,7 @@ namespace MotaiProject.Controllers
                     orderShip.oCheck = item.oCheck;
                     orderShip.oCheckDate = item.oCheckDate;
                     orderShip.cNote = item.cNote;
-                    orderShip.oDate = DateTime.Now;
+                    orderShip.oDate = item.oDate;
                     orderShips.Add(orderShip);
                 }
                 model.ShipShows = orderShips;
@@ -604,6 +606,7 @@ namespace MotaiProject.Controllers
             model.ProductNames = productRespoitory.GetSelectList(dicProduct);
             var dicWarehouse = commodityRespoitory.GetWarehouseAll();
             model.WareHouseInNames = commodityRespoitory.GetSelectList(dicWarehouse);
+            model.Date = DateTime.Now;
             return View(model);
         }
         public JsonResult WareOutSearch(int ProductId)
@@ -697,10 +700,11 @@ namespace MotaiProject.Controllers
             else
             {
                 MotaiDataEntities dbContext = new MotaiDataEntities();
-                List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
+                CommodityViewModel model = new CommodityViewModel();
+                List<tWarehouse> Warehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
                 List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
                 List<WarningQuantityViewModel> WarningList = new List<WarningQuantityViewModel>();
-                foreach (var item in tWarehouses)
+                foreach (var item in Warehouses)
                 {
                     WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
                     wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
@@ -708,9 +712,26 @@ namespace MotaiProject.Controllers
                     wareInventory.ProductQty = item.wPQty;
                     InventoryList.Add(wareInventory);
                 }
-
-
-                return View(InventoryList);
+                var productInventories = dbContext.tWarehouses.GroupBy(p => p.wProductId,p=>p.wPQty);
+                foreach(var warnitem in productInventories)
+                {
+                    WarningQuantityViewModel warningQuantity = new WarningQuantityViewModel();
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId == warnitem.Key).FirstOrDefault();
+                    int ProductQty = 0;
+                    foreach(var qty in warnitem)
+                    {
+                        ProductQty += qty;
+                    }
+                    if (ProductQty < 3)
+                    {
+                        warningQuantity.ProductName = product.pName;
+                        warningQuantity.underStock = ProductQty;
+                        WarningList.Add(warningQuantity);
+                    }
+                }
+                model.InventorySelect = InventoryList;
+                model.InventoryWaring = WarningList;
+                return View(model);
             }
         }
         

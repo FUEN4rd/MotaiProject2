@@ -25,6 +25,99 @@
         .map_text {
             margin: 20px;
         }
+
+        .cardrow {
+            height: 400px;
+            width: 250px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .cardimg {
+            width: 100%;
+            height: 50%;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 960px;
+            height: 300px;
+            overflow: hidden;
+            margin: 100px auto;
+        }
+
+
+        ul.slides {
+            width: 2200px;
+            left: 0px;
+            transition: all 1s;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+        }
+
+            ul.slides li {
+                margin: 20px;
+                padding: 0;
+                list-style: none;
+                width: 200px;
+                height: 300px;
+                overflow: hidden;
+                float: left;
+            }
+
+                ul.slides li img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+        .dot {
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+            .dot li {
+                border: 1px solid #fff;
+                /* border-radius: 50%; */
+                margin: 0 5px;
+                width: 24px;
+                height: 10px;
+            }
+
+        /* .dot li:hover{
+            background: #fff;
+        } */
+        .slide_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            bottom: 0;
+            width: 30px;
+            color: #fff;
+            position: absolute;
+            font-size: 24px;
+        }
+
+        #prevSlide {
+            left: 0;
+        }
+
+        #nextSlide {
+            right: 0;
+        }
+
+        .slide_btn i {
+            color: rgba(255, 255, 255, .6);
+            transition: .5s;
+        }
+
+        .slide_btn:hover i {
+            color: rgba(255, 255, 255, 1);
+        }
     </style>
     <div class="container">
         <div class="row">
@@ -43,7 +136,30 @@
             </div>
         </div>
     </div>
+    <!--buy bar要有10個商品或以上-->
 
+    <div class="container">
+        <div class="row">
+            <div class="wrapper">
+                <h3 style="color:#FCD492">最多人購買：</h3>
+                <ul class="slides">
+                    @for (int i = 1; i < 11; i++)
+                    {
+                        <li>
+                            <img id="orderimg@(i)" src=""
+                                 alt="">
+                        </li>
+                    }
+                </ul>
+                <div id="prevSlide" class="slide_btn">
+                    <i class="carousel-control-prev-icon"></i>
+                </div>
+                <div id="nextSlide" class="slide_btn">
+                    <i class="carousel-control-next-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 影片 -->
     <div class="container">
         <div class="row" style="display:flex;justify-content:center;margin:70px 0">
@@ -180,4 +296,82 @@
 <script>
 
 
+</script>
+
+
+
+<script type="text/javascript">
+        (function favororder() {
+            fetch('@Url.Action("購買排名", "Customer")', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+        }).then(function (response) {
+            return response.json();
+                }).then(function (data) {
+                    //圖片需要從
+                    for (let i = 1; i < 11; i++) {
+                        let xx = $(`#orderimg${i}`);
+                        let S2 = data.buyOrderby[i - 1]["Pimage"];
+                        xx.attr("src", `${S2}`);
+                        let S = data.buyOrderby[i-1]["Pid"];
+                        xx.attr("onclick", `javascript:location.href='@Url.Action("產品細節", "Customer")?ProductId=${S}'`)
+                    }
+
+        });
+        })()
+</script>
+
+
+<script>
+    $(function () {
+
+        let slideNum = 0;
+        let slideCount = $(".slides li").length;
+        let lastIndex = slideCount - 5;
+
+
+        // let play = window.setInterval(setPlay, 1500);
+        function setPlay() {
+            show();
+            slideNum++
+            if (slideNum > lastIndex) {
+                slideNum = 0;
+            }
+        }
+
+        function stopPlay() {
+            clearInterval(play);
+        }
+
+        function show() {
+            let move = 0 - 240 * slideNum;
+            $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
+            $("ul.slides").css("left", move);
+        }
+
+        $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
+        $(".dot li").mouseenter(function () {
+            slideNum = $(this).index();
+            show();
+        });
+
+        $("#prevSlide").click(function () {
+            slideNum--;
+            if (slideNum < 0) {
+                slideNum = lastIndex;
+            }
+            show();
+        })
+
+        $("#nextSlide").click(function () {
+            slideNum++;
+            if (slideNum > lastIndex) {
+                slideNum = 0;
+            }
+            show();
+        })
+
+    });
 </script>

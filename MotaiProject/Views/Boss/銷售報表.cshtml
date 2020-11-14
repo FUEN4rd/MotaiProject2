@@ -35,13 +35,17 @@
     <h2 class="bg-white">銷售報表</h2>
     <div class="row">
         <div class="card text-white bg-primary mb-3 d-flex cab" style="max-width: 18rem;">
-            <div class="card-header"><h5>員工銷售總額</h5></div>
+            <div class="card-header">
+                <h5>員工銷售總額</h5>
+            </div>
             <div class="card-body">
                 <h5 class="card-text">$NTD @RR 元</h5>
             </div>
         </div>
         <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
-            <div class="card-header"><h5>員工銷售第一</h5></div>
+            <div class="card-header">
+                <h5>員工銷售第一</h5>
+            </div>
             <div class="card-body">
                 <h5>@S</h5>
                 <p class="card-text">$NTD @person 元</p>
@@ -55,7 +59,7 @@
         <canvas id="myChart" width="400" height="400"></canvas>
     </div>
 
-    <table class="table">
+    @*<table class="table">
         <tr>
             <th>
                 員工\月份
@@ -88,32 +92,65 @@
 
     </table>
 
-</div>
+</div>*@
+
+@*<script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                datasets: [
+                @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+                {
+                    <text>
+                    {
+                        label: '@kvp.Key',
+                        backgroundColor: '@L[datacolor]',
+                        borderColor: '@L[datacolor]',
+                        data: [
+                            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value){
+                                @kvp2.Value<Text>,</Text>
+                            }
+                        ],
+                    },
+                    </text>
+                    datacolor++;
+                    if (datacolor == L.Count) { datacolor = 0; }
+                }
+                ]
+            }
+        });
+
+
+    </script>*@
 
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
-            labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            labels: [@foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+                        {<Text>
+                        '@kvp.Key.Replace("\r\n", "")',</Text>}],
             datasets: [
-            @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-            {
-                <text>
                 {
-                    label: '@kvp.Key',
-                    backgroundColor: '@L[datacolor]',
-                    borderColor: '@L[datacolor]',
+                    label:'set1',
+                        backgroundColor: ['@L[0]', '@L[1]', '@L[2]', '@L[3]', '@L[4]'],
+                    borderColor: ['@L[0]','@L[1]','@L[2]','@L[3]','@L[4]'],
                     data: [
-                        @foreach (KeyValuePair<int, int> kvp2 in kvp.Value){
-                            @kvp2.Value<Text>,</Text>
+                        @foreach(KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+                        {
+                            int fuc = 0;
+                            foreach (KeyValuePair<int, int> kvp2 in kvp.Value) { fuc += kvp2.Value; }
+                            <Text>@fuc,</Text>
+
                         }
+
                     ],
+
                 },
-                </text>
-                datacolor++;
-                if (datacolor == L.Count) { datacolor = 0; }
-            }
+            
             ]
         }
     });

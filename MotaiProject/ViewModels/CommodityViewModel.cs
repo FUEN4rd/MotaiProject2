@@ -63,7 +63,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("調進倉儲")]
         public int WarehouseIdIn { get; set; }
         [DisplayName("調貨日期")]
-        public DateTime Date { get { return DateTime.Now; } set { } }
+        public DateTime Date { get; set; }
         [DisplayName("備註")]
         public string tNote { get; set; }
 
@@ -113,8 +113,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }
@@ -150,8 +149,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public StockDetailViewModel StockDetail { get; set; }
@@ -169,8 +167,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public List<StockSelectDetailModel> StockDetails { get; set; }
@@ -200,8 +197,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單號")]
         public int sOrderId { get; set; }
         [DisplayName("出貨日期")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
 
@@ -230,15 +226,12 @@ namespace MotaiProject.ViewModels
         public int sEmployeeId { get; set; }
         [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         [DisplayName("出貨日期")]
-        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
         public List<OrderShipShowViewModel> ShipShows
-        {
-            get; set;
-        }
+        { get; set; }
     }
     public class OrderShipShowViewModel
     {
@@ -299,8 +292,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("出貨單號")]
         public int ShipSerialValue { get; set; }
         [DisplayName("出貨日期")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime ShipDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime ShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string ShipNote { get; set; }
         public List<ShipSelectDetailModel> ShipDetails { get; set; }

@@ -520,25 +520,47 @@ namespace MotaiProject.Controllers
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 MotaiDataEntities db = new MotaiDataEntities();
+
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
                 ViewBag.Count = count + "項";
-
-                var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
-                if (product != null && product.pQty > buyQty)
+                tStatu productStatus = db.tStatus.Where(s => s.sCustomerId == cust.CustomerId&&s.sProductId==ProductId).FirstOrDefault();
+                if (productStatus != null)
                 {
-                    tStatu cart = new tStatu();
-                    cart.sCustomerId = cust.CustomerId;
-                    cart.sProductId = ProductId;
-                    cart.sProductQty = buyQty;
-                    db.tStatus.Add(cart);
-                    db.SaveChanges();
-                    return Json(new { result = true, msg = "加入成功" });
+                    int statusQty = 0;
+                    statusQty = productStatus.sProductQty;
+                    var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                    int productQty = productRespotiory.GetProductQtyById(ProductId);
+                    if (product != null && productQty - statusQty > buyQty)
+                    {
+                        productStatus.sProductQty += buyQty;
+                        db.SaveChanges();
+                        return Json(new { result = true, msg = "加入成功" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, msg = "庫存不足" });
+                    }
                 }
                 else
                 {
-                    return Json(new { result = false, msg = "庫存不足" });
-                }
+                    var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                    int productQty = productRespotiory.GetProductQtyById(ProductId);
+                    if (product != null && productQty > buyQty)
+                    {
+                        tStatu cart = new tStatu();
+                        cart.sCustomerId = cust.CustomerId;
+                        cart.sProductId = ProductId;
+                        cart.sProductQty = buyQty;
+                        db.tStatus.Add(cart);
+                        db.SaveChanges();
+                        return Json(new { result = true, msg = "加入成功" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, msg = "庫存不足" });
+                    }
+                }               
             }
             else
             {
@@ -560,6 +582,41 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("購物車清單");
         }
+        //訂單
+        public ActionResult 過往訂單()
+        {
+            if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+            {
+                tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+                MotaiDataEntities db = new MotaiDataEntities();
+                List<tOrder> orders = db.tOrders.Where(o => o.oCustomerId==cust.CustomerId).ToList();
+                List<CustomerOrderViewModel> OrderList = new List<CustomerOrderViewModel>();
+                foreach (var items in orders)
+                {
+                    CustomerOrderViewModel order = new CustomerOrderViewModel();
+                    order.oDate = items.oDate;
+                    order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
+                    order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId==items.oEmployeeId).FirstOrDefault().eName;
+                    order.cNote = items.cNote;
+                    List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId == items.OrderId).ToList();
+                    List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();
+                    foreach (var itemDetail in orderdetails)
+                    {
+                        CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
+                        orderdetail.ProductNum = db.tProducts.Where(p => p.ProductId==itemDetail.oProductId).FirstOrDefault().pNumber;
+                        orderdetail.ProductName = db.tProducts.Where(p => p.ProductId==itemDetail.oProductId).FirstOrDefault().pName;
+                        orderdetail.oProductQty = itemDetail.oProductQty;
+                        orderdetail.oNote = itemDetail.oNote;
+                        OrderDetailList.Add(orderdetail);
+                    }
+                    order.CustomerOrderDetails = OrderDetailList;
+                    OrderList.Add(order);
+                }
+                return View(OrderList);
+            }
+            return RedirectToAction("首頁");
+        }
+        //收藏
         public ActionResult 收藏清單()
         {            
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)

@@ -12,19 +12,26 @@
 <style>
     .wrapper {
         position: relative;
-        width: 80%;
+        width: 960px;
         height: 300px;
         overflow: hidden;
         margin: 100px auto;
     }
 
+
     ul.slides {
         width: 2200px;
         left: 0px;
         transition: all 1s;
+        margin: 0;
+        padding: 0;
+        position: absolute;
     }
 
         ul.slides li {
+            margin: 20px;
+            padding: 0;
+            list-style: none;
             width: 200px;
             height: 300px;
             overflow: hidden;
@@ -87,80 +94,83 @@
 
 
 <div class="container">
-        <table class="table table-light">
-            <thead>
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Carts.First().pName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Carts.First().pPrice)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Carts.First().sProductQty)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Carts.First().pTotal)
+                </th>
+                <th scope="col">
+                    刪除
+                </th>
+            </tr>
+        </thead>
+        <tbody id="buyData">
+
+            @foreach (var item in Model.Carts)
+            {
                 <tr>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Carts.First().pName)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Carts.First().pPrice)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Carts.First().sProductQty)
-                    </th>
-                    <th scope="col">
-                        @Html.DisplayNameFor(model => model.Carts.First().pTotal)
-                    </th>
-                    <th scope="col">
-                        刪除
-                    </th>
+                    <td style="display:none" name="Id">
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.pName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pIntPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sProductQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pTotal)
+                    </td>
+                    <td>
+                        @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
+    new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
+                    </td>
                 </tr>
-            </thead>
-            <tbody id="buyData">
+                count += item.pTotal;
+            }
+        </tbody>
+    </table>
 
-                @foreach (var item in Model.Carts)
-                {
-                    <tr>
-                        <td style="display:none" name="Id">
-                            @Html.DisplayFor(modelItem => item.ProductId)
-                        </td>
-                        <td scope="row">
-                            @Html.DisplayFor(modelItem => item.pName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.pIntPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.sProductQty)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.pTotal)
-                        </td>
-                        <td>
-                            @Html.ActionLink("刪除", "購物車內刪除", "Customer", new { fId = item.StatusId },
-        new { OnClick= "return confirm('確定要刪除嗎?')",Class="btn btn-danger" })
-                        </td>
-                    </tr>
-                    count += item.pTotal;
-                }
-            </tbody>
-        </table>
-
-        <div style="display:inline-grid">
-            <div>
-                <input type="radio" id="customerAddress" name="Address" value="1">
-                <label for="customerAddress">自家住宅</label>
-                <p id="cAddress">@cust.cAddress</p>
-            </div>
-            <div>
-                <input type="radio" id="storeAddress" name="Address" value="2">
-                <label for="storeAddress">門市</label>
-                @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
-            </div>
+    <div style="display:inline-grid;color:#F2EDD8">
+        <div>
+            <input type="radio" id="customerAddress" name="Address" value="1">
+            <label for="customerAddress">自家住宅</label>
+            <p id="cAddress">@cust.cAddress</p>
         </div>
         <div>
-            <ul>
-                <li>
-                    1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
-                    <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
-                </li>
-                <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
-                <li> 3.不同帳號的交易紀錄無法移轉。</li>
-            </ul>
+            <input type="radio" id="storeAddress" name="Address" value="2">
+            <label for="storeAddress">門市</label>
+            @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
         </div>
+    </div>
+    <div style="color:#F2EDD8">
+        <ul>
+            <li>
+                1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
+                <br />如以手機號碼為購物帳號，建議可新增常用Email，日後可快速查詢客服回應資訊。
+            </li>
+            <li>2.您的交易記錄會留存於該次購物所用帳號內。如果更換綁定手機號碼，需查詢過往交易記錄時，請以更換後的手機號碼查詢即可。</li>
+            <li> 3.不同帳號的交易紀錄無法移轉。</li>
+        </ul>
+    </div>
+    <div class="d-flex">
+        <div class="d-flex" style="width:60vw;height:20vh;margin:0px">
 
-        <div>
+        </div>
+        <div style="color:#F2EDD8;position:relative;width:30vw" class="">
             訂單資訊
             <hr />
             <div>
@@ -171,9 +181,9 @@
                 document.querySelector("#info").innerHTML = @count;
 
             </script>
-            運費
+            運費:
             <br />
-            折扣
+            折扣:
             <br />
             <div style="display:inline-grid">
                 <div>
@@ -185,11 +195,14 @@
                     <label for="creditCard">信用卡</label>
                 </div>
             </div>
+            <form method="post" action="@Url.Action("webOrder", "Order")" id="webData">
+                <button id="webCheckout" type="button" class="btn btn-dark" style="position:absolute;right:0px">確定結帳</button>
+            </form>
         </div>
-    <form method="post" action="@Url.Action("webOrder", "Order")" id="webData">
-        <button id="webCheckout" type="button" class="btn btn-dark">確定結帳</button>
-    </form>
+
+    </div>
 </div>
+
 <script>
 
     $("#webCheckout").click(function () {
@@ -221,12 +234,13 @@
         }
         document.body.appendChild(temp);
         temp.submit();
-        return temp;    
+        return temp;
     });
 </script>
 <div class="container">
     <div class="row">
         <div class="wrapper">
+            <h3 style="color:#FCD492">最多人購買：</h3>
             <ul class="slides">
                 @for (int i = 1; i < 11; i++)
                 {
@@ -275,8 +289,10 @@
 
         let slideNum = 0;
         let slideCount = $(".slides li").length;
-        let lastIndex = slideCount - 1;
+        let lastIndex = slideCount - 5;
 
+
+        // let play = window.setInterval(setPlay, 1500);
         function setPlay() {
             show();
             slideNum++
@@ -290,10 +306,18 @@
         }
 
         function show() {
-            let move = 0 - 200 * slideNum;
+            let move = 0 - 240 * slideNum;
             $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
             $("ul.slides").css("left", move);
         }
+
+        // $(".wrapper").hover(function () {
+        //     stopPlay();
+        //     console.log("stop");
+        // }, function () {
+        //     play = window.setInterval(setPlay, 500);
+        //     console.log("play");
+        // });
 
         $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
         $(".dot li").mouseenter(function () {
@@ -319,5 +343,3 @@
 
     });
 </script>
-
-

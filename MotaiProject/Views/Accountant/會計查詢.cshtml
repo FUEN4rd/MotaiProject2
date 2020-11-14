@@ -59,7 +59,8 @@
                     @Html.DisplayFor(modelItem => item.OrderId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.oDate)
+                    @*@Html.DisplayFor(modelItem => item.oDate)*@
+                    @item.oDate.Date.ToString("yyyy-MM-dd")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.sWarehouseName)
@@ -82,7 +83,8 @@
                 <td>
                     @if (item.oCheck != null)
                     {
-                        @Html.DisplayFor(modelItem => item.oCheckDate)
+                        //@Html.DisplayFor(modelItem => item.oCheckDate)
+                        <div>@item.oCheckDate.Value.Date.ToString("yyyy-MM-dd")</div>
                         <div>已審核</div>
                     }
                     else if (item.surplus <= 0)
