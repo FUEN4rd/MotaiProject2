@@ -63,7 +63,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("調進倉儲")]
         public int WarehouseIdIn { get; set; }
         [DisplayName("調貨日期")]
-        public DateTime Date { get { return DateTime.Now; } set { } }
+        public DateTime Date { get; set; }
         [DisplayName("備註")]
         public string tNote { get; set; }
 
@@ -114,7 +114,7 @@ namespace MotaiProject.ViewModels
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime sStockDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
         public List<StockDetailViewModel> StockDetails { get; set; }

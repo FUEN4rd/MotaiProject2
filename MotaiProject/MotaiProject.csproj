@@ -726,6 +726,7 @@
     <Content Include="Views\Commodity\調貨單查詢.cshtml" />
     <Content Include="Views\Order\分期結帳畫面.cshtml" />
     <Content Include="Views\business\會計查詢.cshtml" />
+    <Content Include="Views\Customer\過往訂單.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
