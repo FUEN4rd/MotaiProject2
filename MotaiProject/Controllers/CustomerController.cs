@@ -520,29 +520,43 @@ namespace MotaiProject.Controllers
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 int count = db.tStatus.Where(c => c.sCustomerId == cust.CustomerId).ToList().Count;
                 ViewBag.Count = count + "項";
-                List<tStatu> productStatusList = db.tStatus.Where(s => s.sCustomerId == cust.CustomerId&&s.sProductId==ProductId).ToList();
-                int statusQty = 0;
-                foreach(var statusitem in productStatusList)
+                tStatu productStatus = db.tStatus.Where(s => s.sCustomerId == cust.CustomerId&&s.sProductId==ProductId).FirstOrDefault();
+                if (productStatus != null)
                 {
-                    statusQty += statusitem.sProductQty;
-                }
-                var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
-
-                int productQty = productRespotiory.GetProductQtyById(ProductId);
-                if (product != null && productQty - statusQty >buyQty)
-                {
-                    tStatu cart = new tStatu();
-                    cart.sCustomerId = cust.CustomerId;
-                    cart.sProductId = ProductId;
-                    cart.sProductQty = buyQty;
-                    db.tStatus.Add(cart);
-                    db.SaveChanges();
-                    return Json(new { result = true, msg = "加入成功" });
+                    int statusQty = 0;
+                    statusQty = productStatus.sProductQty;
+                    var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                    int productQty = productRespotiory.GetProductQtyById(ProductId);
+                    if (product != null && productQty - statusQty > buyQty)
+                    {
+                        productStatus.sProductQty += buyQty;
+                        db.SaveChanges();
+                        return Json(new { result = true, msg = "加入成功" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, msg = "庫存不足" });
+                    }
                 }
                 else
                 {
-                    return Json(new { result = false, msg = "庫存不足" });
-                }
+                    var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
+                    int productQty = productRespotiory.GetProductQtyById(ProductId);
+                    if (product != null && productQty > buyQty)
+                    {
+                        tStatu cart = new tStatu();
+                        cart.sCustomerId = cust.CustomerId;
+                        cart.sProductId = ProductId;
+                        cart.sProductQty = buyQty;
+                        db.tStatus.Add(cart);
+                        db.SaveChanges();
+                        return Json(new { result = true, msg = "加入成功" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, msg = "庫存不足" });
+                    }
+                }               
             }
             else
             {
