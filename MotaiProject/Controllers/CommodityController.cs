@@ -697,10 +697,11 @@ namespace MotaiProject.Controllers
             else
             {
                 MotaiDataEntities dbContext = new MotaiDataEntities();
-                List<tWarehouse> tWarehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
+                CommodityViewModel model = new CommodityViewModel();
+                List<tWarehouse> Warehouses = dbContext.tWarehouses.OrderBy(w => w.WarehouseNameId).ToList();
                 List<WareInventorySelectViewModel> InventoryList = new List<WareInventorySelectViewModel>();
                 List<WarningQuantityViewModel> WarningList = new List<WarningQuantityViewModel>();
-                foreach (var item in tWarehouses)
+                foreach (var item in Warehouses)
                 {
                     WareInventorySelectViewModel wareInventory = new WareInventorySelectViewModel();
                     wareInventory.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(item.WarehouseNameId)).FirstOrDefault().WarehouseName;
@@ -708,9 +709,26 @@ namespace MotaiProject.Controllers
                     wareInventory.ProductQty = item.wPQty;
                     InventoryList.Add(wareInventory);
                 }
-
-
-                return View(InventoryList);
+                var productInventories = dbContext.tWarehouses.GroupBy(p => p.wProductId,p=>p.wPQty);
+                foreach(var warnitem in productInventories)
+                {
+                    WarningQuantityViewModel warningQuantity = new WarningQuantityViewModel();
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId == warnitem.Key).FirstOrDefault();
+                    int ProductQty = 0;
+                    foreach(var qty in warnitem)
+                    {
+                        ProductQty += qty;
+                    }
+                    if (ProductQty < 3)
+                    {
+                        warningQuantity.ProductName = product.pName;
+                        warningQuantity.underStock = ProductQty;
+                        WarningList.Add(warningQuantity);
+                    }
+                }
+                model.InventorySelect = InventoryList;
+                model.InventoryWaring = WarningList;
+                return View(model);
             }
         }
         

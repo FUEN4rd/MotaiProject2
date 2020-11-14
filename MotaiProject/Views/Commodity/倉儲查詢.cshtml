@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MotaiProject.ViewModels.WareInventorySelectViewModel>
+﻿@model MotaiProject.ViewModels.CommodityViewModel
 
 @{
     ViewBag.Title = "倉儲查詢";
@@ -8,9 +8,9 @@
 <h2>倉儲查詢</h2>
 
 
-    @if (Model != null)
+    @if (Model.InventoryWaring != null)
     {
-        <div class="accordion" id="accordionExample">
+        <div class="accordion  col-5" id="accordionExample">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
@@ -21,10 +21,19 @@
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
-                        @foreach (var item in Model)
-                        {
-                            @Html.DisplayFor(modelItem => item.allProductQty)
-                        }
+                        <table>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.InventoryWaring.FirstOrDefault().ProductName)</th>
+                                <th>@Html.DisplayNameFor(model => model.InventoryWaring.FirstOrDefault().underStock)</th>
+                            </tr>
+                            @foreach (var item in Model.InventoryWaring)
+                            {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.underStock)</td>
+                            </tr>
+                            }
+                        </table>
                     </div>
                         </div>
                     </div>
@@ -35,17 +44,17 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.WarehouseName)
+                    @Html.DisplayNameFor(model => model.InventorySelect.First().WarehouseName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductName)
+                    @Html.DisplayNameFor(model => model.InventorySelect.First().ProductName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductQty)
+                    @Html.DisplayNameFor(model => model.InventorySelect.First().ProductQty)
                 </th>
             </tr>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.InventorySelect)
                 {
                     <tr>
                         <td>
