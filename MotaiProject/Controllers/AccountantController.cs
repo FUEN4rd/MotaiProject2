@@ -91,7 +91,7 @@ namespace MotaiProject.Controllers
             MotaiDataEntities dbContext = new MotaiDataEntities();
             tOrder tcheckOrder = dbContext.tOrders.FirstOrDefault(p => p.OrderId == checkOrder.OrderId);
             tcheckOrder.oCheck = checkOrder.oCheck;
-            var date = DateTime.Now;
+            var date = DateTime.Now.Date;
             checkOrder.oCheckDate = date;
             dbContext.SaveChanges();
             return RedirectToAction("會計查詢");

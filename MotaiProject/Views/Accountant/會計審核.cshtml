@@ -27,7 +27,7 @@
 
         <div>
             @Html.DisplayNameFor(model => model.oDate)：
-            @Html.DisplayFor(model => model.oDate)
+            @Model.oDate.Date.ToString("yyyy-MM-dd")
         </div>
 
         <div>

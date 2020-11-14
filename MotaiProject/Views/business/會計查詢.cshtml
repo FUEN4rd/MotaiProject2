@@ -59,8 +59,7 @@
                     @Html.DisplayFor(modelItem => item.OrderId)
                 </td>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.oDate)*@
-                    @item.oDate.Date.ToString("yyyy-MM-dd")
+                    @Html.DisplayFor(modelItem => item.oDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.sWarehouseName)
@@ -83,8 +82,7 @@
                 <td>
                     @if (item.oCheck != null)
                     {
-                        //@Html.DisplayFor(modelItem => item.oCheckDate)
-                        <div>@item.oCheckDate.Value.Date.ToString("yyyy-MM-dd")</div>
+                        @Html.DisplayFor(modelItem => item.oCheckDate)
                         <div>已審核</div>
                     }
                     else if (item.surplus <= 0)
@@ -102,7 +100,7 @@
     </tbody>
 </table>
 <script>
-    
+
     $(document).ready(function () {
         var table = document.getElementById("table");
         var check1 = document.getElementById("alreadyCheck");
@@ -131,9 +129,9 @@
                     else {
                         hidden1[i].classList.add("Y_hidden");
                     }
-                }                
+                }
             });
-            check2.addEventListener('change', function (event) {                
+            check2.addEventListener('change', function (event) {
                 for (let i = 0; i < hidden2.length; i++) {
                     if (check2.checked == true) {
                         hidden2[i].classList.remove("Y_hidden");

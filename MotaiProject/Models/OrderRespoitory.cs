@@ -123,9 +123,15 @@ namespace MotaiProject.Models
                 OrderViewModel Order = new OrderViewModel();
                 Order.oAddress = item.oAddress;
                 Order.oCheck = item.oCheck;
-                Order.oCheckDate = item.oCheckDate;
-                Order.oDate = item.oDate;
-                Order.oDeliverDate = item.oDeliverDate;
+                if (item.oCheckDate != null)
+                {
+                    Order.oCheckDate = item.oCheckDate.Value.Date;
+                }
+                
+                
+                Order.oDate = item.oDate.Date;
+                //if(item.oDeliverDate)
+                //Order.oDeliverDate = item.oDeliverDate.Value.Date;
                 Order.OrderId = item.OrderId;
 
                 Order.sWarehouseName = item.tWarehouseName.WarehouseName;
@@ -202,7 +208,8 @@ namespace MotaiProject.Models
             Order.oAddress = item.oAddress;
             Order.oCheck = item.oCheck;
             Order.oCheckDate = item.oCheckDate;
-            Order.oDate = item.oDate;
+    
+            Order.oDate = item.oDate.Date;
             Order.oDeliverDate = item.oDeliverDate;
             Order.oEmployeeId = item.oEmployeeId;
             Order.OrderId = item.OrderId;
@@ -253,6 +260,8 @@ namespace MotaiProject.Models
                 Order.PromotionName = "無參與折扣活動";
                 Order.pDiscount=0;
             }
+
+
             return Order;
         }
 
