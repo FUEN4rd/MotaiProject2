@@ -220,6 +220,11 @@ namespace MotaiProject.ViewModels
 
         [DisplayName("htmlName")]
         public string htmlName { get; set; }
+
+        [DisplayName("商品")]
+        public string pName { get; set; }
+        [DisplayName("數量")]
+        public string oProductQty { get; set; }
     }
 
     public class OrderDetailViewModel
