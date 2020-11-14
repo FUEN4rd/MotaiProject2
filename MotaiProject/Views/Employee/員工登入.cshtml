@@ -22,44 +22,26 @@
 </div>
 
 
-@*@using (Html.BeginForm())
-    {*@
-@*@Html.AntiForgeryToken()
-<form>*@
+@Html.AntiForgeryToken()
+   
+<div class="form-group">
+    <div class="col-md-10" style="margin:0 auto">
+        @Html.LabelFor(model => model.eAccount, htmlAttributes: new { @class = "control-label col-md-5" })
+        @Html.EditorFor(model => model.eAccount, new { htmlAttributes = new { @class = "form-control", @id = "Account" } })
+        @Html.ValidationMessageFor(model => model.eAccount, "", new { @class = "text-danger" })
+    </div>
     <div class="form-group">
         <div class="col-md-10" style="margin:0 auto">
-            @Html.LabelFor(model => model.eAccount, htmlAttributes: new { @class = "control-label col-md-5" })
-            @Html.EditorFor(model => model.eAccount, new { htmlAttributes = new { @class = "form-control", @id = "Account" } })
-            @Html.ValidationMessageFor(model => model.eAccount, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-10" style="margin:0 auto">
-                @Html.LabelFor(model => model.ePassword, htmlAttributes: new { @class = "control-label col-md-5" })
             @Html.LabelFor(model => model.ePassword, htmlAttributes: new { @class = "control-label col-md-5" })
             @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control", @id = "Password" } })
             @Html.ValidationMessageFor(model => model.ePassword, "", new { @class = "text-danger" })
         </div>
-        <div style="display:flex; justify-content:center">
-            <button type="submit" class="btn btn-primary" style="width:140px;height:50px;">登入</button>
-        </div>
-
-    </form>
-}
-
-<script>
-    function Alogin(id) {
-        document.getElementById("Acc").value = `test0${id}`;
-        document.getElementById("Pass").value = `test0${id}`;
-    }
-</script>
     </div>
     <div style="display:flex; justify-content:center">
         <input type="submit" class="btn btn-primary" style="width:140px;height:50px;" onclick="checklogin()" value="登入">
     </div>
+</div>
 
-@*</form>*@
-@*}*@
 <script>
     function checklogin() {
         var Account = $("#Account").val();
@@ -71,7 +53,7 @@
         };
 
         $.ajax({
-            url: "@Url.Action("員工登入", "Employee")",            
+            url: "@Url.Action("員工登入", "Employee")",
             type: "POST",
             data: { "e登入資料": emplogin },
             success: function (data) {
@@ -84,4 +66,9 @@
     var onSuccess = function (url) {
         window.location.href = url;
     };
+
+    function Alogin(id) {
+         document.getElementById("Account").value = `test0${id}`;
+         document.getElementById("Password").value = `test0${id}`;
+    }
 </script>
