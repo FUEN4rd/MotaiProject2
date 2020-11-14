@@ -16,37 +16,66 @@ namespace MotaiProject.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public ActionResult 員工登入(EmployeeLoginViewModel e登入資料)
+        //{
+        //    MotaiDataEntities dbContext = new MotaiDataEntities();
+        //    tEmployee d資料確認 = dbContext.tEmployees.Where(e => e.eAccount == e登入資料.eAccount && e.ePassword.Equals(e登入資料.ePassword)).FirstOrDefault();
+        //    if (d資料確認 != null)
+        //    {
+        //        Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = d資料確認;
+
+        //        switch (d資料確認.eBranch)
+        //        {
+        //            case 1:
+        //                return RedirectToAction("Boss首頁", "Boss");
+        //            case 2:
+        //                return RedirectToAction("Business首頁", "Business");
+        //            case 3:
+        //                return RedirectToAction("Accountant首頁", "Accountant");
+        //            case 4:
+        //                return RedirectToAction("People首頁", "People");
+        //            case 5:
+        //                return RedirectToAction("Commodity首頁", "Commodity");
+        //            default:
+        //                return RedirectToAction("員工首頁", "Employee");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Write("帳號密碼錯誤!");
+        //        return View();
+        //    }
+        //}
+
         [HttpPost]
-        public ActionResult 員工登入(EmployeeLoginViewModel e登入資料)
+        public JsonResult 員工登入(EmployeeLoginViewModel e登入資料)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             tEmployee d資料確認 = dbContext.tEmployees.Where(e => e.eAccount == e登入資料.eAccount && e.ePassword.Equals(e登入資料.ePassword)).FirstOrDefault();
             if (d資料確認 != null)
             {
                 Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] = d資料確認;
-
                 switch (d資料確認.eBranch)
                 {
                     case 1:
-                        return RedirectToAction("Boss首頁", "Boss");
+                        return Json(new { msg = "登入成功", url = Url.Action("Boss首頁", "Boss") });
                     case 2:
-                        return RedirectToAction("Business首頁", "Business");
+                        return Json(new { msg = "登入成功", url = Url.Action("Business首頁", "Business") });
                     case 3:
-                        return RedirectToAction("Accountant首頁", "Accountant");
+                        return Json(new { msg = "登入成功", url = Url.Action("Accountant首頁", "Accountant") });
                     case 4:
-                        return RedirectToAction("People首頁", "People");
+                        return Json(new { msg = "登入成功", url = Url.Action("People首頁", "People") });
                     case 5:
-                        return RedirectToAction("Commodity首頁", "Commodity");
+                        return Json(new { msg = "登入成功", url = Url.Action("Commodity首頁", "Commodity") });
                     default:
-                        return RedirectToAction("員工首頁", "Employee");
+                        return Json(new { msg = "帳號或密碼有誤", url = Url.Action("員工首頁", "Employee") });
                 }
             }
             else
             {
-                Response.Write("帳號密碼錯誤!");
-                return View();
+                return Json(new { msg = "帳號或密碼有誤", url = Url.Action("員工首頁", "Employee") });
             }
-
         }
 
         public ActionResult 員工登出()

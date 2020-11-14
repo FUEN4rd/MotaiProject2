@@ -344,8 +344,8 @@
             if (cust == null)
             {
 
-                using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
-                {
+                //using (Html.BeginForm("會員登入", "Customer", FormMethod.Post, null))
+                //{
                     @Html.AntiForgeryToken()
 
                     <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -362,18 +362,18 @@
                                         <div class="form-group form-inline">
                                             <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
                                             <div class="col-md-10 ">
-                                                @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black" } })
+                                                @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black",@id = "Account" } })
                                             </div>
                                         </div>
                                         <div class="form-group form-inline">
                                             <label for="loginPassword" class="col-form-label Y_black">密碼:</label>
                                             <div class="col-md-10">
-                                                @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black" } })
+                                                @Html.Editor("cPassword", new { htmlAttributes = new { @class = "Y_black", @id = "Password" } })
                                             </div>
                                         </div>
                                         <div class="form-group form-inline code">
                                             <label class="col-form-label Y_black">驗證碼:</label>
-                                            <input type="text" name="code" />
+                                            <input type="text" name="code" id="ValidateCode"/>
                                             <img id="codePicture" src="@Url.Action("GetValidateCode","Customer")" />
                                             <div class="btn btn-primary" onclick="code()">換一組驗證碼</div>
                                         </div>
@@ -382,20 +382,19 @@
                                                 @Html.ActionLink("註冊會員", "會員註冊", "Customer", null, null)
                                             </div>
                                             <div class="col-md-10">
-                                                <button type="button" data-toggle="modal" class="btn btn-primary" data-dismiss="modal" data-target="#forgetPassword">忘記密碼</button>
+                                                <button type="button" data-toggle="modal" class="btn btn-primary" data-dismiss="modal" data-target="#forgetPassword" >忘記密碼</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">登入</button>
+                                    <input type="submit" class="btn btn-primary" onclick="checklogin()" value="登入">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                }
+                //}
 
                 @Html.AntiForgeryToken()
 
@@ -418,6 +417,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="modal fade" id="Shop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -427,7 +427,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body  Y_black">
+                            <div class="modal-body Y_black">
                                 是否要登入?
                             </div>
                             <div class="modal-footer">
@@ -526,25 +526,38 @@
                     var onSuccess = function (url) {
                         window.location.href = url;
                     };
-
                                    
-                        function code() {
-                            //$.ajax({
-                            //    type: "POST",
-                            //    url: "/Customer/GetValidateCode",
-                            //    success: function (data) {
-                            //        $("#codePicture").attr("src", data.result);
-                            //        console.log(data.result);
-                            //        document.getElementById("codePicture").src = data.picture;
-                            //    }
-                            //});
-                            $("#codePicture").attr("src", "/Customer/GetValidateCode/" + new Date().getTime());
-                            //document.getElementById("codePicture").src = "Customer/GetValidateCode";
-                        }
-                        //$("codeBtn").click(function () {
-                        //    document.getElementById("codePicture").src = "Customer/GetValidateCode";
-                        //})
-       
+                    function code() {
+                        $("#codePicture").attr("src", "/Customer/GetValidateCode/" + new Date().getTime());
+                    };
+                       
+                    function checklogin() {
+                        var Account = $("#Account").val();
+                        var Password = $("#Password").val();
+                        var ValidateCode = $("#ValidateCode").val();
+                       
+
+                        var customerlogin = {
+                            cAccount: Account,
+                            cPassword: Password,
+                            cValidateCode: ValidateCode,
+                        };
+
+                        $.ajax({
+                            url: "/Customer/會員登入",
+                            type: "POST",
+                            data: { "c登入資料": customerlogin },
+                            success: function (data) {
+                                alert(data.msg);
+                                onSuccess(data.url);
+                            }
+                        });
+                    };
+
+                    var onSuccess = function (url) {
+                        window.location.href = url;
+                    };
+                    
                 </script>
             }
             else

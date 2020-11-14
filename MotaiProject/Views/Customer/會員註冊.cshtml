@@ -133,8 +133,14 @@
             type: "POST",
             data: { "newMember": customersign },
             success: function (data) {
-                alert(data.msg);         
+                alert(data.msg); 
+                onSuccess(data.url);
             }
         });
+    };
+
+
+    var onSuccess = function (url) {
+        window.location.href = url;
     };
 </script>

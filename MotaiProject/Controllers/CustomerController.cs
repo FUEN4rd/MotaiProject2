@@ -99,23 +99,26 @@ namespace MotaiProject.Controllers
 
         //GET: 會員登入
         [HttpPost]
-        public ActionResult 會員登入(CustomerLoginViewModel c登入資料)
+        public JsonResult 會員登入(CustomerLoginViewModel c登入資料)
         {
-            string code = Request.Form["code"].ToString();
-            if (code == TempData["code"].ToString())
+            if (c登入資料.cValidateCode != null)
             {
-
+                string code = c登入資料.cValidateCode;
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer d資料確認 = dbContext.tCustomers.FirstOrDefault
                     (c => c.cAccount == c登入資料.cAccount && c.cPassword.Equals(c登入資料.cPassword));
                 if (d資料確認 != null)
                 {
-                    Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;
-                    return RedirectToAction("首頁");
+                    if (code == TempData["codecode"].ToString())
+                    {
+                        Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;
+                        return Json(new { msg = "登入成功",url = Url.Action("首頁", "Customer") });
+                    }
+                    return Json(new { msg = "驗證碼錯誤" });
                 }
-                return RedirectToAction("首頁");
+                return Json(new { msg = "帳號或密碼有誤" });
             }
-            return RedirectToAction("首頁");
+            return Json(new { msg = "請輸入驗證碼" });
         }
 
         [HttpPost]
@@ -137,6 +140,7 @@ namespace MotaiProject.Controllers
                 return View();
             }
         }
+
         private string RandomCode(int length)
         {
             string s = "0123456789zxcvbnmasdfghjklqwertyuiop";
@@ -168,7 +172,7 @@ namespace MotaiProject.Controllers
         {
             byte[] data = null;
             string code = RandomCode(5);
-            TempData["code"] = code;
+            TempData["codecode"] = code;
             //定義一個畫板
             MemoryStream ms = new MemoryStream();
             using (Bitmap map = new Bitmap(100, 40))
@@ -346,7 +350,7 @@ namespace MotaiProject.Controllers
                 newmember.cEmail = newMember.cEmail;
                 dbContext.tCustomers.Add(newmember);
                 dbContext.SaveChanges();
-                return Json(new { msg = "註冊成功" });
+                return Json(new { msg = "註冊成功", url = Url.Action("首頁", "Customer") });
             }     
             return Json(new {msg = "帳號、密碼、姓名、手機、地址及信箱必須填寫" });
         }

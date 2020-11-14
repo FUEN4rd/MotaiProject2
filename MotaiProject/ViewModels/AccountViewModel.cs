@@ -93,11 +93,12 @@ namespace MotaiProject.ViewModels
     public class CustomerLoginViewModel
     {
         [DisplayName("客戶帳號")]
-        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
         public string cAccount { get; set; }
         [DisplayName("客戶密碼")]
-        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$", ErrorMessage = "必須有英文大、小寫與數字，長度介於6~12字元")]
         public string cPassword { get; set; }
+        [DisplayName("驗證碼")]
+        public string cValidateCode { get; set; }
+        
     }
 
     public class ForgotPasswordViewModel
