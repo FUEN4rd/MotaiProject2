@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
+
 using System.Web.Http.Cors;
 using System.Web.Mvc;
 
@@ -326,7 +327,7 @@ namespace MotaiProject.Controllers
             return RedirectToAction("首頁");
         }
         //網購接受信用卡訂單
-        public void orderCredit(string merchantTradeNo)
+        public HttpResponseBase orderCredit([System.Web.Http.FromBody]string merchantTradeNo)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<string> enErrors = new List<string>();
@@ -386,6 +387,7 @@ namespace MotaiProject.Controllers
                             default: break;
                         }
                     }
+                    
                     WebOrderModel Trade = Session[szMerchantTradeNo] as WebOrderModel;
                     //先建訂單
                     tOrder newOrder = new tOrder();
@@ -440,6 +442,7 @@ namespace MotaiProject.Controllers
                 this.Response.Flush();
                 this.Response.End();
             }
+            return this.Response;
         }
         //public void orderCredit(FormCollection callback)
         //{
