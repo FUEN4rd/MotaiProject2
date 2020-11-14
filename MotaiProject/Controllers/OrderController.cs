@@ -38,6 +38,7 @@ namespace MotaiProject.Controllers
                 List<SelectListItem> productlist = commodityRespoitory.GetSelectList(productNames);
                 model.WareHouseNames = warehouselist;
                 detail.ProductNames = productlist;
+                model.oDate = DateTime.Now;
                 model.empOrderDetail = detail;
                 return View(model);
             }

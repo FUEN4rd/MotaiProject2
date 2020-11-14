@@ -227,13 +227,11 @@ namespace MotaiProject.ViewModels
         [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
         [DisplayName("出貨日期")]
-        public DateTime sShipDate { get { return DateTime.Now.Date; } set { } }
+        public DateTime sShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
         public List<OrderShipShowViewModel> ShipShows
-        {
-            get; set;
-        }
+        { get; set; }
     }
     public class OrderShipShowViewModel
     {
