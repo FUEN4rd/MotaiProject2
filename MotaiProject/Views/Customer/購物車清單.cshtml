@@ -12,19 +12,26 @@
 <style>
     .wrapper {
         position: relative;
-        width: 80%;
+        width: 960px;
         height: 300px;
         overflow: hidden;
         margin: 100px auto;
     }
 
+
     ul.slides {
         width: 2200px;
         left: 0px;
         transition: all 1s;
+        margin: 0;
+        padding: 0;
+        position: absolute;
     }
 
         ul.slides li {
+            margin: 20px;
+            padding: 0;
+            list-style: none;
             width: 200px;
             height: 300px;
             overflow: hidden;
@@ -282,8 +289,10 @@
 
         let slideNum = 0;
         let slideCount = $(".slides li").length;
-        let lastIndex = slideCount - 1;
+        let lastIndex = slideCount - 5;
 
+
+        // let play = window.setInterval(setPlay, 1500);
         function setPlay() {
             show();
             slideNum++
@@ -297,10 +306,18 @@
         }
 
         function show() {
-            let move = 0 - 200 * slideNum;
+            let move = 0 - 240 * slideNum;
             $(".dot li").eq(slideNum).css("background-color", "#fff").siblings().css("background-color", "transparent");
             $("ul.slides").css("left", move);
         }
+
+        // $(".wrapper").hover(function () {
+        //     stopPlay();
+        //     console.log("stop");
+        // }, function () {
+        //     play = window.setInterval(setPlay, 500);
+        //     console.log("play");
+        // });
 
         $(".dot li").eq(0).css("background-color", "#fff").siblings().css("background-color", "transparent");
         $(".dot li").mouseenter(function () {
@@ -326,5 +343,3 @@
 
     });
 </script>
-
-
