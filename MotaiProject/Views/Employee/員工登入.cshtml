@@ -9,8 +9,46 @@
         padding: 0px;
         font-size: 30px;
     }
+
+    .btn-brown_me_one {
+        color: #fff;
+        background-color: #A7674C;
+        width: 100px;
+    }
+
+        .btn-brown_me_one:hover {
+            color: #fff;
+            background-color: #945d45;
+        }
+
+        .btn-brown_me_one:focus,
+        .btn-brown_me_one.focus {
+            box-shadow: 0 0 0 0.1rem #F2EDD8;
+            background-color: #945d45;
+        }
+
+        .btn-brown_me_one.disabled,
+        .btn-brown_me_one:disabled {
+            color: #fff;
+            background-color: #A7674C;
+            border-color: #A7674C;
+        }
+
+        .btn-brown_me_one:not(:disabled):not(.disabled):active,
+        .btn-brown_me_one:not(:disabled):not(.disabled).active,
+        .show > .btn-brown_me.dropdown-toggle {
+            color: #fff;
+            background-color: #A7674C;
+        }
+
+            .btn-brown_me_one:not(:disabled):not(.disabled):active:focus,
+            .btn-brown_me_one:not(:disabled):not(.disabled).active:focus,
+            .show > .btn-brown_me_one.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.1rem #F2EDD8;
+                background-color: #945d45;
+            }
 </style>
-<div>
+<div style="width:300px;margin:auto">
     <p style="font-size:0px; padding-left:50px;">
         <span onclick="Alogin(1)">墨</span>
         <span onclick="Alogin(2)">臺</span>
@@ -21,11 +59,10 @@
     </p>
 </div>
 
-
 @Html.AntiForgeryToken()
    
 <div class="form-group">
-    <div class="col-md-10" style="margin:0 auto">
+    <div class="col-md-10" style="margin:20px auto">
         @Html.LabelFor(model => model.eAccount, htmlAttributes: new { @class = "control-label col-md-5" })
         @Html.EditorFor(model => model.eAccount, new { htmlAttributes = new { @class = "form-control", @id = "Account" } })
         @Html.ValidationMessageFor(model => model.eAccount, "", new { @class = "text-danger" })
@@ -38,7 +75,7 @@
         </div>
     </div>
     <div style="display:flex; justify-content:center">
-        <input type="submit" class="btn btn-primary" style="width:140px;height:50px;" onclick="checklogin()" id="" value="登入">
+        <input type="submit" class="btn btn-brown_me_one" style="width:140px;height:50px;" onclick="checklogin()" id="" value="登入">
     </div>
 </div>
 
