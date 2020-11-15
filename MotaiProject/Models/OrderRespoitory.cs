@@ -332,7 +332,7 @@ namespace MotaiProject.Models
             int receivedM(int PayId)
             {
                 var cashList = from tp in dbContext.tOrderPays
-                               where tp.oPayId == PayId
+                               where tp.oPayType == PayId && tp.oOrderId==Id
                                select tp.oPayment;
                 int cashTotal = 0;
                 foreach (var cashItem in cashList)
@@ -344,9 +344,8 @@ namespace MotaiProject.Models
             Order.cash = receivedM(1);
             Order.card = receivedM(2);
             Order.voucher = receivedM(3);
-            Order.consignment = receivedM(4);
             int receivedTotal = 0;
-            for (int i = 1; i < 5; i++)
+            for (int i = 1; i < 4; i++)
             {
                 receivedTotal+=receivedM(i);
             }
@@ -381,6 +380,7 @@ namespace MotaiProject.Models
                 tProduct product = dbContext.tProducts.Where(p => p.ProductId == detail.oProductId).FirstOrDefault();
                 accountOrderdetail.ProductNum = product.pNumber;
                 accountOrderdetail.ProductName = product.pName;
+                accountOrderdetail.ProductPrice = product.pPrice;
                 accountOrderdetail.oProductQty = detail.oProductQty;
                 accountOrderdetail.oNote = detail.oNote;
                 orderDetails.Add(accountOrderdetail);
