@@ -1,0 +1,269 @@
+﻿@model IEnumerable<MotaiProject.ViewModels.OrderViewModel>
+
+@{
+    ViewBag.Title = "審核會計帳";
+    Layout = "~/Views/Shared/Layoutbusiness.cshtml";
+    int i = 0;
+}
+
+<h2>審核會計帳</h2>
+<style>
+    .Y_hidden {
+        display: none;
+    }
+</style>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="alreadyCheck" value="option1" checked>
+    <label class="form-check-label" for="alreadyCheck">已審核</label>(<span id="alreadyCheckC">0</span>)
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="unCheck" value="option2" checked>
+    <label class="form-check-label" for="unCheck">待審核</label>(<span id="unCheckC">0</span>)
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="unFinish" value="option3" checked>
+    <label class="form-check-label" for="unFinish">未完成</label>(<span id="unFinishC">0</span>)
+</div>
+<div class="accordion" id="accordionExample">
+    <div class="container" style="margin-left:-30px;width:68vw">
+        <table class="table" style="text-align:center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.oDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sWarehouseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.scName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.receivable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.received)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.surplus)
+                </th>
+                <th>審核狀況</th>
+            </tr>
+        </table>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="card" style="padding:0px" name="@item.htmlName">
+            <div class="card-header" id="heading@(i)" style="padding:0px">
+                <div class="btn btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px">
+                    <table class="table" text-align:center>
+                        <tr>
+                            <td style="width:100px">
+                                @Html.DisplayFor(modelItem => item.OrderId)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.oDate)
+                            </td>
+                            <td style="width:100px">
+                                @Html.DisplayFor(modelItem => item.sWarehouseName)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.scName)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.receivable)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.received)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.surplus)
+                            </td>
+                            <td>
+                                @if (item.oCheck != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.oCheckDate)
+                                    <div>已審核</div>
+                                }
+                                else if (item.surplus <= 0)
+                                {
+                                    <div>待審核</div>
+                                }
+                                else
+                                {
+                                    <div>未完成</div>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="collapse@(i)" class="collapse hide" aria-labelledby="heading@(i)" data-parent="#accordionExample">
+                <div class="card-body" style="width:100%">
+                    <table class="table text-dark" style="text-align:center">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.orderDetailViews.First().ProductNum)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.orderDetailViews.First().ProductName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.orderDetailViews.First().oProductQty)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.orderDetailViews.First().oNote)
+                            </th>
+                        </tr>
+                        @foreach (var itemdetail in item.orderDetailViews)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductNum)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.oProductQty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.oNote)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            </div>
+            i++;
+            }
+            <tbody id="table">
+                @foreach (var item in Model)
+                {
+                    <tr name="@item.htmlName">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.oDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sWarehouseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.seName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.scName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.receivable)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.received)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.surplus)
+                        </td>
+                        <td>
+                            @if (item.oCheck != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.oCheckDate)
+                                <div>已審核</div>
+                            }
+                            else if (item.surplus <= 0)
+                            {
+                                <div>待審核</div>
+                            }
+                            else
+                            {
+                                <div>未完成</div>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </div>
+        <script>
+
+            $(document).ready(function () {
+                var check1 = document.getElementById("alreadyCheck");
+                var check2 = document.getElementById("unCheck");
+                var check3 = document.getElementById("unFinish");
+
+                var hidden1 = document.getElementsByName("tr_hidden1");
+                var alreadyCheckC = hidden1.length;
+                $("#alreadyCheckC").text(alreadyCheckC);
+
+                var hidden2 = document.getElementsByName("tr_hidden2")
+                var unCheckC = hidden2.length;
+                $("#unCheckC").text(unCheckC);
+
+                var hidden3 = document.getElementsByName("tr_hidden3")
+                var unFinishC = hidden3.length;
+                $("#unFinishC").text(unFinishC);
+
+                    check1.addEventListener('change', function (event) {
+                        //var hidden1 = document.getElementsByName("tr_hidden1")
+                        for (let i = 0; i < hidden1.length; i++) {
+                            if (check1.checked == true) {
+                                hidden1[i].classList.remove("Y_hidden");
+                            }
+                            else {
+                                hidden1[i].classList.add("Y_hidden");
+                            }
+                        }
+                    });
+                    check2.addEventListener('change', function (event) {
+                        for (let i = 0; i < hidden2.length; i++) {
+                            if (check2.checked == true) {
+                                hidden2[i].classList.remove("Y_hidden");
+                            }
+                            else {
+                                hidden2[i].classList.add("Y_hidden");
+                            }
+                        }
+                    });
+                    check3.addEventListener('change', function (event) {
+                        var hidden3 = document.getElementsByName("tr_hidden3")
+                        for (let i = 0; i < hidden3.length; i++) {
+                            if (check3.checked == true) {
+                                hidden3[i].classList.remove("Y_hidden");
+                            }
+                            else {
+                                hidden3[i].classList.add("Y_hidden");
+                            }
+                        }
+                    });
+            });
+
+
+                                    //$("#webCheckout").click(function () {
+                                    //    var table = document.getElementById("buyData");
+                                    //    var cAddress = $("#cAddress").text();
+                                    //    var total = $("#info").text();
+                                    //    var store = $("#WarehouseNameId").text();
+                                    //    var method = $("input[name='Address']:checked").val();
+                                    //    var shipaddress;
+                                    //    if (method == 1) {
+                                    //        shipaddress = cAddress;
+                                    //    } else {
+                                    //        shipaddress = store;
+                                    //    }
+                                    //    var payType = $("input[name='payType']:checked").val();
+                                    //    var rowArr = new Object;
+                                    //    for (let i = 0; i < table.rows.length; i++) {
+                                    //        rowArr[i] = new Object;
+                                    //        rowArr[i] = {
+                                    //            Id: table.rows[i].cells[0].innerHTML.split("\n")[1],
+                                    //            Name: table.rows[i].cells[1].innerHTML.split("\n")[1],
+                                    //            Price: table.rows[i].cells[2].innerHTML.split("\n")[1],
+                                    //            Quantity: table.rows[i].cells[3].innerHTML.split("\n")[1],
+                                    //        }
+                                    //    }
+        </script>
