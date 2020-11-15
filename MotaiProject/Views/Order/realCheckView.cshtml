@@ -15,10 +15,10 @@
     </div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Order.cCellphone)
+            @Html.DisplayNameFor(model => model.Order.CustomerName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Order.cCellphone)
+            @Html.DisplayFor(model => model.Order.CustomerName)
         </dd>
     </dl>
     <dl class="dl-horizontal">
@@ -49,7 +49,7 @@
                 @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().oProductQty)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().oNote))
+                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().oNote)
             </th>
         </tr>
         @foreach (var item in Model.orderDetails)
@@ -72,18 +72,34 @@
     </table>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TotalAmount)
+            @Html.DisplayNameFor(model => model.originalPrice)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TotalAmount)
+            @Html.DisplayFor(model => model.originalPrice)
         </dd>
     </dl>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Order.oPromotionId)
+            @Html.DisplayNameFor(model => model.Order.PromotionName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Order.oPromotionId)
+            @Html.DisplayFor(model => model.Order.PromotionName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PromotionCondition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.PromotionCondition)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.PromotionDiscount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Order.PromotionDiscount)
         </dd>
     </dl>
     <div>
@@ -95,12 +111,12 @@
         <label for="creditCard">信用卡</label>
     </div>
     <div>
-        <label>應付金額:</label>
+        <label>應收帳款:</label>
         @Html.DisplayFor(model => model.TotalAmount)
     </div>
     <div>
-        <label>已付金額:</label>
-        @Html.DisplayFor(model=>model.AlreadyPay)
+        <label>已收帳款:</label>
+        @Html.DisplayFor(model => model.AlreadyPay)
     </div>
     <div>
         <label for="payMoney">付款金額:</label>

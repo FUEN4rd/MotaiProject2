@@ -38,7 +38,7 @@ namespace MotaiProject.Controllers
                 List<SelectListItem> productlist = commodityRespoitory.GetSelectList(productNames);
                 model.WareHouseNames = warehouselist;
                 detail.ProductNames = productlist;
-                model.oDate = DateTime.Now;
+                model.oDate = DateTime.Now.Date;
                 model.empOrderDetail = detail;
                 return View(model);
             }
@@ -61,12 +61,19 @@ namespace MotaiProject.Controllers
                 {
                     List<EmployeeOrderDetailViewModel> orders = Session[CSession關鍵字.SK_ORDERDETAIL] as List<EmployeeOrderDetailViewModel>;
                     MotaiDataEntities dbContext = new MotaiDataEntities();
+                    tCustomer customer = dbContext.tCustomers.Where(c => c.cCellPhone == empOrder.cCellphone).FirstOrDefault();
                     tOrder list = new tOrder();
                     list.oEmployeeId = emp.EmployeeId;
-                    list.oCustomerId = dbContext.tCustomers.Where(c => c.cCellPhone.Equals(empOrder.cCellphone)).FirstOrDefault().CustomerId;
-                    list.oAddress = empOrder.oAddress;
+                    list.oCustomerId = customer.CustomerId;
+                    if(empOrder.oAddress == "")
+                    {
+                        list.oAddress = customer.cAddress;
+                    }
+                    else
+                    {
+                        list.oAddress = empOrder.oAddress;
+                    }
                     list.oDate = empOrder.oDate;
-                    list.oPromotionId = empOrder.oPromotionId;
                     list.cNote = empOrder.cNote;
                     list.oWarehouseName = empOrder.oWarehouseName;
                     dbContext.tOrders.Add(list);
@@ -152,7 +159,7 @@ namespace MotaiProject.Controllers
             EmployeeCheckoutViewModel model = new EmployeeCheckoutViewModel();
             EmployeeOrderViewModel Order = new EmployeeOrderViewModel();
             tOrder order = dbContext.tOrders.Where(o => o.OrderId.Equals(OrderId)).FirstOrDefault();
-            Order.oCustomerId = (int)order.oCustomerId;
+            Order.CustomerName = dbContext.tCustomers.Where(c=>c.CustomerId==order.oCustomerId).FirstOrDefault().cName;
             Order.oAddress = order.oAddress;
             Order.oDate = order.oDate;
             Order.cNote = order.cNote;
@@ -166,15 +173,24 @@ namespace MotaiProject.Controllers
                 Orderdetail.ProductName = product.pName;
                 Orderdetail.ProductNum = product.pNumber;
                 Orderdetail.oProductQty = itemdetails.oProductQty;
-                model.TotalAmount += itemdetails.oProductQty * Convert.ToInt32(product.pPrice);
+                model.originalPrice += itemdetails.oProductQty * Convert.ToInt32(product.pPrice);
                 Orderdetails.Add(Orderdetail);
             }
-            int promotionId = orderRespoitory.SelectPromotionId(model.TotalAmount, order.oDate);
+            int promotionId = orderRespoitory.SelectPromotionId(model.originalPrice, order.oDate);
             if (promotionId != 0)
             {
-                Order.oPromotionId = promotionId;
                 tPromotion promotion = dbContext.tPromotions.Where(p => p.PromotionId.Equals(promotionId)).FirstOrDefault();
-                model.TotalAmount = model.TotalAmount - Convert.ToInt32(promotion.pDiscount);
+                Order.PromotionName = promotion.PromotionName;
+                Order.PromotionDiscount = promotion.pDiscount;
+                Order.PromotionCondition = promotion.pCondition;
+                model.TotalAmount = model.originalPrice - Convert.ToInt32(promotion.pDiscount);
+            }
+            else
+            {
+                Order.PromotionName = "不適用任何優惠活動";
+                Order.PromotionDiscount = "0";
+                Order.PromotionCondition = "無";
+                model.TotalAmount = model.originalPrice;
             }
             model.AlreadyPay = 0;
             model.Unpaid = model.TotalAmount;

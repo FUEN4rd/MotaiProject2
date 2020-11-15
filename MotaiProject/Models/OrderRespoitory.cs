@@ -16,7 +16,7 @@ namespace MotaiProject.Models
             List<tPromotion> promotions = dbContext.tPromotions.OrderByDescending(p => p.pCondition).Where(p=>p.pPromotionDeadline>date&&p.pPromotionStartDate<date).ToList();
             foreach(var item in promotions)
             {
-                if (Convert.ToInt32(item.pCondition) <= money)
+                if (Convert.ToInt32(item.pCondition) <= money && item.pCondition!=null)
                 {
                     return item.PromotionId;
                 }

@@ -102,16 +102,25 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("客戶手機")]
         public string cCellphone { get; set; }
+        [DisplayName("客戶名字")]
+        public string CustomerName { get; set; }
         [DisplayName("客戶編號")]
         public int oCustomerId { get; set; }
         [DisplayName("訂單地址")]
         public string oAddress { get; set; }
         [DisplayName("訂單時間")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime oDate { get; set; }
         [DisplayName("員工編號")]
         public Nullable<int> oEmployeeId { get; set; }
         [DisplayName("優惠")]
         public Nullable<int> oPromotionId { get; set; }
+        [DisplayName("活動名稱")]
+        public string PromotionName { get; set; }
+        [DisplayName("折扣金額")]
+        public string PromotionDiscount { get; set; }
+        [DisplayName("折扣條件")]
+        public string PromotionCondition { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }
         [DisplayName("門市編號")]
@@ -145,11 +154,13 @@ namespace MotaiProject.ViewModels
     {
         public EmployeeOrderViewModel Order { get; set; }
         public List<EmployeeOrderDetailViewModel> orderDetails { get; set; }
-        [DisplayName("總金額")]
+        [DisplayName("原價")]
+        public int originalPrice { get; set; }
+        [DisplayName("應收帳款")]
         public int TotalAmount { get; set; }
-        [DisplayName("已付金額")]
+        [DisplayName("已收帳款")]
         public int AlreadyPay { get; set; }
-        [DisplayName("尚未付款")]
+        [DisplayName("剩餘帳款")]
         public int Unpaid { get; set; }
         
         public Orderpay orderPay { get; set; }
