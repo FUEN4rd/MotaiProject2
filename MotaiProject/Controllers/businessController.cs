@@ -61,11 +61,10 @@ namespace MotaiProject.Controllers
             {
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
-                var dlist = dbContext.tDiaries.OrderBy(c => c.dEmployeeId).ToList();
+                var dlist = dbContext.tDiaries.Where(c => c.dEmployeeId==emp.EmployeeId).ToList();
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
                 foreach (var item in dlist)
                 {
-                    tWarehouseName warename = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(item.dWarehouseNameId)).FirstOrDefault();
                     DiaryViewModel show = new DiaryViewModel();
                     show.eName = item.tEmployee.eName;
                     show.dDate = item.dDate;
@@ -73,7 +72,7 @@ namespace MotaiProject.Controllers
                     show.dDiaryNote = item.dDiaryNote;
                     show.DiaryId = item.DiaryId;
                     show.dWarehouseNameId = item.dWarehouseNameId;
-                    show.dWarehouseName = warename.WarehouseName;
+                    show.dWarehouseName = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId == item.dWarehouseNameId).FirstOrDefault().WarehouseName;
                     DSaw.Add(show);
                 }
                 return View(DSaw);

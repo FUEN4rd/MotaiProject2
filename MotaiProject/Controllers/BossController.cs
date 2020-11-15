@@ -76,7 +76,7 @@ namespace MotaiProject.Controllers
                     show.dDate = item.dDate;
                     show.dWeather = item.dWeather;
                     show.dDiaryNote = item.dDiaryNote;
-                    show.dWarehouseNameId = item.dWarehouseNameId;
+                    show.dWarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId == item.dWarehouseNameId).FirstOrDefault().WarehouseName;
 
                     DSaw.Add(show);
                 }
