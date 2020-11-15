@@ -226,6 +226,8 @@ namespace MotaiProject.ViewModels
         public string pName { get; set; }
         [DisplayName("數量")]
         public string oProductQty { get; set; }
+
+        public List<AccountOrderDetailViewModel> orderDetailViews { get; set; }
     }
 
     public class OrderDetailViewModel
@@ -235,6 +237,20 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單編號")]
         public int oOrderId { get; set; }
         public int oProductId { get; set; }
+        [DisplayName("產品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("產品名稱")]
+        public string ProductName { get; set; }
+        [DisplayName("產品數量")]
+        public int oProductQty { get; set; }
+        [DisplayName("備註")]
+        public string oNote { get; set; }
+    }
+
+    public class AccountOrderDetailViewModel
+    {
+        [DisplayName("訂單編號")]
+        public int oOrderId { get; set; }
         [DisplayName("產品編號")]
         public string ProductNum { get; set; }
         [DisplayName("產品名稱")]

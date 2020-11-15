@@ -260,8 +260,19 @@ namespace MotaiProject.Models
                 Order.PromotionName = "無參與折扣活動";
                 Order.pDiscount=0;
             }
-
-
+            List<AccountOrderDetailViewModel> orderDetails = new List<AccountOrderDetailViewModel>();
+            List<tOrderDetail> orderDetailList = dbContext.tOrderDetails.Where(od => od.oOrderId == Id).ToList();
+            foreach(var detail in orderDetailList)
+            {
+                AccountOrderDetailViewModel accountOrderdetail = new AccountOrderDetailViewModel();
+                tProduct product = dbContext.tProducts.Where(p => p.ProductId == detail.oProductId).FirstOrDefault();
+                accountOrderdetail.ProductNum = product.pNumber;
+                accountOrderdetail.ProductName = product.pName;
+                accountOrderdetail.oProductQty = detail.oProductQty;
+                accountOrderdetail.oNote = detail.oNote;
+                orderDetails.Add(accountOrderdetail);
+            }
+            Order.orderDetailViews = orderDetails;
             return Order;
         }
 
