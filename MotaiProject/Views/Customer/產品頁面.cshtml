@@ -40,10 +40,11 @@
             src: local(Helvetica), local(Segoe UI);
             unicode-range: U+00-024F
         }
+
         .custom-sans-serif {
             font-family: custom-sans-serif
-        } 
-    
+        }
+
         .Y_productInfo {
             padding: 10px 20px;
             text-align: center;
@@ -53,25 +54,25 @@
         }
 
         .btn-brown_me {
-            color: #fff;
+            color: #FCD492;
             background-color: #A7674C;
-            border-color: #A7674C;
+            width: 100px;
         }
 
             .btn-brown_me:hover {
-                color: #fff;
-                background-color: #A7674C;
-                border-color: #F2EDD8;
+                color: #FCD492;
+                background-color: #945d45;
             }
 
             .btn-brown_me:focus,
             .btn-brown_me.focus {
-                box-shadow: 0 0 0 0.2rem#F2EDD8;
+                box-shadow: 0 0 0 0.1rem #F2EDD8;
+                background-color: #945d45;
             }
 
             .btn-brown_me.disabled,
             .btn-brown_me:disabled {
-                color: #fff;
+                color: #FCD492;
                 background-color: #A7674C;
                 border-color: #A7674C;
             }
@@ -79,15 +80,15 @@
             .btn-brown_me:not(:disabled):not(.disabled):active,
             .btn-brown_me:not(:disabled):not(.disabled).active,
             .show > .btn-brown_me.dropdown-toggle {
-                color: #fff;
+                color: #FCD492;
                 background-color: #A7674C;
-                border-color: #A7674C;
             }
 
                 .btn-brown_me:not(:disabled):not(.disabled):active:focus,
                 .btn-brown_me:not(:disabled):not(.disabled).active:focus,
                 .show > .btn-brown_me.dropdown-toggle:focus {
-                    box-shadow: 0 0 0 0.2rem#F2EDD8;
+                    box-shadow: 0 0 0 0.1rem #F2EDD8;
+                    background-color: #945d45;
                 }
 
         .dropdown-item {
@@ -97,10 +98,12 @@
         .displayisnone {
             display: none;
         }
+
         .Y_yellow {
             background-color: #FCD492;
             color: #313737;
         }
+
         .Y_white {
             background-color: #F2EDD8;
             color: #313737;
@@ -108,188 +111,191 @@
     </style>
     <div class="container">
         <!-- 篩選器頭 -->
-        <div class="btn-group " role="group" style="align-items:center">
+        <div style="height:100px">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" style="align-items:center">
 
-            <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" style="width:75.69px">
-                分類
-            </button>
+                    <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        @*style="width:75.69px"*@
+                        分類
+                    </button>
 
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <div class="form-group">
-                    @foreach (var item in Model)
-                    {
-                        if (listA) { break; }
-                        foreach (var item2 in item.AllCategory)
-                        {<text>
-                                <a class="dropdown-item" href="#" onclick="cl(`C@(xr)`)" >
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input d-none" value="@(item2.Replace("\r\n", ""))" id="C@(xr)"
-                                               onclick="bt1(this.value,this.id+1,this.id)">
-                                        <label class="form-check-label" for="dropdownCheck">
-                                            @item2.Replace("\r\n", "")
-                                        </label>
-                                    </div>
-                                </a>
-                        </text>
-                        xr++;
-                    }
-                    listA = true;
-                }
-                </div>
-            </div>
-
-
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    材質
-                </button>
-
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <div class="form-group">
-                        @foreach (var item in Model)
-                        {
-                            if (listB) { break; }
-                            foreach (var item2 in item.AllMaterial)
-                            {<text>
-                                    <a class="dropdown-item" href="#" onclick="cl(`W@(xr2)`)">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input d-none" value="@(item2.Replace("\r\n", ""))" id="W@(xr2)"
-                                                   onclick="bt1(this.value,this.id+1,this.id)">
-                                            <label class="form-check-label" for="dropdownCheck">
-                                                @item2.Replace("\r\n", "")
-                                            </label>
-                                        </div>
-                                    </a>
-                            </text>
-                            xr2++;
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <div class="form-group">
+                            @foreach (var item in Model)
+                            {
+                                if (listA) { break; }
+                                foreach (var item2 in item.AllCategory)
+                                {<text>
+                                        <a class="dropdown-item" href="#" onclick="cl(`C@(xr)`)">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input d-none" value="@(item2.Replace("\r\n", ""))" id="C@(xr)"
+                                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                                <label class="form-check-label" for="dropdownCheck">
+                                                    @item2.Replace("\r\n", "")
+                                                </label>
+                                            </div>
+                                        </a>
+                                </text>
+                                xr++;
+                            }
+                            listA = true;
                         }
-                        listB = true;
-                    }
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    單價
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <div class="form-group">
-                        <a class="dropdown-item" href="#" onclick="cl(`P1`)">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="NTD.5,000以下" id="P1"
-                                       onclick="bt1(this.value,this.id+1,this.id)">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    NTD.5,000以下
-                                </label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#" onclick="cl(`P2`)">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="NTD.5,000~50,000" id="P2"
-                                       onclick="bt1(this.value,this.id+1,this.id)">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    NTD.5,000~50,000
-                                </label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#" onclick="cl(`P3`)">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="NTD.50,000~200,000" id="P3"
-                                       onclick="bt1(this.value,this.id+1,this.id)">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    NTD.50,000~200,000
-                                </label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#" onclick="cl(`P4`)">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="NTD.200,000~1,000,000"
-                                       id="P4" onclick="bt1(this.value,this.id+1,this.id)">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    NTD.200,000~1,000,000
-                                </label>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#" onclick="cl(`P5`)">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input d-none" value="NTD.1,000,000以上" id="P5"
-                                       onclick="bt1(this.value,this.id+1,this.id)">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    NTD.1,000,000以上
-                                </label>
-                            </div>
-                        </a>
+                    <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        材質
+                    </button>
 
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    尺寸
-                </button>
-
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <div class="form-group">
-                        @foreach (var item in Model)
-                        {
-                            if (listC) { break; }
-                            foreach (var item2 in item.AllSize)
-                            {<text>
-                                    <a class="dropdown-item" href="#" onclick="cl(`S@(xr3)`)">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input d-none" value="@(item2.Replace("\r\n", ""))" id="S@(xr3)"
-                                                   onclick="bt1(this.value,this.id+1,this.id)">
-                                            <label class="form-check-label" for="dropdownCheck">
-                                                @item2.Replace("\r\n", "")
-                                            </label>
-                                        </div>
-                                    </a>
-                            </text>
-                            xr3++;
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <div class="form-group">
+                            @foreach (var item in Model)
+                            {
+                                if (listB) { break; }
+                                foreach (var item2 in item.AllMaterial)
+                                {<text>
+                                        <a class="dropdown-item" href="#" onclick="cl(`W@(xr2)`)">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input d-none" value="@(item2.Replace("\r\n", ""))" id="W@(xr2)"
+                                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                                <label class="form-check-label" for="dropdownCheck">
+                                                    @item2.Replace("\r\n", "")
+                                                </label>
+                                            </div>
+                                        </a>
+                                </text>
+                                xr2++;
+                            }
+                            listB = true;
                         }
-                        listC = true;
-                    }
+                        </div>
                     </div>
+
+                    <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        單價
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <div class="form-group">
+                            <a class="dropdown-item" href="#" onclick="cl(`P1`)">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input d-none" value="NTD.5,000以下" id="P1"
+                                           onclick="bt1(this.value,this.id+1,this.id)">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        NTD.5,000以下
+                                    </label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="cl(`P2`)">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input d-none" value="NTD.5,000~50,000" id="P2"
+                                           onclick="bt1(this.value,this.id+1,this.id)">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        NTD.5,000~50,000
+                                    </label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="cl(`P3`)">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input d-none" value="NTD.50,000~200,000" id="P3"
+                                           onclick="bt1(this.value,this.id+1,this.id)">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        NTD.50,000~200,000
+                                    </label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="cl(`P4`)">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input d-none" value="NTD.200,000~1,000,000"
+                                           id="P4" onclick="bt1(this.value,this.id+1,this.id)">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        NTD.200,000~1,000,000
+                                    </label>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="cl(`P5`)">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input d-none" value="NTD.1,000,000以上" id="P5"
+                                           onclick="bt1(this.value,this.id+1,this.id)">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        NTD.1,000,000以上
+                                    </label>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <button id="btnGroupDrop1" type="button" class="btn btn-brown_me dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        尺寸
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <div class="form-group">
+                            @foreach (var item in Model)
+                            {
+                                if (listC) { break; }
+                                foreach (var item2 in item.AllSize)
+                                {<text>
+                                        <a class="dropdown-item" href="#" onclick="cl(`S@(xr3)`)">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input d-none" value="@(item2.Replace("\r\n", ""))" id="S@(xr3)"
+                                                       onclick="bt1(this.value,this.id+1,this.id)">
+                                                <label class="form-check-label" for="dropdownCheck">
+                                                    @item2.Replace("\r\n", "")
+                                                </label>
+                                            </div>
+                                        </a>
+                                </text>
+                                xr3++;
+                            }
+                            listC = true;
+                        }
+                        </div>
+                    </div>
+                    @*</div>*@
+                    <div id="productcount" style="color:#F2EDD8;font-size:large;" class="d-flex">共54件</div>
                 </div>
-            </div>            
-            <div id="productcount" style="color:#F2EDD8;font-size:large;" class="d-flex">共54件</div>
-        </div>
-        <div class="d-flex" style="align-content:center">
-            <div id=Nulldiv class="d-flex"></div>
-            <button onclick="bclean()" class="btn btn-light Y_yellow d-none" id="shine" style="border-color:#A7674C;border-width:3px;border-radius:10px;">清除所有選項</button>
+                <div class="d-flex" style="align-content:center">
+                    <div id=Nulldiv class="d-flex" style="border-radius:10px"></div>
+                    <button onclick="bclean()" class="btn btn-light Y_yellow d-none" id="shine" style="border-color:#A7674C;border-width:3px;border-radius:10px;">清除所有選項</button>
+                </div>
+            </div>
         </div>
         <!-- 篩選器尾 -->
+
+
+
+
+
+
         <div class="row ">
             @foreach (var item in Model)
             {
                 <div class=" col-12 col-md-6 col-xl-3 thisisnotselected @(item.pPriceGroup.Replace("\r\n", "")) @(item.psSize.Replace("\r\n", "")) @(item.psMaterial.Replace("\r\n", "")) @(item.psCategory.Replace("\r\n", "")) product" id="product@(item.ProductId)">
-                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId }) " style="text-decoration:none;align-content:center">         
-                            <img src="@Url.Content(item.epsImage)" class="img-fluid" alt="..." style="height:400px;width:255px"/>
-                            <div class="Y_productInfo">
-                                <h4>
-                                    <b>@Html.DisplayFor(modelItem => item.pName)</b>
-                                </h4> 
-                                <h5>
-                                    @*<b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>*@
-                                    <b>NTD$ @((int)item.pPrice)</b>
-                                </h5>
-                            </div>
-                        
+                    <a href="@Url.Action("產品細節","Customer", new { ProductId = item.ProductId }) " style="text-decoration:none;align-content:center">
+                        <img src="@Url.Content(item.epsImage)" class="img-fluid" alt="..." style="height:400px;width:255px" />
+                        <div class="Y_productInfo">
+                            <h4>
+                                <b>@Html.DisplayFor(modelItem => item.pName)</b>
+                            </h4>
+                            <h5>
+                                @*<b>NTD$ @Html.DisplayFor(modelItem => item.pPrice)</b>*@
+                                <b>NTD$ @((int)item.pPrice)</b>
+                            </h5>
+                        </div>
+
                     </a>
                 </div>
             }
         </div>
-
-
     </div>
 
-      
+
     <script type="text/javascript">
         (function setname() {
             var x = document.getElementsByClassName("form-check-input");
@@ -655,6 +661,6 @@
             shine.css("display", "block");
         }
 
-        
+
     </script>
 </content>
