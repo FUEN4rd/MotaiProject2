@@ -89,6 +89,8 @@ namespace MotaiProject.ViewModels
         public string ProductNum { get; set; }
         [DisplayName("產品名稱")]
         public string ProductName { get; set; }
+        [DisplayName("產品單價")]
+        public decimal ProductPrice { get; set; }
         [DisplayName("產品數量")]
         public int oProductQty { get; set; }
         [DisplayName("備註")]
