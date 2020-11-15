@@ -195,11 +195,124 @@ namespace MotaiProject.Models
                 {
                     Order.htmlName = "tr_hidden3";
                 }
+                List<AccountOrderDetailViewModel> detailViewModels = new List<AccountOrderDetailViewModel>();
+                List<tOrderDetail> detailLists = dbContext.tOrderDetails.Where(od => od.oOrderId == item.OrderId).ToList();
+                foreach(tOrderDetail itemdetail in detailLists)
+                {
+                    AccountOrderDetailViewModel detail = new AccountOrderDetailViewModel();
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId == itemdetail.oProductId).FirstOrDefault();
+                    detail.ProductNum = product.pNumber;
+                    detail.ProductName = product.pName;
+                    detail.ProductPrice = product.pPrice;
+                    detail.oProductQty = itemdetail.oProductQty;
+                    detail.oNote = itemdetail.oNote;
+                    detailViewModels.Add(detail);
+                }
+                Order.orderDetailViews = detailViewModels;
                 orderlist.Add(Order);
             }
             return orderlist;
         }
 
+        public List<OrderViewModel> GetOrderAllByEmp(int EmployeeId)
+        {
+            List<tOrder> order = dbContext.tOrders.Where(o => o.oEmployeeId == EmployeeId).ToList();
+            List<OrderViewModel> orderlist = new List<OrderViewModel>();
+            foreach (tOrder item in order)
+            {
+                OrderViewModel Order = new OrderViewModel();
+                Order.oAddress = item.oAddress;
+                Order.oCheck = item.oCheck;
+                if (item.oCheckDate != null)
+                {
+                    Order.oCheckDate = item.oCheckDate.Value.Date;
+                }
+
+
+                Order.oDate = item.oDate.Date;
+                //if(item.oDeliverDate)
+                //Order.oDeliverDate = item.oDeliverDate.Value.Date;
+                Order.OrderId = item.OrderId;
+
+                Order.sWarehouseName = item.tWarehouseName.WarehouseName;
+                Order.seName = item.tEmployee.eName;
+                Order.scName = item.tCustomer.cName;
+                var note = item.cNote;
+                if (note != null)
+                {
+                    if (note.Length > 10)
+                    {
+                        Order.cNote = note.Substring(0, 10) + "...";
+                    }
+                    else
+                    {
+                        Order.cNote = note;
+                    }
+                }
+                //變數 - 觀察付了多少錢
+                var receivedMoney = from tP in dbContext.tOrderPays
+                                    where tP.oOrderId == item.OrderId
+                                    select tP.oPayment;
+                //已收到
+                int receivedTotal = 0;
+                foreach (var receivedM in receivedMoney)
+                {
+                    receivedTotal = (int)receivedM + receivedTotal;
+                }
+
+                Order.received = receivedTotal;
+                //應收款
+                var receivableMoney = from tp in dbContext.tOrderDetails
+                                      where tp.oOrderId == item.OrderId
+                                      select tp.oProductQty * tp.tProduct.pPrice;
+                //全額
+                int receivableTotal = 0;
+
+                foreach (var receivableM in receivableMoney)
+                {
+                    receivableTotal += (int)receivableM;
+                }
+                //折扣
+                if (item.oPromotionId != null)
+                {
+                    Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
+                    receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
+                }
+
+                Order.receivable = receivableTotal;
+                //應付款額-收款
+                var surplus = receivableTotal - receivedTotal;
+                Order.surplus = surplus;
+                if (item.oCheck != null)
+                {
+                    Order.htmlName = "tr_hidden1";
+                }
+                else if (surplus <= 0)
+                {
+                    Order.htmlName = "tr_hidden2";
+                }
+                else
+                {
+                    Order.htmlName = "tr_hidden3";
+                }
+                List<AccountOrderDetailViewModel> detailViewModels = new List<AccountOrderDetailViewModel>();
+                List<tOrderDetail> detailLists = dbContext.tOrderDetails.Where(od => od.oOrderId == item.OrderId).ToList();
+                foreach (tOrderDetail itemdetail in detailLists)
+                {
+                    AccountOrderDetailViewModel detail = new AccountOrderDetailViewModel();
+                    tProduct product = dbContext.tProducts.Where(p => p.ProductId == itemdetail.oProductId).FirstOrDefault();
+                    detail.ProductNum = product.pNumber;
+                    detail.ProductName = product.pName;
+                    detail.ProductPrice = product.pPrice;
+                    detail.oProductQty = itemdetail.oProductQty;
+                    detail.oNote = itemdetail.oNote;
+                    detailViewModels.Add(detail);
+                }
+                Order.orderDetailViews = detailViewModels;
+                orderlist.Add(Order);
+            }
+            return orderlist;
+        }
 
         public OrderViewModel poGetOrderbyId(int Id)
         {

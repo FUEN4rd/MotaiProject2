@@ -104,7 +104,6 @@
 <script>
     
     $(document).ready(function () {
-        var table = document.getElementById("table");
         var check1 = document.getElementById("alreadyCheck");
         var check2 = document.getElementById("unCheck");
         var check3 = document.getElementById("unFinish");
@@ -121,7 +120,6 @@
         var unFinishC = hidden3.length;
         $("#unFinishC").text(unFinishC);
 
-        for (let i = 0; i < table.rows.length; i++) {
             check1.addEventListener('change', function (event) {
                 //var hidden1 = document.getElementsByName("tr_hidden1")
                 for (let i = 0; i < hidden1.length; i++) {
@@ -154,7 +152,6 @@
                     }
                 }
             });
-        }
     });
 
 

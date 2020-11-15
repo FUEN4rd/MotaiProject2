@@ -161,10 +161,15 @@ namespace MotaiProject.Controllers
         }
 
         private OrderRespoitory orderRespoitory = new OrderRespoitory();
-        public ActionResult 會計查詢()
+        public ActionResult 訂單查詢()
         {
+            if (Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] == null)
+            {
+                return RedirectToAction("員工登入", "Employee");
+            }
+            tEmployee employee = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
             List<OrderViewModel> CheckOrder = new List<OrderViewModel>();
-            CheckOrder = orderRespoitory.GetOrderAll();
+            CheckOrder = orderRespoitory.GetOrderAllByEmp(employee.EmployeeId);
             return View(CheckOrder);
         }
 

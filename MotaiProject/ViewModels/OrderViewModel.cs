@@ -255,9 +255,25 @@ namespace MotaiProject.ViewModels
         public string ProductNum { get; set; }
         [DisplayName("產品名稱")]
         public string ProductName { get; set; }
+        [DisplayName("售價")]
+        public decimal ProductPrice { get; set; }
         [DisplayName("產品數量")]
         public int oProductQty { get; set; }
         [DisplayName("備註")]
         public string oNote { get; set; }
+    }
+
+    public class BusinessOrderDetailViewModel
+    {
+        [DisplayName("訂單編號")]
+        public int OrderId { get; set; }
+        [DisplayName("產品編號")]
+        public string ProductNum { get; set; }
+        [DisplayName("產品名稱")]
+        public string ProductName { get; set; }
+        [DisplayName("產品數量")]
+        public int ProductQty { get; set; }
+        [DisplayName("備註")]
+        public string Note { get; set; }
     }
 }

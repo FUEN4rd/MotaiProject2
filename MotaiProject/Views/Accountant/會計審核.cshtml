@@ -11,11 +11,10 @@
         border-color: #FCD492;
         border-width: 2px;
         border-style: solid;
-        padding: 10px;
-        margin: 10px;
-        width: 250px;
+        padding:10px;
+        margin:10px;
+        width:250px;
     }
-
     .Detail_Account_border {
         border-radius: 10px;
         border-color: #FCD492;
@@ -23,7 +22,7 @@
         border-style: solid;
         padding: 10px;
         margin: 10px;
-        width: 400px;
+        width: 350px;
     }
 </style>
 <h2>審核訂單</h2>
@@ -54,133 +53,138 @@
             @Html.DisplayNameFor(model => model.scName)：
             @Html.DisplayFor(model => model.scName)
         </div>
+
+        <div style="display:flex;justify-content:space-between">
+            <div class="Detail_Account_border">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductNum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductPrice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oProductQty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oNote)
+                        </th>
+                    </tr>
+                    @foreach(var item in Model.orderDetailViews)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.ProductNum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.ProductPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.oProductQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.oNote)
+                        </td>
+                    </tr>
+                    }
+                </table>
+            </div>
+            <div class="Y_Account_border">
+                <div>
+                    @Html.DisplayNameFor(model => model.received)：
+                    @Html.DisplayFor(model => model.received)
+                </div>
+                <hr />
+                <div>
+                    @Html.DisplayNameFor(model => model.cash)：
+                    @Html.DisplayFor(model => model.cash)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.card)：
+                    @Html.DisplayFor(model => model.card)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.voucher)：
+                    @Html.DisplayFor(model => model.voucher)
+                </div>
+            </div>
+            <div class="Y_Account_border">
+                <div>
+                    @Html.DisplayNameFor(model => model.receivable)：
+                    @Html.DisplayFor(model => model.receivable)
+                </div>
+                <hr />
+                <div>
+                    @Html.DisplayNameFor(model => model.originalPrice)：
+                    @Html.DisplayFor(model => model.originalPrice)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.pDiscount)：
+                    @Html.DisplayFor(model => model.pDiscount)
+                </div>
+                @{ if (Model.PromotionName != null)
+                    {
+                        <div>
+                            @Html.DisplayNameFor(model => model.PromotionName)：
+                            @Html.DisplayFor(model => model.PromotionName)
+                        </div>
+                    }
+                    else
+                    {
+                        <div>無參與折扣活動</div>
+                    }}
+            </div>
+        </div>
     </div>
     <a class="btn btn-danger" data-toggle="modal" data-target="#checkOk" style="width:90px;height:90px;border-radius:45px;display:flex;align-items:center;justify-content:center" id="checkOkfunction">
         審核
     </a>
 </div>
-
-<div style="display:flex;justify-content:space-between">
-    <div class="Detail_Account_border">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductNum)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oProductQty)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oNote)
-                </th>
-            </tr>
-            @foreach (var item in Model.orderDetailViews)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.ProductNum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.oProductQty)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.oNote)
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-    <div class="Y_Account_border">
-        <div>
-            @Html.DisplayNameFor(model => model.received)：
-            @Html.DisplayFor(model => model.received)
-        </div>
-        <hr />
-        <div>
-            @Html.DisplayNameFor(model => model.cash)：
-            @Html.DisplayFor(model => model.cash)
-        </div>
-        <div>
-            @Html.DisplayNameFor(model => model.card)：
-            @Html.DisplayFor(model => model.card)
-        </div>
-        <div>
-            @Html.DisplayNameFor(model => model.voucher)：
-            @Html.DisplayFor(model => model.voucher)
-        </div>
-    </div>
-    <div class="Y_Account_border">
-        <div>
-            @Html.DisplayNameFor(model => model.receivable)：
-            @Html.DisplayFor(model => model.receivable)
-        </div>
-        <hr />
-        <div>
-            @Html.DisplayNameFor(model => model.originalPrice)：
-            @Html.DisplayFor(model => model.originalPrice)
-        </div>
-        <div>
-            @Html.DisplayNameFor(model => model.pDiscount)：
-            @Html.DisplayFor(model => model.pDiscount)
-        </div>
-        @{ if (Model.PromotionName != null)
-            {
-                <div>
-                    @Html.DisplayNameFor(model => model.PromotionName)：
-                    @Html.DisplayFor(model => model.PromotionName)
+        <!-- Modal -->
+        <div class="modal fade" id="checkOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">審核</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        確認審核，剩餘為零
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        @*<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:location.href='@Url.Action("會計查詢","Accountant")'" id="orderCheck">確認</button>*@
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="orderCheck">確認</button>
+                    </div>
                 </div>
-            }
-            else
-            {
-                <div>無參與折扣活動</div>
-            }}
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="checkOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">審核</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                確認審核，剩餘為零
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                @*<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:location.href='@Url.Action("會計查詢","Accountant")'" id="orderCheck">確認</button>*@
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="orderCheck">確認</button>
             </div>
         </div>
-    </div>
-</div>
-<div>
-    @Html.ActionLink("回上一頁", "會計查詢")
-</div>
-
-<script>
+        <div>
+            @Html.ActionLink("回上一頁", "會計查詢")
+        </div>
+    
+    <script>
         $("#orderCheck").click(function () {
                     $.ajax({
                     url: "@Url.Action("orderCheck", "Accountant")",
                     type: "POST",
                     data: { "Id":@id},
-                        success: function (data) {
+                        success: function (data) {                                                           
                             alert(data.msg);
                             onSuccess(data.url);
-                        }
+                        }                                                                             
                         });
         });
         var onSuccess = function (url) {
             window.location.href = url;
         }
-</script>
+    </script>
