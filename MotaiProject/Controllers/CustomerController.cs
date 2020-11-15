@@ -112,13 +112,13 @@ namespace MotaiProject.Controllers
                     if (code == TempData["codecode"].ToString())
                     {
                         Session[CSession關鍵字.SK_LOGINED_CUSTOMER] = d資料確認;
-                        return Json(new { msg = "登入成功",url = Url.Action("首頁", "Customer") });
+                        return Json(new { result = true, msg = "登入成功",url = Url.Action("首頁", "Customer") });
                     }
-                    return Json(new { msg = "驗證碼錯誤" });
+                    return Json(new { result = false,msg = "驗證碼錯誤" });
                 }
-                return Json(new { msg = "帳號或密碼有誤" });
+                return Json(new { result = false, msg = "帳號或密碼有誤" });
             }
-            return Json(new { msg = "請輸入驗證碼" });
+            return Json(new { result = false, msg = "請輸入驗證碼" });
         }
 
         [HttpPost]

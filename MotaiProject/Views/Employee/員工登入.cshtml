@@ -38,7 +38,7 @@
         </div>
     </div>
     <div style="display:flex; justify-content:center">
-        <input type="submit" class="btn btn-primary" style="width:140px;height:50px;" onclick="checklogin()" value="登入">
+        <input type="submit" class="btn btn-primary" style="width:140px;height:50px;" onclick="checklogin()" id="" value="登入">
     </div>
 </div>
 
@@ -58,10 +58,19 @@
             data: { "e登入資料": emplogin },
             success: function (data) {
                 alert(data.msg);
-                onSuccess(data.url);
+                if (data.result == true) {
+                    onSuccess(data.url);
+                }   
             }
         });
     };
+
+    $('body').keydown(function () {
+        if (event.keyCode == 13) {
+            //enter 键值 为13
+            checklogin();
+        };
+    });
 
     var onSuccess = function (url) {
         window.location.href = url;

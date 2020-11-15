@@ -554,10 +554,19 @@
                             data: { "c登入資料": customerlogin },
                             success: function (data) {
                                 alert(data.msg);
-                                onSuccess(data.url);
+                                if (data.result == true) {
+                                    onSuccess(data.url);
+                                }                             
                             }
                         });
                     };
+
+                    $('body').keydown(function () {
+                        if (event.keyCode == 13) {
+                            //enter 键值 为13
+                            checklogin();
+                        };
+                    });
 
                     var onSuccess = function (url) {
                         window.location.href = url;

@@ -59,22 +59,22 @@ namespace MotaiProject.Controllers
                 switch (d資料確認.eBranch)
                 {
                     case 1:
-                        return Json(new { msg = "登入成功", url = Url.Action("Boss首頁", "Boss") });
+                        return Json(new { result = true, msg = "登入成功", url = Url.Action("Boss首頁", "Boss") });
                     case 2:
-                        return Json(new { msg = "登入成功", url = Url.Action("Business首頁", "Business") });
+                        return Json(new { result = true, msg = "登入成功", url = Url.Action("Business首頁", "Business") });
                     case 3:
-                        return Json(new { msg = "登入成功", url = Url.Action("Accountant首頁", "Accountant") });
+                        return Json(new { result = true, msg = "登入成功", url = Url.Action("Accountant首頁", "Accountant") });
                     case 4:
-                        return Json(new { msg = "登入成功", url = Url.Action("People首頁", "People") });
+                        return Json(new { result = true, msg = "登入成功", url = Url.Action("People首頁", "People") });
                     case 5:
-                        return Json(new { msg = "登入成功", url = Url.Action("Commodity首頁", "Commodity") });
+                        return Json(new { result = true, msg = "登入成功", url = Url.Action("Commodity首頁", "Commodity") });
                     default:
-                        return Json(new { msg = "帳號或密碼有誤", url = Url.Action("員工首頁", "Employee") });
+                        return Json(new { result = true, msg = "帳號或密碼有誤", url = Url.Action("員工首頁", "Employee") });
                 }
             }
             else
             {
-                return Json(new { msg = "帳號或密碼有誤", url = Url.Action("員工首頁", "Employee") });
+                return Json(new { result = false, msg = "帳號或密碼有誤" });
             }
         }
 
