@@ -322,21 +322,21 @@ namespace MotaiProject.Controllers
                 )
             {
                 if (newMember.cPassword.Length < 6 && newMember.cAccount.Length < 6)
-                { return Json(new { msg = "密碼及帳號長度需介於6~12字元" }); }
+                { return Json(new { result = false, msg = "密碼及帳號長度需介於6~12字元" }); }
 
                 if (newMember.cPassword != newMember.cConfirmPassword)
-                {return Json(new { msg = "密碼及確認密碼必須相同" });}
+                {return Json(new { result = false, msg = "密碼及確認密碼必須相同" });}
 
                 List<tCustomer> custo = dbContext.tCustomers.ToList();
                 foreach (var item in custo)
                 {
                     if (item.cAccount == newMember.cAccount)
                     {
-                        return Json(new { msg = "帳號已被註冊" });
+                        return Json(new { result = false, msg = "帳號已被註冊" });
                     }
                     else if (item.cEmail == newMember.cEmail)
                     {
-                        return Json(new { msg = "信箱已被使用" });
+                        return Json(new { result = false, msg = "信箱已被使用" });
                     }
                 }
                 tCustomer newmember = new tCustomer();
@@ -350,9 +350,9 @@ namespace MotaiProject.Controllers
                 newmember.cEmail = newMember.cEmail;
                 dbContext.tCustomers.Add(newmember);
                 dbContext.SaveChanges();
-                return Json(new { msg = "註冊成功", url = Url.Action("首頁", "Customer") });
+                return Json(new { result = true, msg = "註冊成功", url = Url.Action("首頁", "Customer") });
             }     
-            return Json(new {msg = "帳號、密碼、姓名、手機、地址及信箱必須填寫" });
+            return Json(new { result = false, msg = "帳號、密碼、姓名、手機、地址及信箱必須填寫" });
         }
 
         public ActionResult 忘記密碼()
