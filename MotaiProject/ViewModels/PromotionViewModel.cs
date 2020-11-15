@@ -75,9 +75,9 @@ namespace MotaiProject.ViewModels
         public int PromotionId { get; set; }
         [DisplayName("活動名稱")]
         public string PromotionName { get; set; }
-        [DisplayName("條件金額")]
+        [DisplayName("條件")]
         public string pCondition { get; set; }
-        [DisplayName("折扣金額")]
+        [DisplayName("折扣")]
         public string pDiscount { get; set; }
         [DisplayName("折扣碼")]
         public string pDiscountCode { get; set; }
@@ -88,7 +88,7 @@ namespace MotaiProject.ViewModels
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime pPromotionDeadline { get; set; }
 
-        [DisplayName("消息圖片")]
+        [DisplayName("圖片")]
         public string pADimage { get; set; }
         [DisplayName("上傳圖片")]
         public HttpPostedFileBase upLoadimage { get; set; }

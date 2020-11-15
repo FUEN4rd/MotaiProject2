@@ -275,6 +275,8 @@ namespace MotaiProject.Models
                 //折扣
                 if (item.oPromotionId != null)
                 {
+                    tPromotion promotion = dbContext.tPromotions.Where(p => p.PromotionId == item.oPromotionId).FirstOrDefault();
+                    Order.PromotionName = promotion.PromotionName;
                     Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
                     receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
                 }

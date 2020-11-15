@@ -64,14 +64,13 @@ namespace MotaiProject.ViewModels
         public int dEmployeeId { get; set; }
         [DisplayName("日期")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime dDate { get { return DateTime.Now; } set { } }
+        public DateTime dDate { get; set; }
         [DisplayName("天氣")]
         public string dWeather { get; set; }
-        [DisplayName("備註")]
+        [DisplayName("日誌內容")]
         public string dDiaryNote { get; set; }
-        [DisplayName("門市")]
         public int dWarehouseNameId { get; set; }
-        [DisplayName("門市名稱")]
+        [DisplayName("門市")]
         public string dWarehouseName { get; set; }
 
         public IEnumerable<SelectListItem> warehouses { get; set; }
