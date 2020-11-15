@@ -15,6 +15,15 @@
         margin:10px;
         width:250px;
     }
+    .Detail_Account_border {
+        border-radius: 10px;
+        border-color: #FCD492;
+        border-width: 2px;
+        border-style: solid;
+        padding: 10px;
+        margin: 10px;
+        width: 350px;
+    }
 </style>
 <h2>審核訂單</h2>
 <hr />
@@ -46,6 +55,41 @@
         </div>
 
         <div style="display:flex;justify-content:space-between">
+            <div class="Detail_Account_border">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductNum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oProductQty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oNote)
+                        </th>
+                    </tr>
+                    @foreach(var item in Model.orderDetailViews)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.ProductNum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.oProductQty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.oNote)
+                        </td>
+                    </tr>
+                    }
+                </table>
+            </div>
             <div class="Y_Account_border">
                 <div>
                     @Html.DisplayNameFor(model => model.received)：
