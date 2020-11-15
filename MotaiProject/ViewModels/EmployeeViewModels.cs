@@ -67,7 +67,7 @@ namespace MotaiProject.ViewModels
         public DateTime dDate { get; set; }
         [DisplayName("天氣")]
         public string dWeather { get; set; }
-        [DisplayName("日誌內容")]
+        [DisplayName("內容")]
         public string dDiaryNote { get; set; }
         public int dWarehouseNameId { get; set; }
         [DisplayName("門市")]

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/Layoutbusiness.cshtml";
 }
 
-<h2>工作日誌</h2>
+<h2>@Html.DisplayFor(model=>Model.FirstOrDefault().eName) 工作日誌</h2>
 
 <p>
     @Html.ActionLink("新增", "新增日誌")
@@ -17,9 +17,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.dDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.eName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.dWeather)
@@ -41,10 +38,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.dDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.eName)
-            </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.dWeather)
             </td>
