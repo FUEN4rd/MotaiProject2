@@ -162,53 +162,6 @@
         </div>
         i++;
     }
-    @*<tbody id="table">
-            @foreach (var item in Model)
-            {
-                <tr name="@item.htmlName">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.oDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sWarehouseName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.seName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.scName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.receivable)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.received)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.surplus)
-                    </td>
-                    <td>
-                        @if (item.oCheck != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.oCheckDate)
-                            <div>已審核</div>
-                        }
-                        else if (item.surplus <= 0)
-                        {
-                            <div>待審核</div>
-                        }
-                        else
-                        {
-                            <div>未完成</div>
-                        }
-                    </td>
-                </tr>
-            }
-
-        </tbody>*@
 </div>
 <script>
 

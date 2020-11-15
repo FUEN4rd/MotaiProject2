@@ -582,7 +582,7 @@ namespace MotaiProject.Controllers
             }
             return RedirectToAction("購物車清單");
         }
-        //訂單
+        //客戶看訂單
         public ActionResult 過往訂單()
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
@@ -603,8 +603,10 @@ namespace MotaiProject.Controllers
                     foreach (var itemDetail in orderdetails)
                     {
                         CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
-                        orderdetail.ProductNum = db.tProducts.Where(p => p.ProductId==itemDetail.oProductId).FirstOrDefault().pNumber;
-                        orderdetail.ProductName = db.tProducts.Where(p => p.ProductId==itemDetail.oProductId).FirstOrDefault().pName;
+                        tProduct product = db.tProducts.Where(p => p.ProductId == itemDetail.oProductId).FirstOrDefault();
+                        orderdetail.ProductNum = product.pNumber;
+                        orderdetail.ProductName = product.pName;
+                        orderdetail.ProductPrice = product.pPrice;
                         orderdetail.oProductQty = itemDetail.oProductQty;
                         orderdetail.oNote = itemDetail.oNote;
                         OrderDetailList.Add(orderdetail);

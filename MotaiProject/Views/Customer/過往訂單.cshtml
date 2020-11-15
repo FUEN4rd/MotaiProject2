@@ -3,45 +3,97 @@
 @{
     ViewBag.Title = "客戶看訂單";
     Layout = "~/Views/Shared/_Layout登入.cshtml";
+    int i = 0;
 }
 
 <h2>客戶看訂單</h2>
+<div class="accordion" id="accordionExample">
+    <div class="container" style="margin-left:-30px;width:68vw">
+        <table class="table" style="text-align:center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.oDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WarehouseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cNote)
+                </th>
+            </tr>
+        </table>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="card" style="padding:0px">
+            <div class="card-header" id="heading@(i)" style="padding:0px">
+                <div class="btn btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px">
+                    <table class="table" text-align:center>
+                        <tr>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.oDate)
+                            </td>
+                            <td style="width:100px">
+                                @Html.DisplayFor(modelItem => item.WarehouseName)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.EmployeeName)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.cNote)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.oDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WarehouseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cNote)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.oDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WarehouseName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cNote)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+            <div id="collapse@(i)" class="collapse hide" aria-labelledby="heading@(i)" data-parent="#accordionExample">
+                <div class="card-body" style="width:100%">
+                    <table class="table text-dark" style="text-align:center">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().ProductNum)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().ProductName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().ProductPrice)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().oProductQty)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().oNote)
+                            </th>
+                        </tr>
+                        @foreach (var itemdetail in item.CustomerOrderDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductNum)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.ProductPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.oProductQty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemdetail.oNote)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        i++;
+    }
+</div>
