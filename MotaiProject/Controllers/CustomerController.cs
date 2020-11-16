@@ -72,6 +72,7 @@ namespace MotaiProject.Controllers
                 {
                     npv.PromotionDescription = items.PromotionDescription;
                 }
+                npv.PromotionName = items.PromotionName;
                 npv.pADimage = items.pADimage;
                 npv.pPromotionPostDate = items.pPromotionPostDate;               
                 npv.PromotionId = items.PromotionId;
