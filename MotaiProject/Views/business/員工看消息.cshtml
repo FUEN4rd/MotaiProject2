@@ -22,7 +22,7 @@
 <button class="btn btn-primary" style="background-color:white">
     @Html.ActionLink("新增", "新增消息")
 </button>
-<table class="table order-table">
+<table class="table order-table table-hover"  style="text-align:center">
     <thead>
         <tr>
             <th>
@@ -37,8 +37,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PromotionDescription)
             </th>
-
-
             <th>
                 @Html.DisplayNameFor(model => model.pCondition)
             </th>
