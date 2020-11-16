@@ -333,11 +333,11 @@ namespace MotaiProject.Controllers
                 {
                     if (item.cAccount == newMember.cAccount)
                     {
-                        return Json(new { result = false, msg = "帳號已被註冊" });
+                        return Json(new { result = false, msg = "此帳號已被註冊" });
                     }
                     else if (item.cEmail == newMember.cEmail)
                     {
-                        return Json(new { result = false, msg = "信箱已被使用" });
+                        return Json(new { result = false, msg = "此信箱已被使用" });
                     }
                 }
                 tCustomer newmember = new tCustomer();
@@ -384,26 +384,67 @@ namespace MotaiProject.Controllers
             return View(customer);
         }
         [HttpPost]
-        public ActionResult 修改會員資料(MemberViewModel member)
+        public JsonResult 修改會員資料(MemberViewModel oldmember)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                MotaiDataEntities db = new MotaiDataEntities();
-                tCustomer cust = db.tCustomers.Find(customer.CustomerId);
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tCustomer cust = dbContext.tCustomers.Find(customer.CustomerId);
+                List<tCustomer> custList = dbContext.tCustomers.ToList();
                 if (cust != null)
                 {
-                    cust.cName = member.cName;
-                    cust.cTelePhone = member.cTelePhone;
-                    cust.cGUI = member.cGUI;
-                    cust.cEmail = member.cEmail;
-                    cust.cAddress = member.cAddress;
-                    db.SaveChanges();
+                    foreach (var item in custList)
+                    {
+                        if (item.cCellPhone == oldmember.cCellPhone)
+                        {
+                            if (cust.cCellPhone != oldmember.cCellPhone)
+                            {
+                                return Json(new { result = false, msg = "此手機號碼已被註冊" });
+                            }
+                            else if (item.cEmail == oldmember.cEmail)
+                            {
+                                if (cust.cCellPhone != oldmember.cCellPhone)
+                                {
+                                    return Json(new { result = false, msg = "此信箱已被註冊" });
+                                }
+                                else
+                                {
+                                    cust.cName = oldmember.cName;
+                                    cust.cTelePhone = oldmember.cTelePhone;
+                                    cust.cGUI = oldmember.cGUI;
+                                    cust.cEmail = oldmember.cEmail;
+                                    cust.cAddress = oldmember.cAddress;
+                                    dbContext.SaveChanges();
+                                    return Json(new { result = true, msg = "此信箱已被註冊", url = Url.Action("會員中心", "Customer") });
+                                }
+                            }
+                        }
+                    }
                 }
-                return RedirectToAction("會員中心");
             }
-            return RedirectToAction("首頁");
+            return Json(new { result = true, msg = "請先登入", url = Url.Action("首頁", "Customer") });
         }
+        //public ActionResult 修改會員資料(MemberViewModel member)
+        //{
+        //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+        //    {
+        //        tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+        //        MotaiDataEntities db = new MotaiDataEntities();
+        //        tCustomer cust = db.tCustomers.Find(customer.CustomerId);
+        //        if (cust != null)
+        //        {
+        //            cust.cName = member.cName;
+        //            cust.cTelePhone = member.cTelePhone;
+        //            cust.cGUI = member.cGUI;
+        //            cust.cEmail = member.cEmail;
+        //            cust.cAddress = member.cAddress;
+        //            db.SaveChanges();
+        //        }
+        //        return RedirectToAction("會員中心");
+        //    }
+        //    return RedirectToAction("首頁");
+        //}
 
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
