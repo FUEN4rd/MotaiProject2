@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
 
-<h2>出貨單建立</h2>
+<h2 onclick="clicktitle()">出貨單建立</h2>
 <form method="post">
     <div class="form-horizontal">
         <h4>StockListViewModel</h4>
@@ -60,7 +60,7 @@
             {
                 <tr>
                     <td>
-                        <input type="radio" name="SelectOrder" value="@Html.DisplayFor(modelItem => item.OrderId)" />
+                        <input id="@item.OrderId" type="radio" name="SelectOrder" value="@Html.DisplayFor(modelItem => item.OrderId)" />
                         @Html.DisplayFor(modelItem => item.OrderId)
                     </td>
                     <td>
@@ -143,8 +143,23 @@
                         "<td>" + Qty + "</td>" +
                         "<td><input type='text' name='ShipProductQty'></td>" +
                         "</tr >");
+                    document.getElementsByName('ShipProductQty')[0].value = 1;
                 }
             }
         });
     })
+</script>
+<script>
+    function clicktitle() {
+        @foreach(var item in Model.ShipShows)
+        {
+        <Text>
+        var X =@item.OrderId;
+        document.getElementById(`${X}`).click();
+        </Text>
+            break;
+        }
+    }
+
+
 </script>

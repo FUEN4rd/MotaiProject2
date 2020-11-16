@@ -90,7 +90,7 @@ namespace MotaiProject.Controllers
             var warehouses = commodityRespoitory.GetWarehouseAll();
             List<SelectListItem> WareList = commodityRespoitory.GetSelectList(warehouses);
             newDiary.warehouses = WareList;
-
+            newDiary.dDate = DateTime.Now;
             return View(newDiary);
         }
         [HttpPost]
