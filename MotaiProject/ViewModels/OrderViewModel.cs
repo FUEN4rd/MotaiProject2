@@ -184,6 +184,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單地址")]
         public string oAddress { get; set; }
         [DisplayName("訂單時間")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime oDate { get; set; }
         [DisplayName("交貨時間")]
         public Nullable<System.DateTime> oDeliverDate { get; set; }

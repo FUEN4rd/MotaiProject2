@@ -12,6 +12,12 @@
     }
 }
 
+<style>
+    .actionlink {
+        text-decoration:none;
+    }
+</style>
+
 <div>
     <h4>@welcome    歡迎登入</h4>
 
@@ -20,9 +26,9 @@
     <h4>權限:   @Emp.tPosition.pPosition</h4>
 
 </div>
-<div class="row">
-    <div class="card" id="collapseExample" style="margin-left:30px;margin-bottom:20px;">
-        <div class="card-body" style="background-color: #F2EDD8">
+<div class="row" style="display:flex;">
+    <div class="card" id="collapseExample"style="margin-right:300px;">
+        <div class="card-body" style="background-color: #F2EDD8;">
             <div>
                 舊密碼
                 <div class="col-md-10 card-text">
@@ -39,8 +45,21 @@
             <p id="warning"></p>
         </div>
     </div>
+    <div class="card" id="collapseExample">
+        <div class="card-body" style="display:inline-grid;justify-content:space-between;background-color: #F2EDD8;">
+            <div>
+                <a href="@Url.Action("出貨單建立","Commodity")"   style="text-decoration:none">新增出貨單</a> 
+            </div>
+            <div>
+                <a href="@Url.Action("進貨單建立","Commodity")" style="text-decoration:none">新增進貨單</a>
+            </div>
+            <div>
+                <a href="@Url.Action("調貨單建立","Commodity")" style="text-decoration:none">產生調貨單</a>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
+    <script>
     var pa = document.querySelectorAll(".form-control");
     //var oldpass = pa[0].value;
     //var checkpass = pa[2].value;
@@ -69,4 +88,4 @@
                 $("#warning").text(data.msg);
         });
     }
-</script>
+    </script>

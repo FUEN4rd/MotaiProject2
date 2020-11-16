@@ -6,6 +6,7 @@
     List<string> L = new List<string>
 {"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
     int datacolor = 0;
+    int datacolor2 = 0;
     string S = "";
     int person = 0;
     string S2 = "";
@@ -149,6 +150,7 @@
             ],
             datasets: [
             @foreach (var item in Model.buyV) {
+
 <Text>
                 {//再改
                     label: '@item.pName',
@@ -161,6 +163,7 @@
                     ],
                 },</Text>
                 datacolor++;
+                if (datacolor == L.Count) { break; }
             }
             ]
         },
@@ -188,16 +191,16 @@
 <Text>
                 {
                     label: '@item.pName',
-                    backgroundColor: '@L[datacolor]',
-                    borderColor: '@L[datacolor]',
+                    backgroundColor: '@L[datacolor2]',
+                    borderColor: '@L[datacolor2]',
                     data: [
 
                      @item.faverCount,
 
                     ],
                 },</Text>
-                datacolor++;
-                if (datacolor == L.Count) { datacolor = 0; }
+                datacolor2++;
+                if (datacolor2 == L.Count) { break; }
             }
             ]
         },
@@ -206,6 +209,7 @@
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
+                        stepSize: 1,
                     }
                 }]
             }
