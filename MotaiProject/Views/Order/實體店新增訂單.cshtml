@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/Layoutbusiness.cshtml";
 }
 
-<h2>新增門市訂單</h2>
+<h2 onclick="clicktitle()">新增門市訂單</h2>
 
 
 @using (Html.BeginForm()) 
@@ -218,5 +218,11 @@
         document.body.appendChild(temp);
         temp.submit();
         return temp;
+    }
+</script>
+<script>
+    function clicktitle() {
+        document.getElementById('cCellphone').value = "0911560846";
+        document.getElementById('oAddress').value = "新北市三重區成功路97號";
     }
 </script>
