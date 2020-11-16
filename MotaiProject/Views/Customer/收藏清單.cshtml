@@ -153,6 +153,7 @@
 
                 @if (Model != null)
                 {
+                    int REA=0;
                     foreach (var item in Model)
                     {
                         <div id="card@(item.fProductId)" class="card  cardrow">
@@ -168,8 +169,19 @@
                       window.onload = collect(@item.fProductId);
                             </script>
                         </div>
+                        REA++;
                     }
+                    if (REA==0)
+                    {
+                    <div style="width:100vw;text-align:center;font-size:30px;color:#F2EDD8;margin-right:-15px">
+                         目前尚未收藏商品
+                    </div>
+                    }
+
+
                 }
+
+
 
         </div>
         @*<div class="container-fluid" style="height:200px">
@@ -183,7 +195,7 @@
             <div class="container">
                 <div class="row">
                     <div class="wrapper">
-                        <h3 style="color:#FCD492">最多人收藏：</h3>
+                        <h3 style="color:#FCD492">收藏榜</h3>
                         <ul class="slides">              
                             @for (int i = 1; i < 11; i++)
                             {
