@@ -94,7 +94,7 @@
 
 
 <div class="container">
-    <table class="table table-light">
+    <table class="table table-light" style="font-size:18px">
         <thead>
             <tr>
                 <th scope="col">
@@ -144,7 +144,7 @@
         </tbody>
     </table>
 
-    <div style="display:inline-grid;color:#F2EDD8">
+    <div style="display:inline-grid;color:#F2EDD8;font-size:18px">
         <div>
             <input type="radio" id="customerAddress" name="Address" value="1">
             <label for="customerAddress">自家住宅</label>
@@ -156,7 +156,7 @@
             @Html.DropDownListFor(model => model.WarehouseNameId, Model.warehouses, "請選擇門市")
         </div>
     </div>
-    <div style="color:#F2EDD8">
+    <div style="color:#F2EDD8;font-size:18px">
         <ul>
             <li>
                 1.本站以您的Email或手機號碼為購物帳號，將以此帳號提供購物及查詢訂單服務。
@@ -166,7 +166,7 @@
             <li> 3.不同帳號的交易紀錄無法移轉。</li>
         </ul>
     </div>
-    <div class="d-flex">
+    <div class="d-flex" style="font-size:18px">
         <div class="d-flex" style="width:60vw;height:20vh;margin:0px">
 
         </div>
@@ -196,7 +196,7 @@
                 </div>
             </div>
             <form method="post" action="@Url.Action("webOrder", "Order")" id="webData">
-                <button id="webCheckout" type="button" class="btn btn-dark" style="position:absolute;right:0px">確定結帳</button>
+                <button id="webCheckout" type="button" class="btn btn-dark" style="position:absolute;right:0px;font-size:18px">確定結帳</button>
             </form>
         </div>
 

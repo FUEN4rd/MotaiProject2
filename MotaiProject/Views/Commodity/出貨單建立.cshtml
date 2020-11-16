@@ -6,15 +6,14 @@
 }
 
 <h2 onclick="clicktitle()">出貨單建立</h2>
-<form method="post">
+<form method="post" action="@Url.Action("出貨單建立","Commodity")">
     <div class="form-horizontal">
-        <h4>StockListViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.sShipSerialValue, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sShipSerialValue, new { htmlAttributes = new { @class = "form-control", @id = "ShipSerialValue" ,@disabled= "disabled" } })
+                @Html.EditorFor(model => model.sShipSerialValue, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sShipSerialValue, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -22,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sShipDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sShipDate, new { htmlAttributes = new { @class = "form-control", @id = "ShipDate" } })
+                @Html.EditorFor(model => model.sShipDate, new { htmlAttributes = new { @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.sShipDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -30,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sShipNote, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sShipNote, new { htmlAttributes = new { @class = "form-control", @id = "ShipNote" } })
+                @Html.EditorFor(model => model.sShipNote, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sShipNote, "", new { @class = "text-danger" })
             </div>
         </div>

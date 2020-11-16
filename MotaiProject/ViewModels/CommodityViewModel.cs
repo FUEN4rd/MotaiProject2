@@ -284,9 +284,10 @@ namespace MotaiProject.ViewModels
     }
     public class ShipCreateModel
     {
-        public int ShipSerialValue { get; set; }
-        public DateTime ShipDate { get; set; }
-        public string ShipNote { get; set; }
+        [DisplayName("出貨單號")]
+        public int sShipSerialValue { get; set; }
+        public DateTime sShipDate { get; set; }
+        public string sShipNote { get; set; }
         public int SelectOrder { get; set; }
         public List<int> WareHouseId { get; set; }
         public List<int> ProductId { get; set; }
