@@ -33,10 +33,10 @@
         color: #A7674C;
     }
 
-    a {
+    /*a {
         color: #F2EDD8;
         text-decoration: none;
-    }
+    }*/
 
         a:hover {
             color: #F2EDD8;
@@ -45,6 +45,8 @@
 
     .Y_email a {
         pointer-events: none;
+        color: #F2EDD8;
+        text-decoration: none;
     }
 
     .Y_memberName_border {
@@ -76,38 +78,43 @@
     }
 
     .btn-Y_yellow {
-        color: #fff;
-        background-color: #007bff;
-        border-color: #007bff;
+        color: #000000;
+        background-color: #FCD492;
+        border-color: #FCD492;
+        height: 38px;
     }
 
         .btn-Y_yellow:hover {
-            color: #fff;
-            background-color: #0069d9;
-            border-color: #0062cc;
+            color: #000000;
+            background-color: #F2EDD8;
+            border-color: #F2EDD8;
         }
 
         .btn-Y_yellow:focus, .btn-Y_yellow.focus {
-            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+            box-shadow: 0 0 0 0.2rem #F2EDD8;
         }
 
         .btn-Y_yellow.disabled, .btn-Y_yellow:disabled {
-            color: #fff;
-            background-color: #007bff;
-            border-color: #007bff;
+            color: #000000;
+            background-color: #FCD492;
+            border-color: #FCD492;
         }
 
         .btn-Y_yellow:not(:disabled):not(.disabled):active, .btn-Y_yellow:not(:disabled):not(.disabled).active,
         .show > .btn-Y_yellow.dropdown-toggle {
             color: #fff;
-            background-color: #0062cc;
-            border-color: #005cbf;
+            background-color: #FCD492;
+            border-color: #FCD492;
         }
 
             .btn-Y_yellow:not(:disabled):not(.disabled):active:focus, .btn-Y_yellow:not(:disabled):not(.disabled).active:focus,
             .show > .btn-Y_yellow.dropdown-toggle:focus {
-                box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+                box-shadow: 0 0 0 0.2rem #F2EDD8;
             }
+
+        .btn-Y_yellow a{
+            color:#000000;
+        }
 </style>
 
 
@@ -181,9 +188,9 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    @Html.ActionLink("修改個人資料", "修改會員資料", new { @class = "btn-Y_yellow", CustomerId = cust.CustomerId, style = "color: #ff0000;" })
-                </div>
+                <button class="btn btn-Y_yellow">
+                    @Html.ActionLink("修改個人資料", "修改會員資料", new { CustomerId = cust.CustomerId })
+                </button>
             </div>
         </div>
         <div>
@@ -192,7 +199,7 @@
                     <div style="display:flex;justify-content:space-between">
                         <div class="Y_member_row">
                             <div class="row Y_row">
-                                <div>
+                                <div style="margin-right:5px">
                                     @Html.DisplayNameFor(model => model.cAccount)：
                                 </div>
 
@@ -205,34 +212,34 @@
                                     @Html.DisplayNameFor(model => model.cPassword)：
                                 </div>
                                 <div>
-                                    <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <button style="font-weight:bold;height:38px;margin-left:5px" class="btn btn-Y_yellow" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         修改密碼
                                     </button>
                                 </div>
                                 <div class="collapse" id="collapseExample">
-                                    <div class="card card-body card-deck"  style="background-color:#A7674C;margin: 10px;">
-                                        <div>
+                                    <div class="card card-body card-deck"  style="background-color:#FCD492;margin: 10px; height:380px;">
+                                        <div style="color:black">
                                             舊密碼
-                                            <div class="col-md-10">
+                                            <div class="col-md-10" >
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "oldpass" } })
                                             </div>
                                         </div>
 
 
-                                        <div>
+                                        <div style="color:black">
                                             新密碼
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "newpass" } })
                                             </div>
                                         </div>
 
-                                        <div>
+                                        <div style="color:black">
                                             確認密碼
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "checkpass" } })
                                             </div>
                                         </div>
-                                        <button class="btn btn-danger" id="changepassword" onclick="customerChangePassword()">修改密碼</button>
+                                        <button class="btn btn-danger" id="changepassword" onclick="customerChangePassword()" style="margin:20px">修改密碼</button>
                                         <p id="warning"></p>
                                     </div>
                                 </div>
