@@ -384,7 +384,7 @@ namespace MotaiProject.Controllers
             return View(customer);
         }
         [HttpPost]
-        public JsonResult 修改會員資料(MemberViewModel oldmember)
+        public JsonResult 修改會員資料(MemberViewModel oldMember)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
@@ -392,36 +392,30 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tCustomer cust = dbContext.tCustomers.Find(customer.CustomerId);
                 List<tCustomer> custList = dbContext.tCustomers.ToList();
-                if (cust != null)
+                foreach (var item in custList)
                 {
-                    foreach (var item in custList)
+                    if (item.cCellPhone == oldMember.cCellPhone)
                     {
-                        if (item.cCellPhone == oldmember.cCellPhone)
+                        if (cust.cCellPhone != oldMember.cCellPhone)
                         {
-                            if (cust.cCellPhone != oldmember.cCellPhone)
-                            {
-                                return Json(new { result = false, msg = "此手機號碼已被註冊" });
-                            }
-                            else if (item.cEmail == oldmember.cEmail)
-                            {
-                                if (cust.cCellPhone != oldmember.cCellPhone)
-                                {
-                                    return Json(new { result = false, msg = "此信箱已被註冊" });
-                                }
-                                else
-                                {
-                                    cust.cName = oldmember.cName;
-                                    cust.cTelePhone = oldmember.cTelePhone;
-                                    cust.cGUI = oldmember.cGUI;
-                                    cust.cEmail = oldmember.cEmail;
-                                    cust.cAddress = oldmember.cAddress;
-                                    dbContext.SaveChanges();
-                                    return Json(new { result = true, msg = "此信箱已被註冊", url = Url.Action("會員中心", "Customer") });
-                                }
-                            }
+                            return Json(new { result = false, msg = "此手機號碼已被註冊" });
+                        }
+                    }
+                    else if (item.cEmail == oldMember.cEmail)
+                    {
+                        if (cust.cEmail != oldMember.cEmail)
+                        {
+                            return Json(new { result = false, msg = "此信箱已被註冊" });
                         }
                     }
                 }
+                cust.cName = oldMember.cName;
+                cust.cTelePhone = oldMember.cTelePhone;
+                cust.cGUI = oldMember.cGUI;
+                cust.cEmail = oldMember.cEmail;
+                cust.cAddress = oldMember.cAddress;
+                dbContext.SaveChanges();
+                return Json(new { result = true, msg = "修改成功", url = Url.Action("會員中心", "Customer") });
             }
             return Json(new { result = true, msg = "請先登入", url = Url.Action("首頁", "Customer") });
         }

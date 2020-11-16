@@ -149,7 +149,7 @@
         $.ajax({
             url: "/Customer/修改會員資料",
             type: "POST",
-            data: { "newMember": customersign },
+            data: { "oldMember": customersign },
             success: function (data) {
                 alert(data.msg);
                 if (data.result) {
