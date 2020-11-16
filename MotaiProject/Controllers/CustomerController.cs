@@ -546,7 +546,7 @@ namespace MotaiProject.Controllers
                 {
                     var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
                     int productQty = productRespotiory.GetProductQtyById(ProductId);
-                    if (product != null && productQty > buyQty)
+                    if (product != null && productQty >= buyQty)
                     {
                         tStatu cart = new tStatu();
                         cart.sCustomerId = cust.CustomerId;

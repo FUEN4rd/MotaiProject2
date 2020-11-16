@@ -46,6 +46,9 @@
                 @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().ProductName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().ProductPrice)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.orderDetails.FirstOrDefault().oProductQty)
             </th>
             <th>
@@ -54,20 +57,23 @@
         </tr>
         @foreach (var item in Model.orderDetails)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductNum)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oProductQty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.oNote)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oProductQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oNote)
+            </td>
+        </tr>
         }
     </table>
     <dl class="dl-horizontal">
