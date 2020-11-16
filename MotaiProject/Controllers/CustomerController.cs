@@ -591,30 +591,30 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities db = new MotaiDataEntities();
                 List<tOrder> orders = db.tOrders.Where(o => o.oCustomerId==cust.CustomerId).ToList();
                 List<CustomerOrderViewModel> OrderList = new List<CustomerOrderViewModel>();
-                foreach (var items in orders)
-                {
-                    CustomerOrderViewModel order = new CustomerOrderViewModel();
-                    order.oDate = items.oDate;
-                    order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
-                    order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId==items.oEmployeeId).FirstOrDefault().eName;
-                    order.cNote = items.cNote;
-                    List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId == items.OrderId).ToList();
-                    List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();
-                    foreach (var itemDetail in orderdetails)
+                    foreach (var items in orders)
                     {
-                        CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
-                        tProduct product = db.tProducts.Where(p => p.ProductId == itemDetail.oProductId).FirstOrDefault();
-                        orderdetail.ProductNum = product.pNumber;
-                        orderdetail.ProductName = product.pName;
-                        orderdetail.ProductPrice = product.pPrice;
-                        orderdetail.oProductQty = itemDetail.oProductQty;
-                        orderdetail.oNote = itemDetail.oNote;
-                        OrderDetailList.Add(orderdetail);
+                        CustomerOrderViewModel order = new CustomerOrderViewModel();
+                        order.oDate = items.oDate;
+                        order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
+                        order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId == items.oEmployeeId).FirstOrDefault().eName;
+                        order.cNote = items.cNote;
+                        List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId == items.OrderId).ToList();
+                        List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();
+                        foreach (var itemDetail in orderdetails)
+                        {
+                            CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
+                            tProduct product = db.tProducts.Where(p => p.ProductId == itemDetail.oProductId).FirstOrDefault();
+                            orderdetail.ProductNum = product.pNumber;
+                            orderdetail.ProductName = product.pName;
+                            orderdetail.ProductPrice = product.pPrice;
+                            orderdetail.oProductQty = itemDetail.oProductQty;
+                            orderdetail.oNote = itemDetail.oNote;
+                            OrderDetailList.Add(orderdetail);
+                        }
+                        order.CustomerOrderDetails = OrderDetailList;
+                        OrderList.Add(order);
                     }
-                    order.CustomerOrderDetails = OrderDetailList;
-                    OrderList.Add(order);
-                }
-                return View(OrderList);
+                    return View(OrderList);
             }
             return RedirectToAction("首頁");
         }
