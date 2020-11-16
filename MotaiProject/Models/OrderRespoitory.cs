@@ -13,10 +13,10 @@ namespace MotaiProject.Models
         MotaiDataEntities dbContext = new MotaiDataEntities();
         public int SelectPromotionId(int money,DateTime date)
         {
-            List<tPromotion> promotions = dbContext.tPromotions.OrderByDescending(p => p.pCondition).Where(p=>p.pPromotionDeadline>date&&p.pPromotionStartDate<date).ToList();
+            List<tPromotion> promotions = dbContext.tPromotions.OrderByDescending(p => p.pCondition).Where(p=>p.pPromotionDeadline>=date&&p.pPromotionStartDate<=date&&p.pCondition!=null).ToList();
             foreach(var item in promotions)
             {
-                if (Convert.ToInt32(item.pCondition) <= money && item.pCondition!=null)
+                if (Convert.ToInt32(item.pCondition) <= money)
                 {
                     return item.PromotionId;
                 }
