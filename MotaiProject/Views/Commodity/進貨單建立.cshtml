@@ -13,7 +13,7 @@
     }
 
 </style>
-<h2>進貨單建立</h2>
+<h2 onclick="clicktitle()">進貨單建立</h2>
 
 
 @{
@@ -187,4 +187,11 @@
         window.location.href = url;
     }
 </script>
-
+<script>
+    function clicktitle() {
+        document.getElementById('Vendor').value = "測試";
+        document.getElementById('VendorTel').value = "0912345678";
+        document.getElementById('StockNote').value = "急件";
+        //$("#")
+    }
+</script>
