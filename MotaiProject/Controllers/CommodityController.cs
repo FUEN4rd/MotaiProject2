@@ -500,8 +500,8 @@ namespace MotaiProject.Controllers
                 {
                     tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(item.oProductId)).FirstOrDefault();
                     WareShipChooseViewModel wareChoose = new WareShipChooseViewModel();
-                    wareChoose.WareHouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(itemware.WarehouseId)).FirstOrDefault().WarehouseName;
-                    wareChoose.WareHouseId = itemware.WarehouseId;
+                    wareChoose.WareHouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId.Equals(itemware.WarehouseNameId)).FirstOrDefault().WarehouseName;
+                    wareChoose.WareHouseId = itemware.WarehouseNameId;
                     wareChoose.OrderDetailId = item.oOrderDetailId;
                     wareChoose.ProductId = product.ProductId;
                     wareChoose.ProductNum = product.pNumber;

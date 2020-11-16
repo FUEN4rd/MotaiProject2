@@ -733,6 +733,8 @@
     <Content Include="Views\Order\分期結帳畫面.cshtml" />
     <Content Include="Views\business\訂單查詢.cshtml" />
     <Content Include="Views\Customer\過往訂單.cshtml" />
+    <Content Include="Views\Order\test.cshtml" />
+    <Content Include="Views\Order\orderCredit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
