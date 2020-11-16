@@ -63,6 +63,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("調進倉儲")]
         public int WarehouseIdIn { get; set; }
         [DisplayName("調貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime Date { get; set; }
         [DisplayName("備註")]
         public string tNote { get; set; }
@@ -96,6 +97,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("調進倉儲")]
         public string WareHouseInName { get; set; }
         [DisplayName("調貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime Date { get; set; }
         [DisplayName("備註")]
         public string tNote { get; set; }
@@ -113,6 +115,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
@@ -149,6 +152,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
@@ -167,6 +171,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("聯絡方式")]
         public string sVendorTel { get; set; }
         [DisplayName("進貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
@@ -197,6 +202,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單號")]
         public int sOrderId { get; set; }
         [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
@@ -227,6 +233,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("出貨單號")]
         public int sShipSerialValue { get; set; }
         [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime sShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string sShipNote { get; set; }
@@ -240,6 +247,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("訂單地址")]
         public string oAddress { get; set; }
         [DisplayName("訂單時間")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime oDate { get; set; }
         [DisplayName("審核")]
         public string oCheck { get; set; }
@@ -292,6 +300,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("出貨單號")]
         public int ShipSerialValue { get; set; }
         [DisplayName("出貨日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime ShipDate { get; set; }
         [DisplayName("出貨備註")]
         public string ShipNote { get; set; }

@@ -531,7 +531,7 @@ namespace MotaiProject.Controllers
                     statusQty = productStatus.sProductQty;
                     var product = (new MotaiDataEntities()).tProducts.FirstOrDefault(p => p.ProductId == ProductId);
                     int productQty = productRespotiory.GetProductQtyById(ProductId);
-                    if (product != null && productQty - statusQty > buyQty)
+                    if (product != null && productQty - statusQty >= buyQty)
                     {
                         productStatus.sProductQty += buyQty;
                         db.SaveChanges();

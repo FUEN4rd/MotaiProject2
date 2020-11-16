@@ -56,6 +56,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("付款金額")]
         public decimal oPayment { get; set; }
         [DisplayName("付款日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public int oPayDate { get; set; }
         public int oPayTypeId { get; set; }
         [DisplayName("付款方式")]
