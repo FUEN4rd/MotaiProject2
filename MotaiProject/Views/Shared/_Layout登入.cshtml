@@ -592,8 +592,10 @@
                             data: { "c登入資料": customerlogin },
                             success: function (data) {
                                 alert(data.msg);
-                                if (data.result == true) {
+                                if (data.result) {
                                     onSuccess(data.url);
+                                } else {
+                                    $("#codePicture").attr("src", "/Customer/GetValidateCode/" + new Date().getTime());
                                 }                             
                             }
                         });
