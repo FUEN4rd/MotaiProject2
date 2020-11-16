@@ -458,6 +458,7 @@ namespace MotaiProject.Controllers
             }
             return View(htFeedback);
         }
+        public static WebOrderModel order;
         //網購接受信用卡訂單
         public ActionResult orderCredit()
         {
@@ -522,12 +523,11 @@ namespace MotaiProject.Controllers
                         }
                     }
                     
-                    WebOrderModel Trade = Session[szMerchantTradeNo] as WebOrderModel;
                     //先建訂單
                     tOrder newOrder = new tOrder();
-                    newOrder.oCustomerId = Trade.customer.CustomerId;
-                    newOrder.oDate = Trade.payDate;
-                    newOrder.oAddress = Trade.webpay.shipAddress;
+                    newOrder.oCustomerId = order.customer.CustomerId;
+                    newOrder.oDate = order.payDate;
+                    newOrder.oAddress = order.webpay.shipAddress;
                     newOrder.oWarehouseName = 1;
                     dbContext.tOrders.Add(newOrder);
                     dbContext.SaveChanges();
@@ -535,11 +535,11 @@ namespace MotaiProject.Controllers
                     tOrderPay pay = new tOrderPay();
                     pay.oOrderId = CreateOrder.OrderId;
                     pay.oOrderInstallment = 1;
-                    pay.oPayType = Trade.webpay.payType;
-                    pay.oPayment = Convert.ToInt32(Trade.webpay.totalPay);
-                    pay.oPayDate = Trade.payDate;
+                    pay.oPayType = order.webpay.payType;
+                    pay.oPayment = Convert.ToInt32(order.webpay.totalPay);
+                    pay.oPayDate = order.payDate;
                     dbContext.tOrderPays.Add(pay);
-                    foreach (var item in Trade.boughtList)
+                    foreach (var item in order.boughtList)
                     {
                         tOrderDetail orderDetail = new tOrderDetail();
                         orderDetail.oOrderId = CreateOrder.OrderId;
@@ -764,13 +764,12 @@ namespace MotaiProject.Controllers
                         /* 產生產生訂單 Html Code 的方法 */
                         //string szHtml = String.Empty;
                         enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
-                        WebOrderModel order = new WebOrderModel();
                         order.boughtList = StatuList;
                         order.webpay = payData;
                         order.customer = cust;
                         order.payDate = oPayment.Send.MerchantTradeDate;
-                        string MerchantTradeNoSession = oPayment.Send.MerchantTradeNo.ToString();
-                        Session[MerchantTradeNoSession] = order;
+                        //string MerchantTradeNoSession = oPayment.Send.MerchantTradeNo.ToString();
+                        //Session[MerchantTradeNoSession] = order;
                     }
                 }
                 catch (Exception ex)
