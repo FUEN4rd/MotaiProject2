@@ -625,32 +625,49 @@ namespace MotaiProject.Controllers
             {
                 tCustomer cust = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
                 MotaiDataEntities db = new MotaiDataEntities();
-                List<tOrder> orders = db.tOrders.Where(o => o.oCustomerId==cust.CustomerId).ToList();
+                List<tOrder> orders = db.tOrders.Where(o => o.oCustomerId == cust.CustomerId).ToList();
                 List<CustomerOrderViewModel> OrderList = new List<CustomerOrderViewModel>();
-                    foreach (var items in orders)
+                foreach (var items in orders)
+                {
+                    CustomerOrderViewModel order = new CustomerOrderViewModel();
+                    order.oDate = items.oDate;
+                    order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
+                    order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId == items.oEmployeeId).FirstOrDefault().eName;
+                    order.cNote = items.cNote;
+                    List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId == items.OrderId).ToList();
+                    List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();
+                    int originPrice = 0;
+                    foreach (var itemDetail in orderdetails)
                     {
-                        CustomerOrderViewModel order = new CustomerOrderViewModel();
-                        order.oDate = items.oDate;
-                        order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
-                        order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId == items.oEmployeeId).FirstOrDefault().eName;
-                        order.cNote = items.cNote;
-                        List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId == items.OrderId).ToList();
-                        List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();
-                        foreach (var itemDetail in orderdetails)
-                        {
-                            CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
-                            tProduct product = db.tProducts.Where(p => p.ProductId == itemDetail.oProductId).FirstOrDefault();
-                            orderdetail.ProductNum = product.pNumber;
-                            orderdetail.ProductName = product.pName;
-                            orderdetail.ProductPrice = product.pPrice;
-                            orderdetail.oProductQty = itemDetail.oProductQty;
-                            orderdetail.oNote = itemDetail.oNote;
-                            OrderDetailList.Add(orderdetail);
-                        }
-                        order.CustomerOrderDetails = OrderDetailList;
-                        OrderList.Add(order);
+                        CustomerOrderDetailViewModel orderdetail = new CustomerOrderDetailViewModel();
+                        tProduct product = db.tProducts.Where(p => p.ProductId == itemDetail.oProductId).FirstOrDefault();
+                        orderdetail.ProductNum = product.pNumber;
+                        orderdetail.ProductName = product.pName;
+                        orderdetail.ProductPrice = product.pPrice;
+                        orderdetail.oProductQty = itemDetail.oProductQty;
+                        orderdetail.oNote = itemDetail.oNote;
+                        OrderDetailList.Add(orderdetail);
+                        originPrice += Convert.ToInt32(product.pPrice) * itemDetail.oProductQty;
                     }
-                    return View(OrderList);
+                    if(items.oPromotionId != null)
+                    {
+                        tPromotion promotion = db.tPromotions.Where(p => p.PromotionId == items.oPromotionId).FirstOrDefault();
+                        order.TotalAmount = originPrice - Convert.ToInt32(promotion.pDiscount);
+                    }
+                    else
+                    {
+                        order.TotalAmount = originPrice;
+                    }
+                    List<tOrderPay> paylists = db.tOrderPays.Where(op => op.oOrderId == items.OrderId).ToList();
+                    foreach(var itemPay in paylists)
+                    {
+                        order.AlreadyPay += Convert.ToInt32(itemPay.oPayment);
+                    }
+                    order.Unpaid = order.TotalAmount - order.AlreadyPay;
+                    order.CustomerOrderDetails = OrderDetailList;
+                    OrderList.Add(order);
+                }
+                return View(OrderList);
             }
             return RedirectToAction("首頁");
         }

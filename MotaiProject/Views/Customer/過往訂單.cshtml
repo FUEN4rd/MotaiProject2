@@ -51,6 +51,15 @@
                     <th style="width:250px">
                         @Html.DisplayNameFor(model => model.EmployeeName)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AlreadyPay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Unpaid)
+                    </th>
                     <th style="width:250px">
                         @Html.DisplayNameFor(model => model.cNote)
                     </th>
@@ -74,6 +83,15 @@
                                         </td>
                                         <td style="width:250px">
                                             @Html.DisplayFor(modelItem => item.EmployeeName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TotalAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AlreadyPay)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Unpaid)
                                         </td>
                                         <td style="width:250px">
                                             @Html.DisplayFor(modelItem => item.cNote)
