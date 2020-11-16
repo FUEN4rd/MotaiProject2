@@ -51,6 +51,7 @@
 
 
     <div style="width:500px;height:500px">
+        <p>年度銷售</p>
         <canvas id="myChart" width="400" height="400"></canvas>
     </div>
     @*<table class="table">
@@ -100,8 +101,8 @@
             datasets: [
                 {
                     label:'set1',
-                        backgroundColor: ['@L[0]', '@L[1]', '@L[2]', '@L[3]', '@L[4]'],
-                    borderColor: ['@L[0]','@L[1]','@L[2]','@L[3]','@L[4]'],
+                        backgroundColor: ['@L[0]', '@L[1]', '@L[2]', '@L[3]', '@L[4]' ,'@L[5]', '@L[6]', '@L[7]'],
+                    borderColor: ['@L[0]','@L[1]','@L[2]','@L[3]','@L[4]','@L[5]', '@L[6]', '@L[7]'],
                     data: [
                         @foreach(KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
                         {
@@ -118,6 +119,4 @@
             ]
         }
     });
-
-
 </script>
