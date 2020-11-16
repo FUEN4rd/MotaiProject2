@@ -199,7 +199,7 @@
                     <div style="display:flex;justify-content:space-between">
                         <div class="Y_member_row">
                             <div class="row Y_row">
-                                <div>
+                                <div style="margin-right:5px">
                                     @Html.DisplayNameFor(model => model.cAccount)：
                                 </div>
 
@@ -212,28 +212,28 @@
                                     @Html.DisplayNameFor(model => model.cPassword)：
                                 </div>
                                 <div>
-                                    <button class="btn btn-Y_yellow" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <button style="font-weight:bold;height:38px;margin-left:5px" class="btn btn-Y_yellow" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                         修改密碼
                                     </button>
                                 </div>
                                 <div class="collapse" id="collapseExample">
-                                    <div class="card card-body card-deck"  style="background-color:#A7674C;margin: 10px; height:380px">
-                                        <div>
+                                    <div class="card card-body card-deck"  style="background-color:#FCD492;margin: 10px; height:380px;">
+                                        <div style="color:black">
                                             舊密碼
-                                            <div class="col-md-10">
+                                            <div class="col-md-10" >
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "oldpass" } })
                                             </div>
                                         </div>
 
 
-                                        <div>
+                                        <div style="color:black">
                                             新密碼
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "newpass" } })
                                             </div>
                                         </div>
 
-                                        <div>
+                                        <div style="color:black">
                                             確認密碼
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.cPassword, new { htmlAttributes = new { @class = "form-control", @id = "checkpass" } })
