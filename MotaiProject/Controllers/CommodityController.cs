@@ -529,18 +529,21 @@ namespace MotaiProject.Controllers
                 dbContext.SaveChanges();
                 for(int i = 0; i < ShipList.WareHouseId.Count; i++)
                 {
-                    tShipDetail tShipdetail = new tShipDetail();
-                    tShipdetail.ShipId = dbContext.tShipLists.OrderByDescending(s => s.ShipId).First().ShipId;
-                    tShipdetail.sOrderDetailId = ShipList.OrderDetailId[i];
-                    tShipdetail.sProductId = ShipList.ProductId[i];
-                    tShipdetail.sQuantity = ShipList.ShipProductQty[i];
-                    tShipdetail.sWarehouseNameId = ShipList.WareHouseId[i];
-                    dbContext.tShipDetails.Add(tShipdetail);
-                    //倉儲變動
-                    tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId== tShipdetail.sWarehouseNameId && w.wProductId== tShipdetail.sProductId).FirstOrDefault();
-                    if (Warehouse != null)
+                    if(ShipList.ShipProductQty[i] != 0)
                     {
-                        Warehouse.wPQty -= ShipList.ShipProductQty[i];
+                        tShipDetail tShipdetail = new tShipDetail();
+                        tShipdetail.ShipId = dbContext.tShipLists.OrderByDescending(s => s.ShipId).First().ShipId;
+                        tShipdetail.sOrderDetailId = ShipList.OrderDetailId[i];
+                        tShipdetail.sProductId = ShipList.ProductId[i];
+                        tShipdetail.sQuantity = ShipList.ShipProductQty[i];
+                        tShipdetail.sWarehouseNameId = ShipList.WareHouseId[i];
+                        dbContext.tShipDetails.Add(tShipdetail);
+                        //倉儲變動
+                        tWarehouse Warehouse = dbContext.tWarehouses.Where(w => w.WarehouseNameId == tShipdetail.sWarehouseNameId && w.wProductId == tShipdetail.sProductId).FirstOrDefault();
+                        if (Warehouse != null)
+                        {
+                            Warehouse.wPQty -= ShipList.ShipProductQty[i];
+                        }
                     }
                 }
                 tOrder order = dbContext.tOrders.Where(o => o.OrderId == Shiplist.sOrderId).FirstOrDefault();
