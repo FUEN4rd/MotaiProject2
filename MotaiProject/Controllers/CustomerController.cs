@@ -333,11 +333,11 @@ namespace MotaiProject.Controllers
                 {
                     if (item.cAccount == newMember.cAccount)
                     {
-                        return Json(new { result = false, msg = "帳號已被註冊" });
+                        return Json(new { result = false, msg = "此帳號已被註冊" });
                     }
                     else if (item.cEmail == newMember.cEmail)
                     {
-                        return Json(new { result = false, msg = "信箱已被使用" });
+                        return Json(new { result = false, msg = "此信箱已被使用" });
                     }
                 }
                 tCustomer newmember = new tCustomer();
@@ -384,26 +384,61 @@ namespace MotaiProject.Controllers
             return View(customer);
         }
         [HttpPost]
-        public ActionResult 修改會員資料(MemberViewModel member)
+        public JsonResult 修改會員資料(MemberViewModel oldMember)
         {
             if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
             {
                 tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
-                MotaiDataEntities db = new MotaiDataEntities();
-                tCustomer cust = db.tCustomers.Find(customer.CustomerId);
-                if (cust != null)
+                MotaiDataEntities dbContext = new MotaiDataEntities();
+                tCustomer cust = dbContext.tCustomers.Find(customer.CustomerId);
+                List<tCustomer> custList = dbContext.tCustomers.ToList();
+                foreach (var item in custList)
                 {
-                    cust.cName = member.cName;
-                    cust.cTelePhone = member.cTelePhone;
-                    cust.cGUI = member.cGUI;
-                    cust.cEmail = member.cEmail;
-                    cust.cAddress = member.cAddress;
-                    db.SaveChanges();
+                    if (item.cCellPhone == oldMember.cCellPhone)
+                    {
+                        if (cust.cCellPhone != oldMember.cCellPhone)
+                        {
+                            return Json(new { result = false, msg = "此手機號碼已被註冊" });
+                        }
+                    }
+                    else if (item.cEmail == oldMember.cEmail)
+                    {
+                        if (cust.cEmail != oldMember.cEmail)
+                        {
+                            return Json(new { result = false, msg = "此信箱已被註冊" });
+                        }
+                    }
                 }
-                return RedirectToAction("會員中心");
+                cust.cName = oldMember.cName;
+                cust.cTelePhone = oldMember.cTelePhone;
+                cust.cGUI = oldMember.cGUI;
+                cust.cEmail = oldMember.cEmail;
+                cust.cAddress = oldMember.cAddress;
+                dbContext.SaveChanges();
+                return Json(new { result = true, msg = "修改成功", url = Url.Action("會員中心", "Customer") });
             }
-            return RedirectToAction("首頁");
+            return Json(new { result = true, msg = "請先登入", url = Url.Action("首頁", "Customer") });
         }
+        //public ActionResult 修改會員資料(MemberViewModel member)
+        //{
+        //    if (Session[CSession關鍵字.SK_LOGINED_CUSTOMER] != null)
+        //    {
+        //        tCustomer customer = Session[CSession關鍵字.SK_LOGINED_CUSTOMER] as tCustomer;
+        //        MotaiDataEntities db = new MotaiDataEntities();
+        //        tCustomer cust = db.tCustomers.Find(customer.CustomerId);
+        //        if (cust != null)
+        //        {
+        //            cust.cName = member.cName;
+        //            cust.cTelePhone = member.cTelePhone;
+        //            cust.cGUI = member.cGUI;
+        //            cust.cEmail = member.cEmail;
+        //            cust.cAddress = member.cAddress;
+        //            db.SaveChanges();
+        //        }
+        //        return RedirectToAction("會員中心");
+        //    }
+        //    return RedirectToAction("首頁");
+        //}
 
         private ProductRespoitory productRespotiory = new ProductRespoitory();
         private CommodityRespoitory commodityRespoitory = new CommodityRespoitory();
