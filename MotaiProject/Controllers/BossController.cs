@@ -269,7 +269,7 @@ namespace MotaiProject.Controllers
                     for(int i = 1; i < 13; i++)
                     {//抓月份
                         var q = from search in tOrderDetails
-                                where search.tOrder.oDate.Month == i && search.tOrder.tEmployee.eName == ENAME
+                                where search.tOrder.oDate.Month == i && search.tOrder.tEmployee.eName == ENAME && search.tOrder.oCheck == "checked"
                                 select (search.oProductQty) * ((int)search.tProduct.pPrice);
                         int V = q.Sum();
                         temD.Add(i, V);
@@ -303,7 +303,7 @@ namespace MotaiProject.Controllers
                     for (int i = 1; i < 13; i++)
                     {//抓月份
                         var q = from search in tOrderDetails
-                                where search.tOrder.oDate.Month == i && search.tOrder.tWarehouseName.WarehouseNameId == wNAME
+                                where search.tOrder.oDate.Month == i && search.tOrder.tWarehouseName.WarehouseNameId == wNAME&&search.tOrder.oCheck=="checked"
                                 select (search.oProductQty) * ((int)search.tProduct.pPrice);
                         int V = q.Sum();//合併月份內營收
                         temD.Add(i, V);
