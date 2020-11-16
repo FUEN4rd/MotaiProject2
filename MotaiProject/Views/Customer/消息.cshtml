@@ -67,7 +67,7 @@
                         @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.sPromotinoCategory)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionDescription)
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.PromotionName)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().newPromotion.pPromotionPostDate)
@@ -83,7 +83,7 @@
                         </td>
                         <td>
                             <a href="@Url.Action("消息細節","Customer", new { PromotionId = item.newPromotion.PromotionId })" style="text-decoration:none;color:#F2EDD8">
-                                @Html.DisplayFor(modelItem => item.newPromotion.PromotionDescription)
+                                @Html.DisplayFor(modelItem => item.newPromotion.PromotionName)
                             </a>
                         </td>
                         <td>

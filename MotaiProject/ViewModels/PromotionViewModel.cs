@@ -13,8 +13,12 @@ namespace MotaiProject.ViewModels
     {
         [DisplayName("類別")]
         public string sPromotinoCategory { get; set; }
-        [DisplayName("消息名稱")]
+        [DisplayName("消息介紹")]
         public string PromotionDescription { get; set; }
+
+        [DisplayName("消息名稱")]
+        public string PromotionName { get; set; }
+
         [DisplayName("圖片")]
         public string pADimage { get; set; }
         [DisplayName("網頁連結")]
