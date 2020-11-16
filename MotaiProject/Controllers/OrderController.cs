@@ -76,21 +76,29 @@ namespace MotaiProject.Controllers
                     }
                     list.oDate = empOrder.oDate;
                     list.cNote = empOrder.cNote;
-                    
                     list.oWarehouseName = empOrder.oWarehouseName;
                     dbContext.tOrders.Add(list);
                     dbContext.SaveChanges();
+                    int orderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
+                    int originalPrice = 0;
                     foreach (var items in orders)
                     {
                         tOrderDetail detail = new tOrderDetail();
-                        detail.oOrderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
+                        detail.oOrderId = orderId;
                         detail.oProductId = items.oProductId;
                         detail.oProductQty = items.oProductQty;
                         detail.oNote = items.oNote;
                         dbContext.tOrderDetails.Add(detail);
+                        tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(items.oProductId)).FirstOrDefault();
+                        originalPrice += items.oProductQty * Convert.ToInt32(product.pPrice);
+                    }
+                    tOrder order = dbContext.tOrders.Where(o => o.OrderId == orderId).FirstOrDefault();
+                    int promotionId = orderRespoitory.SelectPromotionId(originalPrice, empOrder.oDate);
+                    if(promotionId != 0)
+                    {
+                        order.oPromotionId = promotionId;
                     }
                     dbContext.SaveChanges();
-                    int orderId = dbContext.tOrders.OrderByDescending(i => i.OrderId).First().OrderId;
                     Session[CSession關鍵字.SK_ORDERDETAIL] = null;
                     return Json(new { result = true, msg = "新增成功", url = Url.Action("realCheckView", "Order"), OrderId = orderId });
                 }
@@ -199,10 +207,9 @@ namespace MotaiProject.Controllers
                 model.originalPrice += itemdetails.oProductQty * Convert.ToInt32(product.pPrice);
                 Orderdetails.Add(Orderdetail);
             }
-            int promotionId = orderRespoitory.SelectPromotionId(model.originalPrice, order.oDate);
-            if (promotionId != 0)
+            if (order.oPromotionId != null)
             {
-                tPromotion promotion = dbContext.tPromotions.Where(p => p.PromotionId.Equals(promotionId)).FirstOrDefault();
+                tPromotion promotion = dbContext.tPromotions.Where(p => p.PromotionId==order.oPromotionId).FirstOrDefault();
                 Order.PromotionName = promotion.PromotionName;
                 Order.PromotionDiscount = promotion.pDiscount;
                 Order.PromotionCondition = promotion.pCondition;
