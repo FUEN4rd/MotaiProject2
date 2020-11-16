@@ -3,17 +3,12 @@
 @{
     ViewBag.Title = "銷售報表";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
-    int datacolor = 0;
     List<string> L = new List<string>
 {"#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2"};
     int RR = 0;
     string S = "";
     int person = 0;
-    int tagG = 0;
-    List<int> LF = new List<int>();
-    List<int> LF2 = new List<int>();
-    List<int> LF3 = new List<int>();
-    List<List<int>> LR = new List<List<int>> { LF, LF2, LF3 };
+    List<List<int>> LR = new List<List<int>> ();
     foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
     {
         int temsave = 0;
@@ -24,11 +19,20 @@
             temsave += kvp2.Value;
             LFF.Add(kvp2.Value);
         }
-        LR[tagG] = LFF;
+        LR.Add(LFF);
         if (person < temsave) { S = kvp.Key; person = temsave; }
-        tagG++;
     }
+    List<int> BEUSE = new List<int>();
+    for (int ii = 0; ii < 12; ii++) {
+        int AA = 0;
+        for (int i = 0; i < LR.Count; i++)
+        {
+            int A = LR[i][ii];
+            AA += A;
 
+        }
+        BEUSE.Add(AA);
+    }
 }
 <style>
     .cab {
@@ -72,73 +76,73 @@
         <canvas id="myChart2" width="400" height="400"></canvas>
     </div>
 </div>
-    @*<table class="table">
-                <tr>
-                    <th>
-                        員工\月份
-                    </th>
-                    @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
-                    {
-                        foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
-                        {
-                            <th>
-                                @kvp2.Key 月
-                            </th>
-                        }
-                        break;
-                    }
-
-                </tr>
-
+@*<table class="table">
+            <tr>
+                <th>
+                    員工\月份
+                </th>
                 @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
                 {
-                    <tr>
-                        <td>@kvp.Key</td>
-                        @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
-                        {
-
-                            <td>@kvp2.Value</td>
-
-                        }
-                    </tr>
-                }
-
-            </table>
-
-        </div>*@
-
-    @*<script>
-            var ctx = document.getElementById('myChart2');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                    datasets: [
-                    @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+                    foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
                     {
-                        <text>
-                        {
-                            label: '@kvp.Key',
-                            backgroundColor: '@L[datacolor]',
-                            borderColor: '@L[datacolor]',
-                            data: [
-                                @foreach (KeyValuePair<int, int> kvp2 in kvp.Value){
-                                    @kvp2.Value<Text>,</Text>
-                                }
-                            ],
-                        },
-                        </text>
-                        datacolor++;
-                        if (datacolor == L.Count) { datacolor = 0; }
+                        <th>
+                            @kvp2.Key 月
+                        </th>
                     }
-                    ]
+                    break;
                 }
-            });
+
+            </tr>
+
+            @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+            {
+                <tr>
+                    <td>@kvp.Key</td>
+                    @foreach (KeyValuePair<int, int> kvp2 in kvp.Value)
+                    {
+
+                        <td>@kvp2.Value</td>
+
+                    }
+                </tr>
+            }
+
+        </table>
+
+    </div>*@
+
+@*<script>
+        var ctx = document.getElementById('myChart2');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                datasets: [
+                @foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
+                {
+                    <text>
+                    {
+                        label: '@kvp.Key',
+                        backgroundColor: '@L[datacolor]',
+                        borderColor: '@L[datacolor]',
+                        data: [
+                            @foreach (KeyValuePair<int, int> kvp2 in kvp.Value){
+                                @kvp2.Value<Text>,</Text>
+                            }
+                        ],
+                    },
+                    </text>
+                    datacolor++;
+                    if (datacolor == L.Count) { datacolor = 0; }
+                }
+                ]
+            }
+        });
 
 
-        </script>*@
+    </script>*@
 
-    <script>
+<script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'pie',
@@ -169,8 +173,8 @@
     });
 
 
-    </script>
-    <script>
+</script>
+<script>
         var ctx = document.getElementById('myChart2');
         var myChart = new Chart(ctx, {
             type: 'line',
@@ -179,12 +183,11 @@
                 datasets: [
                     {
                         label: '銷售額',
-                        backgroundColor: '@L[7]',
-                        borderColor: '@L[7]',
+                        backgroundColor: 'rgba(179,205,227,0.6)',
+                        borderColor: 'rgb(179,205,227)',
                         data: [
-
-                            @for (int i=0;i<LF.Count;i++){
-                                @LF[i]<Text>,</Text>
+                            @for (int i=0;i<BEUSE.Count;i++){
+                                @BEUSE[i]<Text>,</Text>
                             }
                         ],
                     },
@@ -194,13 +197,25 @@
         });
 
 
-    </script>
-    @*<script>
-    @foreach(var item in LR)
+</script>
+<script>
+    @*@foreach(var item in LR)
     {
         foreach(var item2 in item)
         {<Text>
         console.log(@item2)</Text>
         }
-    }
-    </script>*@
+        for(int i=0; i<12;i++)
+        {<Text>
+    console.log(@item[i])</Text>
+        }
+    }*@
+     @*@for(int i = 0; i < 3; i++)
+     {
+
+        for(int ii=0; ii<12;ii++)
+        {<Text>
+        console.log(@LR[0][ii])</Text>
+        }
+    }*@
+</script>
