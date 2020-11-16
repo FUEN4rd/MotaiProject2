@@ -38,6 +38,7 @@ namespace MotaiProject.Controllers
                 List<SelectListItem> productlist = commodityRespoitory.GetSelectList(productNames);
                 model.WareHouseNames = warehouselist;
                 detail.ProductNames = productlist;
+                detail.oProductQty = 1;
                 model.oDate = DateTime.Now.Date;
                 model.empOrderDetail = detail;
                 return View(model);
@@ -98,6 +99,15 @@ namespace MotaiProject.Controllers
                 return Json(new { result = false, msg = "尚未登入!", url = Url.Action("員工登入", "Employee") });
             }
         }
+        public JsonResult autoProductNumPrice(int ProductId)
+        {
+            MotaiDataEntities dbContext = new MotaiDataEntities();
+            tProduct product = dbContext.tProducts.Where(p => p.ProductId == ProductId).FirstOrDefault();
+            string Number = product.pNumber;
+            string Price = product.pPrice.ToString("#0.######");
+            return Json(new {num = Number,price = Price });
+        }
+
         [HttpPost]
         public string createOrderDetail(EmployeeOrderDetailViewModel orderDetail)
         {
@@ -121,6 +131,7 @@ namespace MotaiProject.Controllers
             {
                 data += orderDetail.ProductName.ToString() + "</td><td>";
                 data += orderDetail.ProductNum.ToString() + "</td><td>";
+                data += orderDetail.ProductPrice.ToString() + "</td><td>";
                 data += orderDetail.oProductQty.ToString() + "</td><td>";
                 if (orderDetail.oNote.Length > 10)
                 {
@@ -139,6 +150,7 @@ namespace MotaiProject.Controllers
             {
                 data += orderDetail.ProductName.ToString() + "</td><td>";
                 data += orderDetail.ProductNum.ToString() + "</td><td>";
+                data += orderDetail.ProductPrice.ToString() + "</td><td>";
                 data += orderDetail.oProductQty.ToString() + "</td><td>";
                 data += "</td>";
             }
