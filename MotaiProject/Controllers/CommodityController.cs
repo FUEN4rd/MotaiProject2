@@ -607,12 +607,13 @@ namespace MotaiProject.Controllers
             var dicWarehouse = commodityRespoitory.GetWarehouseAll();
             model.WareHouseInNames = commodityRespoitory.GetSelectList(dicWarehouse);
             model.Date = DateTime.Now;
+            model.ProductQty = 1;
             return View(model);
         }
         public JsonResult WareOutSearch(int ProductId)
         {
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            List<tWarehouse> warehouseOut = dbContext.tWarehouses.Where(w => w.wProductId.Equals(ProductId)).ToList();
+            List<tWarehouse> warehouseOut = dbContext.tWarehouses.Where(w => w.wProductId==ProductId && w.wPQty != 0).ToList();
             List<WarehouseOutList> outLists = new List<WarehouseOutList>();
             foreach (var item in warehouseOut)
             {

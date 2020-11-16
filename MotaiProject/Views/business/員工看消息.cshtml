@@ -23,85 +23,87 @@
     @Html.ActionLink("新增", "新增消息")
 </button>
 <table class="table order-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.pPromotionPostDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sPromotinoCategory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PromotionName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PromotionDescription)
-        </th>
-
-
-        <th>
-            @Html.DisplayNameFor(model => model.pCondition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pDiscount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pDiscountCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pPromotionStartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pPromotionDeadline)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pADimage)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.pPromotionPostDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sPromotinoCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PromotionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PromotionDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pCondition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pDiscount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pDiscountCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pPromotionStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pPromotionDeadline)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.pADimage)*@
-                <img src="@Html.DisplayFor(modelItem => item.pADimage)" width="90" height="90" />
-            </td>
-            <td style="display:none">
-                @Html.DisplayFor(modelItem => item.PromotionId)
-            </td>
-            <td>
-                @Html.ActionLink("編輯", "修改消息", new { id = item.PromotionId })
-            </td>
-        </tr>
-    }
+            <th>
+                @Html.DisplayNameFor(model => model.pPromotionPostDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sPromotinoCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PromotionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PromotionDescription)
+            </th>
 
+
+            <th>
+                @Html.DisplayNameFor(model => model.pCondition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pDiscount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pDiscountCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pPromotionStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pPromotionDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pADimage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPromotionPostDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sPromotinoCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PromotionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PromotionDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pCondition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pDiscount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pDiscountCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPromotionStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pPromotionDeadline)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.pADimage)*@
+                    <img src="@Html.DisplayFor(modelItem => item.pADimage)" width="90" height="90" />
+                </td>
+                <td style="display:none">
+                    @Html.DisplayFor(modelItem => item.PromotionId)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯", "修改消息", new { id = item.PromotionId })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 
