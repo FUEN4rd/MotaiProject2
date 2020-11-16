@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
 
-<h2>新增產品</h2>
+<h2 onclick="clicktitle()">新增產品</h2>
 
 
 @using (Html.BeginForm("新增產品", "Commodity", FormMethod.Post,new { enctype ="multipart/form-data"}))
@@ -95,13 +95,13 @@
         </div>
     </div>
 
-    <div class="form-group">
+    @*<div class="form-group">
         @Html.LabelFor(model => model.pQty, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-2">
             @Html.EditorFor(model => model.pQty, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.pQty, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.pImage, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -145,4 +145,17 @@
             reader.readAsDataURL(filefield.files[i]);
         }
     });
+</script>
+<script>
+    function clicktitle() {
+        document.getElementById("pNumber").value = "J040911250";
+        document.getElementById("pName").value = "黑曜石-心經";
+        document.getElementById("pIntroduction").value = "商品顏色僅供參考，色樣會因電腦螢幕設定不同而有誤差，顏色以實際商品為主。※網頁圖片僅為示意圖參考，不含拍攝道具，實際出貨件數以「內容件數」說明為主。此商品圖為參考用之情境圖示，產品內容以規格敘述內容為準。";
+        document.getElementById("pLxWxH").value = "10 x 10 x 10";
+        document.getElementById("pWeight").value = "2";
+        document.getElementById("pPrice").value = "4500";
+        document.getElementById("pCategory").value = "4";
+        document.getElementById("pMaterial").value = "6";
+        document.getElementById("pSize").value = "3";
+    }
 </script>
