@@ -73,8 +73,11 @@
                     @Html.DisplayNameFor(model => model.empOrderDetail.ProductNum)
                 </th>
                 <th scope="col">
+                    @Html.DisplayNameFor(model => model.empOrderDetail.ProductPrice)
+                </th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.empOrderDetail.oProductQty)
-                </th>                
+                </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.empOrderDetail.oNote)
                 </th>
@@ -87,7 +90,10 @@
                     @Html.DropDownListFor(model => model.empOrderDetail.oProductId, Model.empOrderDetail.ProductNames, "請選擇商品")
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.empOrderDetail.ProductNum)
+                    @Html.EditorFor(model => model.empOrderDetail.ProductNum, new { htmlAttributes = new { @disabled="disabled" } })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.empOrderDetail.ProductPrice, new { htmlAttributes = new { @disabled = "disabled" } })
                 </td>
                 <td>
                     @Html.EditorFor(model => model.empOrderDetail.oProductQty)
@@ -115,15 +121,31 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
+    $("#empOrderDetail_oProductId").change(function () {
+        var ProductId = $("#empOrderDetail_oProductId option:selected").val();
+        $.ajax({
+            url: "@Url.Action("autoProductNumPrice", "Order")",
+            type: "POST",
+            data: { "ProductId": ProductId },
+            success: function (data) {
+                console.log(data);
+                $("#empOrderDetail_ProductNum").val(data.num);
+                $("#empOrderDetail_ProductPrice").val(data.price);
+                
+            }
+        });
+    });
     $(document).ready(function () {
         $("#createDetail").click(function () {
             var Name = $("#empOrderDetail_oProductId").val();
             var Num = $("#empOrderDetail_ProductNum").val();
+            var Price = $("#empOrderDetail_ProductPrice").val();
             var Qty = $("#empOrderDetail_oProductQty").val();
             var Note = $("#empOrderDetail_oNote").val();
             var orderDetail = {
                 oProductId: Name,
                 ProductNum: Num,
+                ProductPrice: Price,
                 oProductQty: Qty,
                 oNote: Note,
             };
