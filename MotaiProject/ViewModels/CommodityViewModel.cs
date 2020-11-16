@@ -252,6 +252,7 @@ namespace MotaiProject.ViewModels
         [DisplayName("審核")]
         public string oCheck { get; set; }
         [DisplayName("審核時間")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy/MM/dd}")]
         public Nullable<System.DateTime> oCheckDate { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }

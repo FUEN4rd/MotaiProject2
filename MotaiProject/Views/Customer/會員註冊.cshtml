@@ -67,7 +67,7 @@
     <div style="width:600px;margin:auto;height:1000px">
         <div class="container">
             <div class="form-horizontal">
-                <h4>會員註冊</h4>
+                <h4 onclick="clicktitle()">會員註冊</h4>
                 <hr />
                 <div style="display:flex;justify-content:space-between">
                     <div class="form-group ">
@@ -198,4 +198,18 @@
     var onSuccess = function (url) {
         window.location.href = url;
     };
+</script>
+<script>
+    function clicktitle() {
+        document.getElementById('Account').value = "a123456789A";
+        document.getElementById('Password').value = "a123456789A";
+        document.getElementById('TelePhone').value = "0220201919";
+        document.getElementById('Name').value = "墨芝";
+        document.getElementById('ConfirmPassword').value = "a123456789A";
+        document.getElementById('CellPhone').value = "0987654321";
+        document.getElementById('Address').value = "台北市大安區和平東路二段106號11樓";
+        document.getElementById('GUI').value = "";
+        document.getElementById('Email').value = "04113004@gm.scu.edu.tw";
+
+    }
 </script>
