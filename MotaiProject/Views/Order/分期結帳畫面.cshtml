@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/Layoutbusiness.cshtml";
 }
 
-<h2>分期結帳畫面</h2>
+<h2 onclick="clicktitle()">分期結帳畫面</h2>
 <div>
     <label for="searchCustomer">客戶手機:</label>
     <input id="searchCustomer" type="text" />
@@ -73,4 +73,9 @@
             }
         });
     })
+</script>
+<script>
+    function clicktitle() {
+        document.getElementById('searchCustomer').value = "0911560846";
+    }
 </script>
