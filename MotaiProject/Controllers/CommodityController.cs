@@ -453,7 +453,7 @@ namespace MotaiProject.Controllers
                 count++;
                 model.sShipSerialValue = Convert.ToInt32(DateTime.Now.ToString("yyMMdd") + count.ToString("0000"));
                 model.sShipDate = DateTime.Now;
-                List<tOrder> orderSearch = dbContext.tOrders.Where(o => o.oCheck != null && o.cNote != "已出貨").ToList();
+                List<tOrder> orderSearch = dbContext.tOrders.Where(o => o.oCheck != null && o.oDeliverDate == null).ToList();
                 List<OrderShipShowViewModel> orderShips = new List<OrderShipShowViewModel>();
                 foreach (var item in orderSearch)
                 {
@@ -547,7 +547,7 @@ namespace MotaiProject.Controllers
                     }
                 }
                 tOrder order = dbContext.tOrders.Where(o => o.OrderId == Shiplist.sOrderId).FirstOrDefault();
-                order.cNote = "已出貨";
+                order.oDeliverDate = ShipList.sShipDate;
                 dbContext.SaveChanges();
             }
             return RedirectToAction("出貨單查詢");
