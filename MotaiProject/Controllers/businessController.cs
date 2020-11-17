@@ -62,8 +62,9 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 var dlist = dbContext.tDiaries.Where(c => c.dEmployeeId==emp.EmployeeId).ToList();
+                var dlistnew = dlist.OrderByDescending(c => c.dDate).ToList();
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
-                foreach (var item in dlist)
+                foreach (var item in dlistnew)
                 {
                     DiaryViewModel show = new DiaryViewModel();
                     show.eName = item.tEmployee.eName;
