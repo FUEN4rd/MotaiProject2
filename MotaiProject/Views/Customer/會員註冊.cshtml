@@ -180,7 +180,7 @@
             data: { "newMember": customersign },
             success: function (data) {
                 alert(data.msg);
-                if (data.result) {
+                if (data.result == true) {
                     onSuccess(data.url);
                 }
             }
