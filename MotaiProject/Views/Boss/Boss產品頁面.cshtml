@@ -27,9 +27,6 @@
                     @Html.DisplayNameFor(model => model.pName)
                 </th>
                 <th scope="col" class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.pIntroduction)
-                </th>
-                <th scope="col" class="text-nowrap">
                     @Html.DisplayNameFor(model => model.pCategory)
                 </th>
                 <th scope="col" class="text-nowrap">
@@ -69,9 +66,6 @@
                         @Html.DisplayFor(modelItem => item.pName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.pIntroduction)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.psCategory)
                     </td>
                     <td>
@@ -87,7 +81,7 @@
                         @Html.DisplayFor(modelItem => item.pWeight)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.pPrice)
+                        @((int)item.pPrice)元
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.pQty)

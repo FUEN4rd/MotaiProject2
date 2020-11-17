@@ -117,8 +117,9 @@ namespace MotaiProject.Models
         public List<OrderViewModel> GetOrderAll()
         {
             List<tOrder> order = dbContext.tOrders.ToList();
+            var orderlists = order.OrderByDescending(c => c.oDate).ToList();
             List<OrderViewModel> orderlist = new List<OrderViewModel>();
-            foreach (tOrder item in order)
+            foreach (tOrder item in orderlists)
             {
                 OrderViewModel Order = new OrderViewModel();
                 Order.oAddress = item.oAddress;

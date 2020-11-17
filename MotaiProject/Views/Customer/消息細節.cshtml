@@ -1,7 +1,7 @@
 ﻿@model MotaiProject.ViewModels.DetailPromotionViewModel
 
 @{
-    ViewBag.Title = "消息細節";
+    ViewBag.Title = Model.PromotionName;
     Layout = "~/Views/Shared/_Layout登入.cshtml";
 }
 <style>
@@ -12,14 +12,14 @@
 </style>
 <div class="container" >
     <div>
-        <div>
+        <div style="margin-bottom:40px">
             <h3>@Html.DisplayFor(model => model.PromotionName)</h3>
         </div>
         <hr />
-        <div style="display:flex;justify-content:space-between">
+        <div style="display:flex;justify-content:space-between;font-size:18px">
             <div>
 
-                <div>
+                <div style="margin-bottom:40px">
                     @Html.DisplayFor(model => model.sPromotinoCategory)
 
                     活動期間：
@@ -59,7 +59,7 @@
                 }
             </div>
             <div style="padding-bottom:50px;">
-                <img  style="height:70vh;width:30vh"  src="../..@Url.Content(Model.pADimage)" class="d-block w-100" alt="..." />
+                <img  style="height:40vh;width:60vh"  src="../..@Url.Content(Model.pADimage)" class="d-block w-100" alt="..." />
             </div>
         </div>
     </div>
