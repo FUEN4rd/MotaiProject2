@@ -55,7 +55,7 @@
         <span onclick="Alogin(3)">後</span>
         <span onclick="Alogin(4)">台</span>
         <span onclick="Alogin(5)">系</span>
-        <span>統</span>
+        <span onclick="Blogin()">統</span>
     </p>
 </div>
 
@@ -116,5 +116,9 @@
     function Alogin(id) {
          document.getElementById("Account").value = `test0${id}`;
          document.getElementById("Password").value = `test0${id}`;
+    }
+    function Blogin() {
+        document.getElementById("Account").value = `test10`;
+        document.getElementById("Password").value = `test10`;
     }
 </script>

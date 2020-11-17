@@ -42,25 +42,25 @@
         <div class="card-header" style="padding:0px">
             <table class="table Y_white" style="text-align:center">
                 <tr>
-                    <th style="width:250px">
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.oDate)
                     </th>
-                    <th style="width:250px">
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.WarehouseName)
                     </th>
-                    <th style="width:250px">
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.EmployeeName)
                     </th>
-                    <th>
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.TotalAmount)
                     </th>
-                    <th>
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.AlreadyPay)
                     </th>
-                    <th>
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.Unpaid)
                     </th>
-                    <th style="width:250px">
+                    <th style="width:150px">
                         @Html.DisplayNameFor(model => model.cNote)
                     </th>
                 </tr>
@@ -75,25 +75,25 @@
                             <div id="heading@(i)" class="btn Y_btn-link container-fluid " type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px;height:50px">
                                 <table class="table table-hover" style="text-align:center">
                                     <tr>
-                                        <td style="width:250px">
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.oDate)
                                         </td>
-                                        <td style="width:250px">
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.WarehouseName)
                                         </td>
-                                        <td style="width:250px">
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.EmployeeName)
                                         </td>
-                                        <td>
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.TotalAmount)
                                         </td>
-                                        <td>
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.AlreadyPay)
                                         </td>
-                                        <td>
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.Unpaid)
                                         </td>
-                                        <td style="width:250px">
+                                        <td style="width:150px">
                                             @Html.DisplayFor(modelItem => item.cNote)
                                         </td>
                                     </tr>
@@ -104,21 +104,22 @@
 
                     <div id="collapse@(i)" class="collapse hide" aria-labelledby="heading@(i)" data-parent="#accordionExample">
                         <div class="card-body" style="width:100%;background-color:#F2EDD8;">
+                            <h5 style="text-align:center">商品列表</h5>
                             <table class="table text-dark" style="text-align:center">
                                 <tr>
-                                    <th>
+                                    <th style="width:150px">
                                         @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().ProductNum)
                                     </th>
-                                    <th>
+                                    <th style="width:150px">
                                         @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().ProductName)
                                     </th>
-                                    <th>
+                                    <th style="width:150px">
                                         @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().ProductPrice)
                                     </th>
-                                    <th>
+                                    <th style="width:150px">
                                         @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().oProductQty)
                                     </th>
-                                    <th>
+                                    <th  style="width:150px">
                                         @Html.DisplayNameFor(model => model.CustomerOrderDetails.First().oNote)
                                     </th>
                                 </tr>
@@ -132,7 +133,7 @@
                                             @Html.DisplayFor(modelItem => itemdetail.ProductName)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => itemdetail.ProductPrice)
+                                            @((int)itemdetail.ProductPrice)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => itemdetail.oProductQty)
