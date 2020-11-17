@@ -465,7 +465,7 @@ namespace MotaiProject.Controllers
             }
             return View(htFeedback);
         }
-        public static WebOrderModel order;
+        //public static WebOrderModel order;
         //網購接受信用卡訂單
         public ActionResult orderCredit()
         {
@@ -508,8 +508,7 @@ namespace MotaiProject.Controllers
                         {
                             /* 使用定期定額交易時回傳的參數 */
                             case "MerchantID": szMerchantID = htFeedback[szKey].ToString(); break;
-                            case "MerchantTradeNo":
-                                szMerchantTradeNo = htFeedback[szKey].ToString();
+                            case "MerchantTradeNo": szMerchantTradeNo = htFeedback[szKey].ToString();
                                 break;
                             case "RtnCode": szRtnCode = htFeedback[szKey].ToString(); break;
                             case "RtnMsg": szRtnMsg = htFeedback[szKey].ToString(); break;
@@ -520,43 +519,41 @@ namespace MotaiProject.Controllers
                             case "Gwsr": szGwsr = htFeedback[szKey].ToString(); break;
                             case "ProcessDate": szProcessDate = htFeedback[szKey].ToString(); break;
                             case "AuthCode": szAuthCode = htFeedback[szKey].ToString(); break;
-                            case "FirstAuthAmount":
-                                szFirstAuthAmount = htFeedback[szKey].ToString();
+                            case "FirstAuthAmount": szFirstAuthAmount = htFeedback[szKey].ToString();
                                 break;
-                            case "TotalSuccessTimes":
-                                szTotalSuccessTimes = htFeedback[szKey].ToString();
+                            case "TotalSuccessTimes": szTotalSuccessTimes = htFeedback[szKey].ToString();
                                 break;
                             default: break;
                         }
                     }
-                    
-                    //先建訂單
-                    tOrder newOrder = new tOrder();
-                    newOrder.oCustomerId = order.customer.CustomerId;
-                    newOrder.oDate = order.payDate;
-                    newOrder.oAddress = order.webpay.shipAddress;
-                    newOrder.oWarehouseName = 1;
-                    dbContext.tOrders.Add(newOrder);
-                    dbContext.SaveChanges();
-                    tOrder CreateOrder = dbContext.tOrders.OrderByDescending(o => o.OrderId).FirstOrDefault();
-                    tOrderPay pay = new tOrderPay();
-                    pay.oOrderId = CreateOrder.OrderId;
-                    pay.oOrderInstallment = 1;
-                    pay.oPayType = order.webpay.payType;
-                    pay.oPayment = Convert.ToInt32(order.webpay.totalPay);
-                    pay.oPayDate = order.payDate;
-                    dbContext.tOrderPays.Add(pay);
-                    foreach (var item in order.boughtList)
-                    {
-                        tOrderDetail orderDetail = new tOrderDetail();
-                        orderDetail.oOrderId = CreateOrder.OrderId;
-                        orderDetail.oProductId = item.sProductId;
-                        orderDetail.oProductQty = item.sProductQty;
-                        dbContext.tOrderDetails.Add(orderDetail);
-                        dbContext.tStatus.Remove(item);
-                        dbContext.SaveChanges();
-                    }
-                    dbContext.SaveChanges();
+                    //WebOrderModel order = http.Session[szMerchantTradeNo] as WebOrderModel;
+                    ////先建訂單
+                    //tOrder newOrder = new tOrder();
+                    //newOrder.oCustomerId = order.customer.CustomerId;
+                    //newOrder.oDate = order.payDate;
+                    //newOrder.oAddress = order.webpay.shipAddress;
+                    //newOrder.oWarehouseName = 1;
+                    //dbContext.tOrders.Add(newOrder);
+                    //dbContext.SaveChanges();
+                    //tOrder CreateOrder = dbContext.tOrders.OrderByDescending(o => o.OrderId).FirstOrDefault();
+                    //tOrderPay pay = new tOrderPay();
+                    //pay.oOrderId = CreateOrder.OrderId;
+                    //pay.oOrderInstallment = 1;
+                    //pay.oPayType = order.webpay.payType;
+                    //pay.oPayment = Convert.ToInt32(order.webpay.totalPay);
+                    //pay.oPayDate = order.payDate;
+                    //dbContext.tOrderPays.Add(pay);
+                    //foreach (var item in order.boughtList)
+                    //{
+                    //    tOrderDetail orderDetail = new tOrderDetail();
+                    //    orderDetail.oOrderId = CreateOrder.OrderId;
+                    //    orderDetail.oProductId = item.sProductId;
+                    //    orderDetail.oProductQty = item.sProductQty;
+                    //    dbContext.tOrderDetails.Add(orderDetail);
+                    //    dbContext.tStatus.Remove(item);
+                    //    dbContext.SaveChanges();
+                    //}
+                    //dbContext.SaveChanges();
                 }
                 else
                 {
@@ -691,6 +688,7 @@ namespace MotaiProject.Controllers
         {
 
         }
+        public static HttpSessionStateBase http;
         //網購寫入訂單
         public string webOrder(WebPay payData)
         {
@@ -701,6 +699,7 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 List<tStatu> StatuList = dbContext.tStatus.Where(s => s.sCustomerId.Equals(cust.CustomerId)).ToList();
                 string szHtml = String.Empty;
+                string szErrorMessage = String.Empty;
                 List<string> enErrors = new List<string>();
                 try
                 {
@@ -766,17 +765,20 @@ namespace MotaiProject.Controllers
                         {
                             oPayment.SendExtend.PaymentInfoURL = baseURI + Url.Action("orderATM", "Order");
                         }
+                        ////攜帶參數
+                        //WebOrderModel order = new WebOrderModel();
+                        //order.boughtList = StatuList;
+                        //order.webpay = payData;
+                        //order.customer = cust;
+                        //order.payDate = oPayment.Send.MerchantTradeDate;
+
+                        //http.Session[oPayment.Send.MerchantTradeNo] = order;
+
                         /* 產生訂單 */
                         enErrors.AddRange(oPayment.CheckOut());
                         /* 產生產生訂單 Html Code 的方法 */
                         //string szHtml = String.Empty;
                         enErrors.AddRange(oPayment.CheckOutString(ref szHtml));
-                        order.boughtList = StatuList;
-                        order.webpay = payData;
-                        order.customer = cust;
-                        order.payDate = oPayment.Send.MerchantTradeDate;
-                        //string MerchantTradeNoSession = oPayment.Send.MerchantTradeNo.ToString();
-                        //Session[MerchantTradeNoSession] = order;
                     }
                 }
                 catch (Exception ex)
@@ -789,10 +791,17 @@ namespace MotaiProject.Controllers
                     // 顯示錯誤訊息。
                     if (enErrors.Count() > 0)
                     {
-                        string szErrorMessage = String.Join("\\r\\n", enErrors);
+                        szErrorMessage = String.Join("\\r\\n", enErrors);
                     }
                 }
-                return szHtml;
+                if(enErrors.Count() == 0)
+                {
+                    return szHtml;
+                }
+                else
+                {
+                    return szErrorMessage;
+                }
             }
             return String.Empty;
         }
