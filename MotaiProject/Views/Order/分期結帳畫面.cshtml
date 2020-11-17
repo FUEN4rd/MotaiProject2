@@ -3,18 +3,70 @@
     ViewBag.Title = "分期結帳畫面";
     Layout = "~/Views/Shared/Layoutbusiness.cshtml";
 }
+<style>
+    a {
+        color: #000000;
+    }
+
+        a:hover {
+            color: #000000;
+            text-decoration: none;
+        }
+
+    .btn-yellow_me_one {
+        color: #000000;
+        font-weight: 900;
+        background-color: #FCD492;
+        width: 100px;
+    }
+
+        .btn-yellow_me_one:hover {
+            color: #000000;
+            font-weight: 900;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one:focus,
+        .btn-yellow_me_one.focus {
+            box-shadow: 0 0 0 0.1rem #F2EDD8;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one.disabled,
+        .btn-yellow_me_one:disabled {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+            border-color: #A7674C;
+        }
+
+        .btn-yellow_me_one:not(:disabled):not(.disabled):active,
+        .btn-yellow_me_one:not(:disabled):not(.disabled).active,
+        .show > .btn-yellow_me_one.dropdown-toggle {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+        }
+
+            .btn-yellow_me_one:not(:disabled):not(.disabled):active:focus,
+            .btn-yellow_me_one:not(:disabled):not(.disabled).active:focus,
+            .show > .btn-brown_me_one.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.1rem #F2EDD8;
+                background-color: #ffdfaa;
+            }
+</style>
 
 <h2 onclick="clicktitle()">分期結帳畫面</h2>
 <div>
     <label for="searchCustomer">客戶手機:</label>
     <input id="searchCustomer" type="text" />
-    <button id="searchOrder">搜尋訂單</button>
+    <button id="searchOrder" class="btn btn-yellow_me_one">搜尋訂單</button>
 </div>
 <div>
     <form action="@Url.Action("realCheckView","Order")" method="post">
         <table class="table" id="OrderList"></table>
         <table class="table" id="OrderDetail"></table>
-        <input type="submit" value="前往結帳"/>
+        <input type="submit" value="前往結帳" class="btn btn-yellow_me_one"/>
     </form>
 </div>
 <script>
