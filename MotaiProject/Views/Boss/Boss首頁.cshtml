@@ -11,16 +11,14 @@
     }
 }
 
-
+@*<div style="display:flex;width:600px;height:300px;margin:auto;align-items:center">*@
+@*<div style="width:300px">*@
 <div>
     <h4>@welcome    歡迎登入</h4>
-
-    <h4>帳號:   @Emp.eAccount </h4>
-
-    <h4>權限:   @Emp.tPosition.pPosition</h4>
-
+    <h4>帳號：@Emp.eAccount </h4>
+    <h4>職位：@Emp.tPosition.pPosition</h4>
 </div>
-<div class="row container">
+<div class="row">
     <div class="card" id="collapseExample" style="margin-left:30px;margin-bottom:20px;">
         <div class="card-body" style="background-color: #F2EDD8">
             <div>
@@ -40,6 +38,7 @@
         </div>
     </div>
 </div>
+@*</div>*@
 <script>
     var pa = document.querySelectorAll(".form-control");
     //var oldpass = pa[0].value;
