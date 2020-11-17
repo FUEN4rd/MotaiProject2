@@ -8,6 +8,10 @@
     int RR = 0;
     string S = "";
     int person = 0;
+    int RRM = 0;
+    string SM = "";
+    int personM = 0;
+    int M = DateTime.Now.Month;
     List<List<int>> LR = new List<List<int>> ();
     foreach (KeyValuePair<string, Dictionary<int, int>> kvp in Model.tem)
     {
@@ -21,6 +25,10 @@
         }
         LR.Add(LFF);
         if (person < temsave) { S = kvp.Key; person = temsave; }
+        int temsaveM = 0;
+        RRM += kvp.Value[M];
+        temsaveM = kvp.Value[M];
+        if (personM < temsaveM) { SM = kvp.Key; personM = temsaveM; }
     }
     List<int> BEUSE = new List<int>();
     for (int ii = 0; ii < 12; ii++) {
@@ -44,20 +52,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-white" style="height:800px;width:1140px">
     <h2 class="bg-white">業務報表</h2>
     <div class="row">
         <div class="card text-white bg-primary mb-3 d-flex cab" style="max-width: 18rem;">
             <div class="card-header">
-                <h5>員工銷售總額</h5>
+                <h5>全業務本月銷售總額</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">$NTD @RRM 元</h5>
+            </div>
+        </div>
+        <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
+            <div class="card-header">
+                <h5>業務本月銷售第一</h5>
+            </div>
+            <div class="card-body">
+                <h5>@SM</h5>
+                <p class="card-text">$NTD @personM 元</p>
+            </div>
+        </div>
+        <div class="card text-white bg-warning mb-3 d-flex cab" style="max-width: 18rem;">
+            <div class="card-header">
+                <h5>業務今年度銷售總額</h5>
             </div>
             <div class="card-body">
                 <h5 class="card-text">$NTD @RR 元</h5>
             </div>
         </div>
-        <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
+        <div class="card text-white bg-secondary mb-3 d-flex cab" style="max-width: 18rem;">
             <div class="card-header">
-                <h5>員工銷售第一</h5>
+                <h5>業務今年度銷售第一</h5>
             </div>
             <div class="card-body">
                 <h5>@S</h5>
@@ -69,9 +94,11 @@
 
 
     <div style="width:500px;height:500px">
+        <p>業務今年度銷售統計圖表</p>
         <canvas id="myChart" width="400" height="400"></canvas>
     </div>
     <div style="width:500px;height:500px;margin-left:600px;margin-top:-500px">
+        <p>公司今年度銷售折線圖</p>
         <canvas id="myChart2" width="400" height="400"></canvas>
     </div>
 </div>
