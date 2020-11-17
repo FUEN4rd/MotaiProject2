@@ -6,8 +6,6 @@
     int i = 0;
 }
 
-<h2>查詢出貨單</h2>
-<a href="@Url.Action("出貨單建立","Commodity")" style="text-decoration:none;padding: 3px;" class=" btn btn-yellow_me_one">新增出貨單</a>
 
 <style>
     a {
@@ -60,22 +58,44 @@
                 box-shadow: 0 0 0 0.1rem #F2EDD8;
                 background-color: #ffdfaa;
             }
+
+    .Y_btn-link {
+        font-weight: 400;
+        color: #000000;
+    }
+
+        .Y_btn-link:hover {
+            /*color: #0056b3;*/
+            background-color: #FCD492;
+        }
+
+        .Y_btn-link:focus, .Y_btn-link.focus {
+            box-shadow: none;
+        }
+
+        .Y_btn-link:disabled, .Y_btn-link.disabled {
+            color: #6c757d;
+            pointer-events: none;
+        }
 </style>
+<h2>查詢出貨單</h2>
+<a href="@Url.Action("出貨單建立","Commodity")" style="text-decoration:none;padding: 3px;background-color:#FCD492"  class=" btn btn-yellow_me_one">新增出貨單</a>
 
 <div class="accordion" id="accordionExample">
-    <div class="container" style="margin-left:0px;width:68vw">
-        <table class="table" style="text-align:left">
+    @*<div class="container" style="margin-left:0px;width:68vw">*@
+    <div class="card-header" style="padding:0px">
+        <table class="table" style="text-align:center">
             <tr>
-                <th>
+                <th style="width:250px">
                     @Html.DisplayNameFor(model => model.EmployeeName)
                 </th>
-                <th>
+                <th style="width:250px">
                     @Html.DisplayNameFor(model => model.ShipSerialValue)
                 </th>
-                <th>
+                <th style="width:250px">
                     @Html.DisplayNameFor(model => model.ShipDate)
                 </th>
-                <th>
+                <th style="width:250px">
                     @Html.DisplayNameFor(model => model.ShipNote)
                 </th>
             </tr>
@@ -86,29 +106,29 @@
     {
         <div class="card" style="padding:0px">
             <div class="card-header" id="heading@(i)" style="padding:0px">
-                <div class="btn btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px">
-                    <table class="table" style="text-align:left">
+                <div class="btn Y_btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px;height:50px">
+                    <table class="table" style="text-align:center">
                         <tr>
-                            <td style="width:100px">
+                            <td style="width:250px">
                                 @item.EmployeeName.Replace("\r\n", "")
                             </td>
-                            <td style="width:150px">
+                            <td style="width:250px">
                                 @Html.DisplayFor(modelItem => item.ShipSerialValue)
                             </td>
-                            <td style="width:100px">
+                            <td style="width:250px">
                                 @Html.DisplayFor(modelItem => item.ShipDate)
                             </td>
-                            <td style="width:150px">
+                            <td style="width:250px">
                                 @Html.DisplayFor(modelItem => item.ShipNote)
                             </td>
-
                         </tr>
                     </table>
                 </div>
             </div>
 
-            <div id="collapse@(i)" class="collapse hide" aria-labelledby="heading@(i)" data-parent="#accordionExample">
+            <div id="collapse@(i)" class="collapse hide" aria-labelledby="heading@(i)" data-parent="#accordionExample">               
                 <div class="card-body" style="width:100%">
+                    <h5 style="text-align:center">商品列表</h5>
                     <table class="table text-dark" style="text-align:center">
                         <tr>
                             <th>

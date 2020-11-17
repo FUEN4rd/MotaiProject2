@@ -60,13 +60,13 @@
 <div>
     <label for="searchCustomer">客戶手機:</label>
     <input id="searchCustomer" type="text" />
-    <button id="searchOrder" class="btn btn-yellow_me_one">搜尋訂單</button>
+    <button id="searchOrder" class="btn btn-yellow_me_one" style="background-color:#FCD492">搜尋訂單</button>
 </div>
 <div>
     <form action="@Url.Action("realCheckView","Order")" method="post">
         <table class="table" id="OrderList"></table>
         <table class="table" id="OrderDetail"></table>
-        <input type="submit" value="前往結帳" class="btn btn-yellow_me_one"/>
+        <input type="submit" value="前往結帳" class="btn btn-yellow_me_one" style="background-color:#FCD492"/>
     </form>
 </div>
 <script>
