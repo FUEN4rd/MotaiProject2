@@ -10,6 +10,10 @@
     int RR = 0;
     int S = 0;
     int person = 0;
+    int RRM = 0;
+    int SM = 0;
+    int personM = 0;
+    int M = DateTime.Now.Month;
     //foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
     //{
     //    int temsave = 0;
@@ -33,14 +37,20 @@
         }
         LR.Add(LFF);
         if (person < temsave) { S = kvp.Key; person = temsave; }
+        int temsaveM = 0;
+        RRM += kvp.Value[M];
+        temsaveM = kvp.Value[M];
+        if (personM < temsaveM) { SM = kvp.Key; personM = temsaveM; }
+
+
     }
     List<int> BEUSE = new List<int>();
-    for (int ii = 0; ii < 12; ii++)
+    for (int ii = 0; ii < LR.Count; ii++)
     {
         int AA = 0;
-        for (int i = 0; i < LR.Count; i++)
+        for (int i = 0; i < 12; i++)
         {
-            int A = LR[i][ii];
+            int A = LR[ii][i];
             AA += A;
 
         }
@@ -57,20 +67,37 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
-<div class="container bg-white" style="height:120vh">
+<div class="container bg-white" style="height:800px;">
     <h2 class="bg-white">店鋪報表</h2>
     <div class="row">
         <div class="card text-white bg-primary mb-3 d-flex cab" style="max-width: 18rem;">
             <div class="card-header">
-                <h5>店鋪銷售總額</h5>
+                <h5>全門市本月銷售總額</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">$NTD @RRM 元</h5>
+            </div>
+        </div>
+        <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
+            <div class="card-header">
+                <h5>門市本月銷售第一</h5>
+            </div>
+            <div class="card-body">
+                <h5>@Wname[SM - 1]</h5>
+                <p class="card-text">$NTD @personM 元</p>
+            </div>
+        </div>
+        <div class="card text-white bg-warning mb-3 d-flex cab" style="max-width: 18rem;">
+            <div class="card-header">
+                <h5>全門市今年度銷售總額</h5>
             </div>
             <div class="card-body">
                 <h5 class="card-text">$NTD @RR 元</h5>
             </div>
         </div>
-        <div class="card text-white bg-info mb-3 d-flex cab" style="max-width: 18rem;">
+        <div class="card text-white bg-secondary mb-3 d-flex cab" style="max-width: 18rem;">
             <div class="card-header">
-                <h5>店鋪銷售第一</h5>
+                <h5>門市今年度銷售第一</h5>
             </div>
             <div class="card-body">
                 <h5>@Wname[S - 1]</h5>
@@ -87,11 +114,11 @@
         </div>*@
 
     <div style="width:500px;height:500px">
-        <p>年度銷售</p>
+        <p>門市本月銷售統計圖表</p>
         <canvas id="myChart" width="400" height="400"></canvas>
     </div>
     <div style="width:500px;height:500px;margin-left:600px;margin-top:-500px">
-        <p>每月銷售</p>
+        <p>門市今年度銷售統計圖表</p>
         <canvas id="myChart2" width="400" height="400"></canvas>
     </div>
     @*<table class="table">
@@ -131,6 +158,7 @@
 
 
 <script>
+
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'pie',
@@ -142,12 +170,13 @@
                 {
                     label:'set1',
                         backgroundColor: ['@L[0]', '@L[1]', '@L[2]', '@L[3]', '@L[4]' ,'@L[5]', '@L[6]', '@L[7]', '@L[8]', '#169DB2',],
-                    borderColor: ['@L[0]','@L[1]','@L[2]','@L[3]','@L[4]','@L[5]', '@L[6]', '@L[7]', '@L[8]','#169DB2',],
+                    borderColor:'#fff',
                     data: [
                         @foreach(KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
                         {
-                            int fuc = 0;
-                            foreach (KeyValuePair<int, int> kvp2 in kvp.Value) { fuc += kvp2.Value; }
+                            int thismon = DateTime.Now.Month;
+                            //foreach (KeyValuePair<int, int> kvp2 in kvp.Value) { fuc += kvp2.Value; }
+                            int fuc = kvp.Value[thismon];
                             <Text>@fuc,</Text>
 
                         }
@@ -157,23 +186,27 @@
                 },
 
             ]
-        }
+        },     
     });
 </script>
 <script>
         var ctx = document.getElementById('myChart2');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                labels: [
+                    @foreach (KeyValuePair<int, Dictionary<int, int>> kvp in Model.waretem)
+                        {<Text>
+                        '@Wname[kvp.Key - 1]',</Text>}
+                ],
                 datasets: [
                     {
-                        label: '銷售額',
+                    label: '銷售額',
                         backgroundColor: 'rgba(179,205,227,0.6)',
                         borderColor: 'rgb(179,205,227)',
                         data: [
                             @for (int i=0;i<BEUSE.Count;i++){
-                                @BEUSE[i]<Text>,</Text>
+                            @BEUSE[i]<Text>,</Text>
                             }
                         ],
                     },

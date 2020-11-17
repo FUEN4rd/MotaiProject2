@@ -5,15 +5,68 @@
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
 
+<style>
+    a {
+        color: #000000;
+    }
+
+        a:hover {
+            color: #000000;
+            text-decoration: none;
+        }
+
+    .btn-yellow_me_one {
+        color: #000000;
+        font-weight: 900;
+        background-color: #FCD492;
+        width: 100px;
+    }
+
+        .btn-yellow_me_one:hover {
+            color: #000000;
+            font-weight: 900;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one:focus,
+        .btn-yellow_me_one.focus {
+            box-shadow: 0 0 0 0.1rem #F2EDD8;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one.disabled,
+        .btn-yellow_me_one:disabled {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+            border-color: #A7674C;
+        }
+
+        .btn-yellow_me_one:not(:disabled):not(.disabled):active,
+        .btn-yellow_me_one:not(:disabled):not(.disabled).active,
+        .show > .btn-yellow_me_one.dropdown-toggle {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+        }
+
+            .btn-yellow_me_one:not(:disabled):not(.disabled):active:focus,
+            .btn-yellow_me_one:not(:disabled):not(.disabled).active:focus,
+            .show > .btn-brown_me_one.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.1rem #F2EDD8;
+                background-color: #ffdfaa;
+            }
+</style>
+
 <h2>管理產品</h2>
 <div style="position:absolute;right:300px">
     <label style="font-size:16px;padding-top:12px;padding-right:10px;line-height:16px;margin-bottom:-5px;">搜尋: </label>
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 </div>
-<p>
+<button class="btn btn-yellow_me_one"  style="background-color:#FCD492">
     @Html.ActionLink("新增", "新增產品")
-</p>
-<table class="table order-table">
+</button>
+<table class="table order-table" style="text-align:center">
     <thead>
         <tr>
             <th style="display:none">

@@ -10,6 +10,56 @@
     th {
         width: 140px;
     }
+    a {
+        color: #000000;
+    }
+
+        a:hover {
+            color: #000000;
+            text-decoration: none;
+        }
+
+    .btn-yellow_me_one {
+        color: #000000;
+        font-weight: 900;
+        background-color: #FCD492;
+        width: 100px;
+    }
+
+        .btn-yellow_me_one:hover {
+            color: #000000;
+            font-weight: 900;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one:focus,
+        .btn-yellow_me_one.focus {
+            box-shadow: 0 0 0 0.1rem #F2EDD8;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one.disabled,
+        .btn-yellow_me_one:disabled {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+            border-color: #A7674C;
+        }
+
+        .btn-yellow_me_one:not(:disabled):not(.disabled):active,
+        .btn-yellow_me_one:not(:disabled):not(.disabled).active,
+        .show > .btn-yellow_me_one.dropdown-toggle {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+        }
+
+            .btn-yellow_me_one:not(:disabled):not(.disabled):active:focus,
+            .btn-yellow_me_one:not(:disabled):not(.disabled).active:focus,
+            .show > .btn-brown_me_one.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.1rem #F2EDD8;
+                background-color: #ffdfaa;
+            }
 </style>
 <div style="display:flex;justify-content:space-between">
     <h2>管理消息</h2>
@@ -19,40 +69,40 @@
     </div>
 </div>
 
-<button class="btn btn-primary" style="background-color:white">
+<button class="btn btn-yellow_me_one" style="background-color:#FCD492">
     @Html.ActionLink("新增", "新增消息")
 </button>
 <table class="table order-table table-hover"  style="text-align:center">
     <thead>
         <tr>
-            <th>
+            <th  style="width:100px">
                 @Html.DisplayNameFor(model => model.pPromotionPostDate)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.sPromotinoCategory)
             </th>
-            <th>
+            <th style="width:200px">
                 @Html.DisplayNameFor(model => model.PromotionName)
             </th>
-            <th>
+            <th  style="width:200px">
                 @Html.DisplayNameFor(model => model.PromotionDescription)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.pCondition)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.pDiscount)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.pDiscountCode)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.pPromotionStartDate)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.pPromotionDeadline)
             </th>
-            <th>
+            <th style="width:100px">
                 @Html.DisplayNameFor(model => model.pADimage)
             </th>
             <th></th>

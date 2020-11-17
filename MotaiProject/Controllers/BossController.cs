@@ -68,8 +68,9 @@ namespace MotaiProject.Controllers
                 MotaiDataEntities dbContext = new MotaiDataEntities();
                 tEmployee emp = Session[CSession關鍵字.SK_LOGINED_EMPLOYEE] as tEmployee;
                 var dlist = dbContext.tDiaries.ToList();
+                var dlistnew = dlist.OrderByDescending(c => c.dDate).ToList();
                 List<DiaryViewModel> DSaw = new List<DiaryViewModel>();
-                foreach (var item in dlist)
+                foreach (var item in dlistnew)
                 {
                     DiaryViewModel show = new DiaryViewModel();
                     show.eName = item.tEmployee.eName;
@@ -269,7 +270,7 @@ namespace MotaiProject.Controllers
                     for(int i = 1; i < 13; i++)
                     {//抓月份
                         var q = from search in tOrderDetails
-                                where search.tOrder.oDate.Month == i && search.tOrder.tEmployee.eName == ENAME && search.tOrder.oCheck == "checked"
+                                where search.tOrder.oDate.Month == i && search.tOrder.tEmployee.eName == ENAME && search.tOrder.oCheck == "checked" && search.tOrder.oDate.Year == DateTime.Now.Year
                                 select (search.oProductQty) * ((int)search.tProduct.pPrice);
                         int V = q.Sum();
                         temD.Add(i, V);
@@ -303,7 +304,7 @@ namespace MotaiProject.Controllers
                     for (int i = 1; i < 13; i++)
                     {//抓月份
                         var q = from search in tOrderDetails
-                                where search.tOrder.oDate.Month == i && search.tOrder.tWarehouseName.WarehouseNameId == wNAME&&search.tOrder.oCheck=="checked"
+                                where search.tOrder.oDate.Month == i && search.tOrder.tWarehouseName.WarehouseNameId == wNAME&&search.tOrder.oCheck=="checked"&& search.tOrder.oDate.Year==DateTime.Now.Year
                                 select (search.oProductQty) * ((int)search.tProduct.pPrice);
                         int V = q.Sum();//合併月份內營收
                         temD.Add(i, V);

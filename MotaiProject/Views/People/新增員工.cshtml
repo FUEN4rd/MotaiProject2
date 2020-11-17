@@ -7,6 +7,58 @@
 
 <h2 onclick="clicktitle()">新增職員</h2>
 
+<style>
+    a {
+        color: #000000;
+    }
+
+        a:hover {
+            color: #000000;
+            text-decoration: none;
+        }
+
+    .btn-yellow_me_one {
+        color: #000000;
+        font-weight: 900;
+        background-color: #FCD492;
+        width: 100px;
+    }
+
+        .btn-yellow_me_one:hover {
+            color: #000000;
+            font-weight: 900;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one:focus,
+        .btn-yellow_me_one.focus {
+            box-shadow: 0 0 0 0.1rem #F2EDD8;
+            background-color: #ffdfaa;
+        }
+
+        .btn-yellow_me_one.disabled,
+        .btn-yellow_me_one:disabled {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+            border-color: #A7674C;
+        }
+
+        .btn-yellow_me_one:not(:disabled):not(.disabled):active,
+        .btn-yellow_me_one:not(:disabled):not(.disabled).active,
+        .show > .btn-yellow_me_one.dropdown-toggle {
+            color: #000000;
+            font-weight: 900;
+            background-color: #FCD492;
+        }
+
+            .btn-yellow_me_one:not(:disabled):not(.disabled):active:focus,
+            .btn-yellow_me_one:not(:disabled):not(.disabled).active:focus,
+            .show > .btn-brown_me_one.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.1rem #F2EDD8;
+                background-color: #ffdfaa;
+            }
+</style>
 
 @using (Html.BeginForm()) 
 {
@@ -66,20 +118,17 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="新增" class="btn btn-default" />
+            <input type="submit" value="新增" class="btn btn-yellow_me_one" />
         </div>
     </div>
 </div>
 }
-    <div>
-        @Html.ActionLink("回上一頁", "人員檢視")
-    </div>
 
 <script>
     function clicktitle() {
         document.getElementById('eAccount').value = "test10";
         document.getElementById('eName').value = "陳進士";
-        document.getElementById('eBranch').value = "2";
+        document.getElementById('eBranch').value = "3";
         document.getElementById('ePosition').value = "5";
         document.getElementById('ePassword').value = "test10";
     }

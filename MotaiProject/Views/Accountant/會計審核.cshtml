@@ -23,7 +23,7 @@
         border-style: solid;
         padding: 10px;
         margin: 10px;
-        width: 500px;
+        width: 700px;
     }
 </style>
 <h2>審核訂單</h2>
@@ -60,23 +60,23 @@
     </a>
 </div>
 
-<div style="display:flex;justify-content:space-between">
+<div style="display:flex">
     <div class="Detail_Account_border">
-        <table class="table">
+        <table class="table" style="text-align:center" >
             <tr>
-                <th>
+                <th style="width:200px">
                     @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductNum)
                 </th>
-                <th>
+                <th style="width:200px">
                     @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductName)
                 </th>
-                <th>
+                <th style="width:200px">
                     @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().ProductPrice)
                 </th>
-                <th>
+                <th style="width:200px">
                     @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oProductQty)
                 </th>
-                <th>
+                <th style="width:200px">
                     @Html.DisplayNameFor(model => model.orderDetailViews.FirstOrDefault().oNote)
                 </th>
             </tr>
@@ -103,7 +103,7 @@
         </table>
     </div>
     <div class="Y_Account_border">
-        <div>
+        <div style="font-weight:bold">
             @Html.DisplayNameFor(model => model.received)：
             @Html.DisplayFor(model => model.received)
         </div>
@@ -122,7 +122,7 @@
         </div>
     </div>
     <div class="Y_Account_border">
-        <div>
+        <div style="font-weight:bold">
             @Html.DisplayNameFor(model => model.receivable)：
             @Html.DisplayFor(model => model.receivable)
         </div>

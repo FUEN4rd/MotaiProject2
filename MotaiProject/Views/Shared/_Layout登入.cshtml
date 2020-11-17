@@ -398,11 +398,11 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body" style="font-size:20px">
                                     <form method="post" id="form1" action="/Customer/會員登入">
                                         <div class="form-group form-inline">
                                             <label for="loginAccount" class="col-form-label Y_black">帳號:</label>
-                                            <div class="col-md-10 ">
+                                            <div class="col-md-10">
                                                 @Html.Editor("cAccount", new { htmlAttributes = new { @class = "Y_black",@id = "Account" } })
                                             </div>
                                         </div>
@@ -414,7 +414,7 @@
                                         </div>
                                         <div class="form-group form-inline code">
                                             <label class="col-form-label Y_black">驗證碼:</label>
-                                            <input type="text" name="code" id="ValidateCode"/>
+                                            <input type="text" name="code" id="ValidateCode" style="width:100px"/>
                                             <img id="codePicture" src="@Url.Action("GetValidateCode","Customer")" />
                                             <a href="#" onclick="code()" style="text-decoration:none" class="Y_black">換一組驗證碼</a>
                                         </div>
@@ -592,8 +592,10 @@
                             data: { "c登入資料": customerlogin },
                             success: function (data) {
                                 alert(data.msg);
-                                if (data.result == true) {
+                                if (data.result) {
                                     onSuccess(data.url);
+                                } else {
+                                    $("#codePicture").attr("src", "/Customer/GetValidateCode/" + new Date().getTime());
                                 }                             
                             }
                         });
