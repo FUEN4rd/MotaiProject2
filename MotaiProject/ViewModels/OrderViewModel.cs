@@ -75,6 +75,12 @@ namespace MotaiProject.ViewModels
         public Nullable<int> oEmployeeId { get; set; }
         [DisplayName("專員")]
         public string EmployeeName { get; set; }
+        [DisplayName("應收帳款")]
+        public int TotalAmount { get; set; }
+        [DisplayName("已收帳款")]
+        public int AlreadyPay { get; set; }
+        [DisplayName("剩餘帳款")]
+        public int Unpaid { get; set; }
         [DisplayName("備註")]
         public string cNote { get; set; }
 
