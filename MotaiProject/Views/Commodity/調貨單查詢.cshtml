@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.TransferSearchViewModel>
 
 @{
-    ViewBag.Title = "調貨單查詢";
+    ViewBag.Title = "查詢調貨單";
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
 }
 
@@ -9,7 +9,7 @@
     <label style="font-size:16px;padding-top:12px;padding-right:10px;line-height:16px;margin-bottom:-5px;">搜尋: </label>
     <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
 </div>
-<h2>調貨單查詢</h2>
+<h2>查詢調貨單</h2>
 <a href="@Url.Action("調貨單建立","Commodity")" style="text-decoration:none">產生調貨單</a>
 
 <table class="table order-table">

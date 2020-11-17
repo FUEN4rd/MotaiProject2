@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<MotaiProject.ViewModels.StockSelectViewModel>
 
 @{
-    ViewBag.Title = "進貨單查詢";
+    ViewBag.Title = "查詢進貨單";
     Layout = "~/Views/Shared/LayoutCommodity.cshtml";
     int i = 0;
 }
 <style>
 </style>
 <div style="display:flex;justify-content:space-between">
-    <h2>進貨單查詢</h2>
+    <h2>查詢進貨單</h2>
     <a href="@Url.Action("進貨單建立","Commodity")" style="text-decoration:none">新增進貨單</a>
     <div style="position:absolute;right:300px">
         <label style="font-size:16px;padding-top:12px;padding-right:10px;line-height:16px;margin-bottom:-5px;">搜尋: </label>
