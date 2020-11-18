@@ -632,7 +632,11 @@ namespace MotaiProject.Controllers
                     CustomerOrderViewModel order = new CustomerOrderViewModel();
                     order.oDate = items.oDate;
                     order.WarehouseName = db.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(items.oWarehouseName)).FirstOrDefault().WarehouseName;
-                    order.EmployeeName = db.tEmployees.Where(e => e.EmployeeId == items.oEmployeeId).FirstOrDefault().eName;
+                    tEmployee employee = db.tEmployees.Where(e => e.EmployeeId == items.oEmployeeId).FirstOrDefault();
+                    if (employee != null)
+                    {
+                        order.EmployeeName = employee.eName;
+                    }
                     order.cNote = items.cNote;
                     List<tOrderDetail> orderdetails = db.tOrderDetails.Where(od => od.oOrderId == items.OrderId).ToList();
                     List<CustomerOrderDetailViewModel> OrderDetailList = new List<CustomerOrderDetailViewModel>();

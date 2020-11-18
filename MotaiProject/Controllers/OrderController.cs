@@ -777,6 +777,7 @@ namespace MotaiProject.Controllers
                         //database產生訂單
                         tOrder newOrder = new tOrder();
                         newOrder.oCustomerId = cust.CustomerId;
+                        newOrder.oEmployeeId = 19;
                         newOrder.oDate = DateTime.Now;
                         newOrder.oAddress = payData.shipAddress;
                         newOrder.oWarehouseName = 1;
