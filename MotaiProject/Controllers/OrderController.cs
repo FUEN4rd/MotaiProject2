@@ -774,6 +774,34 @@ namespace MotaiProject.Controllers
 
                         //http.Session[oPayment.Send.MerchantTradeNo] = order;
 
+                        //database產生訂單
+                        tOrder newOrder = new tOrder();
+                        newOrder.oCustomerId = cust.CustomerId;
+                        newOrder.oDate = DateTime.Now;
+                        newOrder.oAddress = payData.shipAddress;
+                        newOrder.oWarehouseName = 1;
+                        newOrder.cNote = oPayment.Send.MerchantTradeNo;
+                        dbContext.tOrders.Add(newOrder);
+                        dbContext.SaveChanges();
+                        tOrder CreateOrder = dbContext.tOrders.OrderByDescending(o => o.OrderId).FirstOrDefault();
+                        tOrderPay pay = new tOrderPay();
+                        pay.oOrderId = CreateOrder.OrderId;
+                        pay.oOrderInstallment = 1;
+                        pay.oPayType = payData.payType;
+                        pay.oPayment = Convert.ToInt32(payData.totalPay);
+                        pay.oPayDate = DateTime.Now;
+                        dbContext.tOrderPays.Add(pay);
+                        foreach (var item in StatuList)
+                        {
+                            tOrderDetail orderDetail = new tOrderDetail();
+                            orderDetail.oOrderId = CreateOrder.OrderId;
+                            orderDetail.oProductId = item.sProductId;
+                            orderDetail.oProductQty = item.sProductQty;
+                            dbContext.tOrderDetails.Add(orderDetail);
+                            dbContext.tStatus.Remove(item);
+                            dbContext.SaveChanges();
+                        }
+                        dbContext.SaveChanges();
                         /* 產生訂單 */
                         enErrors.AddRange(oPayment.CheckOut());
                         /* 產生產生訂單 Html Code 的方法 */
