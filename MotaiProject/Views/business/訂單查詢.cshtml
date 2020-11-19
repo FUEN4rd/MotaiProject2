@@ -71,7 +71,7 @@
     {
         <div class="card" style="padding:0px" name="@item.htmlName">
             <div class="card-header" id="heading@(i)" style="padding:0px">
-                <div class="btn Y_btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px;height:50px">
+                <div class="btn Y_btn-link container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px;height:65px">
                     <table class="table table-hover" style="text-align:center" >
                         <tr>
                             <td style="width:100px">
@@ -104,8 +104,8 @@
                             <td style="width:100px">
                                 @if (item.oCheck != null)
                                 {
-                                    @Html.DisplayFor(modelItem => item.oCheckDate)
                                     <div>已審核</div>
+                                    @Html.DisplayFor(modelItem => item.oCheckDate)
                                 }
                                 else if (item.surplus <= 0)
                                 {

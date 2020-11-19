@@ -183,7 +183,7 @@ namespace MotaiProject.Controllers
             List<DetailPromotionViewModel> promotionlist = new List<DetailPromotionViewModel>();
             promotionlist = promotionRespoitory.GetPromotionAll();
 
-            var promotionlistpostID = promotionlist.OrderBy(p => p.pPromotionPostDate);
+            var promotionlistpostID = promotionlist.OrderByDescending(p => p.pPromotionPostDate);
 
             return View(promotionlistpostID);
         }
