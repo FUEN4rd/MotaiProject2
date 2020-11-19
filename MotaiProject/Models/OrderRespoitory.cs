@@ -277,7 +277,17 @@ namespace MotaiProject.Models
                 if (item.oPromotionId != null)
                 {
                     tPromotion promotion = dbContext.tPromotions.Where(p => p.PromotionId == item.oPromotionId).FirstOrDefault();
-                    Order.PromotionName = promotion.PromotionName;
+
+                    if (promotion.PromotionName.Length > 7)
+                    {
+                        Order.PromotionName = promotion.PromotionName.Substring(0, 6) + ".";
+                    }
+                    else
+                    {
+                        Order.PromotionName = promotion.PromotionName;
+                    }
+
+                    //Order.PromotionName = promotion.PromotionName;
                     Order.pDiscount = Convert.ToInt32(item.tPromotion.pDiscount);
                     receivableTotal -= Convert.ToInt32(item.tPromotion.pDiscount);
                 }
