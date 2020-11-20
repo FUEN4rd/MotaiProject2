@@ -259,18 +259,19 @@ namespace MotaiProject.Controllers
             else
             {
                 int custId = cust.CustomerId;
-                List<tOrder> orderlist = dbContext.tOrders.Where(o => o.oCustomerId == custId).ToList();
+                List<tOrder> orderlist = dbContext.tOrders.Where(o => o.oCustomerId == custId&&o.oCheck == null).ToList();
                 List<SearchCustomerOrderModel> searchlist = new List<SearchCustomerOrderModel>();
                 foreach(var item in orderlist)
                 {
-                    if(item.oCheck == null)
-                    {
-                        SearchCustomerOrderModel search = new SearchCustomerOrderModel();
-                        search.orderId = item.OrderId;
-                        search.purchaseDate = item.oDate.ToString("yyyy/MM/dd");
-                        search.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId==item.oWarehouseName).FirstOrDefault().WarehouseName;
-                        searchlist.Add(search);
-                    }
+                    SearchCustomerOrderModel search = new SearchCustomerOrderModel();
+                    search.orderId = item.OrderId;
+                    search.purchaseDate = item.oDate.ToString("yyyy/MM/dd");
+                    search.WarehouseName = dbContext.tWarehouseNames.Where(wn => wn.WarehouseNameId == item.oWarehouseName).FirstOrDefault().WarehouseName;
+                    OrderPayStatus payStatus = orderRespoitory.GetPayStatus(item.OrderId);
+                    search.TotalAmount = payStatus.TotalAmount;
+                    search.AlreadyPay = payStatus.AlreadyPay;
+                    search.Unpaid = payStatus.Unpaid;
+                    searchlist.Add(search);
                 }
                 return Json(new { result = true, list = searchlist });
             }

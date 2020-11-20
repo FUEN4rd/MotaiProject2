@@ -182,7 +182,19 @@ namespace MotaiProject.ViewModels
         public string purchaseDate { get; set; }
         [DisplayName("購買門市")]
         public string WarehouseName { get; set; }
+        public int TotalAmount { get; set; }
+        public int AlreadyPay { get; set; }
+        public int Unpaid { get; set; }
     }
+    //抓訂單付款金額
+    public class OrderPayStatus
+    {
+        public int TotalAmount { get; set; }
+        public int AlreadyPay { get; set; }
+        public int Unpaid { get; set; }
+    }
+
+
     public class OrderViewModel //審核
     {
         [DisplayName("訂單編號")]
