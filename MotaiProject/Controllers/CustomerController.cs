@@ -231,24 +231,24 @@ namespace MotaiProject.Controllers
                         Password = "fuen12302"
                     }
                 };
-                //MailMessage Message = new MailMessage();
-                //Message.To.Add(new MailAddress(c電子郵件.Email, d信箱確認.cName));
-                //Message.From = new MailAddress("fuen12302@gmail.com", "墨台");
-                //Message.Subject = "墨台 忘記密碼認證信";
-                //Message.IsBodyHtml = true;
-                //Message.Body = d信箱確認.cName + "您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。\r\n請您回到首頁，以此密碼登入：" + d信箱確認.cPassword + "\r\n登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。\r\n首頁連結： https://motai.azurewebsites.net/ "
+                MailMessage Message = new MailMessage();
+                Message.To.Add(new MailAddress(c電子郵件.Email, d信箱確認.cName));
+                Message.From = new MailAddress("fuen12302@gmail.com", "墨台");
+                Message.Subject = "墨台 忘記密碼認證信";
+                Message.IsBodyHtml = true;
+                Message.Body = d信箱確認.cName + "您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。\r\n請您回到首頁，以此密碼登入：" + d信箱確認.cPassword + "\r\n登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。\r\n首頁連結： https://motai.azurewebsites.net/ ";
 
-                //MailAddress ToEmail = new MailAddress("hongyeelin5@gmail.com", "HY LIN2");
-                MailAddress FromEmail = new MailAddress("fuen12302@gmail.com", "墨台");
-                MailAddress ToEmail = new MailAddress(c電子郵件.Email, d信箱確認.cName);
-                MailMessage Message = new MailMessage()
-                {
-                    From = FromEmail,
-                    Subject = "墨台 忘記密碼認證信",
-                    Body = d信箱確認.cName + "您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。\r\n請您回到首頁，以此密碼登入：" + d信箱確認.cPassword + "\r\n登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。\r\n首頁連結： https://motai.azurewebsites.net/ "
-                    //  IsBodyHtml = true
-                };
-                Message.To.Add(ToEmail);
+                ////MailAddress ToEmail = new MailAddress("hongyeelin5@gmail.com", "HY LIN2");
+                //MailAddress FromEmail = new MailAddress("fuen12302@gmail.com", "墨台");
+                //MailAddress ToEmail = new MailAddress(c電子郵件.Email, d信箱確認.cName);
+                //MailMessage Message = new MailMessage()
+                //{
+                //    From = FromEmail,
+                //    Subject = "墨台 忘記密碼認證信",
+                //    Body = d信箱確認.cName + "您好非常感謝您到墨台進行選購，我們已收到您重設密碼的申請。\r\n請您回到首頁，以此密碼登入：" + d信箱確認.cPassword + "\r\n登入後，點選右上角第一個Icon進入會員中心，重新設定一組新的密碼。\r\n首頁連結： https://motai.azurewebsites.net/ "
+                //    //  IsBodyHtml = true
+                //};
+                //Message.To.Add(ToEmail);
                 Client.Send(Message);
                 Client.Dispose();
                 Message.Dispose();
