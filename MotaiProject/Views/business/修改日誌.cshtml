@@ -8,6 +8,11 @@
 <h2>修改日誌</h2>
 
 <style>
+    .Y_textArea {
+        width:500px;
+        height:100px;    
+    }
+
     a {
         color: #000000;
     }
@@ -58,6 +63,8 @@
                 box-shadow: 0 0 0 0.1rem #F2EDD8;
                 background-color: #ffdfaa;
             }
+
+        
 </style>
 
 @using (Html.BeginForm())
@@ -109,7 +116,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.dDiaryNote, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-4">
-            @Html.EditorFor(model => model.dDiaryNote, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.TextAreaFor(model => model.dDiaryNote, new { htmlAttributes = new { @class = "Y_textArea" } })*@
+            <textarea class="control-label" cols="60" id="dDiaryNote" name="dDiaryNote" rows="10">@Model.dDiaryNote</textarea>
             @Html.ValidationMessageFor(model => model.dDiaryNote, "", new { @class = "text-danger" })
         </div>
     </div>
