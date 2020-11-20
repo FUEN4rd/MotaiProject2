@@ -3,49 +3,101 @@
     ViewBag.Title = "工作日誌總覽";
     Layout = "~/Views/Shared/_LayoutBoss.cshtml";
 }
-
+<div style="position:absolute;right:200px">
+    <label style="font-size:16px;padding-top:12px;padding-right:10px;line-height:16px;margin-bottom:-5px;">搜尋: </label>
+    <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+</div>
 <h2>工作日誌總覽</h2>
 
 
-<table class="table" style="overflow:hidden;text-align:center" >
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.dDate)
-        </th>
-        <th style="min-width:100px">
-            @Html.DisplayNameFor(model => model.eName)
-        </th>
-        <th style="min-width:100px">
-            @Html.DisplayNameFor(model => model.dWeather)
-        </th>
-        <th style="min-width:150px">
-            @Html.DisplayNameFor(model => model.dWarehouseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dDiaryNote)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table order-table" style="overflow:hidden;text-align:center" >
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.dDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.eName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dWeather)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dWarehouseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dDiaryNote)
-            </td>
-
+            <th>
+                @Html.DisplayNameFor(model => model.dDate)
+            </th>
+            <th style="min-width:100px">
+                @Html.DisplayNameFor(model => model.eName)
+            </th>
+            <th style="min-width:100px">
+                @Html.DisplayNameFor(model => model.dWeather)
+            </th>
+            <th style="min-width:150px">
+                @Html.DisplayNameFor(model => model.dWarehouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dDiaryNote)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.eName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dWeather)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dWarehouseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dDiaryNote)
+                </td>
 
+            </tr>
+        }
+    </tbody>
 </table>
+
+<script>
+    (function (document) {
+        'use strict';
+
+        // 建立 LightTableFilter
+        var LightTableFilter = (function (Arr) {
+
+            var _input;
+
+            // 資料輸入事件處理函數
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function (table) {
+                    Arr.forEach.call(table.tBodies, function (tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+
+            // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+
+            return {
+                // 初始化函數
+                init: function () {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function (input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+
+        // 網頁載入完成後，啟動 LightTableFilter
+        document.addEventListener('readystatechange', function () {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+
+    })(document);
+</script>
