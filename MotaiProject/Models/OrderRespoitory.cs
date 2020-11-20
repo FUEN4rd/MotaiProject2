@@ -25,6 +25,36 @@ namespace MotaiProject.Models
             return promotionId;
         }
 
+        public OrderPayStatus GetPayStatus(int orderId)
+        {
+            tOrder order = dbContext.tOrders.Where(o => o.OrderId == orderId).FirstOrDefault();
+            List<tOrderDetail> detaillist = dbContext.tOrderDetails.Where(od => od.oOrderId == orderId).ToList();
+            List<tOrderPay> paylist = dbContext.tOrderPays.Where(op => op.oOrderId == orderId).ToList();
+            OrderPayStatus payStatus = new OrderPayStatus();
+            foreach(var detail in detaillist)
+            {
+                int price = Convert.ToInt32(dbContext.tProducts.Where(p => p.ProductId == detail.oProductId).FirstOrDefault().pPrice);
+                payStatus.TotalAmount += detail.oProductQty * price;
+            }
+            tPromotion promotion = dbContext.tPromotions.Where(pm => pm.PromotionId == order.oPromotionId).FirstOrDefault();
+            if (promotion != null)
+            {
+                payStatus.TotalAmount -= Convert.ToInt32(promotion.pDiscount);
+            }
+            if(paylist.Count() == 0)
+            {
+                payStatus.AlreadyPay = 0;
+            }
+            else
+            {
+                foreach(var payitem in paylist)
+                {
+                    payStatus.AlreadyPay += Convert.ToInt32(payitem.oPayment);
+                }
+            }
+            payStatus.Unpaid = payStatus.TotalAmount - payStatus.AlreadyPay;
+            return payStatus;
+        }
         //public List<OrderViewModel> GetOrderQty()
         //{
         //    List<tOrderDetail> order = dbContext.tOrderDetails.ToList();

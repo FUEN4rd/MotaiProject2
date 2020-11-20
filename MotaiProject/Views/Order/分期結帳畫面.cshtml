@@ -79,7 +79,11 @@
             success: function (data) {
                 const title = "<tr><th>訂單選擇</th>" +
                     "<th>購買日期</th>" +
-                    "<th>購買門市</th></tr>";
+                    "<th>購買門市</th>" +
+                    "<th>應收帳款</th>" +
+                    "<th>已收帳款</th>" +
+                    "<th>剩餘帳款</th>" +
+                    "</tr>";
                 $("#OrderList").html(title);
                 if (!data.result) {
                     alert(data.msg);
@@ -88,9 +92,13 @@
                         var Id = data.list[i].orderId;
                         var Date = data.list[i].purchaseDate;
                         var Shop = data.list[i].WarehouseName;
+                        var TotalAmount = data.list[i].TotalAmount;
+                        var AlreadyPay = data.list[i].AlreadyPay;
+                        var Unpaid = data.list[i].Unpaid;
                         $("#OrderList").append("<tr><td><input type='radio' name='OrderId' value='" + Id + "' /></td>" +
-                            "<td>" + Date + "</td>" +
-                            "<td>" + Shop + "</td></tr>");
+                            "<td>" + Date + "</td><td>" + Shop + "</td>" +
+                            "<td>" + TotalAmount + "</td><td>" + AlreadyPay + "</td>" +
+                            "<td>" + Unpaid + "</td ></tr>");
                     }
                 }
             }
