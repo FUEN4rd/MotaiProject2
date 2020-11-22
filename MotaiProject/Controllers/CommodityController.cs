@@ -415,7 +415,8 @@ namespace MotaiProject.Controllers
                 List<tStockDetail> tStockDetails = dbContext.tStockDetails.Where(sd => sd.sStockId.Equals(item.StockId)).ToList();
                 StockSelectViewModel select = new StockSelectViewModel();
                 List<StockSelectDetailModel> details = new List<StockSelectDetailModel>();
-                foreach(var itemdetail in tStockDetails)
+                int totalCost=0;
+                foreach (var itemdetail in tStockDetails)
                 {
                     tProduct product = dbContext.tProducts.Where(p => p.ProductId.Equals(itemdetail.sProductId)).FirstOrDefault();
                     tWarehouseName warehouseName = dbContext.tWarehouseNames.Where(w => w.WarehouseNameId.Equals(itemdetail.sWarehouseNameId)).FirstOrDefault();
@@ -426,8 +427,10 @@ namespace MotaiProject.Controllers
                     selectDetail.sQuantity = itemdetail.sQuantity;
                     selectDetail.WareHouseName = warehouseName.WarehouseName;
                     selectDetail.sNote = itemdetail.sNote;
+                    totalCost += (int)itemdetail.sCost * itemdetail.sQuantity;
                     details.Add(selectDetail);
                 }
+
                 tEmployee employee = dbContext.tEmployees.Where(e => e.EmployeeId.Equals(item.sEmployeeId)).FirstOrDefault();
                 select.EmployeeName = employee.eName;
                 select.sStockSerialValue = item.sStockSerialValue;
@@ -435,6 +438,7 @@ namespace MotaiProject.Controllers
                 select.sVendorTel = item.sVendorTel;
                 select.sStockDate = item.sStockDate;
                 select.sStockNote = item.sStockNote;
+                select.sTotalCost = totalCost;
                 select.StockDetails = details;
                 stockSelects.Add(select);
             }

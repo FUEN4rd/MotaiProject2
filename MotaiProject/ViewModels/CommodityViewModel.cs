@@ -175,6 +175,8 @@ namespace MotaiProject.ViewModels
         public DateTime sStockDate { get; set; }
         [DisplayName("進貨備註")]
         public string sStockNote { get; set; }
+        [DisplayName("進貨總成本")]
+        public int sTotalCost { get; set; }
         public List<StockSelectDetailModel> StockDetails { get; set; }
     }
     public class StockSelectDetailModel
