@@ -408,7 +408,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            List<tStockList> tStockLists = dbContext.tStockLists.ToList();
+            List<tStockList> tStockLists = dbContext.tStockLists.OrderByDescending(s=>s.sStockDate).ToList();
             List<StockSelectViewModel> stockSelects = new List<StockSelectViewModel>();
             foreach(var item in tStockLists)
             {
@@ -563,7 +563,7 @@ namespace MotaiProject.Controllers
                 return RedirectToAction("員工登入", "Employee");
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
-            List<tShipList> tShipLists = dbContext.tShipLists.ToList();
+            List<tShipList> tShipLists = dbContext.tShipLists.OrderByDescending(s=>s.sShipDate).ToList();
             List<ShipSelectViewModel> shipSelects = new List<ShipSelectViewModel>();
             foreach (var item in tShipLists)
             {
@@ -677,7 +677,7 @@ namespace MotaiProject.Controllers
             }
             MotaiDataEntities dbContext = new MotaiDataEntities();
             List<TransferSearchViewModel> model = new List<TransferSearchViewModel>();
-            List<tTransfer> transfers = dbContext.tTransfers.ToList();
+            List<tTransfer> transfers = dbContext.tTransfers.OrderByDescending(t=>t.tDate).ToList();
             foreach (var item in transfers)
             {
                 TransferSearchViewModel tItem = new TransferSearchViewModel();

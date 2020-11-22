@@ -247,7 +247,7 @@ namespace MotaiProject.Models
 
         public List<OrderViewModel> GetOrderAllByEmp(int EmployeeId)
         {
-            List<tOrder> order = dbContext.tOrders.Where(o => o.oEmployeeId == EmployeeId).ToList();
+            List<tOrder> order = dbContext.tOrders.OrderByDescending(o=>o.oDate).Where(o => o.oEmployeeId == EmployeeId).ToList();
             List<OrderViewModel> orderlist = new List<OrderViewModel>();
             foreach (tOrder item in order)
             {
