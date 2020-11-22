@@ -76,10 +76,10 @@
             pointer-events: none;
         }
 </style>
-<div style="display:flex;justify-content:space-between">
+@*<div style="display:flex;justify-content:space-between">*@
     <h2>查詢進貨單</h2>
     <a href="@Url.Action("進貨單建立","Commodity")" style="text-decoration:none; padding: 3px;background-color:#FCD492" class="btn btn-yellow_me_one">新增進貨單</a>
-</div>
+@*</div>*@
  @*<table class="table  order-table">
         <tr>
             <th>
@@ -192,6 +192,9 @@
                     @Html.DisplayNameFor(model => model.sStockDate)
                 </th>
                 <th style="width:150px">
+                    @Html.DisplayNameFor(model => model.sTotalCost)
+                </th>
+                <th style="width:150px">
                     @Html.DisplayNameFor(model => model.sStockNote)
                 </th>
             </tr>
@@ -205,7 +208,7 @@
                 <div class="btn Y_btn-link  container-fluid" type="button" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)" style="padding:0px;height:50px">
                     <table class="table table-hover">
                         <tr>
-                            <td style="width:150px" >
+                            <td style="width:150px">
                                 @item.EmployeeName.Replace("\r\n", "")
                             </td>
                             <td style="width:150px">
@@ -219,6 +222,9 @@
                             </td>
                             <td style="width:150px">
                                 @Html.DisplayFor(modelItem => item.sStockDate)
+                            </td>
+                            <td style="width:150px">
+                                @Html.DisplayFor(modelItem => item.sTotalCost)
                             </td>
                             <td style="width:150px">
                                 @Html.DisplayFor(modelItem => item.sStockNote)
@@ -262,7 +268,8 @@
                                     @Html.DisplayFor(modelItem => itemdetail.ProductName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => itemdetail.sCost)
+                                    @*@Html.DisplayFor(modelItem => itemdetail.sCost)*@
+                                    @((int)itemdetail.sCost)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => itemdetail.sQuantity)

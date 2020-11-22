@@ -62,20 +62,20 @@
 @Html.AntiForgeryToken()
    
 <div class="form-group">
-    <div class="col-md-10" style="margin:20px auto">
+    <div class="col-md-10" style="margin:20px auto;font-size:20px">
         @Html.LabelFor(model => model.eAccount, htmlAttributes: new { @class = "control-label col-md-5" })
         @Html.EditorFor(model => model.eAccount, new { htmlAttributes = new { @class = "form-control", @id = "Account" } })
         @Html.ValidationMessageFor(model => model.eAccount, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        <div class="col-md-10" style="margin:0 auto">
+        <div class="col-md-10" style="margin:0 auto;font-size:20px">
             @Html.LabelFor(model => model.ePassword, htmlAttributes: new { @class = "control-label col-md-5" })
             @Html.EditorFor(model => model.ePassword, new { htmlAttributes = new { @class = "form-control", @id = "Password" } })
             @Html.ValidationMessageFor(model => model.ePassword, "", new { @class = "text-danger" })
         </div>
     </div>
     <div style="display:flex; justify-content:center">
-        <input type="submit" class="btn btn-brown_me_one" style="width:140px;height:50px;" onclick="checklogin()" id="" value="登入">
+        <input type="submit" class="btn btn-brown_me_one" style="width:140px;height:50px;font-size:20px;" onclick="checklogin()" id="" value="登入">
     </div>
 </div>
 
